@@ -41,6 +41,18 @@
           <li @if(URL::full() == url('/admin/castigados'))class="active"@endif><a href="{{ url('/admin/castigados') }}"><i class="fa fa-"></i> <span>Castigados</span></a></li>
         </ul>
       </li>
+      <li class="treeview @if(URL::full() == url('/admin/noticias') || URL::full() == url('/admin/noticias')) active @endif  ">
+        <a href="#">
+          <i class="fa fa-table"></i> <span>Noticias</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li @if(URL::full() == url('/admin/noticias/create'))class="active"@endif><a href="{{ url('/admin/noticias/create') }}"><i class="fa fa-th"></i> <span>Crear Notica</span></a></li>
+          <li @if(URL::full() == url('/admin/castigados'))class="active"@endif><a href="{{ url('/admin/castigados') }}"><i class="fa fa-"></i> <span>Ver Noticia</span></a></li>
+        </ul>
+      </li>
       <li class="treeview @if(URL::full() == url('/admin/items') || URL::full() == url('/admin/ejemplares') || URL::full() == url('/admin/lugares') || URL::full() == url('/admin/categorias') || URL::full() == url('/admin/estados'))  active @endif  ">
         <a href="#">
           <i class="fa fa-table"></i> <span>Productos</span>
