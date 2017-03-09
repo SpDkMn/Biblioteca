@@ -71,11 +71,11 @@
 								<div style="text-align: center; height: 100px; font-size:15px; display: flex; justify-content: center; align-content: center; flex-direction: column;  overflow: hidden;"><?php echo $variable[($i-1)*4]->contenido ?></div>
 								
 							</div>
-							<div style="padding-left: 60px;">
+							<div style="padding-left: 18%;">
 							<div class="box">
 								{!!link_to_route('noticias.edit', $title='Editar', $parameters = $variable[($i-1)*4]->id, $attributes = ['class'=>'btn btn-primary'])!!}
 							</div>
-								<div class="box" style="margin-left:30px">
+								<div class="box" style="margin-left:17%">
 									<form action="{{ route('noticias.destroy',$variable[($i-1)*4]->id )}}" method="POST">
 							              <input name="_method" type="hidden" value="DELETE">
 							              {{ csrf_field() }}
@@ -104,11 +104,11 @@
 								<h3 style="text-align: center; font-weight:bold;"><?php echo $variable[($i-1)*4+1]->titulo ?></h3>
 								<div style="text-align: center; height: 100px; font-size:15px; display: flex; justify-content: center; align-content: center; flex-direction: column;  overflow: hidden;"><?php echo $variable[($i-1)*4+1]->contenido ?></div>
 							</div>
-							<div style="padding-left: 60px;">
+							<div style="padding-left: 18%;">
 								<div class="box">
 									{!!link_to_route('noticias.edit', $title='Editar', $parameters = $variable[($i-1)*4+1]->id, $attributes = ['class'=>'btn btn-primary'])!!}
 								</div>
-								<div class="box" style="margin-left:30px">
+								<div class="box" style="margin-left:17%">
 									<form action="{{ route('noticias.destroy',$variable[($i-1)*4+1]->id )}}" method="POST">
 							              <input name="_method" type="hidden" value="DELETE">
 							              {{ csrf_field() }}
@@ -137,11 +137,11 @@
 								<h3 style="text-align: center; font-weight:bold;"><?php echo $variable[($i-1)*4+2]->titulo ?></h3>
 								<div style="text-align: center; height: 100px; font-size:15px; display: flex; justify-content: center; align-content: center; flex-direction: column;  overflow: hidden;"><?php echo $variable[($i-1)*4+2]->contenido ?></div>
 							</div>
-							<div style="padding-left: 60px;">
+							<div style="padding-left: 18%;">
 								<div class="box">
 									{!!link_to_route('noticias.edit', $title='Editar', $parameters = $variable[($i-1)*4+2]->id, $attributes = ['class'=>'btn btn-primary'])!!}
 								</div>
-								<div class="box" style="margin-left:30px">
+								<div class="box" style="margin-left:17%">
 									<form action="{{ route('noticias.destroy',$variable[($i-1)*4+2]->id )}}" method="POST">
 							              <input name="_method" type="hidden" value="DELETE">
 							              {{ csrf_field() }}
@@ -171,11 +171,11 @@
 								
 								<div style="text-align: center; height: 100px; font-size:15px; display: flex; justify-content: center; align-content: center; flex-direction: column;  overflow: hidden;"><?php echo $variable[($i-1)*4+3]->contenido ?></div>
 							</div>
-							<div style="padding-left: 60px;">
+							<div style="padding-left: 18%;">
 								<div class="box">
 									{!!link_to_route('noticias.edit', $title='Editar', $parameters = $variable[($i-1)*4+3]->id, $attributes = ['class'=>'btn btn-primary'])!!}
 								</div>
-								<div class="box" style="margin-left:30px">
+								<div class="box" style="margin-left:17%">
 									<form action="{{ route('noticias.destroy',$variable[($i-1)*4+3]->id )}}" method="POST">
 							              <input name="_method" type="hidden" value="DELETE">
 							              {{ csrf_field() }}
@@ -217,12 +217,12 @@
 								<div style="text-align: center; height: 100px; font-size:15px; display: flex; justify-content: center; align-content: center; flex-direction: column; overflow: hidden;"><?php echo $variable[$cantidad_elementos_multiplo4+$i-1]->contenido ?></div>
 								
 							</div>
-							<div style="padding-left: 60px;">
+							<div style="padding-left: 18%;">
 							<div class="box">
 							{!!link_to_route('noticias.edit', $title='Editar', $parameters = $variable[$cantidad_elementos_multiplo4+$i-1]->id, $attributes = ['class'=>'btn btn-primary'])!!}
 							</div>
 							<!--<a href="#" class="btn btn-primary">Leer mas</a>-->
-							<div class="box" style="margin-left:30px">
+							<div class="box" style="margin-left:17%">
 							<form action="{{ route('noticias.destroy',$variable[$cantidad_elementos_multiplo4+$i-1]->id )}}" method="POST">
 					              <input name="_method" type="hidden" value="DELETE">
 					              {{ csrf_field() }}

@@ -11,6 +11,7 @@ class Noticia extends Model
     ];
     public function setUrlImgAttribute($urlImg){
     	//echo $urlImg;
+        echo("holasa");
     	if($urlImg==true)
     	{
             if(is_string ( $urlImg)==false)
