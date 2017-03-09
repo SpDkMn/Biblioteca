@@ -18,8 +18,8 @@ class CreateNoticiasTable extends Migration
             $table->string('titulo');
             $table->string('contenido', 764);
             $table->string('palabra_clave');
-            $table->string('urlImg')->nullable()->change();
-            $table->string('localizacion')->nullable()->change();
+            $table->string('urlImg')->nullable();
+            $table->string('localizacion')->nullable();
             $table->timestamps();
         });
     }
