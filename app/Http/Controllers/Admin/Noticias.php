@@ -70,7 +70,8 @@ class Noticias extends Controller
      */
     public function show($id)
     {
-        return ("hola");
+        $variable = \App\Noticia::paginate(8);
+       return view('admin.md_noticias.mostrar_noticia',compact('variable'));
     }
 
     /**
