@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\NoticiaCreateRequest;
+use App\Http\Requests\NoticiaUpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Noticia;
 use Session;
@@ -82,7 +83,8 @@ class Noticias extends Controller
      */
     public function edit($id)
     {
-        //
+         $user = \App\Noticia::find($id);
+        return view('admin.md_noticias.editar_noticia',['noticia'=>$user]);
     }
 
     /**
@@ -92,9 +94,23 @@ class Noticias extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(NoticiaUpdateRequest $request, $id)
     {
-        //
+        $user = \App\Noticia::find($id);
+        $user->fill($request->all());
+        /*\App\Noticia::update([
+                'titulo' =>$request['titulo'],
+                'contenido' =>$request['contenido'],
+                'palabra_clave' =>$request['palabra_clave'],
+                'localizacion' =>$request['localizacion'],
+                'urlImg' =>$request['urlImg'],
+                
+            ]); */
+            $user->save();
+        Session::flash('message','Noticia editada correctamente');
+
+
+        return Redirect::to('/admin/noticias/show');
     }
 
     /**
@@ -105,6 +121,8 @@ class Noticias extends Controller
      */
     public function destroy($id)
     {
-        //
+        Noticia::destroy($id);
+        Session::flash('message','Noticia eliminada Correctamente');
+        return redirect::to('/admin/noticias/show');
     }
 }

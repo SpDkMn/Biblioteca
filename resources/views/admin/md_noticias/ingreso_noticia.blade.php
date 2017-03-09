@@ -68,7 +68,7 @@ alert("entro");
   @endif
                   <div class="col-md-3" id="boton_crear_noticia" style="padding-left: 10px; margin-top: 7px;">
                       
-                      <a href="http://127.0.0.1:8000/admin/noticias_creacion/show" class="btn btn-primary">Vista de Noticia</a>
+                      <a href="http://127.0.0.1:8000/admin/noticias/show" class="btn btn-primary">Vista de Noticia</a>
                    </div>
                   <h1 id="titulo_ingresar_noticia">Ingresar Noticia</h1>
                   <form class="form-horizontal" role="form" method="POST" action="http://127.0.0.1:8000/admin/noticias" enctype="multipart/form-data" files="true" name="formulario_ingreso_noticia" id="formulario_ingreso_noticia">
@@ -203,7 +203,6 @@ alert("entro");
     <!-- Bootstrap WYSIHTML5 -->
     <script src="{{ URL::asset('js/bootstrap3-wysihtml5.all.min.js')}}"></script>
     <!-- Page Script -->
-    <script src="{{ URL::asset('js/bootstrap3-wysihtml5.all.min.js')}}"></script>
     <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
     <!-- Bootstrap WYSIHTML5 -->
     <script>
