@@ -24,7 +24,7 @@
 			#titulo_mostrar_noticia{
 				margin-top: 0px;
         margin-bottom: 20px;
-        margin-left:500px;
+        margin-left:39%;
 	        
       }
       	.box {
