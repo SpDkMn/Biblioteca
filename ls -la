@@ -1,0 +1,8 @@
+
+[1mVariables:[22m
+  [1m$conten2[22m    [34;4mApp\Content[39;24m {#703 …5}                                           
+  [1m$content[22m    [34;4mApp\Content[39;24m {#700 …6}                                           
+  [1m$content2[22m   {#690 …1}                                                       
+  [1m$magazine[22m   [34;4mApp\Magazine[39;24m {#693 …6}                                          
+  [31m$_[39m          [34;4mApp\Magazine[39;24m {#693 …6}                                          
+  [31m$_e[39m         [34;4mSymfony\Component\Console\Exception\RuntimeException[39;24m {#722 …3}  

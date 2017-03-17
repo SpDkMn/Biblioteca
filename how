@@ -1,0 +1,252 @@
+[34m  0[39m: $category = new App\Category();
+[34m  1[39m: $category->name="libro"
+[34m  2[39m: $category->name="revista"
+[34m  3[39m: $category->name="tesis"
+[34m  4[39m: $category->save();
+[34m  5[39m: $category->save()
+[34m  6[39m: $category->save();
+[34m  7[39m: $category->name="libro"
+[34m  8[39m: $category->name="revista"
+[34m  9[39m: $category->name="tesis"
+[34m 10[39m: $category->save();
+[34m 11[39m: $category->save();
+[34m 12[39m: $category->all();
+[34m 13[39m: $category->name=libro"
+[34m 14[39m: $category->name="libro"
+[34m 15[39m: $category->name="revista"
+[34m 16[39m: $category->save();
+[34m 17[39m: $category->all()
+[34m 18[39m: $category->all()
+[34m 19[39m: $category->save();
+[34m 20[39m: $category->all()
+[34m 21[39m: $category->name="revista"
+[34m 22[39m: $category->save();
+[34m 23[39m: $category->all()
+[34m 24[39m: $author->new();
+[34m 25[39m: exit
+[34m 26[39m: %authot = new App\Author()
+[34m 27[39m: exit
+[34m 28[39m: $category = new App\Category();
+[34m 29[39m: $category->name="tesis"
+[34m 30[39m: $category->save();
+[34m 31[39m: $category->name="libro"
+[34m 32[39m: $category->save();
+[34m 33[39m: exit
+[34m 34[39m: $category = new App\Category();
+[34m 35[39m: $category->name= "tesis" 
+[34m 36[39m: $category->save();
+[34m 37[39m: $author = new App\Autho();
+[34m 38[39m: $magazine = new App\Magazine();
+[34m 39[39m: $magazine->title="Revista de Prueba "
+[34m 40[39m: $magazine->save();
+[34m 41[39m: $magazine
+[34m 42[39m: $magazine->issn=123123
+[34m 43[39m: $magazine
+[34m 44[39m: $magazine->all();
+[34m 45[39m: $magazine->title="Revista de la FISI"
+[34m 46[39m: $magazine->issn=91822
+[34m 47[39m: $magazine->save();
+[34m 48[39m: $magazine->all();
+[34m 49[39m: $magazine 
+[34m 50[39m: $m = App\Magazine();
+[34m 51[39m: $m = new App\Magazine();
+[34m 52[39m: $m->title="Revista de Psicologia"
+[34m 53[39m: $m->issn=98202
+[34m 54[39m: $m->save();
+[34m 55[39m: ls
+[34m 56[39m: ls -l
+[34m 57[39m: ls -l
+[34m 58[39m: $category->name="tesina"
+[34m 59[39m: $category->save();
+[34m 60[39m: ls 
+[34m 61[39m: ls -l
+[34m 62[39m: select $m
+[34m 63[39m: ls -l
+[34m 64[39m: //sd
+[34m 65[39m: ls 
+[34m 66[39m: ls- l
+[34m 67[39m: ls -l
+[34m 68[39m: $m->title="Revista de Industrial"
+[34m 69[39m: $m->save();
+[34m 70[39m: update
+[34m 71[39m: ls 
+[34m 72[39m: ls- l
+[34m 73[39m: info
+[34m 74[39m: ls 
+[34m 75[39m: ls- l
+[34m 76[39m: select 
+[34m 77[39m: ls 
+[34m 78[39m: l-ls 
+[34m 79[39m: ls -l
+[34m 80[39m: ls 
+[34m 81[39m: ls -l
+[34m 82[39m: ls -la
+[34m 83[39m: ls -la 
+[34m 84[39m: ls -ls
+[34m 85[39m: ls -la 
+[34m 86[39m: ls -l
+[34m 87[39m: $m
+[34m 88[39m: $magazine
+[34m 89[39m: App\Category::all();
+[34m 90[39m: $magazine
+[34m 91[39m: $editorial = new App\Editorial();
+[34m 92[39m: $editorial -> name = "UNMSM"
+[34m 93[39m: $ditorial -> save();
+[34m 94[39m: $editorial -> save();
+[34m 95[39m: $editorial
+[34m 96[39m: $editorial-> magazine_id = 1 
+[34m 97[39m: $editorial-> save();
+[34m 98[39m: $editorial
+[34m 99[39m: exit
+[34m100[39m: ls 
+[34m101[39m: ls -ls 
+[34m102[39m: ls -la 
+[34m103[39m: ls -la 
+[34m104[39m: $author = new AppºAuthor();
+
+[34m105[39m: $author = new App\Author(),
+[34m106[39m: $cat = new App\Category();
+[34m107[39m: $cat 
+[34m108[39m: ls
+[34m109[39m: ls -l
+[34m110[39m: $cat 
+[34m111[39m: $cat-> name = "tesis " 
+[34m112[39m: $cat -> name = "tesis"
+[34m113[39m: $cat->save();
+[34m114[39m: $cat-> name = "revista"
+[34m115[39m: $revista -> save();
+[34m116[39m: $cat -> save(); 
+[34m117[39m: $cat2 = new App\Category();
+[34m118[39m: $cat2 -> name  = "tesis"
+[34m119[39m: $cat2->save();
+[34m120[39m: ls 
+[34m121[39m: ls -la 
+[34m122[39m: $mag = new App\Magazine();
+[34m123[39m: $mag->title="Revista de Investigacion"
+[34m124[39m: $mag->issn="981723"
+[34m125[39m: $mag->issn=987123
+[34m126[39m: $mag->save();
+[34m127[39m: $mag2 = new App\Magazine();
+[34m128[39m: $mag2 -> title = "Revista de la FISI"
+[34m129[39m: $mag2-> issn = 971232
+[34m130[39m: $mag2->save();
+[34m131[39m: $magCopy = new App\Magazine_Copy();
+[34m132[39m: $magCopy = new App\Magazine_Copy();
+[34m133[39m: $magCopy = new App\MagazineCopy();
+[34m134[39m: $magCopy ->clasification = "Q123HASD123"
+[34m135[39m: $magCopy -> incomeNumber = 100292019
+[34m136[39m: $magCopy->barcode=0000000123123
+[34m137[39m: $magCopy->copy=1
+[34m138[39m: $magCopy->magazine_id=1
+[34m139[39m: $magCopy->save();
+[34m140[39m: $magCopy
+[34m141[39m: $magCopy->save();
+[34m142[39m: $magCopy->save();
+[34m143[39m: $magCopy->save();
+[34m144[39m: $magcopy
+[34m145[39m: ls 
+[34m146[39m: ls -l
+[34m147[39m: $magCopy
+[34m148[39m: $cat
+[34m149[39m: ls 
+[34m150[39m: l-s l
+[34m151[39m: ls 
+[34m152[39m: l-ls 
+[34m153[39m: ls -
+[34m154[39m: ls -l
+[34m155[39m: $cat->save():
+[34m156[39m: $cat->save();
+[34m157[39m: $cat
+[34m158[39m: $cat->name="Revista"
+[34m159[39m: $cat->save();
+[34m160[39m: $cat->save();
+[34m161[39m: $cat
+[34m162[39m: exit
+[34m163[39m: ls 
+[34m164[39m: ls- l
+[34m165[39m: ls -ls 
+[34m166[39m: ls 
+[34m167[39m: ls -l 
+[34m168[39m: select * from categories ; 
+[34m169[39m: $magazine = new App\Magazine;
+[34m170[39m: $magazine -> title = "Revista de la FISI";
+[34m171[39m: $magazine -> issn = asdasd
+[34m172[39m: $magazine->issn=123123
+[34m173[39m: $magazine->save();
+[34m174[39m: $content = new App\Content();
+[34m175[39m: $content -> title = "Este es el primer contenido " ;
+[34m176[39m: $content -> magazine_id = 1
+[34m177[39m: $conten2 = new App\content();
+[34m178[39m: $content2 -> title = "Este es el segundo contenido" ;
+[34m179[39m: $conten2 -> title = "este es el segundo contenido" ;
+[34m180[39m: $conten2 -> magazine_id = 1 ; 
+[34m181[39m: $conten2 -> save();
+[34m182[39m: $conten2 -> save();
+[34m183[39m: $conten2 -> save();
+[34m184[39m: $conten2 -> save();
+[34m185[39m: $conten2 -> save();
+[34m186[39m: $conten2 -> save();
+[34m187[39m: $content 
+[34m188[39m: $content2 ; 
+[34m189[39m: $content -> save();
+[34m190[39m: $content->save(),
+[34m191[39m: $content->save();
+[34m192[39m: $content->save();
+[34m193[39m: $content2 -> save();
+[34m194[39m: $conten2
+[34m195[39m: $content
+[34m196[39m: $conten2->save();
+[34m197[39m: $content->magazine();
+[34m198[39m: ls -ls 
+[34m199[39m: ls 
+[34m200[39m: $magazine->content();
+[34m201[39m: $conten->magazine();
+[34m202[39m: $content->magazine();
+[34m203[39m: $content->magazine()
+[34m204[39m: $magazines->content();
+[34m205[39m: $magazine->contents();
+[34m206[39m: $magazine
+[34m207[39m: $magazine->contents
+[34m208[39m: $content->magazine
+[34m209[39m: $content
+[34m210[39m: $magazine
+[34m211[39m: ls -ls 
+[34m212[39m: ls -la 
+[34m213[39m: clear
+[34m214[39m: ls -la 
+[34m215[39m: ls 
+[34m216[39m: ls -la 
+[34m217[39m: $category  = new App\Category ; 
+[34m218[39m: $category -> name = "revista"
+[34m219[39m: $category -> name = "tesis"
+[34m220[39m: $category-> name = "libro"
+[34m221[39m: $category-> name = "tesina"
+[34m222[39m: $category
+[34m223[39m: $category -> save();
+[34m224[39m: $category2 = new App\Category;
+[34m225[39m: $category2 -> name = "revista" ;
+[34m226[39m: $category2->save();
+[34m227[39m: $magazine 
+[34m228[39m: ls 
+[34m229[39m: ls -la 
+[34m230[39m: $contents 
+[34m231[39m: $content ; 
+[34m232[39m: ls -la 
+[34m233[39m: clear 
+[34m234[39m: ls -la 
+[34m235[39m: $magazine1 = new App\Magazine ; 
+[34m236[39m: $magazine1 -> title = "Revista de Industrial" ; 
+[34m237[39m: $magazine1 -> issn = 19812 ; 
+[34m238[39m: $magazine1 -> save(); 
+[34m239[39m: $magazine1 
+[34m240[39m: $editorial = new App\Editorial ; 
+[34m241[39m: $editorial -> name = "UNMSM" ; 
+[34m242[39m: $editorial -> magazine_id = 2 
+[34m243[39m: $editorial -> category_id = 2
+[34m244[39m: $editorial-> save();
+[34m245[39m: $editorial->save();
+[34m246[39m: $editorial->save();
+[34m247[39m: $editorial
+[34m248[39m: $editorial->save();
+[34m249[39m: $editorial->magazine
+[
