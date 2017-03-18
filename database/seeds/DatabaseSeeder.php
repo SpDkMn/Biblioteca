@@ -16,7 +16,5 @@ class DatabaseSeeder extends Seeder
         $this->call(Authors::class);
         $this->call(Editorials::class);
         $this->call(Categories::class);
-
-
     }
 }

@@ -63,7 +63,6 @@
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
-
         <ul class="treeview-menu">
           <li @if(URL::full() == url('/admin/magazines'))class="active"@endif><a href="{{ url('/admin/magazines') }}"><i class="fa fa-bookmark-o"></i> <span></span></a></li>
             <li @if(URL::full() == url(''))class="active"@endif><a href="{{ url('') }}"><i class="fa fa-book"></i> <span></span></a></li>  

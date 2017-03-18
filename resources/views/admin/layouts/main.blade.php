@@ -22,9 +22,6 @@
     {{-- selector mulltiple --}}
     <link rel="stylesheet" href="{{URL::asset('css/select2.min.css')}}">
     {{-- end selector multiple --}}
-
-
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -73,8 +70,5 @@
     @yield('scriptModal')
     @yield('scriptModalContent')
     <!-- Js para enviar el id de una revista seleccionada -->
-
-
-
   </body>
 </html>

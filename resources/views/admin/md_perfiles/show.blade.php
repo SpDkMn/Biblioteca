@@ -45,7 +45,7 @@
         $("#confirmaDelete").on('click',function(event){
           $id = $('#confirmaDelete').data('id')
           $.ajax({
-            url: '{{ url("/admin/magazines") }}/'+$id,
+            url: '{{ url("/admin/profiles") }}/'+$id,
             type: 'DELETE',
             data: {'_token': '{{csrf_token()}}'},
             success: function(result) {

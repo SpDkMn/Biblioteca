@@ -11,7 +11,7 @@
   <div class="box-body">
     <table class="table table-bordered table-hover">
       <tr>
-        <th>Nombres</th
+        <th>Nombres</th>
         <th>Apellidos</th>
         <th>Correo</th>
         <th>Perfil</th>
