@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAuthorsTable extends Migration
+class CreateMagazinesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateAuthorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('authors', function (Blueprint $table) {
+        Schema::create('magazines', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            
+            $table->string('title');
+            $table->bigInteger('issn')->unsigned();
+            $table->integer('author_id')->unsigned();
 
+            $table->softDeletes();
             $table->timestamps();
+
         });
     }
 
@@ -29,6 +32,6 @@ class CreateAuthorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('authors');
+        Schema::dropIfExists('magazines');
     }
 }
