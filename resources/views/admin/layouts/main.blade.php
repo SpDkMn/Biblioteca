@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     @yield('css')
     <link rel="stylesheet" href="{{ URL::asset('css/app.css')}}">
+    
+
+    <link rel="stylesheet" href="{{ URL::asset('plugins/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/AdminLTE.min.css') }}">
+    
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -39,7 +45,18 @@
     <script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
     @yield('plugins')
     <script src="{{ URL::asset('js/fastclick.js')}}"></script>
+    
+
     <script src="{{ URL::asset('js/app.min.js')}}"></script>
+    <script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>
     @yield('script')
+    <script>
+      $(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();
+      });
+    </script>
+ 
+
   </body>
 </html>

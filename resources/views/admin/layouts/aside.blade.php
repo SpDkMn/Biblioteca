@@ -29,6 +29,9 @@
           <li @if(URL::full() == url('/admin/employees'))class="active"@endif><a href="{{ url('/admin/employees') }}"><i class="fa fa-male"></i> <span>Empleados</span></a></li>
         </ul>
       </li>
+
+      <li @if(URL::full() == url('/admin/autor'))class="active"@endif><a href="{{ url('/admin/autor') }}"><i class="fa fa-user-plus"></i> <span>Autores</span></a></li>
+
       <li class="treeview @if(URL::full() == url('/admin/castigos') || URL::full() == url('/admin/castigados')) active @endif  ">
         <a href="#">
           <i class="fa fa-table"></i> <span>Sanciones</span>
