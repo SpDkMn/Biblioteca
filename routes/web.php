@@ -16,3 +16,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+<<<<<<< HEAD
+=======
+
+
+
+
+Route::get('/home', 'HomeController@index');
+>>>>>>> refs/remotes/origin/joseG-autoress

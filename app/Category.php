@@ -23,6 +23,4 @@ class Category extends Model
 	public function editorials(){
 		return $this->belogsToMany('App\Editorial','category_editorial');
 	}
-
-
 }

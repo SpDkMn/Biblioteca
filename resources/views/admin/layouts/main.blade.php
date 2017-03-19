@@ -54,6 +54,8 @@
     {{--end Magazine JScript --}}
     @yield('plugins')
     <script src="{{ URL::asset('js/fastclick.js')}}"></script>
+
+
     <script src="{{ URL::asset('js/app.min.js')}}"></script>
     <script src="{{ URL::asset('js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ URL::asset('js/jquery.slimscroll.min.js')}}"></script>
@@ -70,5 +72,13 @@
     @yield('scriptModal')
     @yield('scriptModalContent')
     <!-- Js para enviar el id de una revista seleccionada -->
+    <script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>
+    @yield('script')
+    <script>
+      $(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();
+      });
+    </script>
   </body>
 </html>
