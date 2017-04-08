@@ -11,10 +11,21 @@ class CreateBooksTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up() 
     {
         Schema::create('books', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('clasification');
+            $table->string('title');
+            $table->string('secondaryTitle');
+            $table->string('summary');
+            $table->biginteger('isbn');
+            //Descripcion fisica del libro
+            $table->string('extension');
+            $table->string('physicalDetails');
+            $table->string('dimensions');
+            $table->string('accompaniment');
+            //fin descripcion fisica
             $table->timestamps();
         });
     }

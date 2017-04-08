@@ -29,6 +29,11 @@
           <li @if(URL::full() == url('/admin/employees'))class="active"@endif><a href="{{ url('/admin/employees') }}"><i class="fa fa-male"></i> <span>Empleados</span></a></li>
         </ul>
       </li>
+
+      <li @if(URL::full() == url('/admin/editorial'))class="active"@endif><a href="{{ url('/admin/editorial') }}"><i class="fa fa-"></i> <span>Editorial</span></a></li>
+       <li @if(URL::full() == url('/admin/magazines'))class="active"@endif><a href="{{ url('/admin/magazines') }}"><i class="fa fa-"></i> <span>Revistas</span></a></li>
+       <li @if(URL::full() == url('/admin/book'))class="active"@endif><a href="{{ url('/admin/book') }}"><i class="fa fa-"></i> <span>Libros</span></a></li>
+
       <li class="treeview @if(URL::full() == url('/admin/castigos') || URL::full() == url('/admin/castigados')) active @endif  ">
         <a href="#">
           <i class="fa fa-table"></i> <span>Sanciones</span>
