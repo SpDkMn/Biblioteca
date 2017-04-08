@@ -11,17 +11,17 @@
     @yield('css')
     <link rel="stylesheet" href="{{ URL::asset('css/app.css')}}">
     {{-- Magazine Style --}}
-    {{-- AdminLTE --}}
-    <link rel="stylesheet" href="{{URL::asset('css/AdminLTE.min.css')}}">
-    {{-- end AdminLTE --}}
-    <link rel="stylesheet" href="{{ URL::asset('css/magazinesStyle.css')}}">
-    {{--end  Magazine Style --}}
-    {{-- dataTables --}}
-    <link rel="stylesheet" href="{{URL::asset('css/dataTables.bootstrap.css')}}">
-    {{-- end dataTables --}}
     {{-- selector mulltiple --}}
     <link rel="stylesheet" href="{{URL::asset('css/select2.min.css')}}">
     {{-- end selector multiple --}}
+    {{-- AdminLTE --}}
+    <link rel="stylesheet" href="{{URL::asset('css/AdminLTE.min.css')}}">
+    {{-- end AdminLTE --}}
+    {{-- dataTables --}}
+    <link rel="stylesheet" href="{{URL::asset('css/dataTables.bootstrap.css')}}">
+    {{-- end dataTables --}}
+    <link rel="stylesheet" href="{{ URL::asset('css/magazinesStyle.css')}}">
+    {{--end  Magazine Style --}}
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -54,21 +54,27 @@
     {{--end Magazine JScript --}}
     @yield('plugins')
     <script src="{{ URL::asset('js/fastclick.js')}}"></script>
+    <script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>
     <script src="{{ URL::asset('js/app.min.js')}}"></script>
     <script src="{{ URL::asset('js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ URL::asset('js/jquery.slimscroll.min.js')}}"></script>
     <script src="{{ URL::asset('js/dataTables.bootstrap.min.js')}}"></script>
     <!-- Selector multiple  -->
     <script src="{{ URL::asset('js/select2.full.min.js')}}"></script>
+    <!-- Probando ...  -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+
     <!-- Los js de abajo seran guardados en un solo archivo .js  -->
+    <!-- js para mostrar el modal , editar , eliminar -->
+    @yield('script')
+    <!-- js para agregar mas contenidos a una revista -->
     @yield('scriptContent')
+    <!-- js para agregar mas items a una revista -->
     @yield('scriptItem')
-    @yield('scriptDelete')
+    <!-- js para cambiar el dataTable a español -->
     @yield('scriptTable')
-    @yield('scriptTableExtend')
+    <!-- js para Inicializar el selector multiple -->
     @yield('scriptSelect')
-    @yield('scriptModal')
-    @yield('scriptModalContent')
-    <!-- Js para enviar el id de una revista seleccionada -->
+
   </body>
 </html>

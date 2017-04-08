@@ -17,8 +17,8 @@ class CreateAuthorContentTable extends Migration
             $table->increments('id');
             $table->integer('author_id')->unsigned();
             $table->integer('content_id')->unsigned();
-            $table->foreign('author_id')->references('id')->on('authors');
-            $table->foreign('content_id')->references('id')->on('contents');
+            $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
+            $table->foreign('content_id')->references('id')->on('contents')->onDelete('cascade');
             $table->timestamps();
         });
     }
