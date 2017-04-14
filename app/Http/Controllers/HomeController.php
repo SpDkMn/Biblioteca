@@ -22,7 +22,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { #dashboard - Admin
-        return view('admin.layouts.main');
+    {
+        return view('home');
     }
 }

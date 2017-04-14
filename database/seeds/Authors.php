@@ -12,7 +12,19 @@ class Authors extends Seeder
     public function run()
     {
       //Rellenando la tabla authors con 30 datos aleatorios
-        factory(Author::class)->times(30) ->create();
+        Author::Create(['name'=>'Facultad de sistemas']);
+        Author::Create(['name'=>'Facultad de industrial']);
+        Author::Create(['name'=>'Facultad de electrica']);
+        Author::Create(['name'=>'Eduardo Espinoza']);
+        Author::Create(['name'=>'Luis Toro']);
+        Author::Create(['name'=>'Pedro Diaz']);
+        Author::Create(['name'=>'Gloria Fudeni']);
+        Author::Create(['name'=>'Roberto Sediño']);
+        Author::Create(['name'=>'Rin Okumura']);
+        Author::Create(['name'=>'Hanabi Yasuraoka']);
+        Author::Create(['name'=>'Rodolfo el cerdo']);
+        Author::Create(['name'=>'Eren Jaeger']);
     }
+    
 }
 // Eliminar esta semilla cuando se tenga gestion author
