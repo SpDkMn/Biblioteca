@@ -1,4 +1,4 @@
- <div class="box box-primary">
+<div class="box box-primary">
   <div class="box-header with-border">
     <h3 class="box-title">Nuevo</h3>
     <div class="box-tools pull-right">
@@ -6,100 +6,164 @@
       </button>
     </div>
   </div>
-  <!-- /.box-header -->
+  
+  <div class="box-body">
+    
+    <div class="col-md-6">
+      <div class="box box-success box-solid">
+        <div class="box-header with-border">
+          <h3 class="box-title">Libro</h3>
+          <div class="box-tools pull-right"> 
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+          </div> 
+        </div>
+          <div class="box-body">
+          
+            <div class="bs-example" data-example-id="simple-nav-tabs"> 
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#primero" data-toggle="tab">Primero</a></li>
+                <li><a href="#segundo" data-toggle="tab">Segundo</a></li>
+              </ul>
 
-  <form method="POST" action="{{ url('/admin/book') }}">
-    {{ csrf_field() }}	  
-     <div class="box-body">
-     		<!---->
-     		<!--***************************** PANEL DE LIBRO *************************************-->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Informacion</h3>
+              <div class="tab-content">
+                <div class="tab-pane active" id="primero">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label>Titulo</label>
+                      <input type="text" name="title" class="form-control" id="title">
+                      <br><label>Resto de Titulo</label>
+                      <input type="text" name="secondaryTtle" class="form-control" id="secondaryTitle">
+                      <br><label>Clasificacion</label>
+                      <input type="text" name="clasification" class="form-control" id="clasification">
+                      <br>
+                      <label>Autor</label>
+                      <p>
+                        &nbsp&nbsp&nbsp&nbspPrincipal<?php   for($i=0;$i<20;$i++){echo "&nbsp";}?>:&nbsp<input type="text" name="">
+                      </p>
+                      <p>
+                        &nbsp&nbsp&nbsp&nbspSecundario<?php   for($i=0;$i<15;$i++){echo "&nbsp";}?>:&nbsp<input type="text" name="">
+                      </p>
+                      <br>
+                      <label>Editorial</label>
+                      <p>
+                        &nbsp&nbsp&nbsp&nbspPrincipal<?php   for($i=0;$i<20;$i++){echo "&nbsp";}?>:&nbsp<input type="text" name="">
+                      </p>
+                      <p>
+                        &nbsp&nbsp&nbsp&nbspAnexo<?php   for($i=0;$i<25;$i++){echo "&nbsp";}?>:&nbsp<input type="text" name="">
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div class="panel-body" id="bookPanel">
-                    <div class="form-group">
-                        <label for="inputTitle">Titulo</label>
-                        <input type="text" class="form-control" name="title" id="inputTitle" placeholder="">
+                <div class="tab-pane fade" id="segundo">
+                  <div class="form-group">
+                    <br><label>Resumen</label>
+                    <textarea class="form-control" rows="3" name="summary" id="inputSummary" placeholder=""></textarea> 
+                    <br><label>Contenido</label>
+                    <input type="text" name="" class="form-control">
+                    <br><label>Descripcion Fisica</label>
+                    <br>
+                    
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div id="example1_filter" class="dataTables_filter">
+                          <label>Extension:<input type="text" class="form-control input-sm" placeholder="" aria-controls="example1" size="6"></label>
+                        </div>
+                      </div> 
+                      <div class="col-md-8"> 
+                      </div>
+                      <div class="col-md-4">
+                        <div id="example1_filter" class="dataTables_filter">
+                          <label>Otros detalles fisicos:<input type="text" class="form-control input-sm" placeholder="" aria-controls="example1" size="6"></label>
+                        </div>
+                      </div> 
+                      <div class="col-md-8"></div>
                     </div>
-                    <div class="form-group">
-                        <label>Autor</label>
-                       	<select class="form-control select2" name="autor[]" multiple="multiple" data-placeholder="Autor Principal - Autor Secundario" style="width: 100%;">
-                        @foreach($autores as  $autor)
-                          @foreach($autor->categories as $category)
-                            @if($category->name == "libro"){
-                              <option value="{{ $autor->id }}">{{$autor->name}}</option>
-                            }@endif
-                          @endforeach
-                        @endforeach
-                       
-                        </select>
+                      
+
+                      <br><div class="col-md-4">
+                        <div id="example1_filter" class="dataTables_filter">
+                          <label>Dimensiones:<input type="text" class="form-control input-sm" placeholder="" aria-controls="example1" size="6"></label>
+                        </div>
+                      </div> 
+
+                      <br><div class="col-md-4">
+                        <div id="example1_filter" class="dataTables_filter">
+                          <label>Material de acompañamiento:<input type="text" class="form-control input-sm" placeholder="" aria-controls="example1" size="6"></label>
+                        </div>
+                      </div> 
+                    
+                    <br>
                     </div>
+                    <div class="col-md-4">
+                      <div id="example1_filter" class="dataTables_filter">
+                        <label>Extension:<input type="search" class="form-control" placeholder="" aria-controls="example1"></label>
+                      </div>
+                    </div>  
 
-                    <div class="form-group">
-                        <label>Editorial</label>
-                        <select class="form-control select2" name="editorial[]" multiple="multiple" data-placeholder="Editorial Principal - Editorial Secundaria" style="width: 100%;">
-                        @foreach($editoriales as  $editorial)
-                          @foreach($editorial->categories as $category)
-                            @if($category->name == "libro"){
-                              <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
-                            }@endif
-                          @endforeach
-                        @endforeach
-                        </select>
-                    </div>
+                    <br>
+                    <br>
+                  
+                  </div>                  
+                </div>
+              </div> 
 
-                    <div class="form-group">
-                        <label for="inputISBN">ISBN</label>
-                        <input type="text" class="form-control" name="isbn" id="inputISBN" placeholder="">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputISBN">Resumen</label>
-                        <textarea class="form-control" rows="3" name="summary" id="inputSummary" placeholder=""></textarea> 
-                    </div>
-
-                    <label>Capitulos</label>
-                    <div class="input-group">
-	                	<span class="input-group-addon">1</span>
-	                	<input type="text" id="inputChapter" name="chapter0" class="form-control">
-	                	<span id="agregarCapitulo"  class="input-group-addon"><i class="fa fa-plus"></i></span>
-	                	
-	             	 </div>
-
-                 </div>
             </div>
-            <!--**************************************************************************************-->
- 				
- 			<!--*************************  PANEL DE ITEM  ********************************************-->
-          <div class="panel panel-default" id="itemPanel">
-              <div class="panel-heading">
-                  <h3 class="panel-title col-xs-11">Item</h3>
-                  <!-- Cambiar por un diseño mas atractivo cuando este funcionando -->
-                  <span id="agregarItem" class="fa fa-plus"></span>
-              </div>
-              <div class="panel-body">
-                  <div class="form-group">
-                      <label for="inputClasification">Clasificación</label>
-                      <input type="text" class="form-control" name="clasification0" id="inputClasification" placeholder="">
+
+            
+
+          </div>
+      </div> 
+    </div>
+
+    <div class="col-md-6">
+      <div class="box box-success box-solid">
+        <div class="box-header with-border">
+          <h3 class="box-title">Item</h3>
+          <div class="box-tools pull-right"> 
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+          </div> 
+        </div>
+          <div class="box-body">
+          
+            <div class="container" role="tabpanel">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#primero" data-toggle="tab">Primero</a></li>
+                <li><a href="#segundo" data-toggle="tab">Segundo</a></li>
+              </ul>
+            
+              <div class="tab-content">
+                <div class="tab-pane active" id="primero">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label>Titulo</label>
+                      <input type="text" name="title" class="form-control" id="title">
+                      <label>Resto de Titulo</label>
+                      <input type="text" name="secondaryTtle" class="form-control" id="secondaryTitle">
+                      <label>Clasificacion</label>
+                      <input type="text" name="clasification" class="form-control" id="clasification">
+                      <label>Autor</label>
+                      <p>
+                        Principal<input type="text" name="">
+                      </p>
+                      <p>
+                        Secundario<input type="text" name="">
+                      </p>
+                    </div>
                   </div>
-                  <div class="form-group">
-                      <label for="inputIncomeNumber">Nº Ingreso</label>
-                      <input type="text" class="form-control" name="incomeNumber0" id="inputIncomeNumber" placeholder="">
-                  </div>
-                  <div class="form-group">
-                      <label for="inputBarcode">Código de barra</label>
-                      <input type="text" class="form-control" name="barcode0" id="inputBarcode" placeholder="">
-                  </div>
-                  <div class="form-group">
-                      <label for="inputCopy">Ejemplar</label>
-                      <input type="number" class="form-control" name="copy0" id="inputCopy" placeholder="">
-                  </div>
-              </div>
-           </div>
-           <!--***************************************************************************************-->
-     </div>
+                </div>
+                <div class="tab-pane fade" id="segundo">bbbbbbbb</div>
+              </div> 
+            </div>
+          
+          </div>
+      </div> 
+    </div>
+
+
   </div>
+</div>
 
 
 @section('scriptContent')

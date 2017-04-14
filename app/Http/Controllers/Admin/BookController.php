@@ -30,8 +30,8 @@ class BookController extends Controller
 
 
      return view('admin.md_books.index',[
-                                            'show'=>$show
-                                            
+                                            'show'=>$show,
+                                            'new'=>$new
                                             ]);
  	}
 
@@ -195,11 +195,14 @@ class BookController extends Controller
         return view('admin.md_books.show2')->with('book',$book);
       }
       if($request->get('page')==2){
-        dd("estas en la pagina 2");
+        return view('admin.md_books.show3')->with('book',$book);
       }
+      
       if($request->get('page')==3){
-        dd("estas en la pagina 3");
+         $books=Book::all();
+         return view('admin.md_books.show')->with('books',$books);
       }
+      
     }
 
   public function content(){

@@ -22,7 +22,9 @@
     <div class="col-md-12 " id="div-content">
       {!! $show !!}
     </div> 
-          
+    <div class="col-md-12" id="div-new">
+      {!! $new !!}
+    </div>
       
   </div>
   
