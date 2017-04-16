@@ -59,7 +59,7 @@
                         {{-- Seleccionando editoriales que pertenecen a la categoria revista --}}
                         <div class="row">
                           <div class="col-xs-4">
-                            <select id="selectEditorialEditMain" class="form-control" name="editorialP[]" multiple="multiple" data-placeholder="Editorial Principal" style="width: 100%;">
+                            <select id="selectEditorialMainEdit" class="form-control" name="editorialP[]" multiple="multiple" data-placeholder="Editorial Principal" style="width: 100%;">
                               <!-- Este bucle es para mostrar a la editorial seleccionada -->
 
                               @foreach($editoriales as $editoriall)
@@ -82,7 +82,7 @@
                             </select>
                           </div>
                           <div class="col-xs-8">
-                            <select class="form-control select" name="editorial[]" multiple="multiple" data-placeholder="Editorial Secundaria" style="width: 100%;">
+                            <select class="form-control" id="selectEditorialSecondEdit" name="editorial[]" multiple="multiple" data-placeholder="Editorial Secundaria" style="width: 100%;">
                             @foreach($editoriales as  $editorial)
                               @foreach($editorial->categories as $category)
                                 @if($category->name == "revista")
@@ -261,17 +261,99 @@
       <!-- Script para mostrar los selectores luego de mostrar el editar -->
       <script type="text/javascript">
         $(".select").select2();
-        $("#selectEditorialEditMain").select2({
-        maximumSelectionLength: 1,
-        language: {
-          noResults: function() {
-            return "No hay resultado";
-          },
-          searching: function() {
-            return "Buscando..";
-          }
-        }
-      });
+        $listaSecEdit = $("#selectEditorialSecondEdit").select2();
+        $listaPrimEdit =  $("#selectEditorialMainEdit").select2({
+            maximumSelectionLength: 1,
+            language: {
+              noResults: function() {
+                return "No hay resultado";
+              },
+              searching: function() {
+                return "Buscando..";
+              }
+            }
+          });
+
+        //Actualizado 9/04/17 04:55
+        //INICIO DE  PRUEBA -> Deshabilitar una opcion PARA EDITAR
+          $("#selectEditorialMainEdi").on('change',function(e){
+            //Almacenando el valor que esta en el selector de editorial principal
+            e.preventDefault();
+              var opc2 = $(this).val();
+              var txt2 = $(this).text();
+              //Aun no se por qué no tengo que declarar la variable opcD ,
+              //cuando lo declaro var opcD aparece que no esta definido ¿?
+              if(opc2!=null){opcD2 = opc2 ;deshabilitar(opc2);}
+              else{habilitar(opcD2);}
+            });
+
+            function deshabilitar(opc2){
+              //Elimina las opciones si una de ellas es igual a la seleccionada para ser deshabilitada
+              if ($("#selectEditorialSecondEdit").val()!=null) {
+                //Guardando los datos seleccionados (editoriales secundarias) en un arreglo
+                datos = $("#selectEditorialSecondEdit").val().slice();
+                //Recorriendo los datos seleccionados para compararlo con el que se esta deshabilitando
+                for (var i = 0; i < datos.length; i++) {
+                  //Si lo encuentra entonces
+                  if (opc2==datos[i]) {
+                    //Eliminando opciones seleccionadas de editoriales secundarias
+                    $("#selectEditorialSecondEdit").val(null);
+                    //Agregando nuevamente los elementos seleccionados
+                    for (var i = 0; i < datos.length; i++) {
+                      if (datos[i]==opc2) {
+                        // alert("datos["+i+"]: "+datos[i]+"   Opcion: "+opc);
+                        //Guardando la posicion del elemento que se encuentra seleccionado y se quiere deshabilitar
+                        var pos = datos.indexOf(""+opc2+"");
+                        //Eliminando opcion que se deshabilitara en las listas de opciones seleccionadas de editoriales secundarias
+                        datos.splice(pos, 1);
+                        //Colocando nuevos datos en la lista de opciones seleccionadas de la editorial secundaria
+                        //Nota: Solo falta agregar los nuevos valores
+                        // $('#listEditorialSecond').val(["datos[0]","datos[1]","datos[2]"]);
+                        //
+                        //Mostrar datos para hacer prueba
+                        // for (var i = 0; i < datos.length; i++) {
+                        //   alert("Nuevos datos["+i+"]: "+datos[i])
+                        // }
+                      }
+                    }
+                  }
+                }
+              }
+              //Deshabilita la opcion seleccionada
+              $("#listEditorialSecondEdit option").each(function(){
+                //Comparando opcion para deshabilitar
+                if(opc2==$(this).attr('value')){
+                  //Deshabilitando la opcion
+                  $(this).attr("disabled","disabled");
+                  // alert('Deshabilitando opcion '+$(this).text()+' valor '+ $(this).attr('value'));
+                  //Reinicializando
+                  reiniciarSelect('#listEditorialSecondEdit');
+                  // $('#listEditorialSecond').select2('destroy');
+                  // $('#listEditorialSecond').select2();
+
+                }
+
+              });
+            }
+
+            function habilitar(opcD){
+              //Eliminando y volviendo a inicializar el selector cuando se habilite las opciones , sin esto
+              //solo se muestra deshabilitado la primera vez que se inicia el selector
+              reiniciarSelect('#listEditorialSecondEdit');
+              //fin
+              $("#listEditorialSecondEdit option").each(function(){
+                if(opcD==$(this).attr('value')){
+                  $(this).removeAttr('disabled');
+                  // alert('Habilitando opcion '+$(this).text()+' valor '+ $(this).attr('value'))
+
+                }
+              })
+            }
+            function reiniciarSelect(id){
+              $(id).select2('destroy');
+              $(id).select2();
+            }
+        //FIN DE PRUEBAS PARA EDITAR
       </script>
 
 
@@ -280,9 +362,6 @@
                 var idContt = {{$contContent}}; //global
                 //Agregando un contenido màs
                 $('#agregarContenidoCont').click(function(){
-
-
-
 
                   // Guardar el panel donde se encuentra la seccion contenido
                   var container = $('#contentPanel0');
@@ -355,10 +434,6 @@
           })
         });
       </script>
-
-
-
-
 
     @endif
   @endforeach

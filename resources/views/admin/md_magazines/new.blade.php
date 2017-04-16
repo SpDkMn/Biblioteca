@@ -54,7 +54,7 @@
                           <div class="col-xs-8">
                             <!-- Este div permite tener dos inputs en una sola fila  -->
                             <div class="input-group ">
-                              <select id="listEditorialSecond" class="form-control select2" name="editorial[]" multiple="multiple" data-placeholder="Anexos" style="width: 97%;">
+                              <select id="listEditorialSecond" class="form-control"  name="editorial[]" multiple="multiple" data-placeholder="Anexos" style="width: 97%;">
                               @foreach($editoriales as  $editorial)
                                 @foreach($editorial->categories as $category)
                                   @if($category->name == "revista")
@@ -123,8 +123,7 @@
             </div>
     <!--***************************************************************************************************************************************
                                                 PANEL DE CONTENIDO
-      *****************************************************************************************************************************************
-      -->
+    *****************************************************************************************************************************************-->
             <div class="box box-danger box-solid" id="contentPanel">
               <div class="box-header ">
                   <h3 class="box-title">Contenido</h3>
@@ -152,7 +151,6 @@
                 </div>
               </div>
             </div>
-
     <div class="box-footer">
       <button type="submit" class="btn btn-primary">Crear</button>
     </div>
@@ -166,43 +164,114 @@
 @section('scriptSelect')
   <script type="text/javascript">
     $(function () {
-      //Inicializar elmentos select2
-      //Prueba: Guardamos la el valor del elemento select con la clase select2 en una variable llamada $lista
-      var $listaSec = $(".select2").select2();
-      var $listaPrim = $("#selectEditorialMain").select2({
-         maximumSelectionLength: 1,
-         language: {
-           noResults: function() {
-             return "No hay resultado";
-           },
-           searching: function() {
-             return "Buscando..";
+      //Inicializar selectores de las editoriaes , principales y secundarias
+        //Selectores generales
+        $(".select2").select2();
+        var $listaSec = $("#listEditorialSecond").select2();
+        var $listaPrim = $("#selectEditorialMain").select2({
+           maximumSelectionLength: 1,
+           language: {
+             noResults: function() {
+               return "No hay resultado";
+             },
+             searching: function() {
+               return "Buscando..";
+             }
            }
-         }
 
-      });
+        });
+        //Eliminar las editoriales secundarias que esten seleccionadas
+        $(".clearSelect2").on("click", function (){ $listaSec.val(null).trigger("change"); });
+      //INICIO DE  PRUEBA -> Deshabilitar una opcion
+        $($listaPrim).on('change',function(e){
+          //Almacenando el valor que esta en el selector de editorial principal
+          e.preventDefault();
+            var opc = $(this).val();
+            var txt = $(this).text();
+            //Aun no se por qué no tengo que declarar la variable opcD ,
+            //cuando lo declaro var opcD aparece que no esta definido ¿?
+            if(opc!=null){opcD = opc ;deshabilitar(opc);}
+            else{habilitar(opcD);}
+          });
 
-      // PRUEBA : Cuando hagamos click en el boton con clase clearSelect2 agregara ::nulo en las opciones seleccionadas del select que esta en la variable $lista
-      //Esto seguira probandose , luego de que este todo funcionando recien se eliminaran los comentarios
-      // *****************  PROBANDO **********************
-      $(".clearSelect2").on("click", function () { $listaSec.val(null).trigger("change"); });
-      // FIN DE PRUEBA
+          function deshabilitar(opc){
+            //Elimina las opciones si una de ellas es igual a la seleccionada para ser deshabilitada
+            if ($('#listEditorialSecond').val()!=null) {
+              //Guardando los datos seleccionados (editoriales secundarias) en un arreglo
+              datos = $('#listEditorialSecond').val().slice();
+              //Recorriendo los datos seleccionados para compararlo con el que se esta deshabilitando
+              for (var i = 0; i < datos.length; i++) {
+                //Si lo encuentra entonces
+                if (opc==datos[i]) {
+                  //Eliminando opciones seleccionadas de editoriales secundarias
+                  $('#listEditorialSecond').val(null);
+                  //Agregando nuevamente los elementos seleccionados
+                  for (var i = 0; i < datos.length; i++) {
+                    if (datos[i]==opc) {
+                      // alert("datos["+i+"]: "+datos[i]+"   Opcion: "+opc);
+                      //Guardando la posicion del elemento que se encuentra seleccionado y se quiere deshabilitar
+                      var pos = datos.indexOf(""+opc+"");
+                      //Eliminando opcion que se deshabilitara en las listas de opciones seleccionadas de editoriales secundarias
+                      datos.splice(pos, 1);
+                      //Colocando nuevos datos en la lista de opciones seleccionadas de la editorial secundaria
+                      //Nota: Solo falta agregar los nuevos valores
+                      // $('#listEditorialSecond').val(["datos[0]","datos[1]","datos[2]"]);
+                      //
+                      //Mostrar datos para hacer prueba
+                      // for (var i = 0; i < datos.length; i++) {
+                      //   alert("Nuevos datos["+i+"]: "+datos[i])
+                      // }
+                    }
+                  }
+                }
+              }
+            }
+            //Deshabilita la opcion seleccionada
+            $("#listEditorialSecond option").each(function(){
+              //Comparando opcion para deshabilitar
+              if(opc==$(this).attr('value')){
+                //Deshabilitando la opcion
+                $(this).attr("disabled","disabled");
+                // alert('Deshabilitando opcion '+$(this).text()+' valor '+ $(this).attr('value'));
+                //Reinicializando
+                reiniciarSelect('#listEditorialSecond');
+                // $('#listEditorialSecond').select2('destroy');
+                // $('#listEditorialSecond').select2();
 
+              }
 
-      //Eliminar esto luego -> solo es PRUEBA
-      //Definiendo los tooltip
-      $('[data-toggle="tooltip"]').tooltip();
+            });
+          }
+          function habilitar(opcD){
+            //Eliminando y volviendo a inicializar el selector cuando se habilite las opciones , sin esto
+            //solo se muestra deshabilitado la primera vez que se inicia el selector
+            reiniciarSelect('#listEditorialSecond');
+            //fin
+            $("#listEditorialSecond option").each(function(){
+              if(opcD==$(this).attr('value')){
+                $(this).removeAttr('disabled');
+                // alert('Habilitando opcion '+$(this).text()+' valor '+ $(this).attr('value'))
 
-      //Declarando inputmask para el issn y barcode , Los patrones seran agregados al final
-      $("[data-mask]").inputmask();
-    }
-    );
-    </script>
+              }
+            })
+          }
+          function reiniciarSelect(id){
+            $(id).select2('destroy');
+            $(id).select2();
+          }
+      //FIN DE PRUEBAS
+
+     //Definiendo los tooltip
+        $('[data-toggle="tooltip"]').tooltip();
+        //Declarando inputmask para el issn y barcode , Los patrones seran agregados al final
+        $("[data-mask]").inputmask();
+    });
+  </script>
 @endsection
 @section('scriptContent')
   <script type="text/javascript">
   $(document).ready(function(){
-    var idCont = 1 ; //global
+    var idCont = 1 ;
     //Agregando un contenido màs
   	$('#agregarContenido').click(function(){
       // Guardar el panel donde se encuentra la seccion contenido
@@ -234,14 +303,15 @@
       //Inicializar el select2 para mostrar los colaboradores de los nuevos contenidos
       $(".select2").select2();
   	});
-    //Nota: Falta hacer funcionar el boton x -> eliminar el box
+    //Nota: Falta hacer funcionar el boton x -> eliminar el los nuevos contenidos que se van agregando
+    $('#eliminarContenido').click(function(){})
   });
   </script>
 @endsection
 @section('scriptItem')
   <script type="text/javascript">
   $(document).ready(function(){
-    var idCont = 1 ; //global
+    var idCont = 1 ;
     // Cuando haga click en agregarContenido
     $('#agregarItem').click(function(){
       // Guardar el panel donde se encuentra la seccion contenido
@@ -274,13 +344,8 @@
     });
     //Agregando funcion para poder reutilziaar el codigo en editar -> agregar mas items
     //Nota: Hubo un error al guardarlo en una funcion en magazineJS , no lo reconocía
-
-    $('#eliminarItem').click(function(){
-
-    })
-
     //Nota: Falta hacer funcionar el boton x -> eliminar el box
-
+    $('#eliminarItem').click(function(){})
 
   });
   </script>
