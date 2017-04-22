@@ -80,9 +80,17 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputISSN">ISSN</label>
-
-                        <input type="text" class="form-control" name="issn" id="inputISSN" data-inputmask='"mask": "9999-9999"' data-mask>
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <label for="inputISSN">ISSN Impreso</label>
+                            <span>*</span>
+                            <input type="text" class="form-control" name="issn" id="inputISSN" data-inputmask='"mask": "9999-9999"' data-mask placeholder="Version Impresa">
+                          </div>
+                          <div class="col-lg-6">
+                            <label for="inputISSN">ISSN Digital</label>
+                              <input type="text" class="form-control" name="issn" id="inputISSN" data-inputmask='"mask": "9999-9999"' data-mask placeholder="Version Digital">
+                          </div>
+                        </div>
                     </div>
 
                  </div>
@@ -105,18 +113,22 @@
               <div class="box-body">
                   <div class="form-group">
                       <label for="inputClasification">Clasificación</label>
-                      <input type="text" class="form-control" name="clasification0" id="inputClasification" placeholder="">
+                        <span>*</span>
+                        <input type="text" class="form-control" name="clasification0" id="inputClasification" placeholder="">
                   </div>
                   <div class="form-group">
                       <label for="inputIncomeNumber">Nº Ingreso</label>
+                      <span>*</span>
                       <input type="text" class="form-control" name="incomeNumber0" id="inputIncomeNumber" placeholder="">
                   </div>
                   <div class="form-group">
                       <label for="inputBarcode">Código de barra</label>
-                      <input type="text" class="form-control" name="barcode0" id="inputBarcode" data-inputmask='"mask": "200000000999"' data-mask>
+                      <span>*</span>
+                      <input type="text" class="form-control" name="barcode0" id="inputBarcode" data-inputmask='"mask": "200000009999"' data-mask>
                   </div>
                   <div class="form-group">
                       <label for="inputCopy">Ejemplar</label>
+                      <span>*</span>
                       <input type="number" class="form-control" name="copy0" id="inputCopy" placeholder="">
                   </div>
               </div>
@@ -134,19 +146,20 @@
               <div class="box-body">
                   <div class="form-group">
                     <label for="inputTitleContent">Título</label>
+                    <span>*</span>
                     <input type="text" class="form-control" name="titleContent0" id="inputTitleContent0" placeholder="">
                   </div>
                   <div class="form-group">
                     <label>Colaborador</label>
-                    <select class="form-control select2" multiple="multiple" name ="collaborator0[]" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
-                      @foreach($autores as $autor)
-                        @foreach($autor->categories as $category)
-                          @if($category->name == "colaborador")
-                            <option value="{{ $autor->id }}">{{ $autor->name}}</option>
-                          @endif
+                      <select class="form-control select2" multiple="multiple" name ="collaborator0[]" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
+                        @foreach($autores as $autor)
+                          @foreach($autor->categories as $category)
+                            @if($category->name == "colaborador")
+                              <option value="{{ $autor->id }}">{{ $autor->name}}</option>
+                            @endif
+                          @endforeach
                         @endforeach
-                      @endforeach
-                    </select>
+                      </select>
                   </div>
                 </div>
               </div>
