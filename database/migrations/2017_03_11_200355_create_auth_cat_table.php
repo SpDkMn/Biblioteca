@@ -13,7 +13,7 @@ class CreateAuthCatTable extends Migration
      */
     public function up()
     {
-        Schema::create('auth_cat', function (Blueprint $table) {
+        Schema::create('author_category', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('author_id')->unsigned();
             $table->foreign('author_id')->references('id')->on('authors');
@@ -30,6 +30,6 @@ class CreateAuthCatTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('auth_cat');
+        Schema::dropIfExists('author_category');
     }
 }

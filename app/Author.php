@@ -14,7 +14,7 @@ class Author extends Model
 
     public function categories(){
 
-    	return $this->belongsToMany('\App\Category','auth_cat');
+    	return $this->belongsToMany('\App\Category','author_category');
 
     }
 
