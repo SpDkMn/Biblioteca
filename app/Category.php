@@ -10,7 +10,7 @@ class Category extends Model
 	protected $fillable=['name'];
 
     public function editorials(){
-    	return $this->belongsToMany('\App\Editorial','editorial_category');
+    	return $this->belongsToMany('\App\Editorial','category_editorial');
     }
 
     public function authors(){

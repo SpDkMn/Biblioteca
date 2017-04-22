@@ -15,7 +15,7 @@ class Editorial extends Model{
 	}
 
     public function categories(){
-    	return $this->belongsToMany('\App\Category','editorial_category');
+    	return $this->belongsToMany('\App\Category','category_editorial');
     }
 
      public function scopeName($query,$name){
