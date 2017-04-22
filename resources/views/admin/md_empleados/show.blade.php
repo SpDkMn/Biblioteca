@@ -10,7 +10,7 @@
   <!-- /.box-header -->
   <div class="box-body">
     <table class="table table-bordered table-hover">
-      <tr>
+      <tr> 
         <th>Nombres</th>
         <th>Apellidos</th>
         <th>Correo</th>
@@ -27,6 +27,7 @@
         <td><button type="button" data-id="{{$empleado->id}}" class="btn btn-success editar" @if(!$editar) disabled @endif><i class="fa fa-pencil"></i></button></td>
         <td><button type="button" data-id="{{$empleado->id}}" data-name="{{$empleado->user->name}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#deleted" @if(!$eliminar) disabled @endif><i class="fa fa-trash"></i></button></td>
       </tr>
+      
       @endforeach
     </table>
   </div>

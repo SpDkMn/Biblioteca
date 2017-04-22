@@ -2,6 +2,8 @@
 Route::resource('profiles', 'ProfileController');
 Route::resource('employees', 'EmployeeController');
 Route::resource('magazines', 'MagazineController');
+Route::resource('autor', 'AuthorController');
+Route::resource('tesis', 'ThesisController');
 
 //Creando una nueva ruta para poder eliminar las revistas
 Route::get('magazines/{magazines}/destroy', 'MagazineController@destroy')->name('magazines.destroy');
