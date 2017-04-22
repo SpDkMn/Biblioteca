@@ -25,14 +25,12 @@
                       <h3 class="box-title">Informacion</h3>
                   </div>
                   <div class="box-body">
-
                       <div class="form-group">
                           <label for="inputTitle">Titulo</label>
                           <input type="text" class="form-control" value="{{$revista->title}}" name="title" id="inputTitle" placeholder="">
                     </div>
                     <div class="form-group">
                         <label>Autor</label>
-
                         <select class="form-control select" name="author" >
                         <!-- Cargando opciones de autores -->
                         @foreach($autores as $autor)
@@ -252,7 +250,6 @@
                   @endforeach
                 </div>
             </div> {{-- end box-body --}}
-
           <div class="box-footer">
             <button type="submit" class="btn btn-primary">Editar</button>
           </div>

@@ -11,7 +11,6 @@
 	border : 1px solid black ;
 }
 
-
 .example-modal .modal {
       position: relative;
       top: auto;
@@ -25,7 +24,6 @@
     .example-modal .modal {
       background: transparent !important;
     }
-
 
 /*td.details-control {
     background: url('../resources/details_open.png') no-repeat center center;

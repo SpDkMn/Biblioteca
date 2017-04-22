@@ -69,7 +69,8 @@
         </ul>
       </li> --}}
       {{-- END COMPENDIUM MANAGMENT--}}
-
+      <li @if(URL::full() == url('/admin/editorial'))class="active"@endif><a href="{{ url('/admin/editorial') }}"><i class="fa fa-"></i> <span>Editorial</span></a></li>
+       <li @if(URL::full() == url('/admin/book'))class="active"@endif><a href="{{ url('/admin/book') }}"><i class="fa fa-"></i> <span>Libros</span></a></li>
       <li class="treeview @if(URL::full() == url('/admin/castigos') || URL::full() == url('/admin/castigados')) active @endif  ">
         <a href="#">
           <i class="fa fa-table"></i> <span>Sanciones</span>

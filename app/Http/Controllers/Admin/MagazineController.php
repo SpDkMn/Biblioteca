@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use App\Author as Author;
 use App\Magazine as Magazine;
 use App\MagazineCopy as MagazineCopy;
@@ -50,6 +51,7 @@ class MagazineController extends Controller{
                                             'item'=>$item
                                           ]);
  	}
+
   //Funcion no usada
  	public function create(){
     //Funcion no usada
@@ -59,6 +61,7 @@ class MagazineController extends Controller{
     function cambiaCadena($str){
       return intval(preg_replace('/[^0-9]+/', '', $str), 10) ;
     }
+
  		//Almacenamos lo que el usuario ingresa
     //Declarando contadores
     $contador_contenido = 0 ;
@@ -75,6 +78,7 @@ class MagazineController extends Controller{
     //Guardando los datos de la revista
  		$m = Magazine::create(['title'=>$request['title'],
  		                            'issn'=>cambiaCadena($request['issn']),
+
                                 'author_id'=>$request['author']
                                 ]);
 
@@ -84,6 +88,7 @@ class MagazineController extends Controller{
     $editoriales = Editorial::all();
     // Capturando id de la revista ingresada
     foreach ($magazines as $magazine) {
+
       if($magazine->issn == cambiaCadena($request['issn'])){
         $id_magazine = $magazine->id ;
       };
@@ -140,7 +145,6 @@ class MagazineController extends Controller{
                 $magazine-> editorials() -> attach($id,['type'=>true]);
             }
           }
-
     };
  		//Redireccionamos a la seccion de revistas
  		return redirect('admin/magazines');
@@ -226,8 +230,6 @@ class MagazineController extends Controller{
 
     //********************************************************************************************************
 
-
-
     //Actualizando datos de revista
     $revista->title = $request['title'];
     $revista->issn = $request['issn'];
@@ -253,6 +255,7 @@ class MagazineController extends Controller{
     // $revista->magazines_copies->sync($request->coll);
     //Actualizacion de datos de los items
     for ($j=0; $j < $contador_copia2 ; $j++) {
+
         $revista->magazines_copies[$j]->clasification = $request['clasification'.$j];
         $revista->magazines_copies[$j]->incomeNumber = $request['incomeNumber'.$j];
         $revista->magazines_copies[$j]->barcode = $request['barcode'.$j];
@@ -302,10 +305,6 @@ class MagazineController extends Controller{
           }
         }
 
-
-
-
-
     //Borramos las relaciones entre revistas y  editoriales
     foreach ($magazines as $magazine) {
       if ($magazine->id == $id) {
@@ -335,7 +334,6 @@ class MagazineController extends Controller{
 
     };
 
-
     //Guardando las copias de revistas
     // dd($request->all(),$revista)  ;
 
@@ -343,6 +341,7 @@ class MagazineController extends Controller{
     $revista->save();
     return redirect('admin/magazines');
   }
+
   //Terminado
   public function destroy($id){
       $magazine = Magazine::find($id);

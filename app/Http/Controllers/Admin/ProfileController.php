@@ -21,8 +21,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        // Obtenemos el perfil del usuario logueado como Modelo Profile
-        $profile = User::with(['Employee','Employee.profile'])->where('id',Auth::user()->id)->first()->Employee->Profile;
+          $profile = User::with(['Employee','Employee.profile'])->where('id',Auth::user()->id)->first()->Employee->Profile;
         // Json TO Array (J2A)
         $j2a = json_decode($profile->JSON,true);
         // Iniciamos los permisos en false

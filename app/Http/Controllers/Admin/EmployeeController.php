@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
@@ -23,6 +23,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+        
         // Obtenemos el perfil del usuario logueado como Modelo Profile
         $profile = User::with(['Employee','Employee.profile'])->where('id',Auth::user()->id)->first()->Employee->Profile;
         // Json TO Array (J2A)
@@ -33,7 +34,7 @@ class EmployeeController extends Controller
         // Recorremos cada uno de los permisos de 'perfiles'
         foreach($j2a['empleados'] as $dato){
           foreach($dato as $key => $value){
-            if($value == true){
+            if($value == true){ 
               switch($key){
                 case 'ver': $ver = true;break;
                 case 'crear': $crear = true;break;
@@ -43,7 +44,6 @@ class EmployeeController extends Controller
             }
           }
         }
-
         $show = $new = $edit = $delete = "";
         
         if($crear)
@@ -56,7 +56,6 @@ class EmployeeController extends Controller
         if($eliminar)
             $delete = view('admin.md_empleados.delete');
 
-
         return view('admin.md_empleados.index',[
           'show' => $show,
           'new' => $new,
@@ -65,13 +64,10 @@ class EmployeeController extends Controller
         ]);
     }
 
-
-
     public function create()
     {
         //
     }
-
 
     public function store(Request $request)
     {
@@ -80,19 +76,17 @@ class EmployeeController extends Controller
         return redirect('admin/employees');
     }
 
-
     public function show($id)
     {
         //
     }
 
-
     public function edit($id)
     {
         $e = Employee::with(['user','profile'])->where('id',$id)->first();
+        
         return view('admin.md_empleados.edit',['empleado'=>$e,'perfiles'=>Profile::all()]);
     }
-
 
     public function update(Request $request, $id)
     {
@@ -106,12 +100,10 @@ class EmployeeController extends Controller
         return redirect('admin/employees');
     }
 
-
     public function destroy($id)
     {
         $e = Employee::with('user')->where('id',$id)->first();
         $e->user->delete();
         $e->delete();
     }
-
 }

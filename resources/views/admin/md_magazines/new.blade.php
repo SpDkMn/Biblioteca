@@ -76,12 +76,10 @@
 
                           </div>
                         </div>
-
                     </div>
 
                     <div class="form-group">
                         <label for="inputISSN">ISSN</label>
-
                         <input type="text" class="form-control" name="issn" id="inputISSN" data-inputmask='"mask": "9999-9999"' data-mask>
                     </div>
 
