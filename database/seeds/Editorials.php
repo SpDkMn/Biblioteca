@@ -13,19 +13,20 @@ class Editorials extends Seeder
     public function run()
     {
     	//Rellenando la tabla authors para la prueba de revistas
-        Editorial::Create(['name'=>'FIGMMG']);
-        Editorial::Create(['name'=>'FISI']);
-        Editorial::Create(['name'=>'FII']);
-        Editorial::Create(['name'=>'FIEE']);
-        Editorial::Create(['name'=>'UNMSM']);
-        Editorial::Create(['name'=>'Callao']);
-        Editorial::Create(['name'=>'Villareal']);
-        Editorial::Create(['name'=>'Anaya Multimedia']);
+        Editorial::Create(['name'=>'Cepredin']);
+        Editorial::Create(['name'=>'Alpha']);
+        Editorial::Create(['name'=>'Omega']);
         Editorial::Create(['name'=>'Delta']);
         Editorial::Create(['name'=>'Coquito']);
         Editorial::Create(['name'=>'Rectorado']);
         Editorial::Create(['name'=>'Vicerectorado']);
-
+        Editorial::Create(['name'=>'Lumbreras']);
+        Editorial::Create(['name'=>'Monti']);
+        Editorial::Create(['name'=>'Anaya Multimedia']);
+        Editorial::Create(['name'=>'Globin']);
+        Editorial::Create(['name'=>'Conquistador']);
+        Editorial::Create(['name'=>'Fibonacci']);
+        Editorial::Create(['name'=>'Gamarra']);
     }
 }
 // Eliminar esta semilla cuando se tenga gestion editorial

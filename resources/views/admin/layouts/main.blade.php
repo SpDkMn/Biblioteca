@@ -5,27 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sistema de Biblioteca</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="{{ URL::asset('css/modalStyles.css')}}"><!--Estilos de la ventana  modal-->
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css')}}">
     @yield('css')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     
-
-    <link rel="stylesheet" href="{{ URL::asset('plugins/select2/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/app.css')}}">
-
-    {{-- Magazine Style --}}
-    {{-- selector mulltiple --}}
-    <link rel="stylesheet" href="{{URL::asset('css/select2.min.css')}}">
-    {{-- end selector multiple --}}
     {{-- AdminLTE --}}
     <link rel="stylesheet" href="{{URL::asset('css/AdminLTE.min.css')}}">
     {{-- end AdminLTE --}}
+    {{-- Magazine Style --}}
+    <link rel="stylesheet" href="{{ URL::asset('css/magazinesStyle.css')}}">
+    {{-- end Magazine Style --}}
     {{-- dataTables --}}
     <link rel="stylesheet" href="{{URL::asset('css/dataTables.bootstrap.css')}}">
     {{-- end dataTables --}}
-    <link rel="stylesheet" href="{{ URL::asset('css/magazinesStyle.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('plugins/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/app.css')}}">
     {{--end  Magazine Style --}}
     <link rel="stylesheet" href="{{URL::asset('css/bootstrap-multiselect.css')}}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -45,6 +42,7 @@
       <div class="content-wrapper">
         @yield('content')
       </div>
+      
       <!-- /.content-wrapper -->
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
@@ -67,7 +65,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
     <!-- Selector multiple  -->
     <script src="{{ URL::asset('js/select2.full.min.js')}}"></script>
-    <script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>
     <script src="{{ URL::asset('js/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{ URL::asset('js/jquery.slimscroll.min.js')}}"></script>
     
@@ -93,5 +90,18 @@
         $(".select2").select2();
       });
     </script>
+    <script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
   </body>
 </html>

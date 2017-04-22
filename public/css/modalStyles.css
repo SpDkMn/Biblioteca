@@ -1,0 +1,60 @@
+
+#formContainer{
+	width:8px;
+	height:0px;
+	margin:0 auto;
+	top:10%;
+	left:0px;
+	
+	-moz-perspective: 10px;
+	-webkit-perspective: 10px;
+	perspective: 10px;
+}
+
+#animacionmodal{
+	width:20px;
+	height:20px;
+	top:10%;
+	left:9%;
+	
+	-moz-transition:0.8s;
+	-webkit-transition:0.8s;
+	transition:0.8s;
+	
+	/* Configurando la animacion para Firefox */
+	-moz-animation: pulse 2s infinite;
+	
+	/* Configurando la animacion para Chrome y Safari */
+	-webkit-animation: pulse 2s infinite;
+}
+
+
+/* Codigo para el inicio de la animacion del margen del contenedor */
+@-moz-keyframes pulse{
+	0%{		box-shadow:0 0 8px #008aff;}
+	50%{	box-shadow:0 0 50px #008aff;}
+	100%{	box-shadow:0 0 8px #008aff;}
+}
+
+/* Codigo para el fin de la animacion del margen del contenedor */
+@-webkit-keyframes pulse{
+	0%{		box-shadow:0 0 8px #008aff;}
+	50%{	box-shadow:0 0 50px #008aff;}
+	100%{	box-shadow:0 0 8px #008aff;}
+}
+
+
+#contenido {
+	font: 15px 'Segoe UI',Arial,sans-serif;
+	border: none;
+	background:none;
+	height: 500px;
+	left: 500px;
+	position: absolute;
+	top: 176px;
+	width: 34px;
+	text-indent: 8px;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+	color:#eee;
+	outline:none;
+}

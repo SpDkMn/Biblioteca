@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 use App\Category as Category; 
 
+
 class Categories extends Seeder
 {
     /**
@@ -13,6 +14,7 @@ class Categories extends Seeder
      */
     public function run()
     {
+
     	//Rellenando la tabla categorias para hacer la prueba
 		Category::create(['name'=>'libro']);
 		Category::create(['name'=>'revista']);

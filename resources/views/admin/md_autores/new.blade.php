@@ -7,26 +7,38 @@
       </button>
     </div>
   </div>
-
+  <!-- /.box-header -->
+ 
   <form method="POST" action="{{ url('/admin/autor') }}">
     {{ csrf_field() }}
     <div class="box-body">
-        <div class="form-group">
-            <label for="inputNombre">Nombre </label>
-            <input type="text" class="form-control" name="name" id="inputNombre" required>
-        </div>
-        <div class="form-group">
-            <label>Categoría</label>
-              <select class="form-control select2" multiple="multiple" data-placeholder="Seleccione la categoria" name="category[]" style="width: 100%;" required>
-                <option>Libro</option>
-                <option>Revista</option>
-                <option>Tesis</option>
-                <option>Compendio</option>
-              </select>      
-        </div>
+
+      <div class="form-group">
+        <label for="inputNombre">Nombre </label>
+        <input type="text" class="form-control" name="name" id="inputNombre" placeholder="">
+      </div>
+      
+      <div class="form-group">
+        <label>Categoria</label>
+      <select class="form-control select2" multiple="multiple" data-placeholder="Seleccione la categoria" name="category[]" style="width: 100%;">
+        <option>libro</option>
+        <option>revista</option>
+        <option>tesis</option>
+        <option>compendio</option>
+        <option>colaborador</option>
+        <option>asesor</option>
+        <option>tesina</option>
+      </select>
+        
+      </div>
+
+
     </div>
+   
     <div class="box-footer">
-       <button type="submit" class="btn btn-primary">Crear</button>
+      <button type="submit" class="btn btn-primary">Crear</button>
     </div>
   </form>
+  
 </div>
+<!-- /.box -->

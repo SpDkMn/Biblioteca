@@ -6,15 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-	protected $fillable=['name'];
 	protected $table = 'categories';
+	protected $fillable=['name'];
 
-	//Una categoria tiene uno o muchos autores
-	public function authors(){
-		return $this->belogsToMany('App\Author','author_category');//(,tableName)
-	}
-	//Una categoria tiene una o muchas editoriales
-	public function editorials(){
-		return $this->belogsToMany('App\Editorial','category_editorial');
-	}
+    public function editorials(){
+    	return $this->belongsToMany('\App\Editorial','editorial_category');
+    }
+
+    public function authors(){
+    	return $this->belongsToMany('\App\Author','author_category');
+    }
+
+    //Esto agregue para agregar el campo tipo (si es tesis o tesina)
+    public function thesiss(){
+    	return $this->hasMany('App\Thesis');
+    }
 }
