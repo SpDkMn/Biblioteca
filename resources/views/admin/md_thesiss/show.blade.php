@@ -6,16 +6,16 @@
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
       </button>
     </div> 
-  </div>
+  </div><br>
 
   <div class="box-body">
               <table id="example1" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>TÍTULO</th>
-                  <th>AUTOR</th>
-                  <th>TIPO DE ÍTEM</th>
-                  <th>Nº EJEMPLARES</th>
+                  <th class="text-center">TIPO DE ÍTEM</th>
+                  <th class="text-center">TÍTULO</th>
+                  <th class="text-center">AUTOR</th>
+                  <th class="text-center">Nº EJEMPLARES</th>
                   <th>EDITAR</th>
                   <th>ELIMINAR</th>
                 </tr>
@@ -24,6 +24,14 @@
                 <tbody>
                 @foreach($thesiss as $thesis)
                 <tr>
+                  
+                  <td class="text-center">
+                  <?php if($thesis->category_id ==3) echo "Tesis";
+                        else if ($thesis->category_id ==7) echo "Tesina";
+                  ?>
+                  
+                  </td>
+
                   <td>
                     <a href="#" data-id="{{$thesis->id}}" id="contenid">{{$thesis->title}}</a>
                   </td>
@@ -46,13 +54,8 @@
                         @endforeach
                   </td>
                  
-                  <td>
-                  <?php if($thesis->category_id ==3) echo "Tesis";
-                        else if ($thesis->category_id ==7) echo "Tesina";
-                  ?>
                   
-                  </td>
-                <td>
+                <td class="text-center">
                       <?php $cont=0 ?>
                       @foreach($thesis->thesisCopies as $copy)
                         <?php $cont=$cont+1; ?>

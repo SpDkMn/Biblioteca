@@ -20,6 +20,9 @@ class ThesisController extends Controller
     $editoriales = Editorial::all(); 
     $autores = Author::all();
 
+    $copias_thesiss = ThesisCopy::all();
+    $contenidos = Content::all();
+
     $show = view('admin.md_thesiss.show',['thesiss'=>$thesiss
                                             ]);
     
@@ -28,9 +31,21 @@ class ThesisController extends Controller
                                     'autores'=>$autores
       ]);
 
+    $edit = view('admin.md_thesiss.edit',[  'thesiss'=>$thesiss,
+                                              'copias_thesiss'=>$copias_thesiss,
+                                              'contenidos'=>$contenidos,
+                                              'editoriales'=>$editoriales,
+                                              'autores'=>$autores,
+                                              //Definiendo las variables para editar
+                                              'id'=>null,
+                                              'autores'=>null
+                                              ]);
+
 
      return view('admin.md_thesiss.index',[
-                                            'show'=>$show
+                                            'new' => $new,
+                                            'show'=>$show,
+                                            'edit'=>$edit
                                             
                                             ]);
  	}

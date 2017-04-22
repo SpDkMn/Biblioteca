@@ -30,8 +30,6 @@
         </ul>
       </li>
 
-      <li @if(URL::full() == url('/admin/editorial'))class="active"@endif><a href="{{ url('/admin/editorial') }}"><i class="fa fa-"></i> <span>Editorial</span></a></li>
-       <li @if(URL::full() == url('/admin/magazines'))class="active"@endif><a href="{{ url('/admin/magazines') }}"><i class="fa fa-"></i> <span>Revistas</span></a></li>
        <li @if(URL::full() == url('/admin/autor'))class="active"@endif><a href="{{ url('/admin/autor') }}"><i class="fa fa-"></i> <span>Autores</span></a></li>
        <li @if(URL::full() == url('/admin/thesis'))class="active"@endif><a href="{{ url('/admin/thesis') }}"><i class="fa fa-"></i> <span>Tesis</span></a></li>
 

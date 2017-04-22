@@ -22,7 +22,13 @@
     <div class="col-md-12 " id="div-content">
       {!! $show !!}
     </div> 
-          
+    <div class="col-md-6" id="div-content">
+      {!! $new !!}
+    </div>  
+    <div class="col-md-6" id="div-content">
+      {!! $edit !!}
+    </div>      
+
       
   </div>
   

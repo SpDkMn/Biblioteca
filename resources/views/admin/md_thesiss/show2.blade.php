@@ -8,7 +8,7 @@
   
 
   <div class="box-body with-border">
-        <h1 class="text-center"><strong>{{$thesis->title}}</strong><h1>
+        <h2 class="text-center"><strong>{{$thesis->title}}</strong><h2>
   </div>
 
 
@@ -145,33 +145,35 @@
 
 
   <div class="box-body table-bordered table-responsive table-hover col-md-12">
-  	<h3><strong>Items</strong></h3>
+  	<h4><strong>Ejemplares</strong></h4><br>
       <table class="table table-striped table-bordered table-hover table-condensed">
       	<tr class="bg-gray">
-          <th>Ejemplar</th>
-          <th>Número de Ingreso</th>
-          <th>Código de Barras</th>
-      		<th>Detalles</th>
-      		<th>Editar</th>
-      		<th>Eliminar</th>
+          <th>Condición</th>
+          <th class="text-center">Ejemplar</th>
+          <th class="text-center">Número de Ingreso</th>
+          <th class="text-center">Código de Barras</th>
+      		<th class="text-center">Detalles</th>
+      		<th class="text-center">Editar</th>
+      		<th class="text-center">Eliminar</th>
       	</tr>
         @foreach($thesis->thesisCopies as $copy)
 
       	<tr @if($copy->availability) class="success" @else class="danger" @endif>
       		
-          <td>{{$copy->ejemplar}}
+          <td>@if($copy->availability) Habilitado @else Prestado @endif</td>
+          <td class="text-center">{{$copy->ejemplar}}
             @if($copy->availability)
             <span class="sr-only">Disponible</span>
             @else
               <span class="sr-only">No disponible</span>
             @endif
           </td>
-          <td>{{$copy->incomeNumber}}</td>
+          <td class="text-center">{{$copy->incomeNumber}}</td>
       	
-        	<td>{{$copy->barcode}} </td>
+        	<td class="text-center">{{$copy->barcode}} </td>
 
       
-      		<td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalCopy<?php echo $copy->id; ?>"><i class="fa fa-tag"></i></button></td>
+      		<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalCopy<?php echo $copy->id; ?>"><i class="fa fa-tag"></i></button></td>
       		<td><a type="button" class="button-content btn btn-success"><i class="fa fa-pencil"></i></a></td>
  	        <td><a type="button" class="button-content btn btn-danger"><i class="fa fa-trash"></i></a></td>
       	</tr>
@@ -231,7 +233,7 @@
           <!-- DIRECT CHAT SUCCESS -->
         <div class="box box-success direct-chat direct-chat-success">
             <div class="box-header with-border">
-              <h3 class="box-title"><strong>Contenido</strong></h3>
+              <h3 class="box-title text-center"><strong>Contenido</strong></h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>

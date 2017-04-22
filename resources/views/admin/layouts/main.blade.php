@@ -64,6 +64,7 @@
     <script src="{{ URL::asset('js/jquery.slimscroll.min.js')}}"></script>
     
     @yield('scriptContent')
+    @yield('scriptItem')
     @yield('scriptDelete')
     @yield('scriptTable')
     @yield('scriptTableExtend')
