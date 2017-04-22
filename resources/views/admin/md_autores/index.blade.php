@@ -1,6 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('content')
+<!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
     Autores
@@ -11,18 +12,29 @@
     <li class="active">Autores</li>
   </ol>
 </section>  
-<!-- TABLA MOSTRANDO LOS NOMBRES Y CATEGORIAS DE TODOS LOS AUTORES. -->
+
+<!-- Main content -->
+
 <section class="content">
+
   <div class="row">
-     <div class="col-md-5">
-         {!!$new!!}
-         {!! $edit!!}
-     </div>
-     <div class="col-md-7">
-         {!! $show !!}
-     </div>          
+      
+    
+    <div class="col-md-4">
+      {!!$new!!}
+      <div id="div-edit" class="col-md-18">
+      {!! $edit !!}
+    </div>
+    </div>
+    
+    <div class="col-md-8 ">
+      {!! $show !!}
+    </div> 
+          
+      
   </div>
-  
+    <!-- /.col -->
+  <!-- /.row -->
 </section>
 {!! $delete !!}
 @endsection

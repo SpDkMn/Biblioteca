@@ -9,6 +9,7 @@
 @endif
 <div class="box box-primary">
     <div class="box-header with-border">
+        <i class="fa fa-info"></i>
         <h3 class="box-title">Información de revistas</h3>
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -33,73 +34,61 @@
             <tbody>
               @foreach($revistas as $revista)
                 <tr>
+                  <!-- <td class="details-control"></td> -->
                   <td>{{$revista->title}}</td>
                   <td>{{$revista->author->name}}</td>
                   <td>{{$revista->issn}}</td>
                   <td>
-                    <select class="" name="">
-                        @foreach($copias_revistas as $copy)
-                          @if($copy->magazine_id == $revista->id)
-                            <option value="{{ $copy->id }}">{{$copy->copy}}</option>
-                          @endif
-                        @endforeach
-                      </select>
-                  </td>
-                        <!-- Falta : Agregar lista de copias que tiene la revista y seleccionar una de ella para luego actualizar
-                        los campos que no se reitan como son las copias -->
+                    <!-- Arreglar diseño luego -->
+                      <!--
+                  Para insertar una lista de botones con los ejemplares
+                    <div class="btn-group">
+                      <button aria-haspopup="true" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <span class="caret"></span>
+                      </button>
+
+
+                    <ul class="dropdown-menu">
+                      @foreach($revista->magazines_copies as $copy)
+                        @if($copy->magazine_id == $revista->id)
+                        <li>
+                          <button type="button" data-id="{{$copy->id}}" class="btn copias">{{$copy->copy}}</button>
+                        </li>
+                        @endif
+                      @endforeach
+                    </ul>
+                  </div> -->
+                  <!-- Para mostrar los items usando el modal -->
+
+                  <button type="button" data-id="{{$revista->id}}" class="btn btn-success showItem"><i class="fa fa-book"></i></button>
+                </td>
                     <td>
                       @foreach($revista->editorials as $editorial)
-                        {{$editorial->name}}
+                        @if($editorial->pivot->type == true)
+                          <span class="label label-danger">{{$editorial->name}}</span>
+                          @else
+                            <span class="label label-info">{{$editorial->name}}</span>
+                        @endif
                       @endforeach
                     </td>
                       <td>
-                        <button type="button" data-id="{{$revista->id}}" class="btn btn-success button-content" data-toggle="modal" data-target="#modalContent" ><i class="fa fa-bookmark"></i></button></td>
+                        <!-- <a class="button-content"  href="{{route('magazines.show',$revista->id)}}" >click aqui</a>
+                      href="{{route('magazines.edit',$revista->id)}}-->
+                        <!-- href="{{route('magazines.show',$revista->id)}}" -->
+                        <!-- data-toggle="modal" data-target="#modalContent" no seran agregados  , puesto que con esto inicializa el modal pero cuando su valor es null
+                      luego tiene el id cargado y al presionar cualquiera , muestra el contenido anterior-->
+                        <button type="button" data-id="{{$revista->id}}" class="btn btn-success showContent"><i class="fa fa-bookmark"></i></button></td>
                       </td>
                       <td>
                         <button type="button" data-id="{{$revista->id}}" class="btn btn-success editar"><i class="fa fa-edit"></i></button></td>
                       </td>
                       <td>
-                        <button type="button" data-id="{{$revista->id}}" data-name="{{$revista->title}}" class="deleteButton btn btn-danger"  data-toggle="modal" data-target="#modalDelete"><i class="fa fa-trash"></i></button></td>
+                        <a type="button" class="button-content btn btn-danger"  href="{{route('magazines.destroy',$revista->id)}}"><i class="fa fa-trash"></i></a>
+                        <!--  Borrar comentario cuando el metodo para eliminar sea DELETE y se use ajax -->
+                        <!-- <button type="button" data-id="{{$revista->id}}"  data-name="{{$revista->title}}" class="deleteButton btn btn-danger"  data-toggle="modal" data-target="#modalDelete"><i class="fa fa-trash"></i></button></td> -->
                       </td>
                 </tr>
               @endforeach
-
-              <!-- Button trigger modal -->
-              <div class="modal fade" id="modalContent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Contenidos</h4>
-                      </div>
-                      <div class="modal-body">
-                        <div class="list-group">
-                          @foreach($revistas as $revista)
-                          <!-- si revista->id == id:data , entonces-->
-                            <a href="#" class="list-group-item ">
-                              @foreach($contenidos as $contenido)
-                                @if($contenido->magazine_id == $revista->id)
-                                  <h4 class="list-group-item-heading">
-                                    {{$contenido->title}}
-                                  </h4>
-                                  <p class="list-group-item-text">
-                                    @foreach($contenido->authors as $autor)
-                                      <li>{{$autor->name}}</li>
-                                    @endforeach
-                                </p>
-                                  @endif
-                                @endforeach
-                            </a>
-                          <!-- fin si -->
-                          @endforeach
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
             </tbody>
             <tfoot>
               <tr>
@@ -113,57 +102,127 @@
         </table>
     </div>
 </div>
-<!-- Falta : moverlo a delete.blade.php -->
-<!-- Modal para la confirmacion de la eliminacion de una revista -->
-<div class="modal fade modal-danger" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id='myModalLabel'>Eliminar Revista</h4>
-      </div>
-      <div class="modal-body" id="modalDeleteBody">
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="confirmarDelete" data-id="" class="btn btn-outline">Eliminar</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 
 
-@section('scriptDelete')
+<!-- Button trigger modal -->
+@section('script')
     <script type="text/javascript">
       $(document).ready(function() {
-        $(".editar").on('click',function(event) {
-          $id = $(this).data('id')
-          $("#div-edit").html('<div class="box box-success box-solid"><div class="box-header with-border"><h3 class="box-title">Editar</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>')
-          $("#div-edit").load('{{ url("/admin/employees/") }}/' + $id + '/edit');
-        });
-        $(".deleteButton").on('click',function(event) {
-          $name = $(this).data('name')
-          $('#modalDeleteBody').html('<p>¿Esta seguro que quiere eliminar la revista ' + $name +'?</p>');
-          //Agregando la el id de la revista
-          $('#confirmarDelete').data('id',$(this).data('id'))
-        });
-        $("#confirmarDelete").on('click',function(event){
-          $id = $('#confirmarDelete').data('id')
+        //Mostrar contenido de una revista
+        $('.showContent').on('click',function(event){
+          $id = $(this).data('id');
+          //Deshabilita el boton que se ha hecho click para mostrar el contenido
+          //Nota: Descartado por el momento , es mejor que deshabilite todos los botones
+          //  $("button[data-id="+$id+"]").attr("disabled","disabled");
+          //Deshabilita los botones de mostrar contenido
+          $(".showContent").attr("disabled","disabled")
+          //Cargando el modal mientras se espera la aparicion del contenido de la revista
+          $('#divContent').load('{{ url("/admin/magazines/") }}/' + $id + '/content');
+          //Intentando deshabilitar el boton mostar contenido luego de que se ha hecho click
           $.ajax({
-            url: '{{ url("/admin/magazines") }}/'+$id,
-            type: 'DELETE',
-            data: {'_token': '{{csrf_token()}}'},
-            success: function(result) {
-              location.reload();
-            }
+            //Antes de enviar la peticion al servidor
+             beforeSend: function(){
+               //Esta es una prueba para mostrar un refresh antes de que aparesca el contenido
+               //Nota : Falta arreglar / No muestra sin antes poner el modal() , pero luego al aparecer el contenido vuelve a cargarlo
+               // , no es continuo
+                 $("#modalContentBody").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+             },
+             //Cuando termina de cargar la peticion exitosamente , sin errores
+             success: function(){
+               //Muestra el modal
+               $('#modalContent').modal();
+               //Habilita los botones de mostrar contenido
+               $(".showContent").removeAttr("disabled","disabled");
+
+             }
+           });
           })
-        })
+          //Manejador de evento local para mostrar el modal luego de que se ha completado la peticion
+          //************************************************************************************
+          //                                        PRUEBA
+          //***********************************************************************************
+
+          //************************************************************************************
+          //                                       FIN DE LA PRUEBA
+          //***********************************************************************************
+
+          //Esta variable sera cambiado por otra cuando se quiera mostrar varios modales
+          // var band = true ;
+          // cargaCompleta(band);
+        //Mostrar items de una revista
+        $('.showItem').on('click',function(event){
+          $id = $(this).data('id');
+          $(".showItem").attr("disabled","disabled")
+          //Cargando el modal mientras se espera la aparicion del contenido de la revista
+          $('#divItem').load('{{ url("/admin/magazines/") }}/' + $id + '/itemDetail');
+          //Intentando deshabilitar el boton mostar contenido luego de que se ha hecho click
+          $.ajax({
+            //Antes de enviar la peticion al servidor
+             beforeSend: function(){
+               //Esta es una prueba para mostrar un refresh antes de que aparesca el contenido
+               //Nota : Falta arreglar / No muestra sin antes poner el modal() , pero luego al aparecer el contenido vuelve a cargarlo
+               // , no es continuo
+                 $("#modalItemBody").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+             },
+             //Cuando termina de cargar la peticion exitosamente , sin errores
+             complete: function(){
+               //Muestra el modal
+               $('#modalItem').modal();
+               //Habilita los botones de mostrar contenido
+               $(".showItem").removeAttr("disabled","disabled");
+
+             }
+           });
+          })
+        //Editar una revista sin dirigirse a otra url
+        $(".editar").on('click',function(event) {
+          $id = $(this).data('id');
+          //Mostrando recarga
+          $("#divEdit").html('<div class="box box-success box-solid"><div class="box-header with-border"><h3 class="box-title">Editar</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>');
+          //Cargando datos de la url para editar
+          $("#divEdit").load('{{ url("/admin/magazines/") }}/' + $id + '/edit');
+        });
+        //Eliminar -> Prueba{
+          //Esta funcion es para mostrar el modal luego de que se termina de completar la peticion al servidor ,
+          // ponemos una bandera para evitar que aparesca el modal con cualquier otra peticion
+          // function cargaCompleta(band){
+          // Nota : Este es un manejador de evento ajax global , sera cambiado por un manejador local
+          //  $(document).ajaxSuccess(function(){
+          //     //Personalizar para cualquier otras peticiones agregando un switch
+          //       if (band == true) {
+          //         $('#modalContent').modal();
+          //         band = false ;
+          //       }
+          //     });
+          // }
+
+
+
+
+          // Borrar comentario cuando el metodo para eliminar sea DELETE y se use ajax
+          // $(".deleteButton").on('click',function(event) {
+          //   $name = $(this).data('name');
+          //   $id = $(this).data('id');
+          //   $('.modal-body').html('<p>¿Esta seguro que quiere eliminar la revista ' + $name +'?</p>');
+          //   //Agregando la el id de la revista
+          //   $('#confirmarDelete').data('id',$id);
+
+          // Borrar comentario cuando el metodo para eliminar sea DELETE y se use ajax
+          // $("#confirmarDelete").on('click',function(event){
+          //   $id = $('#confirmarDelete').data('id');
+          //   $.ajax({
+          //     url: '{{ url("/admin/magazines/")}}'+$id,
+          //     type: 'POST',
+          //     data: {'_token': '{{csrf_token()}}'},
+          //     success: function(result) {
+          //       location.reload();
+          //     }
+          //   })
+          //   })
+          // });
       });
     </script>
 @endsection
-
 @section('scriptTable')
   <script type="text/javascript">
   $(function () {
@@ -204,65 +263,8 @@
             "zeroRecords": "No se encontraron registros",
             "info" : "Página _PAGE_ de _PAGES_",
             "infoEmpty" : "No hay registros"
-        }
-    });
-
-
-  });
-  </script>
-@endsection
-@section('scriptModal')
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $('.list-group-item').hover(
-        function(){
-          $(this).addClass('active');
         },
-        function(){
-          $(this).removeClass('active');
-        }
-      );
-    })
-  </script>
-@endsection
-<!-- Falta : Arreglar problema con mostrar modal  -->
-@section('scriptModalContent')
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $('.button-content').click(function(){
-        var id = $(this).data('id');
-        var modalContent = '<div class="modal fade" id="modalContent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'+
-          '<div class="modal-dialog" role="document">'+
-            '<div class="modal-content">'+
-              '<div class="modal-header">'+
-                '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-                '<h4 class="modal-title" id="myModalLabel">Contenidos</h4>'+
-              '</div>'+
-              '<div class="modal-body">'+
-                '<div class="list-group">'+
-                '  @foreach($revistas as $revista)'+
-                    '@if($revista->id == '+id+')'+
-                    '<a href="#" class="list-group-item ">'+
-                      '@foreach($contenidos as $contenido)'+
-                        '@if($contenido-> magazine_id == $revista->id)'+
-                          '<h4 class="list-group-item-heading">'+
-                            '{{$contenido->title}}'+
-                          '</h4>'+
-                          '<p class="list-group-item-text">'+
-                            '@foreach($contenido->authors as $autor)'+
-                              '<li>{{$autor->name}}</li>'+
-                          '  @endforeach'+
-                        '</p>'+
-                        '  @endif'+
-                      '  @endforeach'+
-                    '</a>'+
-                    '@endif'+
-                  '@endforeach'+
-                '</div>'+
-              '</div>';
-              var modal = '<button>123</button>';
-      $('.magazineTable').after(modal);
-      })
     });
+  });
   </script>
 @endsection

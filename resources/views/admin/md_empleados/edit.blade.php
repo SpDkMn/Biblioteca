@@ -1,7 +1,7 @@
 
 <div class="box box-success">
   <div class="box-header with-border">
-    <h3 class="box-title">Editar</h3>
+    <h3 class="box-title">Editar</h3> 
 
     <div class="box-tools pull-right">
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -9,7 +9,7 @@
     </div>
   </div>
   <!-- /.box-header -->
-  <form role="form" method="POSTT" action="{{ url('/admin/employees') }}/{{$empleado->id}}">
+  <form role="form" method="POST" action="{{ url('/admin/employees') }}/{{$empleado->id}}">
     <input type="hidden" name="_method" value="put" />
     {{ csrf_field() }}
     <div class="box-body">

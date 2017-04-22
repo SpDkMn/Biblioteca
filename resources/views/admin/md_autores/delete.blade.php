@@ -11,5 +11,8 @@
         <button type="button" id="confirmaDelete" data-id="" class="btn btn-outline">Eliminar</button>
       </div>
     </div>
+    <!-- /.modal-content -->
   </div>
+  <!-- /.modal-dialog -->
 </div>
+<!-- /.modal -->
