@@ -34,6 +34,8 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="{{ URL::asset('js/jquery-2.2.3.min.js')}}"></script>
+    <script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -54,8 +56,6 @@
     </div>
 
     <!-- ./wrapper -->
-    <script src="{{ URL::asset('js/jquery-2.2.3.min.js')}}"></script>
-    <script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
     <script src="{{URL::asset('js/bootstrap-multiselect.js')}}"></script>  
     @yield('plugins')
     <script src="{{ URL::asset('js/fastclick.js')}}"></script>
@@ -72,6 +72,8 @@
     <script src="{{ URL::asset('js/jquery.slimscroll.min.js')}}"></script>
     
     <!-- Los js de abajo seran guardados en un solo archivo .js  -->
+    <!-- js para Inicializar el selector multiple -->
+    @yield('scriptSelect')
     <!-- js para agregar mas contenidos a una revista -->
     @yield('scriptContent')
     <!-- js para agregar mas items a una revista -->
@@ -80,8 +82,6 @@
     <!-- js para cambiar el dataTable a español -->
     @yield('scriptTable')
     @yield('scriptTableExtend')
-    <!-- js para Inicializar el selector multiple -->
-    @yield('scriptSelect')
     @yield('scriptModal')
     @yield('scriptModalContent')
     <!-- js para mostrar el modal , editar , eliminar -->
