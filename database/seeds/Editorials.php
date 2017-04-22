@@ -25,6 +25,7 @@ class Editorials extends Seeder
         Editorial::Create(['name'=>'Coquito']);
         Editorial::Create(['name'=>'Rectorado']);
         Editorial::Create(['name'=>'Vicerectorado']);
+
     }
 }
 // Eliminar esta semilla cuando se tenga gestion editorial

@@ -45,7 +45,6 @@
 				</div>
 		</div>
 	</section>
-
 	{!! $delete !!}
 
 

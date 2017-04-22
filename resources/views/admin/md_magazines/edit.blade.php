@@ -25,14 +25,12 @@
                       <h3 class="box-title">Informacion</h3>
                   </div>
                   <div class="box-body">
-
                       <div class="form-group">
                           <label for="inputTitle">Titulo</label>
                           <input type="text" class="form-control" value="{{$revista->title}}" name="title" id="inputTitle" placeholder="">
                     </div>
                     <div class="form-group">
                         <label>Autor</label>
-
                         <select class="form-control select" name="author" >
                         <!-- Cargando opciones de autores -->
                         @foreach($autores as $autor)
@@ -59,7 +57,7 @@
                         {{-- Seleccionando editoriales que pertenecen a la categoria revista --}}
                         <div class="row">
                           <div class="col-xs-4">
-                            <select id="selectEditorialMainEdit" class="form-control" name="editorialP[]" multiple="multiple" data-placeholder="Editorial Principal" style="width: 100%;">
+                            <select id="selectEditorialMainEdit" class="form-control" name="mEditorialMain[]" multiple="multiple" data-placeholder="Editorial Principal" style="width: 100%;">
                               <!-- Este bucle es para mostrar a la editorial seleccionada -->
 
                               @foreach($editoriales as $editoriall)
@@ -82,7 +80,7 @@
                             </select>
                           </div>
                           <div class="col-xs-8">
-                            <select class="form-control" id="selectEditorialSecondEdit" name="editorial[]" multiple="multiple" data-placeholder="Editorial Secundaria" style="width: 100%;">
+                            <select class="form-control" id="selectEditorialSecondEdit" name="mEditorialSecond[]" multiple="multiple" data-placeholder="Editorial Secundaria" style="width: 100%;">
                             @foreach($editoriales as  $editorial)
                               @foreach($editorial->categories as $category)
                                 @if($category->name == "revista")
@@ -252,7 +250,6 @@
                   @endforeach
                 </div>
             </div> {{-- end box-body --}}
-
           <div class="box-footer">
             <button type="submit" class="btn btn-primary">Editar</button>
           </div>

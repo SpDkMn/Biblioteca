@@ -38,10 +38,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Editorial</label>
                         <div class="row">
                           <div class="col-xs-4">
-                            <select id="selectEditorialMain"  class="form-control" name="editorialP[]" multiple="multiple" data-placeholder="Editorial Principal" style="width: 100%;">
+                            <label>Editorial</label>
+                            <select id="selectEditorialMain"  class="form-control" name="mEditorialMain[]" multiple="multiple" data-placeholder="Editorial Principal" style="width: 100%;">
                             @foreach($editoriales as  $editorial)
                               @foreach($editorial->categories as $category)
                                 @if($category->name == "revista")
@@ -50,11 +50,14 @@
                               @endforeach
                             @endforeach
                             </select>
+
                           </div>
                           <div class="col-xs-8">
                             <!-- Este div permite tener dos inputs en una sola fila  -->
+                            <label>Anexos</label>
+
                             <div class="input-group ">
-                              <select id="listEditorialSecond" class="form-control"  name="editorial[]" multiple="multiple" data-placeholder="Anexos" style="width: 97%;">
+                              <select id="listEditorialSecond" class="form-control"  name="mEditorialSecond[]" multiple="multiple" data-placeholder="Anexos" style="width: 97%;">
                               @foreach($editoriales as  $editorial)
                                 @foreach($editorial->categories as $category)
                                   @if($category->name == "revista")
@@ -76,7 +79,6 @@
 
                           </div>
                         </div>
-
                     </div>
 
                     <div class="form-group">
@@ -179,6 +181,7 @@
     $(function () {
       //Inicializar selectores de las editoriaes , principales y secundarias
         //Selectores generales
+        //Select del autor
         $(".select2").select2();
         var $listaSec = $("#listEditorialSecond").select2();
         var $listaPrim = $("#selectEditorialMain").select2({
@@ -248,8 +251,6 @@
                 // alert('Deshabilitando opcion '+$(this).text()+' valor '+ $(this).attr('value'));
                 //Reinicializando
                 reiniciarSelect('#listEditorialSecond');
-                // $('#listEditorialSecond').select2('destroy');
-                // $('#listEditorialSecond').select2();
 
               }
 

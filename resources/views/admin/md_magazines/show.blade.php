@@ -21,7 +21,6 @@
         <table id="magazineTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <!-- <th></th> -->
                     <th>Revista</th>
                     <th>Autor</th>
                     <th>ISSN</th>
@@ -93,7 +92,6 @@
             </tbody>
             <tfoot>
               <tr>
-                    <!-- <th></th> -->
                     <th>Revista</th>
                     <th>Autor</th>
                     <th>ISSN</th>
@@ -223,16 +221,12 @@
           //   })
           // });
       });
-
     </script>
 @endsection
 @section('scriptTable')
   <script type="text/javascript">
-
-
   $(function () {
     $('#magazineTable').DataTable({
-
         "paging": true,
         "lengthChange": true,
         "searching": true,

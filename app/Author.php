@@ -6,19 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
+  //Esta es la rama de Jose Gonzalez
 
-    protected $fillable = ['name'];
+  	protected $table = 'authors';
 
-    //Un autor pertenece a una revista
-    public function magazine(){
-    	return $this->hasMany('App\Magazine');
-    }
-    //Un autor (Colaborador) pertenece a un contenido
-    public function contents(){
-    	return $this->belongsToMany('App\Content','author_content');
-    }
-    //Un autor pertenece a muchas categorias
+  	protected $fillable=['name'];
+
     public function categories(){
-        return $this->belongsToMany('App\Category','author_category');
+
+    	return $this->belongsToMany('\App\Category','author_category');
+
     }
+
+    public function scopeName($query,$name){
+    	if(trim($name)!=""){
+    		$query->where('name',"LIKE","%$name%");
+    	}
+    }
+
+    public function scopeCategory($query,$category){
+      $categories=['Libro'=>'Libro','Revista'=>'Revista','Tesis'=>'Tesis','Compendio'=>'Compendio'];
+      if($category!="" && isset($categories[$category])){
+        $query->where('Category',$category);
+      }
+    }
+
 }

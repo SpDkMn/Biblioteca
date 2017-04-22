@@ -16,8 +16,10 @@ class CreateMagazinesCopiesTable extends Migration
         Schema::create('magazine_copies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('clasification')->unique();
+            
             $table->bigInteger('incomeNumber')->unsigned()->unique();
             $table->bigInteger('barcode')->unsigned()->unique();
+
             $table->smallInteger('copy')->unsigned(); //Ejemplar
             $table->integer('magazine_id')->unsigned();
 

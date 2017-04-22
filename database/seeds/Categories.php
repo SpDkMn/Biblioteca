@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+
 use App\Category as Category; 
 
 class Categories extends Seeder
@@ -19,5 +20,6 @@ class Categories extends Seeder
 		Category::create(['name'=>'compendio']);
 		Category::create(['name'=>'colaborador']);
 		Category::create(['name'=>'asesor']);
+        Category::create(['name'=>'tesina']);
     }
 }
