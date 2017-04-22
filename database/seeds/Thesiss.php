@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Thesis as Thesis ;
+
+use App\Thesis as Thesis;
+
 class Thesiss extends Seeder
 {
     /**
@@ -11,8 +13,6 @@ class Thesiss extends Seeder
      */
     public function run()
     {
-        Thesis::create(['clasification'=>'swes4','title'=>'Analisis Matematico','category_id'=>'1','summary'=>'Libro de matematicas','isbn'=>'489213','extension'=>'120','physicalDetails'=>'Sin portada','dimensions'=>'35 x 24 cm','accompaniment'=>'no incluye cd']);
-        Thesis::create(['clasification'=>'ds12s4','title'=>'Diario de Rin','category_id'=>'2','summary'=>'El demenio rin','isbn'=>'489213','extension'=>'120','physicalDetails'=>'Sin portada','dimensions'=>'35 x 24 cm','accompaniment'=>'no incluye cd']);
-        Thesis::create(['clasification'=>'ws23s4','title'=>'Reglas del futbol','category_id'=>'3','summary'=>'Aprende con Oliver'  ,'isbn'=>'489213','extension'=>'120','physicalDetails'=>'Sin portada','dimensions'=>'35 x 24 cm','accompaniment'=>'no incluye cd']);
+        Thesis::create(['clasification'=>'23432r','title'=>'Analisis Matematico','category_id'=>'1','extension'=>'345','physicalDetails'=>'Tesis de mediano tamaño','dimensions'=>'35x24','accompaniment'=>'Incluye 2 cds']);  
     }
 }

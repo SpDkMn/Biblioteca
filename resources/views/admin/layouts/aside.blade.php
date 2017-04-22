@@ -58,7 +58,7 @@
           <li @if(URL::full() == url('/admin/lugares'))class="active"@endif><a href="{{ url('/admin/lugares') }}"><i class="fa fa-map"></i> <span>Lugares</span></a></li>
           <li @if(URL::full() == url('/admin/categorias'))class="active"@endif><a href="{{ url('/admin/categorias') }}"><i class="fa fa-list"></i> <span>Categorias</span></a></li>
           <li @if(URL::full() == url('/admin/estados'))class="active"@endif><a href="{{ url('/admin/estados') }}"><i class="fa fa-bookmark-o"></i> <span>Estados</span></a></li>
-          <!--li @if(URL::full() == url('/admin/editoriales'))class="active"@endif><a href="{{ url('/admin/editoriales') }}"><i class="fa fa-bookmark-o"></i> <span>Editoriales</span></a></li-->
+          
         </ul>
       </li>
       <li @if(URL::full() == url('/admin/usuarios'))class="active"@endif><a href="{{ url('/admin/usuarios') }}"><i class="fa fa-users"></i> <span>Usuarios</span></a></li>
