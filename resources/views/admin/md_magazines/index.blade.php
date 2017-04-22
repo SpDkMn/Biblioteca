@@ -26,7 +26,7 @@
     		 	{{-- Momentaneo  -> Cargar vista new --}}
 				{!! $new  !!}
    		 	</div>
-				<div id="divEdit" class="col-md-6">
+			<div id="divEdit" class="col-md-6">
       			{!! $edit!!}
    		 	</div>
 		</div>

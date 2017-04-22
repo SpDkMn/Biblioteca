@@ -1,4 +1,4 @@
-<div class="box box-warning">
+<div class="box box-warning collapsed-box">
   <div class="box-header with-border">
     <h3 class="box-title">Informacion de Libros</h3>
 
@@ -8,7 +8,7 @@
     </div> 
   </div>
 
-  <div class="box-body">
+  <div class="box-body table-responsive">
     <div class="row">
 
       <div class="col-lg-3">
@@ -17,7 +17,7 @@
             
             
             <div class="input-group-btn">
-              <button type="button" class="btn btn-default" >
+              <button type="button" class="btn btn-default">
                 <span>Cantidad de Libros&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
               </button>
             
