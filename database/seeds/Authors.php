@@ -25,5 +25,6 @@ class Authors extends Seeder
         Author::Create(['name'=>'Rodolfo el cerdo']);
         Author::Create(['name'=>'Eren Jaeger']);
     }
+    
 }
 // Eliminar esta semilla cuando se tenga gestion author

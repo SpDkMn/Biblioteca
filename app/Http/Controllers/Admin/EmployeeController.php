@@ -29,8 +29,7 @@ class EmployeeController extends Controller
         // Json TO Array (J2A)
         $j2a = json_decode($profile->JSON,true);
         // Iniciamos los permisos en false
-
-        $ver = $crear = $editar = $eliminar = true;
+        $ver = $crear = $editar = $eliminar = false;
         // Recorremos cada uno de los permisos de 'perfiles'
         foreach($j2a['empleados'] as $dato){
           foreach($dato as $key => $value){
@@ -44,6 +43,7 @@ class EmployeeController extends Controller
             }
           }
         }
+        
         $show = $new = $edit = $delete = "";
         
         if($crear)
@@ -55,7 +55,6 @@ class EmployeeController extends Controller
             $edit = view('admin.md_empleados.edit',['empleado'=>Employee::with(['user'])->get()[0],'perfiles'=>Profile::all()]);
         if($eliminar)
             $delete = view('admin.md_empleados.delete');
-
         return view('admin.md_empleados.index',[
           'show' => $show,
           'new' => $new,
@@ -106,4 +105,5 @@ class EmployeeController extends Controller
         $e->user->delete();
         $e->delete();
     }
+    
 }

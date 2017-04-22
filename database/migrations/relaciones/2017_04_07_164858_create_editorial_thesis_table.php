@@ -4,21 +4,22 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEditorialCategoryTable extends Migration
+class CreateEditorialThesisTable extends Migration
 {
     /**
-     * Run the migrations. 
+     * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up() 
     {
-        Schema::create('category_editorial', function (Blueprint $table) {
+        Schema::create('editorial_thesis', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('thesis_id')->unsigned();
+            $table->foreign('thesis_id')->references('id')->on('thesiss');
             $table->integer('editorial_id')->unsigned();
             $table->foreign('editorial_id')->references('id')->on('editorials');
-            $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->boolean('type')->unsigned();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateEditorialCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_editorial');
+        Schema::dropIfExists('editorial_thesis');
     }
 }

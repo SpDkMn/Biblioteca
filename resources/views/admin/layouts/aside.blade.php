@@ -13,11 +13,10 @@
     </div>
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
-      <li class="header">Menu de Navegación</li>
+      <li class="header">MAIN NAVIGATION</li>
       <li @if(URL::full() == url('/admin/index'))class="active"@endif><a href="{{ url('/admin/index') }}"><i class="fa fa-dashboard"></i><span>Panel de control</span></a></li>
       <li @if(URL::full() == url('/admin/solicitudes'))class="active"@endif><a href="{{ url('/admin/solicitudes') }}"><i class="fa fa-bell"></i> <span>Solicitudes</span><span class="pull-right-container"><small class="label pull-right bg-blue">4</small></span></a></li>
       <li @if(URL::full() == url('/admin/prestamos'))class="active"@endif><a href="{{ url('/admin/prestamos') }}"><i class="fa fa-"></i> <span>Prestamos</span></a></li>
-
       {{-- ADMINISTRATION --}}
       <li class="treeview @if(URL::full() == url('/admin/profiles') || URL::full() == url('/admin/employees')) active @endif  ">
         <a href="#">
@@ -27,9 +26,7 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          {{-- Si estoy en admin/profiles - > se activa  --}}
           <li @if(URL::full() == url('/admin/profiles'))class="active"@endif><a href="{{ url('/admin/profiles') }}"><i class="fa fa-user-secret"></i> <span>Perfiles</span></a></li>
-          {{-- Si estoy en admin/employees - > se activa  --}}
           <li @if(URL::full() == url('/admin/employees'))class="active"@endif><a href="{{ url('/admin/employees') }}"><i class="fa fa-male"></i> <span>Empleados</span></a></li>
         </ul>
       </li>
@@ -37,7 +34,7 @@
 
 
       {{-- MAGAZINE MANAGEMENT--}}
-       <li class="treeview @if(URL::full() == url('/admin/magazines') || URL::full() == url('/admin/compendium')) active @endif  ">
+      <li class="treeview @if(URL::full() == url('/admin/magazines') || URL::full() == url('/admin/compendium')) active @endif  ">
         <a href="#">
           <i class="fa fa-table"></i><span>Revistas</span>
           <span class="pull-right-container">
@@ -71,6 +68,8 @@
       {{-- END COMPENDIUM MANAGMENT--}}
       <li @if(URL::full() == url('/admin/editorial'))class="active"@endif><a href="{{ url('/admin/editorial') }}"><i class="fa fa-"></i> <span>Editorial</span></a></li>
        <li @if(URL::full() == url('/admin/book'))class="active"@endif><a href="{{ url('/admin/book') }}"><i class="fa fa-"></i> <span>Libros</span></a></li>
+       <li @if(URL::full() == url('/admin/autor'))class="active"@endif><a href="{{ url('/admin/autor') }}"><i class="fa fa-"></i> <span>Autores</span></a></li>
+       <li @if(URL::full() == url('/admin/thesis'))class="active"@endif><a href="{{ url('/admin/thesis') }}"><i class="fa fa-"></i> <span>Tesis</span></a></li>
       <li class="treeview @if(URL::full() == url('/admin/castigos') || URL::full() == url('/admin/castigados')) active @endif  ">
         <a href="#">
           <i class="fa fa-table"></i> <span>Sanciones</span>
@@ -96,7 +95,7 @@
           <li @if(URL::full() == url('/admin/lugares'))class="active"@endif><a href="{{ url('/admin/lugares') }}"><i class="fa fa-map"></i> <span>Lugares</span></a></li>
           <li @if(URL::full() == url('/admin/categorias'))class="active"@endif><a href="{{ url('/admin/categorias') }}"><i class="fa fa-list"></i> <span>Categorias</span></a></li>
           <li @if(URL::full() == url('/admin/estados'))class="active"@endif><a href="{{ url('/admin/estados') }}"><i class="fa fa-bookmark-o"></i> <span>Estados</span></a></li>
-          <!--li @if(URL::full() == url('/admin/editoriales'))class="active"@endif><a href="{{ url('/admin/editoriales') }}"><i class="fa fa-bookmark-o"></i> <span>Editoriales</span></a></li-->
+          
         </ul>
       </li>
       <li @if(URL::full() == url('/admin/usuarios'))class="active"@endif><a href="{{ url('/admin/usuarios') }}"><i class="fa fa-users"></i> <span>Usuarios</span></a></li>

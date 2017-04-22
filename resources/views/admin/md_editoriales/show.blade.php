@@ -16,13 +16,6 @@
   {!!Form::model(Request::all(),['route'=>'editorial.index','method'=>'GET','class'=>'navbar-form navbar-right','role'=>'search'])!!}
     <div class="form-group">
         {!!Form::text('name',null,['class'=>'form-control', 'placeholder'=>'Nombre de editorial'])!!}
-        
-        <!-- Note the missing multiple attribute! -->
-         <script>
-                    $(document).ready(function() {
-                        $('#example-multiple-selected').multiselect();
-                    });
-         </script>
         {!!Form::select('category[]',['Libro'=>'Libro','Revista'=>'Revista','Tesis'=>'Tesis','Compendio'=>'Compendio'],null,['id'=>'example-multiple-selected','multiple'=>'multiple'])!!}
          
     </div>   
@@ -102,8 +95,13 @@
   
 
   @section('script')
+    <script src="{{ URL::asset('js/jquery.multi-select.js')}}"></script>
     <script type="text/javascript">
+    <!-- Note the missing multiple attribute! -->
       $(document).ready(function() {
+        $(document).ready(function() {
+          $('#example-multiple-selected').multiselect();
+        });
         @if($editar)
         $(".editar").on('click',function(event) {
           $id = $(this).data('id')

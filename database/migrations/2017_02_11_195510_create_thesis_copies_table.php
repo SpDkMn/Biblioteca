@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBookCopiesTable extends Migration
+class CreateThesisCopiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,29 +13,24 @@ class CreateBookCopiesTable extends Migration
      */
     public function up()
     { 
-        Schema::create('book_copies', function (Blueprint $table) {
+        Schema::create('thesis_copies', function (Blueprint $table) {
             $table->increments('id');
             $table->biginteger('incomeNumber');
             $table->string('clasification');
             $table->biginteger('barcode');
-            $table->integer('copy');
+            $table->integer('ejemplar');
             $table->integer('edition');
-            //adquision del libro
-            $table->string('acquisitionModality');
-            $table->string('acquisitionSource');
-            $table->string('acquisitionPrice');
-            $table->string('acquisitionDate');
+            //adquision de la tesis
+
+            $table->string('nhojas');
             //fin adquision
             $table->string('location');
             $table->integer('management');
             $table->boolean('availability');
 
-            $table->string('printType');
             $table->string('publicationLocation');
-            $table->string('publicationDate');
-            $table->biginteger('phone');
-            $table->biginteger('ruc');
-            $table->integer('book_id')->unsigned();
+            
+            $table->integer('thesis_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -47,6 +42,6 @@ class CreateBookCopiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book_copies');
+        Schema::dropIfExists('thesis_copies');
     }
 }
