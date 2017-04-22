@@ -271,38 +271,74 @@
 @section('scriptContent')
   <script type="text/javascript">
   $(document).ready(function(){
+
     var idCont = 1 ;
     //Agregando un contenido màs
-  	$('#agregarContenido').click(function(){
-      // Guardar el panel donde se encuentra la seccion contenido
-      var container = $('#contentPanel');
-      var buttonClose = '<button id="eliminarContenido'+idCont+'" class="btn btn-xs btn-danger btn-block" type="button" name="button" ><i class="fa fa-times"></i></button>';
-      var contentHeader = '<div class="box-header with-border">'+buttonClose+'</div>'
-      var groupTitle = '<div class="form-group">'+
-                            '<label for="inputTitleContent">Título</label>'+
-                            '<input type="text" class="form-control" name="titleContent'+idCont+'" id="inputTitleContent'+idCont+'" placeholder="">'+
-                       '</div>';
-      var linea = '<hr>';
-      var groupCollaborator = '<div class="form-group">'+
-                                '<label>Colaborador</label>'+
-                                  '<select class="form-control select2" multiple="multiple" name ="collaborator'+idCont+'[]" data-placeholder="Seleccione los colaboradores" style="width: 100%;">'+
-                                    '@foreach($autores as $autor)'+
-                                      '@foreach($autor->categories as $category)'+
-                                        '@if($category->name == "colaborador")'+
-                                          '<option value="{!! $autor->id !!}">{{$autor->name}}</option>'+
-                                        '@endif '+
+    function agregarContenido(id,contenedor,cont,select){
+      $(id).click(function(){
+        // Guardar el panel donde se encuentra la seccion contenido
+        var container = $(contenedor);
+        var buttonClose = '<button id="eliminarContenido'+cont+'" class="btn btn-xs btn-danger btn-block" type="button" name="button" ><i class="fa fa-times"></i></button>';
+        var contentHeader = '<div class="box-header with-border">'+buttonClose+'</div>'
+        var groupTitle = '<div class="form-group">'+
+                              '<label for="inputTitleContent">Título</label>'+
+                              '<input type="text" class="form-control" name="titleContent'+cont+'" id="inputTitleContent'+cont+'" placeholder="">'+
+                         '</div>';
+        var linea = '<hr>';
+        var groupCollaborator = '<div class="form-group">'+
+                                  '<label>Colaborador</label>'+
+                                    '<select class="form-control '+select+'" multiple="multiple" name ="collaborator'+cont+'[]" data-placeholder="Seleccione los colaboradores" style="width: 100%;">'+
+                                      '@foreach($autores as $autor)'+
+                                        '@foreach($autor->categories as $category)'+
+                                          '@if($category->name == "colaborador")'+
+                                            '<option value="{!! $autor->id !!}">{{$autor->name}}</option>'+
+                                          '@endif '+
+                                        '@endforeach '+
                                       '@endforeach '+
-                                    '@endforeach '+
-                                  '</select>'+
-                                '</div>';
-      var contentBody = linea+'<div class="panel-body" id="boxID'+idCont+'">'+groupTitle+groupCollaborator+'</div>';
-      // var boxContent = '<div class="box box-default" id="boxID'+idCont+'">'+contentBody +'</div>';
+                                    '</select>'+
+                                  '</div>';
+        var contentBody = linea+'<div class="panel-body" id="boxID'+cont+'">'+groupTitle+groupCollaborator+'</div>';
+        // var boxContent = '<div class="box box-default" id="boxID'+idCont+'">'+contentBody +'</div>';
 
-  		$(container).append(contentBody);
-      idCont = idCont + 1 ;
-      //Inicializar el select2 para mostrar los colaboradores de los nuevos contenidos
-      $(".select2").select2();
-  	});
+    		$(container).append(contentBody);
+        cont = cont + 1 ;
+        //Inicializar el select2 para mostrar los colaboradores de los nuevos contenidos
+        $("."+select).select2();
+    	});
+    }
+    agregarContenido('#agregarContenido','#contentPanel',idCont,'select2');
+
+    //
+  	// $('#agregarContenido').click(function(){
+    //   // Guardar el panel donde se encuentra la seccion contenido
+    //   var container = $('#contentPanel');
+    //   var buttonClose = '<button id="eliminarContenido'+idCont+'" class="btn btn-xs btn-danger btn-block" type="button" name="button" ><i class="fa fa-times"></i></button>';
+    //   var contentHeader = '<div class="box-header with-border">'+buttonClose+'</div>'
+    //   var groupTitle = '<div class="form-group">'+
+    //                         '<label for="inputTitleContent">Título</label>'+
+    //                         '<input type="text" class="form-control" name="titleContent'+idCont+'" id="inputTitleContent'+idCont+'" placeholder="">'+
+    //                    '</div>';
+    //   var linea = '<hr>';
+    //   var groupCollaborator = '<div class="form-group">'+
+    //                             '<label>Colaborador</label>'+
+    //                               '<select class="form-control select2" multiple="multiple" name ="collaborator'+idCont+'[]" data-placeholder="Seleccione los colaboradores" style="width: 100%;">'+
+    //                                 '@foreach($autores as $autor)'+
+    //                                   '@foreach($autor->categories as $category)'+
+    //                                     '@if($category->name == "colaborador")'+
+    //                                       '<option value="{!! $autor->id !!}">{{$autor->name}}</option>'+
+    //                                     '@endif '+
+    //                                   '@endforeach '+
+    //                                 '@endforeach '+
+    //                               '</select>'+
+    //                             '</div>';
+    //   var contentBody = linea+'<div class="panel-body" id="boxID'+idCont+'">'+groupTitle+groupCollaborator+'</div>';
+    //   // var boxContent = '<div class="box box-default" id="boxID'+idCont+'">'+contentBody +'</div>';
+    //
+  	// 	$(container).append(contentBody);
+    //   idCont = idCont + 1 ;
+    //   //Inicializar el select2 para mostrar los colaboradores de los nuevos contenidos
+    //   $(".select2").select2();
+  	// });
     //Nota: Falta hacer funcionar el boton x -> eliminar el los nuevos contenidos que se van agregando
     $('#eliminarContenido').click(function(){})
   });

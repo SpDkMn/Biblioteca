@@ -64,6 +64,11 @@
     <!-- Probando ...  -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
 
+    <!-- magazineJS -->
+    <script src="{{ URL::asset('js/magazineJS.js')}}"></script>
+
+
+
     <!-- Los js de abajo seran guardados en un solo archivo .js  -->
     <!-- js para mostrar el modal , editar , eliminar -->
     @yield('script')

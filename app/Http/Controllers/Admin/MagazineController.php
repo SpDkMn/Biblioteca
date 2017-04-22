@@ -114,9 +114,12 @@ class MagazineController extends Controller{
             //Si el contenido esta relacionado con la revista
             if($content->magazine_id == $id_magazine){
               //recorremos el arreglo con los id de los colaboradores para asociarlos al contenido
+              //Si el arreglo colaborador no esta vacio
+              if($request["collaborator".$cont]!=null){
                 foreach ($request["collaborator".$cont] as $clave => $id) {
-                  $content -> authors() -> attach($id);
+                    $content -> authors() -> attach($id);
                 };
+              }
             };
             $cont = $cont +1 ;
           };
@@ -291,12 +294,13 @@ class MagazineController extends Controller{
       $cont = 0 ;
 
         foreach ($revistaP->contents as $contentR) {
+          if($request["collaborator".$cont]!=null){
             foreach ($request["collaborator".$cont] as $clave => $id) {
               $contentR -> authors() -> attach($id);
             };
             $cont ++ ;
-
           }
+        }
 
 
 
@@ -311,11 +315,14 @@ class MagazineController extends Controller{
     //Relacionamos nuevamente los editoriales de los contenidos
     foreach ($magazines as $magazine) {
       // Editoriales Anexadas
-      foreach ($request['editorial'] as $clave => $valor) {
-        if($magazine->id == $id){
-          $magazine-> editorials()->attach($valor,['type'=>false]);
+      if($request['editorial']!=null){
+        foreach ($request['editorial'] as $clave => $valor) {
+            if($magazine->id == $id){
+              $magazine-> editorials()->attach($valor,['type'=>false]);
+            }
         }
       }
+
 
 
       // Editorial Primaria

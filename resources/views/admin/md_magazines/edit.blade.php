@@ -178,7 +178,7 @@
                     <div class="box-header ">
                         <h3 class="panel-title col-xs-11">Contenido</h3>
                         <div class="box-tools pull-right">
-                          <button type="button" id="agregarContenidoCont" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
+                          <button type="button" id="agregarContenidoCont"  class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
                         </div>
                     </div>
                   @foreach($revista->contents as $contenido)
@@ -355,9 +355,7 @@
             }
         //FIN DE PRUEBAS PARA EDITAR
       </script>
-
-
-            <script type="text/javascript">
+      <script type="text/javascript">
               $(document).ready(function(){
                 var idContt = {{$contContent}}; //global
                 //Agregando un contenido màs
@@ -397,7 +395,6 @@
                 });
               })
             </script>
-
       <script type="text/javascript">
         $(document).ready(function(){
           //Convirtiendo a entero contItem -> guarda el numero de item que se muestra inicialmente en editar ,
@@ -434,7 +431,6 @@
           })
         });
       </script>
-
     @endif
   @endforeach
 @endif
