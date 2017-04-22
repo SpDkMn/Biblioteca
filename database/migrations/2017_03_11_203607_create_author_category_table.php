@@ -17,8 +17,8 @@ class CreateAuthorCategoryTable extends Migration
             $table->increments('id');
             $table->integer('author_id')->unsigned();
             $table->integer('category_id')->unsigned();
-            $table->foreign('author_id')->references('id')->on('authors');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
             $table->timestamps();
         });

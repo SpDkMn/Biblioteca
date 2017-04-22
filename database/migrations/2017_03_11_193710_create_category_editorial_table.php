@@ -13,12 +13,14 @@ class CreateCategoryEditorialTable extends Migration
      */
     public function up()
     {
+      //21/03/17 ->ondelete() agregado para poder eliminar las tablas relacionadas con otras
+
         Schema::create('category_editorial', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('editorial_id')->unsigned();
-            $table->foreign('editorial_id')->references('id')->on('editorials');
+            $table->foreign('editorial_id')->references('id')->on('editorials')->onDelete('cascade');
             $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
 
             $table->softDeletes();

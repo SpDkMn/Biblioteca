@@ -18,7 +18,7 @@ class Magazine extends Model
 
     //Una revista tiene una o más editoriales
     public function editorials(){
-        return $this->belongsToMany('App\Editorial','editorial_magazine');
+        return $this->belongsToMany('App\Editorial','editorial_magazine')->withPivot('type');
     }
 
     //Una revista tiene un autor

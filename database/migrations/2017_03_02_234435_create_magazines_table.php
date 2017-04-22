@@ -16,7 +16,7 @@ class CreateMagazinesTable extends Migration
         Schema::create('magazines', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->bigInteger('issn')->unsigned();
+            $table->integer('issn')->unsigned();
             $table->integer('author_id')->unsigned();
 
             $table->softDeletes();

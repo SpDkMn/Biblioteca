@@ -7,14 +7,20 @@ class Editorial extends Model{
 
 	protected $fillable=['name'];
 
-    public function categories(){
-    	return $this->belongsToMany('\App\Category','edi_cat');
-    }
+	//Una editorial pertenece a muchas revistas
+	public function magazines(){
+		return $this->belongsToMany('App\Magazine','editorial_magazine');
+	}
 
-		public function scopeName($query,$name){
-			if(trim($name)!=""){
-				$query->where('name',"LIKE","%$name%");
-			}
+	//Una editorial puede pertenece a muchas categorias
+	public function categories(){
+		return $this->belongsToMany('App\Category','category_editorial');
+	}
+
+	public function scopeName($query,$name){
+		if(trim($name)!=""){
+			$query->where('name',"LIKE","%$name%");
 		}
+	}
 
 }
