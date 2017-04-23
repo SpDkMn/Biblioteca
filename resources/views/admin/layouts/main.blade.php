@@ -8,22 +8,14 @@
     <link rel="stylesheet" href="{{ URL::asset('css/modalStyles.css')}}"><!--Estilos de la ventana  modal-->
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css')}}">
     @yield('css')
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<<<<<<< HEAD
-
-
     <link rel="stylesheet" href="{{ URL::asset('plugins/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/app.css')}}">
-
     {{-- Magazine Style --}}
     {{-- selector mulltiple --}}
     <link rel="stylesheet" href="{{URL::asset('css/select2.min.css')}}">
     {{-- end selector multiple --}}
-=======
-    
->>>>>>> origin/Revistas-JMC
     {{-- AdminLTE --}}
     <link rel="stylesheet" href="{{URL::asset('css/AdminLTE.min.css')}}">
     {{-- end AdminLTE --}}
@@ -54,7 +46,7 @@
       <div class="content-wrapper">
         @yield('content')
       </div>
-      
+
       <!-- /.content-wrapper -->
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
@@ -66,13 +58,9 @@
     </div>
 
     <!-- ./wrapper -->
-<<<<<<< HEAD
     <script src="{{ URL::asset('js/jquery-2.2.3.min.js')}}"></script>
     <script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
     <script src="{{URL::asset('js/bootstrap-multiselect.js')}}"></script>
-=======
-    <script src="{{URL::asset('js/bootstrap-multiselect.js')}}"></script>  
->>>>>>> origin/Revistas-JMC
     @yield('plugins')
     <script src="{{ URL::asset('js/fastclick.js')}}"></script>
     <script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>
@@ -100,28 +88,5 @@
     <!-- js para mostrar el modal , editar , eliminar -->
     <!-- Js para enviar el id de una revista seleccionada -->
     @yield('script')
-<<<<<<< HEAD
-    
-=======
-    <script>
-      $(function () {
-        //Initialize Select2 Elements
-        $(".select2").select2();
-      });
-    </script>
-    <script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-  });
-</script>
->>>>>>> origin/Revistas-JMC
   </body>
 </html>

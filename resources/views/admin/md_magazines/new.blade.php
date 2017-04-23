@@ -1,4 +1,4 @@
-<div class="box box-primary">
+inputISSNi<div class="box box-primary">
   <div class="box-header with-border">
     <i class="fa fa-book"></i>
     <h3 class="box-title">Nuevo</h3>
@@ -20,11 +20,17 @@
                 </div>
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="inputTitle">Titulo</label>
+                        <label for="inputTitle">Título</label>
+                        <span>*</span>
                         <input type="text" class="form-control" name="title" id="inputTitle" placeholder="">
                     </div>
                     <div class="form-group">
+                        <label for="inputSubTitle">Subtítulo</label>
+                        <input type="text" class="form-control" name="subtitle" id="inputSubTitle" placeholder="">
+                    </div>
+                    <div class="form-group">
                         <label>Autor</label>
+                        <span>*</span>
                         <select class="form-control select2" name="author">
                           <!--  Seleccionando la lista de autores que pertenecen a la categoria revista -->
                           @foreach($autores as $autor)
@@ -41,7 +47,7 @@
                         <div class="row">
                           <div class="col-xs-4">
                             <label>Editorial</label>
-                            <select id="selectEditorialMain"  class="form-control" name="mEditorialMain[]" multiple="multiple" data-placeholder="Editorial Principal" style="width: 100%;">
+                            <select id="listEditorialMain"  class="form-control" name="mEditorialMain[]" multiple="multiple" data-placeholder="Editorial Principal" style="width: 100%;">
                             @foreach($editoriales as  $editorial)
                               @foreach($editorial->categories as $category)
                                 @if($category->name == "revista")
@@ -84,13 +90,13 @@
                     <div class="form-group">
                         <div class="row">
                           <div class="col-lg-6">
-                            <label for="inputISSN">ISSN Impreso</label>
+                            <label for="inputISSNi">ISSN Impreso</label>
                             <span>*</span>
-                            <input type="text" class="form-control" name="issn" id="inputISSN" data-inputmask='"mask": "9999-9999"' data-mask placeholder="Version Impresa">
+                            <input type="text" class="form-control" name="issn" id="inputISSNi" data-inputmask='"mask": "9999-9999"' data-mask placeholder="Version Impresa">
                           </div>
                           <div class="col-lg-6">
-                            <label for="inputISSN">ISSN Digital</label>
-                              <input type="text" class="form-control" name="issn" id="inputISSN" data-inputmask='"mask": "9999-9999"' data-mask placeholder="Version Digital">
+                            <label for="inputISSNd">ISSN Digital</label>
+                              <input type="text" class="form-control" name="issnD" id="inputISSNd" data-inputmask='"mask": "9999-9999"' data-mask placeholder="Version Digital">
                           </div>
                         </div>
                     </div>
@@ -153,7 +159,7 @@
                   </div>
                   <div class="form-group">
                     <label>Colaborador</label>
-                      <select class="form-control select2" multiple="multiple" name ="collaborator0[]" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
+                      <select class="form-control selectCollaborator" multiple="multiple" name ="collaborator0[]" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
                         @foreach($autores as $autor)
                           @foreach($autor->categories as $category)
                             @if($category->name == "colaborador")
@@ -183,8 +189,9 @@
         //Selectores generales
         //Select del autor
         $(".select2").select2();
+        $(".selectCollaborator").select2();
         var $listaSec = $("#listEditorialSecond").select2();
-        var $listaPrim = $("#selectEditorialMain").select2({
+        var $listaPrim = $("#listEditorialMain").select2({
            maximumSelectionLength: 1,
            language: {
              noResults: function() {
@@ -296,6 +303,7 @@
         var contentHeader = '<div class="box-header with-border">'+buttonClose+'</div>'
         var groupTitle = '<div class="form-group">'+
                               '<label for="inputTitleContent">Título</label>'+
+                              '<span>*</span>'+
                               '<input type="text" class="form-control" name="titleContent'+cont+'" id="inputTitleContent'+cont+'" placeholder="">'+
                          '</div>';
         var linea = '<hr>';
@@ -320,7 +328,7 @@
         $("."+select).select2();
     	});
     }
-    agregarContenido('#agregarContenido','#contentPanel',idCont,'select2');
+    agregarContenido('#agregarContenido','#contentPanel',idCont,'selectCollaborator');
 
     //
   	// $('#agregarContenido').click(function(){

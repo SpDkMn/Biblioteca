@@ -8,7 +8,7 @@ class Magazine extends Model
 {
 	//Datos guardados en la tabla
     protected $fillable = [
-        'title','issn','author_id'
+        'title','subtitle','issn','issnD','author_id'
     ];
 
     //Una revista tiene una o más copias

@@ -77,8 +77,9 @@ class MagazineController extends Controller{
 
     //Guardando los datos de la revista
  		$m = Magazine::create(['title'=>$request['title'],
+                                'subtitle'=>$request['subtitle'],
  		                            'issn'=>cambiaCadena($request['issn']),
-
+                                'issnD'=>cambiaCadena($request['issnD']),
                                 'author_id'=>$request['author']
                                 ]);
 
@@ -134,11 +135,14 @@ class MagazineController extends Controller{
     foreach ($magazines as $magazine) {
       //Recorremos el arreglo con los id de las editoriales seleccionadas para asociarlas a las revistas
       // Editoriales anexadas
-      foreach ($request['mEditorialSecond'] as $clave => $id) {
-        if($magazine->id == $id_magazine){
-              $magazine-> editorials() -> attach($id,['type'=>false]);
+      if($request['mEditorialSecond']!=null){
+        foreach ($request['mEditorialSecond'] as $clave => $id) {
+          if($magazine->id == $id_magazine){
+                $magazine-> editorials() -> attach($id,['type'=>false]);
+            }
           }
-        }
+      }
+
         // Editorial Primaria
         foreach ($request['mEditorialMain'] as $clave => $id) {
           if($magazine->id == $id_magazine){

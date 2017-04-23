@@ -7,11 +7,11 @@
       </button>
     </div>
   </div>
- 
-      
-    
+
+
+
   <!-- /.box-header -->
- 
+
   <form method="POST" action="{{ url('/admin/editorial') }}">
     {{ csrf_field() }}
     <div class="box-body">
@@ -20,25 +20,26 @@
         <label for="inputNombre">Nombre </label>
         <input type="text" class="form-control" name="name" id="inputNombre" placeholder="">
       </div>
-      
+
       <div class="form-group">
         <label>Categoria</label>
-      <select class="form-control select2" multiple="multiple" data-placeholder="Seleccione la categoria" name="category[]" style="width: 100%;">
+      <select class="form-control selectCategory" multiple="multiple" data-placeholder="Seleccione la categoria" name="category[]" style="width: 100%;">
         <option>libro</option>
         <option>revista</option>
         <option>tesis</option>
         <option>compendio</option>
       </select>
-        
+      <script> $(document).ready(function(){$('.selectCategory').select2();}) </script>
+
       </div>
 
 
     </div>
-   
+
     <div class="box-footer">
       <button type="submit" class="btn btn-primary">Crear</button>
     </div>
   </form>
-  
+
 </div>
 <!-- /.box -->
