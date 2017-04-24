@@ -1,7 +1,6 @@
 <div class="box box-warning">
   <div class="box-header with-border">
     <h3 class="box-title">Listado de Autores</h3>
-<<<<<<< HEAD
     <div class="box-tools pull-right">
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
     </div>
@@ -25,14 +24,6 @@
          <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button><br>
        {!!Form::close()!!}
    </div>
-=======
-
-    <div class="box-tools pull-right"> 
-      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-      </button>
-    </div> 
-  </div>
->>>>>>> origin/Revistas-JMC
 
   <div class="box-body">
 
@@ -70,23 +61,6 @@
         @foreach($authors as $author)
           <tr>
             <td>{{$author->name}}</td>
-<<<<<<< HEAD
-            <?php $aux=0; ?>
-            <td>
-                @foreach($author->categories as $category)
-                    @if($aux>0),@endif
-                    {{$category->name}}
-                    <?php $aux=$aux+1; ?>
-                @endforeach
-            </td>
-            <td><a href="{{route('autor.edit',$author->id)}}" class="btn btn-success editar"><i class="fa fa-pencil" @if(!$editar) disabled @endif></i></a></td>
-            <td><button type="button" data-id="{{$author->id}}" data-name="{{$author->name}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted" @if(!$eliminar) disabled @endif><i class="fa fa-trash"></i></button></td>
-         </tr>
-          @endforeach
-      @else
-      @foreach($authors as $author)
-            <?php
-=======
               <?php $aux=0; ?>
             <td>
               @foreach($author->categories as $category)
@@ -107,7 +81,6 @@
       @else
         @foreach($authors as $author)
             <?php 
->>>>>>> origin/Revistas-JMC
               $array=null;
               $i=0;
               foreach ($author->categories as $category) {
@@ -115,29 +88,6 @@
                 $i=$i+1;
               }   
             ?>
-<<<<<<< HEAD
-            @if($array==$categories)
-               <tr>
-                  <td>{{$author->name}}</td>
-                  <?php $aux=0; ?>
-                  <td>
-                      @foreach($author->categories as $category)
-                        @if($aux>0),@endif
-                        {{$category->name}}
-                        <?php $aux=$aux+1; ?>
-                      @endforeach
-                  </td>
-            <td><a href="{{route('autor.edit',$author->id)}}" class="btn btn-success editar" @if(!$editar) disabled @endif><i class="fa fa-pencil"></i></a></td>
-            <td><button type="button" data-id="{{$author->id}}" data-name="{{$author->name}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted" @if(!$eliminar) disabled @endif><i class="fa fa-trash"></i></button></td>
-        </tr>
-      @endif
-    @endforeach
-  @endif
- </table>
-</div>
-{!! $authors->appends(Request::only(['name','category']))->render() !!}
-=======
-
           @if($array==$categories)
               <tr>
                 <td>{{$author->name}}</td>
@@ -159,7 +109,6 @@
       </table>
       
   </div>
->>>>>>> origin/Revistas-JMC
 
   @section('script')
     <script type="text/javascript">

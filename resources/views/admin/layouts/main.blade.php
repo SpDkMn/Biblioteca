@@ -11,19 +11,6 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<<<<<<< HEAD
-
-
-    <link rel="stylesheet" href="{{ URL::asset('plugins/select2/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/app.css')}}">
-
-    {{-- Magazine Style --}}
-    {{-- selector mulltiple --}}
-    <link rel="stylesheet" href="{{URL::asset('css/select2.min.css')}}">
-    {{-- end selector multiple --}}
-=======
-    
->>>>>>> origin/Revistas-JMC
     {{-- AdminLTE --}}
     <link rel="stylesheet" href="{{URL::asset('css/AdminLTE.min.css')}}">
     {{-- end AdminLTE --}}
