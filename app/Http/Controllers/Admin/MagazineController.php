@@ -134,13 +134,13 @@ class MagazineController extends Controller{
     foreach ($magazines as $magazine) {
       //Recorremos el arreglo con los id de las editoriales seleccionadas para asociarlas a las revistas
       // Editoriales anexadas
-      foreach ($request['editorial'] as $clave => $id) {
+      foreach ($request['mEditorialSecond'] as $clave => $id) {
         if($magazine->id == $id_magazine){
               $magazine-> editorials() -> attach($id,['type'=>false]);
           }
         }
         // Editorial Primaria
-        foreach ($request['editorialP'] as $clave => $id) {
+        foreach ($request['mEditorialMain'] as $clave => $id) {
           if($magazine->id == $id_magazine){
                 $magazine-> editorials() -> attach($id,['type'=>true]);
             }
@@ -314,8 +314,8 @@ class MagazineController extends Controller{
     //Relacionamos nuevamente los editoriales de los contenidos
     foreach ($magazines as $magazine) {
       // Editoriales Anexadas
-      if($request['editorial']!=null){
-        foreach ($request['editorial'] as $clave => $valor) {
+      if($request['mEditorialSecond']!=null){
+        foreach ($request['mEditorialSecond'] as $clave => $valor) {
             if($magazine->id == $id){
               $magazine-> editorials()->attach($valor,['type'=>false]);
             }
@@ -325,7 +325,7 @@ class MagazineController extends Controller{
 
 
       // Editorial Primaria
-      foreach ($request['editorialP'] as $clave => $valor2) {
+      foreach ($request['mEditorialMain'] as $clave => $valor2) {
         if($magazine->id == $id){
               $magazine-> editorials() -> attach($valor2,['type'=>true]);
           }

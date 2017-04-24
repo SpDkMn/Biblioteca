@@ -1,12 +1,29 @@
 <div class="box box-warning">
   <div class="box-header with-border">
     <h3 class="box-title">Listado de Autores</h3>
-
-    <div class="box-tools pull-right"> 
-      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-      </button>
-    </div> 
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
   </div>
+  <br>
+<div class="" role="tabpanel" data-example-id="togglable-tabs">
+    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+       <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Busqueda Normal</a>
+       </li>
+       <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Busqueda Avanzada</a>
+      </li>
+    </ul>
+<div id="myTabContent" class="tab-content">
+   <!-- ESTA SECCION REALIZA LA BUSQUEDA NORMAL (Solo del nombre del autor) -->
+   <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+
+       {!!Form::model(Request::all(),['route'=>'autor.index','method'=>'GET','class'=>'navbar-form navbar-left','role'=>'search']) !!}
+         <div class="form-group">
+         {!! Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre del autor']) !!}
+         </div>
+         <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button><br>
+       {!!Form::close()!!}
+   </div>
 
   <div class="box-body">
 
@@ -65,13 +82,12 @@
         @foreach($authors as $author)
             <?php 
               $array=null;
-              $i=0; 
+              $i=0;
               foreach ($author->categories as $category) {
                 $array[$i] = $category->id;
                 $i=$i+1;
               }   
             ?>
-
           @if($array==$categories)
               <tr>
                 <td>{{$author->name}}</td>
