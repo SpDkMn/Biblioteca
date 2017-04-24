@@ -53,13 +53,7 @@
     </div>
 
     <!-- ./wrapper -->
-<<<<<<< HEAD
-    <script src="{{ URL::asset('js/jquery-2.2.3.min.js')}}"></script>
-    <script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
-    <script src="{{URL::asset('js/bootstrap-multiselect.js')}}"></script>
-=======
     <script src="{{URL::asset('js/bootstrap-multiselect.js')}}"></script>  
->>>>>>> origin/Revistas-JMC
     @yield('plugins')
     <script src="{{ URL::asset('js/fastclick.js')}}"></script>
     <script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>
@@ -87,9 +81,6 @@
     <!-- js para mostrar el modal , editar , eliminar -->
     <!-- Js para enviar el id de una revista seleccionada -->
     @yield('script')
-<<<<<<< HEAD
-    
-=======
     <script>
       $(function () {
         //Initialize Select2 Elements
@@ -109,6 +100,5 @@
     });
   });
 </script>
->>>>>>> origin/Revistas-JMC
   </body>
 </html>
