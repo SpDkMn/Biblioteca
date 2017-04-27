@@ -37,7 +37,12 @@
                   <!-- <td class="details-control"></td> -->
                   <td>{{$revista->title}}</td>
                   <td>{{$revista->author->name}}</td>
-                  <td>{{$revista->issn}}</td>
+                  <td>
+                    <span class="label label-danger">{{$revista->issn}}</span>
+                    @if($revista->issnD!=0)
+                    <span class="label label-info">{{$revista->issnD}}</span>
+                    @endif
+                  </td>
                   <td>
                     <!-- Arreglar diseño luego -->
                       <!--

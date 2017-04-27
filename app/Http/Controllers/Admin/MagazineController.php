@@ -58,6 +58,7 @@ class MagazineController extends Controller{
  	}
   //Terminado
  	public function store(Request $request){
+    // dd($request->all());
     function cambiaCadena($str){
       return intval(preg_replace('/[^0-9]+/', '', $str), 10) ;
     }
@@ -93,6 +94,7 @@ class MagazineController extends Controller{
       if($magazine->issn == cambiaCadena($request['issn'])){
         $id_magazine = $magazine->id ;
       };
+
     };
     //Guardando datos de las copias de revistas
     for ($j=0; $j < $contador_copia; $j++) {
@@ -170,11 +172,13 @@ class MagazineController extends Controller{
     //   }
     // }
     $autores = Author::all();
+    $editorial = Editorial::find($id);
     $editoriales = Editorial::all();
     return view('admin.md_magazines.edit',['id'=>$id,
                                           'revistas'=>$revistas,
                                           //Para la carga de opciones de editoriales y colaboradores
                                           'editoriales'=>$editoriales,
+                                          'editorial'=>$editorial,
                                           'autores'=>$autores]);
   }
   //Terminado
@@ -236,7 +240,9 @@ class MagazineController extends Controller{
 
     //Actualizando datos de revista
     $revista->title = $request['title'];
+    $revista->subtitle = $request['subtitle'];
     $revista->issn = $request['issn'];
+    $revista->issnD = $request['issnD'];
     if(is_string($request['author'])){
       //Convirtiendo a entero el valor de $request['author'], pues es una cadena y al asignarlo guardara 0
       $request['author'] = (int)$request['author'];
@@ -325,7 +331,6 @@ class MagazineController extends Controller{
             }
         }
       }
-
 
 
       // Editorial Primaria

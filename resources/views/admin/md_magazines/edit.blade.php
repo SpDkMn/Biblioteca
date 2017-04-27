@@ -30,6 +30,10 @@
                           <input type="text" class="form-control" value="{{$revista->title}}" name="title" id="inputTitle" placeholder="">
                     </div>
                     <div class="form-group">
+                        <label for="inputSubTitle">Subtítulo</label>
+                        <input type="text" class="form-control" value="{{$revista->subtitle}}" name="subtitle" id="inputSubTitle" placeholder="">
+                    </div>
+                    <div class="form-group">
                         <label>Autor</label>
                         <select class="form-control select" name="author" >
                         <!-- Cargando opciones de autores -->
@@ -51,52 +55,69 @@
                         @endforeach
                         </select>
                     </div>
+<!-- *********************************  -->
 
                     <div class="form-group">
-                        <label>Editorial</label>
-                        {{-- Seleccionando editoriales que pertenecen a la categoria revista --}}
                         <div class="row">
                           <div class="col-xs-4">
-                            <select id="selectEditorialMainEdit" class="form-control" name="mEditorialMain[]" multiple="multiple" data-placeholder="Editorial Principal" style="width: 100%;">
-                              <!-- Este bucle es para mostrar a la editorial seleccionada -->
-
-                              @foreach($editoriales as $editoriall)
-                                @foreach($editoriall->categories as $category)
-                                  @if($category->name = "revista")
-                                  <!-- arreglo con las editoriales de una revista -->
-                                    @foreach($revista->editorials as $editorial)
-                                      @if($editorial->id == $editoriall->id)
-                                        @if($editorial->pivot->type == true)
-                                          <option value="{{ $editorial->id }}" selected>{{$editorial->name}}</option>
-                                        @endif
+                              <label>Editorial</label>
+                              <select id="selectEditorialMainEdit" class="form-control" name="mEditorialMain[]" multiple="multiple" data-placeholder="Editorial Principal" style="width: 100%;">
+                                @foreach($editoriales as $editoriall)
+                                  @foreach($editoriall->categories as $category)
+                                    @if($category->name = "revista")
+                                    <!-- arreglo con las editoriales de una revista -->
+                                      @foreach($revista->editorials as $editorial)
+                                      @if($editorial->magazine_id == $id)
+                                          @if($editorial->pivot->type == true)
+                                            <option value="{{ $editorial->id }}" selected>{{$editorial->name}}</option>
+                                          @endif
                                       @endif
-                                    @endforeach
-                                    <option value="{{ $editoriall->id }}">{{$editoriall->name}}</option>
-                                  @endif
+                                      @endforeach
+                                      <option value="{{ $editoriall->id }}">{{$editoriall->name}}</option>
+                                    @endif
+                                  @endforeach
                                 @endforeach
-                              @endforeach
 
-
-                            </select>
+                              </select>
                           </div>
                           <div class="col-xs-8">
-                            <select class="form-control" id="selectEditorialSecondEdit" name="mEditorialSecond[]" multiple="multiple" data-placeholder="Editorial Secundaria" style="width: 100%;">
-                            @foreach($editoriales as  $editorial)
-                              @foreach($editorial->categories as $category)
-                                @if($category->name == "revista")
-                                  <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
-                                @endif
-                              @endforeach
-                            @endforeach
-                            </select>
+                              <label>Anexos</label>
+                              <div class="input-group ">
+                                <select class="form-control" id="selectEditorialSecondEdit" name="mEditorialSecond[]" multiple="multiple" data-placeholder="Editorial Secundaria" style="width: 97%;">
+                                  @foreach($editoriales as  $editorial)
+                                    @foreach($editorial->categories as $category)
+                                      @if($category->name == "revista")
+                                        <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
+                                      @endif
+                                    @endforeach
+                                  @endforeach
+                                </select>
+                                <div class="input-group-btn ">
+                                  <button type="button" class="btn btn-danger btn-flat clearSelect2" data-toggle="tooltip" data-placement="top" title="Elimina todas las opciones seleccionadas"><i class="fa fa-times"></i></button>
+                                </div>
+                              </div>
                           </div>
                         </div>
                       </div>
 
+<!--  ********************************** -->
+<!--  ********************************** -->
+<!--  ********************************** -->
+
                       <div class="form-group">
-                          <label for="inputISSN">ISSN</label>
-                          <input type="text" class="form-control" name="issn" id="inputISSN" placeholder="" value="{{$revista->issn}}">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <label for="inputISSNi">ISSN Impreso</label>
+                              <span>*</span>
+                              <input type="text" class="form-control" name="issn" id="inputISSNi" data-inputmask='"mask": "9999-9999"' placeholder="Version Impresa" value="{{$revista->issn}}">
+                            </div>
+                            <div class="col-lg-6">
+                              <label for="inputISSNd">ISSN Digital</label>
+                              <input type="text" class="form-control" name="issnD" id="inputISSNd" data-inputmask='"mask": "9999-9999"' placeholder="Version Digital" value="@if($revista->issnD!=0){{$revista->issnD}}@endif">
+                            </div>
+                          </div>
                       </div>
+
 
                     </div>
                  </div>
