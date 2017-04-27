@@ -24,6 +24,10 @@
          <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button><br>
        {!!Form::close()!!}
    </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/Revistas-JMC
   <div class="box-body">
 
   <!---->
@@ -60,6 +64,7 @@
         @foreach($authors as $author)
           <tr>
             <td>{{$author->name}}</td>
+<<<<<<< HEAD
             <?php $aux=0; ?>
             <td>
                 @foreach($author->categories as $category)
@@ -75,6 +80,28 @@
       @else
       @foreach($authors as $author)
             <?php
+=======
+              <?php $aux=0; ?>
+            <td>
+              @foreach($author->categories as $category)
+              
+                @if($aux>0),@endif
+                {{$category->name}}
+                <?php $aux=$aux+1; ?>
+              
+              @endforeach
+            </td>
+
+            <td><button type="button" data-id="{{$author->id}}" class="btn btn-success editar" @if(!$editar) disabled @endif><i class="fa fa-pencil"></i></button></td>
+
+            <td><button type="button" data-id="{{$author->id}}" data-name="{{$author->name}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted" @if(!$eliminar) disabled @endif><i class="fa fa-trash"></i></button></td> 
+          </tr>
+        @endforeach
+
+      @else
+        @foreach($authors as $author)
+            <?php 
+>>>>>>> origin/Revistas-JMC
               $array=null;
               $i=0;
               foreach ($author->categories as $category) {
@@ -82,6 +109,7 @@
                 $i=$i+1;
               }
             ?>
+<<<<<<< HEAD
             @if($array==$categories)
                <tr>
                   <td>{{$author->name}}</td>
@@ -104,6 +132,29 @@
 <!-- Esta linea no funciona !!! -->
 
 
+=======
+          @if($array==$categories)
+              <tr>
+                <td>{{$author->name}}</td>
+                <?php $aux=0; ?>
+                <td>
+                @foreach($author->categories as $category)
+                   @if($aux>0),@endif
+                    {{$category->name}}
+                    <?php $aux=$aux+1; ?>
+                @endforeach
+                </td>
+                <td><button type="button" data-id="{{$author->id}}" class="btn btn-success editar" @if(!$editar) disabled @endif><i class="fa fa-pencil"></i></button></td>
+
+                <td><button type="button" data-id="{{$author->id}}" data-name="{{$author->name}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted" @if(!$eliminar) disabled @endif><i class="fa fa-trash"></i></button></td> 
+              </tr>
+          @endif
+        @endforeach
+      @endif
+      </table>
+      
+  </div>
+>>>>>>> origin/Revistas-JMC
 
   @section('script')
     <script type="text/javascript">
