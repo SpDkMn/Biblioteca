@@ -22,7 +22,9 @@
             <thead>
                 <tr>
                     <th>Revista</th>
-                    <th>Autor</th>
+                    <!-- <th>Subtitulo</th> -->
+                    <th>clasificación</th>
+                    <th>Entidad académica</th>
                     <th>ISSN</th>
                     <th>Ejemplar</th>
                     <th>Editorial</th>
@@ -36,6 +38,8 @@
                 <tr>
                   <!-- <td class="details-control"></td> -->
                   <td>{{$revista->title}}</td>
+                  <td>{{$revista->clasification}}</td>
+                  <!-- <td>{{$revista->subtitle}}</td> -->
                   <td>{{$revista->author->name}}</td>
                   <td>
                     <span class="label label-danger">{{$revista->issn}}</span>
@@ -82,10 +86,10 @@
                         <!-- href="{{route('magazines.show',$revista->id)}}" -->
                         <!-- data-toggle="modal" data-target="#modalContent" no seran agregados  , puesto que con esto inicializa el modal pero cuando su valor es null
                       luego tiene el id cargado y al presionar cualquiera , muestra el contenido anterior-->
-                        <button type="button" data-id="{{$revista->id}}" class="btn btn-success showContent"><i class="fa fa-bookmark"></i></button></td>
+                        <button type="button" data-id="{{$revista->id}}" class="btn btn-success showContent"><i class="fa fa-bookmark"></i></button>
                       </td>
                       <td>
-                        <button type="button" data-id="{{$revista->id}}" class="btn btn-success editar"><i class="fa fa-edit"></i></button></td>
+                        <button type="button" data-id="{{$revista->id}}" class="btn btn-success editar"><i class="fa fa-edit"></i></button>
                       </td>
                       <td>
                         <a type="button" class="button-content btn btn-danger"  href="{{route('magazines.destroy',$revista->id)}}"><i class="fa fa-trash"></i></a>
@@ -97,11 +101,16 @@
             </tbody>
             <tfoot>
               <tr>
-                    <th>Revista</th>
-                    <th>Autor</th>
-                    <th>ISSN</th>
-                    <th>Clasificación</th>
-                    <th>Contenido</th>
+                <th>Revista</th>
+                <th>clasificación</th>
+                <!-- <th>Subtitulo</th> -->
+                <th>Entidad académica</th>
+                <th>ISSN</th>
+                <th>Ejemplar</th>
+                <th>Editorial</th>
+                <th>Contenido</th>
+                <th></th>
+                <th></th>
               </tr>
             </tfoot>
         </table>

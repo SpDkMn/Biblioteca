@@ -25,16 +25,16 @@
                       <h3 class="box-title">Informacion</h3>
                   </div>
                   <div class="box-body">
-                      <div class="form-group">
+                    <div class="form-group">
                           <label for="inputTitle">Titulo</label>
                           <input type="text" class="form-control" value="{{$revista->title}}" name="title" id="inputTitle" placeholder="">
                     </div>
                     <div class="form-group">
-                        <label for="inputSubTitle">Subtítulo</label>
+                        <label for="inputSubTitle">Resto de título</label>
                         <input type="text" class="form-control" value="{{$revista->subtitle}}" name="subtitle" id="inputSubTitle" placeholder="">
                     </div>
                     <div class="form-group">
-                        <label>Autor</label>
+                        <label>Entidad académica</label>
                         <select class="form-control select" name="author" >
                         <!-- Cargando opciones de autores -->
                         @foreach($autores as $autor)
@@ -55,8 +55,6 @@
                         @endforeach
                         </select>
                     </div>
-<!-- *********************************  -->
-
                     <div class="form-group">
                         <div class="row">
                           <div class="col-xs-4">
@@ -77,7 +75,6 @@
                                     @endif
                                   @endforeach
                                 @endforeach
-
                               </select>
                           </div>
                           <div class="col-xs-8">
@@ -99,11 +96,6 @@
                           </div>
                         </div>
                       </div>
-
-<!--  ********************************** -->
-<!--  ********************************** -->
-<!--  ********************************** -->
-
                       <div class="form-group">
                           <div class="row">
                             <div class="col-lg-6">
@@ -117,68 +109,66 @@
                             </div>
                           </div>
                       </div>
-
-
+                      <div class="form-group">
+                            <label for="inputTitle">Clasificación</label>
+                            <input type="text" class="form-control" value="{{$revista->clasification}}" name="clasification" id="inputClasification" placeholder="">
+                      </div>
                     </div>
                  </div>
 <!--***************************************************************************************************************************************
                                          PANEL DE ITEM
 *******************************************************************************************************************************************
 -->
-
-            <!-- Declarando el contador de items -->
-          <?php $contItem = 0  ?>
+        <?php $contItem = 0  ?>
             @foreach($revista->magazines_copies as $item)
               @if($loop->first)
               <div class="box box-info box-solid" id="{{'itemPanel'.$contItem}}">
                 <div class="box-header">
-                    <h3 class="box-title ">Item Principal</h3>
+                    <h3 class="box-title">Item Principal</h3>
                     <div class="box-tools pull-right">
                       <button type="button" id="agregarItemEdit" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="inputClasification">Clasificación</label>
-                        <input type="text" value="{{$item->clasification}}" class="form-control" name="{{'clasification'.$contItem}}" id="inputClasification" placeholder="">
-                    </div>
-                    <div class="form-group">
                         <label for="inputIncomeNumber">Nº Ingreso</label>
+                        <span>*</span>
                         <input type="text" class="form-control" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="inputBarcode">Código de barra</label>
+                        <span>*</span>
                         <input type="text" class="form-control" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="inputCopy">Ejemplar</label>
+                        <span>*</span>
                         <input type="number" class="form-control" value="{{$item->copy}}" name="{{'copy'.$contItem}}" id="inputCopy" placeholder="">
                     </div>
                 </div>
               </div>
               @else
-                <div class="box box-info box-solid" id="{{'itemPanel'.$contItem}}">
+                <div class="BoxItemMagazineEdit box box-info box-solid" id="{{'itemPanel'.$contItem}}">
                   <div class="box-header">
                       <h3 class="panel-title">Item Secundario</h3>
                       <div class="box-tools pull-right">
-                        <button type="button" id="eliminarItem" class="btn btn-box-tool"><i class="fa fa-times"></i></button>
+                        <button type="button" class="btn btn-box-tool" class="eliminarItem" data-widget="remove"><i class="fa fa-times"></i></button>
                       </div>
                   </div>
                   <div class="box-body">
                       <div class="form-group">
-                          <label for="inputClasification">Clasificación</label>
-                          <input type="text" value="{{$item->clasification}}" class="form-control" name="{{'clasification'.$contItem}}" id="inputClasification" placeholder="">
-                      </div>
-                      <div class="form-group">
                           <label for="inputIncomeNumber">Nº Ingreso</label>
+                          <span>*</span>
                           <input type="text" class="form-control" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="">
                       </div>
                       <div class="form-group">
                           <label for="inputBarcode">Código de barra</label>
+                          <span>*</span>
                           <input type="text" class="form-control" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
                       </div>
                       <div class="form-group">
                           <label for="inputCopy">Ejemplar</label>
+                          <span>*</span>
                           <input type="number" class="form-control" value="{{$item->copy}}" name="{{'copy'.$contItem}}" id="inputCopy" placeholder="">
                       </div>
                   </div>
@@ -190,92 +180,78 @@
                                           PANEL DE CONTENIDO
 *******************************************************************************************************************************************
 -->
-
-        <!-- Declarando el contador de items -->
         <?php $contContent = 0  ?>
                 <div class="box box-danger box-solid" id="{{'contentPanel'.$contContent}}">
                     <div class="box-header ">
-                        <h3 class="panel-title col-xs-11">Contenido</h3>
+                        <h3 class="panel-title">Contenido</h3>
                         <div class="box-tools pull-right">
                           <button type="button" id="agregarContenidoCont"  class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
                         </div>
                     </div>
-                  @foreach($revista->contents as $contenido)
-                    @if($loop->first)
                     <!-- PRUEBA  -->
-                    <div class="box-body" id="contentPanel0">
-                        <div class="form-group">
-                          <label for="inputTitleContent">Título</label>
-                          <input type="text" class="form-control" name="{{'titleContent'.$contContent}}" id="{{'inputTitleContent'.$contContent}}" placeholder="" value="{{$contenido->title}}">
-                        </div>
-                    <!--  Por el momento no hay limite de colaboradores-->
-                      <div class="form-group">
-                        <label>Colaborador</label>
-                        <!-- Mostrando seleccion de colaboradores que pertenecen a un contenido -->
-
-                        <select class="form-control select"  multiple="multiple" name ="{{'collaborator'.$contContent.'[]'}}" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
-                          <!-- Cargando colaboradores seleccionados -->
-                          <!-- Cargando lista de opciones para ser seleccionados  -->
-                          <!-- Nota : Corregir error al mostrar lista de opciones  -->
-                          @foreach($autores as $autor)
-                            @foreach($autor->categories as $category)
-                              @if($category->name == "colaborador")
-                              <!-- Nota : Corregir esto -->
-                                    <!-- Aca estan todos los colaboradores -->
-                                    <option value="{{ $autor->id }}" >{{ $autor->name}}</option>
-
-
-                              @endif
-                            @endforeach
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-
-                    @else
-                    <hr>
-                          <!-- PRUEBA  -->
-                          <div class="panel-body" id="{{'boxID'.$contContent}}">
-                              <div class="form-group">
-                                <label for="inputTitleContent">Título</label>
-                                <input type="text" class="form-control" name="{{'titleContent'.$contContent}}" id="{{'inputTitleContent'.$contContent}}" placeholder="" value="{{$contenido->title}}">
-                              </div>
-                          <!--  Por el momento no hay limite de colaboradores-->
-                            <div class="form-group">
-                              <label>Colaborador</label>
-                              <!-- Mostrando seleccion de colaboradores que pertenecen a un contenido -->
-
-                              <select class="form-control select"  multiple="multiple" name ="{{'collaborator'.$contContent.'[]'}}" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
-                                <!-- Cargando colaboradores seleccionados -->
-                                <!-- Cargando lista de opciones para ser seleccionados  -->
-                                <!-- Nota : Corregir error al mostrar lista de opciones  -->
-                                @foreach($autores as $autor)
-                                  @foreach($autor->categories as $category)
-                                    @if($category->name == "colaborador")
-                                    <!-- Nota : Corregir esto -->
-                                          <!-- Aca estan todos los colaboradores -->
-
-                                          <option value="{{ $autor->id }}" >{{ $autor->name}}</option>
-
-
-                                    @endif
-                                  @endforeach
+                    <div class="box-body">
+                      <div  id="contentPanelEdit">
+                      @foreach($revista->contents as $contenido)
+                        @if($loop->first)
+                        <div class="panel-body">
+                          <div class="form-group">
+                            <label for="inputTitleContent">Título</label>
+                            <span>*</span>
+                            <input type="text" class="form-control" name="{{'titleContent'.$contContent}}" id="{{'inputTitleContent'.$contContent}}" placeholder="" value="{{$contenido->title}}">
+                          </div>
+                          <div class="form-group">
+                          <label>Colaborador</label>
+                            <select class="form-control select"  multiple="multiple" name ="{{'collaborator'.$contContent.'[]'}}" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
+                              <!-- Cargando colaboradores seleccionados -->
+                              <!-- Cargando lista de opciones para ser seleccionados  -->
+                              <!-- Nota : Corregir error al mostrar lista de opciones  -->
+                              @foreach($autores as $autor)
+                                @foreach($autor->categories as $category)
+                                  @if($category->name == "colaborador")
+                                        <option value="{{ $autor->id }}" >{{ $autor->name}}</option>
+                                  @endif
                                 @endforeach
-
-
+                              @endforeach
                               </select>
                             </div>
                           </div>
-                    @endif
-                    <?php $contContent = $contContent +1 ?>
-                  @endforeach
-                </div>
-            </div> {{-- end box-body --}}
-          <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Editar</button>
+                          @else
+                            <hr>
+                                <div class="panel-body" id="{{'boxID'.$contContent}}">
+                                    <div class="form-group">
+                                      <label for="inputTitleContent">Título</label>
+                                      <input type="text" class="form-control" name="{{'titleContent'.$contContent}}" id="{{'inputTitleContent'.$contContent}}" placeholder="" value="{{$contenido->title}}">
+                                    </div>
+                                  <div class="form-group">
+                                    <label>Colaborador</label>
+                                    <select class="form-control select"  multiple="multiple" name ="{{'collaborator'.$contContent.'[]'}}" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
+                                      @foreach($autores as $autor)
+                                        @foreach($autor->categories as $category)
+                                          @if($category->name == "colaborador")
+                                                <option value="{{ $autor->id }}" >{{ $autor->name}}</option>
+                                          @endif
+                                        @endforeach
+                                      @endforeach
+                                    </select>
+                                  </div>
+                                </div>
+                        @endif
+                        <?php $contContent = $contContent +1 ?>
+                        @endforeach
+                      </div>
+                    </div>
+<!--***************************************************************************************************************************************
+                                          BOTON DE EDITAR
+*******************************************************************************************************************************************
+-->
           </div>
-        </form>
-      </div>
+          <div class="box-footer">
+            <button type="submit" class="btn btn-primary" id="editMagazine">Editar</button>
+          </div>
+      </form>
+</div>
+
+
       <!-- Script para mostrar los selectores luego de mostrar el editar -->
       <script type="text/javascript">
         $(".select").select2();
@@ -385,6 +361,7 @@
                   var contentHeader = '<div class="box-header with-border">'+buttonClose+'</div>'
                   var groupTitle = '<div class="form-group">'+
                                         '<label for="inputTitleContent">Título</label>'+
+                                        '<span>*</span>'+
                                         '<input type="text" class="form-control" name="titleContent'+idContt+'" id="inputTitleContent'+idContt+'" placeholder="">'+
                                    '</div>';
                   var linea = '<hr>';
@@ -422,13 +399,9 @@
             // Guardar el panel donde se encuentra la seccion contenido
             var container = $('#itemPanel0');
             var titleItem = '<h3 class="box-title">Item Secundario</h3>';
-            var buttonClose ='<div class="box-tools pull-right">  <button type="button" id="eliminarItemEdit" data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button> </div>';
+            var buttonClose ='<div class="box-tools pull-right">  <button type="button" data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button> </div>';
             var itemHeader = '<div class="box-header">'+titleItem+buttonClose+'</div>'
             var itemBody = '<div class="box-body">'+
-                                  '<div class="form-group">'+
-                                      '<label for="inputClasification">Clasificación</label>'+
-                                      '<input type="text" class="form-control" name="clasification'+idCont+'" id="inputClasification" placeholder="">'+
-                                  '</div>'+
                                   '<div class="form-group">'+
                                       '<label for="inputIncomeNumber">Nº Ingreso</label>'+
                                       '<input type="text" class="form-control" name="incomeNumber'+idCont+'" id="inputIncomeNumber" placeholder="">'+
@@ -439,14 +412,26 @@
                                   '</div>'+
                                   '<div class="form-group">'+
                                       '<label for="inputCopy">Ejemplar</label>'+
-                                      '<input type="number" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
+                                      '<input type="number" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="" >'+
                                   '</div>'+
                               '</div>';
-            var itemPanel = '<div class="box box-info box-solid" id="itemPanel'+idCont+'">'+itemHeader+itemBody +'</div>';
+            var itemPanel = '<div class="BoxItemMagazineEdit box box-info box-solid" id="itemPanel'+idCont+'">'+itemHeader+itemBody +'</div>';
 
             $(container).after(itemPanel);
             idCont = idCont + 1 ;
+
+
           })
+          $('#editMagazine').on('click',function(){
+            //Eliminando los valores que tienen para poder eliminarlos en la base de datos
+            $('.BoxItemMagazineEdit:hidden .form-group').find(':input').val(null);
+          });
+          //Cuando se hace click en editar
+            $('#editMagazine').click(function(){
+              //Elimina las cajas ocultadas que contiene los items
+                $('.BoxItemMagazineEdit:hidden').remove();
+
+            });
         });
       </script>
     @endif

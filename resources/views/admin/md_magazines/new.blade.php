@@ -24,11 +24,11 @@
                         <input type="text" class="form-control" name="title" id="inputTitle" placeholder="">
                     </div>
                     <div class="form-group">
-                        <label for="inputSubTitle">Subtítulo</label>
+                        <label for="inputSubTitle">Resto de título</label>
                         <input type="text" class="form-control" name="subtitle" id="inputSubTitle" placeholder="">
                     </div>
                     <div class="form-group">
-                        <label>Autor</label>
+                        <label>Entidad académica</label>
                         <span>*</span>
                         <select class="form-control select2" name="author">
                           <!--  Seleccionando la lista de autores que pertenecen a la categoria revista -->
@@ -46,6 +46,7 @@
                         <div class="row">
                           <div class="col-xs-4">
                             <label>Editorial</label>
+                            <span>*</span>
                             <select id="listEditorialMain"  class="form-control" name="mEditorialMain[]" multiple="multiple" data-placeholder="Editorial Principal" style="width: 100%;">
                             @foreach($editoriales as  $editorial)
                               @foreach($editorial->categories as $category)
@@ -90,6 +91,11 @@
                           </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="inputClasification">Clasificación</label>
+                          <span>*</span>
+                          <input type="text" class="form-control" name="clasification" id="inputClasification" placeholder="">
+                    </div>
 
                  </div>
                </div>
@@ -100,17 +106,11 @@
           <div class="box box-info box-solid" id="itemBox">
               <div class="box-header">
                   <h3 class="box-title">Item principal</h3>
-                  <!-- Cambiar por un diseño mas atractivo cuando este funcionando -->
                   <div class="box-tools pull-right">
                     <button type="button" id="agregarItem" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
                   </div>
               </div>
               <div class="box-body">
-                  <div class="form-group">
-                      <label for="inputClasification">Clasificación</label>
-                        <span>*</span>
-                        <input type="text" class="form-control" name="clasification0" id="inputClasification" placeholder="">
-                  </div>
                   <div class="form-group">
                       <label for="inputIncomeNumber">Nº Ingreso</label>
                       <span>*</span>
@@ -124,7 +124,7 @@
                   <div class="form-group">
                       <label for="inputCopy">Ejemplar</label>
                       <span>*</span>
-                      <input type="number" class="form-control" name="copy0" id="inputCopy" placeholder="">
+                      <input type="number" class="form-control" name="copy0" id="inputCopy" placeholder="" value=1 >
                   </div>
               </div>
             </div>
@@ -172,7 +172,7 @@
               </div>
             </div>
     <div class="box-footer">
-      <button type="submit" class="btn btn-primary">Crear</button>
+      <button type="submit" class="btn btn-primary" id="newMagazine">Crear</button>
     </div>
   </form>
 </div>
@@ -296,7 +296,6 @@
       $(id).click(function(){
         // Guardar el panel donde se encuentra la seccion contenido
         var container = $(contenedor);
-        var contentHeader = '<div class="box-header with-border">'+buttonClose+'</div>'
         var groupTitle = '<div class="form-group">'+
                               '<label for="inputTitleContent">Título</label>'+
                               '<span>*</span>'+
@@ -340,11 +339,6 @@
       var itemHeader = '<div class="box-header">'+titleItem+buttonClose+'</div>'
       var itemBody = '<div class="box-body">'+
                             '<div class="form-group">'+
-                                '<label for="inputClasification">Clasificación</label>'+
-                                '<span>*</span>'+
-                                '<input type="text" class="form-control" name="clasification'+idCont+'" id="inputClasification">'+
-                            '</div>'+
-                            '<div class="form-group">'+
                                 '<label for="inputIncomeNumber">Nº Ingreso</label>'+
                                 '<span>*</span>'+
                                 '<input type="text" class="form-control" name="incomeNumber'+idCont+'" id="inputIncomeNumber">'+
@@ -357,7 +351,7 @@
                             '<div class="form-group">'+
                                 '<label for="inputCopy">Ejemplar</label>'+
                                 '<span>*</span>'+
-                                '<input type="number" class="form-control" name="copy'+idCont+'" id="inputCopy" >'+
+                                '<input type="number" class="form-control" name="copy'+idCont+'" id="inputCopy" value='+(idCont+1)+'>'+
                             '</div>'+
                         '</div>';
       var itemPanel = '<div class="BoxItemMagazine box box-info box-solid" id="itemBoxID'+idCont+'">'+itemHeader+itemBody +'</div>';
@@ -366,7 +360,7 @@
       $("[data-mask]").inputmask();
       idCont = idCont + 1 ;
     });
-    $('button[type="submit"]').click(function(){
+    $('#newMagazine').click(function(){
       //Elimina las cajas ocultadas que contiene los items
         $('.BoxItemMagazine:hidden').remove();
 

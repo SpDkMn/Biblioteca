@@ -51,7 +51,6 @@ class MagazineController extends Controller{
                                             'item'=>$item
                                           ]);
  	}
-
   //Funcion no usada
  	public function create(){
     //Funcion no usada
@@ -72,7 +71,7 @@ class MagazineController extends Controller{
       $contador_contenido ++ ;
     };
     //Contando las copias de la revista
-    while($request['clasification'.$contador_copia]!=null){
+    while($request['incomeNumber'.$contador_copia]!=null){
       $contador_copia ++ ;
     };
 
@@ -81,9 +80,9 @@ class MagazineController extends Controller{
                                 'subtitle'=>$request['subtitle'],
  		                            'issn'=>cambiaCadena($request['issn']),
                                 'issnD'=>cambiaCadena($request['issnD']),
-                                'author_id'=>$request['author']
+                                'author_id'=>$request['author'],
+                                'clasification'=>$request['clasification']
                                 ]);
-
    //Guardamos los registros de las revistas
     $magazines = Magazine::all();
     //Guardamos los registros de las editoriales para el pivote
@@ -98,8 +97,7 @@ class MagazineController extends Controller{
     };
     //Guardando datos de las copias de revistas
     for ($j=0; $j < $contador_copia; $j++) {
-      $mc = MagazineCopy::create(['clasification'=>$request['clasification'.$j],
-                                  'incomeNumber'=>$request['incomeNumber'.$j],
+      $mc = MagazineCopy::create(['incomeNumber'=>$request['incomeNumber'.$j],
                                   'barcode'=>cambiaCadena($request['barcode'.$j]),
                                   'copy'=>$request['copy'.$j],
                                   'magazine_id'=>$id_magazine
@@ -158,19 +156,6 @@ class MagazineController extends Controller{
   //Terminado
   public function edit($id){
     $revistas = Magazine::all();
-    //Contando contenidos y copias de una revista
-    // foreach ($revistas as $revista) {
-    //   if ($revista->id == $id) {
-    //       //Contando la cantidad de contenidos que tiene una revista
-    //     foreach ($revista->contents as $contenido) {
-    //       $contContent = $contContent + 1 ;
-    //     }
-    //       //Contando la cantidad de copias que tiene una revista
-    //     foreach ($revista->magazines_copies as $item) {
-    //       $contItem = $contItem +1 ;
-    //     }
-    //   }
-    // }
     $autores = Author::all();
     $editorial = Editorial::find($id);
     $editoriales = Editorial::all();
@@ -181,132 +166,106 @@ class MagazineController extends Controller{
                                           'editorial'=>$editorial,
                                           'autores'=>$autores]);
   }
-  //Terminado
+  //Terminado - Falta optimizar
   public function update(Request $request, $id){
-
-
+    //Obteniendo datos
+    $revistaP = Magazine::find($id);
     $revista = Magazine::find($id);
     $copias = MagazineCopy::all();
     $magazines = Magazine::all();
     $contents = Content::all();
     $editoriales = Editorial::all();
+    //Inicializando contadores
+      $contador_contenido = 0 ;
+      $contador_contenido2 = 0 ;
+      $contador_copia = 0;
+      $contador_copia2 = 0;
+    //Asignando
+      //Copias de la revista a editar
+      $copiasR=$revista->magazines_copies;
+      //CONTENIDO DE REVISTA
+        //Contenidos de la revista a editar
+        $contentsR = $revista->contents;
+        //Contando las contenidos de la revista antes de editar ($contador_contenido2)
+        foreach($contentsR as $contentR){
+          $contador_contenido2 ++ ;
+        }
+        //Contando los contenidos luego de editar ($contador_contenido)
+        while($request['titleContent'.$contador_contenido]!=null){
+          $contador_contenido ++ ;
+        };
+      //COPIAS DE REVISTA
+        //Contando las copias de la revista antes de editar ($contador_copia2)
+        foreach($copiasR as $copia){
+          $contador_copia2 ++ ;
+        }
+        //Contando las copias de revista luego de editar ($contador_copia)
+        while($request['incomeNumber'.$contador_copia]!=null){
+          //Muestra la cantidad de item que hay luego de editar
+          $contador_copia ++ ;
+        };
 
-    $contador_contenido = 0 ;
-    $contador_contenido2 = 0 ;
-
-
-    $contador_copia = 0;
-    $contador_copia2 = 0;
-
-    $copiasR=$revista->magazines_copies;
-    $contentsR = $revista->contents;
-    // foreach ($copias as $copia) {
-    //   if($copia->magazine_id == $id){
-    //     dd($copia->fill($request->all()));
-    //   }
-    // }
-
-
-
-  //Contando los contenidos de la revista
-    while($request['titleContent'.$contador_contenido]!=null){
-      $contador_contenido ++ ;
-    };
-
-    //Contando las contenidos de la revista
-    foreach($contentsR as $contentR){
-     //Guarda la cantida de item que hay luego de agregar
-      $contador_contenido2 ++ ;
-    }
-
-    //Contando las copias de la revista
-    foreach($copiasR as $copia){
-     //Guarda la cantida de item que hay luego de agregar
-      $contador_copia2 ++ ;
-    }
-
-    while($request['clasification'.$contador_copia]!=null){
-      //Muestra la cantidad de item que hay luego de editar
-      $contador_copia ++ ;
-    };
-
-
-
-    // dd($revista->magazines_copies[0],$revista->magazines_copies[1]);
     //********************************************************************************************************
     /* PRUEBAS */
-
+    // dd($request->all(),$request['clasification1'],$revista->magazines_copies,'Copias luego de editar:',$contador_copia ,'Copias antes de Editar:',$contador_copia2);
     //********************************************************************************************************
 
     //Actualizando datos de revista
-    $revista->title = $request['title'];
-    $revista->subtitle = $request['subtitle'];
-    $revista->issn = $request['issn'];
-    $revista->issnD = $request['issnD'];
-    if(is_string($request['author'])){
-      //Convirtiendo a entero el valor de $request['author'], pues es una cadena y al asignarlo guardara 0
-      $request['author'] = (int)$request['author'];
-    }
-
-    $revista->author_id = $request['author'];
-
-    //Ver porque aparece que $item no existe
-    // foreach ($revista->magazines_copies as $item) {
-    //   $j = 0 ;
-    //   $item->clasification = $request['clasification'.$j];
-    //   $item->incomeNumber = $request['incomeNumber'.$j];
-    //   $item->barcode = $request['barcode'.$j];
-    //   $item->copy = $request['copy'.$j]
-    //   $item->magazine_id = $id;
-    //   $j = $j +1 ;
-    // };
-
-//PRUEBA
-    // $revista->magazines_copies->sync($request->coll);
+      $revista->title = $request['title'];
+      $revista->subtitle = $request['subtitle'];
+      $revista->issn = $request['issn'];
+      $revista->issnD = $request['issnD'];
+      $revista->clasification = $request['clasification'];
+      if(is_string($request['author'])){
+        //Convirtiendo a entero el valor de $request['author'], pues es una cadena y al asignarlo guardara 0
+        $request['author'] = (int)$request['author'];
+      }
+      $revista->author_id = $request['author'];
     //Actualizacion de datos de los items
-    for ($j=0; $j < $contador_copia2 ; $j++) {
-
-        $revista->magazines_copies[$j]->clasification = $request['clasification'.$j];
-        $revista->magazines_copies[$j]->incomeNumber = $request['incomeNumber'.$j];
-        $revista->magazines_copies[$j]->barcode = $request['barcode'.$j];
-        $revista->magazines_copies[$j]->copy = $request['copy'.$j];
-        $copiasR[$j]->save();
-    };
+      for ($j=0; $j < $contador_copia2 ; $j++) {
+        //Agregando las nuevos datos del item
+        $incomeN = $request['incomeNumber'.$j];
+        $barC = $request['barcode'.$j];
+        $cop = $request['copy'.$j];
+        if(($incomeN!= null) && ($barC!=null) && ($cop!=null)){
+          $revista->magazines_copies[$j]->incomeNumber = $incomeN;
+          $revista->magazines_copies[$j]->barcode = $barC;
+          $revista->magazines_copies[$j]->copy =$cop;
+          $copiasR[$j]->save();
+        }else{ //Si son nulos es porque han sido eliminados luego de que fueron agregados
+          //Probando...
+          $copiaEliminada = $revista->magazines_copies[$j] ;
+          $copiaEliminada->delete();
+        }
+      };
     //Agregando los nuevos items que se han colocado en editar
-
-    for ($j=$contador_copia2; $j < $contador_copia; $j++) {
-      $mc = MagazineCopy::create(['clasification'=>$request['clasification'.$j],
-                                  'incomeNumber'=>$request['incomeNumber'.$j],
-                                  'barcode'=>$request['barcode'.$j],
-                                  'copy'=>$request['copy'.$j],
-                                  'magazine_id'=>$id
-                                  ]);
-    }
-
-    //Agregando Contenido
-    for ($i=$contador_contenido2; $i<$contador_contenido ; $i++) {
-      $cc = Content::create(['title'=>$request["titleContent".$i],
-                           'magazine_id'=>$id
-                                             ]);
-    }
+      for ($j=$contador_copia2; $j < $contador_copia; $j++) {
+        $mc = MagazineCopy::create(['incomeNumber'=>$request['incomeNumber'.$j],
+                                    'barcode'=>$request['barcode'.$j],
+                                    'copy'=>$request['copy'.$j],
+                                    'magazine_id'=>$id
+                                    ]);
+      }
+    //Agregando Los nuevos Contenidos que se han agregado en editar
+      for ($i=$contador_contenido2; $i<$contador_contenido ; $i++) {
+        $cc = Content::create(['title'=>$request["titleContent".$i],
+                             'magazine_id'=>$id
+                                               ]);
+      }
     //Actualizando contenido
-    for ($i=0; $i<$contador_contenido2 ; $i++) {
-      $revista->contents[$i]->title=$request["titleContent".$i];
-      $contentsR[$i]->save();
+      for ($i=0; $i<$contador_contenido2 ; $i++) {
+        $revista->contents[$i]->title=$request["titleContent".$i];
+        $contentsR[$i]->save();
 
-    }
-
-
-    $revistaP = Magazine::find($id);
-
+      }
     //Borramos las relaciones entre contenidos y colaboradores
-    foreach($revistaP->contents as $contentR) {
-        $contentR->authors()->detach();
-    }
-
+      foreach($revistaP->contents as $contentR) {
+          $contentR->authors()->detach();
+      }
+    //Inicializando contador
       $cont = 0 ;
-
-        foreach ($revistaP->contents as $contentR) {
+    //Añadiendo nuevas relaciones entre contenidos y colaboradores
+      foreach ($revistaP->contents as $contentR) {
           if($request["collaborator".$cont]!=null){
             foreach ($request["collaborator".$cont] as $clave => $id) {
               $contentR -> authors() -> attach($id);
@@ -314,14 +273,13 @@ class MagazineController extends Controller{
             $cont ++ ;
           }
         }
-
     //Borramos las relaciones entre revistas y  editoriales
     foreach ($magazines as $magazine) {
       if ($magazine->id == $id) {
         $magazine->editorials()->detach();
       }
     }
-    //Relacionamos nuevamente los editoriales de los contenidos
+    //Relacionamos nuevamente revistas con editoriales
     foreach ($magazines as $magazine) {
       // Editoriales Anexadas
       if($request['mEditorialSecond']!=null){
@@ -331,26 +289,16 @@ class MagazineController extends Controller{
             }
         }
       }
-
-
-      // Editorial Primaria
+      // Editorial Primaria -> Dato obligatorio
       foreach ($request['mEditorialMain'] as $clave => $valor2) {
         if($magazine->id == $id){
               $magazine-> editorials() -> attach($valor2,['type'=>true]);
           }
         }
-
-
     };
-
-    //Guardando las copias de revistas
-    // dd($request->all(),$revista)  ;
-
-    //Falta guardas los contenidos y los items usando save()
     $revista->save();
     return redirect('admin/magazines');
   }
-
   //Terminado
   public function destroy($id){
       $magazine = Magazine::find($id);
@@ -378,10 +326,9 @@ class MagazineController extends Controller{
     return view('admin.md_magazines.content',['id'=>$id,
                                               'revistas'=>$revistas]);
   }
-  //PROBANDO
+  //Terminado
   public function itemDetail($id){
     $revistas = Magazine::all();
-
     return view('admin.md_magazines.items',['revistas'=>$revistas,
                                           'id'=>$id]);
   }

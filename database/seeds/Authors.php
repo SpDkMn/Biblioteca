@@ -14,9 +14,10 @@ class Authors extends Seeder
       //Rellenando la tabla authors con 30 datos aleatorios
         Author::Create(['name'=>'Facultad de sistemas']);
         Author::Create(['name'=>'Facultad de industrial']);
-        Author::Create(['name'=>'Universidad Nacional Mayor de San Marcos']);
-        Author::Create(['name'=>'Vicerrectorado']);
-        Author::Create(['name'=>'Rectorado']);
+        Author::Create(['name'=>'Facultad de Electroníca']);
+        Author::Create(['name'=>'Facultad de Odontología']);
+
+        Author::Create(['name'=>'José Mateo Carrasco']);
         Author::Create(['name'=>'Eduardo Espinoza']);
         Author::Create(['name'=>'Luis Toro']);
         Author::Create(['name'=>'Pedro Diaz']);
@@ -26,7 +27,7 @@ class Authors extends Seeder
         Author::Create(['name'=>'Hanabi Yasuraoka']);
         Author::Create(['name'=>'Rodolfo el cerdo']);
         Author::Create(['name'=>'Eren Jaeger']);
-    
+
 
     }
 
