@@ -11,11 +11,11 @@ class Editorial extends Model{
 
 	//Una editorial pertenece a muchas revistas
 	public function magazines(){
-		return $this->belongsToMany('App\Magazine','editorial_magazine');
+		return $this->belongsToMany('App\Magazine','editorial_magazine')->withPivot('type');;
 	}
 
     public function categories(){
-    	return $this->belongsToMany('\App\Category','category_editorial');
+    	return $this->belongsToMany('App\Category','category_editorial');
     }
 
      public function scopeName($query,$name){

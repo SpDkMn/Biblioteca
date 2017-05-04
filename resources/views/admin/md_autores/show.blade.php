@@ -24,7 +24,10 @@
          <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button><br>
        {!!Form::close()!!}
    </div>
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/Revistas-JMC
   <div class="box-body">
 
   <!---->
@@ -32,7 +35,7 @@
   {!!Form::model(Request::all(),['route'=>'autor.index','method'=>'GET','class'=>'navbar-form navbar-right','role'=>'search'])!!}
     <div class="form-group">
         {!!Form::text('name',null,['class'=>'form-control', 'placeholder'=>'Nombre del autor'])!!}
-        
+
         <!-- Note the missing multiple attribute! -->
          <script>
                     $(document).ready(function() {
@@ -40,14 +43,14 @@
                     });
          </script>
         {!!Form::select('category[]',['Libro'=>'Libro','Revista'=>'Revista','Tesis'=>'Tesis','Compendio'=>'Compendio','Colaborador'=>'Colaborador','Asesor'=>'Asesor','Tesina'=>'Tesina'],null,['id'=>'example-multiple-selected','multiple'=>'multiple'])!!}
-         
-    </div>   
+
+    </div>
     <button type="submit" class="btn btn-primary">Buscar</button><br>
-      
+
     {!!Form::close()!!}
   <!--FIN BUSQUEDA Y FILTROS-->
 
-   
+
     <table class="table table-bordered table-hover">
       <tr>
         <th>Nombre</th>
@@ -61,6 +64,23 @@
         @foreach($authors as $author)
           <tr>
             <td>{{$author->name}}</td>
+<<<<<<< HEAD
+            <?php $aux=0; ?>
+            <td>
+                @foreach($author->categories as $category)
+                    @if($aux>0),@endif
+                    {{$category->name}}
+                    <?php $aux=$aux+1; ?>
+                @endforeach
+            </td>
+            <td><a href="{{route('autor.edit',$author->id)}}" class="btn btn-success editar"><i class="fa fa-pencil" @if(!$editar) disabled @endif></i></a></td>
+            <td><button type="button" data-id="{{$author->id}}" data-name="{{$author->name}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted" @if(!$eliminar) disabled @endif><i class="fa fa-trash"></i></button></td>
+         </tr>
+          @endforeach
+      @else
+      @foreach($authors as $author)
+            <?php
+=======
               <?php $aux=0; ?>
             <td>
               @foreach($author->categories as $category)
@@ -81,13 +101,38 @@
       @else
         @foreach($authors as $author)
             <?php 
+>>>>>>> origin/Revistas-JMC
               $array=null;
               $i=0;
               foreach ($author->categories as $category) {
                 $array[$i] = $category->id;
                 $i=$i+1;
-              }   
+              }
             ?>
+<<<<<<< HEAD
+            @if($array==$categories)
+               <tr>
+                  <td>{{$author->name}}</td>
+                  <?php $aux=0; ?>
+                  <td>
+                      @foreach($author->categories as $category)
+                        @if($aux>0),@endif
+                        {{$category->name}}
+                        <?php $aux=$aux+1; ?>
+                      @endforeach
+                  </td>
+            <td><a href="{{route('autor.edit',$author->id)}}" class="btn btn-success editar" @if(!$editar) disabled @endif><i class="fa fa-pencil"></i></a></td>
+            <td><button type="button" data-id="{{$author->id}}" data-name="{{$author->name}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted" @if(!$eliminar) disabled @endif><i class="fa fa-trash"></i></button></td>
+        </tr>
+      @endif
+    @endforeach
+  @endif
+ </table>
+</div>
+<!-- Esta linea no funciona !!! -->
+
+
+=======
           @if($array==$categories)
               <tr>
                 <td>{{$author->name}}</td>
@@ -109,6 +154,7 @@
       </table>
       
   </div>
+>>>>>>> origin/Revistas-JMC
 
   @section('script')
     <script type="text/javascript">

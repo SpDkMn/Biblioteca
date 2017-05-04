@@ -1,4 +1,4 @@
-@if (count($errors) > 0)
+<!-- @if (count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -6,7 +6,7 @@
             @endforeach
         </ul>
     </div>
-@endif
+@endif -->
 <div class="box box-primary">
     <div class="box-header with-border">
         <i class="fa fa-info"></i>
@@ -22,7 +22,9 @@
             <thead>
                 <tr>
                     <th>Revista</th>
-                    <th>Autor</th>
+                    <!-- <th>Subtitulo</th> -->
+                    <th>clasificación</th>
+                    <th>Entidad académica</th>
                     <th>ISSN</th>
                     <th>Ejemplar</th>
                     <th>Editorial</th>
@@ -36,8 +38,15 @@
                 <tr>
                   <!-- <td class="details-control"></td> -->
                   <td>{{$revista->title}}</td>
+                  <td>{{$revista->clasification}}</td>
+                  <!-- <td>{{$revista->subtitle}}</td> -->
                   <td>{{$revista->author->name}}</td>
-                  <td>{{$revista->issn}}</td>
+                  <td>
+                    <span class="label label-danger">{{$revista->issn}}</span>
+                    @if($revista->issnD!=0)
+                    <span class="label label-info">{{$revista->issnD}}</span>
+                    @endif
+                  </td>
                   <td>
                     <!-- Arreglar diseño luego -->
                       <!--
@@ -77,10 +86,10 @@
                         <!-- href="{{route('magazines.show',$revista->id)}}" -->
                         <!-- data-toggle="modal" data-target="#modalContent" no seran agregados  , puesto que con esto inicializa el modal pero cuando su valor es null
                       luego tiene el id cargado y al presionar cualquiera , muestra el contenido anterior-->
-                        <button type="button" data-id="{{$revista->id}}" class="btn btn-success showContent"><i class="fa fa-bookmark"></i></button></td>
+                        <button type="button" data-id="{{$revista->id}}" class="btn btn-success showContent"><i class="fa fa-bookmark"></i></button>
                       </td>
                       <td>
-                        <button type="button" data-id="{{$revista->id}}" class="btn btn-success editar"><i class="fa fa-edit"></i></button></td>
+                        <button type="button" data-id="{{$revista->id}}" class="btn btn-success editar"><i class="fa fa-edit"></i></button>
                       </td>
                       <td>
                         <a type="button" class="button-content btn btn-danger"  href="{{route('magazines.destroy',$revista->id)}}"><i class="fa fa-trash"></i></a>
@@ -92,11 +101,16 @@
             </tbody>
             <tfoot>
               <tr>
-                    <th>Revista</th>
-                    <th>Autor</th>
-                    <th>ISSN</th>
-                    <th>Clasificación</th>
-                    <th>Contenido</th>
+                <th>Revista</th>
+                <th>clasificación</th>
+                <!-- <th>Subtitulo</th> -->
+                <th>Entidad académica</th>
+                <th>ISSN</th>
+                <th>Ejemplar</th>
+                <th>Editorial</th>
+                <th>Contenido</th>
+                <th></th>
+                <th></th>
               </tr>
             </tfoot>
         </table>
@@ -137,19 +151,7 @@
              }
            });
           })
-          //Manejador de evento local para mostrar el modal luego de que se ha completado la peticion
-          //************************************************************************************
-          //                                        PRUEBA
-          //***********************************************************************************
 
-          //************************************************************************************
-          //                                       FIN DE LA PRUEBA
-          //***********************************************************************************
-
-          //Esta variable sera cambiado por otra cuando se quiera mostrar varios modales
-          // var band = true ;
-          // cargaCompleta(band);
-        //Mostrar items de una revista
         $('.showItem').on('click',function(event){
           $id = $(this).data('id');
           $(".showItem").attr("disabled","disabled")
@@ -165,7 +167,7 @@
                  $("#modalItemBody").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
              },
              //Cuando termina de cargar la peticion exitosamente , sin errores
-             complete: function(){
+             success: function(){
                //Muestra el modal
                $('#modalItem').modal();
                //Habilita los botones de mostrar contenido
@@ -182,44 +184,6 @@
           //Cargando datos de la url para editar
           $("#divEdit").load('{{ url("/admin/magazines/") }}/' + $id + '/edit');
         });
-        //Eliminar -> Prueba{
-          //Esta funcion es para mostrar el modal luego de que se termina de completar la peticion al servidor ,
-          // ponemos una bandera para evitar que aparesca el modal con cualquier otra peticion
-          // function cargaCompleta(band){
-          // Nota : Este es un manejador de evento ajax global , sera cambiado por un manejador local
-          //  $(document).ajaxSuccess(function(){
-          //     //Personalizar para cualquier otras peticiones agregando un switch
-          //       if (band == true) {
-          //         $('#modalContent').modal();
-          //         band = false ;
-          //       }
-          //     });
-          // }
-
-
-
-
-          // Borrar comentario cuando el metodo para eliminar sea DELETE y se use ajax
-          // $(".deleteButton").on('click',function(event) {
-          //   $name = $(this).data('name');
-          //   $id = $(this).data('id');
-          //   $('.modal-body').html('<p>¿Esta seguro que quiere eliminar la revista ' + $name +'?</p>');
-          //   //Agregando la el id de la revista
-          //   $('#confirmarDelete').data('id',$id);
-
-          // Borrar comentario cuando el metodo para eliminar sea DELETE y se use ajax
-          // $("#confirmarDelete").on('click',function(event){
-          //   $id = $('#confirmarDelete').data('id');
-          //   $.ajax({
-          //     url: '{{ url("/admin/magazines/")}}'+$id,
-          //     type: 'POST',
-          //     data: {'_token': '{{csrf_token()}}'},
-          //     success: function(result) {
-          //       location.reload();
-          //     }
-          //   })
-          //   })
-          // });
       });
     </script>
 @endsection

@@ -11,7 +11,6 @@
               <table class="table table-bordered">
                 <tr>
                   <th style="width: 10px">Ejemplar</th>
-                  <th>Clasificación</th>
                   <th>Numero de ingreso</th>
                   <th>Codigo de barra</th>
                   <th style="width: 40px">Estado</th>
@@ -19,7 +18,6 @@
                 @foreach($revista->magazines_copies as $copia)
                   <tr>
                     <td>{{$copia->copy}}.</td>
-                    <td>{{$copia->clasification}}</td>
                     <td>{{$copia->incomeNumber}}</td>
                     <td>{{$copia->barcode}}</td>
                     <td><span class="label label-warning">Disponible</span></td>
