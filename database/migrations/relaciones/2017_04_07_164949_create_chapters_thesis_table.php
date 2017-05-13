@@ -15,7 +15,7 @@ class CreateChaptersThesisTable extends Migration
     {
         Schema::create('chapters_thesis', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('content');
+            $table->string('contenido');
             $table->integer('thesis_id')->unsigned();
             $table->timestamps();
         });

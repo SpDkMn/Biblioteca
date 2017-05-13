@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Thesiss::class);
         $this->call(ThesisCopies::class);
         $this->call(ChaptersThesis::class);
-        
     }
 }
+

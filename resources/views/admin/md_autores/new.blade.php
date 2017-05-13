@@ -26,11 +26,10 @@
       <select class="form-control select2" multiple="multiple" data-placeholder="Seleccione la categoria" name="category[]" style="width: 100%;">
         <option>libro</option>
         <option>revista</option>
-        <option>tesis</option>
+        <option>tesis/tesina</option>
         <option>compendio</option>
         <option>colaborador</option>
         <option>asesor</option>
-        <option>tesina</option>
       </select>
         
       </div>

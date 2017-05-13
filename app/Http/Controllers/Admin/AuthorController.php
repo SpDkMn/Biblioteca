@@ -63,7 +63,7 @@ class AuthorController extends Controller
               case 'Revista':
                 $categories[$i]=2;
                 break;
-              case 'Tesis':
+              case 'Tesis/Tesina':
                 $categories[$i]=3;
                 break;
               case 'Compendio':
@@ -75,9 +75,7 @@ class AuthorController extends Controller
               case 'Asesor':
                 $categories[$i]=6;
                 break;
-              case 'Tesina':
-                $categories[$i]=7;
-                break;
+             
             }
             $i=$i+1;
         }
@@ -140,7 +138,7 @@ class AuthorController extends Controller
                 case 'revista':
                     $id=2;
                     break;
-                case 'tesis':
+                case 'tesis/tesina':
                     $id=3;
                     break;
                 case 'compendio':
@@ -151,9 +149,6 @@ class AuthorController extends Controller
                     break;
                 case 'asesor':
                     $id=6;
-                    break;
-                case 'tesina':
-                    $id=7;
                     break;
             }   
 
@@ -190,7 +185,7 @@ class AuthorController extends Controller
                 case 'revista':
                     $id=2;
                     break;
-                case 'tesis':
+                case 'tesis/tesina':
                     $id=3;
                     break;
                 case 'compendio':
@@ -202,9 +197,6 @@ class AuthorController extends Controller
               case 'asesor':
                    $id=6;
                    break;
-              case 'tesina':
-                  $id=7;
-                  break;
             }   
 
             $author->categories()->attach($id);

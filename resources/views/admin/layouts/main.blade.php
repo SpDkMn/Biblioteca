@@ -63,33 +63,8 @@
     <script src="{{ URL::asset('js/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{ URL::asset('js/jquery.slimscroll.min.js')}}"></script>
     
-    @yield('scriptContent')
-    @yield('scriptItem')
-    @yield('scriptDelete')
-    @yield('scriptTable')
-    @yield('scriptTableExtend')
-    @yield('scriptSelect')
-    @yield('scriptModal')
-    @yield('scriptModalContent')
-    @yield('script')
-    <script>
-      $(function () {
-        //Initialize Select2 Elements
-        $(".select2").select2();
-      });
-    </script>
-    <!--
-     <script>
-        $(function() {
-            $('#ms').change(function() {
-                console.log($(this).val());
-            }).multipleSelect({
-                width: '100%'
-            });
-        });
-    </script>
-    -->
-    <script>
+    
+<script>
   $(function () {
     $("#example1").DataTable();
     $('#example2').DataTable({
@@ -103,6 +78,39 @@
   });
 </script>
 
+
+
+    @yield('scriptContent')
+    @yield('scriptItem')
+    @yield('scriptDelete')
+    @yield('scriptTable')
+    @yield('scriptTableExtend')
+    @yield('scriptSelect')
+    @yield('scriptModal')
+    @yield('scriptModalContent')
+    @yield('script')
+    @yield('scriptSelectAutorPrincipal')
+    
+   
+    <script>
+      $(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();
+      });
+    </script>
+
+    <!--
+     <script>
+        $(function() {
+            $('#ms').change(function() {
+                console.log($(this).val());
+            }).multipleSelect({
+                width: '100%'
+            });
+        });
+    </script>
+    -->
+    
 
   </body>
 </html>

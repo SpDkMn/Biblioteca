@@ -1,3 +1,6 @@
+@extends('admin.layouts.main')
+@section('content')
+
 <div class="box box-warning">
   <div class="box-header with-border">
     <h3 class="box-title">Información de Tesis y Tesinas</h3>
@@ -12,98 +15,68 @@
   </div>
 
 
-
-
-<!--Esta es la parte del autor proncipal y las editoriales-->
+<!--Esta es la parte de la editorial y los autores (Principal y secundario)-->
 <div class="col-md-7">
      <div class="box-body">
         <!--    A u t o re s -->
-        <strong>AUTORES</strong>
-        <?php   for($i=0;$i<10;$i++){echo "&nbsp";}?>:&nbsp
-        <?php $cont=0;$cont2=2;$cont3=0; ?>
+        <strong>AUTOR PRINCIPAL</strong>
+              <?php for($i=0;$i<26;$i++){echo "&nbsp";}?>:&nbsp
+            <?php $cont=0; ?>
             @foreach($thesis->authors as $author)
-              @if($author->pivot->type == true)
+              @if($author->pivot->type == true ||$author->pivot->type == true)
               <?php $cont=$cont+1; ?>
-              @else
-              <?php $cont3=$cont3+1;?>
               @endif
             @endforeach 
+            <?php $cont2=2; ?>
             @foreach($thesis->authors as $author)
               @if($author->pivot->type == true)
               {{$author->name}}
                 @if($cont2<=$cont)
-                &nbsp|&nbsp
-                @endif
-              @endif
-              <?php $cont2=$cont2+1; ?>
-            @endforeach  
-        @if($cont3>0)
-          </br>
-          Autores Secundarios 
-          <?php $cont2=2; for($i=0;$i<33;$i++){echo "&nbsp";}?>:&nbsp
-          @foreach($thesis->authors as $author)
-              @if($author->pivot->type == false)
-              {{$author->name}}
-                @if($cont2<=$cont3)
                 ,
                 @endif
               @endif
               <?php $cont2=$cont2+1; ?>
+            @endforeach  
+          
+      </div>
+
+     <div class="box-body">
+        <!--    A u t o re s -->
+        <strong>AUTORES SECUNDARIOS</strong>
+              <?php for($i=0;$i<14;$i++){echo "&nbsp";}?>:&nbsp
+            <?php $cont=0; ?>
+            @foreach($thesis->authors as $author)
+              @if($author->pivot->type == false ||$author->pivot->type == true)
+              <?php $cont=$cont+1; ?>
+              @endif
             @endforeach 
-        @endif  
+            <?php $cont2=2; ?>
+            @foreach($thesis->authors as $author)
+              @if($author->pivot->type == false)
+              {{$author->name}}
+                @if($cont2<=$cont)
+                ,
+                @endif
+              @endif
+              <?php $cont2=$cont2+1; ?>
+            @endforeach  
+          
       </div>
 
       <div class="box-body">
-            <strong>EDITORIAL</strong>
-            <?php   for($i=0;$i<22;$i++){echo "&nbsp";}?>:&nbsp
-            <?php $cont=0;$cont2=2;$cont3=0; ?>
-                @foreach($thesis->editorials as $editorial)
-                  @if($editorial->pivot->type == true)
-                    {{$editorial->name}}
-                  @else
-                  <?php $cont3=$cont3+1;?>
-                  @endif
-                @endforeach
-            @if($cont3>0)
-              </br>
-              &nbsp&nbsp&nbspAnexos
-              <?php $cont2=2; for($i=0;$i<35;$i++){echo "&nbsp";}?>:&nbsp
+            <strong>EDITORIAL</strong>                
+              <?php for($i=0;$i<22;$i++){echo "&nbsp";}?>:&nbsp
               @foreach($thesis->editorials as $editorial)
                   @if($editorial->pivot->type == false)
                   {{$editorial->name}}
-                    @if($cont2<=$cont3)
-                    ,
-                    @endif
                   @endif
-                  <?php $cont2=$cont2+1; ?>
                 @endforeach 
-            @endif
       </div>
+
       <div class="box-body">
             <strong>ASESOR</strong>
-            <?php   for($i=0;$i<26;$i++){echo "&nbsp";}?>:&nbsp
-            <?php $cont=0;$cont2=2;$cont3=0; ?>
-                @foreach($thesis->editorials as $editorial)
-                  @if($editorial->pivot->type == true)
-                    {{$editorial->name}}
-                  @else
-                  <?php $cont3=$cont3+1;?>
-                  @endif
-                @endforeach
-            @if($cont3>0)
-              </br>
-              &nbsp&nbsp&nbspAnexos
-              <?php $cont2=2; for($i=0;$i<35;$i++){echo "&nbsp";}?>:&nbsp
-              @foreach($thesis->editorials as $editorial)
-                  @if($editorial->pivot->type == false)
-                  {{$editorial->name}}
-                    @if($cont2<=$cont3)
-                    ,
-                    @endif
-                  @endif
-                  <?php $cont2=$cont2+1; ?>
-                @endforeach 
-            @endif
+              <?php $cont2=2; for($i=0;$i<26;$i++){echo "&nbsp";}?>:&nbsp
+              {{$thesis->asesor}}
       </div>
 
       <div class="box-body">
@@ -115,7 +88,7 @@
       <div class="box-body">
             <strong>EXTENSION</strong>
             <?php   for($i=0;$i<20;$i++){echo "&nbsp";}?>:&nbsp
-            {{$thesis->clasification}}
+            {{$thesis->extension}}
       </div>
 
       <div class="box-body">
@@ -134,7 +107,7 @@
             <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>:&nbsp
             {{$thesis->accompaniment}}
       </div>
-</div>
+</div>  
 
 <div class="col-md-5">
     <img src="{{URL::asset('img/tesis.jpg') }}" style="width:400px;">
@@ -161,21 +134,15 @@
       	<tr @if($copy->availability) class="success" @else class="danger" @endif>
       		
           <td>@if($copy->availability) Habilitado @else Prestado @endif</td>
-          <td class="text-center">{{$copy->ejemplar}}
-            @if($copy->availability)
-            <span class="sr-only">Disponible</span>
-            @else
-              <span class="sr-only">No disponible</span>
-            @endif
-          </td>
+          <td class="text-center">{{$copy->ejemplar}}</td>
           <td class="text-center">{{$copy->incomeNumber}}</td>
       	
         	<td class="text-center">{{$copy->barcode}} </td>
 
       
-      		<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalCopy<?php echo $copy->id; ?>"><i class="fa fa-tag"></i></button></td>
-      		<td><a type="button" class="button-content btn btn-success"><i class="fa fa-pencil"></i></a></td>
- 	        <td><a type="button" class="button-content btn btn-danger"><i class="fa fa-trash"></i></a></td>
+      		<td><center><button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalCopy<?php echo $copy->id; ?>"><i class="fa fa-tag"></i></button></center></td>
+      		<td><center><a type="button" class="button-content btn btn-success"><i class="fa fa-pencil"></i></a></center></td>
+ 	        <td><center><a type="button" class="button-content btn btn-danger"><i class="fa fa-trash"></i></a></center></td>
       	</tr>
       	<!-- MODAL DEL EJEMPLAR -->
       	<div class="modal fade" id="ModalCopy<?php echo $copy->id; ?>" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">
@@ -191,31 +158,27 @@
                 	
                 	<div>
                 		
-  	              	@if($copy->edition)
-  	              	<p>&nbsp&nbsp&nbspEdición
+  	              	@if($copy->incomeNumber)
+  	              	<p>&nbsp&nbsp&nbspNumero de Ingreso
   					       <?php  	for($i=0;$i<60;$i++){echo "&nbsp";}?>:&nbsp
-  	              	{{$copy->edition}}</p>
+  	              	{{$copy->incomeNumber}}</p>
   	              	@endif
-  	              	@if($copy->location!="")
-  	              	<p>&nbsp&nbsp&nbspUbicacion
-  					       <?php  	for($i=0;$i<55;$i++){echo "&nbsp";}?>:&nbsp
-  	              	{{$copy->location}}</p>
-  	              	@endif
+
                 	</div>
                 	<div>
                 		
-  	              	@if($copy->publicationLocation!="")
-  	          		<p>&nbsp&nbsp&nbspLugar de sustentacion
-  					       <?php  	for($i=0;$i<31;$i++){echo "&nbsp";}?>:&nbsp
-  	              	{{$copy->publicationLocation}}</p>
+  	              	@if($copy->barcode!="")
+  	          		<p>&nbsp&nbsp&nbspCódigo de Barras
+  					       <?php  	for($i=0;$i<65;$i++){echo "&nbsp";}?>:&nbsp
+  	              	{{$copy->barcode}}</p>
   	              	@endif
   	              	
-  	              	@if($copy->nhojas!="")
-  	              	<p>&nbsp&nbsp&nbspNº de Hojas
-  					       <?php  	for($i=0;$i<52;$i++){echo "&nbsp";}?>:&nbsp
-  	              	{{$copy->nhojas}}</p>
-  	              	@endif     
-                	</div>    	     	
+  	              	<p>&nbsp&nbsp&nbspEstado
+  					         <?php  	for($i=0;$i<85;$i++){echo "&nbsp";}?>:&nbsp
+  	              	  @if($copy->availability==1) Habilitado @endif
+                      @if($copy->availability==0) Deshabilitado  @endif
+                    </p>
+  	              	</div>    	     	
                 </div>
               
              </div>
@@ -246,11 +209,8 @@
 
             </div>
             <div class="box-body">
-               <td >@foreach($thesis->chapters as $chapte)
-                           &nbsp {{$chapte->content}}
-                        
-                    @endforeach
-               </td>  
+               <td >{{$thesis->conten}}
+                </td>  
             </div>
         </div>
 </div>
@@ -274,23 +234,14 @@
             </div>
             <div class="box-body">
                <td >
-                 @foreach($thesis->summaries as $summ)
-                          &nbsp  {{$summ->content}}
-                        
-                    @endforeach
+                 {{$thesis->summary}}
                </td>  
             </div>
         </div>
+     </div>
+    <!--Aqui termina el cuadro que contiene los contendos--> 
+  </div>
 </div>
 
-<!--Aqui termina el cuadro que contiene los contendos-->
-
-
-
-
-    
- </div>
-</div>
-
-
+@endsection
 

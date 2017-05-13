@@ -23,7 +23,7 @@
                         $('#example-multiple-selected').multiselect();
                     });
          </script>
-        {!!Form::select('category[]',['Libro'=>'Libro','Revista'=>'Revista','Tesis'=>'Tesis','Compendio'=>'Compendio','Colaborador'=>'Colaborador','Asesor'=>'Asesor','Tesina'=>'Tesina'],null,['id'=>'example-multiple-selected','multiple'=>'multiple'])!!}
+        {!!Form::select('category[]',['Libro'=>'Libro','Revista'=>'Revista','Tesis/Tesina'=>'Tesis/Tesina','Compendio'=>'Compendio','Colaborador'=>'Colaborador','Asesor'=>'Asesor'],null,['id'=>'example-multiple-selected','multiple'=>'multiple'])!!}
          
     </div>   
     <button type="submit" class="btn btn-primary">Buscar</button><br>

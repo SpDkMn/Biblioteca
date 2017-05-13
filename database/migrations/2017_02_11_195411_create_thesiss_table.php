@@ -15,15 +15,22 @@ class CreateThesissTable extends Migration
     {
         Schema::create('thesiss', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('type');
             $table->string('clasification');
             $table->string('title');
-            $table->integer('category_id')->unsigned();
             
+            $table->string('edition');
             //Descripcion fisica de la tesis
             $table->string('extension');
+            $table->integer('nhojas');
             $table->string('physicalDetails');
             $table->string('dimensions');
             $table->string('accompaniment');
+            $table->string('location');
+            $table->string('publicationLocation');
+            $table->string('summary');
+            $table->string('conten');
+            $table->string('asesor');
             //fin descripcion fisica
             $table->timestamps();
            // $table->foreign('category_id')->references('id')->on('categories');

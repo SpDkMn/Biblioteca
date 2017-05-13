@@ -8,14 +8,14 @@ class Thesis extends Model
 {   
     protected $table = 'thesiss';
 
-	protected $fillable = ['clasification','title','category_id','extension','physicalDetails','dimensions','accompaniment'];
+	protected $fillable = ['type','clasification','title','edition','nhojas','extension','dimensions','physicalDetails','accompaniment','conten','summary','location','publicationLocation','asesor'];
 
     public function thesisCopies(){
     	return $this->hasMany('App\ThesisCopy');
     }
 
     public function editorials(){
-    	return $this->belongsToMany('App\Editorial','editorial_thesis')->withPivot('type');
+    	return $this->belongsToMany('App\Editorial','editorial_thesis');
     }
     
     public function authors(){

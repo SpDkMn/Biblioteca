@@ -25,18 +25,17 @@
       </div>
       <?php
       
-      $id_1=$id_2=$id_3=$id_4=$id_5=$id_6=$id_7=false;
+      $id_1=$id_2=$id_3=$id_4=$id_5=$id_6=false;
       
        foreach($author->categories as $category){
           
             switch($category->name){
               case 'libro': $id_1=true;break;
               case 'revista':$id_2=true;break;
-              case 'tesis': $id_3=true;break;
+              case 'tesis/tesina': $id_3=true;break;
               case 'compendio': $id_4=true;break;
               case 'colaborador':$id_5=true;break;
               case 'asesor': $id_6=true;break;
-              case 'tesina': $id_7=true;break;
             }
        }
        
@@ -51,8 +50,8 @@
       @if($id_2)<option selected>revista</option>
       @else<option>revista</option>@endif
 
-      @if($id_3)<option selected>tesis</option>
-      @else<option>tesis</option>@endif
+      @if($id_3)<option selected>tesis/tesina</option>
+      @else<option>tesis/tesina</option>@endif
 
       @if($id_4)<option selected>compendio</option>
       @else<option>compendio</option>@endif
@@ -63,8 +62,6 @@
       @if($id_6)<option selected>asesor</option>
       @else<option>asesor</option>@endif
 
-      @if($id_7)<option selected>tesina</option>
-      @else<option>tesina</option>@endif
       </select>
         
       </div>
