@@ -46,6 +46,4 @@
 		</div>
 	</section>
 	{!! $delete !!}
-
-
 @endsection

@@ -21,7 +21,7 @@ class Magazine extends Model
         return $this->belongsToMany('App\Editorial','editorial_magazine')->withPivot('type');
     }
 
-    //Una revista tiene un autor
+    //Una revista pertenece a una entidad academica (Autor)
     public function author(){
         return $this->belongsTo('App\Author');
     }
