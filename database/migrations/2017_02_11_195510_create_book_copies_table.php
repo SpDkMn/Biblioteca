@@ -33,8 +33,8 @@ class CreateBookCopiesTable extends Migration
             $table->string('printType');
             $table->string('publicationLocation');
             $table->string('publicationDate');
-            $table->biginteger('phone');
-            $table->biginteger('ruc');
+            $table->string('phone');
+            $table->string('ruc');
             $table->integer('book_id')->unsigned();
             $table->timestamps();
         });

@@ -19,7 +19,7 @@ class CreateBooksTable extends Migration
             $table->string('title');
             $table->string('secondaryTitle');
             $table->string('summary');
-            $table->biginteger('isbn');
+            $table->string('isbn');
             //Descripcion fisica del libro
             $table->string('extension');
             $table->string('physicalDetails');
