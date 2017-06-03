@@ -8,7 +8,7 @@ class Book extends Model
 {   
     protected $table = 'books';
 
-	protected $fillable = ['title','secondaryTitle','summary','isbn','extension','physicalDetails','dimensions','accompaniment'];
+	protected $fillable = ['clasification','title','secondaryTitle','summary','isbn','extension','physicalDetails','dimensions','accompaniment'];
 
     public function bookCopies(){
     	return $this->hasMany('App\BookCopy');
