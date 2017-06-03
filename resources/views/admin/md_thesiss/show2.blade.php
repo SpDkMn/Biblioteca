@@ -23,7 +23,7 @@
               <?php for($i=0;$i<26;$i++){echo "&nbsp";}?>:&nbsp
             <?php $cont=0; ?>
             @foreach($thesis->authors as $author)
-              @if($author->pivot->type == true ||$author->pivot->type == true)
+              @if($author->pivot->type == true)
               <?php $cont=$cont+1; ?>
               @endif
             @endforeach 
@@ -46,7 +46,7 @@
               <?php for($i=0;$i<14;$i++){echo "&nbsp";}?>:&nbsp
             <?php $cont=0; ?>
             @foreach($thesis->authors as $author)
-              @if($author->pivot->type == false ||$author->pivot->type == true)
+              @if($author->pivot->type == false)
               <?php $cont=$cont+1; ?>
               @endif
             @endforeach 
@@ -182,7 +182,7 @@
                 </div>
               
              </div>
-          </div>
+              </div>
         </div>
         <!-- Fin Modal Ejemplar -->
       	@endforeach
@@ -217,7 +217,7 @@
 
 
 <div class="col-md-6">
-          <!-- DIRECT CHAT SUCCESS -->
+          <!--  DIRECT CHAT SUCCESS -->
         <div class="box box-primary direct-chat">
             <div class="box-header with-border">
               <h3 class="box-title"><strong>Resumen</strong></h3>
@@ -240,6 +240,30 @@
         </div>
      </div>
     <!--Aqui termina el cuadro que contiene los contendos--> 
+
+<div class="col-md-6">
+          <!-- DIRECT CHAT SUCCESS -->
+        <div class="box box-warning direct-chat direct-chat-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title text-center"><strong>Conclusiones y Recomendaciones</strong></h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
+                  <i class="fa fa-comments"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+    
+              </div>
+
+            </div>
+            <div class="box-body">
+               <td >{{$thesis->recomendacion}}
+                </td>  
+            </div>
+        </div>
+</div>
+
   </div>
 </div>
 

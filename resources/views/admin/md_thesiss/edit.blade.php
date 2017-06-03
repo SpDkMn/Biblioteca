@@ -44,7 +44,18 @@
                             @foreach($autores as  $autor)
                               @foreach($autor->categories as $category)
                                 @if($category->name == "tesis/tesina")
-                                  <option value="{{ $autor->id }}">{{$autor->name}}</option>
+                                  <option value="{{ $autor->id }}"
+                                    
+                                    <?php 
+                                        foreach($thesis->authors as $aut){
+                                          if($aut->id == $autor->id && $aut->pivot->type == true){
+                                            echo "selected";
+                                            break;
+                                          }
+                                        }
+                                    ?>
+
+                                  >{{$autor->name}}</option>
                                 @endif
                               @endforeach
                             @endforeach
@@ -57,7 +68,18 @@
                             @foreach($autores as  $autor)
                               @foreach($autor->categories as $category)
                                 @if($category->name == "tesis/tesina")
-                                  <option value="{{ $autor->id }}">{{$autor->name}}</option>
+                                  <option value="{{ $autor->id }}"
+                                      <?php 
+                                        foreach($thesis->authors as $aut){
+                                          if($aut->id == $autor->id && $aut->pivot->type == false){
+                                            echo "selected";
+                                            break;
+                                          }
+                                        }
+
+                                      ?>
+
+                                  >{{$autor->name}}</option>
                                 @endif
                               @endforeach
                             @endforeach
@@ -170,6 +192,13 @@
                         <label for="inputContent">Contenido</label>
                         <textarea class="form-control" name="contenido" id="inputContent" placeholder="">{{$thesis->conten}}</textarea> 
                      </div>  
+
+                     <div class="form-group">
+                       <label for="inputRecomend">Conclusiones y Recomendaciones</label>
+                         <textarea class="form-control" name="recomendacion" id="inputRecomend" cols="65"></textarea>
+                      
+                     </div>
+
                     
                 </div>
             </div>
@@ -183,7 +212,7 @@
               @if($loop->first)
               <div class="box box-info box-solid" id="{{'itemPanel'.$contItem}}">
                 <div class="box-header">
-                    <h3 class="box-title ">Item Principal</h3>
+                    <h3 class="box-title ">Item {{$item->ejemplar}}</h3>
                     <div class="box-tools pull-right">
                       <button type="button" id="agregarItemEdit" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
                     </div>
@@ -198,16 +227,12 @@
                         <label for="inputBarcode">Código de barra</label>
                         <input type="text" class="form-control" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
                     </div>
-                    <div class="form-group">
-                        <label for="inputCopy">Ejemplar</label>
-                        <input type="number" class="form-control" value="{{$item->copy}}" name="{{'copy'.$contItem}}" id="inputCopy" placeholder="">
-                    </div>
                 </div>
               </div>
               @else
                 <div class="box box-info box-solid" id="{{'itemPanel'.$contItem}}">
                   <div class="box-header">
-                      <h3 class="panel-title">Item Secundario</h3>
+                      <h3 class="panel-title">Item {{$item->ejemplar}}</h3>
                       <div class="box-tools pull-right">
                         <button type="button" id="eliminarItem" class="btn btn-box-tool"><i class="fa fa-times"></i></button>
                       </div>
@@ -222,10 +247,7 @@
                           <label for="inputBarcode">Código de barra</label>
                           <input type="text" class="form-control" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
                       </div>
-                      <div class="form-group">
-                          <label for="inputCopy">Ejemplar</label>
-                          <input type="number" class="form-control" value="{{$item->copy}}" name="{{'copy'.$contItem}}" id="inputCopy" placeholder="">
-                      </div>
+                      
                   </div>
                 </div>
                 @endif
@@ -245,11 +267,12 @@
       
           //Convirtiendo a entero contItem -> guarda el numero de item que se muestra inicialmente en editar ,
           //estos seran los que se agregaron , apartir de ahi se podra agregar mas items con id continuo
-          var idCont = {{ $contItem }};
+
+          var idCont = {{ $item->ejemplar}} ;
           $('#agregarItemEdit').click(function(){
             // Guardar el panel donde se encuentra la seccion contenido
             var container = $('#itemPanel0');
-            var titleItem = '<h3 class="box-title">Item Secundario</h3>';
+            var titleItem = '<h3 class="box-title">Item '+(idCont+1)+'</h3>';
             var buttonClose ='<div class="box-tools pull-right">  <button type="button" id="eliminarItemEdit" data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button> </div>';
             var itemHeader = '<div class="box-header">'+titleItem+buttonClose+'</div>'
             var itemBody = '<div class="box-body">'+
@@ -262,13 +285,11 @@
                                       '<label for="inputBarcode">Código de barra</label>'+
                                     '<input type="text" class="form-control" name="barcode'+idCont+'" id="inputBarcode" placeholder="">'+
                                   '</div>'+
-                                  '<div class="form-group">'+
-                                      '<label for="inputCopy">Ejemplar</label>'+
-                                      '<input type="number" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
-                                  '</div>'+
-                              '</div>';
-            var itemPanel = '<div class="box box-info box-solid" id="itemPanel'+idCont+'">'+itemHeader+itemBody +'</div>';
+                            '</div>';
+
+            var itemPanel = '<div class="box box-info box-solid" id="itemPanel'+(idCont-1)+'">'+itemHeader+itemBody +'</div>';
             $(container).after(itemPanel);
+
             idCont = idCont + 1 ;
           })
       

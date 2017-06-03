@@ -115,6 +115,7 @@ class ThesisController extends Controller
                          'location'=>$request['ubicacion'],
                          'publicationLocation'=>$request['lugarsus'],
                          'asesor'=>$request['asesor'],
+                         'recomendacion'=>$request['recomendacion'],  //Conclusiones y recomendaciones
 
                          ]);
 
@@ -216,6 +217,7 @@ class ThesisController extends Controller
     $thesis->accompaniment = $request['materialad'];
     $thesis->conten = $request['contenido'];
     $thesis->summary = $request['summary'];
+    $thesis->recomendacion = $request['recomendacion'];
     $thesis->location = $request['ubicacion'];
     $thesis->publicationLocation = $request['lugarsus'];
     $thesis->asesor = $request['asesor'];

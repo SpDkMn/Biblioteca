@@ -30,6 +30,7 @@ class CreateThesissTable extends Migration
             $table->string('publicationLocation');
             $table->string('summary');
             $table->string('conten');
+            $table->string('recomendacion');
             $table->string('asesor');
             //fin descripcion fisica
             $table->timestamps();

@@ -41,7 +41,7 @@
                     
                     <div class="form-group">
                         <label>Autor Principal</label>
-                        <select class="form-control select2" id="selectAutorMain" name="autorMain[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Principal">
+                        <select class="form-control" id="selectAutorMain" name="autorMain[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Principal">
                             @foreach($autores as  $autor)
                               @foreach($autor->categories as $category)
                                 @if($category->name == "tesis/tesina")
@@ -171,6 +171,11 @@
                         <textarea class="form-control" name="contenido" id="inputContent" placeholder=""></textarea> 
                      </div>  
                     
+                    <div class="form-group">
+                        <label for="inputRecomend">Conclusiones y Recomendaciones</label>
+                        <textarea class="form-control" name="recomendacion" id="inputRecomend" placeholder=""></textarea> 
+                     </div>
+
                 </div>
             </div>
         <!--Fin de la tercera division-->
@@ -197,7 +202,7 @@
                   </div>
                   <div class="form-group">
                       <label for="inputCopy">Ejemplar</label>
-                      <input type="number" class="form-control" name="copy0" id="inputCopy" placeholder="">
+                      <input type="number" class="form-control" value="1" name="copy0" id="inputCopy" placeholder="">
                   </div>
               </div>
             </div>
@@ -326,11 +331,11 @@
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label for="inputBarcode">Código de barra</label>'+
-                              '<input type="text" class="form-control" name="barcode'+idCont+'" id="inputBarcode" placeholder="">'+
+                              '<input type="text" class="form-control" value="20000000" name="barcode'+idCont+'" id="inputBarcode" placeholder="">'+
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label for="inputCopy">Ejemplar</label>'+
-                                '<input type="number" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
+                                '<input type="number" value="'+(idCont+1)+'" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
                             '</div>'+
                         '</div>';
       var itemPanel = '<div class="box box-info box-solid" id="itemBoxID'+idCont+'">'+itemHeader+itemBody +'</div>';

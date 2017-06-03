@@ -6,19 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller; 
 use App\Http\Requests\AuthorRequest;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\DB;
-
-
 use App\User as User;
 // Para usar el Modelo Profile
 use App\Profile as Profile;
-
 use App\Author as Author;
-
 use Session; 
 use Redirect;
-
 
 class AuthorController extends Controller
 {  
@@ -50,10 +44,7 @@ class AuthorController extends Controller
         $categories=null;
       }
       else{
-      //Rellena la variable $categories con el tipo de categoria que desean filtrar 
-      //Ejm: Desea filtrar por Revista y Tesis
-      //El id de Revista en la tabla categories es 2 , y Tesis es 3
-      //Entonces $categories[0]=2 ; $categories[1]=3;
+   
         $i=0;
         foreach ($request->get('category') as $category) {
             switch ($category) {
@@ -158,7 +149,7 @@ class AuthorController extends Controller
     	return redirect('admin/autor');
   }
 
-  public function edit($id){
+   public function edit($id){
   
       $author = Author::find($id);
       return view('admin.md_autores.edit')->with('author',$author);
@@ -167,7 +158,7 @@ class AuthorController extends Controller
     
     
 
-    public function update($id,AuthorRequest $request){
+   public function update($id,AuthorRequest $request){
        
        $author = Author::find($id);
 
@@ -206,7 +197,7 @@ class AuthorController extends Controller
        
     }
 
-    public function destroy($id){
+   public function destroy($id){
         $author=Author::find($id);
         $author->delete();
         return redirect('autor.index');
