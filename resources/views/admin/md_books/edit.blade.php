@@ -263,6 +263,7 @@
 
             <div class="bs-example" data-expample-id="simple-nav-tabs">
                <ul class="nav nav-tabs" id="contenedor-pestañas">
+               <li><a type="button" href="#" class="agregarItem">+</a></li>
                 <?php $cont=1; ?>
                 @foreach($book->bookCopies as $bc)
                   @if($cont==1)
@@ -272,7 +273,7 @@
                   @endif
                   <?php $cont=$cont+1; ?>
                  @endforeach
-                  <li><a type="button" href="#" class="agregarItem">+</a></li>
+                  
                </ul>
                
               <!--************************** CONTENIDO DE ITEM 1 ***********************************-->
