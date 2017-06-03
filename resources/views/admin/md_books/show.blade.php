@@ -108,15 +108,30 @@
           {{$cont}}
         </td>
         <td>{{$book->isbn}}</td>
-        <td><a type="button" class="button-content btn btn-success"><i class="fa fa-pencil"></i></a></td>
-
-        <td><a type="button" class="button-content btn btn-danger"><i class="fa fa-trash"></i></a></td> 
+        <td><a type="button" data-id="{{$book->id}}" class="button-content btn btn-success editar"><i class="fa fa-pencil"></i></a></td>
+        
+        {!! Form::open(['route'=>['book.destroy',$book->id],'method' => 'DELETE']) !!}
+          <td><button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+        {!! Form::close() !!}
+        
       </tr>
       @endforeach
       
     </table>      
   </div>
 </div>
+
+  <script>
+    $(document).ready(function() {
+      $(".editar").on('click',function(event){
+        $id = $(this).data('id')
+         $("#div-new").html('<div class="box box-success box-solid"><div class="box-header with-border"><h3 class="box-title">Editar</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>')
+         $("#div-new").load('{{ url("/admin/book/") }}/' + $id + '/edit'); 
+      });
+    });
+  </script>
+
+
 
 
   <script>
@@ -129,3 +144,4 @@
       })
     })
   </script>
+  

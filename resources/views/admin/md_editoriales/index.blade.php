@@ -23,8 +23,8 @@
     <div class="col-md-4">
       {!!$new!!}
       <div id="div-edit" class="col-md-18">
-      {!! $edit !!}
-    </div>
+        {!! $edit !!}
+      </div>
     </div>
     
     <div class="col-md-8 ">

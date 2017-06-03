@@ -23,8 +23,7 @@
           <th>Edicion</th>
           <th>Clasificacion</th>
           <th>Contenido</th>
-          <th>Editar</th>
-          <th>Eliminar</th>
+          
         </tr>
         @foreach($book->bookCopies as $copy)
 
@@ -42,8 +41,7 @@
           <td>{{$copy->clasification}}</td>
 
           <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalCopy<?php echo $copy->id; ?>"><i class="fa fa-tag"></i></button></td>
-          <td><a type="button" class="button-content btn btn-success"><i class="fa fa-pencil"></i></a></td>
-          <td><a type="button" class="button-content btn btn-danger"><i class="fa fa-trash"></i></a></td>
+          
         </tr>
         <!-- MODAL DEL EJEMPLAR -->
         <div class="modal fade" id="ModalCopy<?php echo $copy->id; ?>" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">
@@ -200,6 +198,7 @@
   </div>
 </div>
 
+  
 
   <script>
     $(document).ready(function(){
