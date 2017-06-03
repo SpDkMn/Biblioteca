@@ -31,7 +31,19 @@
         </ul>
       </li>
       {{-- END ADMINISTRATION --}}
-
+      {{-- SEARCH --}}
+      <li class="treeview @if(URL::full() == url('/admin/profiles') || URL::full() == url('/admin/employees')) active @endif  ">
+        <a href="#">
+          <i class="fa fa-table"></i><span>Busqueda</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <!-- <li @if(URL::full() == url('/admin/profiles'))class="active"@endif><a href="{{ url('/admin/profiles') }}"><i class="fa fa-user-secret"></i> <span>Perfiles</span></a></li> -->
+        </ul>
+      </li>
+      {{-- END SEARCH --}}
 
       {{-- MAGAZINE MANAGEMENT--}}
       <li class="treeview @if(URL::full() == url('/admin/magazines') || URL::full() == url('/admin/compendium')) active @endif  ">
@@ -44,7 +56,7 @@
 
         <ul class="treeview-menu">
             <li @if(URL::full() == url('/admin/magazines'))class="active"@endif><a href="{{ url('/admin/magazines') }}"><i class="fa fa-"></i> <span>Revistas</span></a></li>
-            <li @if(URL::full() == url('/admin/magazines/edit'))class="active"@endif><a href="{{ url('/admin/compendium') }}"><i class="fa fa-"></i> <span>Compendios</span></a></li>
+            <!-- <li @if(URL::full() == url('/admin/magazines/edit'))class="active"@endif><a href="{{ url('/admin/compendium') }}"><i class="fa fa-"></i> <span>Compendios</span></a></li> -->
             {{-- <li @if(URL::full() == url('/admin/magazines/delete'))class="active"@endif><a href="{{ url('/admin/magazines/delete') }}"><i class="fa fa-"></i> <span>Eliminar</span></a></li>
             <li @if(URL::full() == url('/admin/magazines/show'))class="active"@endif><a href="{{ url('/admin/magazines/show') }}"><i class="fa fa-"></i> <span>Mostrar</span></a></li>   --}}
         </ul>
@@ -95,7 +107,7 @@
           <li @if(URL::full() == url('/admin/lugares'))class="active"@endif><a href="{{ url('/admin/lugares') }}"><i class="fa fa-map"></i> <span>Lugares</span></a></li>
           <li @if(URL::full() == url('/admin/categorias'))class="active"@endif><a href="{{ url('/admin/categorias') }}"><i class="fa fa-list"></i> <span>Categorias</span></a></li>
           <li @if(URL::full() == url('/admin/estados'))class="active"@endif><a href="{{ url('/admin/estados') }}"><i class="fa fa-bookmark-o"></i> <span>Estados</span></a></li>
-          
+
         </ul>
       </li>
       <li @if(URL::full() == url('/admin/usuarios'))class="active"@endif><a href="{{ url('/admin/usuarios') }}"><i class="fa fa-users"></i> <span>Usuarios</span></a></li>
