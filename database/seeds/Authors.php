@@ -23,11 +23,24 @@ class Authors extends Seeder
         Author::Create(['name'=>'Pedro Diaz']);
         Author::Create(['name'=>'Gloria Fudeni']);
         Author::Create(['name'=>'Roberto Sediño']);
-        Author::Create(['name'=>'Rin Okumura']);
-        Author::Create(['name'=>'Hanabi Yasuraoka']);
-        Author::Create(['name'=>'Rodolfo el cerdo']);
-        Author::Create(['name'=>'Eren Jaeger']);
 
+
+        DB::table('author_category')->insert([
+            ['author_id' => 5, 'category_id' => 1],
+            ['author_id' => 6, 'category_id' => 1],
+            ['author_id' => 1, 'category_id' => 2],
+            ['author_id' => 2, 'category_id' => 2],
+            ['author_id' => 3, 'category_id' => 5],
+            ['author_id' => 4, 'category_id' => 5],
+        ]);
+        DB::table('category_editorial')->insert([
+            ['editorial_id' => 1, 'category_id' => 2],
+            ['editorial_id' => 2, 'category_id' => 2],
+            ['editorial_id' => 3, 'category_id' => 2],
+            ['editorial_id' => 4, 'category_id' => 2],
+            ['editorial_id' => 5, 'category_id' => 2],
+            ['editorial_id' => 6, 'category_id' => 2],
+        ]);
 
     }
 

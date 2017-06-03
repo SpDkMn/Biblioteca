@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use App\Editorial as Editorial;
 
@@ -20,7 +21,10 @@ class Editorials extends Seeder
         Editorial::Create(['name'=>'Pontificia Universidad Catolica del Perú']);
         Editorial::Create(['name'=>'Rectorado']);
         Editorial::Create(['name'=>'Vicerectorado']);
+
       
+
+
     }
 }
 // Eliminar esta semilla cuando se tenga gestion editorial
