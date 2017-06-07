@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateThesesTable extends Migration
+class CreateChaptersBookTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateThesesTable extends Migration
      */
     public function up()
     {
-        Schema::create('theses', function (Blueprint $table) {
+        Schema::create('chapters_book', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->integer('number');
+            $table->integer('book_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateThesesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('theses');
+        Schema::dropIfExists('chapters_book');
     }
 }

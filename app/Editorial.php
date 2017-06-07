@@ -14,6 +14,10 @@ class Editorial extends Model{
 		return $this->belongsToMany('App\Magazine','editorial_magazine')->withPivot('type');;
 	}
 
+	public function books(){
+		return $this->belongsToMany('App\Book','editorial_book')->withPivot('type');;
+	}
+
     public function categories(){
     	return $this->belongsToMany('App\Category','category_editorial');
     }

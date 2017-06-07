@@ -47,7 +47,7 @@ class BookController extends Controller
 
  	public function store(Request $request){
     
-    dd("hola prro");
+    
 
     $books=Book::all();
     
