@@ -56,7 +56,7 @@
       
     </div>
     
-    <table class="table table-bordered table-hover">
+    <table id="bookTable" class="table table-bordered table-striped">
         <tr>
           <th>Titulo</th>
           <th>Autor</th>

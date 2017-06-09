@@ -209,9 +209,11 @@
           <div class="box-body">
             <div class="bs-example" data-expample-id="simple-nav-tabs">
                <ul class="nav nav-tabs" id="contenedor-pestañas">
-                <li class="active"><a href="#item1" data-toggle="tab">Item1&nbsp</a></li>
+                <li><a type="button" href="#" class="agregarItem"><i class="fa fa-plus"></i></a></li>
+                <li><a type="button" href="#" class="eliminarItem"><i class="fa fa-remove"></i></a></li>
+                <li class="active"><a href="#item1" id="cabezera-item1" data-toggle="tab">Item1&nbsp</a></li>
                 
-                <li><a type="button" href="#" class="agregarItem">+</a></li>
+                
                </ul>
                
               <!--************************** CONTENIDO DE ITEM 1 ***********************************-->
@@ -363,7 +365,8 @@
     var contenedorPestañas = $("#contenedor-pestañas");
     var contenedorItem = $('#contenedor-item');
     var AddButton1 = $("#agregarItem");
-    var x = $("#contenedor-pestañas ul").length+1;
+    var x = $("#contenedor-pestañas li").length-2;
+
     var FieldCount = x;
     var arreglo;
 
@@ -373,7 +376,7 @@
     
       arreglo = FieldCount-1;
 
-      $(contenedorPestañas).append('<li><a href="#item'+FieldCount+'" data-toggle="tab">Item'+FieldCount+'</a></li>');
+      $(contenedorPestañas).append('<li><a href="#item'+FieldCount+'" id="cabezera-item'+FieldCount+'" data-toggle="tab">Item'+FieldCount+'</a></li>');
         
       $(contenedorItem).append(
 
@@ -494,6 +497,18 @@
 
       x++;
     });
+    
+    $(".eliminarItem").click(function(){
+      if (FieldCount>1) {
+        $("#item"+FieldCount).remove();
+        $("#cabezera-item"+FieldCount).remove();
+        FieldCount = FieldCount-1;
+
+      }
+      
+    });
+
+
     return false;
   });
 </script>

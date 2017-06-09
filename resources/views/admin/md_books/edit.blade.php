@@ -262,14 +262,17 @@
 
 
             <div class="bs-example" data-expample-id="simple-nav-tabs">
+
+        
                <ul class="nav nav-tabs" id="contenedor-pestañas">
-               <li><a type="button" href="#" class="agregarItem">+</a></li>
+               <li><a type="button" href="#" class="agregarItem"><i class="fa fa-plus"></i></a></li>
+               <li><a type="button" href="#" class="eliminarItem"><i class="fa fa-remove"></i></a></li>
                 <?php $cont=1; ?>
                 @foreach($book->bookCopies as $bc)
                   @if($cont==1)
-                  <li class="active"><a href="#item{{$cont}}" data-toggle="tab">Item{{$cont}}&nbsp</a></li>
+                  <li class="active"><a href="#item{{$cont}}" id="cabezera-item{{$cont}}" data-toggle="tab">Item{{$cont}}&nbsp</a></li>
                   @else
-                  <li><a href="#item{{$cont}}" data-toggle="tab">Item{{$cont}}&nbsp</a></li>
+                  <li><a href="#item{{$cont}}" id="cabezera-item{{$cont}}" data-toggle="tab">Item{{$cont}}&nbsp</a></li>
                   @endif
                   <?php $cont=$cont+1; ?>
                  @endforeach
@@ -434,7 +437,11 @@
     var contenedorPestañas = $("#contenedor-pestañas");
     var contenedorItem = $('#contenedor-item');
     var AddButton1 = $("#agregarItem");
-    var x = $("#contenedor-pestañas ul").length+1;
+
+    var x = $("#contenedor-pestañas li").length-2;
+
+    
+
     var FieldCount = x;
     var arreglo;
 
@@ -444,7 +451,7 @@
     
       arreglo = FieldCount-1;
 
-      $(contenedorPestañas).append('<li><a href="#item'+FieldCount+'" data-toggle="tab">Item'+FieldCount+'</a></li>');
+      $(contenedorPestañas).append('<li><a href="#item'+FieldCount+'" id="cabezera-item'+FieldCount+'" data-toggle="tab">Item'+FieldCount+'</a></li>');
         
       $(contenedorItem).append(
 
@@ -565,6 +572,17 @@
 
       x++;
     });
+  
+    $(".eliminarItem").click(function(){
+      if (FieldCount>1) {
+        $("#item"+FieldCount).remove();
+        $("#cabezera-item"+FieldCount).remove();
+        FieldCount = FieldCount-1;
+
+      }
+      
+    });
+
     return false;
   });
 </script>
@@ -586,7 +604,7 @@
 
     $(AddButton).click(function (e) {
         if(x <= MaxInputs) //max input box allowed
-        {
+        {   
             FieldCount++;
             //agregar campo
             var array = FieldCount-1;
