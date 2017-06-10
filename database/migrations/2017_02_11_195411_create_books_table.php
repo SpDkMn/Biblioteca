@@ -4,24 +4,23 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateThesissTable extends Migration
+class CreateBooksTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() 
+    public function up()
     {
-        Schema::create('thesiss', function (Blueprint $table) {
+        Schema::create('books', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');
             $table->string('clasification');
-            $table->string('title');
-            
+            $table->string('title');            
             $table->string('edition');
             //Descripcion fisica de la tesis
-            $table->string('extension');
+      $table->string('extension');
             $table->integer('nhojas');
             $table->string('physicalDetails');
             $table->string('dimensions');
@@ -34,7 +33,6 @@ class CreateThesissTable extends Migration
             $table->string('asesor');
             //fin descripcion fisica
             $table->timestamps();
-           // $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
@@ -45,6 +43,6 @@ class CreateThesissTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('thesiss');
+        Schema::dropIfExists('books');
     }
 }

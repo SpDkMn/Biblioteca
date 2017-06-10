@@ -13,7 +13,6 @@ use App\Profile as Profile;
 use App\Author as Author;
 use Session; 
 use Redirect;
-
 class AuthorController extends Controller
 {  
 	public function index(Request $request){
@@ -22,23 +21,21 @@ class AuthorController extends Controller
       $j2a = json_decode($profile->JSON,true);
       // Iniciamos los permisos en false
 
-      $ver = $crear = $editar = $eliminar =false;
-    
-      // Recorremos cada uno de los permisos de 'perfiles'
-      foreach($j2a['empleados'] as $dato){
-        foreach($dato as $key => $value){
-          if($value == true){
-            switch($key){
-              case 'ver': $ver = true;break;
-              case 'crear': $crear = true;break;
-              case 'editar': $editar = true; break;
-              case 'eliminar': $eliminar = true; break;
-            }
+      $ver = $crear = $editar = $eliminar =false;    
+    // Recorremos cada uno de los permisos de 'perfiles'
+    foreach($j2a['empleados'] as $dato){
+      foreach($dato as $key => $value){
+        if($value == true){
+          switch($key){
+            case 'ver': $ver = true;break;
+            case 'crear': $crear = true;break;
+            case 'editar': $editar = true; break;
+            case 'eliminar': $eliminar = true; break;
           }
         }
       }
-      $show = $new = $edit = $delete = "";
-    
+    }
+    $show = $new = $edit = $delete = "";
       //Verifica si se envio "category" por metodo get , FILTROS de busqueda 
       if($request->get('category')==null){
         $categories=null;
@@ -71,42 +68,43 @@ class AuthorController extends Controller
             $i=$i+1;
         }
       }
+    }
       
-      if($editar)
-        //$author recibira el primer autor, tambien pudo usarse el metodo first 
-        $edit = view('admin.md_autores.edit',['author'=>Author::get()[0]]);
+    if($editar){
+      //$author recibira el primer autor, tambien pudo usarse el metodo first 
+      $edit = view('admin.md_autores.edit',['author'=>Author::get()[0]]);
+    }
           
-      if($crear)
-          $new = view('admin.md_autores.new');
+    if($crear){
+      $new = view('admin.md_autores.new');
+    }
 
-      if ($ver) 
-         if(($request->get('name'))!=null){
-            //$authors cargara todos los autores con con nombre "name"
-            $authors=Author::name($request->get('name'))->paginate();
-            //envia los permisos de editar y eliminar
-            //ademas enviara un boleano "search" el cual servira para saber si se realizo una busqueda en la vista
-            $show = view('admin.md_autores.show',['authors'=>$authors,'eliminar'=>$eliminar,'editar'=>$editar,'categories'=>$categories,'search'=>true]);
-            }
+    if ($ver){
+      if(($request->get('name'))!=null){
+        //$authors cargara todos los autores con con nombre "name"
+        $authors=Author::name($request->get('name'))->paginate();
+        //envia los permisos de editar y eliminar
+        //ademas enviara un boleano "search" el cual servira para saber si se realizo una busqueda en la vista
+        $show = view('admin.md_autores.show',['authors'=>$authors,'eliminar'=>$eliminar,'editar'=>$editar,'categories'=>$categories,'search'=>true]);
+      } else{
+        //$authors cargara todos los autores
+        $authors=Author::all();
+        //envia los permisos de editar y eliminar
+        //ademas enviara un boleano "search" el cual servira para saber si se realizo una busqueda en la vista
+        $show = view('admin.md_autores.show',['authors'=>$authors,'eliminar'=>$eliminar,'editar'=>$editar,'categories'=>$categories,'search'=>false]);
+      }
+    }
 
-          else{
-            //$authors cargara todos los autores
-            $authors=Author::all();
-            //envia los permisos de editar y eliminar
-            //ademas enviara un boleano "search" el cual servira para saber si se realizo una busqueda en la vista
-            $show = view('admin.md_autores.show',['authors'=>$authors,'eliminar'=>$eliminar,'editar'=>$editar,'categories'=>$categories,'search'=>false]);
-          }
+    if($eliminar){
+      $delete = view('admin.md_autores.delete',['author'=>Author::get()[0]]);
+    }
 
-
-      if($eliminar)
-        $delete = view('admin.md_autores.delete',['author'=>Author::get()[0]]);
-
-      return view('admin.md_autores.index',[
-        'show' => $show,
-         'new' => $new,
-        'edit' => $edit,
-        'delete' => $delete
-      ]);
-            
+    return view('admin.md_autores.index',[
+      'show' => $show,
+      'new' => $new,
+      'edit' => $edit,
+      'delete' => $delete
+    ]);
   }
 
 
@@ -161,10 +159,8 @@ class AuthorController extends Controller
    public function update($id,AuthorRequest $request){
        
        $author = Author::find($id);
-
-       $author->fill($request->all());
-       $author->save();
-           
+    $author->fill($request->all());
+    $author->save();
        $author->categories()->detach();
 
        foreach ($request['category'] as $category) {
@@ -204,16 +200,20 @@ class AuthorController extends Controller
        
     }
 
+    return redirect()->route('autor.index');
+  }
 
+  public function destroy($id){
+    $author=Author::find($id);
+    $author->delete();
+    return redirect('autor.index');
+  }
 
-     public function show($id){
-
-        $author = Author::find($id);
-        $author->categories()->detach();
-        $author->delete();
-
-        return redirect()->route('autor.index');
-          }
-   
-    
+  public function show($id){
+    $author = Author::find($id);
+    $author->categories()->detach();
+    $author->delete();
+    return redirect()->route('autor.index');
+  }
+  
 }

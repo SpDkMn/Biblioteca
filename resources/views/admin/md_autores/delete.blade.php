@@ -16,5 +16,3 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
-

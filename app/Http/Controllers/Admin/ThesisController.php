@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-// Para usar el Modelo Tesis
 use App\Author as Author;
 use App\Thesis as Thesis;
 use App\ThesisCopy as ThesisCopy;
@@ -18,8 +16,7 @@ use App\Profile as Profile;
 
 
 
-class ThesisController extends Controller
-{
+class ThesisController extends Controller{
 
  	public function index(Request $request){
 
@@ -43,13 +40,9 @@ class ThesisController extends Controller
         }
       }
       $show = $new = $edit = $delete = "";
-
-
-
     $thesiss=Thesis::all();
     $editoriales = Editorial::all(); 
     $autores = Author::all();
-
     $copias_thesiss = ThesisCopy::all();
     $contenidos = Content::all();
 
@@ -57,12 +50,10 @@ class ThesisController extends Controller
                                             'eliminar'=>$eliminar,
                                             'editar'=>$editar,
                                             ]);
-    
     $new=view('admin.md_thesiss.new',['thesiss'=>$thesiss,
                                     'editoriales'=>$editoriales,
                                     'autores'=>$autores
       ]);
-
     $edit = view('admin.md_thesiss.edit',[  'thesiss'=>$thesiss,
                                               'copias_thesiss'=>$copias_thesiss,
                                               'contenidos'=>$contenidos,
@@ -72,8 +63,6 @@ class ThesisController extends Controller
                                               'id'=>null,
                                               'autores'=>null
                                               ]);
-
-
      return view('admin.md_thesiss.index',[
                                             'new' => $new,
                                             'show'=>$show,
@@ -82,12 +71,9 @@ class ThesisController extends Controller
                                             ]);
  	}
 
-
-
  public function create(){
     
  	}
-
 
  	public function store(Request $request){
 
@@ -170,7 +156,6 @@ class ThesisController extends Controller
  		return redirect('admin/thesis');
  	}
 
-
   public function edit($id){
     $editoriales = Editorial::all();
     $autores = Author::all();
@@ -184,6 +169,7 @@ class ThesisController extends Controller
                                             'autores'=>$autores,
                                             'copias_thesiss'=>$copias_thesiss
                                             ]);
+
   }
 
   public function update(Request $request, $id){
@@ -321,5 +307,3 @@ foreach ($thesiss as $thesi) {
  
        return redirect()->route('thesis.index');
       }
-
-}

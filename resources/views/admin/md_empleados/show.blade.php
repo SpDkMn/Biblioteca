@@ -25,8 +25,7 @@
         <td>{{$empleado->user->email}}</td>
         <td>{{$empleado->profile->name}}</td>
         <td><button type="button" data-id="{{$empleado->id}}" class="btn btn-success editar" @if(!$editar) disabled @endif><i class="fa fa-pencil"></i></button></td>
-        
-        <td><button type="button" data-id="{{$empleado->id}}" data-name="{{$empleado->user->name}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted" @if(!$eliminar) disabled @endif><i class="fa fa-trash"></i></button></td>
+        <td><button type="button" data-id="{{$empleado->id}}" data-name="{{$empleado->user->name}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#deleted" @if(!$eliminar) disabled @endif><i class="fa fa-trash"></i></button></td>
       </tr>
       
       @endforeach
@@ -52,6 +51,7 @@
           $('.modal-body').html('<p>¿Esta seguro que quiere eliminar el empleado ' + $username +'?</p>');
           $('#confirmaDelete').data('id',$(this).data('id'))
         });
+
         $("#confirmaDelete").on('click',function(event){
           $id = $('#confirmaDelete').data('id')
           $.ajax({

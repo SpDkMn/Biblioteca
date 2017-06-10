@@ -29,7 +29,6 @@ class EmployeeController extends Controller
         // Json TO Array (J2A)
         $j2a = json_decode($profile->JSON,true);
         // Iniciamos los permisos en false
-        
         $ver = $crear = $editar = $eliminar = false;
         // Recorremos cada uno de los permisos de 'perfiles'
         foreach($j2a['empleados'] as $dato){
@@ -56,8 +55,6 @@ class EmployeeController extends Controller
             $edit = view('admin.md_empleados.edit',['empleado'=>Employee::with(['user'])->get()[0],'perfiles'=>Profile::all()]);
         if($eliminar)
             $delete = view('admin.md_empleados.delete');
-        
-       
         return view('admin.md_empleados.index',[
           'show' => $show,
           'new' => $new,
@@ -66,14 +63,11 @@ class EmployeeController extends Controller
         ]);
     }
 
-    
-     
     public function create()
     {
         //
     }
 
-    
     public function store(Request $request)
     {
         $u = User::create(['name'=>$request->name,'last_name'=>$request->last_name,'email'=>$request->email,'password'=>bcrypt($request->username)]);
@@ -81,13 +75,11 @@ class EmployeeController extends Controller
         return redirect('admin/employees');
     }
 
-    
     public function show($id)
     {
         //
     }
 
-    
     public function edit($id)
     {
         $e = Employee::with(['user','profile'])->where('id',$id)->first();
@@ -95,7 +87,6 @@ class EmployeeController extends Controller
         return view('admin.md_empleados.edit',['empleado'=>$e,'perfiles'=>Profile::all()]);
     }
 
-    
     public function update(Request $request, $id)
     {
         $e = Employee::find($id);
@@ -108,7 +99,6 @@ class EmployeeController extends Controller
         return redirect('admin/employees');
     }
 
-    
     public function destroy($id)
     {
         $e = Employee::with('user')->where('id',$id)->first();

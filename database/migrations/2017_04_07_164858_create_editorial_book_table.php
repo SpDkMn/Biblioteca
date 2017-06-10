@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEditorialThesisTable extends Migration
+class CreateEditorialBookTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateEditorialThesisTable extends Migration
      */
     public function up() 
     {
-        Schema::create('editorial_thesis', function (Blueprint $table) {
+        Schema::create('editorial_book', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('thesis_id')->unsigned();
-            $table->foreign('thesis_id')->references('id')->on('thesiss');
+            $table->integer('book_id')->unsigned();
+            $table->foreign('book_id')->references('id')->on('books');
             $table->integer('editorial_id')->unsigned();
             $table->foreign('editorial_id')->references('id')->on('editorials');
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateEditorialThesisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('editorial_thesis');
+        Schema::dropIfExists('editorial_book');
     }
 }

@@ -24,11 +24,13 @@ class ProfileController extends Controller
           $profile = User::with(['Employee','Employee.profile'])->where('id',Auth::user()->id)->first()->Employee->Profile;
         // Json TO Array (J2A)
         $j2a = json_decode($profile->JSON,true);
-         $ver = $crear = $editar = $eliminar = false;
+        // Iniciamos los permisos en false
+        $ver = $crear = $editar = $eliminar = true;
+        // Recorremos cada uno de los permisos de 'perfiles'
         foreach($j2a['perfiles'] as $dato){
           foreach($dato as $key => $value){
             if($value == true){
-              switch($key){
+              switch($ke       y){
                 case 'ver': $ver = true;break;
                 case 'crear': $crear = true;break;
                 case 'editar': $editar = true; break;
@@ -38,7 +40,7 @@ class ProfileController extends Controller
           }
         }
         $show = $new = $edit = $delete = "";
-        
+
         if($crear)$new = view('admin.md_perfiles.new');
         if($ver)$show = view('admin.md_perfiles.show',['new' => $new,'perfiles'=>Profile::all(),'editar' => $editar,'eliminar'=>$eliminar]);
         if($editar)$edit = view('admin.md_perfiles.edit',['perfil'=>Profile::first()]);
