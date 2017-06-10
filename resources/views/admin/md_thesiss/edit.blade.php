@@ -214,7 +214,7 @@
                 <div class="box-header">
                     <h3 class="box-title ">Item {{$item->ejemplar}}</h3>
                     <div class="box-tools pull-right">
-                      <button type="button" id="agregarItemEdit" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
+                      <button type="button" name="copy0" id="agregarItemEdit" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
@@ -227,6 +227,7 @@
                         <label for="inputBarcode">Código de barra</label>
                         <input type="text" class="form-control" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
                     </div>
+ 
                 </div>
               </div>
               @else
@@ -285,6 +286,13 @@
                                       '<label for="inputBarcode">Código de barra</label>'+
                                     '<input type="text" class="form-control" name="barcode'+idCont+'" id="inputBarcode" placeholder="">'+
                                   '</div>'+
+
+
+                                '<div class="form-group">'+
+                                  '<label for="inputCopy">Ejemplar</label>'+
+                                  '<input type="number" value="'+(idCont+1)+'" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
+                                '</div>'+
+
                             '</div>';
 
             var itemPanel = '<div class="box box-info box-solid" id="itemPanel'+(idCont-1)+'">'+itemHeader+itemBody +'</div>';

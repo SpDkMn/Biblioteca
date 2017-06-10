@@ -137,7 +137,7 @@ class ThesisController extends Controller
                                   'ejemplar'=>$request['copy'.$j],
                                   'availability'=>$av,
                                   'thesis_id'=>$id_thesis
-                                  ]);
+                                ]);
     }
    
     //RELACIONANDO LAS TABLAS PIVOTES
@@ -152,6 +152,7 @@ class ThesisController extends Controller
     foreach ($thesiss as $thesi) {
       //Recorremos el arreglo con los id de los autores seleccionados para asociarlas a las tesis
       // Autor Principal
+
         foreach ($request['autorMain'] as $clave => $id) {
           if($thesis->id == $id_thesis){
                 $thesi-> authors()->attach($id,['type'=>true]);
@@ -163,7 +164,7 @@ class ThesisController extends Controller
         if($thesis->id == $id_thesis){
               $thesi-> authors() -> attach($id,['type'=>false]);
           }
-        }
+       }
     };
  		//Redireccionamos a la seccion de tesis
  		return redirect('admin/thesis');
@@ -186,6 +187,10 @@ class ThesisController extends Controller
   }
 
   public function update(Request $request, $id){
+
+
+    dd($request['ejemplar']);
+
         $thesis = Thesis::find($id);
         $copias = ThesisCopy::all();
         $thesiss = Thesis::all();
@@ -267,7 +272,7 @@ foreach ($thesiss as $thesi) {
                 }
           }
       }
-    if($request['autorMain']!=null){
+    if($request['autorSecond']!=null){
       foreach ($request['autorSecond'] as $clave => $valor2) {
         if($thesi->id == $id){
               $thesi-> authors() -> attach($valor2,['type'=>false]);
@@ -276,11 +281,11 @@ foreach ($thesiss as $thesi) {
       }
     };
 
-            $thesis->editorials()->detach(); 
+      $thesis->editorials()->detach(); 
 
-          
-           $id=$request['editorial'];
-            $thesis->editorials()->attach($id);
+    
+     $id=$request['editorial'];
+     $thesis->editorials()->attach($id);
         
     $thesis->save();
     return redirect('admin/thesis');

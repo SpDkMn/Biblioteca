@@ -10,103 +10,131 @@
     </div> 
   
 
-  <div class="box-body with-border">
-        <h2 class="text-center"><strong>{{$thesis->title}}</strong><h2>
-  </div>
+ 
 
 
-<!--Esta es la parte de la editorial y los autores (Principal y secundario)-->
-<div class="col-md-7">
-     <div class="box-body">
-        <!--    A u t o re s -->
-        <strong>AUTOR PRINCIPAL</strong>
-              <?php for($i=0;$i<26;$i++){echo "&nbsp";}?>:&nbsp
-            <?php $cont=0; ?>
-            @foreach($thesis->authors as $author)
-              @if($author->pivot->type == true)
-              <?php $cont=$cont+1; ?>
-              @endif
-            @endforeach 
-            <?php $cont2=2; ?>
-            @foreach($thesis->authors as $author)
-              @if($author->pivot->type == true)
-              {{$author->name}}
-                @if($cont2<=$cont)
-                ,
-                @endif
-              @endif
-              <?php $cont2=$cont2+1; ?>
-            @endforeach  
+    <div class="box-body with-border">
           
-      </div>
+          <h2><strong><?php for($i=0;$i<26;$i++){echo "&nbsp";}?>&nbsp {{ $thesis->title }}</strong><h2>
+    </div>
 
-     <div class="box-body">
-        <!--    A u t o re s -->
-        <strong>AUTORES SECUNDARIOS</strong>
-              <?php for($i=0;$i<14;$i++){echo "&nbsp";}?>:&nbsp
-            <?php $cont=0; ?>
-            @foreach($thesis->authors as $author)
-              @if($author->pivot->type == false)
-              <?php $cont=$cont+1; ?>
-              @endif
-            @endforeach 
-            <?php $cont2=2; ?>
-            @foreach($thesis->authors as $author)
-              @if($author->pivot->type == false)
-              {{$author->name}}
-                @if($cont2<=$cont)
-                ,
-                @endif
-              @endif
-              <?php $cont2=$cont2+1; ?>
-            @endforeach  
-          
-      </div>
+    <!--Esta es la parte de la editorial y los autores (Principal y secundario)-->
+    <div class="col-md-7">
+         
+      <div class="box box-info box-solid">
 
-      <div class="box-body">
-            <strong>EDITORIAL</strong>                
-              <?php for($i=0;$i<22;$i++){echo "&nbsp";}?>:&nbsp
-              @foreach($thesis->editorials as $editorial)
-                  @if($editorial->pivot->type == false)
-                  {{$editorial->name}}
+
+         <div class="box-body">
+          <!--    A u t o re s -->
+              <strong>AUTOR PRINCIPAL</strong>
+                  <?php for($i=0;$i<10;$i++){echo "&nbsp";}?>:&nbsp
+                <?php $cont=0; ?>
+                @foreach($thesis->authors as $author)
+                  @if($author->pivot->type == true)
+                  <?php $cont=$cont+1; ?>
                   @endif
                 @endforeach 
-      </div>
+                <?php $cont2=2; ?>
+                @foreach($thesis->authors as $author)
+                  @if($author->pivot->type == true)
+                  {{$author->name}}
+                    @if($cont2<=$cont)
+                    ,
+                    @endif
+                  @endif
+                  <?php $cont2=$cont2+1; ?>
+                @endforeach  
+          
+         </div>
 
-      <div class="box-body">
-            <strong>ASESOR</strong>
-              <?php $cont2=2; for($i=0;$i<26;$i++){echo "&nbsp";}?>:&nbsp
-              {{$thesis->asesor}}
-      </div>
+         <div class="box-body">
+          <!--    A u t o re s -->
+            <strong>AUTORES SECUNDARIOS</strong>
+                    <?php for($i=0;$i<14;$i++){echo "&nbsp";}?>:&nbsp
+                  <?php $cont=0; ?>
+                  @foreach($thesis->authors as $author)
+                    @if($author->pivot->type == false)
+                    <?php $cont=$cont+1; ?>
+                    @endif
+                  @endforeach 
+                  <?php $cont2=2; ?>
+                  @foreach($thesis->authors as $author)
+                    @if($author->pivot->type == false)
+                    {{$author->name}}
+                      @if($cont2<=$cont)
+                      ,
+                      @endif
+                    @endif
+                    <?php $cont2=$cont2+1; ?>
+                  @endforeach  
+                
+          </div>
 
-      <div class="box-body">
-            <strong>CLASIFICACIÓN</strong>
-            <?php   for($i=0;$i<13;$i++){echo "&nbsp";}?>:&nbsp
-            {{$thesis->clasification}}
-      </div>
+        <div class="box-body">
+              <strong>EDITORIAL</strong>                
+                <?php for($i=0;$i<22;$i++){echo "&nbsp";}?>:&nbsp
+                @foreach($thesis->editorials as $editorial)
+                    @if($editorial->pivot->type == false)
+                    {{$editorial->name}}
+                    @endif
+                  @endforeach 
+        </div>
 
-      <div class="box-body">
-            <strong>EXTENSION</strong>
-            <?php   for($i=0;$i<20;$i++){echo "&nbsp";}?>:&nbsp
-            {{$thesis->extension}}
-      </div>
+        <div class="box-body">
+              <strong>ASESOR</strong>
+                <?php $cont2=2; for($i=0;$i<26;$i++){echo "&nbsp";}?>:&nbsp
+                {{$thesis->asesor}}
+        </div>
 
-      <div class="box-body">
-            <strong>DIMENSIONES</strong>
-            <?php   for($i=0;$i<15;$i++){echo "&nbsp";}?>:&nbsp
-            {{$thesis->dimensions}}
-      </div>
+        <div class="box-body">
+              <strong>CLASIFICACIÓN</strong>
+              <?php   for($i=0;$i<13;$i++){echo "&nbsp";}?>:&nbsp
+              {{$thesis->clasification}}
+        </div>
 
-      <div class="box-body">
-            <strong>DETALLES FISICOS</strong>
-            <?php   for($i=0;$i<7;$i++){echo "&nbsp";}?>:&nbsp
-            {{$thesis->physicalDetails}}
-      </div>
-      <div class="box-body">
-            <strong>MATERIAL ADICIONAL</strong>
-            <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>:&nbsp
-            {{$thesis->accompaniment}}
-      </div>
+        <div class="box-body">
+              <strong>EXTENSION</strong>
+              <?php   for($i=0;$i<20;$i++){echo "&nbsp";}?>:&nbsp
+              {{$thesis->extension}}
+        </div>
+
+        <div class="box-body">
+              <strong>DIMENSIONES</strong>
+              <?php   for($i=0;$i<15;$i++){echo "&nbsp";}?>:&nbsp
+              {{$thesis->dimensions}}
+        </div>
+
+        <div class="box-body">
+              <strong>DETALLES FISICOS</strong>
+              <?php   for($i=0;$i<7;$i++){echo "&nbsp";}?>:&nbsp
+              {{$thesis->physicalDetails}}
+        </div>
+        <div class="box-body">
+              <strong>MATERIAL ADICIONAL</strong>
+              <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>:&nbsp
+              {{$thesis->accompaniment}}
+        </div>
+        <div class="box-body">
+              <strong>CONTENIDO</strong>
+              <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>:&nbsp
+              {{$thesis->conten}}
+        </div>
+        <div class="box-body">
+              <strong>RESUMEN</strong>
+              <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>:&nbsp
+              {{$thesis->summary}}
+        </div>
+
+        <div class="box-body">
+              <strong>CONCLUSIONES Y RECOMENDACIONES</strong>
+              <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>:&nbsp
+              {{$thesis->recomendacion}}
+        </div>
+
+
+    </div>
+
+
 </div>  
 
 <div class="col-md-5">
@@ -192,77 +220,6 @@
 
 <!--Aqui va a ir a parte del contenido y resumen  -->
 
-<div class="col-md-6">
-          <!-- DIRECT CHAT SUCCESS -->
-        <div class="box box-success direct-chat direct-chat-success">
-            <div class="box-header with-border">
-              <h3 class="box-title text-center"><strong>Contenido</strong></h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
-                  <i class="fa fa-comments"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-    
-              </div>
-
-            </div>
-            <div class="box-body">
-               <td >{{$thesis->conten}}
-                </td>  
-            </div>
-        </div>
-</div>
-
-
-<div class="col-md-6">
-          <!--  DIRECT CHAT SUCCESS -->
-        <div class="box box-primary direct-chat">
-            <div class="box-header with-border">
-              <h3 class="box-title"><strong>Resumen</strong></h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
-                  <i class="fa fa-comments"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-    
-              </div>
-
-            </div>
-            <div class="box-body">
-               <td >
-                 {{$thesis->summary}}
-               </td>  
-            </div>
-        </div>
-     </div>
-    <!--Aqui termina el cuadro que contiene los contendos--> 
-
-<div class="col-md-6">
-          <!-- DIRECT CHAT SUCCESS -->
-        <div class="box box-warning direct-chat direct-chat-warning">
-            <div class="box-header with-border">
-              <h3 class="box-title text-center"><strong>Conclusiones y Recomendaciones</strong></h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
-                  <i class="fa fa-comments"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-    
-              </div>
-
-            </div>
-            <div class="box-body">
-               <td >{{$thesis->recomendacion}}
-                </td>  
-            </div>
-        </div>
-</div>
 
   </div>
 </div>
