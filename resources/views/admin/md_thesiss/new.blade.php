@@ -13,17 +13,45 @@
 
 
      <div class="box-body">
-     		<!---->
-     		<!--***************************** PANEL DE NUEVA TESIS *************************************-->
-           
-          <!--Primera division-->
-            <div class="box box-success box-solid">
-                <div class="box-header">
-                    <h3 class="panel-title">Informacion General</h3>
-                </div>
+        <!---->
+        <!--***************************** PANEL DE NUEVA TESIS *************************************-->
+ 
+    
 
-                <div class="box-body" id="thesisPanel">
+
+
+
+
+      <div class="col-md-12">
+        <div class="box box-success box-solid">
+            
+
+            <div class="box-header with-border">
+              <h3 class="box-title">Tesis y tesina</h3>
+              <div class="box-tools pull-right"> 
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div> 
+            </div>
+            
+             
+
+     <div class="box-body">
+              
+        <div class="bs-example" data-example-id="simple-nav-tabs"> 
+             <ul class="nav nav-tabs">
+              <li class="active"><a href="#primero" data-toggle="tab">Primero</a></li>
+              <li><a href="#segundo" data-toggle="tab">Segundo</a></li>
+              <li><a href="#tercero" data-toggle="tab">Tercero</a></li>
+              <li><a href="#cuarto" data-toggle="tab">Cuarto</a></li>
+             </ul>
+
+            <div class="tab-content">
+                    <!-- Primer panel -->
+             <div class="tab-pane active" id="primero">
+
                 
+                <div class="box-body">
                   <div class="form-group">
                     <label>TIPO DE ITEM</label>
                       <p>
@@ -98,21 +126,28 @@
                         </select>
                     </div>
                             
-                </div>
-            </div>
+           </div>
+     </div>
         <!--Fin de la primera division-->
 
-        <!--Segunda division-->  
-          <div class="box box-info box-solid">
-                <div class="box-header">
-                    <h3 class="box-title">Descripción Física</h3>
-                </div>
-                <div class="box-body" id="thesisPanel">
-                    
-                    <div class="form-group">
-                        <label for="inputHojas">Nº de hojas</label>
-                        <input type="text" class="form-control" name="nhojas" id="inputHojas" placeholder="">
-                    </div>
+
+
+
+
+
+
+
+
+
+              <!-- Segundo Panel -->
+            <div class="tab-pane fade" id="segundo">
+                 <div class="box-body">
+                       
+                        <!-- 1. Resumen -->
+                   <div class="form-group">
+                         <label for="inputHojas">Nº de hojas</label>
+                          <input type="text" class="form-control" name="nhojas" id="inputHojas" placeholder="">
+                   </div>
 
                     <div class="form-group">
                         <label for="inputEdition">Edicion</label>
@@ -146,22 +181,26 @@
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Lugar de sustentacion</label>
-                        <input type="text" class="form-control" name="lugarsus" id="inputEXTENSION" value="Facultad de Ingeniería de Sistemas">
+                        <input type="text" class="form-control" name="lugarsus" id="inputEXTENSION" value="Facultad de Ingeniería de Sistemas - UNMSM">
                     </div>
 
-                    
-                 </div>
-          </div>
-        <!--Fin de la segunda division-->
+                        
+                 </div><!-- End Box-Body -->
+            </div><!-- End Segundo Panel -->
+                 
+      
+                  
 
-        <!--Inicio de la tercera division-->
-            <div class="box box-warning box-solid">
-                <div class="box-header">
-                    <h3 class="box-title">Resumen y Contenido del Material</h3>
-                </div>
-                <div class="box-body" id="thesisPanel">
-                              
-                     <div class="form-group">
+
+
+
+
+                  <!-- Tercer Panel -->
+          <div class="tab-pane fade" id="tercero">
+              <div class="box-body">
+                        
+                        <!-- 1. Resumen -->
+                    <div class="form-group">
                         <label for="inputSummary">Resumen</label>
                         <textarea class="form-control" rows="3" name="summary" id="inputSummary" placeholder=""></textarea> 
                      </div>
@@ -174,24 +213,26 @@
                     <div class="form-group">
                         <label for="inputRecomend">Conclusiones y Recomendaciones</label>
                         <textarea class="form-control" name="recomendacion" id="inputRecomend" placeholder=""></textarea> 
-                     </div>
+                    </div>
 
-                </div>
-            </div>
-        <!--Fin de la tercera division-->
+                    <div class="form-group">
+                        <label for="inputBibliografia">Bibliografía</label>
+                        <textarea class="form-control" name="bibliografia" id="inputBibliografia" placeholder=""></textarea> 
+                    </div>
+                        
+               </div><!-- End Box-Body -->
+          </div><!-- End Tercer  Panel -->
 
- 				
- 			<!--****Inicio de la cuarta division***-->
-          <div class="box box-info box-solid" id="itemBox">
-              <div class="box-header">
-                  <h3 class="box-title">Item principal</h3>
-                  <!-- Cambiar por un diseño mas atractivo cuando este funcionando -->
-                  <div class="box-tools pull-right">
-                    <button type="button" id="agregarItem" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
-                  </div>
-              </div>
-              <div class="box-body">
-                  
+
+
+
+
+
+
+              <!-- Cuarto Panel -->
+            <div class="tab-pane fade" id="cuarto">
+               <div class="box-body">
+                        
                   <div class="form-group">
                       <label for="inputIncomeNumber">Nº Ingreso</label>
                       <input type="text" class="form-control" name="incomeNumber0" id="inputIncomeNumber" placeholder="">
@@ -204,19 +245,229 @@
                       <label for="inputCopy">Ejemplar</label>
                       <input type="number" class="form-control" value="1" name="copy0" id="inputCopy" placeholder="">
                   </div>
-              </div>
-            </div>
+                        
+               </div><!-- End Box-Body -->
+             </div><!-- End Cuarto Panel -->
 
-      <!--Fin de la cuarta division-->
 
-     </div>
+
+
+
+                
+        </div><!-- End Box-solid -->
+      </div><!-- End col-md-6 -->
+
+
+
+    </div>  
 
     <div class="box-footer">
-   <button type="submit" class="btn btn-primary">Crear</button>
-  </div>
- </form>
+        <button type="submit" class="btn btn-primary">Crear</button>
+    </div>
+
+  </form>
 
 </div>
+
+
+
+<script>
+  $(document).ready(function(){
+    var contenedorPestañas = $("#contenedor-pestañas");
+    var contenedorItem = $('#contenedor-item');
+    var AddButton1 = $("#agregarItem");
+    var x = $("#contenedor-pestañas li").length-2;
+
+    var FieldCount = x;
+    var arreglo;
+
+    $(".agregarItem").click(function(){
+      
+      FieldCount++;
+    
+      arreglo = FieldCount-1;
+
+      $(contenedorPestañas).append('<li><a href="#item'+FieldCount+'" id="cabezera-item'+FieldCount+'" data-toggle="tab">Item'+FieldCount+'</a></li>');
+        
+      $(contenedorItem).append(
+
+              '<div class="tab-pane fade" id="item'+FieldCount+'">'
+                 +'<div class="box-body">'
+                   +'<div class="bs-example" data-example-id="simple-nav-tabs"> '
+                    +'<ul class="nav nav-tabs">'
+                      +'<li class="active"><a href="#primero'+FieldCount+'" data-toggle="tab">Primero</a></li>'
+                      +'<li><a href="#segundo'+FieldCount+'" data-toggle="tab">Segundo</a></li>'
+                      +'<li><a href="#tercero'+FieldCount+'" data-toggle="tab">Tercero</a></li>'
+                    +'</ul>'
+
+                    +'<div class="tab-content">'
+                      +'<div class="tab-pane active" id="primero'+FieldCount+'">'
+                       +'<div class="box-body">'
+                          +'<div class="form-group">'
+                            +'<label>Numero de Ingreso</label>'
+                            +'<input type="text" name="incomeNumber['+arreglo+']" class="form-control">'
+                          +'</div>'
+
+                          +'<div class="form-group">'
+                            +'<label>Codigo de Barras</label>'
+                            +'<input type="text" name="barcode['+arreglo+']" class="form-control">'
+                          +'</div>'
+
+                          +'<div class="form-group">'
+                            +'<label>Edicion</label>'
+                            +'<input type="text" name="edition['+arreglo+']" class="form-control">'
+                          +'</div>'
+
+                          +'<div class="form-group">'
+                            +'<label>Gestion</label>'
+                            +'<input type="text" name="management['+arreglo+']" class="form-control">'
+                          +'</div>'
+
+                          +'<div class="form-group">'
+                            +'<label>Disponibilidad</label>'
+                            +'<select class="form-control select2" name="availability['+arreglo+']" style="width: 100%;">'
+                                +'<option>Disponible</option>'
+                                +'<option>No Disponible</option>'                              
+                            +'</select>'
+                          +'</div>'
+
+                        +'</div>'
+                      +'</div>'
+                      
+                      +'<div class="tab-pane fade" id="segundo'+FieldCount+'">'
+                        +'<div class="box-body">'
+                          +'<div class="form-group">'
+                            +'<label>Modalidad de Adquision</label>'
+                            +'<select class="form-control select2" name="acquisitionModality['+arreglo+']"  style="width: 100%;">'
+                                +'<option>Compra</option> '
+                                +'<option>Donacion</option>'
+                                +'<option>Adquisicion</option>  '                             
+                            +'</select>'
+                          +'</div>'
+
+                          +'<div class="form-group">'
+                            +'<label>Fuente de Adquisicion</label>'
+                            +'<input type="text" name="acquisitionSource['+arreglo+']" class="form-control">'
+                          +'</div>'
+
+                          +'<div class="form-group">'
+                            +'<label>Precio de Adquisicion</label>'
+                            +'<input type="text" name="acquisitionPrice['+arreglo+']" class="form-control">'
+                          +'</div>'
+
+                          +'<div class="form-group">'
+                            +'<label>Fecha de Adquisicion</label>'
+                            +'<input type="text" name="acquisitionDate['+arreglo+']" class="form-control">'
+                          +'</div>'
+
+                          +'<div class="form-group">'
+                            +'<label>Ubicacion</label>'
+                            +'<input type="text" name="location['+arreglo+']" class="form-control">'
+                          +'</div>'
+
+                        +'</div>'
+                      +'</div>'
+
+                      +'<div class="tab-pane fade" id="tercero'+FieldCount+'">'
+                        +'<div class="box-body">'
+                          +'<div class="form-group">'
+                            +'<label>Tipo de Impresion</label>'
+                            +'<select class="form-control select2" name="printType['+arreglo+']" style="width: 100%;">'
+                                +'<option>Impresion</option>' 
+                                +'<option>Reimpresion</option>   '                           
+                            +'</select>'
+                          +'</div>'
+
+                          +'<div class="form-group">'
+                            +'<label>Lugar de Publicacion</label>'
+                            +'<input type="text" name="publicationLocation['+arreglo+']" class="form-control">'
+                          +'</div>'
+
+                          +'<div class="form-group">'
+                            +'<label>Fecha de Publicacion</label>'
+                            +'<input type="text" name="publicationDate['+arreglo+']" class="form-control">'
+                          +'</div>'
+
+                          +'<div class="form-group">'
+                            +'<label>Telefono</label>'
+                            +'<input type="text" name="phone['+arreglo+']" class="form-control">'
+                          +'</div>'
+
+                          +'<div class="form-group">'
+                            +'<label>RUC</label>'
+                            +'<input type="text" name="ruc['+arreglo+']" class="form-control">'
+                          +'</div>'
+                        +'</div>'
+                      +'</div>'
+                    
+                    +'</div><!-- End Tab Content--> '
+                                
+                  +'</div><!-- End navbar -->'
+                 +'</div><!-- End box-body -->'
+               +'</div><!-- End tab-pane -->');
+
+      x++;
+    });
+    
+    $(".eliminarItem").click(function(){
+      if (FieldCount>1) {
+        $("#item"+FieldCount).remove();
+        $("#cabezera-item"+FieldCount).remove();
+        FieldCount = FieldCount-1;
+
+      }
+      
+    });
+
+
+    return false;
+  });
+</script>
+
+
+
+
+<script>
+  $(document).ready(function() {
+
+    var MaxInputs       = 100; //Número Maximo de Campos
+    var contenedor       = $("#contenedor"); //ID del contenedor
+    var AddButton       = $("#agregarCampo"); //ID del Botón Agregar
+
+    //var x = número de campos existentes en el contenedor
+    var x = $("#contenedor div").length + 1;
+    var FieldCount = x-1; //para el seguimiento de los campos
+    
+
+    $(AddButton).click(function (e) {
+        if(x <= MaxInputs) //max input box allowed
+        {
+            FieldCount++;
+            //agregar campo
+            var array = FieldCount-1;
+            $(contenedor).append('<div class="input-group"><span class="input-group-addon">'+FieldCount+'</span><input type="text" id="campo_'+FieldCount+'" name="chapter['+array+']" class="form-control"><span id="eliminarCampo"  class="input-group-addon eliminar"><i class="fa fa-remove"></i></span></div>');
+            x++; //text box increment
+        }
+        return false;
+    });
+
+    $("body").on("click",".eliminar", function(e){ //click en eliminar campo
+        if( x > 1 ) {
+            $(this).parent('div').remove(); //eliminar el campo
+            x--;
+            FieldCount--;
+        }
+        return false;
+    });
+  });
+</script>
+
+<script>
+      $(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();
+      });
+</script>
 
 
 @section('scriptSelectAutorPrincipal')

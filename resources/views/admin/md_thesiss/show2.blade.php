@@ -154,8 +154,8 @@
           <th class="text-center">Número de Ingreso</th>
           <th class="text-center">Código de Barras</th>
       		<th class="text-center">Detalles</th>
-      		<th class="text-center">Editar</th>
-      		<th class="text-center">Eliminar</th>
+      <!--		<th class="text-center">Editar</th>
+      		<th class="text-center">Eliminar</th>     -->
       	</tr>
         @foreach($thesis->thesisCopies as $copy)
 
@@ -169,8 +169,8 @@
 
       
       		<td><center><button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalCopy<?php echo $copy->id; ?>"><i class="fa fa-tag"></i></button></center></td>
-      		<td><center><a type="button" class="button-content btn btn-success"><i class="fa fa-pencil"></i></a></center></td>
- 	        <td><center><a type="button" class="button-content btn btn-danger"><i class="fa fa-trash"></i></a></center></td>
+     <!-- <td><center><a type="button" class="button-content btn btn-success"><i class="fa fa-pencil"></i></a></center></td>
+ 	        <td><center><a type="button" class="button-content btn btn-danger"><i class="fa fa-trash"></i></a></center></td> -->
       	</tr>
       	<!-- MODAL DEL EJEMPLAR -->
       	<div class="modal fade" id="ModalCopy<?php echo $copy->id; ?>" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">

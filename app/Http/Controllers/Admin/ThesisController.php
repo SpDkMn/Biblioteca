@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+// Para usar el Modelo Tesis
 use App\Author as Author;
 use App\Thesis as Thesis;
 use App\ThesisCopy as ThesisCopy;
@@ -16,9 +18,10 @@ use App\Profile as Profile;
 
 
 
-class ThesisController extends Controller{
+class ThesisController extends Controller
+{
 
- 	public function index(Request $request){
+  public function index(Request $request){
 
       $profile = User::with(['Employee','Employee.profile'])->where('id',Auth::user()->id)->first()->Employee->Profile;
       $j2a = json_decode($profile->JSON,true);
@@ -40,9 +43,13 @@ class ThesisController extends Controller{
         }
       }
       $show = $new = $edit = $delete = "";
+
+
+
     $thesiss=Thesis::all();
     $editoriales = Editorial::all(); 
     $autores = Author::all();
+
     $copias_thesiss = ThesisCopy::all();
     $contenidos = Content::all();
 
@@ -50,10 +57,12 @@ class ThesisController extends Controller{
                                             'eliminar'=>$eliminar,
                                             'editar'=>$editar,
                                             ]);
+    
     $new=view('admin.md_thesiss.new',['thesiss'=>$thesiss,
                                     'editoriales'=>$editoriales,
                                     'autores'=>$autores
       ]);
+
     $edit = view('admin.md_thesiss.edit',[  'thesiss'=>$thesiss,
                                               'copias_thesiss'=>$copias_thesiss,
                                               'contenidos'=>$contenidos,
@@ -63,19 +72,24 @@ class ThesisController extends Controller{
                                               'id'=>null,
                                               'autores'=>null
                                               ]);
+
+
      return view('admin.md_thesiss.index',[
                                             'new' => $new,
                                             'show'=>$show,
                                             'edit'=>$edit,
                                             'delete'=>$delete
                                             ]);
- 	}
+  }
+
+
 
  public function create(){
     
- 	}
+  }
 
- 	public function store(Request $request){
+
+  public function store(Request $request){
 
     $contador_copia = 0 ;
 
@@ -87,7 +101,7 @@ class ThesisController extends Controller{
 
     {{$av=1;}}
     //Guardando los datos de la tesis
- 		$m = Thesis::create(['type'=>$request['tipo'],
+    $m = Thesis::create(['type'=>$request['tipo'],
                          'clasification'=>$request['clasification'],
                          'title'=>$request['title'],
                          'edition'=>$request['edition'],
@@ -98,6 +112,8 @@ class ThesisController extends Controller{
                          'accompaniment'=>$request['materialad'],
                          'conten'=>$request['contenido'],
                          'summary'=>$request['summary'],
+                         'bibliografia'=>$request['bibliografia'],
+                         'recomendacion'=>$request['recomendacion'],
                          'location'=>$request['ubicacion'],
                          'publicationLocation'=>$request['lugarsus'],
                          'asesor'=>$request['asesor'],
@@ -152,9 +168,10 @@ class ThesisController extends Controller{
           }
        }
     };
- 		//Redireccionamos a la seccion de tesis
- 		return redirect('admin/thesis');
- 	}
+    //Redireccionamos a la seccion de tesis
+    return redirect('admin/thesis');
+  }
+
 
   public function edit($id){
     $editoriales = Editorial::all();
@@ -169,14 +186,12 @@ class ThesisController extends Controller{
                                             'autores'=>$autores,
                                             'copias_thesiss'=>$copias_thesiss
                                             ]);
-
   }
 
   public function update(Request $request, $id){
 
 
     dd($request['ejemplar']);
-
         $thesis = Thesis::find($id);
         $copias = ThesisCopy::all();
         $thesiss = Thesis::all();
@@ -208,6 +223,7 @@ class ThesisController extends Controller{
     $thesis->accompaniment = $request['materialad'];
     $thesis->conten = $request['contenido'];
     $thesis->summary = $request['summary'];
+    $thesis->bibliografia = $request['bibliografia'];
     $thesis->recomendacion = $request['recomendacion'];
     $thesis->location = $request['ubicacion'];
     $thesis->publicationLocation = $request['lugarsus'];
@@ -307,3 +323,5 @@ foreach ($thesiss as $thesi) {
  
        return redirect()->route('thesis.index');
       }
+
+}

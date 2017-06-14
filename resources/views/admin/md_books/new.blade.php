@@ -1,6 +1,4 @@
 
-
-
 <div class="box box-primary">
   <div class="box-header with-border">
     <h3 class="box-title">Nuevo</h3>
@@ -16,17 +14,28 @@
    
     <div class="box-body">
     
-      <div class="col-md-6">
+
+
+
+
+
         <div class="box box-success box-solid">
-          <div class="box-header with-border">
-            <h3 class="box-title">Libro</h3>
-            <div class="box-tools pull-right"> 
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-              </button>
-            </div> 
-          </div>
-          
-              <div class="box-body">
+            
+
+            <div class="box-header with-border">
+              <h3 class="box-title">Libro</h3>
+              <div class="box-tools pull-right"> 
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div> 
+            </div>
+            
+             
+
+
+
+
+            <div class="box-body">
               
                 <div class="bs-example" data-example-id="simple-nav-tabs"> 
                   <ul class="nav nav-tabs">
@@ -37,6 +46,13 @@
                   <div class="tab-content">
                     <!-- Primer panel -->
                     <div class="tab-pane active" id="primero">
+
+
+
+
+
+
+
                       <div class="box-body">
                           <!--1. Titulo -->
                           <div class="form-group">
@@ -344,7 +360,6 @@
          
             </div><!-- End nav.bar -->
 
-          </div><!-- End box-body -->
         </div><!-- End box-solid -->
 
       </div><!-- End coll-md-6 -->

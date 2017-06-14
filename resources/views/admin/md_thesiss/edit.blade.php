@@ -195,8 +195,12 @@
 
                      <div class="form-group">
                        <label for="inputRecomend">Conclusiones y Recomendaciones</label>
-                         <textarea class="form-control" name="recomendacion" id="inputRecomend" cols="65"></textarea>
-                      
+                         <textarea class="form-control" name="recomendacion" id="inputRecomend" cols="65">{{$thesis->recomendacion}}</textarea>
+                     </div>
+
+                     <div class="form-group">
+                       <label for="inputBibliografia">Bibliografia</label>
+                         <textarea class="form-control" name="bibliografia" id="inputBibliografia" cols="65">{{$thesis->bibliografia}}</textarea>
                      </div>
 
                     

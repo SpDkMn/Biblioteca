@@ -63,7 +63,7 @@
       </select>
         
       </div>
-
+      <script> $(document).ready(function(){$('.selectCategoryEdit').select2();}) </script>
 
     </div>
    
