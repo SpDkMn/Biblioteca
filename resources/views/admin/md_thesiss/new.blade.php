@@ -1,6 +1,6 @@
  <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title"><strong>Nuevo Material</strong></h3>
+    <h3 class="box-title"><strong>Agregar Nuevo Material</strong></h3>
     <div class="box-tools pull-right">
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
       </button>
@@ -22,12 +22,11 @@
 
 
 
-      <div class="col-md-12">
+
         <div class="box box-success box-solid">
             
-
             <div class="box-header with-border">
-              <h3 class="box-title">Tesis y tesina</h3>
+              <h3 class="box-title">Tesis y Tesina</h3>
               <div class="box-tools pull-right"> 
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
@@ -40,18 +39,18 @@
               
         <div class="bs-example" data-example-id="simple-nav-tabs"> 
              <ul class="nav nav-tabs">
-              <li class="active"><a href="#primero" data-toggle="tab">Primero</a></li>
-              <li><a href="#segundo" data-toggle="tab">Segundo</a></li>
-              <li><a href="#tercero" data-toggle="tab">Tercero</a></li>
-              <li><a href="#cuarto" data-toggle="tab">Cuarto</a></li>
+                <li class="active"><a href="#primero" data-toggle="tab">Primero</a></li>
+                <li><a href="#segundo" data-toggle="tab">Segundo</a></li>
+                <li><a href="#tercero" data-toggle="tab">Tercero</a></li>
+                <li><a href="#cuarto" data-toggle="tab">Cuarto</a></li>
              </ul>
 
-            <div class="tab-content">
+          <div class="tab-content">
                     <!-- Primer panel -->
-             <div class="tab-pane active" id="primero">
+            <div class="tab-pane active" id="primero">
 
                 
-                <div class="box-body">
+              <div class="box-body">
                   <div class="form-group">
                     <label>TIPO DE ITEM</label>
                       <p>
@@ -106,10 +105,10 @@
                         </select>
                     </div>
 
-                   <div class="form-group">
+                    <div class="form-group">
                       <label for="Clasification">Clasificación</label>
                       <input type="text" class="form-control" name="clasification" id="inputClasification" placeholder="">
-                  </div>
+                    </div>
 
                     
                     <div class="form-group">
@@ -126,8 +125,8 @@
                         </select>
                     </div>
                             
-           </div>
-     </div>
+              </div>
+            </div>
         <!--Fin de la primera division-->
 
 
@@ -135,13 +134,9 @@
 
 
 
-
-
-
-
               <!-- Segundo Panel -->
-            <div class="tab-pane fade" id="segundo">
-                 <div class="box-body">
+          <div class="tab-pane fade" id="segundo">
+              <div class="box-body">
                        
                         <!-- 1. Resumen -->
                    <div class="form-group">
@@ -185,8 +180,8 @@
                     </div>
 
                         
-                 </div><!-- End Box-Body -->
-            </div><!-- End Segundo Panel -->
+              </div><!-- End Box-Body -->
+           </div><!-- End Segundo Panel -->
                  
       
                   
@@ -227,12 +222,19 @@
 
 
 
-
-
               <!-- Cuarto Panel -->
             <div class="tab-pane fade" id="cuarto">
-               <div class="box-body">
-                        
+               
+                <div class="box box-default box-solid" id="itemBox">
+              <div class="box-header">
+                  <h3 class="box-title">Item principal</h3>
+                  <!-- Cambiar por un diseño mas atractivo cuando este funcionando -->
+                  <div class="box-tools pull-right">
+                    <button type="button" id="agregarItem" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
+                  </div>
+              </div>
+              <div class="box-body">
+                  
                   <div class="form-group">
                       <label for="inputIncomeNumber">Nº Ingreso</label>
                       <input type="text" class="form-control" name="incomeNumber0" id="inputIncomeNumber" placeholder="">
@@ -245,13 +247,17 @@
                       <label for="inputCopy">Ejemplar</label>
                       <input type="number" class="form-control" value="1" name="copy0" id="inputCopy" placeholder="">
                   </div>
-                        
-               </div><!-- End Box-Body -->
+              </div>
+            </div>
+
+
+
+
              </div><!-- End Cuarto Panel -->
 
-
-
-
+          </div>
+        </div>
+      </div>
 
                 
         </div><!-- End Box-solid -->
@@ -259,15 +265,14 @@
 
 
 
-    </div>  
-
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Crear</button>
+       <button type="submit" class="btn btn-primary">Crear</button>
     </div>
 
   </form>
 
 </div>
+
 
 
 
@@ -589,7 +594,7 @@
                                 '<input type="number" value="'+(idCont+1)+'" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
                             '</div>'+
                         '</div>';
-      var itemPanel = '<div class="box box-info box-solid" id="itemBoxID'+idCont+'">'+itemHeader+itemBody +'</div>';
+      var itemPanel = '<div class="box box-default box-solid" id="itemBoxID'+idCont+'">'+itemHeader+itemBody +'</div>';
       $(container).after(itemPanel);
       idCont = idCont + 1 ;
     });

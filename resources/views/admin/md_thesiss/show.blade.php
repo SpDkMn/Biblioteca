@@ -58,9 +58,12 @@
                   <!--<td><button type="button"  href="{{route('thesis.edit',$thesis->id)}}" data-id="{{$thesis->id}}" class="btn btn-success editar" ><i class="fa fa-pencil"></i></a></td> -->
               <td><button type="button" data-id="{{$thesis->id}}" class="btn btn-success editar"><i class="fa fa-edit"></i></button></td>  
               <!--<td><button type="button" data-id="{{$thesis->id}}" data-name="{{$thesis->title}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted"><i class="fa fa-trash"></i></button></td>-->
-              <td><a type="button" class="button-content btn btn-danger eliminar" href="{{route('thesis.destroy',$thesis->id)}}"><i class="fa fa-trash"></i></a></td>  
+           <!--   <td><a type="button" class="button-content btn btn-danger" href="{{route('thesis.destroy',$thesis->id)}}"><i class="fa fa-trash"></i></a></td>     -->
+           {!! Form::open(['route'=>['thesis.destroy',$thesis->id],'method' => 'DELETE']) !!}
+          <td><button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+        {!! Form::close() !!}
               
-              </tr>
+             </tr>
                
             @endforeach
            </tbody>

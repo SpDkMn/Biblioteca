@@ -296,7 +296,20 @@ foreach ($thesiss as $thesi) {
 
   public function destroy($id)
   {   
-   //Eliminar esta siendo utilizado en la funcion show
+    $thesis = Thesis::find($id);
+      $copias = ThesisCopy::all();
+
+      foreach($copias as $copia) {
+        if($copia->thesis_id == $id) {
+          $copia->delete();
+        }
+      }
+      $thesis->authors()->detach();
+      $thesis->editorials()->detach();
+  // $thesis->categories()->detach();
+      $thesis->delete();
+ 
+       return redirect()->route('thesis.index');
    }
 
 
@@ -308,7 +321,7 @@ foreach ($thesiss as $thesi) {
 
 
   public function show($id){
-        $thesis = Thesis::find($id);
+      $thesis = Thesis::find($id);
       $copias = ThesisCopy::all();
 
       foreach($copias as $copia) {
