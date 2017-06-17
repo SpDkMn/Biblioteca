@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateChaptersBookTable extends Migration
+class CreateBookThemeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateChaptersBookTable extends Migration
      */
     public function up()
     {
-        Schema::create('chapters_book', function (Blueprint $table) {
+        Schema::create('book_theme', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->unsignedTinyInteger('number');
-            $table->unsignedSmallInteger('book_id');
+            $table->integer('book_id')->unsigned();
+            $table->foreign('book_id')->references('id')->on('books');
+            $table->integer('theme_id')->unsigned();
+            $table->foreign('theme_id')->references('id')->on('themes');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +31,6 @@ class CreateChaptersBookTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chapters_book');
+        Schema::dropIfExists('book_theme');
     }
 }

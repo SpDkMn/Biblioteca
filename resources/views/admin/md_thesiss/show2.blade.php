@@ -27,7 +27,7 @@
          <div class="box-body">
           <!--    A u t o re s -->
               <strong>AUTOR PRINCIPAL</strong>
-                  <?php for($i=0;$i<10;$i++){echo "&nbsp";}?>:&nbsp
+                  <?php for($i=0;$i<18;$i++){echo "&nbsp";}?>:&nbsp
                 <?php $cont=0; ?>
                 @foreach($thesis->authors as $author)
                   @if($author->pivot->type == true)
@@ -50,7 +50,7 @@
          <div class="box-body">
           <!--    A u t o re s -->
             <strong>AUTORES SECUNDARIOS</strong>
-                    <?php for($i=0;$i<14;$i++){echo "&nbsp";}?>:&nbsp
+                    <?php for($i=0;$i<4;$i++){echo "&nbsp";}?>:&nbsp
                   <?php $cont=0; ?>
                   @foreach($thesis->authors as $author)
                     @if($author->pivot->type == false)
@@ -72,7 +72,7 @@
 
         <div class="box-body">
               <strong>EDITORIAL</strong>                
-                <?php for($i=0;$i<22;$i++){echo "&nbsp";}?>:&nbsp
+                <?php for($i=0;$i<32;$i++){echo "&nbsp";}?>:&nbsp
                 @foreach($thesis->editorials as $editorial)
                     @if($editorial->pivot->type == false)
                     {{$editorial->name}}
@@ -82,65 +82,120 @@
 
         <div class="box-body">
               <strong>ASESOR</strong>
-                <?php $cont2=2; for($i=0;$i<26;$i++){echo "&nbsp";}?>:&nbsp
+                <?php $cont2=2; for($i=0;$i<37;$i++){echo "&nbsp";}?>:&nbsp
                 {{$thesis->asesor}}
         </div>
 
         <div class="box-body">
               <strong>CLASIFICACIÓN</strong>
-              <?php   for($i=0;$i<13;$i++){echo "&nbsp";}?>:&nbsp
+              <?php   for($i=0;$i<23;$i++){echo "&nbsp";}?>:&nbsp
               {{$thesis->clasification}}
-        </div>
+        </div><br><br>
+
+
 
         <div class="box-body">
-              <strong>EXTENSION</strong>
-              <?php   for($i=0;$i<20;$i++){echo "&nbsp";}?>:&nbsp
-              {{$thesis->extension}}
-        </div>
-
-        <div class="box-body">
-              <strong>DIMENSIONES</strong>
-              <?php   for($i=0;$i<15;$i++){echo "&nbsp";}?>:&nbsp
-              {{$thesis->dimensions}}
-        </div>
-
-        <div class="box-body">
-              <strong>DETALLES FISICOS</strong>
-              <?php   for($i=0;$i<7;$i++){echo "&nbsp";}?>:&nbsp
-              {{$thesis->physicalDetails}}
-        </div>
-        <div class="box-body">
-              <strong>MATERIAL ADICIONAL</strong>
-              <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>:&nbsp
-              {{$thesis->accompaniment}}
-        </div>
-        <div class="box-body">
-              <strong>CONTENIDO</strong>
-              <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>:&nbsp
+              <strong>CONTENIDO </strong><br>
+              <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>&nbsp
               {{$thesis->conten}}
-        </div>
+        </div><br><br>
         <div class="box-body">
-              <strong>RESUMEN</strong>
-              <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>:&nbsp
+              <strong>RESUMEN </strong><br>
+              <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>&nbsp
               {{$thesis->summary}}
-        </div>
+        </div><br>
 
         <div class="box-body">
-              <strong>CONCLUSIONES Y RECOMENDACIONES</strong>
-              <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>:&nbsp
+              <strong>CONCLUSIONES Y RECOMENDACIONES </strong><br>
+              <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>&nbsp
               {{$thesis->recomendacion}}
-        </div>
+        </div><br>
+        
+        <div class="box-body">
+              <strong>BIBLIOGRAFÍA </strong><br>
+              <?php   for($i=0; $i < 2;$i++){echo "&nbsp";}?>&nbsp
+                {{$thesis->bibliografia}}
+        </div><br>
+
 
 
     </div>
 
 
 </div>  
-
+<!--
 <div class="col-md-5">
     <img src="{{URL::asset('img/tesis.jpg') }}" style="width:400px;">
 </div>
 </h1>
+-->
+
+    <div class="col-md-5">
+          <!-- Widget: user widget style 1 -->
+          <div class="box box-widget widget-user">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-red" style="background: url('../dist/img/photo1.png') center center;" style=" height: 50%;">
+              <h3 class="widget-user-username">{{$thesis->title}}</h3> 
+              <h5 class="widget-user-desc"><strong>{{$thesis->type}}</strong></h5>
+            </div>
+            <div class="widget-user-image"><br>
+              <img class="img-circle" src="{{URL::asset('img/tesis.jpg') }}" style="height:80px;" alt="User Avatar">
+            </div><br>
+            <div class="box-footer">
+              <div class="row">
+                <div class="col-sm-6 border-left">
+                  <div class="description-block">
+                    <h5 class="description-header">EXTENSIÓN</h5>
+                    <span class="description-text">{{$thesis->extension}}</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+ 
+                <div class="col-sm-6 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header">DIMENSIONES</h5>
+                    {{$thesis->dimensions}}
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->  
+
+              </div>
+              <!-- /.row -->
+              </div>
+
+            <div>
+              <div class="row">
+                <div class="col-sm-12 border-right">
+                  <div>
+                    <h5 class="description-header"><strong>DETALLES FÍSICOS</strong></h5>
+                    <div class="description-text">{{$thesis->physicalDetails}}</div>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+              </div>
+            </div><br>
+
+            <div>
+              <div class="row">
+                <div class="col-sm-12 border-center">
+                  <div>
+                    <h5 class="description-header"><strong>MATERIAL ADICIONAL</strong></h5>
+                    <span class="description-text">{{$thesis->accompaniment}}</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+              </div>
+
+
+            </div>
+            <br><br>
+          </div>
+        </div>
+
+
+
+
   <!--Aqui termina la parte de los autores y editoriales-->    
 
 
@@ -220,8 +275,9 @@
 
 <!--Aqui va a ir a parte del contenido y resumen  -->
 
-
+    
   </div>
+  <br><br><br>
 </div>
 
 @endsection

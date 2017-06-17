@@ -17,21 +17,21 @@ class CreateThesissTable extends Migration
             $table->increments('id');
             $table->string('type');
             $table->string('clasification');
-            $table->string('title');
+            $table->longText('title');
             
             $table->string('edition');
             //Descripcion fisica de la tesis
             $table->string('extension');
-            $table->integer('nhojas');
+            $table->string('escuela');
             $table->string('physicalDetails');
             $table->string('dimensions');
             $table->string('accompaniment');
             $table->string('location');
             $table->string('publicationLocation');
-            $table->string('summary');
-            $table->string('conten');
-            $table->string('recomendacion');
-            $table->string('bibliografia');
+            $table->longText('summary');
+            $table->longText('conten');
+            $table->longText('recomendacion');
+            $table->longText('bibliografia');
             $table->string('asesor');
             //fin descripcion fisica
             $table->timestamps();

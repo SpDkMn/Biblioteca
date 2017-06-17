@@ -17,10 +17,11 @@
     <h3><b><font face="Calibri">Items</font></b></h3>
       <table class="table">
         <tr>
-          <th>Codigo ingreso</th>
+          <th>Numero de ingreso</th>
+          <th>Codigo de barras</th>
           <th>Ejemplar</th>
-          <th>Año</th>
-          <th>Edicion</th>
+          
+          <th>Volumen</th>
           <th>Clasificacion</th>
           <th>Contenido</th>
           
@@ -29,6 +30,7 @@
 
         <tr @if($copy->availability) class="success" @else class="danger" @endif>
           <td>{{$copy->incomeNumber}}</td>
+          <td>{{$copy->barcode}}</td>
           <td>{{$copy->copy}}
             @if($copy->availability)
             <span class="sr-only">Disponible</span>
@@ -36,8 +38,8 @@
               <span class="sr-only">No disponible</span>
             @endif
           </td>
-          <td>{{$copy->acquisitionDate}}</td>
-          <td>{{$copy->edition}}</td>
+          
+          <td>{{$copy->volume}}</td>
           <td>{{$copy->clasification}}</td>
 
           <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalCopy<?php echo $copy->id; ?>"><i class="fa fa-tag"></i></button></td>
@@ -52,13 +54,7 @@
               <h3 class="modal-title text-center text-font-size" id="ModalCopyLabel"><strong>EJEMPLAR&nbsp<?php echo $copy->copy; ?></strong></h3>
               </div>
               <div class="modal-body">
-                <div>
-                  @if($copy->barcode!="")
-                  <p>&nbsp&nbsp&nbspCodigo de Barras
-          <?php   for($i=0;$i<32;$i++){echo "&nbsp";}?>:&nbsp
-          {{$copy->barcode}}</p>
-                  @endif
-                </div>
+                
                 <div>
                   @if($copy->acquisitionModality!="")
                   <p>&nbsp&nbsp&nbspModalidad de Adquisicion
@@ -80,11 +76,7 @@
           <?php   for($i=0;$i<24;$i++){echo "&nbsp";}?>:&nbsp
                   {{$copy->acquisitionDate}}</p>
                   @endif
-                  @if($copy->location!="")
-                  <p>&nbsp&nbsp&nbspUbicacion
-          <?php   for($i=0;$i<46;$i++){echo "&nbsp";}?>:&nbsp
-                  {{$copy->location}}</p>
-                  @endif
+                  
                 </div>
                 <div>
                   @if($copy->printType!="")
@@ -102,16 +94,11 @@
           <?php   for($i=0;$i<23;$i++){echo "&nbsp";}?>:&nbsp
                   {{$copy->publicationDate}}</p>
                   @endif
-                  @if($copy->phone!="")
-                  <p>&nbsp&nbsp&nbspTelefono
-          <?php   for($i=0;$i<47;$i++){echo "&nbsp";}?>:&nbsp
-                  {{$copy->phone}}</p>
+                  @if($copy->publicationDate!="")
+          <p>&nbsp&nbsp&nbspGestion
+          <?php   for($i=0;$i<50;$i++){echo "&nbsp";}?>:&nbsp
+                  {{$copy->management}}</p>
                   @endif
-                  @if($copy->ruc!="")
-                  <p>&nbsp&nbsp&nbspR.U.C
-          <?php   for($i=0;$i<55;$i++){echo "&nbsp";}?>:&nbsp
-                  {{$copy->ruc}}</p>
-                  @endif     
                 </div>            
               </div>
             </div>
@@ -198,24 +185,24 @@
   </div>
 </div>
 
-  
+   
 
   <script>
     $(document).ready(function(){
       $(".pagina1").on('click',function(event){
         $id = $(this).data('id');
-        $("#div-content").html('<div class="box box-warning box-solid"><div class="box-header with-border"><h3 class="box-title">Cargando</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>')
-        $("#div-content").load('{{ url("/admin/book/") }}/' + $id+'?page=1');
+        $("#div-new").html('<div class="box box-warning box-solid"><div class="box-header with-border"><h3 class="box-title">Cargando</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>')
+        $("#div-new").load('{{ url("/admin/book/") }}/' + $id+'/show2');
       })
       $(".pagina2").on('click',function(event){ 
         $id = $(this).data('id');
-        $("#div-content").html('<div class="box box-warning box-solid"><div class="box-header with-border"><h3 class="box-title">Cargando</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>')
-        $("#div-content").load('{{ url("/admin/book/") }}/' + $id+'?page=2');
+        $("#div-new").html('<div class="box box-warning box-solid"><div class="box-header with-border"><h3 class="box-title">Cargando</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>')
+        $("#div-new").load('{{ url("/admin/book/") }}/' + $id+'/show3');
       })
       $(".libros").on('click',function(event){ 
         $id = $(this).data('id');
-        $("#div-content").html('<div class="box box-warning box-solid"><div class="box-header with-border"><h3 class="box-title">Cargando</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>')
-        $("#div-content").load('{{ url("/admin/book/") }}/' + $id+'?page=3');
+        $("#div-new").html('<div class="box box-warning box-solid"><div class="box-header with-border"><h3 class="box-title">Cargando</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>')
+        $("#div-new").load('{{ url("/admin/book/create") }}');
       })
     })
   </script>

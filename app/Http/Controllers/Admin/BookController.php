@@ -20,7 +20,7 @@ class BookController extends Controller
     $books=Book::all();
     $editoriales = Editorial::all(); 
     $autores = Author::all();
-
+ 
     $show = view('admin.md_books.show',['books'=>$books
                                             ]);
     
@@ -39,13 +39,21 @@ class BookController extends Controller
 
 
  public function create(){
- 	}
+    $books=Book::all();
+    $editoriales = Editorial::all(); 
+    $autores = Author::all();
+
+    return view('admin.md_books.new',['books'=>$books,
+                                    'editoriales'=>$editoriales,
+                                    'autores'=>$autores
+      ]);
+
+ }
 
 
  	public function store(Request $request){
     
-    
-
+  
     $books=Book::all();
     
     //Como no se pueden guardar null , entonces verifiricare , y lo llenare con ""
@@ -65,7 +73,10 @@ class BookController extends Controller
         $request['dimensions']="";
     if($request['accompaniment']==null)
         $request['accompaniment']="Ninguno";
-
+    if($request['edition']==null)
+        $request['edition']="";
+    if($request['libraryLocation']==null)
+        $request['libraryLocation']="";
     //Creando un nuevo libro , lo asigno a la variable $b
     $b = Book::create([
                       'clasification'=>$request['clasification'],
@@ -76,7 +87,10 @@ class BookController extends Controller
                       'extension'=>$request['extension'],
                       'physicalDetails'=>$request['physicalDetails'],
                       'dimensions'=>$request['dimensions'],
-                      'accompaniment'=>$request['accompaniment']
+                      'accompaniment'=>$request['accompaniment'],
+                      'relationBook'=>1,
+                      'edition'=>$request['edition'],
+                      'libraryLocation'=>$request['libraryLocation']
                       ]);
 
     //Como el libro ya se creo , buscare y guardare su id    
@@ -169,10 +183,10 @@ class BookController extends Controller
     }
 
     for($i=0;$i<$contador_copia;$i++){
-        if($request['edition'][$i]==null)
-            $edition[$i]=0;
+        if($request['volume'][$i]==null)
+            $volume[$i]=0;
         else
-            $edition[$i] =$request['edition'][$i];
+            $volume[$i] =$request['volume'][$i];
     }
     
     for($i=0;$i<$contador_copia;$i++){
@@ -197,13 +211,6 @@ class BookController extends Controller
     }
     
     for($i=0;$i<$contador_copia;$i++){
-        if($request['location'][$i]==null)
-            $location[$i]="";
-        else
-            $location[$i] =$request['location'][$i];
-    }
-    
-    for($i=0;$i<$contador_copia;$i++){
         if($request['management'][$i]==null)
             $management[$i]=0;
         else
@@ -224,20 +231,7 @@ class BookController extends Controller
             $publicationDate[$i] =$request['publicationDate'][$i];
     }
     
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['phone'][$i]==null)
-            $phone[$i]="";
-        else
-            $phone[$i] =$request['phone'][$i];
-        }
-
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['ruc'][$i]==null)
-            $ruc[$i]="";
-        else
-            $ruc[$i] =$request['ruc'][$i];
-    }
-    
+  
 
     for($i=0;$i<$contador_copia;$i++){
       
@@ -246,24 +240,25 @@ class BookController extends Controller
       if($request['availability'][$i] == "Disponible")
         $bandera=true;
 
+      $copy_aux=$i+1;$bc_clasification = $request->clasification."ej.".$copy_aux;
+
       $bc = BookCopy::create([
         'incomeNumber' => $incomeNumber[$i],
-        'clasification'=>$clasification,
+        'clasification'=>$copy_aux,
         'barcode'=>$barcode[$i],
         'copy'=>$i+1,
-        'edition'=>$edition[$i],
+        'volume'=>$volume[$i],
         'acquisitionModality'=>$acquisitionModality[$i],
         'acquisitionSource'=>$acquisitionSource[$i],
         'acquisitionPrice'=>$acquisitionPrice[$i],
         'acquisitionDate'=>$acquisitionDate[$i],
-        'location'=>$location[$i],
+        
         'management'=>$management[$i],
         'availability'=>$bandera,
         'printType'=>$printType[$i],
         'publicationLocation'=>$publicationLocation[$i],
         'publicationDate'=>$publicationDate[$i],
-        'phone'=>$phone[$i],
-        'ruc'=>$ruc[$i],
+        
         'book_id'=>$book_id
       ]);
 
@@ -274,7 +269,7 @@ class BookController extends Controller
   }
 
   public function edit($id){
-    
+    $books = Book::all();
     $book = Book::find($id);
 
     $editoriales = Editorial::all();
@@ -284,7 +279,8 @@ class BookController extends Controller
     
     
 
-    return view('admin.md_books.edit',[     'book'=>$book,
+    return view('admin.md_books.edit',[     'books'=>$books,
+                                            'book'=>$book,
                                             'editoriales'=>$editoriales,
                                             'autores'=>$autores,
                                             'chapters'=>$chapters,
@@ -312,6 +308,8 @@ class BookController extends Controller
         $request['summary']="";
     if($request['isbn']==null)
         $request['isbn']="";
+    if($request['edition']==null)
+      $request['edition']="";
     if($request['extension']==null)
         $request['extension']="";
     if($request['physicalDetails']==null)
@@ -320,6 +318,8 @@ class BookController extends Controller
         $request['dimensions']="";
     if($request['accompaniment']==null)
         $request['accompaniment']="Ninguno";
+    if($request['libraryLocation']==null)
+        $request['libraryLocation']="";
 
     $book->clasification = $request['clasification'];
     $book->title = $request['title'];
@@ -330,6 +330,9 @@ class BookController extends Controller
     $book->physicalDetails = $request['physicalDetails'];
     $book->dimensions = $request['dimensions'];
     $book->accompaniment = $request['accompaniment'];
+    $book->relationBook = 1;
+    $book->edition = $request->edition;
+    $book->libraryLocation = $request->libraryLocation;
 
     $book->authors()->detach();
     $book->editorials()->detach(); 
@@ -384,144 +387,189 @@ class BookController extends Controller
       }
     }
     
-
-    $book->chapters()->delete();
-
-    //Crenado los capitulos , utilizo el id de libro
-    $contador_capitulos=0;
-    foreach ($request['chapter'] as $chapter) {
-          $contador_capitulos++;
-          $cb = ChapterBook::create([
-            'name'=>$chapter,
-            'number'=>$contador_capitulos,
-            'book_id'=>$book->id
-          ]);
+    //************EDITANDO CAPITULOS******************
+    //Calculando la cantidad de capitulos antiguos
+    $contador_capitulos_antiguo=0;
+    foreach ($book->chapters as $chapter_aux) {
+      $contador_capitulos_antiguo ++;
     }
-
-    $book->save();
-
-    $book->bookCopies()->delete();
-
-    //Calculando el numero de ejemplares del libro
-    $contador_copia=0;
-    foreach ($request['incomeNumber'] as $a) {
-      $contador_copia ++;
+    //Calculando la cantidad de capitulos nuevos
+    $contador_capitulos_nuevo = 0;
+    foreach ($request->chapter as $chapter_aux) {
+      $contador_capitulos_nuevo ++;
     }
-
-    //Asigno lo ingresado en el formulario a las siguientes variables 
-    $incomeNumber =$request['incomeNumber'];
-    $clasification =$request['clasification'];
-    $acquisitionModality =$request['acquisitionModality'];
-    $printType =$request['printType'];
-  
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['barcode'][$i]==null)
-            $barcode[$i]= 0;
-        else
-            $barcode[$i]=$request['barcode'][$i];
+    //CASO I
+    if($contador_capitulos_nuevo==$contador_capitulos_antiguo){
+      for($i=0;$i<$contador_capitulos_nuevo;$i++){
+        $book->chapters[$i]->name = $request->chapter[$i];
+        $book->chapters[$i]->number = $i+1;
+        $book->chapters[$i]->book_id = $id;
+        $book->chapters[$i]->save();
+      }
     }
-
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['edition'][$i]==null)
-            $edition[$i]=0;
-        else
-            $edition[$i] =$request['edition'][$i];
-    }
-    
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['acquisitionSource'][$i]==null)
-            $acquisitionSource[$i]="";
-        else
-            $acquisitionSource[$i] =$request['acquisitionSource'][$i];
-    }
-    
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['acquisitionPrice'][$i]==null)
-            $acquisitionPrice[$i]="";
-        else
-            $acquisitionPrice[$i] =$request['acquisitionPrice'][$i];
-    }
-      
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['acquisitionDate'][$i]==null)
-            $acquisitionDate[$i]="";
-        else
-            $acquisitionDate[$i] =$request['acquisitionDate'][$i];
-    }
-    
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['location'][$i]==null)
-            $location[$i]="";
-        else
-            $location[$i] =$request['location'][$i];
-    }
-    
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['management'][$i]==null)
-            $management[$i]=0;
-        else
-            $management[$i] =$request['management'][$i];
-    }
-    
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['publicationLocation'][$i]==null)
-            $publicationLocation[$i]="";
-        else
-            $publicationLocation[$i] =$request['publicationLocation'][$i];
-    }
-    
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['publicationDate'][$i]==null)
-            $publicationDate[$i]="";
-        else
-            $publicationDate[$i] =$request['publicationDate'][$i];
-    }
-    
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['phone'][$i]==null)
-            $phone[$i]="";
-        else
-            $phone[$i] =$request['phone'][$i];
+    //CASO II
+    if($contador_capitulos_nuevo<$contador_capitulos_antiguo){
+      if($contador_capitulos_nuevo==$contador_capitulos_antiguo){
+        for($i=0;$i<$contador_capitulos_nuevo;$i++){
+          $book->chapters[$i]->name = $request->chapter[$i];
+          $book->chapters[$i]->number = $i+1;
+          $book->chapters[$i]->book_id = $id;
+          $book->chapters[$i]->save();
         }
+      }
+      while($i<$contador_capitulos_antiguo){
+        $book->chapters[$i]->delete();
+        $i++;
+      }
+    }
+    //CASO III
+    if($contador_capitulos_nuevo>$contador_capitulos_antiguo){
+      if($contador_capitulos_nuevo==$contador_capitulos_antiguo){
+        for($i=0;$i<$contador_capitulos_nuevo;$i++){
+          $book->chapters[$i]->name = $request->chapter[$i];
+          $book->chapters[$i]->number = $i+1;
+          $book->chapters[$i]->book_id = $id;
+          $book->chapters[$i]->save();
+        }
+      }
+      while($i<$contador_capitulos_nuevo){
+        ChapterBook::create([
+            'name'=>$request->chapter[$i],
+            'number'=>$i+1,
+            'book_id'=>$id
+        ]);
+        $i++;
+      }
+    }
 
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['ruc'][$i]==null)
-            $ruc[$i]="";
-        else
-            $ruc[$i] =$request['ruc'][$i];
+    //**********************EDITANDO ITEMS**********************
+    //Calculando el antiguo numero de ejemplares del libro
+    $numero_copias_antiguo=0;
+    foreach ($book->bookCopies as $copia_aux) {
+      $numero_copias_antiguo++;
     }
     
-
-    for($i=0;$i<$contador_copia;$i++){
-      
-      $bandera=false;
-
-      if($request['availability'][$i] == "Disponible")
-        $bandera=true;
-
-      $bc = BookCopy::create([
-        'incomeNumber' => $incomeNumber[$i],
-        'clasification'=>$clasification,
-        'barcode'=>$barcode[$i],
-        'copy'=>$i+1,
-        'edition'=>$edition[$i],
-        'acquisitionModality'=>$acquisitionModality[$i],
-        'acquisitionSource'=>$acquisitionSource[$i],
-        'acquisitionPrice'=>$acquisitionPrice[$i],
-        'acquisitionDate'=>$acquisitionDate[$i],
-        'location'=>$location[$i],
-        'management'=>$management[$i],
-        'availability'=>$bandera,
-        'printType'=>$printType[$i],
-        'publicationLocation'=>$publicationLocation[$i],
-        'publicationDate'=>$publicationDate[$i],
-        'phone'=>$phone[$i],
-        'ruc'=>$ruc[$i],
-        'book_id'=>$book->id
-      ]);
-
+    //Calculando el nuevo numero de ejemplares del libro
+    $numero_copias_nuevo=0;
+    foreach ($request['incomeNumber'] as $a) {
+      $numero_copias_nuevo++;
     }
 
+    //Analizo los tres casos 
+    //CASO I
+    //Como son vectores paralelos , ejem 
+    //$book->bookCopies[0]->barcode : antiguo codigo de barras de item1 
+    //$request->barcode[0]          : nuevo codigo de barras de item1
+    if($numero_copias_antiguo==$numero_copias_nuevo){
+
+      for($i=0;$i<$numero_copias_nuevo;$i++){
+        $bandera=false;
+        if($request->availability[$i] == "Disponible")
+          $bandera=true;
+        
+        $copy_aux=$i+1;$bc_clasification = $request->clasification." ej. ".$copy_aux;
+
+        $book->bookCopies[$i]->incomeNumber = $request->incomeNumber[$i];
+        $book->bookCopies[$i]->clasification = $bc_clasification;
+        $book->bookCopies[$i]->barcode = $request->barcode[$i];
+        $book->bookCopies[$i]->copy = $i+1;
+        $book->bookCopies[$i]->volume = $request->volume[$i];
+        $book->bookCopies[$i]->acquisitionModality = $request->acquisitionModality[$i];
+        $book->bookCopies[$i]->acquisitionSource = $request->acquisitionSource[$i];
+        $book->bookCopies[$i]->acquisitionPrice = $request->acquisitionPrice[$i];
+        $book->bookCopies[$i]->acquisitionDate = $request->acquisitionDate[$i];
+        $book->bookCopies[$i]->management = $request->management[$i];
+        $book->bookCopies[$i]->availability = $bandera;
+        $book->bookCopies[$i]->printType = $request->printType[$i];
+        $book->bookCopies[$i]->publicationLocation = $request->publicationLocation[$i];
+        $book->bookCopies[$i]->publicationDate = $request->publicationDate[$i];
+        $book->bookCopies[$i]->save();
+      }
+    }
+    //CASO II
+    if($numero_copias_nuevo<$numero_copias_antiguo){
+      for($i=0;$i<$numero_copias_nuevo;$i++){
+        $bandera=false;
+        if($request->availability[$i] == "Disponible")
+          $bandera=true;
+
+        $copy_aux=$i+1;$bc_clasification = $request->clasification." ej. ".$copy_aux;
+
+        $book->bookCopies[$i]->incomeNumber = $request->incomeNumber[$i];
+        $book->bookCopies[$i]->clasification = $bc_clasification;
+        $book->bookCopies[$i]->barcode = $request->barcode[$i];
+        $book->bookCopies[$i]->copy = $i+1;
+        $book->bookCopies[$i]->volume = $request->volume[$i];
+        $book->bookCopies[$i]->acquisitionModality = $request->acquisitionModality[$i];
+        $book->bookCopies[$i]->acquisitionSource = $request->acquisitionSource[$i];
+        $book->bookCopies[$i]->acquisitionPrice = $request->acquisitionPrice[$i];
+        $book->bookCopies[$i]->acquisitionDate = $request->acquisitionDate[$i];
+        $book->bookCopies[$i]->management = $request->management[$i];
+        $book->bookCopies[$i]->availability = $bandera;
+        $book->bookCopies[$i]->printType = $request->printType[$i];
+        $book->bookCopies[$i]->publicationLocation = $request->publicationLocation[$i];
+        $book->bookCopies[$i]->publicationDate = $request->publicationDate[$i];
+        $book->bookCopies[$i]->save();
+      }
+      while($i<$numero_copias_antiguo){
+        $book->bookCopies[$i]->delete();
+        $i++;
+      }
+    }
+    //CASO III
+    if($numero_copias_nuevo>$numero_copias_antiguo){
+      for($i=0;$i<$numero_copias_antiguo;$i++){
+        $bandera=false;
+        if($request->availability[$i] == "Disponible")
+          $bandera=true;
+
+        $copy_aux=$i+1;$bc_clasification = $request->clasification." ej. ".$copy_aux;
+
+        $book->bookCopies[$i]->incomeNumber = $request->incomeNumber[$i];
+        $book->bookCopies[$i]->clasification = $bc_clasification;
+        $book->bookCopies[$i]->barcode = $request->barcode[$i];
+        $book->bookCopies[$i]->copy = $i+1;
+        $book->bookCopies[$i]->volume = $request->volume[$i];
+        $book->bookCopies[$i]->acquisitionModality = $request->acquisitionModality[$i];
+        $book->bookCopies[$i]->acquisitionSource = $request->acquisitionSource[$i];
+        $book->bookCopies[$i]->acquisitionPrice = $request->acquisitionPrice[$i];
+        $book->bookCopies[$i]->acquisitionDate = $request->acquisitionDate[$i];
+        $book->bookCopies[$i]->management = $request->management[$i];
+        $book->bookCopies[$i]->availability = $bandera;
+        $book->bookCopies[$i]->printType = $request->printType[$i];
+        $book->bookCopies[$i]->publicationLocation = $request->publicationLocation[$i];
+        $book->bookCopies[$i]->publicationDate = $request->publicationDate[$i];
+        $book->bookCopies[$i]->save();
+      }
+      while ($i<$numero_copias_nuevo) {
+        $bandera=false;
+        if($request->availability[$i] == "Disponible")
+          $bandera=true;
+
+        $copy_aux=$i+1;$bc_clasification = $request->clasification." ej. ".$copy_aux;
+
+         BookCopy::create([
+          'incomeNumber' => $request->incomeNumber[$i],
+          'clasification'=>$bc_clasification,
+          'barcode'=>$request->barcode[$i],
+          'copy'=>$i+1,
+          'volume'=>$request->volume[$i],
+          'acquisitionModality'=>$request->acquisitionModality[$i],
+          'acquisitionSource'=>$request->acquisitionSource[$i],
+          'acquisitionPrice'=>$request->acquisitionPrice[$i],
+          'acquisitionDate'=>$request->acquisitionDate[$i],
+          'management'=>$request->management[$i],
+          'availability'=>$bandera,
+          'printType'=>$request->printType[$i],
+          'publicationLocation'=>$request->publicationLocation[$i],
+          'publicationDate'=>$request->publicationDate[$i],
+          'book_id'=>$id
+        ]);
+        $i++;
+      }
+    }
+    //*********************FIN EDITAR ITEMS**********************
+    
     return redirect()->route('book.index');
 
   }
@@ -550,7 +598,7 @@ class BookController extends Controller
    }
 
 
-   public function show(Request $request,$id){
+   public function show(){
 
       $book=Book::find($id);
       if($request->get('page')==1){
@@ -559,13 +607,32 @@ class BookController extends Controller
       if($request->get('page')==2){
         return view('admin.md_books.show3')->with('book',$book);
       }
-      
-      if($request->get('page')==3){
-         $books=Book::all();
-         return view('admin.md_books.show')->with('books',$books);
-      }
-      
     }
+
+
+  public function show2($id){
+      
+      $book= Book::find($id);
+      $editoriales = Editorial::all();
+      $autores = Author::all();
+      $chapters = ChapterBook::all();
+      $bookCopies = BookCopy::all();  
+      return view('admin.md_books.show2',[ 'book'=>$book,
+                                           'autores'=>$autores,
+                                            'editoriales'=>$editoriales,
+                                            'chapters'=>$chapters,
+                                            'bookCopies'=>$bookCopies
+                                            ]);
+  }
+  public function show3($id){
+      $book= Book::find($id);
+      $editoriales = Editorial::all();
+      $autores = Author::all();
+      $chapters = ChapterBook::all();
+      $bookCopies = BookCopy::all();
+      return view('admin.md_books.show3',[ 'book'=>$book
+                                            ]);
+  }
 
   public function content(){
     

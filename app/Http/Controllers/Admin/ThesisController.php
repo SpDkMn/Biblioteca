@@ -89,7 +89,7 @@ class ThesisController extends Controller
   }
 
 
-  public function store(Request $request){
+ public function store(Request $request){
 
     $contador_copia = 0 ;
 
@@ -105,7 +105,7 @@ class ThesisController extends Controller
                          'clasification'=>$request['clasification'],
                          'title'=>$request['title'],
                          'edition'=>$request['edition'],
-                         'nhojas'=>$request['nhojas'],
+                         'escuela'=>$request['escuela'],
                          'extension'=>$request['extension'],
                          'dimensions'=>$request['dimension'],
                          'physicalDetails'=>$request['detalles'],
@@ -190,8 +190,7 @@ class ThesisController extends Controller
 
   public function update(Request $request, $id){
 
-
-    dd($request['ejemplar']);
+        
         $thesis = Thesis::find($id);
         $copias = ThesisCopy::all();
         $thesiss = Thesis::all();
@@ -212,11 +211,12 @@ class ThesisController extends Controller
       $contador_copia ++ ;
     };
 
+
     $thesis->type = $request['tipo'];
     $thesis->clasification = $request['clasification'];
     $thesis->title = $request['title'];
     $thesis->edition = $request['edition'];
-    $thesis->nhojas = $request['nhojas'];
+    $thesis->escuela = $request['escuela'];
     $thesis->extension = $request['extension'];
     $thesis->dimensions = $request['dimension'];
     $thesis->physicalDetails = $request['detalles'];
@@ -241,7 +241,6 @@ class ThesisController extends Controller
     for ($j=0; $j < $contador_copia2 ; $j++){
         $thesis->thesisCopies[$j]->incomeNumber = $request['incomeNumber'.$j];
         $thesis->thesisCopies[$j]->barcode = $request['barcode'.$j];
-        $thesis->thesisCopies[$j]->ejemplar = $request['copy'.$j];
         $thesis->thesisCopies[$j]->availability = $av;
         $copiasT[$j]->save();
     };
@@ -250,7 +249,7 @@ class ThesisController extends Controller
     for ($j=$contador_copia2; $j < $contador_copia; $j++) {
       $tc = ThesisCopy::create([  'incomeNumber'=>$request['incomeNumber'.$j],
                                   'barcode'=>$request['barcode'.$j],
-                                  'ejemplar'=>$request['copy'.$j],
+                                  'ejemplar'=>$request['contador_copia'.$j],
                                   'availability'=>$av,
                                   'thesis_id'=>$id
                                   ]);

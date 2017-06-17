@@ -14,17 +14,8 @@ class Editorials extends Seeder
     public function run()
     {
     	//Rellenando la tabla authors para la prueba de revistas
-        Editorial::Create(['name'=>'Universidad Nacional Mayor de San Marcos']);
-        Editorial::Create(['name'=>'Universidad Nacional Callao']);
-        Editorial::Create(['name'=>'Universidad Alas Peruanas']);
-        Editorial::Create(['name'=>'Universidad La Cantuta']);
-        Editorial::Create(['name'=>'Pontificia Universidad Catolica del Perú']);
-        Editorial::Create(['name'=>'Rectorado']);
-        Editorial::Create(['name'=>'Vicerectorado']);
-
-      
-
-
+        Editorial::Create(['name'=>'Moshera']);
+        Editorial::Create(['name'=>'Ecoe Ediciones']);
     }
 }
 // Eliminar esta semilla cuando se tenga gestion editorial

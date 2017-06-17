@@ -1,4 +1,6 @@
 
+
+
 <div class="box box-primary">
   <div class="box-header with-border">
     <h3 class="box-title">Nuevo</h3>
@@ -9,33 +11,22 @@
   </div>
   
 
-  <form method="POST" action="{{ url('/admin/book') }}">
+  <form method="POST" id="formulario" action="{{ url('/admin/book') }}">
     {{ csrf_field() }}
    
     <div class="box-body">
     
-
-
-
-
-
+      <div class="col-md-6">
         <div class="box box-success box-solid">
-            
-
-            <div class="box-header with-border">
-              <h3 class="box-title">Libro</h3>
-              <div class="box-tools pull-right"> 
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div> 
-            </div>
-            
-             
-
-
-
-
-            <div class="box-body">
+          <div class="box-header with-border">
+            <h3 class="box-title">Libro</h3>
+            <div class="box-tools pull-right"> 
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+            </div> 
+          </div>
+          
+              <div class="box-body">
               
                 <div class="bs-example" data-example-id="simple-nav-tabs"> 
                   <ul class="nav nav-tabs">
@@ -46,13 +37,6 @@
                   <div class="tab-content">
                     <!-- Primer panel -->
                     <div class="tab-pane active" id="primero">
-
-
-
-
-
-
-
                       <div class="box-body">
                           <!--1. Titulo -->
                           <div class="form-group">
@@ -75,6 +59,11 @@
                           </div>
                           <!--3. Fin clasificacion -->
                           
+                          <div class="form-group">
+                            <label>Edicion</label>
+                            <input type="text" name="edition" class="form-control" id="edition">
+                          </div>
+
                           <!--4. Autor -->
                           <div class="form-group">
                             <label>Autor</label>
@@ -153,7 +142,7 @@
                         <!-- 1. Resumen -->
                         <div class="form-group">
                           <label>Resumen</label>
-                          <textarea class="form-control" rows="3" name="summary" id="inputSummary" placeholder=""></textarea> 
+                          <textarea class="form-control" rows="3" name="summary" id="Summary" placeholder=""></textarea> 
                         </div>
                         <!-- 1. Fin Resumen -->
 
@@ -169,35 +158,48 @@
 
                           </div>
                         </div>
-                        <!-- 2. Fin capitulos -->
+                        <!-- 2. Fin <center></center>apitulos -->
 
                         <div class="form-group">
                           <label>Isbn</label>
-                          <input type="text" name="isbn" class="form-control">
+                          <input type="text" name="isbn" id="isbn" class="form-control">
                         </div>
 
+                        <div class="form-group">
+                          <label>Libros relacionados</label>
+                          <select class="form-control select2" name="relationBook[]" multiple="multiple" style="width: 100%;">
+                            @foreach($books as  $book)
+                                  <option value="{{ $book->id }}">{{$book->name}}</option>
+                            @endforeach
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label>Ubicacion en Biblioteca</label>
+                          <input type="text" name="libraryLocation" class="form-control" id="libraryLocation">
+                        </div>
 
                         <div class="form-group">
                         <label>Descripcion Fisica</label>
                           <div class="form-horizontal">
                            <div for="ejemplo_password_3" class="col-xs-6 control-label">Extension</div>
                           <div class="col-xs-6">
-                            <input type="text" name="extension"  class="form-control">
+                            <input type="text" name="extension" id="extension" class="form-control">
                           </div>
 
                           <div for="ejemplo_password_3" class="col-xs-6 control-label">Otros detalles fisicos</div>
                           <div class="col-xs-6">
-                            <input type="text" name="physicalDetails" class="form-control">
+                            <input type="text" name="physicalDetails" id="physicalDetails" class="form-control">
                           </div>
 
                           <div for="ejemplo_password_3" class="col-xs-6 control-label">Dimensiones</div>
                           <div class="col-xs-6">
-                            <input type="text" name="dimensions" class="form-control">
+                            <input type="text" name="dimensions" id="dimensions" class="form-control">
 
                           </div>
                           <div for="ejemplo_password_3" class="col-xs-6 control-label">Material de Acompañamiento</div>
                             <div class="col-xs-6">
-                              <input type="text" name="accompaniment" class="form-control">
+                              <input type="text" name="accompaniment" id="accompaniment" class="form-control">
                             </div>
                           </div>   
 
@@ -249,22 +251,22 @@
                               <div class="box-body">
                                 <div class="form-group">
                                   <label>Numero de Ingreso</label>
-                                  <input type="text" name="incomeNumber[0]" class="form-control">
+                                  <input type="text" name="incomeNumber[0]" id="incomeNumber1" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                   <label>Codigo de Barras</label>
-                                  <input type="text" name="barcode[0]" class="form-control">
+                                  <input type="text" name="barcode[0]" id="barcode1" class="form-control">
                                 </div>
 
                                 <div class="form-group">
-                                  <label>Edicion</label>
-                                  <input type="text" name="edition[0]" class="form-control">
+                                  <label>Volumen</label>
+                                  <input type="text" name="volume[0]" id="volume1" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                   <label>Gestion</label>
-                                  <input type="text" name="management[0]" class="form-control">
+                                  <input type="text" name="management[0]" id="management1" class="form-control">
                                 </div>
 
                                <div class="form-group">
@@ -283,7 +285,7 @@
                               <div class="box-body">
                                 <div class="form-group">
                                   <label>Modalidad de Adquision</label>
-                                  <select class="form-control select2" name="acquisitionModality[0]" style="width: 100%;">
+                                  <select class="form-control select2" name="acquisitionModality[0]" id="acquisitionModality1" style="width: 100%;">
                                       <option>Compra</option> 
                                       <option>Donacion</option>
                                       <option>Adquisicion</option>                               
@@ -292,24 +294,20 @@
 
                                 <div class="form-group">
                                   <label>Fuente de Adquisicion</label>
-                                  <input type="text" class="form-control" name="acquisitionSource[0]">
+                                  <input type="text" class="form-control" name="acquisitionSource[0]" id="acquisitionSource1">
                                 </div>
 
                                 <div class="form-group">
                                   <label>Precio de Adquisicion</label>
-                                  <input type="text" name="acquisitionPrice[0]" class="form-control">
+                                  <input type="text" name="acquisitionPrice[0]" class="form-control" id="acquisitionPrice1">
                                 </div>
 
                                 <div class="form-group">
                                   <label>Fecha de Adquisicion</label>
-                                  <input type="text" name="acquisitionDate[0]" class="form-control">
+                                  <input type="text" name="acquisitionDate[0]" class="form-control" id="acquisitionDate1">
                                 </div>
 
-                                <div class="form-group">
-                                  <label>Ubicacion</label>
-                                  <input type="text" name="location[0]" class="form-control">
-                                </div>
-
+                               
                               </div>
                             </div>
 
@@ -325,23 +323,15 @@
 
                                 <div class="form-group">
                                   <label>Lugar de Publicacion</label>
-                                  <input type="text" name="publicationLocation[0]" class="form-control">
+                                  <input type="text" name="publicationLocation[0]" class="form-control" id="publicationLocation1">
                                 </div>
 
                                 <div class="form-group">
                                   <label>Fecha de Publicacion</label>
-                                  <input type="text" name="publicationDate[0]" class="form-control">
+                                  <input type="text" name="publicationDate[0]" class="form-control" id="publicationDate1">
                                 </div>
 
-                                <div class="form-group">
-                                  <label>Telefono</label>
-                                  <input type="text" name="phone[0]" class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                  <label>RUC</label>
-                                  <input type="text" name="ruc[0]" class="form-control">
-                                </div>
+        
                               </div>
                             </div>
                           
@@ -360,6 +350,7 @@
          
             </div><!-- End nav.bar -->
 
+          </div><!-- End box-body -->
         </div><!-- End box-solid -->
 
       </div><!-- End coll-md-6 -->
@@ -367,7 +358,7 @@
     </div>  
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Crear</button>
+        <button type="submit" id="btn" class="btn btn-primary">Crear</button>
     </div>
 
   </form>
@@ -409,22 +400,22 @@
                        +'<div class="box-body">'
                           +'<div class="form-group">'
                             +'<label>Numero de Ingreso</label>'
-                            +'<input type="text" name="incomeNumber['+arreglo+']" class="form-control">'
+                            +'<input type="text" name="incomeNumber['+arreglo+']" id="incomeNumber'+FieldCount+'" class="form-control">'
                           +'</div>'
 
                           +'<div class="form-group">'
                             +'<label>Codigo de Barras</label>'
-                            +'<input type="text" name="barcode['+arreglo+']" class="form-control">'
+                            +'<input type="text" name="barcode['+arreglo+']" id="barcode'+FieldCount+'" class="form-control">'
                           +'</div>'
 
                           +'<div class="form-group">'
-                            +'<label>Edicion</label>'
-                            +'<input type="text" name="edition['+arreglo+']" class="form-control">'
+                            +'<label>Volumen</label>'
+                            +'<input type="text" name="volume['+arreglo+']" id="volume'+FieldCount+'" class="form-control">'
                           +'</div>'
 
                           +'<div class="form-group">'
                             +'<label>Gestion</label>'
-                            +'<input type="text" name="management['+arreglo+']" class="form-control">'
+                            +'<input type="text" name="management['+arreglo+']" id="management'+FieldCount+'" class="form-control">'
                           +'</div>'
 
                           +'<div class="form-group">'
@@ -451,22 +442,17 @@
 
                           +'<div class="form-group">'
                             +'<label>Fuente de Adquisicion</label>'
-                            +'<input type="text" name="acquisitionSource['+arreglo+']" class="form-control">'
+                            +'<input type="text" name="acquisitionSource['+arreglo+']" id="acquisitionSource'+FieldCount+'" class="form-control">'
                           +'</div>'
 
                           +'<div class="form-group">'
                             +'<label>Precio de Adquisicion</label>'
-                            +'<input type="text" name="acquisitionPrice['+arreglo+']" class="form-control">'
+                            +'<input type="text" name="acquisitionPrice['+arreglo+']" id="acquisitionPrice'+FieldCount+'" class="form-control">'
                           +'</div>'
 
                           +'<div class="form-group">'
                             +'<label>Fecha de Adquisicion</label>'
-                            +'<input type="text" name="acquisitionDate['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Ubicacion</label>'
-                            +'<input type="text" name="location['+arreglo+']" class="form-control">'
+                            +'<input type="text" name="acquisitionDate['+arreglo+']" id="acquisitionDate'+FieldCount+'" class="form-control">'
                           +'</div>'
 
                         +'</div>'
@@ -484,23 +470,14 @@
 
                           +'<div class="form-group">'
                             +'<label>Lugar de Publicacion</label>'
-                            +'<input type="text" name="publicationLocation['+arreglo+']" class="form-control">'
+                            +'<input type="text" name="publicationLocation['+arreglo+']" id="publicationLocation'+FieldCount+'" class="form-control">'
                           +'</div>'
 
                           +'<div class="form-group">'
                             +'<label>Fecha de Publicacion</label>'
-                            +'<input type="text" name="publicationDate['+arreglo+']" class="form-control">'
+                            +'<input type="text" name="publicationDate['+arreglo+']" id="publicationDate'+FieldCount+'" class="form-control">'
                           +'</div>'
 
-                          +'<div class="form-group">'
-                            +'<label>Telefono</label>'
-                            +'<input type="text" name="phone['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>RUC</label>'
-                            +'<input type="text" name="ruc['+arreglo+']" class="form-control">'
-                          +'</div>'
                         +'</div>'
                       +'</div>'
                     
@@ -527,9 +504,6 @@
     return false;
   });
 </script>
-
-
-
 
 <script>
   $(document).ready(function() {
@@ -567,25 +541,41 @@
 </script>
 
 <script>
-      $(function () {
-        //Initialize Select2 Elements
-        $(".select2").select2();
-      });
-    </script>
+    (function(){
+      var formulario = document.getElementById('formulario');
+      var title = document.getElementById('title');
+
+      var validarTitulo = function(e){
+        if(formulario.title.value == ""){
+          alert("No relleno campo de titulo");
+          e.preventDefault();
+        }
+      };
+
+      var validarClasificacion = function(e){
+        if(formulario.clasification.value == ""){
+          alert("Campo clasificacion obligatorio");
+          e.preventDefault();
+        }
+      };
+
+      var validarAutor = function(e){
+        alert(formulario.primaryAuthor.value);
+        if(formulario.primaryAuthor.value[0] == null){
+          alert("No selecciono autor");
+          e.preventDefault();
+        }
+      };
+
+      var validar = function(e){
+          validarTitulo(e);
+          validarClasificacion(e);
+      };
+
+      formulario.addEventListener("submit",validar);
 
 
 
-
-
-<!-- <div class="form-horizontal" role="form">
-  <div class="form-group">
-    <p for="ejemplo_email_3" class="col-md-2 control-label">Email</p>
-    <div class="col-md-2"></div>
-    <div class="col-md-8" >
-      <input type="email" class="form-control" id="ejemplo_email_3"
-             placeholder="Email" style="width: 80%;">
-    </div>
-  </div>
-</div> -->
-
+    } ())
+</script>
 

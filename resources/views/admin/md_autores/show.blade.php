@@ -7,38 +7,20 @@
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
       </button>
     </div> 
-  </div>
+  </div><br>
 
   <div class="box-body">
 
-  <!---->
-  <!--BUSQUEDA Y FILTROS-->
-  {!!Form::model(Request::all(),['route'=>'autor.index','method'=>'GET','class'=>'navbar-form navbar-right','role'=>'search'])!!}
-    <div class="form-group">
-        {!!Form::text('name',null,['class'=>'form-control', 'placeholder'=>'Nombre del autor'])!!}
-        
-        <!-- Note the missing multiple attribute! -->
-         <script>
-                    $(document).ready(function() {
-                        $('#example-multiple-selected').multiselect();
-                    });
-         </script>
-        {!!Form::select('category[]',['Libro'=>'Libro','Revista'=>'Revista','Tesis/Tesina'=>'Tesis/Tesina','Compendio'=>'Compendio','Colaborador'=>'Colaborador','Asesor'=>'Asesor'],null,['id'=>'example-multiple-selected','multiple'=>'multiple'])!!}
-         
-    </div>   
-    <button type="submit" class="btn btn-primary">Buscar</button><br>
       
-    {!!Form::close()!!}
-  <!--FIN BUSQUEDA Y FILTROS-->
-
-   
-    <table class="table table-bordered table-hover">
+    <table id="example1" class="table table-bordered table-hover">
+     <thead>
       <tr>
         <th>Nombre</th>
         <th>Categoria</th>
         <th>Editar</th>
         <th>Eliminar</th>
       </tr>
+      </thead>
 
       <!--$Categories es la variable que almacena los filtros de busqueda-->
       @if($categories==null)

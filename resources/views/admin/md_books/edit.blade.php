@@ -1,3 +1,5 @@
+
+
 <div class="box box-primary">
   <div class="box-header with-border">
     <h3 class="box-title">Editar</h3>
@@ -56,6 +58,11 @@
                           </div>
                           <!--3. Fin clasificacion -->
                           
+                          <div class="form-group">
+                            <label>Edicion</label>
+                            <input type="text" name="edition" class="form-control" id="edition" value="{{$book->edition}}">
+                          </div>
+
                           <!--4. Autor -->
                           <div class="form-group">
                             <label>Autor</label>
@@ -85,6 +92,8 @@
                                 </select>
                               </p>
                             <!--4.1. Fin Autor Principal-->
+
+
                             <!-- 4.2. Autor Secundario -->
                               <p>
                                 &nbsp&nbsp&nbsp&nbspSecundario<?php   for($i=0;$i<15;$i++){echo "&nbsp";}?>:&nbsp&nbsp&nbsp&nbsp
@@ -112,7 +121,6 @@
                             <!--4.2. Fin Autor Secundario -->
                           </div>
                           <!--4. Fin Autor -->
-                          
                           <!-- 5. Editorial -->
                             <div class="form-group">
                               <label>Editorial</label>
@@ -210,6 +218,22 @@
                           <input type="text" name="isbn" class="form-control" value="{{$book->isbn}}">
                         </div>
 
+                        <div class="form-group">
+                          <label>Libros relacionados</label>
+                          <select class="form-control select2" name="relationBook[]" multiple="multiple" style="width: 100%;">
+                            @foreach($books as  $book)
+                                  <option value="{{ $book->id }}">{{$book->name}}</option>
+                            @endforeach
+                            </select>
+                        </div>
+
+                          
+
+
+                        <div class="form-group">
+                          <label>Ubicacion en Biblioteca</label>
+                          <input type="text" name="libraryLocation[]" class="form-control" value="{{$book->libraryLocation}}">
+                        </div>
 
                         <div class="form-group">
                         <label>Descripcion Fisica</label>
@@ -246,6 +270,7 @@
           
         </div><!-- End Box-solid -->
       </div><!-- End col-md-6 -->
+
 
       <div class="col-md-6">
         <div class="box box-success box-solid">
@@ -310,8 +335,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                  <label>Edicion</label>
-                                  <input type="text" name="edition[{{$cont}}]" class="form-control" value="{{$bc->edition}}">
+                                  <label>Volumen</label>
+                                  <input type="text" name="volume[{{$cont}}]" class="form-control" value="{{$bc->volume}}">
                                 </div>
 
                                 <div class="form-group">
@@ -359,11 +384,6 @@
                                   <input type="text" name="acquisitionDate[{{$cont}}]" class="form-control" value="{{$bc->acquisitionDate}}">
                                 </div>
 
-                                <div class="form-group">
-                                  <label>Ubicacion</label>
-                                  <input type="text" name="location[{{$cont}}]" class="form-control" value="{{$bc->location}}">
-                                </div>
-
                               </div>
                             </div>
 
@@ -387,15 +407,6 @@
                                   <input type="text" name="publicationDate[{{$cont}}]" class="form-control" value="{{$bc->publicationDate}}">
                                 </div>
 
-                                <div class="form-group">
-                                  <label>Telefono</label>
-                                  <input type="text" name="phone[{{$cont}}]" class="form-control" value="{{$bc->phone}}">
-                                </div>
-
-                                <div class="form-group">
-                                  <label>RUC</label>
-                                  <input type="text" name="ruc[{{$cont}}]" class="form-control" value="{{$bc->ruc}}">
-                                </div>
                               </div>
                             </div>
                           
@@ -476,8 +487,8 @@
                           +'</div>'
 
                           +'<div class="form-group">'
-                            +'<label>Edicion</label>'
-                            +'<input type="text" name="edition['+arreglo+']" class="form-control">'
+                            +'<label>Volumen</label>'
+                            +'<input type="text" name="volume['+arreglo+']" class="form-control">'
                           +'</div>'
 
                           +'<div class="form-group">'
@@ -522,11 +533,6 @@
                             +'<input type="text" name="acquisitionDate['+arreglo+']" class="form-control">'
                           +'</div>'
 
-                          +'<div class="form-group">'
-                            +'<label>Ubicacion</label>'
-                            +'<input type="text" name="location['+arreglo+']" class="form-control">'
-                          +'</div>'
-
                         +'</div>'
                       +'</div>'
 
@@ -550,15 +556,7 @@
                             +'<input type="text" name="publicationDate['+arreglo+']" class="form-control">'
                           +'</div>'
 
-                          +'<div class="form-group">'
-                            +'<label>Telefono</label>'
-                            +'<input type="text" name="phone['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>RUC</label>'
-                            +'<input type="text" name="ruc['+arreglo+']" class="form-control">'
-                          +'</div>'
+                         
                         +'</div>'
                       +'</div>'
                     

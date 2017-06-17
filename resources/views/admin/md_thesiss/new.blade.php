@@ -16,8 +16,6 @@
         <!---->
         <!--***************************** PANEL DE NUEVA TESIS *************************************-->
  
-    
-
 
 
 
@@ -124,6 +122,11 @@
                        
                         </select>
                     </div>
+
+                    <div class="form-group">
+                      <label for="escuela">E . A . P : </label>
+                      <input type="text" class="form-control" name="escuela" id="inputEscuela" placeholder="">
+                    </div>
                             
               </div>
             </div>
@@ -139,11 +142,7 @@
               <div class="box-body">
                        
                         <!-- 1. Resumen -->
-                   <div class="form-group">
-                         <label for="inputHojas">Nº de hojas</label>
-                          <input type="text" class="form-control" name="nhojas" id="inputHojas" placeholder="">
-                   </div>
-
+                   
                     <div class="form-group">
                         <label for="inputEdition">Edicion</label>
                         <input type="text" class="form-control" name="edition" id="inputEdition" placeholder="">
@@ -202,17 +201,17 @@
 
                      <div class="form-group">
                         <label for="inputContent">Contenido</label>
-                        <textarea class="form-control" name="contenido" id="inputContent" placeholder=""></textarea> 
+                        <textarea class="form-control" rows="3" name="contenido" id="inputContent" placeholder=""></textarea> 
                      </div>  
                     
                     <div class="form-group">
                         <label for="inputRecomend">Conclusiones y Recomendaciones</label>
-                        <textarea class="form-control" name="recomendacion" id="inputRecomend" placeholder=""></textarea> 
+                        <textarea class="form-control" rows="3" name="recomendacion" id="inputRecomend" placeholder=""></textarea> 
                     </div>
 
                     <div class="form-group">
                         <label for="inputBibliografia">Bibliografía</label>
-                        <textarea class="form-control" name="bibliografia" id="inputBibliografia" placeholder=""></textarea> 
+                        <textarea class="form-control" rows="3" name="bibliografia" id="inputBibliografia" placeholder=""></textarea> 
                     </div>
                         
                </div><!-- End Box-Body -->
@@ -245,8 +244,10 @@
                   </div>
                   <div class="form-group">
                       <label for="inputCopy">Ejemplar</label>
-                      <input type="number" class="form-control" value="1" name="copy0" id="inputCopy" placeholder="">
+                      <input type="number" class="form-control" name="copy0" id="inputCopy" placeholder="">
                   </div>
+
+
               </div>
             </div>
 
@@ -513,7 +514,7 @@
               //Recorriendo los datos seleccionados para compararlo con el que se esta deshabilitando
               for (var i = 0; i < datos.length; i++) {
                 //Si lo encuentra entonces
-                if (opc==datos[i]) {
+                if(opc==datos[i]) {
                   //Eliminando opciones seleccionadas de AUTORES secundarias
                   $('#listAutorSecond').val(null);
                   //Agregando nuevamente los elementos seleccionados
@@ -591,7 +592,7 @@
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label for="inputCopy">Ejemplar</label>'+
-                                '<input type="number" value="'+(idCont+1)+'" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
+                                '<input type="number" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
                             '</div>'+
                         '</div>';
       var itemPanel = '<div class="box box-default box-solid" id="itemBoxID'+idCont+'">'+itemHeader+itemBody +'</div>';

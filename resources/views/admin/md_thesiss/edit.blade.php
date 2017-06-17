@@ -45,7 +45,6 @@
 
 
 
-
                      <div class="form-group">
                          <label>TIPO DE ITEM</label>
                            <p>
@@ -142,6 +141,11 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                      <label for="escuela">E . A . P : </label>
+                      <input type="text" class="form-control" name="escuela" value="{{$thesis->escuela}}" id="inputEscuela" placeholder="">
+                    </div>
+
 
 
 
@@ -159,11 +163,6 @@
                  <div class="box-body">
                         
                      
-
-                   <div class="form-group">
-                        <label for="inputHojas">Nº de hojas</label>
-                        <input type="text" class="form-control" value="{{$thesis->nhojas}}" name="nhojas" id="inputHojas" placeholder="">
-                    </div>
 
                     <div class="form-group">
                         <label for="inputEdition">Edicion</label>
@@ -276,7 +275,7 @@
                   <div class="box-header">
                       <h3 class="panel-title">Item {{$item->ejemplar}}</h3>
                       <div class="box-tools pull-right">
-                        <button type="button" id="eliminarItem" class="btn btn-box-tool"><i class="fa fa-times"></i></button>
+                        <button type="button" name="copy0" id="eliminarItem" class="btn btn-box-tool"><i class="fa fa-times"></i></button>
                       </div>
                   </div>
                   <div class="box-body">
@@ -563,12 +562,11 @@
                                       '<label for="inputBarcode">Código de barra</label>'+
                                     '<input type="text" class="form-control" name="barcode'+idCont+'" id="inputBarcode" placeholder="">'+
                                   '</div>'+
+                                     '<div class="form-group">'+
+                                    '<label for="inputCopy">Ejemplar</label>'+
+                                    '<input type="number" value="'+(idCont+1)+'" class="form-control" name="copy'+idCont+'" id="inputC opy" placeholder="">'+
+                            '</div>'+
 
-
-                                '<div class="form-group">'+
-                                  '<label for="inputCopy">Ejemplar</label>'+
-                                  '<input type="number" value="'+(idCont+1)+'" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
-                                '</div>'+
 
                             '</div>';
 

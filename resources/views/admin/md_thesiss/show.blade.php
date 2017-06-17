@@ -18,7 +18,7 @@
                   <th class="text-center">TÍTULO</th>
                   <th class="text-center">AUTOR</th>
                   <th class="text-center">ASESOR</th>                  
-                  <th class="text-center">Nº Hojas</th>
+                  <th class="text-center">E. A. P.</th>
                   <th>EDITAR</th>
                   <th>ELIMINAR</th>
                  </tr>
@@ -53,7 +53,7 @@
                  
                   
                   <td class="text-center">
-                     {{$thesis->nhojas}}
+                     {{$thesis->escuela}}
                   </td>
                   <!--<td><button type="button"  href="{{route('thesis.edit',$thesis->id)}}" data-id="{{$thesis->id}}" class="btn btn-success editar" ><i class="fa fa-pencil"></i></a></td> -->
               <td><button type="button" data-id="{{$thesis->id}}" class="btn btn-success editar"><i class="fa fa-edit"></i></button></td>  
