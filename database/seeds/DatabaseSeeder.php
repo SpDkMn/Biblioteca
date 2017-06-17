@@ -16,11 +16,12 @@ class DatabaseSeeder extends Seeder
         $this->call(Authors::class);
         $this->call(Editorials::class);
         $this->call(Categories::class);
-        $this->call(Books::class);
-        $this->call(BookCopies::class);;
-        $this->call(ChaptersBook::class);
         $this->call(Thesiss::class);
         $this->call(ThesisCopies::class);
         $this->call(ChaptersThesis::class);
+        $this->call(Author_category::class);
+        $this->call(Editorial_category::class);
+       
     }
 }
+

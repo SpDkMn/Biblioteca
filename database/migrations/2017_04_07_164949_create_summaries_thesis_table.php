@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEditorialsTable extends Migration
+class CreateSummariesThesisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateEditorialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('editorials', function (Blueprint $table) {
-
+        Schema::create('summaries_thesis', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-        
+            $table->string('content');
+            $table->integer('thesis_id')->unsigned();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -30,6 +28,6 @@ class CreateEditorialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('editorials');
+        Schema::dropIfExists('summaries_thesis');
     }
 }

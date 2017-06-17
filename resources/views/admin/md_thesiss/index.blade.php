@@ -19,24 +19,23 @@
 
   <div class="row">
      
-    <div class="col-md-12 " id="div-content">
-      {!! $show !!}
-    </div> 
-    <div class="col-md-6" id="div-content">
-      {!! $new !!}
-    </div>  
-    <div class="col-md-6" id="div-content">
-      {!! $edit !!}
-    </div>      
+        <div class="col-md-12 " id="div-content">
+          {!! $show !!}
+        </div> 
+  </div>
+  <div class="row">
+        <div class="col-md-6" id="div-content">
+          {!! $new !!}
+        </div>  
+        <div id="divEdit" class="col-md-6">
+          {!! $edit !!}
+        </div>      
 
       
   </div>
   
-
-      
-
-    <!-- /.col -->
-  <!-- /.row -->
 </section>
+
+{!! $delete !!}
 
 @endsection

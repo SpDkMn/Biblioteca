@@ -55,38 +55,59 @@
                         @endforeach
                         </select>
                     </div>
+
                     <div class="form-group">
                         <div class="row">
                           <div class="col-xs-4">
-                              <label>Editorial</label>
+                            <!-- Main editorial -->
+                            <label>Editorial</label>
                               <select id="selectEditorialMainEdit" class="form-control" name="mEditorialMain[]" multiple="multiple" data-placeholder="Editorial Principal" style="width: 100%;">
-                                @foreach($editoriales as $editoriall)
-                                  @foreach($editoriall->categories as $category)
-                                    @if($category->name = "revista")
-                                    <!-- arreglo con las editoriales de una revista -->
-                                      @foreach($revista->editorials as $editorial)
-                                      @if($editorial->magazine_id == $id)
-                                          @if($editorial->pivot->type == true)
-                                            <option value="{{ $editorial->id }}" selected>{{$editorial->name}}</option>
-                                          @endif
-                                      @endif
-                                      @endforeach
-                                      <option value="{{ $editoriall->id }}">{{$editoriall->name}}</option>
-                                    @endif
-                                  @endforeach
+                              @foreach($editoriales as $editorial)
+                                <?php $band = false ; ?>
+                                @foreach($revista->editorials as $editorialM)
+                                  @if($editorialM->id == $editorial->id and $editorialM->pivot->type == true)
+                                    <?php $band = true ; ?>
+                                  @endif
                                 @endforeach
+                                <!--
+                                  Comprobar si el id de $editorial es igual a
+                                  $revista->editorials as $editorial
+                                    $editorial->id
+                                -->
+                                @if($band)
+                                    <option value="{{$editorial->id }}" selected>{{$editorial->name}}</option>
+                                    <?php $band = false; ?>
+                                  @else
+                                    @foreach($editorial->categories as $category)
+                                      @if($category->name == "revista")
+                                        <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
+                                      @endif
+                                    @endforeach
+                                @endif
+                              @endforeach
                               </select>
                           </div>
                           <div class="col-xs-8">
                               <label>Anexos</label>
                               <div class="input-group ">
                                 <select class="form-control" id="selectEditorialSecondEdit" name="mEditorialSecond[]" multiple="multiple" data-placeholder="Editorial Secundaria" style="width: 97%;">
-                                  @foreach($editoriales as  $editorial)
-                                    @foreach($editorial->categories as $category)
-                                      @if($category->name == "revista")
-                                        <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
+                                  @foreach($editoriales as $editorial)
+                                    <?php $band = false ; ?>
+                                    @foreach($revista->editorials as $editorialM)
+                                      @if($editorialM->id == $editorial->id and $editorialM->pivot->type == false)
+                                        <?php $band = true ; ?>
                                       @endif
                                     @endforeach
+                                    @if($band)
+                                        <?php $band = false ; ?>
+                                        <option value="{{$editorial->id }}" selected>{{$editorial->name}}</option>
+                                      @else
+                                        @foreach($editorial->categories as $category)
+                                          @if($category->name == "revista")
+                                            <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
+                                          @endif
+                                        @endforeach
+                                    @endif
                                   @endforeach
                                 </select>
                                 <div class="input-group-btn ">
@@ -133,17 +154,17 @@
                     <div class="form-group">
                         <label for="inputIncomeNumber">Nº Ingreso</label>
                         <span>*</span>
-                        <input type="text" class="form-control" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="">
+                        <input type="text" class="form-control" value="{{$item->incomeNumber}}" name="{{'incomeNumber[]'}}" id="inputIncomeNumber" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="inputBarcode">Código de barra</label>
                         <span>*</span>
-                        <input type="text" class="form-control" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
+                        <input type="text" class="form-control" value="{{$item->barcode}}" name="{{'barcode[]'}}" id="inputBarcode" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="inputCopy">Ejemplar</label>
                         <span>*</span>
-                        <input type="number" class="form-control" value="{{$item->copy}}" name="{{'copy'.$contItem}}" id="inputCopy" placeholder="">
+                        <input type="number" class="form-control" value="{{$item->copy}}" name="{{'copy[]'}}" id="inputCopy" placeholder="">
                     </div>
                 </div>
               </div>
@@ -159,17 +180,17 @@
                       <div class="form-group">
                           <label for="inputIncomeNumber">Nº Ingreso</label>
                           <span>*</span>
-                          <input type="text" class="form-control" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="">
+                          <input type="text" class="form-control" value="{{$item->incomeNumber}}" name="{{'incomeNumber[]'}}" id="inputIncomeNumber" placeholder="">
                       </div>
                       <div class="form-group">
                           <label for="inputBarcode">Código de barra</label>
                           <span>*</span>
-                          <input type="text" class="form-control" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
+                          <input type="text" class="form-control" value="{{$item->barcode}}" name="{{'barcode[]'}}" id="inputBarcode" placeholder="">
                       </div>
                       <div class="form-group">
                           <label for="inputCopy">Ejemplar</label>
                           <span>*</span>
-                          <input type="number" class="form-control" value="{{$item->copy}}" name="{{'copy'.$contItem}}" id="inputCopy" placeholder="">
+                          <input type="number" class="form-control" value="{{$item->copy}}" name="{{'copy[]'}}" id="inputCopy" placeholder="">
                       </div>
                   </div>
                 </div>
@@ -206,11 +227,30 @@
                               <!-- Cargando lista de opciones para ser seleccionados  -->
                               <!-- Nota : Corregir error al mostrar lista de opciones  -->
                               @foreach($autores as $autor)
-                                @foreach($autor->categories as $category)
-                                  @if($category->name == "colaborador")
-                                        <option value="{{ $autor->id }}" >{{ $autor->name}}</option>
+                                  <?php $band = false ; ?>
+                                  @foreach($contenido->authors as $author)
+                                    @if($autor->id == $author->id)
+                                      @foreach($author->categories as $category)
+                                        @if($category->name == "colaborador")
+                                          <?php $band = true ; ?>
+                                        @endif
+                                      @endforeach
+                                    @endif
+                                  @endforeach
+
+
+                                  @if($band)
+                                      <option value="{{ $autor->id }}" selected>{{ $autor->name}}</option>
+                                      <?php $band = false; ?>
+                                    @else
+                                    @foreach($autor->categories as $category)
+                                      @if($category->name == "colaborador")
+                                            <option value="{{ $autor->id }}" >{{ $autor->name}}</option>
+                                      @endif
+                                    @endforeach
                                   @endif
-                                @endforeach
+
+
                               @endforeach
                               </select>
                             </div>
@@ -226,11 +266,29 @@
                                     <label>Colaborador</label>
                                     <select class="form-control select"  multiple="multiple" name ="{{'collaborator'.$contContent.'[]'}}" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
                                       @foreach($autores as $autor)
-                                        @foreach($autor->categories as $category)
-                                          @if($category->name == "colaborador")
-                                                <option value="{{ $autor->id }}" >{{ $autor->name}}</option>
+                                          <?php $band = false ; ?>
+                                          @foreach($contenido->authors as $author)
+                                            @if($autor->id == $author->id)
+                                              @foreach($author->categories as $category)
+                                                @if($category->name == "colaborador")
+                                                  <?php $band = true ; ?>
+                                                @endif
+                                              @endforeach
+                                            @endif
+                                          @endforeach
+
+
+                                          @if($band)
+                                              <option value="{{ $autor->id }}" selected>{{ $autor->name}}</option>
+                                              <?php $band = false; ?>
+                                            @else
+                                            @foreach($autor->categories as $category)
+                                              @if($category->name == "colaborador")
+                                                    <option value="{{ $autor->id }}" >{{ $autor->name}}</option>
+                                              @endif
+                                            @endforeach
                                           @endif
-                                        @endforeach
+
                                       @endforeach
                                     </select>
                                   </div>
@@ -404,15 +462,15 @@
             var itemBody = '<div class="box-body">'+
                                   '<div class="form-group">'+
                                       '<label for="inputIncomeNumber">Nº Ingreso</label>'+
-                                      '<input type="text" class="form-control" name="incomeNumber'+idCont+'" id="inputIncomeNumber" placeholder="">'+
+                                      '<input type="text" class="form-control" name="{{'incomeNumber[]'}}" id="inputIncomeNumber" placeholder="">'+
                                   '</div>'+
                                   '<div class="form-group">'+
                                       '<label for="inputBarcode">Código de barra</label>'+
-                                    '<input type="text" class="form-control" name="barcode'+idCont+'" id="inputBarcode" placeholder="">'+
+                                    '<input type="text" class="form-control" name="{{'barcode[]'}}" id="inputBarcode" placeholder="">'+
                                   '</div>'+
                                   '<div class="form-group">'+
                                       '<label for="inputCopy">Ejemplar</label>'+
-                                      '<input type="number" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="" >'+
+                                      '<input type="number" class="form-control" name="{{'copy[]'}}" id="inputCopy" placeholder="" >'+
                                   '</div>'+
                               '</div>';
             var itemPanel = '<div class="BoxItemMagazineEdit box box-info box-solid" id="itemPanel'+idCont+'">'+itemHeader+itemBody +'</div>';

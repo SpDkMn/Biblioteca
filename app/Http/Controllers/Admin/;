@@ -255,43 +255,31 @@ class MagazineController extends Controller{
             $cont ++ ;
           }
         }
-        // 
-        // $activador = false ;
-        //     foreach ($revista->editorials as $editorial) {
-        //       if($editorial->pivot->type == true){
-        //         foreach ($request['mEditorialMain'] as $key => $ip) {
-        //             dd($ip);
-        //
-        //             if($ip == $editorial->id){
-        //               $activador =  true;
-        //             }
-        //         }
-        //       }else{
-        //         foreach ($request['mEditorialSecond'] as $key => $ip) {
-        //           if($ip == $editorial->id){
-        //             $activador =  true;
-        //           }
-        //         }
-        //       }
-        //     }
-        //
-        //
-        // dd($revista->editorials,$activador);
+        dd($request['mEditorialSecond']);
 
-    //Borramos las relaciones entre revistas y  editoriales solo cuando se hace una modificacion
-    //si no se modifica esto no es necesario eliminar las relaciones para luego relacionarlos denuevo
-    $revista->editorials()->detach();
+    //Borramos las relaciones entre revistas y  editoriales
+    foreach ($magazines as $magazine) {
+      if ($magazine->id == $id) {
+        $magazine->editorials()->detach();
+      }
+    }
     //Relacionamos nuevamente revistas con editoriales
+    foreach ($magazines as $magazine) {
       // Editoriales Anexadas
       if($request['mEditorialSecond']!=null){
         foreach ($request['mEditorialSecond'] as $clave => $valor) {
-              $revista-> editorials()->attach($valor,['type'=>false]);
+            if($magazine->id == $id){
+              $magazine-> editorials()->attach($valor,['type'=>false]);
+            }
         }
       }
       // Editorial Primaria -> Dato obligatorio
       foreach ($request['mEditorialMain'] as $clave => $valor2) {
-              $revista-> editorials()->attach($valor2,['type'=>true]);
+        if($magazine->id == $id){
+              $magazine-> editorials() -> attach($valor2,['type'=>true]);
+          }
         }
+    };
     $revista->save();
     return redirect('admin/magazines');
   }

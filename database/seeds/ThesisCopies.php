@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
-use App\ThesisCopy as ThesisCopy; 
+use App\ThesisCopy as ThesisCopy;
 
 class ThesisCopies extends Seeder
 {
@@ -13,6 +12,8 @@ class ThesisCopies extends Seeder
      */
     public function run()
     {
-        ThesisCopy::create(['incomeNumber'=>20057861 ,'clasification'=>'addkgd','barcode'=>48200001,'ejemplar'=>1,'edition'=>2014,'nhojas'=>'123','location'=>'Estante 3','management'=>2017,'availability'=>true,'publicationLocation'=>'Facultad de Ingenieria de sistemas','thesis_id'=>1]);
+         ThesisCopy::create(['incomeNumber'=>20057861 ,'barcode'=>48200001,'ejemplar'=>1,'availability'=>'1','thesis_id'=>'1']);
+
+         ThesisCopy::create(['incomeNumber'=>24547861 ,'barcode'=>45642000,'ejemplar'=>2,'availability'=>'0','thesis_id'=>'1']);
     }
 }

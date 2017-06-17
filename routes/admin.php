@@ -6,7 +6,9 @@ Route::get('book/content', 'BookController@content');
 
 Route::resource('editorial', 'EditorialController');
 Route::resource('employees', 'EmployeeController');
-
+Route::resource('autor', 'AuthorController');
+Route::get('thesis/content/{id}', 'ThesisController@content');
+Route::resource('thesis', 'ThesisController');
 Route::resource('magazines', 'MagazineController');
 //Creando una nueva ruta para poder eliminar las revistas
 Route::get('magazines/{magazines}/destroy', 'MagazineController@destroy')->name('magazines.destroy');

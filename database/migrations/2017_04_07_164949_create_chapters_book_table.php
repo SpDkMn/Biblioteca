@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateThesisCopiesTable extends Migration
+class CreateChaptersBookTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateThesisCopiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('thesis_copies', function (Blueprint $table) {
+        Schema::create('chapters_book', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->unsignedTinyInteger('number');
+            $table->unsignedSmallInteger('book_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +30,6 @@ class CreateThesisCopiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('thesis_copies');
+        Schema::dropIfExists('chapters_book');
     }
 }

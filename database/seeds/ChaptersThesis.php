@@ -13,18 +13,6 @@ class ChaptersThesis extends Seeder
      */
     public function run()
     {
-        ChapterThesis::create(['content'=>'numeros romanos'  ,'thesis_id'=>1]);
-        ChapterThesis::create(['content'=>'numeros reales'   ,'thesis_id'=>1]);
-        ChapterThesis::create(['content'=>'numeros complejos','thesis_id'=>1]);
-        ChapterThesis::create(['content'=>'limites'          ,'thesis_id'=>1]);
-        ChapterThesis::create(['content'=>'metodos numericos','thesis_id'=>1]);
-        ChapterThesis::create(['content'=>'derivadas'        ,'thesis_id'=>1]);
-
-        ChapterThesis::create(['content'=>'Nacimiento, Hijo de satan'  ,'thesis_id'=>2]);
-        ChapterThesis::create(['content'=>'Muerte de Shiro'            ,'thesis_id'=>2]);
-		ChapterThesis::create(['content'=>'El nuevo exorcista'         ,'thesis_id'=>2]);
-		ChapterThesis::create(['content'=>'El gato de Rin'             ,'thesis_id'=>2]);
-		ChapterThesis::create(['content'=>'Enfrentamiento Yukio'       ,'thesis_id'=>2]);
-		ChapterThesis::create(['content'=>'Tragado por su padre, satan','thesis_id'=>2]);
+        ChapterThesis::create(['contenido'=>'numeros romanos','thesis_id'=>1]);
     }
 }

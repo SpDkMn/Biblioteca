@@ -8,7 +8,7 @@ class Book extends Model
 {   
     protected $table = 'books';
 
-	protected $fillable = ['title','secondaryTitle','summary','isbn','extension','physicalDetails','dimensions','accompaniment'];
+	protected $fillable = ['clasification','title','secondaryTitle','summary','isbn','extension','physicalDetails','dimensions','accompaniment','relationBook','edition','libraryLocation'];
 
     public function bookCopies(){
     	return $this->hasMany('App\BookCopy');
@@ -23,6 +23,9 @@ class Book extends Model
     }
     public function chapters(){
         return $this->hasMany('App\ChapterBook');
+    }
+    public function themes(){
+        return $this->belongsToMany('App\Theme','book_theme');
     }
 }
  

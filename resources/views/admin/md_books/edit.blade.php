@@ -1,19 +1,18 @@
 
 
-
 <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title">Nuevo</h3>
+    <h3 class="box-title">Editar</h3>
     <div class="box-tools pull-right">
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
       </button>
     </div>
   </div>
   
-
-  <form method="POST" id="formulario" action="{{ url('/admin/book') }}">
+ <form action="{{ route('book.update', $book->id) }}" method="POST">
     {{ csrf_field() }}
-   
+    {{ method_field('PUT') }}
+  
     <div class="box-body">
     
       <div class="col-md-6">
@@ -41,27 +40,27 @@
                           <!--1. Titulo -->
                           <div class="form-group">
                             <label>Titulo</label>
-                            <input type="text" name="title" class="form-control" id="title">
+                            <input type="text" name="title" class="form-control" id="title" value="{{$book->title}}">
                           </div>
                           <!--1. Fin de Titulo -->
 
                           <!--2. Resto de Titulo -->
                           <div class="form-group">
                             <label>Resto de Titulo</label>
-                            <input type="text" name="secondaryTitle" class="form-control" id="secondaryTitle">
+                            <input type="text" name="secondaryTitle" class="form-control" id="secondaryTitle" value="{{$book->secondaryTitle}}">
                           </div>                    
                           <!--2. Fin Resto de Titulo -->
 
                           <!--3. Clasificacion -->
                           <div class="form-group">
                             <label>Clasificacion</label>
-                            <input type="text" name="clasification" class="form-control" id="clasification">
+                            <input type="text" name="clasification" class="form-control" id="clasification" value="{{$book->clasification}}">
                           </div>
                           <!--3. Fin clasificacion -->
                           
                           <div class="form-group">
                             <label>Edicion</label>
-                            <input type="text" name="edition" class="form-control" id="edition">
+                            <input type="text" name="edition" class="form-control" id="edition" value="{{$book->edition}}">
                           </div>
 
                           <!--4. Autor -->
@@ -74,13 +73,27 @@
                                   @foreach($autores as  $autor)
                                     @foreach($autor->categories as $category)
                                       @if($category->id == 1)
-                                        <option value="{{ $autor->id }}">{{$autor->name}}</option>
+                                      <option value="{{ $autor->id }}"
+
+                                      <?php
+                                        foreach($book->authors as $a){
+                                          if($a->id == $autor->id && $a->pivot->type == true){
+                                            echo " selected ";
+                                            break;
+                                          }
+                                        }               
+                                      ?>
+
+                                      >{{$autor->name}}</option>
+                                         
                                       @endif
                                     @endforeach
                                   @endforeach
                                 </select>
                               </p>
                             <!--4.1. Fin Autor Principal-->
+
+
                             <!-- 4.2. Autor Secundario -->
                               <p>
                                 &nbsp&nbsp&nbsp&nbspSecundario<?php   for($i=0;$i<15;$i++){echo "&nbsp";}?>:&nbsp&nbsp&nbsp&nbsp
@@ -88,7 +101,18 @@
                                   @foreach($autores as  $autor)
                                     @foreach($autor->categories as $category)
                                       @if($category->id == 1)
-                                        <option value="{{ $autor->id }}">{{$autor->name}}</option>
+                                        <option value="{{ $autor->id }}"
+
+                                          <?php
+                                            foreach($book->authors as $a){
+                                              if($a->id == $autor->id && $a->pivot->type == false){
+                                                echo " selected ";
+                                                break;
+                                              }
+                                            }               
+                                          ?>
+
+                                        >{{$autor->name}}</option>
                                       @endif
                                     @endforeach
                                   @endforeach
@@ -97,7 +121,6 @@
                             <!--4.2. Fin Autor Secundario -->
                           </div>
                           <!--4. Fin Autor -->
-                          
                           <!-- 5. Editorial -->
                             <div class="form-group">
                               <label>Editorial</label>
@@ -108,7 +131,18 @@
                                       @foreach($editoriales as  $editorial)
                                         @foreach($editorial->categories as $category)
                                           @if($category->name == "libro"){
-                                            <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
+                                            <option value="{{ $editorial->id }}"
+
+                                              <?php
+                                                foreach($book->editorials as $e){
+                                                  if($e->id == $editorial->id && $e->pivot->type == true){
+                                                    echo " selected ";
+                                                    break;
+                                                  }
+                                                }               
+                                              ?>
+
+                                            >{{$editorial->name}}</option>
                                           }@endif
                                         @endforeach
                                       @endforeach
@@ -122,7 +156,18 @@
                                   @foreach($editoriales as  $editorial)
                                     @foreach($editorial->categories as $category)
                                       @if($category->name == "libro"){
-                                        <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
+                                        <option value="{{ $editorial->id }}"
+
+                                          <?php
+                                            foreach($book->editorials as $e){
+                                              if($e->id == $editorial->id && $e->pivot->type == false){
+                                                echo " selected ";
+                                                break;
+                                              }
+                                            }               
+                                          ?>
+
+                                        >{{$editorial->name}}</option>
                                       }@endif
                                     @endforeach
                                   @endforeach
@@ -142,27 +187,35 @@
                         <!-- 1. Resumen -->
                         <div class="form-group">
                           <label>Resumen</label>
-                          <textarea class="form-control" rows="3" name="summary" id="Summary" placeholder=""></textarea> 
+                          <textarea class="form-control" rows="3" name="summary" id="inputSummary" >{{$book->summary}}</textarea> 
                         </div>
                         <!-- 1. Fin Resumen -->
 
                         <!-- 2. Capitulos -->
+                        
                         <div class="form-group">
                           <label>Capitulos</label>
                           <div id="contenedor">
-                            <div class="input-group">
-                              <span class="input-group-addon">1</span>
-                              <input type="text" id="campo_1" name="chapter[0]" class="form-control">
-                              <span id="agregarCampo"  class="input-group-addon"><i class="fa fa-plus"></i></span>
-                            </div>
-
+                            @foreach($book->chapters as $c)
+                            <?php $cont=$c->number-1; ?>
+                              <div class="input-group">
+                                <span class="input-group-addon">{{$c->number}}</span>
+                                <input type="text" id="campo_{{$cont}}" name="chapter[{{$cont}}]" class="form-control" value="{{$c->name}}">
+                                @if($cont>0)
+                                  <span id="eliminarCampo" class="input-group-addon eliminar"><i class="fa fa-remove"></i></span>
+                                @else
+                                  <span id="agregarCampo"  class="input-group-addon"><i class="fa fa-plus"></i></span>
+                                @endif
+                              </div>
+                            @endforeach
                           </div>
                         </div>
-                        <!-- 2. Fin <center></center>apitulos -->
+                       
+                        <!-- 2. Fin capitulos -->
 
                         <div class="form-group">
                           <label>Isbn</label>
-                          <input type="text" name="isbn" id="isbn" class="form-control">
+                          <input type="text" name="isbn" class="form-control" value="{{$book->isbn}}">
                         </div>
 
                         <div class="form-group">
@@ -173,10 +226,13 @@
                             @endforeach
                             </select>
                         </div>
-                        
+
+                          
+
+
                         <div class="form-group">
                           <label>Ubicacion en Biblioteca</label>
-                          <input type="text" name="libraryLocation" class="form-control" id="libraryLocation">
+                          <input type="text" name="libraryLocation[]" class="form-control" value="{{$book->libraryLocation}}">
                         </div>
 
                         <div class="form-group">
@@ -184,22 +240,22 @@
                           <div class="form-horizontal">
                            <div for="ejemplo_password_3" class="col-xs-6 control-label">Extension</div>
                           <div class="col-xs-6">
-                            <input type="text" name="extension" id="extension" class="form-control">
+                            <input type="text" name="extension"  class="form-control" value="{{$book->extension}}">
                           </div>
 
                           <div for="ejemplo_password_3" class="col-xs-6 control-label">Otros detalles fisicos</div>
                           <div class="col-xs-6">
-                            <input type="text" name="physicalDetails" id="physicalDetails" class="form-control">
+                            <input type="text" name="physicalDetails" class="form-control" value="{{$book->physicalDetails}}">
                           </div>
 
                           <div for="ejemplo_password_3" class="col-xs-6 control-label">Dimensiones</div>
                           <div class="col-xs-6">
-                            <input type="text" name="dimensions" id="dimensions" class="form-control">
+                            <input type="text" name="dimensions" class="form-control" value="{{$book->dimensions}}">
 
                           </div>
                           <div for="ejemplo_password_3" class="col-xs-6 control-label">Material de Acompañamiento</div>
                             <div class="col-xs-6">
-                              <input type="text" name="accompaniment" id="accompaniment" class="form-control">
+                              <input type="text" name="accompaniment" class="form-control" value="{{$book->accompaniment}}">
                             </div>
                           </div>   
 
@@ -215,6 +271,7 @@
         </div><!-- End Box-solid -->
       </div><!-- End col-md-6 -->
 
+
       <div class="col-md-6">
         <div class="box box-success box-solid">
           <div class="box-header with-border">
@@ -225,113 +282,131 @@
             </div> 
           </div>
           <div class="box-body">
+
+
             <div class="bs-example" data-expample-id="simple-nav-tabs">
+
+        
                <ul class="nav nav-tabs" id="contenedor-pestañas">
-                <li><a type="button" href="#" class="agregarItem"><i class="fa fa-plus"></i></a></li>
-                <li><a type="button" href="#" class="eliminarItem"><i class="fa fa-remove"></i></a></li>
-                <li class="active"><a href="#item1" id="cabezera-item1" data-toggle="tab">Item1&nbsp</a></li>
-                
-                
+               <li><a type="button" href="#" class="agregarItem"><i class="fa fa-plus"></i></a></li>
+               <li><a type="button" href="#" class="eliminarItem"><i class="fa fa-remove"></i></a></li>
+                <?php $cont=1; ?>
+                @foreach($book->bookCopies as $bc)
+                  @if($cont==1)
+                  <li class="active"><a href="#item{{$cont}}" id="cabezera-item{{$cont}}" data-toggle="tab">Item{{$cont}}&nbsp</a></li>
+                  @else
+                  <li><a href="#item{{$cont}}" id="cabezera-item{{$cont}}" data-toggle="tab">Item{{$cont}}&nbsp</a></li>
+                  @endif
+                  <?php $cont=$cont+1; ?>
+                 @endforeach
+                  
                </ul>
                
               <!--************************** CONTENIDO DE ITEM 1 ***********************************-->
                <div class="tab-content"  id="contenedor-item">
 
-                 <div class="tab-pane active" id="item1">
+               <?php $cont=0; ?>
+               <?php $cont2=1; ?>
+               @foreach($book->bookCopies as $bc)
+                  @if($cont==0)
+                  <div class="tab-pane active" id="item{{$cont2}}">
+                  @else
+                  <div class="tab-pane fade" id="item{{$cont2}}">
+                  @endif
                     <div class="box-body">
                       <div class="bs-example" data-example-id="simple-nav-tabs"> 
                           <ul class="nav nav-tabs">
-                            <li class="active"><a href="#primero1" data-toggle="tab">Primero</a></li>
-                            <li><a href="#segundo1" data-toggle="tab">Segundo</a></li>
-                            <li><a href="#tercero1" data-toggle="tab">Tercero</a></li>
+                            <li class="active"><a href="#primero{{$cont2}}" data-toggle="tab">Primero</a></li>
+                            <li><a href="#segundo{{$cont2}}" data-toggle="tab">Segundo</a></li>
+                            <li><a href="#tercero{{$cont2}}" data-toggle="tab">Tercero</a></li>
                           </ul>
 
                           <div class="tab-content">
-                            <div class="tab-pane active" id="primero1">
+                            <div class="tab-pane active" id="primero{{$cont2}}">
                               <div class="box-body">
                                 <div class="form-group">
                                   <label>Numero de Ingreso</label>
-                                  <input type="text" name="incomeNumber[0]" id="incomeNumber1" class="form-control">
+                                  <input type="text" name="incomeNumber[{{$cont}}]" class="form-control" value="{{$bc->incomeNumber}}">
                                 </div>
 
                                 <div class="form-group">
                                   <label>Codigo de Barras</label>
-                                  <input type="text" name="barcode[0]" id="barcode1" class="form-control">
+                                  <input type="text" name="barcode[{{$cont}}]" class="form-control" value="{{$bc->barcode}}">
                                 </div>
 
                                 <div class="form-group">
                                   <label>Volumen</label>
-                                  <input type="text" name="volume[0]" id="volume1" class="form-control">
+                                  <input type="text" name="volume[{{$cont}}]" class="form-control" value="{{$bc->volume}}">
                                 </div>
 
                                 <div class="form-group">
                                   <label>Gestion</label>
-                                  <input type="text" name="management[0]" id="management1" class="form-control">
+                                  <input type="text" name="management[{{$cont}}]" class="form-control" value="{{$bc->management}}">
                                 </div>
 
-                               <div class="form-group">
+                                <div class="form-group">
                                   <label>Disponibilidad</label>
-                                  <select class="form-control select2" name="availability[0]" style="width: 100%;">
-                                      <option>Disponible</option> 
-                                      <option>No Disponible</option>                              
+                                  <select class="form-control select2" name="availability[{{$cont}}]" style="width: 100%;">
+                                      <option @if($bc->availability == true) selected @endif>Disponible</option> 
+                                      <option @if($bc->availability == false) selected @endif>No Disponible</option>                              
                                   </select>
                                 </div>
-
 
                               </div>
                             </div>
                             
-                            <div class="tab-pane fade" id="segundo1">
+                            <div class="tab-pane fade" id="segundo{{$cont2}}">
                               <div class="box-body">
                                 <div class="form-group">
                                   <label>Modalidad de Adquision</label>
-                                  <select class="form-control select2" name="acquisitionModality[0]" id="acquisitionModality1" style="width: 100%;">
-                                      <option>Compra</option> 
-                                      <option>Donacion</option>
-                                      <option>Adquisicion</option>                               
+                                  <select class="form-control select2" name="acquisitionModality[{{$cont}}]" style="width: 100%;">
+                                      <option @if($bc->acquisitionModality == "Compra") selected @endif>Compra</option> 
+                                
+                                      <option @if($bc->acquisitionModality == "Donacion") selected @endif>Donacion</option>
+
+                                      <option @if($bc->acquisitionModality == "Adquisicion") selected @endif>Adquisicion</option> 
+                                                                   
                                   </select>
                                 </div>
 
                                 <div class="form-group">
                                   <label>Fuente de Adquisicion</label>
-                                  <input type="text" class="form-control" name="acquisitionSource[0]" id="acquisitionSource1">
+                                  <input type="text" class="form-control" name="acquisitionSource[{{$cont}}]" value="{{$bc->acquisitionSource}}">
                                 </div>
 
                                 <div class="form-group">
                                   <label>Precio de Adquisicion</label>
-                                  <input type="text" name="acquisitionPrice[0]" class="form-control" id="acquisitionPrice1">
+                                  <input type="text" name="acquisitionPrice[{{$cont}}]" class="form-control" value="{{$bc->acquisitionPrice}}">
                                 </div>
 
                                 <div class="form-group">
                                   <label>Fecha de Adquisicion</label>
-                                  <input type="text" name="acquisitionDate[0]" class="form-control" id="acquisitionDate1">
+                                  <input type="text" name="acquisitionDate[{{$cont}}]" class="form-control" value="{{$bc->acquisitionDate}}">
                                 </div>
 
-                               
                               </div>
                             </div>
 
-                            <div class="tab-pane fade" id="tercero1">
+                            <div class="tab-pane fade" id="tercero{{$cont2}}">
                               <div class="box-body">
                                 <div class="form-group">
                                   <label>Tipo de Impresion</label>
-                                  <select class="form-control select2" name="printType[0]" style="width: 100%;">
-                                      <option>Impresion</option> 
-                                      <option>Reimpresion</option>                              
+                                  <select class="form-control select2" name="printType[{{$cont}}]" style="width: 100%;">
+                                      <option @if($bc->printType == "Impresion") selected @endif >Impresion</option> 
+                                      <option @if($bc->printType == "Reimpresion") selected @endif >Reimpresion</option>                             
                                   </select>
                                 </div>
 
                                 <div class="form-group">
                                   <label>Lugar de Publicacion</label>
-                                  <input type="text" name="publicationLocation[0]" class="form-control" id="publicationLocation1">
+                                  <input type="text" name="publicationLocation[{{$cont}}]" class="form-control" value="{{$bc->publicationLocation}}">
                                 </div>
 
                                 <div class="form-group">
                                   <label>Fecha de Publicacion</label>
-                                  <input type="text" name="publicationDate[0]" class="form-control" id="publicationDate1">
+                                  <input type="text" name="publicationDate[{{$cont}}]" class="form-control" value="{{$bc->publicationDate}}">
                                 </div>
 
-        
                               </div>
                             </div>
                           
@@ -340,8 +415,9 @@
                       </div><!-- End navbar -->
                     </div><!-- End box-body -->
                  </div><!-- End tab-pane -->
-
-                 
+                 <?php $cont=$cont +1; ?>
+                 <?php $cont2=$cont2 +1; ?>
+               @endforeach
 
 
                </div><!-- End tab-content -->
@@ -358,20 +434,22 @@
     </div>  
 
     <div class="box-footer">
-        <button type="submit" id="btn" class="btn btn-primary">Crear</button>
+        <button type="submit" class="btn btn-primary">Editar</button>
     </div>
 
   </form>
 
 </div>
 
-
 <script>
   $(document).ready(function(){
     var contenedorPestañas = $("#contenedor-pestañas");
     var contenedorItem = $('#contenedor-item');
     var AddButton1 = $("#agregarItem");
+
     var x = $("#contenedor-pestañas li").length-2;
+
+    
 
     var FieldCount = x;
     var arreglo;
@@ -400,22 +478,22 @@
                        +'<div class="box-body">'
                           +'<div class="form-group">'
                             +'<label>Numero de Ingreso</label>'
-                            +'<input type="text" name="incomeNumber['+arreglo+']" id="incomeNumber'+FieldCount+'" class="form-control">'
+                            +'<input type="text" name="incomeNumber['+arreglo+']" class="form-control">'
                           +'</div>'
 
                           +'<div class="form-group">'
                             +'<label>Codigo de Barras</label>'
-                            +'<input type="text" name="barcode['+arreglo+']" id="barcode'+FieldCount+'" class="form-control">'
+                            +'<input type="text" name="barcode['+arreglo+']" class="form-control">'
                           +'</div>'
 
                           +'<div class="form-group">'
                             +'<label>Volumen</label>'
-                            +'<input type="text" name="volume['+arreglo+']" id="volume'+FieldCount+'" class="form-control">'
+                            +'<input type="text" name="volume['+arreglo+']" class="form-control">'
                           +'</div>'
 
                           +'<div class="form-group">'
                             +'<label>Gestion</label>'
-                            +'<input type="text" name="management['+arreglo+']" id="management'+FieldCount+'" class="form-control">'
+                            +'<input type="text" name="management['+arreglo+']" class="form-control">'
                           +'</div>'
 
                           +'<div class="form-group">'
@@ -442,17 +520,17 @@
 
                           +'<div class="form-group">'
                             +'<label>Fuente de Adquisicion</label>'
-                            +'<input type="text" name="acquisitionSource['+arreglo+']" id="acquisitionSource'+FieldCount+'" class="form-control">'
+                            +'<input type="text" name="acquisitionSource['+arreglo+']" class="form-control">'
                           +'</div>'
 
                           +'<div class="form-group">'
                             +'<label>Precio de Adquisicion</label>'
-                            +'<input type="text" name="acquisitionPrice['+arreglo+']" id="acquisitionPrice'+FieldCount+'" class="form-control">'
+                            +'<input type="text" name="acquisitionPrice['+arreglo+']" class="form-control">'
                           +'</div>'
 
                           +'<div class="form-group">'
                             +'<label>Fecha de Adquisicion</label>'
-                            +'<input type="text" name="acquisitionDate['+arreglo+']" id="acquisitionDate'+FieldCount+'" class="form-control">'
+                            +'<input type="text" name="acquisitionDate['+arreglo+']" class="form-control">'
                           +'</div>'
 
                         +'</div>'
@@ -470,14 +548,15 @@
 
                           +'<div class="form-group">'
                             +'<label>Lugar de Publicacion</label>'
-                            +'<input type="text" name="publicationLocation['+arreglo+']" id="publicationLocation'+FieldCount+'" class="form-control">'
+                            +'<input type="text" name="publicationLocation['+arreglo+']" class="form-control">'
                           +'</div>'
 
                           +'<div class="form-group">'
                             +'<label>Fecha de Publicacion</label>'
-                            +'<input type="text" name="publicationDate['+arreglo+']" id="publicationDate'+FieldCount+'" class="form-control">'
+                            +'<input type="text" name="publicationDate['+arreglo+']" class="form-control">'
                           +'</div>'
 
+                         
                         +'</div>'
                       +'</div>'
                     
@@ -489,7 +568,7 @@
 
       x++;
     });
-    
+  
     $(".eliminarItem").click(function(){
       if (FieldCount>1) {
         $("#item"+FieldCount).remove();
@@ -500,10 +579,12 @@
       
     });
 
-
     return false;
   });
 </script>
+
+
+
 
 <script>
   $(document).ready(function() {
@@ -519,7 +600,7 @@
 
     $(AddButton).click(function (e) {
         if(x <= MaxInputs) //max input box allowed
-        {
+        {   
             FieldCount++;
             //agregar campo
             var array = FieldCount-1;
@@ -539,43 +620,9 @@
     });
   });
 </script>
-
 <script>
-    (function(){
-      var formulario = document.getElementById('formulario');
-      var title = document.getElementById('title');
-
-      var validarTitulo = function(e){
-        if(formulario.title.value == ""){
-          alert("No relleno campo de titulo");
-          e.preventDefault();
-        }
-      };
-
-      var validarClasificacion = function(e){
-        if(formulario.clasification.value == ""){
-          alert("Campo clasificacion obligatorio");
-          e.preventDefault();
-        }
-      };
-
-      var validarAutor = function(e){
-        alert(formulario.primaryAuthor.value);
-        if(formulario.primaryAuthor.value[0] == null){
-          alert("No selecciono autor");
-          e.preventDefault();
-        }
-      };
-
-      var validar = function(e){
-          validarTitulo(e);
-          validarClasificacion(e);
-      };
-
-      formulario.addEventListener("submit",validar);
-
-
-
-    } ())
-</script>
-
+      $(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();
+      });
+    </script>

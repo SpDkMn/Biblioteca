@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEditorialsTable extends Migration
+class CreateThemesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateEditorialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('editorials', function (Blueprint $table) {
-
+        Schema::create('themes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-        
+            $table->longText('description');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +29,6 @@ class CreateEditorialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('editorials');
+        Schema::dropIfExists('themes');
     }
 }
