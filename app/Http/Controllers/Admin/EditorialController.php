@@ -146,7 +146,6 @@ class EditorialController extends Controller
   }
 
   public function edit($id){
-
       $editorial = Editorial::find($id);
       return view('admin.md_editoriales.edit')->with('editorial',$editorial);
 

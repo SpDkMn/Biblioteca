@@ -23,11 +23,6 @@ class Authors extends Seeder
         Author::Create(['name'=>'Pedro Diaz']);
         Author::Create(['name'=>'Gloria Fudeni']);
         Author::Create(['name'=>'Roberto Sediño']);
-        Author::Create(['name'=>'Rin Okumura']);
-        Author::Create(['name'=>'Hanabi Yasuraoka']);
-        Author::Create(['name'=>'Rodolfo el cerdo']);
-        Author::Create(['name'=>'Eren Jaeger']);
-
 
     }
 

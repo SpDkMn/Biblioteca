@@ -32,8 +32,8 @@
     <div>
   </div>
   <!-- Este js debe ser cargado inmediatamente despues de cargar esta vista , de lo contrario no
-  activara la lista del contenido
-  Nota : Corregir esto , y colocarlo en show / script en caso de que este diseño quede , de lo
+    activara la lista del contenido
+    Nota : Corregir esto , y colocarlo en show / script en caso de que este diseño quede , de lo
   contrario eliminar este script y tmb el que se encuentra en script-->
   <script type="text/javascript">
     $(document).ready(function(){

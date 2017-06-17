@@ -10,6 +10,7 @@ use App\Book as Book;
 use App\BookCopy as BookCopy;
 use App\Editorial as Editorial;
 use App\Content as Content;
+use App\ChapterBook as ChapterBook;
 
 class BookController extends Controller
 {
@@ -38,137 +39,491 @@ class BookController extends Controller
 
 
  public function create(){
-    
  	}
 
 
  	public function store(Request $request){
-  //   Validando datos de entrada
-  //   $this->validate($request, [
-  //     //  'title' => 'required|unique:posts|max:255',
-  //      'magazine.issn' => 'required|unique:posts',
-  //  ]);
-    // fin de la validacions
- 		//Almacenamos lo que el usuario ingresa
-    $contador_contenido = 0 ;
-    $contador_copia = 0 ;
+    
+    
 
-    //gracias while por existir :)
-    //Contando los contenidos de la revista
-    while($request['titleContent'.$contador_contenido]!=null){
-      $contador_contenido ++ ;
-    };
-    //Contando las copias de la revista
-    while($request['clasification'.$contador_copia]!=null){
-      $contador_copia ++ ;
-    };
+    $books=Book::all();
+    
+    //Como no se pueden guardar null , entonces verifiricare , y lo llenare con ""
+    if($request['title']==null)
+        $request['title']="";
+    if($request['secondaryTitle']==null)
+        $request['secondaryTitle']="";
+    if($request['summary']==null)
+        $request['summary']="";
+    if($request['isbn']==null)
+        $request['isbn']="";
+    if($request['extension']==null)
+        $request['extension']="";
+    if($request['physicalDetails']==null)
+        $request['physicalDetails']="";
+    if($request['dimensions']==null)
+        $request['dimensions']="";
+    if($request['accompaniment']==null)
+        $request['accompaniment']="Ninguno";
 
+    //Creando un nuevo libro , lo asigno a la variable $b
+    $b = Book::create([
+                      'clasification'=>$request['clasification'],
+                      'title'=>$request['title'],
+                      'secondaryTitle'=>$request['secondaryTitle'],
+                      'summary'=>$request['summary'],
+                      'isbn'=>$request['isbn'],
+                      'extension'=>$request['extension'],
+                      'physicalDetails'=>$request['physicalDetails'],
+                      'dimensions'=>$request['dimensions'],
+                      'accompaniment'=>$request['accompaniment']
+                      ]);
 
+    //Como el libro ya se creo , buscare y guardare su id    
 
+    $book_id = $b->id;
 
-    //Guardando los datos de la revista
- 		$m = Magazine::create(['title'=>$request['title'],
- 		                            'issn'=>$request['issn'],
-                                'author_id'=>$request['author']
-                                ]);
-
-   //Guardamos los registros de las revistas
-    $magazines = Magazine::all();
-    //Guardamos los registros de las editoriales para el pivote
+    $autores = Author::all();
     $editoriales = Editorial::all();
-    // Capturando id de la revista ingresada
-    foreach ($magazines as $magazine) {
-      if($magazine->issn == $request['issn']){
-        $id_magazine = $magazine->id ;
-      };
-    };
-    //Guardando datos de las copias de revistas
-    for ($j=0; $j < $contador_copia; $j++) {
-      $mc = MagazineCopy::create(['clasification'=>$request['clasification'.$j],
-                                  'incomeNumber'=>$request['incomeNumber'.$j],
-                                  'barcode'=>$request['barcode'.$j],
-                                  'copy'=>$request['copy'.$j],
-                                  'magazine_id'=>$id_magazine
-                                  ]);
+
+    
+    //Creando relacion de autor principal con libro
+    if($request['primaryAuthor']!=null){
+        foreach( $request['primaryAuthor'] as $autor ){
+          foreach ($autores as $aut ) {
+
+              if($autor == $aut->id)
+                {
+                  $b->authors()->attach($aut->id,['type'=>true]);
+                  break;
+                }
+          }
+        }
     }
-    //Guardando los titulos de los contenidos de una revista
-    //Este bucle tiene que ir antes del bucle que asocia los contenidos y los autores
-     for ($i=0; $i<$contador_contenido ; $i++) {
-       $c = Content::create(['title'=>$request["titleContent".$i],
-                            'magazine_id'=>$id_magazine
-                                              ]);
-     }
-    //RELACIONANDO LAS TABLAS PIVOTES
-    //Pivot -> Content - author
-    foreach ($magazines as $magazine) {
-      if ($magazine->id == $id_magazine) {
-          //Recorre los contenidos de cada revista
-          $cont = 0 ;
-          foreach($magazine->contents as $content){
-            //Si el contenido esta relacionado con la revista
-            if($content->magazine_id == $id_magazine){
-              //recorremos el arreglo con los id de los colaboradores para asociarlos al contenido
-                foreach ($request["collaborator".$cont] as $clave => $id) {
-                  $content -> authors() -> attach($id);
-                };
-            };
-            $cont = $cont +1 ;
-          };
-      };
+    
+    //Creando relacion de autor secundario con libro
+    if($request['secondaryAuthor']!=null){
+        foreach($request['secondaryAuthor'] as $autor){
+          foreach ($autores as $aut) {
+              if($autor == $aut->id)
+                {$b->authors()->attach($aut->id,['type'=>false]);
+                  break;
+                }
+          }
+        }
     }
-    //Pivot-> Magazine - Editorial
-    foreach ($magazines as $magazine) {
-      //Recorremos el arreglo con los id de las editoriales seleccionadas para asociarlas a las revistas
-      foreach ($request['editorial'] as $clave => $id) {
-        if($magazine->id == $id_magazine){
-          $magazine-> editorials() -> attach($id);
+
+    //Creando Relacion de la editorial con libro
+    if($request['editorial']!=null){
+      foreach($request['editorial'] as $editorial){
+        foreach ($editoriales as $edi) {
+            if($editorial == $edi->id)
+              {$b->editorials()->attach($edi->id,['type'=>true]);
+                break;
+              }
         }
       }
-    };
- 		//Redireccionamos a la seccion de revistas
- 		return redirect('admin/magazines');
- 	}
+    }
+    
+    //Creando relacion de anexo con libro
+    if($request['secondaryEditorial']!=null){
+      foreach($request['secondaryEditorial'] as $editorial){
+        foreach ($editoriales as $edi) {
+            if($editorial == $edi->id)
+              {$b->editorials()->attach($edi->id,['type'=>false]);
+                break;
+              }
+        }
+      }
+    }
+    
 
+    //Crenado los capitulos , utilizo el id de libro
+    $contador_capitulos=0;
+    foreach ($request['chapter'] as $chapter) {
+          $contador_capitulos++;
+          $cb = ChapterBook::create([
+            'name'=>$chapter,
+            'number'=>$contador_capitulos,
+            'book_id'=>$book_id
+          ]);
+    }
 
+    //Calculando el numero de ejemplares del libro
+    $contador_copia=0;
+    foreach ($request['incomeNumber'] as $a) {
+      $contador_copia ++;
+    }
 
+    //Asigno lo ingresado en el formulario a las siguientes variables 
+    $incomeNumber =$request['incomeNumber'];
+    $clasification =$request['clasification'];
+    $acquisitionModality =$request['acquisitionModality'];
+    $printType =$request['printType'];
+  
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['barcode'][$i]==null)
+            $barcode[$i]= 0;
+        else
+            $barcode[$i]=$request['barcode'][$i];
+    }
+
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['edition'][$i]==null)
+            $edition[$i]=0;
+        else
+            $edition[$i] =$request['edition'][$i];
+    }
+    
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['acquisitionSource'][$i]==null)
+            $acquisitionSource[$i]="";
+        else
+            $acquisitionSource[$i] =$request['acquisitionSource'][$i];
+    }
+    
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['acquisitionPrice'][$i]==null)
+            $acquisitionPrice[$i]="";
+        else
+            $acquisitionPrice[$i] =$request['acquisitionPrice'][$i];
+    }
+      
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['acquisitionDate'][$i]==null)
+            $acquisitionDate[$i]="";
+        else
+            $acquisitionDate[$i] =$request['acquisitionDate'][$i];
+    }
+    
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['location'][$i]==null)
+            $location[$i]="";
+        else
+            $location[$i] =$request['location'][$i];
+    }
+    
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['management'][$i]==null)
+            $management[$i]=0;
+        else
+            $management[$i] =$request['management'][$i];
+    }
+    
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['publicationLocation'][$i]==null)
+            $publicationLocation[$i]="";
+        else
+            $publicationLocation[$i] =$request['publicationLocation'][$i];
+    }
+    
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['publicationDate'][$i]==null)
+            $publicationDate[$i]="";
+        else
+            $publicationDate[$i] =$request['publicationDate'][$i];
+    }
+    
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['phone'][$i]==null)
+            $phone[$i]="";
+        else
+            $phone[$i] =$request['phone'][$i];
+        }
+
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['ruc'][$i]==null)
+            $ruc[$i]="";
+        else
+            $ruc[$i] =$request['ruc'][$i];
+    }
+    
+
+    for($i=0;$i<$contador_copia;$i++){
+      
+      $bandera=false;
+
+      if($request['availability'][$i] == "Disponible")
+        $bandera=true;
+
+      $bc = BookCopy::create([
+        'incomeNumber' => $incomeNumber[$i],
+        'clasification'=>$clasification,
+        'barcode'=>$barcode[$i],
+        'copy'=>$i+1,
+        'edition'=>$edition[$i],
+        'acquisitionModality'=>$acquisitionModality[$i],
+        'acquisitionSource'=>$acquisitionSource[$i],
+        'acquisitionPrice'=>$acquisitionPrice[$i],
+        'acquisitionDate'=>$acquisitionDate[$i],
+        'location'=>$location[$i],
+        'management'=>$management[$i],
+        'availability'=>$bandera,
+        'printType'=>$printType[$i],
+        'publicationLocation'=>$publicationLocation[$i],
+        'publicationDate'=>$publicationDate[$i],
+        'phone'=>$phone[$i],
+        'ruc'=>$ruc[$i],
+        'book_id'=>$book_id
+      ]);
+
+    }
+
+    return redirect('admin/book');
+
+  }
 
   public function edit($id){
+    
+    $book = Book::find($id);
+
     $editoriales = Editorial::all();
     $autores = Author::all();
-    $revistas = Magazine::all();
-    $copias_revistas = MagazineCopy::all();
-    $contenidos = Content::all();
-
-    //Enviando arreglos -> Autores , editoriales , revistas , copias_revistas
-    $new = view('admin.md_magazines.new',['autores'=>$autores,
-                                          'editoriales'=>$editoriales
-                                          ]);
-
-    $show = view('admin.md_magazines.show',['revistas'=>$revistas,
-                                            'copias_revistas'=>$copias_revistas,
-                                            'contenidos'=>$contenidos,
-                                            'editoriales'=>$editoriales,
-                                            'autores'=>$autores
-                                            ]);
+    $chapters = ChapterBook::all();
+    $bookCopies = BookCopy::all();
     
-    $edit = view('admin.md_magazines.edit',[ 'revistas'=>Magazine::find($id),
-                                              'copias_revistas'=>$copias_revistas,
-                                              'contenidos'=>$contenidos,
-                                              'editoriales'=>$editoriales,
-                                              'autores'=>$autores
-                                              ]);
+    
 
-     return view('admin.md_magazines.index',['new' => $new,
-                                            'show'=>$show,
-                                            'edit'=>$edit]);
-     // return view('admin.md_magazines.edit')->with('id_m',$id);
+    return view('admin.md_books.edit',[     'book'=>$book,
+                                            'editoriales'=>$editoriales,
+                                            'autores'=>$autores,
+                                            'chapters'=>$chapters,
+                                            'bookCopies'=>$bookCopies]);
+     
   }
 
 
 
 
   public function update(Request $request, $id){
-    //Editar los campos que se ha enviado en el formulario para editar
+    $book= Book::find($id);
+    $editoriales = Editorial::all();
+    $autores = Author::all();
+    $chapters = ChapterBook::all();
+    $bookCopies = BookCopy::all();
+
+
+
+    if($request['title']==null)
+        $request['title']="";
+    if($request['secondaryTitle']==null)
+        $request['secondaryTitle']="";
+    if($request['summary']==null)
+        $request['summary']="";
+    if($request['isbn']==null)
+        $request['isbn']="";
+    if($request['extension']==null)
+        $request['extension']="";
+    if($request['physicalDetails']==null)
+        $request['physicalDetails']="";
+    if($request['dimensions']==null)
+        $request['dimensions']="";
+    if($request['accompaniment']==null)
+        $request['accompaniment']="Ninguno";
+
+    $book->clasification = $request['clasification'];
+    $book->title = $request['title'];
+    $book->secondaryTitle = $request['secondaryTitle'];
+    $book->summary = $request['summary'];
+    $book->isbn = $request['isbn'];
+    $book->extension = $request['extension'];
+    $book->physicalDetails = $request['physicalDetails'];
+    $book->dimensions = $request['dimensions'];
+    $book->accompaniment = $request['accompaniment'];
+
+    $book->authors()->detach();
+    $book->editorials()->detach(); 
+
+    //Creando relacion de autor principal con libro
+    if($request['primaryAuthor']!=null){
+        foreach( $request['primaryAuthor'] as $autor ){
+          foreach ($autores as $aut ) {
+
+              if($autor == $aut->id)
+                {
+                  $book->authors()->attach($aut->id,['type'=>true]);
+                  break;
+                }
+          }
+        }
+    }
+    
+    //Creando relacion de autor secundario con libro
+    if($request['secondaryAuthor']!=null){
+        foreach($request['secondaryAuthor'] as $autor){
+          foreach ($autores as $aut) {
+              if($autor == $aut->id)
+                {$book->authors()->attach($aut->id,['type'=>false]);
+                  break;
+                }
+          }
+        }
+    }
+
+    //Creando Relacion de la editorial con libro
+    if($request['editorial']!=null){
+      foreach($request['editorial'] as $editorial){
+        foreach ($editoriales as $edi) {
+            if($editorial == $edi->id)
+              {$book->editorials()->attach($edi->id,['type'=>true]);
+                break;
+              }
+        }
+      }
+    }
+    
+    //Creando relacion de anexo con libro
+    if($request['secondaryEditorial']!=null){
+      foreach($request['secondaryEditorial'] as $editorial){
+        foreach ($editoriales as $edi) {
+            if($editorial == $edi->id)
+              {$book->editorials()->attach($edi->id,['type'=>false]);
+                break;
+              }
+        }
+      }
+    }
+    
+
+    $book->chapters()->delete();
+
+    //Crenado los capitulos , utilizo el id de libro
+    $contador_capitulos=0;
+    foreach ($request['chapter'] as $chapter) {
+          $contador_capitulos++;
+          $cb = ChapterBook::create([
+            'name'=>$chapter,
+            'number'=>$contador_capitulos,
+            'book_id'=>$book->id
+          ]);
+    }
+
+    $book->save();
+
+    $book->bookCopies()->delete();
+
+    //Calculando el numero de ejemplares del libro
+    $contador_copia=0;
+    foreach ($request['incomeNumber'] as $a) {
+      $contador_copia ++;
+    }
+
+    //Asigno lo ingresado en el formulario a las siguientes variables 
+    $incomeNumber =$request['incomeNumber'];
+    $clasification =$request['clasification'];
+    $acquisitionModality =$request['acquisitionModality'];
+    $printType =$request['printType'];
+  
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['barcode'][$i]==null)
+            $barcode[$i]= 0;
+        else
+            $barcode[$i]=$request['barcode'][$i];
+    }
+
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['edition'][$i]==null)
+            $edition[$i]=0;
+        else
+            $edition[$i] =$request['edition'][$i];
+    }
+    
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['acquisitionSource'][$i]==null)
+            $acquisitionSource[$i]="";
+        else
+            $acquisitionSource[$i] =$request['acquisitionSource'][$i];
+    }
+    
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['acquisitionPrice'][$i]==null)
+            $acquisitionPrice[$i]="";
+        else
+            $acquisitionPrice[$i] =$request['acquisitionPrice'][$i];
+    }
+      
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['acquisitionDate'][$i]==null)
+            $acquisitionDate[$i]="";
+        else
+            $acquisitionDate[$i] =$request['acquisitionDate'][$i];
+    }
+    
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['location'][$i]==null)
+            $location[$i]="";
+        else
+            $location[$i] =$request['location'][$i];
+    }
+    
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['management'][$i]==null)
+            $management[$i]=0;
+        else
+            $management[$i] =$request['management'][$i];
+    }
+    
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['publicationLocation'][$i]==null)
+            $publicationLocation[$i]="";
+        else
+            $publicationLocation[$i] =$request['publicationLocation'][$i];
+    }
+    
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['publicationDate'][$i]==null)
+            $publicationDate[$i]="";
+        else
+            $publicationDate[$i] =$request['publicationDate'][$i];
+    }
+    
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['phone'][$i]==null)
+            $phone[$i]="";
+        else
+            $phone[$i] =$request['phone'][$i];
+        }
+
+    for($i=0;$i<$contador_copia;$i++){
+        if($request['ruc'][$i]==null)
+            $ruc[$i]="";
+        else
+            $ruc[$i] =$request['ruc'][$i];
+    }
+    
+
+    for($i=0;$i<$contador_copia;$i++){
+      
+      $bandera=false;
+
+      if($request['availability'][$i] == "Disponible")
+        $bandera=true;
+
+      $bc = BookCopy::create([
+        'incomeNumber' => $incomeNumber[$i],
+        'clasification'=>$clasification,
+        'barcode'=>$barcode[$i],
+        'copy'=>$i+1,
+        'edition'=>$edition[$i],
+        'acquisitionModality'=>$acquisitionModality[$i],
+        'acquisitionSource'=>$acquisitionSource[$i],
+        'acquisitionPrice'=>$acquisitionPrice[$i],
+        'acquisitionDate'=>$acquisitionDate[$i],
+        'location'=>$location[$i],
+        'management'=>$management[$i],
+        'availability'=>$bandera,
+        'printType'=>$printType[$i],
+        'publicationLocation'=>$publicationLocation[$i],
+        'publicationDate'=>$publicationDate[$i],
+        'phone'=>$phone[$i],
+        'ruc'=>$ruc[$i],
+        'book_id'=>$book->id
+      ]);
+
+    }
+
+    return redirect()->route('book.index');
+
   }
 
   /**
@@ -181,15 +536,22 @@ class BookController extends Controller
 
   public function destroy($id)
   {
-      $magazine = Magazine::find($id);
-      $magazine->categories()->detach();
-      $magazine->delete();
+      $book = Book::find($id);
+
+      $book->authors()->detach();
+      $book->editorials()->detach();
+
+      $book->bookCopies()->delete();
+      $book->chapters()->delete();
+
+      $book->delete();
  
-       return redirect()->route('magazines.index');
+       return redirect()->route('book.index');
    }
 
 
    public function show(Request $request,$id){
+
       $book=Book::find($id);
       if($request->get('page')==1){
         return view('admin.md_books.show2')->with('book',$book);

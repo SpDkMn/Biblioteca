@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(Thesiss::class);
         // $this->call(ThesisCopies::class);
         // $this->call(ChaptersThesis::class);
-        
+
         //llenando tablas pivotes
         DB::table('author_category')->insert(['author_id' => '1','category_id' => '2']);
         DB::table('author_category')->insert(['author_id' => '2','category_id' => '2']);
@@ -37,4 +37,5 @@ class DatabaseSeeder extends Seeder
         DB::table('category_editorial')->insert(['editorial_id' => '4','category_id' => '2']);
 
       }
+
 }

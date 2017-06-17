@@ -82,5 +82,14 @@
     <!-- js para mostrar el modal , editar , eliminar -->
     <!-- Js para enviar el id de una revista seleccionada -->
     @yield('script')
+
+
+
+
+
+
+
+
+
   </body>
 </html>
