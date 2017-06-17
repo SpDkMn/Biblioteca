@@ -204,7 +204,7 @@
         <?php $contContent = 0  ?>
                 <div class="box box-danger box-solid" id="{{'contentPanel'.$contContent}}">
                     <div class="box-header ">
-                        <h3 class="panel-title">Contenido</h3>
+                        <h3 class="panel-title">Tabla de contenido</h3>
                         <div class="box-tools pull-right">
                           <button type="button" id="agregarContenidoCont"  class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
                         </div>
@@ -216,12 +216,12 @@
                         @if($loop->first)
                         <div class="panel-body">
                           <div class="form-group">
-                            <label for="inputTitleContent">Título</label>
+                            <label for="inputTitleContent">Tabla de contenido</label>
                             <span>*</span>
                             <input type="text" class="form-control" name="{{'titleContent'.$contContent}}" id="{{'inputTitleContent'.$contContent}}" placeholder="" value="{{$contenido->title}}">
                           </div>
                           <div class="form-group">
-                          <label>Colaborador</label>
+                          <label>Colaboradores</label>
                             <select class="form-control select"  multiple="multiple" name ="{{'collaborator'.$contContent.'[]'}}" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
                               <!-- Cargando colaboradores seleccionados -->
                               <!-- Cargando lista de opciones para ser seleccionados  -->
@@ -259,11 +259,11 @@
                             <hr>
                                 <div class="panel-body" id="{{'boxID'.$contContent}}">
                                     <div class="form-group">
-                                      <label for="inputTitleContent">Título</label>
+                                      <label for="inputTitleContent">Contenido</label>
                                       <input type="text" class="form-control" name="{{'titleContent'.$contContent}}" id="{{'inputTitleContent'.$contContent}}" placeholder="" value="{{$contenido->title}}">
                                     </div>
                                   <div class="form-group">
-                                    <label>Colaborador</label>
+                                    <label>Colaboradores</label>
                                     <select class="form-control select"  multiple="multiple" name ="{{'collaborator'.$contContent.'[]'}}" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
                                       @foreach($autores as $autor)
                                           <?php $band = false ; ?>
@@ -418,13 +418,13 @@
                   var buttonClose = '<button id="eliminarContenido'+idContt+'" class="btn btn-xs btn-danger btn-block" type="button" name="button" ><i class="fa fa-times"></i></button>';
                   var contentHeader = '<div class="box-header with-border">'+buttonClose+'</div>'
                   var groupTitle = '<div class="form-group">'+
-                                        '<label for="inputTitleContent">Título</label>'+
+                                        '<label for="inputTitleContent">Contenido</label>'+
                                         '<span>*</span>'+
                                         '<input type="text" class="form-control" name="titleContent'+idContt+'" id="inputTitleContent'+idContt+'" placeholder="">'+
                                    '</div>';
                   var linea = '<hr>';
                   var groupCollaborator = '<div class="form-group">'+
-                                            '<label>Colaborador</label>'+
+                                            '<label>Colaboradores</label>'+
                                               '<select class="form-control select3" multiple="multiple" name ="collaborator'+idContt+'[]" data-placeholder="Seleccione los colaboradores" style="width: 100%;">'+
                                                 '@foreach($autores as $autor)'+
                                                   '@foreach($autor->categories as $category)'+
