@@ -13,11 +13,12 @@ class CreateContentsTable extends Migration
      */
     public function up()
     {
-        
+
         Schema::create('contents', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->integer('magazine_id');
+            $table->integer('magazine_id')->nullable();
+            $table->integer('compendium_id')->nullable();
 
             $table->timestamps();
 

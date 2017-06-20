@@ -7,7 +7,7 @@
       </button>
     </div>
   </div>
-  <form method="POST" action="{{ url('/admin/magazines') }}">
+  <form method="POST" action="{{ url('/admin/compendium') }}">
     {{ csrf_field() }}
         <div class="box-body">
     <!--***************************************************************************************************************************************
@@ -24,17 +24,17 @@
                         <input type="text" class="form-control" name="title" id="inputTitle" placeholder="">
                     </div>
                     <div class="form-group">
-                        <label for="inputSubTitle">Resto de título</label>
-                        <input type="text" class="form-control" name="subtitle" id="inputSubTitle" placeholder="">
+                        <label for="inputTitle">introduccion</label>
+                        <span>*</span>
+                        <textarea rows="3" class="form-control" name="introduccion" id="inputintroduccion" placeholder=""></textarea>
                     </div>
                     <div class="form-group">
                         <label>Entidad académica</label>
                         <span>*</span>
                         <select class="form-control select2" name="author">
-                          <!--  Seleccionando la lista de autores que pertenecen a la categoria revista -->
                           @foreach($autores as $autor)
                             @foreach($autor->categories as $category)
-                              @if($category->name == "revista")
+                              @if($category->name == "compendio")
                                 <option value="{{ $autor->id }}">{{ $autor->name}}</option>
                               @endif
                             @endforeach
@@ -43,72 +43,36 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="row">
-                          <div class="col-xs-4">
                             <label>Editorial</label>
                             <span>*</span>
-                            <select id="listEditorialMain"  class="form-control" name="mEditorialMain[]" multiple="multiple" data-placeholder="Editorial Principal" style="width: 100%;">
+                            <select class="form-control select2" name="editorial" data-placeholder="Editorial" style="width: 100%;">
                             @foreach($editoriales as  $editorial)
                               @foreach($editorial->categories as $category)
-                                @if($category->name == "revista")
+                                @if($category->name == "compendio")
                                   <option  value="{{ $editorial->id }}">{{$editorial->name}}</option>
                                 @endif
                               @endforeach
                             @endforeach
                             </select>
-
-                          </div>
-                          <div class="col-xs-8">
-                            <label>Anexos</label>
-                            <div class="input-group ">
-                              <select id="listEditorialSecond" class="form-control"  name="mEditorialSecond[]" multiple="multiple" data-placeholder="Anexos" style="width: 97%;">
-                              @foreach($editoriales as  $editorial)
-                                @foreach($editorial->categories as $category)
-                                  @if($category->name == "revista")
-                                    <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
-                                  @endif
-                                @endforeach
-                              @endforeach
-                              </select>
-                              <div class="input-group-btn ">
-                                <button type="button" class="btn btn-danger btn-flat clearSelect2" data-toggle="tooltip" data-placement="top" title="Elimina todas las opciones seleccionadas"><i class="fa fa-times"></i></button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
                     </div>
 
                     <div class="form-group">
                         <div class="row">
-                          <div class="col-lg-6">
-                            <label for="inputISSNi">ISSN Impreso</label>
-                            <span>*</span>
-                            <input type="text" class="form-control" name="issn" id="inputISSNi" data-inputmask='"mask": "9999-9999"' data-mask placeholder="Version Impresa">
-                          </div>
-                          <div class="col-lg-6">
-                            <label for="inputISSNd">ISSN Digital</label>
-                              <input type="text" class="form-control" name="issnD" id="inputISSNd" data-inputmask='"mask": "9999-9999"' data-mask placeholder="Version Digital">
-                          </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                          <div class="col-lg-6">
+                          <!-- <div class="col-lg-4">
                             <label for="volumen">Volumen</label>
                             <input type="number" class="form-control" name="volumen" id="volumen" placeholder="Vol."  min="0">
-                          </div>
+                          </div> -->
                           <div class="col-lg-6">
                             <label for="numero">Nº</label>
                               <input type="number" class="form-control" name="numero" id="numero" placeholder="Nº X" min="0" max="10">
                           </div>
+                          <div class="col-lg-6">
+                              <label for="inputClasification">Fecha de edición</label>
+                                <input type="text" class="form-control" name="fechaEdicion" data-inputmask='"mask": "2099"' data-mask  id="fechaEdicion" placeholder="XXXX"  >
+                          </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="inputClasification">Fecha de edición</label>
-                          <input type="text" class="form-control" name="fechaEdicion" data-inputmask='"mask": "aaa-aaa.2099"' data-mask  id="fechaEdicion" placeholder="ABR-DIC.2017" style='text-transform:uppercase' >
-                    </div>
-                 </div>
+                  </div>
                </div>
   <!--***************************************************************************************************************************************
                                                       PANEL DE ITEM
@@ -128,14 +92,9 @@
                       <input type="text" class="form-control" name="incomeNumber0" id="inputIncomeNumber" placeholder="">
                   </div>
                   <div class="form-group">
-                      <label for="inputBarcode">Código de barra</label>
-                      <span>*</span>
-                      <input type="text" class="form-control" name="barcode0" id="inputBarcode" data-inputmask='"mask": "200000009999"' data-mask>
-                  </div>
-                  <div class="form-group">
                       <label for="inputCopy">Ejemplar</label>
                       <span>*</span>
-                      <input type="number" class="form-control" name="copy0" id="inputCopy" placeholder="" value=1 min="0" max="10">
+                      <input type="number" class="form-control" name="copy0" id="inputCopy" placeholder="" value=1 >
                   </div>
               </div>
             </div>
@@ -157,25 +116,13 @@
                           <span>*</span>
                           <input type="text" class="form-control" name="titleContent0" id="inputTitleContent0" placeholder="">
                         </div>
-                        <div class="form-group">
-                          <label>Colaboradores</label>
-                            <select class="form-control selectCollaborator" multiple="multiple" name ="collaborator0[]" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
-                              @foreach($autores as $autor)
-                                @foreach($autor->categories as $category)
-                                  @if($category->name == "colaborador")
-                                    <option value="{{ $autor->id }}">{{ $autor->name}}</option>
-                                  @endif
-                                @endforeach
-                              @endforeach
-                            </select>
-                        </div>
                       </div>
                   </div>
                 </div>
               </div>
             </div>
     <div class="box-footer">
-      <button type="submit" class="btn btn-primary" id="newMagazine">Crear</button>
+      <button type="submit" class="btn btn-primary" id="newCompendium">Crear</button>
     </div>
   </form>
 </div>
@@ -326,11 +273,6 @@
                                 '<input type="text" class="form-control" name="incomeNumber'+idCont+'" id="inputIncomeNumber">'+
                             '</div>'+
                             '<div class="form-group">'+
-                                '<label for="inputBarcode">Código de barra</label>'+
-                                '<span>*</span>'+
-                              '<input type="text" class="form-control" name="barcode'+idCont+'" id="inputBarcode">'+
-                            '</div>'+
-                            '<div class="form-group">'+
                                 '<label for="inputCopy">Ejemplar</label>'+
                                 '<span>*</span>'+
                                 '<input type="number" class="form-control" name="copy'+idCont+'" id="inputCopy" value='+(idCont+1)+'>'+
@@ -344,7 +286,7 @@
     });
 
 
-    $('#newMagazine').click(function(){
+    $('#newCompendium').click(function(){
       //Elimina las cajas ocultadas que contiene los items
         $('.BoxItemMagazine:hidden').remove();
 

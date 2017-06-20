@@ -11,7 +11,7 @@ class CreateEditorialBookTable extends Migration
      *
      * @return void
      */
-    public function up() 
+    public function up()
     {
         Schema::create('editorial_book', function (Blueprint $table) {
             $table->increments('id');

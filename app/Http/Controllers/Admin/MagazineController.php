@@ -62,6 +62,7 @@ class MagazineController extends Controller{
       return intval(preg_replace('/[^0-9]+/', '', $str), 10) ;
     }
 
+
  		//Almacenamos lo que el usuario ingresa
     //Declarando contadores
     $contador_contenido = 0 ;
@@ -80,8 +81,10 @@ class MagazineController extends Controller{
                                 'subtitle'=>$request['subtitle'],
  		                            'issn'=>cambiaCadena($request['issn']),
                                 'issnD'=>cambiaCadena($request['issnD']),
+                                'volumen'=>$request['volumen'],
+                                'numero'=>$request['numero'],
                                 'author_id'=>$request['author'],
-                                'clasification'=>$request['clasification']
+                                'fechaEdicion'=>$request['fechaEdicion']
                                 ]);
    //Guardamos los registros de las revistas
     $magazines = Magazine::all();
@@ -209,11 +212,10 @@ class MagazineController extends Controller{
       $revista->subtitle = $request['subtitle'];
       $revista->issn = $request['issn'];
       $revista->issnD = $request['issnD'];
-      $revista->clasification = $request['clasification'];
-      if(is_string($request['author'])){
-        //Convirtiendo a entero el valor de $request['author'], pues es una cadena y al asignarlo guardara 0
-        $request['author'] = (int)$request['author'];
-      }
+      $revista->fechaEdicion = $request['fechaEdicion'];
+      $revista->volumen = $request['volumen'];
+      $revista->numero = $request['numero'];
+      if(is_string($request['author'])){$request['author'] = (int)$request['author'];}
       $revista->author_id = $request['author'];
     //Actualizacion de datos de los items
     for ($i=0; $i < $countB ; $i++) {
@@ -255,7 +257,7 @@ class MagazineController extends Controller{
             $cont ++ ;
           }
         }
-        // 
+        //
         // $activador = false ;
         //     foreach ($revista->editorials as $editorial) {
         //       if($editorial->pivot->type == true){

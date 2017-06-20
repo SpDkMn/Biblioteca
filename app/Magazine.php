@@ -12,8 +12,7 @@ class Magazine extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'title','subtitle','issn','issnD','author_id','clasification'
-
+        'title','subtitle','issn','issnD','author_id','volumen','numero','fechaEdicion',
     ];
     protected $dates = ['deleted_at'];
 

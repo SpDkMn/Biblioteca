@@ -10,7 +10,7 @@
 <div class="box box-primary">
     <div class="box-header with-border">
         <i class="fa fa-info"></i>
-        <h3 class="box-title">Información de revistas</h3>
+        <h3 class="box-title">Información de compendios</h3>
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
             </button>
@@ -21,11 +21,11 @@
         <table id="magazineTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Revista</th>
+                    <th>Compendio</th>
+                    <th>Introducción</th>
                     <!-- <th>Subtitulo</th> -->
                     <th>clasificación</th>
                     <th>Entidad académica</th>
-                    <th>ISSN</th>
                     <th>Ejemplar</th>
                     <th>Editorial</th>
                     <th>Contenido</th>
@@ -34,82 +34,55 @@
                 </tr>
             </thead>
             <tbody>
-              @foreach($revistas as $revista)
+              @foreach($compendios as $compendio)
                 <tr>
                   <!-- <td class="details-control"></td> -->
-                  <td>{{$revista->title}}</td>
+                  <td>{{$compendio->title}}</td>
                   <td>
-                    <span>Vol.{{$revista->volumen}}</span>
-                    <span>Nº {{$revista->numero}}</span>
-                    <span>{{$revista->fechaEdicion}}</span>
-                  </td>
-                  <!-- <td>{{$revista->subtitle}}</td> -->
-                  <td>{{$revista->author->name}}</td>
-                  <td>
-                    <span class="label label-danger">{{$revista->issn}}</span>
-                    @if($revista->issnD!=0)
-                    <span class="label label-info">{{$revista->issnD}}</span>
-                    @endif
+                    <button type="button" data-id="{{$compendio->id}}" class="btn btn-success showItem"><i class="fa fa-book"></i></button>
                   </td>
                   <td>
-                    <!-- Arreglar diseño luego -->
-                      <!--
-                  Para insertar una lista de botones con los ejemplares
-                    <div class="btn-group">
-                      <button aria-haspopup="true" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <span class="caret"></span>
-                      </button>
+                    <span>Nº{{$compendio->numero}}</span>
+                    <span>{{$compendio->fechaEdicion}}</span>
+                  </td>
+                  <td>{{$compendio->author->name}}</td>
 
+                  <td>
+                  <button type="button" data-id="{{$compendio->id}}" class="btn btn-success showItem"><i class="fa fa-book"></i></button>
+                  </td>
+                  <td>
+                    @foreach($editoriales as $editorial)
+                      @if($editorial->id == $compendio->editorial_id)
+                        <span>{{$editorial->name}}</span>
+                      @endif
+                    @endforeach
+                  </td>
 
-                    <ul class="dropdown-menu">
-                      @foreach($revista->magazines_copies as $copy)
-                        @if($copy->magazine_id == $revista->id)
-                        <li>
-                          <button type="button" data-id="{{$copy->id}}" class="btn copias">{{$copy->copy}}</button>
-                        </li>
-                        @endif
-                      @endforeach
-                    </ul>
-                  </div> -->
-                  <!-- Para mostrar los items usando el modal -->
-
-                  <button type="button" data-id="{{$revista->id}}" class="btn btn-success showItem"><i class="fa fa-book"></i></button>
-                </td>
-                    <td>
-                      @foreach($revista->editorials as $editorial)
-                        @if($editorial->pivot->type == true)
-                          <span class="label label-danger">{{$editorial->name}}</span>
-                          @else
-                            <span class="label label-info">{{$editorial->name}}</span>
-                        @endif
-                      @endforeach
-                    </td>
                       <td>
-                        <!-- <a class="button-content"  href="{{route('magazines.show',$revista->id)}}" >click aqui</a>
-                      href="{{route('magazines.edit',$revista->id)}}-->
-                        <!-- href="{{route('magazines.show',$revista->id)}}" -->
+                        <!-- <a class="button-content"  href="{{route('magazines.show',$compendio->id)}}" >click aqui</a>
+                      href="{{route('magazines.edit',$compendio->id)}}-->
+                        <!-- href="{{route('magazines.show',$compendio->id)}}" -->
                         <!-- data-toggle="modal" data-target="#modalContent" no seran agregados  , puesto que con esto inicializa el modal pero cuando su valor es null
                       luego tiene el id cargado y al presionar cualquiera , muestra el contenido anterior-->
-                        <button type="button" data-id="{{$revista->id}}" class="btn btn-success showContent"><i class="fa fa-bookmark"></i></button>
+                        <button type="button" data-id="{{$compendio->id}}" class="btn btn-success showContent"><i class="fa fa-bookmark"></i></button>
                       </td>
                       <td>
-                        <button type="button" data-id="{{$revista->id}}" class="btn btn-success editar"><i class="fa fa-edit"></i></button>
+                        <button type="button" data-id="{{$compendio->id}}" class="btn btn-success editar"><i class="fa fa-edit"></i></button>
                       </td>
                       <td>
-                        <a type="button" class="button-content btn btn-danger"  href="{{route('magazines.destroy',$revista->id)}}"><i class="fa fa-trash"></i></a>
+                        <a type="button" class="button-content btn btn-danger"  href="{{route('magazines.destroy',$compendio->id)}}"><i class="fa fa-trash"></i></a>
                         <!--  Borrar comentario cuando el metodo para eliminar sea DELETE y se use ajax -->
-                        <!-- <button type="button" data-id="{{$revista->id}}"  data-name="{{$revista->title}}" class="deleteButton btn btn-danger"  data-toggle="modal" data-target="#modalDelete"><i class="fa fa-trash"></i></button></td> -->
+                        <!-- <button type="button" data-id="{{$compendio->id}}"  data-name="{{$compendio->title}}" class="deleteButton btn btn-danger"  data-toggle="modal" data-target="#modalDelete"><i class="fa fa-trash"></i></button></td> -->
                       </td>
                 </tr>
               @endforeach
             </tbody>
             <tfoot>
               <tr>
-                <th>Revista</th>
-                <th>clasificación</th>
+                <th>compendio</th>
+                <th>Introduccion</th>
                 <!-- <th>Subtitulo</th> -->
                 <th>Entidad académica</th>
-                <th>ISSN</th>
                 <th>Ejemplar</th>
                 <th>Editorial</th>
                 <th>Contenido</th>
@@ -126,28 +99,16 @@
 @section('script')
     <script type="text/javascript">
       $(document).ready(function() {
-        //Mostrar contenido de una revista
+        //Mostrar contenido de una compendio
         $('.showContent').on('click',function(event){
           $id = $(this).data('id');
-          //Deshabilita el boton que se ha hecho click para mostrar el contenido
-          //Nota: Descartado por el momento , es mejor que deshabilite todos los botones
-          //  $("button[data-id="+$id+"]").attr("disabled","disabled");
-          //Deshabilita los botones de mostrar contenido
           $(".showContent").attr("disabled","disabled")
-          //Cargando el modal mientras se espera la aparicion del contenido de la revista
-          $('#divContent').load('{{ url("/admin/magazines/") }}/' + $id + '/content');
-          //Intentando deshabilitar el boton mostar contenido luego de que se ha hecho click
+          $('#divContent').load('{{ url("/admin/compendium/") }}/' + $id + '/content');
           $.ajax({
-            //Antes de enviar la peticion al servidor
              beforeSend: function(){
-               //Esta es una prueba para mostrar un refresh antes de que aparesca el contenido
-               //Nota : Falta arreglar / No muestra sin antes poner el modal() , pero luego al aparecer el contenido vuelve a cargarlo
-               // , no es continuo
                  $("#modalContentBody").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
              },
-             //Cuando termina de cargar la peticion exitosamente , sin errores
              success: function(){
-               //Muestra el modal
                $('#modalContent').modal();
                //Habilita los botones de mostrar contenido
                $(".showContent").removeAttr("disabled","disabled");
@@ -155,24 +116,12 @@
              }
            });
           })
-          //Manejador de evento local para mostrar el modal luego de que se ha completado la peticion
-          //************************************************************************************
-          //                                        PRUEBA
-          //***********************************************************************************
-
-          //************************************************************************************
-          //                                       FIN DE LA PRUEBA
-          //***********************************************************************************
-
-          //Esta variable sera cambiado por otra cuando se quiera mostrar varios modales
-          // var band = true ;
-          // cargaCompleta(band);
-        //Mostrar items de una revista
+        //Mostrar items de una compendio
         $('.showItem').on('click',function(event){
           $id = $(this).data('id');
           $(".showItem").attr("disabled","disabled")
-          //Cargando el modal mientras se espera la aparicion del contenido de la revista
-          $('#divItem').load('{{ url("/admin/magazines/") }}/' + $id + '/itemDetail');
+          //Cargando el modal mientras se espera la aparicion del contenido de la compendio
+          $('#divItem').load('{{ url("/admin/compendium/") }}/' + $id + '/itemDetail');
           //Intentando deshabilitar el boton mostar contenido luego de que se ha hecho click
           $.ajax({
             //Antes de enviar la peticion al servidor
@@ -192,13 +141,13 @@
              }
            });
           })
-        //Editar una revista sin dirigirse a otra url
+        //Editar una compendio sin dirigirse a otra url
         $(".editar").on('click',function(event) {
           $id = $(this).data('id');
           //Mostrando recarga
           $("#divEdit").html('<div class="box box-success box-solid"><div class="box-header with-border"><h3 class="box-title">Editar</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>');
           //Cargando datos de la url para editar
-          $("#divEdit").load('{{ url("/admin/magazines/") }}/' + $id + '/edit');
+          $("#divEdit").load('{{ url("/admin/compendium/") }}/' + $id + '/edit');
         });
         //Eliminar -> Prueba{
           //Esta funcion es para mostrar el modal luego de que se termina de completar la peticion al servidor ,
@@ -221,8 +170,8 @@
           // $(".deleteButton").on('click',function(event) {
           //   $name = $(this).data('name');
           //   $id = $(this).data('id');
-          //   $('.modal-body').html('<p>¿Esta seguro que quiere eliminar la revista ' + $name +'?</p>');
-          //   //Agregando la el id de la revista
+          //   $('.modal-body').html('<p>¿Esta seguro que quiere eliminar la compendio ' + $name +'?</p>');
+          //   //Agregando la el id de la compendio
           //   $('#confirmarDelete').data('id',$id);
 
           // Borrar comentario cuando el metodo para eliminar sea DELETE y se use ajax

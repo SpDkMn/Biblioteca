@@ -13,7 +13,7 @@ class CreateEditorialMagazineTable extends Migration
      */
     public function up()
     {
-      
+
         Schema::create('editorial_magazine', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('magazine_id')->unsigned();
