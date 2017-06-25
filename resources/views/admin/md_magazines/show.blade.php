@@ -134,26 +134,28 @@
           //  $("button[data-id="+$id+"]").attr("disabled","disabled");
           //Deshabilita los botones de mostrar contenido
           $(".showContent").attr("disabled","disabled")
+                $('#modalContent').modal();
           //Cargando el modal mientras se espera la aparicion del contenido de la revista
+          $("#modalContentBody").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
           $('#divContent').load('{{ url("/admin/magazines/") }}/' + $id + '/content');
-          //Intentando deshabilitar el boton mostar contenido luego de que se ha hecho click
-          $.ajax({
-            //Antes de enviar la peticion al servidor
-             beforeSend: function(){
-               //Esta es una prueba para mostrar un refresh antes de que aparesca el contenido
-               //Nota : Falta arreglar / No muestra sin antes poner el modal() , pero luego al aparecer el contenido vuelve a cargarlo
-               // , no es continuo
-                 $("#modalContentBody").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
-             },
-             //Cuando termina de cargar la peticion exitosamente , sin errores
-             success: function(){
-               //Muestra el modal
-               $('#modalContent').modal();
-               //Habilita los botones de mostrar contenido
-               $(".showContent").removeAttr("disabled","disabled");
-
-             }
-           });
+          // //Intentando deshabilitar el boton mostar contenido luego de que se ha hecho click
+          // $.ajax({
+          //   //Antes de enviar la peticion al servidor
+          //    beforeSend: function(){
+          //      //Esta es una prueba para mostrar un refresh antes de que aparesca el contenido
+          //      //Nota : Falta arreglar / No muestra sin antes poner el modal() , pero luego al aparecer el contenido vuelve a cargarlo
+          //      // , no es continuo
+          //        $("#modalContentBody").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+          //    },
+          //    //Cuando termina de cargar la peticion exitosamente , sin errores
+          //    success: function(){
+          //      //Muestra el modal
+          //      $('#modalContent').modal();
+          //      //Habilita los botones de mostrar contenido
+          //      $(".showContent").removeAttr("disabled","disabled");
+          //
+          //    }
+          //  });
           })
           //Manejador de evento local para mostrar el modal luego de que se ha completado la peticion
           //************************************************************************************

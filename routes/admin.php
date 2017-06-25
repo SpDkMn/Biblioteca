@@ -18,6 +18,7 @@ Route::resource('compendium', 'CompendiumController');
 //Creando una nueva ruta para poder eliminar las revistas
 Route::get('compendium/{compendium}/destroy', 'CompendiumController@destroy')->name('compendium.destroy');
 Route::get('compendium/{compendium}/content', 'CompendiumController@content')->name('compendium.content');
+Route::get('compendium/{compendium}/introduccion', 'CompendiumController@introduccion')->name('compendium.introduccion');
 Route::get('compendium/{compendium}/itemDetail', 'CompendiumController@itemDetail')->name('compendium.itemDetail');
 
 

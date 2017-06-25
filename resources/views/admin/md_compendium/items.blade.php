@@ -12,10 +12,9 @@
                 <tr>
                   <th style="width: 10px">Ejemplar</th>
                   <th>Numero de ingreso</th>
-                  <th>Codigo de barra</th>
                   <th style="width: 40px">Estado</th>
                 </tr>
-                @foreach($compendio->magazines_copies as $copia)
+                @foreach($compendio->compendium_copies as $copia)
                   <tr>
                     <td>{{$copia->copy}}.</td>
                     <td>{{$copia->incomeNumber}}</td>

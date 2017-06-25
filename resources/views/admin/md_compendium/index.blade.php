@@ -33,6 +33,13 @@
 	</section>
 	<section class="content">
 		<div class="row">
+				<div id="divIntroduccion">
+					{!! $introduccion !!}
+				</div>
+		</div>
+	</section>
+	<section class="content">
+		<div class="row">
 				<div id="divContent">
 					{!! $content!!}
 				</div>

@@ -21,6 +21,9 @@ class CompendiumController extends Controller{
     $delete = view('admin.md_compendium.delete');
     $content = view('admin.md_compendium.content',['compendios'=>$compendios,
                                                   'id'=>null]);
+    $introduccion = view('admin.md_compendium.introduccion',['compendios'=>$compendios,
+                                                  'id'=>null]);
+
     $item = view('admin.md_compendium.items',['id'=>null,
                                               'compendios'=>$compendios]);
     //Enviando arreglos -> Autores , editoriales , compendioss , copias_compendios
@@ -48,6 +51,7 @@ class CompendiumController extends Controller{
                                             'edit'=>$edit,
                                             'delete'=>$delete,
                                             'content'=>$content,
+                                            'introduccion'=>$introduccion,
                                             'item'=>$item
                                           ]);
  	}
@@ -88,26 +92,32 @@ class CompendiumController extends Controller{
                                 ]);
    //Guardamos los registros de las compendios
     $compendios = Compendium::all();
+    $copias_compendios = CompendiumCopy::all();
     //Guardamos los registros de las editoriales para el pivote
     $editoriales = Editorial::all();
     // Capturando id de la compendio ingresada
+
     foreach ($compendios as $compendio) {
-      if($compendio->incomeNumber == cambiaCadena($request['incomeNumber'])){
+      $i = 0 ;
+      if($compendio->title == cambiaCadena($request['title'])){
         $id_compendium = $compendio->id ;
       };
+      $i ++ ;
     };
+
+
     //Guardando datos de las copias de compendios
     for ($j=0; $j < $contador_copia; $j++) {
       $mc = CompendiumCopy::create(['incomeNumber'=>$request['incomeNumber'.$j],
                                   'copy'=>$request['copy'.$j],
-                                  'compendium_id'=>$id_Compendium
+                                  'compendium_id'=>$id_compendium
                                   ]);
     }
     //Guardando los titulos de los contenidos de una compendio
     //Este bucle tiene que ir antes del bucle que asocia los contenidos y los autores
      for ($i=0; $i<$contador_contenido ; $i++) {
        $c = Content::create(['title'=>$request["titleContent".$i],
-                            'compendium_id'=>$id_Compendium,
+                            'compendium_id'=>$id_compendium,
                             'magazine_id'=>null
                                               ]);
      }
@@ -253,6 +263,12 @@ class CompendiumController extends Controller{
   public function content($id){
     $compendios = Compendium::all();
     return view('admin.md_compendium.content',['id'=>$id,
+                                              'compendios'=>$compendios]);
+  }
+  //Terminado
+  public function introduccion($id){
+    $compendios = Compendium::all();
+    return view('admin.md_compendium.introduccion',['id'=>$id,
                                               'compendios'=>$compendios]);
   }
   //Terminado

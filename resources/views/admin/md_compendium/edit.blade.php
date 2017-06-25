@@ -166,13 +166,11 @@
                         @if($loop->first)
                         <div class="panel-body">
                           <div class="form-group">
-                            <label for="inputTitleContent">Tabla de contenido</label>
-                            <span>*</span>
+                            <label for="inputTitleContent">Contenido</label>
                             <input type="text" class="form-control" name="{{'titleContent'.$contContent}}" id="{{'inputTitleContent'.$contContent}}" placeholder="" value="{{$contenido->title}}">
                           </div>
                           </div>
                           @else
-                            <hr>
                                 <div class="panel-body" id="{{'boxID'.$contContent}}">
                                     <div class="form-group">
                                       <label for="inputTitleContent">Contenido</label>
@@ -300,17 +298,16 @@
                 $('#agregarContenidoCont').click(function(){
 
                   // Guardar el panel donde se encuentra la seccion contenido
-                  var container = $('#contentPanel0');
+                  var container = $('#contentPanelEdit');
                   var buttonClose = '<button id="eliminarContenido'+idContt+'" class="btn btn-xs btn-danger btn-block" type="button" name="button" ><i class="fa fa-times"></i></button>';
                   var contentHeader = '<div class="box-header with-border">'+buttonClose+'</div>'
                   var groupTitle = '<div class="form-group">'+
                                         '<label for="inputTitleContent">Contenido</label>'+
-                                        '<span>*</span>'+
                                         '<input type="text" class="form-control" name="titleContent'+idContt+'" id="inputTitleContent'+idContt+'" placeholder="">'+
                                    '</div>';
                   var linea = '<hr>';
 
-                  var contentBody = linea+'<div class="panel-body" id="boxID'+idContt+'">'+groupTitle+'</div>';
+                  var contentBody = '<div class="panel-body" id="boxID'+idContt+'">'+groupTitle+'</div>';
                   // var boxContent = '<div class="box box-default" id="boxID'+idContt+'">'+contentBody +'</div>';
 
                   $(container).append(contentBody);

@@ -39,7 +39,7 @@
                   <!-- <td class="details-control"></td> -->
                   <td>{{$compendio->title}}</td>
                   <td>
-                    <button type="button" data-id="{{$compendio->id}}" class="btn btn-success showItem"><i class="fa fa-book"></i></button>
+                    <button type="button" data-id="{{$compendio->id}}"  class="btn btn-info showIntroduccion" data-toggle="modal" data-target="#modalIntroduccion"><i class="fa fa-book"></i></button>
                   </td>
                   <td>
                     <span>Nº{{$compendio->numero}}</span>
@@ -70,7 +70,7 @@
                         <button type="button" data-id="{{$compendio->id}}" class="btn btn-success editar"><i class="fa fa-edit"></i></button>
                       </td>
                       <td>
-                        <a type="button" class="button-content btn btn-danger"  href="{{route('magazines.destroy',$compendio->id)}}"><i class="fa fa-trash"></i></a>
+                        <a type="button" class="button-content btn btn-danger"  href="{{route('compendium.destroy',$compendio->id)}}"><i class="fa fa-trash"></i></a>
                         <!--  Borrar comentario cuando el metodo para eliminar sea DELETE y se use ajax -->
                         <!-- <button type="button" data-id="{{$compendio->id}}"  data-name="{{$compendio->title}}" class="deleteButton btn btn-danger"  data-toggle="modal" data-target="#modalDelete"><i class="fa fa-trash"></i></button></td> -->
                       </td>
@@ -116,6 +116,31 @@
              }
            });
           })
+          //prueba mostrar modal
+          $(".showIntroduccion").on('click', function(event) {
+            $id = $(this).data('id')
+            $("#modalIntroduccionBody").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>')
+            $("#modalIntroduccionBody").load('{{ url("/admin/compendium") }}/' + $id+ '/introduccion');
+          })
+
+          // //Mostrar introduccion de una compendio
+          // $('.showIntroduccion').on('click',function(event){
+          //   $id = $(this).data('id');
+          //   $(".showIntroduccion").attr("disabled","disabled")
+          //   $('#divIntroduccion').load('{{ url("/admin/compendium/") }}/' + $id + '/introduccion');
+          //   $.ajax({
+          //      beforeSend: function(){
+          //          $("#modalIntroduccionBody").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+          //      },
+          //      success: function(){
+          //        $('#modalIntroduccion').modal();
+          //        //Habilita los botones de mostrar contenido
+          //        $(".showIntroduccion").removeAttr("disabled","disabled");
+          //
+          //      }
+          //    });
+          //   })
+
         //Mostrar items de una compendio
         $('.showItem').on('click',function(event){
           $id = $(this).data('id');

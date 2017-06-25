@@ -64,7 +64,7 @@
                           </div> -->
                           <div class="col-lg-6">
                             <label for="numero">Nº</label>
-                              <input type="number" class="form-control" name="numero" id="numero" placeholder="Nº X" min="0" max="10">
+                              <input type="number" class="form-control" name="numero" id="numero" placeholder="Nº X" min="0">
                           </div>
                           <div class="col-lg-6">
                               <label for="inputClasification">Fecha de edición</label>
@@ -113,7 +113,6 @@
                       <div class="panel-body">
                         <div class="form-group">
                           <label for="inputTitleContent">Contenido</label>
-                          <span>*</span>
                           <input type="text" class="form-control" name="titleContent0" id="inputTitleContent0" placeholder="">
                         </div>
                       </div>
@@ -227,23 +226,22 @@
         var container = $(contenedor);
         var groupTitle = '<div class="form-group">'+
                               '<label for="inputTitleContent">Contenido</label>'+
-                              '<span>*</span>'+
                               '<input type="text" class="form-control" name="titleContent'+cont+'" id="inputTitleContent'+cont+'" placeholder="">'+
                          '</div>';
         var linea = '<hr>';
-        var groupCollaborator = '<div class="form-group">'+
-                                  '<label>Colaboradores</label>'+
-                                    '<select class="form-control '+select+'" multiple="multiple" name ="collaborator'+cont+'[]" data-placeholder="Seleccione los colaboradores" style="width: 100%;">'+
-                                      '@foreach($autores as $autor)'+
-                                        '@foreach($autor->categories as $category)'+
-                                          '@if($category->name == "colaborador")'+
-                                            '<option value="{!! $autor->id !!}">{{$autor->name}}</option>'+
-                                          '@endif '+
-                                        '@endforeach '+
-                                      '@endforeach '+
-                                    '</select>'+
-                                  '</div>';
-        var contentBody = linea+'<div class="panel-body" id="boxID'+cont+'">'+groupTitle+groupCollaborator+'</div>';
+        // var groupCollaborator = '<div class="form-group">'+
+        //                           '<label>Colaboradores</label>'+
+        //                             '<select class="form-control '+select+'" multiple="multiple" name ="collaborator'+cont+'[]" data-placeholder="Seleccione los colaboradores" style="width: 100%;">'+
+        //                               '@foreach($autores as $autor)'+
+        //                                 '@foreach($autor->categories as $category)'+
+        //                                   '@if($category->name == "colaborador")'+
+        //                                     '<option value="{!! $autor->id !!}">{{$autor->name}}</option>'+
+        //                                   '@endif '+
+        //                                 '@endforeach '+
+        //                               '@endforeach '+
+        //                             '</select>'+
+        //                           '</div>';
+        var contentBody ='<div class="panel-body" id="boxID'+cont+'">'+groupTitle+'</div>';
         // var boxContent = '<div class="box box-default" id="boxID'+idCont+'">'+contentBody +'</div>';
     		$(container).append(contentBody);
         cont = cont + 1 ;
