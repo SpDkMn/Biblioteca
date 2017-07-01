@@ -13,8 +13,15 @@ class CreateConfigurationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('configurations', function (Blueprint $table) {
+         Schema::create('configurations', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('tiPrestamo');
+            $table->string('tcPrestamo');
+            $table->string('tReserva');
+            $table->string('diaFeriado');
+            $table->string('rangoFeriado');
+            $table->boolean('activador');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

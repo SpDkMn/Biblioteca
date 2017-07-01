@@ -21,3 +21,6 @@ Route::get('thesis/content', 'ThesisController@content');
 
 //Parte de Giordano
 Route::resource('/noticias','Noticias');
+
+
+Route::resource('configurations', 'ConfigurationController');
