@@ -41,7 +41,7 @@
 
       <div class="form-group">
         <label>Categoria</label>
-      <select class="form-control select2" multiple="multiple" data-placeholder="Seleccione la categoria" name="category[]" style="width: 100%;">
+      <select class="form-control selectCategoryEdit" multiple="multiple" data-placeholder="Seleccione la categoria" name="category[]" style="width: 100%;">
       @if($id_1)<option selected>libro</option>
       @else<option>libro</option>@endif
       
@@ -73,10 +73,3 @@
   </form>
   
 </div>
-<script>
-      $(function () {
-        //Initialize Select2 Elements
-        $(".select2").select2();
-      });
-    </script>
-<!-- /.box -->

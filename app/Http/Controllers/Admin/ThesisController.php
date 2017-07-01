@@ -132,14 +132,22 @@ class ThesisController extends Controller
       };
     };
 
+
+
     //Guardando datos de las copias de tesis
     for ($j=0; $j < $contador_copia; $j++) {
+      if($request['incomeNumber'.$j]==null){
+          continue;  
+      }
+    
+
       $mc = ThesisCopy::create([  'incomeNumber'=>$request['incomeNumber'.$j],
                                   'barcode'=>$request['barcode'.$j],
                                   'ejemplar'=>$request['copy'.$j],
                                   'availability'=>$av,
                                   'thesis_id'=>$id_thesis
                                 ]);
+       
     }
    
     //RELACIONANDO LAS TABLAS PIVOTES
@@ -162,10 +170,15 @@ class ThesisController extends Controller
           }
 
       // Autor secundario
+
+
       foreach ($request['autorSecond'] as $clave => $id) {
         if($thesis->id == $id_thesis){
               $thesi-> authors() -> attach($id,['type'=>false]);
           }
+        else{
+          continue;
+        }
        }
     };
     //Redireccionamos a la seccion de tesis

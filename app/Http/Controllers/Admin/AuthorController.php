@@ -111,7 +111,6 @@ class AuthorController extends Controller
 
 
    public function create(){
-    	
    }
 
    public function store(AuthorRequest $request){
@@ -151,20 +150,20 @@ class AuthorController extends Controller
 
    public function edit($id){
   
+
       $author = Author::find($id);
       return view('admin.md_autores.edit')->with('author',$author);
 
     }
-    
-    
+       
 
    public function update($id,AuthorRequest $request){
        
-       $author = Author::find($id);
+      $author = Author::find($id);
 
        $author->fill($request->all());
        $author->save();
-           
+
        $author->categories()->detach();
 
        foreach ($request['category'] as $category) {
@@ -185,35 +184,33 @@ class AuthorController extends Controller
                 case 'colaborador':
                     $id=5;
                     break;
-              case 'asesor':
+                case 'asesor':
                    $id=6;
                    break;
             }   
-
             $author->categories()->attach($id);
         }
-
+        
        return redirect()->route('autor.index');
-       
     }
 
+
+
    public function destroy($id){
+
         $author=Author::find($id);
         $author->delete();
         return redirect('autor.index');
-       
-    }
+   }
 
 
-
-     public function show($id){
-
+   public function show($id){
         $author = Author::find($id);
         $author->categories()->detach();
         $author->delete();
 
         return redirect()->route('autor.index');
-          }
+   }
    
     
 }

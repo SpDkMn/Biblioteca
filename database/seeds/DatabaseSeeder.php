@@ -19,9 +19,10 @@ class DatabaseSeeder extends Seeder
         $this->call(Thesiss::class);
         $this->call(ThesisCopies::class);
         $this->call(ChaptersThesis::class);
-        $this->call(Author_category::class);
+
         $this->call(Editorial_category::class);
-       
+        $this->call(Author_category::class);
+
     }
 }
 

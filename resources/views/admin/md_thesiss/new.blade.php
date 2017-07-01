@@ -55,18 +55,18 @@
                         
                         <input type="radio" class="flat" name="tipo" value="tesis" checked="" required/> Tesis 
                         <br>
-                        <input type="radio" class="flat" name="tipo" value="tesina"/> Tesina
+                        <input type="radio" class="flat" name="tipo" value="tesina" required /> Tesina
                       </p>
                   </div>
 
                     <div class="form-group">
                         <label for="inputTitle">Titulo</label>
-                        <input type="text" class="form-control" name="title" id="inputTitle" placeholder="">
+                        <input type="text" class="form-control" name="title" id="inputTitle" placeholder="" required>
                     </div>
                     
                     <div class="form-group">
                         <label>Autor Principal</label>
-                        <select class="form-control" id="selectAutorMain" name="autorMain[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Principal">
+                        <select class="form-control" id="selectAutorMain" name="autorMain[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Principal" required>
                             @foreach($autores as  $autor)
                               @foreach($autor->categories as $category)
                                 @if($category->name == "tesis/tesina")
@@ -79,7 +79,7 @@
 
                     <div class="form-group">
                         <label>Autor Secundario</label>
-                        <select class="form-control select2" id="listAutorSecond" name="autorSecond[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Secundario">
+                        <select class="form-control select2" id="listAutorSecond" name="autorSecond[]" multiple="multiple" style="width: 100%;" data-placeholder="Si no tiene dejelo en blanco">
                             @foreach($autores as  $autor)
                               @foreach($autor->categories as $category)
                                 @if($category->name == "tesis/tesina")
@@ -92,7 +92,7 @@
 
                     <div class="form-group">
                         <label>Editorial</label>
-                        <select class="form-control select2" name="editorial" style="width: 100%;">
+                        <select class="form-control select2" name="editorial" style="width: 100%;" required>
                         @foreach($editoriales as  $editorial)
                           @foreach($editorial->categories as $category)
                             @if($category->name == "tesis/tesina")
@@ -105,13 +105,13 @@
 
                     <div class="form-group">
                       <label for="Clasification">Clasificación</label>
-                      <input type="text" class="form-control" name="clasification" id="inputClasification" placeholder="">
+                      <input type="text" class="form-control" name="clasification" id="inputClasification" placeholder="" required>
                     </div>
 
                     
                     <div class="form-group">
                         <label>Asesor</label>
-                        <select class="form-control select2" name="asesor" style="width: 100%;">
+                        <select class="form-control select2" name="asesor" style="width: 100%;" required>
                         @foreach($autores as  $autor)
                           @foreach($autor->categories as $category)
                             @if($category->name == "asesor")
@@ -125,7 +125,7 @@
 
                     <div class="form-group">
                       <label for="escuela">E . A . P : </label>
-                      <input type="text" class="form-control" name="escuela" id="inputEscuela" placeholder="">
+                      <input type="text" class="form-control" name="escuela" id="inputEscuela" placeholder="" required>
                     </div>
                             
               </div>
@@ -145,37 +145,37 @@
                    
                     <div class="form-group">
                         <label for="inputEdition">Edicion</label>
-                        <input type="text" class="form-control" name="edition" id="inputEdition" placeholder="">
+                        <input type="text" class="form-control" name="edition" id="inputEdition" placeholder="" required>
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Extension</label>
-                        <input type="text" class="form-control" name="extension" id="inputEXTENSION" placeholder="">
+                        <input type="text" class="form-control" name="extension" id="inputEXTENSION" placeholder="" required>
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Dimensiones</label>
-                        <input type="text" class="form-control" name="dimension" id="inputEXTENSION" placeholder="">
+                        <input type="text" class="form-control" name="dimension" id="inputEXTENSION" placeholder="" required>
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Detalles Físicos</label>
-                        <input type="text" class="form-control" name="detalles" id="inputEXTENSION" placeholder="">
+                        <input type="text" class="form-control" name="detalles" id="inputEXTENSION" placeholder="" required>
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Material Adicional</label>
-                        <input type="text" class="form-control" name="materialad" id="inputEXTENSION" placeholder="">
+                        <input type="text" class="form-control" name="materialad" id="inputEXTENSION" placeholder="" required>
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Ubicacion</label>
-                        <input type="text" class="form-control" name="ubicacion" id="inputEXTENSION" value="Estante Nº ">
+                        <input type="text" class="form-control" name="ubicacion" id="inputEXTENSION" value="Estante Nº " required>
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Lugar de sustentacion</label>
-                        <input type="text" class="form-control" name="lugarsus" id="inputEXTENSION" value="Facultad de Ingeniería de Sistemas - UNMSM">
+                        <input type="text" class="form-control" name="lugarsus" id="inputEXTENSION" value="Facultad de Ingeniería de Sistemas - UNMSM" required>
                     </div>
 
                         
@@ -196,22 +196,22 @@
                         <!-- 1. Resumen -->
                     <div class="form-group">
                         <label for="inputSummary">Resumen</label>
-                        <textarea class="form-control" rows="3" name="summary" id="inputSummary" placeholder=""></textarea> 
+                        <textarea class="form-control" rows="3" name="summary" id="inputSummary" placeholder="" required></textarea> 
                      </div>
 
                      <div class="form-group">
                         <label for="inputContent">Contenido</label>
-                        <textarea class="form-control" rows="3" name="contenido" id="inputContent" placeholder=""></textarea> 
+                        <textarea class="form-control" rows="3" name="contenido" id="inputContent" placeholder="" required></textarea> 
                      </div>  
                     
                     <div class="form-group">
                         <label for="inputRecomend">Conclusiones y Recomendaciones</label>
-                        <textarea class="form-control" rows="3" name="recomendacion" id="inputRecomend" placeholder=""></textarea> 
+                        <textarea class="form-control" rows="3" name="recomendacion" id="inputRecomend" placeholder="" required></textarea> 
                     </div>
 
                     <div class="form-group">
                         <label for="inputBibliografia">Bibliografía</label>
-                        <textarea class="form-control" rows="3" name="bibliografia" id="inputBibliografia" placeholder=""></textarea> 
+                        <textarea class="form-control" rows="3" name="bibliografia" id="inputBibliografia" placeholder="" required></textarea> 
                     </div>
                         
                </div><!-- End Box-Body -->
@@ -229,22 +229,22 @@
                   <h3 class="box-title">Item principal</h3>
                   <!-- Cambiar por un diseño mas atractivo cuando este funcionando -->
                   <div class="box-tools pull-right">
-                    <button type="button" id="agregarItem" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
+                    <button type="button" id="agregarItem" class="btn btn-box-tool"><i class="fa fa-plus" required></i></button>
                   </div>
               </div>
               <div class="box-body">
                   
                   <div class="form-group">
                       <label for="inputIncomeNumber">Nº Ingreso</label>
-                      <input type="text" class="form-control" name="incomeNumber0" id="inputIncomeNumber" placeholder="">
+                      <input type="text" class="form-control" name="incomeNumber0" id="inputIncomeNumber" placeholder="" required>
                   </div>
                   <div class="form-group">
                       <label for="inputBarcode">Código de barra</label>
-                      <input type="text" class="form-control" value="20000000" name="barcode0" id="inputBarcode" data-inputmask='"mask": "200000009999"' data-mask>
+                      <input type="text" class="form-control" value="20000000" name="barcode0" id="inputBarcode" data-inputmask='"mask": "200000009999"' data-mask required>
                   </div>
                   <div class="form-group">
                       <label for="inputCopy">Ejemplar</label>
-                      <input type="number" class="form-control" name="copy0" id="inputCopy" placeholder="">
+                      <input type="number" class="form-control" name="copy0" id="inputCopy" placeholder="" required>
                   </div>
 
 

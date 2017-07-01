@@ -18,3 +18,6 @@ Route::get('magazines/{magazines}/itemDetail', 'MagazineController@itemDetail')-
 Route::resource('profiles', 'ProfileController');
 Route::resource('thesis', 'ThesisController');
 Route::get('thesis/content', 'ThesisController@content');
+
+//Parte de Giordano
+Route::resource('/noticias','Noticias');

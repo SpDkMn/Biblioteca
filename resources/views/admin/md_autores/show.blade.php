@@ -7,20 +7,31 @@
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
       </button>
     </div> 
-  </div><br>
+  </div>
 
   <div class="box-body">
 
+  <!---->
+  <!--BUSQUEDA Y FILTROS-->
+  {!!Form::model(Request::all(),['route'=>'autor.index','method'=>'GET','class'=>'navbar-form navbar-right','role'=>'search'])!!}
+    <div class="form-group">
+        {!!Form::text('name',null,['class'=>'form-control', 'placeholder'=>'Nombre del autor'])!!}
+        {!!Form::select('category[]',['Libro'=>'Libro','Revista'=>'Revista','Tesis'=>'Tesis','Compendio'=>'Compendio'],null,['id'=>'example-multiple-selected','multiple'=>'multiple'])!!}
+         
+    </div>   
+    <button type="submit" class="btn btn-primary">Buscar</button><br>
       
-    <table id="example1" class="table table-bordered table-hover">
-     <thead>
+    {!!Form::close()!!}
+  <!--FIN BUSQUEDA Y FILTROS-->
+
+   
+    <table class="table table-bordered table-hover">
       <tr>
         <th>Nombre</th>
         <th>Categoria</th>
         <th>Editar</th>
         <th>Eliminar</th>
       </tr>
-      </thead>
 
       <!--$Categories es la variable que almacena los filtros de busqueda-->
       @if($categories==null)
@@ -84,10 +95,10 @@
   
 
   @section('script')
-  <script src="{{ URL::asset('js/jquery.multi-select.js')}}"></script>
+    <script src="{{ URL::asset('js/jquery.multi-select.js')}}"></script>
     <script type="text/javascript">
+    <!-- Note the missing multiple attribute! -->
       $(document).ready(function() {
-
         $(document).ready(function() {
           $('#example-multiple-selected').multiselect();
         });
@@ -103,14 +114,14 @@
         @if($eliminar)
         $(".eliminar").on('click',function(event) {
           $name = $(this).data('name')
-          $('.modal-body').html('<p>¿Esta seguro que quiere eliminar el autor ' + $name +'?</p>');
+          $('.modal-body').html('<p>¿Esta seguro que quiere eliminar el editorial ' + $name +'?</p>');
           $('#confirmaDelete').data('id',$(this).data('id'))
         });
         $("#confirmaDelete").on('click',function(event){
           $id = $('#confirmaDelete').data('id')
           $.ajax({
             
-            url: '{{ url("/admin/autor") }}/'+$id,
+            url: '{{ url("/admin/editorial") }}/'+$id,
 
             data: {'_token': '{{csrf_token()}}'},
             success: function(result) {

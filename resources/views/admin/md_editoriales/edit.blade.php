@@ -1,5 +1,3 @@
-
-
 <div class="box box-success">
   <div class="box-header with-border">
     <h3 class="box-title">Editar</h3>
@@ -53,6 +51,7 @@
 
       @if($id_4)<option selected>compendio</option>
       @else<option>compendio</option>@endif
+
       </select>
 
       </div>
