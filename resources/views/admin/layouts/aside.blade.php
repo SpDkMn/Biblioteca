@@ -57,9 +57,10 @@
         </a>
      </li> --}}
       {{-- END COMPENDIUM MANAGMENT--}}
-      
+      <li @if(URL::full() == url('/admin/configurations'))class="active"@endif><a href="{{ url('/admin/configurations') }}"><i class="fa fa-"></i> <span>Configuraciones</span></a></li>
+
        <li @if(URL::full() == url('/admin/book'))class="active"@endif><a href="{{ url('/admin/book') }}"><i class="fa fa-book"></i> <span>Libros</span></a></li>
-       
+
        <li @if(URL::full() == url('/admin/thesis'))class="active"@endif><a href="{{ url('/admin/thesis') }}"><i class="fa fa-graduation-cap"></i> <span> Tesis - Tesina</span></a></li>
 
        <li @if(URL::full() == url('/admin/magazines'))class="active"@endif><a href="{{ url('/admin/magazines') }}"><i class="fa fa-bookmark-o"></i> <span>Revistas</span></a></li>
