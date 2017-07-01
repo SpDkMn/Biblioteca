@@ -6,20 +6,18 @@
           <h4 class="modal-title" id="myModalLabel"><i class="fa fa-book"></i>   Item</h4>
         </div>
         <div class="modal-body" id="modalItemBody">
-          @foreach($revistas as $revista)
-            @if($revista->id == $id)
+          @foreach($compendios as $compendio)
+            @if($compendio->id == $id)
               <table class="table table-bordered">
                 <tr>
                   <th style="width: 10px">Ejemplar</th>
                   <th>Numero de ingreso</th>
-                  <th>Codigo de barra</th>
                   <th style="width: 40px">Estado</th>
                 </tr>
-                @foreach($revista->magazines_copies as $copia)
+                @foreach($compendio->compendium_copies as $copia)
                   <tr>
                     <td>{{$copia->copy}}.</td>
                     <td>{{$copia->incomeNumber}}</td>
-                    <td>{{$copia->barcode}}</td>
                     <td><span class="label label-warning">Disponible</span></td>
                   </tr>
                 @endforeach

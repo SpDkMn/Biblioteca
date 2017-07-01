@@ -2,7 +2,6 @@
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 use App\Author as Author;
 use App\Magazine as Magazine;
 use App\MagazineCopy as MagazineCopy;
@@ -11,20 +10,19 @@ use App\Content as Content;
 //Nota: Reducir la funciones al terminar todos los modulos
 class MagazineController extends Controller{
   //Terminado
- 	public function index(){
+  public function index(){
     $editoriales = Editorial::all();
     $autores = Author::all();
     $revistas = Magazine::all();
     $copias_revistas = MagazineCopy::all();
     $contenidos = Content::all();
-
     $delete = view('admin.md_magazines.delete');
     $content = view('admin.md_magazines.content',['revistas'=>$revistas,
                                                   'id'=>null]);
     $item = view('admin.md_magazines.items',['id'=>null,
                                               'revistas'=>$revistas]);
     //Enviando arreglos -> Autores , editoriales , revistas , copias_revistas
- 		$new = view('admin.md_magazines.new',['autores'=>$autores,
+    $new = view('admin.md_magazines.new',['autores'=>$autores,
                                           'editoriales'=>$editoriales
                                           ]);
     $show = view('admin.md_magazines.show',['revistas'=>$revistas,
@@ -42,7 +40,6 @@ class MagazineController extends Controller{
                                               'id'=>null,
                                               'autores'=>null
                                               ]);
-
      return view('admin.md_magazines.index',['new' => $new,
                                             'show'=>$show,
                                             'edit'=>$edit,
@@ -50,19 +47,18 @@ class MagazineController extends Controller{
                                             'content'=>$content,
                                             'item'=>$item
                                           ]);
- 	}
+  }
   //Funcion no usada
- 	public function create(){
+  public function create(){
     //Funcion no usada
- 	}
+  }
   //Terminado
- 	public function store(Request $request){
+  public function store(Request $request){
     // dd($request->all());
     function cambiaCadena($str){
       return intval(preg_replace('/[^0-9]+/', '', $str), 10) ;
     }
-
- 		//Almacenamos lo que el usuario ingresa
+    //Almacenamos lo que el usuario ingresa
     //Declarando contadores
     $contador_contenido = 0 ;
     $contador_copia = 0 ;
@@ -74,14 +70,15 @@ class MagazineController extends Controller{
     while($request['incomeNumber'.$contador_copia]!=null){
       $contador_copia ++ ;
     };
-
     //Guardando los datos de la revista
- 		$m = Magazine::create(['title'=>$request['title'],
+    $m = Magazine::create(['title'=>$request['title'],
                                 'subtitle'=>$request['subtitle'],
- 		                            'issn'=>cambiaCadena($request['issn']),
+                                'issn'=>cambiaCadena($request['issn']),
                                 'issnD'=>cambiaCadena($request['issnD']),
+                                'volumen'=>$request['volumen'],
+                                'numero'=>$request['numero'],
                                 'author_id'=>$request['author'],
-                                'clasification'=>$request['clasification']
+                                'fechaEdicion'=>$request['fechaEdicion']
                                 ]);
    //Guardamos los registros de las revistas
     $magazines = Magazine::all();
@@ -89,11 +86,9 @@ class MagazineController extends Controller{
     $editoriales = Editorial::all();
     // Capturando id de la revista ingresada
     foreach ($magazines as $magazine) {
-
       if($magazine->issn == cambiaCadena($request['issn'])){
         $id_magazine = $magazine->id ;
       };
-
     };
     //Guardando datos de las copias de revistas
     for ($j=0; $j < $contador_copia; $j++) {
@@ -142,7 +137,6 @@ class MagazineController extends Controller{
             }
           }
       }
-
         // Editorial Primaria
         foreach ($request['mEditorialMain'] as $clave => $id) {
           if($magazine->id == $id_magazine){
@@ -150,9 +144,9 @@ class MagazineController extends Controller{
             }
           }
     };
- 		//Redireccionamos a la seccion de revistas
- 		return redirect('admin/magazines');
- 	}
+    //Redireccionamos a la seccion de revistas
+    return redirect('admin/magazines');
+  }
   //Terminado
   public function edit($id){
     $revistas = Magazine::all();
@@ -203,17 +197,15 @@ class MagazineController extends Controller{
     /* PRUEBAS */
     // dd($request->all(),$request['clasification1'],$revista->magazines_copies,'Copias luego de editar:',$contador_copia ,'Copias antes de Editar:',$contador_copia2);
     //********************************************************************************************************
-
     //Actualizando datos de revista
       $revista->title = $request['title'];
       $revista->subtitle = $request['subtitle'];
       $revista->issn = $request['issn'];
       $revista->issnD = $request['issnD'];
-      $revista->clasification = $request['clasification'];
-      if(is_string($request['author'])){
-        //Convirtiendo a entero el valor de $request['author'], pues es una cadena y al asignarlo guardara 0
-        $request['author'] = (int)$request['author'];
-      }
+      $revista->fechaEdicion = $request['fechaEdicion'];
+      $revista->volumen = $request['volumen'];
+      $revista->numero = $request['numero'];
+      if(is_string($request['author'])){$request['author'] = (int)$request['author'];}
       $revista->author_id = $request['author'];
     //Actualizacion de datos de los items
     for ($i=0; $i < $countB ; $i++) {
@@ -226,7 +218,6 @@ class MagazineController extends Controller{
                                     'copy'=>$request['copy'][$j],
                                     'magazine_id'=>$id
                                     ]);
-
       }
     //Agregando Los nuevos Contenidos que se han agregado en editar
       for ($i=$contador_contenido2; $i<$contador_contenido ; $i++) {
@@ -238,7 +229,6 @@ class MagazineController extends Controller{
       for ($i=0; $i<$contador_contenido2 ; $i++) {
         $revista->contents[$i]->title=$request["titleContent".$i];
         $contentsR[$i]->save();
-
       }
     //Borramos las relaciones entre contenidos y colaboradores
       foreach($revistaP->contents as $contentR) {
@@ -255,7 +245,7 @@ class MagazineController extends Controller{
             $cont ++ ;
           }
         }
-        // 
+        //
         // $activador = false ;
         //     foreach ($revista->editorials as $editorial) {
         //       if($editorial->pivot->type == true){
@@ -277,7 +267,6 @@ class MagazineController extends Controller{
         //
         //
         // dd($revista->editorials,$activador);
-
     //Borramos las relaciones entre revistas y  editoriales solo cuando se hace una modificacion
     //si no se modifica esto no es necesario eliminar las relaciones para luego relacionarlos denuevo
     $revista->editorials()->detach();

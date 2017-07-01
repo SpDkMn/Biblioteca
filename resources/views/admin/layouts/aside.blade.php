@@ -62,9 +62,31 @@
        
        <li @if(URL::full() == url('/admin/thesis'))class="active"@endif><a href="{{ url('/admin/thesis') }}"><i class="fa fa-graduation-cap"></i> <span> Tesis - Tesina</span></a></li>
 
-       <li @if(URL::full() == url('/admin/magazines'))class="active"@endif><a href="{{ url('/admin/magazines') }}"><i class="fa fa-bookmark-o"></i> <span>Revistas</span></a></li>
+
+
+        {{-- MAGAZINE MANAGEMENT--}}
+      <li class="treeview @if(URL::full() == url('/admin/magazines') || URL::full() == url('/admin/compendium')) active @endif  ">
+        <a href="#">
+          <i class="fa fa-table"></i><span>Revistas y Compendios</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+            <li @if(URL::full() == url('/admin/magazines'))class="active"@endif><a href="{{ url('/admin/magazines') }}"><i class="fa fa-"></i> <span>Revistas</span></a></li>
+            <li @if(URL::full() == url('/admin/compendium'))class="active"@endif><a href="{{ url('/admin/compendium') }}"><i class="fa fa-"></i> <span>Compendios</span></a></li>
+            {{-- <li @if(URL::full() == url('/admin/magazines/delete'))class="active"@endif><a href="{{ url('/admin/magazines/delete') }}"><i class="fa fa-"></i> <span>Eliminar</span></a></li>
+            <li @if(URL::full() == url('/admin/magazines/show'))class="active"@endif><a href="{{ url('/admin/magazines/show') }}"><i class="fa fa-"></i> <span>Mostrar</span></a></li>   --}}
+        </ul>
+      </li>
+      {{-- END MAGAZINE MANAGMENT--}}
+
+
 
        <li @if(URL::full() == url('/admin/autor'))class="active"@endif><a href="{{ url('/admin/autor') }}"><i class="fa fa-male"></i> <span>Autores</span></a></li>
+
+       
+
 
        <li @if(URL::full() == url('/admin/editorial'))class="active"@endif><a href="{{ url('/admin/editorial') }}"><i class="fa fa-newspaper-o"></i> <span>Editorial</span></a></li>
 

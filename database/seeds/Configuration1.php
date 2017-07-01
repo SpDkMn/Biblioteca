@@ -1,7 +1,6 @@
 <?php
-
 use Illuminate\Database\Seeder;
-
+use App\Configuration as Configuration;
 class Configuration1 extends Seeder
 {
     /**
@@ -11,14 +10,6 @@ class Configuration1 extends Seeder
      */
     public function run()
     {
-      /**
-      * Run the database seeds.
-      *
-      * @return void
-      */
-     public function run()
-       {
-         Configuration::create(['name' => 'Activar','JSON'=>'{"activar":1}']);
-       }
-     }
+        Configuration::create(['name' => 'Activar','JSON'=>'{"activar":1}']);
+    }
 }

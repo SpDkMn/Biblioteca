@@ -8,10 +8,10 @@
         <div class="modal-body" id="modalContentBody">
           <!-- Agregar Refresh mientras se muestra el modal -->
           <!-- Nota : Falta arreglar el diseño de los contenidos -->
-        @foreach($revistas as $revista)
-            @if($revista->id == $id)
+        @foreach($compendios as $compendio)
+            @if($compendio->id == $id)
             <div class="list-group">
-              @foreach($revista->contents as $contenido)
+              @foreach($compendio->contents as $contenido)
               <a href="#" class="list-group-item ">
                 <p class="list-group-item-text">{{$contenido->title}}</p>
                   <h4 class="list-group-item-heading">

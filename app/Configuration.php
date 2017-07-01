@@ -24,6 +24,5 @@ namespace App;
       * @var array
       */
      protected $fillable = [
-         'name', 'JSON',
-     ];
+         'name', 'JSON' ];
   }
