@@ -2,14 +2,19 @@
 namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
+
 class Magazine extends Model
 {
-    //Datos guardados en la tabla
+	//Datos guardados en la tabla
     use SoftDeletes;
+
     protected $fillable = [
         'title','subtitle','issn','issnD','author_id','volumen','numero','fechaEdicion',
     ];
     protected $dates = ['deleted_at'];
+
+
     //Una revista tiene una o más copias
     public function magazines_copies(){
         return $this->hasMany('App\MagazineCopy');

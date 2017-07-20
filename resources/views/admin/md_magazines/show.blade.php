@@ -38,7 +38,11 @@
                 <tr>
                   <!-- <td class="details-control"></td> -->
                   <td>{{$revista->title}}</td>
-                  <td>{{$revista->clasification}}</td>
+                  <td>
+                    <span>Vol.{{$revista->volumen}}</span>
+                    <span>Nº {{$revista->numero}}</span>
+                    <span>{{$revista->fechaEdicion}}</span>
+                  </td>
                   <!-- <td>{{$revista->subtitle}}</td> -->
                   <td>{{$revista->author->name}}</td>
                   <td>
@@ -128,7 +132,9 @@
           //  $("button[data-id="+$id+"]").attr("disabled","disabled");
           //Deshabilita los botones de mostrar contenido
           $(".showContent").attr("disabled","disabled")
+                $('#modalContent').modal();
           //Cargando el modal mientras se espera la aparicion del contenido de la revista
+          $("#modalContentBody").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
           $('#divContent').load('{{ url("/admin/magazines/") }}/' + $id + '/content');
           //Intentando deshabilitar el boton mostar contenido luego de que se ha hecho click
           $.ajax({
@@ -147,6 +153,25 @@
                $(".showContent").removeAttr("disabled","disabled");
              }
            });
+          // //Intentando deshabilitar el boton mostar contenido luego de que se ha hecho click
+          // $.ajax({
+          //   //Antes de enviar la peticion al servidor
+          //    beforeSend: function(){
+          //      //Esta es una prueba para mostrar un refresh antes de que aparesca el contenido
+          //      //Nota : Falta arreglar / No muestra sin antes poner el modal() , pero luego al aparecer el contenido vuelve a cargarlo
+          //      // , no es continuo
+          //        $("#modalContentBody").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+          //    },
+          //    //Cuando termina de cargar la peticion exitosamente , sin errores
+          //    success: function(){
+          //      //Muestra el modal
+          //      $('#modalContent').modal();
+          //      //Habilita los botones de mostrar contenido
+          //      $(".showContent").removeAttr("disabled","disabled");
+          //
+          //    }
+          //  });
+
           })
           //Manejador de evento local para mostrar el modal luego de que se ha completado la peticion
           //************************************************************************************
@@ -184,6 +209,7 @@
           })
         //Editar una revista sin dirigirse a otra url
         $(".editar").on('click',function(event) {
+
           $id = $(this).data('id');
           //Mostrando recarga
           $("#divEdit").html('<div class="box box-success box-solid"><div class="box-header with-border"><h3 class="box-title">Editar</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>');

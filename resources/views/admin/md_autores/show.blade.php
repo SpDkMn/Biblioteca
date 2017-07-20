@@ -2,12 +2,11 @@
 <div class="box box-warning">
   <div class="box-header with-border">
     <h3 class="box-title">Listado de Autores</h3>
-
-    <div class="box-tools pull-right"> 
-      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-      </button>
-    </div> 
-  </div><br>
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+  </div>
+  <br>
 
   <div class="box-body">
 
@@ -70,31 +69,27 @@
               }   
             ?>
 
-          @if($array==$categories)
-              <tr>
-                <td>{{$author->name}}</td>
-                <?php $aux=0; ?>
-                <td>
-                @foreach($author->categories as $category)
-                   @if($aux>0),@endif
-                    {{$category->name}}
-                    <?php $aux=$aux+1; ?>
-                @endforeach
-                </td>
-                <td><button type="button" data-id="{{$author->id}}" class="btn btn-success editar" @if(!$editar) disabled @endif><i class="fa fa-pencil"></i></button></td>
 
-                <td><button type="button" data-id="{{$author->id}}" data-name="{{$author->name}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted" @if(!$eliminar) disabled @endif><i class="fa fa-trash"></i></button></td> 
-              </tr>
-          @endif
-        @endforeach
+            @if($array==$categories)
+               <tr>
+                  <td>{{$author->name}}</td>
+                  <?php $aux=0; ?>
+                  <td>
+                      @foreach($author->categories as $category)
+                        @if($aux>0),@endif
+                        {{$category->name}}
+                        <?php $aux=$aux+1; ?>
+                      @endforeach
+                  </td>
+            <td><a href="{{route('autor.edit',$author->id)}}" class="btn btn-success editar" @if(!$editar) disabled @endif><i class="fa fa-pencil"></i></a></td>
+            <td><button type="button" data-id="{{$author->id}}" data-name="{{$author->name}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted" @if(!$eliminar) disabled @endif><i class="fa fa-trash"></i></button></td>
+        </tr>
       @endif
-      </table>
-      
-  </div>
+    @endforeach
+  @endif
+ </table>
+</div>
 
-
-
-  
 
   @section('script')
     <script src="{{ URL::asset('js/jquery.multi-select.js')}}"></script>

@@ -20,7 +20,7 @@ class CreateMagazinesTable extends Migration
             $table->integer('numero')->unsigned();
             $table->string('fechaEdicion')->nullable();
             $table->string('subtitle')->nullable();
-            $table->bigInteger('issn')->unsigned();
+            $table->bigInteger('issn')->unsigned()->nullable();
             $table->bigInteger('issnD')->unsigned()->nullable();
             $table->integer('author_id')->unsigned();
 

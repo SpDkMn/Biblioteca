@@ -50,7 +50,7 @@
        {{-- COMPENDIUM MANAGEMENT--}}
       {{--  <li class="treeview @if(URL::full() == url('/admin/magazines')) active @endif  ">
         <a href="#">
-          <i class="fa fa-table"></i><span>Compendios</span>
+          <i class="fa fa-table"></i><span>Revistas y Compendios</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
@@ -93,6 +93,8 @@
 
 
        <li @if(URL::full() == url('/admin/editorial'))class="active"@endif><a href="{{ url('/admin/editorial') }}"><i class="fa fa-newspaper-o"></i> <span>Editorial</span></a></li>
+
+
 
       <li class="treeview @if(URL::full() == url('/admin/castigos') || URL::full() == url('/admin/castigados')) active @endif  ">
         <a href="#">

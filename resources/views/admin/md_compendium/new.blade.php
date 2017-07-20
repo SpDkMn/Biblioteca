@@ -157,6 +157,8 @@
             if(opc!=null){opcD = opc ;deshabilitar(opc);}
             else{habilitar(opcD);}
           });
+
+
           function deshabilitar(opc){
             //Elimina las opciones si una de ellas es igual a la seleccionada para ser deshabilitada
             if ($('#listEditorialSecond').val()!=null) {
@@ -190,7 +192,9 @@
                 // alert('Deshabilitando opcion '+$(this).text()+' valor '+ $(this).attr('value'));
                 //Reinicializando
                 reiniciarSelect('#listEditorialSecond');
+
               }
+
             });
           }
           function habilitar(opcD){
@@ -239,11 +243,11 @@
         //                           '</div>';
         var contentBody ='<div class="panel-body" id="boxID'+cont+'">'+groupTitle+'</div>';
         // var boxContent = '<div class="box box-default" id="boxID'+idCont+'">'+contentBody +'</div>';
-        $(container).append(contentBody);
+    		$(container).append(contentBody);
         cont = cont + 1 ;
         //Inicializar el select2 para mostrar los colaboradores de los nuevos contenidos
         $("."+select).select2();
-      });
+    	});
     }
     agregarContenido('#agregarContenido','#contentPanel',idCont,'selectCollaborator');
   });
@@ -273,14 +277,19 @@
                             '</div>'+
                         '</div>';
       var itemPanel = '<div class="BoxItemMagazine box box-info box-solid" id="itemBoxID'+idCont+'">'+itemHeader+itemBody +'</div>';
+
       $(container).after(itemPanel);
       $("[data-mask]").inputmask();
       idCont = idCont + 1 ;
     });
+
+
     $('#newCompendium').click(function(){
       //Elimina las cajas ocultadas que contiene los items
         $('.BoxItemMagazine:hidden').remove();
+
     });
+
   });
   </script>
 @endsection

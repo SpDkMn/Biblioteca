@@ -9,7 +9,7 @@ class Content extends Model
 
 	protected $fillable = [
 	   //Claves foraneaas agregadas - > miercoles 08/03 - 12:08 am
-		'title','magazine_id'
+		'title','magazine_id','compendium_id'
 	];
 
 
@@ -21,6 +21,9 @@ class Content extends Model
 	//Un contenido pertenece a una revista
 	public function magazine(){
 		return $this->belongsTo('App\Magazine');
+	}
+	public function compendium(){
+		return $this->belongsTo('App\Compendium');
 	}
 
 }

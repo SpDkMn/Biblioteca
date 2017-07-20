@@ -23,11 +23,13 @@
 
       <div class="form-group">
         <label>Categoria</label>
-      <select class="form-control selectCategory" multiple="multiple" data-placeholder="Seleccione la categoria" name="category[]" style="width: 100%;">
+      <select class="form-control select2" multiple="multiple" data-placeholder="Seleccione la categoria" name="category[]" style="width: 100%;">
         <option>libro</option>
         <option>revista</option>
-        <option>tesis</option>
+        <option>tesis/tesina</option>
         <option>compendio</option>
+        <option>colaborador</option>
+        <option>asesor</option>
       </select>
       <script> $(document).ready(function(){$('.selectCategory').select2();}) </script>
 
