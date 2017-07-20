@@ -44,7 +44,28 @@ class AuthorController extends Controller
         $categories=null;
       }
       else{
-   
+        $i=0;
+        foreach ($request->get('category') as $category) {
+            switch ($category) {
+              case 'libro':
+                $categories[$i]=1;
+                break;
+              case 'revista':
+                $categories[$i]=2;
+                break;
+              case 'tesis':
+                $categories[$i]=3;
+                break;
+              case 'compendio':
+                $categories[$i]=4;
+                break;
+              
+             
+            }
+            $i=$i+1;
+        }
+
+   /*
         $i=0;
         foreach ($request->get('category') as $category) {
             switch ($category) {
@@ -70,6 +91,7 @@ class AuthorController extends Controller
             }
             $i=$i+1;
         }
+        */
       }
       
       if($editar)
@@ -120,7 +142,6 @@ class AuthorController extends Controller
     	]);
 
         foreach ($request['category'] as $category) {
-            
             switch ($category) {
                 case 'libro':
                     $id=1;
@@ -160,13 +181,13 @@ class AuthorController extends Controller
    public function update($id,AuthorRequest $request){
        
       $author = Author::find($id);
+      //$auth = Auth::find($id);
+      $author->fill($request->all());
+      $author->save();
+       
+      $author->categories()->detach();  //No tiene nada que ver con el error
 
-       $author->fill($request->all());
-       $author->save();
-
-       $author->categories()->detach();
-
-       foreach ($request['category'] as $category) {
+      foreach ($request['category'] as $category) {
             
             switch ($category) {
                 case 'libro':
@@ -185,15 +206,15 @@ class AuthorController extends Controller
                     $id=5;
                     break;
                 case 'asesor':
-                   $id=6;
-                   break;
+                    $id=6;
+                    break;
             }   
             $author->categories()->attach($id);
         }
         
+      //  $author->fill($request->all());//creo que all(todo) no va aquu
        return redirect()->route('autor.index');
     }
-
 
 
    public function destroy($id){

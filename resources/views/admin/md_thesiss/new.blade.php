@@ -170,7 +170,7 @@
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Ubicacion</label>
-                        <input type="text" class="form-control" name="ubicacion" id="inputEXTENSION" value="Estante Nº " required>
+                        <input type="text" class="form-control" name="ubicacion" id="inputEXTENSION" value="Stand  " required>
                     </div>
 
                     <div class="form-group">
@@ -244,7 +244,7 @@
                   </div>
                   <div class="form-group">
                       <label for="inputCopy">Ejemplar</label>
-                      <input type="number" class="form-control" name="copy0" id="inputCopy" placeholder="" required>
+                      <input type="text" value="1" style="background:white;width:54px;" class="form-control" name="copy0" id="inputCopy" placeholder="" required>
                   </div>
 
 
@@ -577,7 +577,7 @@
     $('#agregarItem').click(function(){
       // Guardar el panel donde se encuentra la seccion contenido
       var container = $('#itemBox');
-      var titleItem = '<h3 class="panel-title">Item Secundario</h3>';
+      var titleItem = '<h3 class="panel-title">Ejemplar secundario</h3>';
       var buttonClose ='<div class="box-tools pull-right">  <button type="button" id="eliminarItem" data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button> </div>';
       var itemHeader = '<div class="box-header">'+titleItem+buttonClose+'</div>'
       var itemBody = '<div class="box-body">'+
@@ -592,7 +592,7 @@
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label for="inputCopy">Ejemplar</label>'+
-                                '<input type="number" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
+                                '<input type="text" style="background:white;width:54px;" value="'+(idCont+1)+'" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
                             '</div>'+
                         '</div>';
       var itemPanel = '<div class="box box-default box-solid" id="itemBoxID'+idCont+'">'+itemHeader+itemBody +'</div>';

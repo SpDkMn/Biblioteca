@@ -1,5 +1,6 @@
 
 
+
 <div class="box box-primary">
   <div class="box-header with-border">
     <h3 class="box-title">Editar</h3>
@@ -40,7 +41,7 @@
                           <!--1. Titulo -->
                           <div class="form-group">
                             <label>Titulo</label>
-                            <input type="text" name="title" class="form-control" id="title" value="{{$book->title}}">
+                            <input type="text" name="title" class="form-control" id="title" value="{{$book->title}}" required>
                           </div>
                           <!--1. Fin de Titulo -->
 
@@ -54,13 +55,13 @@
                           <!--3. Clasificacion -->
                           <div class="form-group">
                             <label>Clasificacion</label>
-                            <input type="text" name="clasification" class="form-control" id="clasification" value="{{$book->clasification}}">
+                            <input type="text" name="clasification" class="form-control" id="clasification" value="{{$book->clasification}}" required>
                           </div>
                           <!--3. Fin clasificacion -->
                           
                           <div class="form-group">
                             <label>Edicion</label>
-                            <input type="text" name="edition" class="form-control" id="edition" value="{{$book->edition}}">
+                            <input type="text" name="edition" class="form-control" id="edition" value="{{$book->edition}}" required>
                           </div>
 
                           <!--4. Autor -->
@@ -200,7 +201,7 @@
                             <?php $cont=$c->number-1; ?>
                               <div class="input-group">
                                 <span class="input-group-addon">{{$c->number}}</span>
-                                <input type="text" id="campo_{{$cont}}" name="chapter[{{$cont}}]" class="form-control" value="{{$c->name}}">
+                                <input type="text" id="campo_{{$cont}}" name="chapter[{{$cont}}]" class="form-control" value="{{$c->name}}" required>
                                 @if($cont>0)
                                   <span id="eliminarCampo" class="input-group-addon eliminar"><i class="fa fa-remove"></i></span>
                                 @else
@@ -221,8 +222,8 @@
                         <div class="form-group">
                           <label>Libros relacionados</label>
                           <select class="form-control select2" name="relationBook[]" multiple="multiple" style="width: 100%;">
-                            @foreach($books as  $book)
-                                  <option value="{{ $book->id }}">{{$book->name}}</option>
+                            @foreach($books as  $book_aux)
+                                  <option value="{{ $book_aux->id }}">{{$book_aux->name}}</option>
                             @endforeach
                             </select>
                         </div>
@@ -232,7 +233,7 @@
 
                         <div class="form-group">
                           <label>Ubicacion en Biblioteca</label>
-                          <input type="text" name="libraryLocation[]" class="form-control" value="{{$book->libraryLocation}}">
+                          <input type="text" name="libraryLocation" class="form-control" value="{{$book->libraryLocation}}">
                         </div>
 
                         <div class="form-group">
@@ -240,7 +241,7 @@
                           <div class="form-horizontal">
                            <div for="ejemplo_password_3" class="col-xs-6 control-label">Extension</div>
                           <div class="col-xs-6">
-                            <input type="text" name="extension"  class="form-control" value="{{$book->extension}}">
+                            <input type="text" name="extension"  class="form-control" value="{{$book->extension}}" required>
                           </div>
 
                           <div for="ejemplo_password_3" class="col-xs-6 control-label">Otros detalles fisicos</div>
@@ -250,7 +251,7 @@
 
                           <div for="ejemplo_password_3" class="col-xs-6 control-label">Dimensiones</div>
                           <div class="col-xs-6">
-                            <input type="text" name="dimensions" class="form-control" value="{{$book->dimensions}}">
+                            <input type="text" name="dimensions" class="form-control" value="{{$book->dimensions}}" required>
 
                           </div>
                           <div for="ejemplo_password_3" class="col-xs-6 control-label">Material de Acompañamiento</div>
@@ -325,13 +326,17 @@
                             <div class="tab-pane active" id="primero{{$cont2}}">
                               <div class="box-body">
                                 <div class="form-group">
+                                  <label>clasificacion</label>
+                                  <input type="text" class="form-control" value="{{$bc->clasification}}">
+                                </div>
+                                <div class="form-group">
                                   <label>Numero de Ingreso</label>
-                                  <input type="text" name="incomeNumber[{{$cont}}]" class="form-control" value="{{$bc->incomeNumber}}">
+                                  <input type="text" name="incomeNumber[{{$cont}}]" class="form-control" value="{{$bc->incomeNumber}}" required>
                                 </div>
 
                                 <div class="form-group">
                                   <label>Codigo de Barras</label>
-                                  <input type="text" name="barcode[{{$cont}}]" class="form-control" value="{{$bc->barcode}}">
+                                  <input type="text" name="barcode[{{$cont}}]" class="form-control" value="{{$bc->barcode}}" required>
                                 </div>
 
                                 <div class="form-group">
@@ -341,7 +346,7 @@
 
                                 <div class="form-group">
                                   <label>Gestion</label>
-                                  <input type="text" name="management[{{$cont}}]" class="form-control" value="{{$bc->management}}">
+                                  <input type="text" name="management[{{$cont}}]" class="form-control" value="{{$bc->management}}" required>
                                 </div>
 
                                 <div class="form-group">
@@ -371,17 +376,17 @@
 
                                 <div class="form-group">
                                   <label>Fuente de Adquisicion</label>
-                                  <input type="text" class="form-control" name="acquisitionSource[{{$cont}}]" value="{{$bc->acquisitionSource}}">
+                                  <input type="text" class="form-control" name="acquisitionSource[{{$cont}}]" value="{{$bc->acquisitionSource}}" required>
                                 </div>
 
                                 <div class="form-group">
                                   <label>Precio de Adquisicion</label>
-                                  <input type="text" name="acquisitionPrice[{{$cont}}]" class="form-control" value="{{$bc->acquisitionPrice}}">
+                                  <input type="text" name="acquisitionPrice[{{$cont}}]" class="form-control" value="{{$bc->acquisitionPrice}}" >
                                 </div>
 
                                 <div class="form-group">
                                   <label>Fecha de Adquisicion</label>
-                                  <input type="text" name="acquisitionDate[{{$cont}}]" class="form-control" value="{{$bc->acquisitionDate}}">
+                                  <input type="text" name="acquisitionDate[{{$cont}}]" class="form-control" value="{{$bc->acquisitionDate}}" required>
                                 </div>
 
                               </div>
@@ -399,12 +404,12 @@
 
                                 <div class="form-group">
                                   <label>Lugar de Publicacion</label>
-                                  <input type="text" name="publicationLocation[{{$cont}}]" class="form-control" value="{{$bc->publicationLocation}}">
+                                  <input type="text" name="publicationLocation[{{$cont}}]" class="form-control" value="{{$bc->publicationLocation}}" required>
                                 </div>
 
                                 <div class="form-group">
                                   <label>Fecha de Publicacion</label>
-                                  <input type="text" name="publicationDate[{{$cont}}]" class="form-control" value="{{$bc->publicationDate}}">
+                                  <input type="text" name="publicationDate[{{$cont}}]" class="form-control" value="{{$bc->publicationDate}}" required>
                                 </div>
 
                               </div>
@@ -446,24 +451,18 @@
     var contenedorPestañas = $("#contenedor-pestañas");
     var contenedorItem = $('#contenedor-item');
     var AddButton1 = $("#agregarItem");
-
     var x = $("#contenedor-pestañas li").length-2;
-
     
-
     var FieldCount = x;
     var arreglo;
-
     $(".agregarItem").click(function(){
       
       FieldCount++;
     
       arreglo = FieldCount-1;
-
       $(contenedorPestañas).append('<li><a href="#item'+FieldCount+'" id="cabezera-item'+FieldCount+'" data-toggle="tab">Item'+FieldCount+'</a></li>');
         
       $(contenedorItem).append(
-
               '<div class="tab-pane fade" id="item'+FieldCount+'">'
                  +'<div class="box-body">'
                    +'<div class="bs-example" data-example-id="simple-nav-tabs"> '
@@ -472,30 +471,25 @@
                       +'<li><a href="#segundo'+FieldCount+'" data-toggle="tab">Segundo</a></li>'
                       +'<li><a href="#tercero'+FieldCount+'" data-toggle="tab">Tercero</a></li>'
                     +'</ul>'
-
                     +'<div class="tab-content">'
                       +'<div class="tab-pane active" id="primero'+FieldCount+'">'
                        +'<div class="box-body">'
                           +'<div class="form-group">'
                             +'<label>Numero de Ingreso</label>'
-                            +'<input type="text" name="incomeNumber['+arreglo+']" class="form-control">'
+                            +'<input type="text" name="incomeNumber['+arreglo+']" class="form-control" required>'
                           +'</div>'
-
                           +'<div class="form-group">'
                             +'<label>Codigo de Barras</label>'
-                            +'<input type="text" name="barcode['+arreglo+']" class="form-control">'
+                            +'<input type="text" name="barcode['+arreglo+']" class="form-control" required>'
                           +'</div>'
-
                           +'<div class="form-group">'
                             +'<label>Volumen</label>'
                             +'<input type="text" name="volume['+arreglo+']" class="form-control">'
                           +'</div>'
-
                           +'<div class="form-group">'
                             +'<label>Gestion</label>'
-                            +'<input type="text" name="management['+arreglo+']" class="form-control">'
+                            +'<input type="text" name="management['+arreglo+']" class="form-control" required>'
                           +'</div>'
-
                           +'<div class="form-group">'
                             +'<label>Disponibilidad</label>'
                             +'<select class="form-control select2" name="availability['+arreglo+']" style="width: 100%;">'
@@ -503,7 +497,6 @@
                                 +'<option>No Disponible</option>'                              
                             +'</select>'
                           +'</div>'
-
                         +'</div>'
                       +'</div>'
                       
@@ -517,25 +510,20 @@
                                 +'<option>Adquisicion</option>  '                             
                             +'</select>'
                           +'</div>'
-
                           +'<div class="form-group">'
                             +'<label>Fuente de Adquisicion</label>'
-                            +'<input type="text" name="acquisitionSource['+arreglo+']" class="form-control">'
+                            +'<input type="text" name="acquisitionSource['+arreglo+']" class="form-control" required>'
                           +'</div>'
-
                           +'<div class="form-group">'
                             +'<label>Precio de Adquisicion</label>'
                             +'<input type="text" name="acquisitionPrice['+arreglo+']" class="form-control">'
                           +'</div>'
-
                           +'<div class="form-group">'
                             +'<label>Fecha de Adquisicion</label>'
-                            +'<input type="text" name="acquisitionDate['+arreglo+']" class="form-control">'
+                            +'<input type="text" name="acquisitionDate['+arreglo+']" class="form-control" required>'
                           +'</div>'
-
                         +'</div>'
                       +'</div>'
-
                       +'<div class="tab-pane fade" id="tercero'+FieldCount+'">'
                         +'<div class="box-body">'
                           +'<div class="form-group">'
@@ -545,17 +533,14 @@
                                 +'<option>Reimpresion</option>   '                           
                             +'</select>'
                           +'</div>'
-
                           +'<div class="form-group">'
                             +'<label>Lugar de Publicacion</label>'
-                            +'<input type="text" name="publicationLocation['+arreglo+']" class="form-control">'
+                            +'<input type="text" name="publicationLocation['+arreglo+']" class="form-control" required>'
                           +'</div>'
-
                           +'<div class="form-group">'
                             +'<label>Fecha de Publicacion</label>'
-                            +'<input type="text" name="publicationDate['+arreglo+']" class="form-control">'
+                            +'<input type="text" name="publicationDate['+arreglo+']" class="form-control" required>'
                           +'</div>'
-
                          
                         +'</div>'
                       +'</div>'
@@ -565,7 +550,6 @@
                   +'</div><!-- End navbar -->'
                  +'</div><!-- End box-body -->'
                +'</div><!-- End tab-pane -->');
-
       x++;
     });
   
@@ -574,11 +558,9 @@
         $("#item"+FieldCount).remove();
         $("#cabezera-item"+FieldCount).remove();
         FieldCount = FieldCount-1;
-
       }
       
     });
-
     return false;
   });
 </script>
@@ -588,28 +570,24 @@
 
 <script>
   $(document).ready(function() {
-
     var MaxInputs       = 100; //Número Maximo de Campos
     var contenedor       = $("#contenedor"); //ID del contenedor
     var AddButton       = $("#agregarCampo"); //ID del Botón Agregar
-
     //var x = número de campos existentes en el contenedor
     var x = $("#contenedor div").length + 1;
     var FieldCount = x-1; //para el seguimiento de los campos
     
-
     $(AddButton).click(function (e) {
         if(x <= MaxInputs) //max input box allowed
         {   
             FieldCount++;
             //agregar campo
             var array = FieldCount-1;
-            $(contenedor).append('<div class="input-group"><span class="input-group-addon">'+FieldCount+'</span><input type="text" id="campo_'+FieldCount+'" name="chapter['+array+']" class="form-control"><span id="eliminarCampo"  class="input-group-addon eliminar"><i class="fa fa-remove"></i></span></div>');
+            $(contenedor).append('<div class="input-group"><span class="input-group-addon">'+FieldCount+'</span><input type="text" id="campo_'+FieldCount+'" name="chapter['+array+']" class="form-control" required><span id="eliminarCampo"  class="input-group-addon eliminar"><i class="fa fa-remove"></i></span></div>');
             x++; //text box increment
         }
         return false;
     });
-
     $("body").on("click",".eliminar", function(e){ //click en eliminar campo
         if( x > 1 ) {
             $(this).parent('div').remove(); //eliminar el campo

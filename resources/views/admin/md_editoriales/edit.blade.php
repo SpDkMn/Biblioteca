@@ -22,11 +22,8 @@
         <input type="text" class="form-control" name="name" value="{{ $editorial->name }}">
       </div>
       <?php
-
       $id_1=$id_2=$id_3=$id_4=false;
-
        foreach($editorial->categories as $category){
-
             switch($category->name){
               case 'libro': $id_1=true;break;
               case 'revista':$id_2=true;break;
@@ -34,7 +31,6 @@
               case 'compendio': $id_4=true;break;
             }
        }
-
        ?>
 
       <div class="form-group">
@@ -51,7 +47,6 @@
 
       @if($id_4)<option selected>compendio</option>
       @else<option>compendio</option>@endif
-
       </select>
 
       </div>

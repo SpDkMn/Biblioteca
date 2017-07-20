@@ -191,7 +191,7 @@
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Ubicacion</label>
-                        <input type="text" class="form-control" value="{{$thesis->location}}" name="ubicacion" id="inputEXTENSION" value="Estante Nº ">
+                        <input type="text" class="form-control" value="{{$thesis->location}}" name="ubicacion" id="inputEXTENSION" value="Stand ">
                     </div>
 
                     <div class="form-group">
@@ -267,6 +267,10 @@
                         <label for="inputBarcode">Código de barra</label>
                         <input type="text" class="form-control" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
                     </div>
+                    <div class="form-group">
+                      <label for="inputCopy">Ejemplar</label>
+                      <input type="text" disabled value="1" class="form-control" name="copy0" id="inputCopy" placeholder="" required>
+                  </div>
  
                 </div>
               </div>
@@ -287,6 +291,10 @@
                       <div class="form-group">
                           <label for="inputBarcode">Código de barra</label>
                           <input type="text" class="form-control" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
+                      </div>
+                      <div class="form-group">
+                          <label for="inputCopy">Ejemplar</label>
+                          <input type="text" disabled value="1" class="form-control" name="copy0" id="inputCopy" placeholder="" required>
                       </div>
                       
                   </div>

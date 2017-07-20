@@ -1,35 +1,23 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EditorialRequest;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\DB;
-
-
 use App\User as User;
 // Para usar el Modelo Profile
 use App\Profile as Profile;
-
 use App\Editorial as Editorial;
-
 use Session;
 use Redirect;
-
-
 class EditorialController extends Controller
 {
-	public function index(Request $request){
-
+  public function index(Request $request){
       $profile = User::with(['Employee','Employee.profile'])->where('id',Auth::user()->id)->first()->Employee->Profile;
       $j2a = json_decode($profile->JSON,true);
       // Iniciamos los permisos en false
-
       $ver = $crear = $editar = $eliminar =false;
-
       // Recorremos cada uno de los permisos de 'perfiles'
       foreach($j2a['empleados'] as $dato){
         foreach($dato as $key => $value){
@@ -44,7 +32,6 @@ class EditorialController extends Controller
         }
       }
       $show = $new = $edit = $delete = "";
-
       //Verifica si se envio "category" por metodo get , FILTROS de busqueda
       if($request->get('category')==null){
         $categories=null;
@@ -73,14 +60,11 @@ class EditorialController extends Controller
             $i=$i+1;
         }
       }
-
       if($editar)
         //$editorial recibira la primera editorial, tambien pudo usarse el metodo first
         $edit = view('admin.md_editoriales.edit',['editorial'=>Editorial::get()[0]]);
-
       if($crear)
           $new = view('admin.md_editoriales.new');
-
       if ($ver)
          if(($request->get('name'))!=null){
             //$editorials cargara todas las editoriales con con nombre "name"
@@ -89,7 +73,6 @@ class EditorialController extends Controller
             //ademas enviara un boleano "search" el cual servira para saber si se realizo una busqueda en la vista
             $show = view('admin.md_editoriales.show',['editorials'=>$editorials,'eliminar'=>$eliminar,'editar'=>$editar,'categories'=>$categories,'search'=>true]);
             }
-
           else{
             //$editorials cargara todas las editoriales
             $editorials=Editorial::all();
@@ -97,33 +80,22 @@ class EditorialController extends Controller
             //ademas enviara un boleano "search" el cual servira para saber si se realizo una busqueda en la vista
             $show = view('admin.md_editoriales.show',['editorials'=>$editorials,'eliminar'=>$eliminar,'editar'=>$editar,'categories'=>$categories,'search'=>false]);
           }
-
-
       if($eliminar)
         $delete = view('admin.md_editoriales.delete',['editorial'=>Editorial::get()[0]]);
-
       return view('admin.md_editoriales.index',[
         'show' => $show,
          'new' => $new,
         'edit' => $edit,
         'delete' => $delete
       ]);
-
   }
-
-
    public function create(){
-
    }
-
    public function store(EditorialRequest $request){
-
         $edit =Editorial::create([
-    		'name' => $request['name'],
-    	]);
-
+        'name' => $request['name'],
+      ]);
         foreach ($request['category'] as $category) {
-
             switch ($category) {
                 case 'libro':
                     $id=1;
@@ -138,32 +110,20 @@ class EditorialController extends Controller
                     $id=4;
                     break;
             }
-
             $edit->categories()->attach($id);
         }
-
-    	return redirect('admin/editorial');
+      return redirect('admin/editorial');
   }
-
   public function edit($id){
       $editorial = Editorial::find($id);
       return view('admin.md_editoriales.edit')->with('editorial',$editorial);
-
     }
-
-
-
     public function update($id,EditorialRequest $request){
-
        $editorial = Editorial::find($id);
-
        $editorial->fill($request->all());
        $editorial->save();
-
        $editorial->categories()->detach();
-
        foreach ($request['category'] as $category) {
-
             switch ($category) {
                 case 'libro':
                     $id=1;
@@ -178,31 +138,19 @@ class EditorialController extends Controller
                     $id=4;
                     break;
             }
-
             $editorial->categories()->attach($id);
         }
-
        return redirect()->route('editorial.index');
-
     }
-
     public function destroy($id){
         $editorial=Editorial::find($id);
         $editorial->delete();
         return redirect('editorial.index');
-
     }
-
-
-
      public function show($id){
-
         $editorial = Editorial::find($id);
         $editorial->categories()->detach();
         $editorial->delete();
-
         return redirect()->route('editorial.index');
           }
-
-
 }

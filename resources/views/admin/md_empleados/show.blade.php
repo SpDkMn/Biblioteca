@@ -49,7 +49,7 @@
         $(".eliminar").on('click',function(event) {
           $username = $(this).data('name')
           $('.modal-body').html('<p>¿Esta seguro que quiere eliminar el empleado ' + $username +'?</p>');
-          $('#confirmaDelete').data('id',$(this).data('id'))
+          $('#confirmaDelete').data('id',$(this).data('id'));
         });
 
         $("#confirmaDelete").on('click',function(event){

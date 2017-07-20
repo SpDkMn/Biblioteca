@@ -239,11 +239,11 @@
         //                           '</div>';
         var contentBody ='<div class="panel-body" id="boxID'+cont+'">'+groupTitle+'</div>';
         // var boxContent = '<div class="box box-default" id="boxID'+idCont+'">'+contentBody +'</div>';
-    		$(container).append(contentBody);
+        $(container).append(contentBody);
         cont = cont + 1 ;
         //Inicializar el select2 para mostrar los colaboradores de los nuevos contenidos
         $("."+select).select2();
-    	});
+      });
     }
     agregarContenido('#agregarContenido','#contentPanel',idCont,'selectCollaborator');
   });

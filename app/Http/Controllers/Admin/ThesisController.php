@@ -92,11 +92,10 @@ class ThesisController extends Controller
  public function store(Request $request){
 
     $contador_copia = 0 ;
-
     
-    //Contando las copias de la tesis
+    
     while($request['barcode'.$contador_copia]!=null){
-      $contador_copia ++ ;
+      $contador_copia ++ ;    //  Cuenta la cantidad de copias de tesis que existen (cada copia tiene un codigo de barra)
     };
 
     {{$av=1;}}
@@ -118,72 +117,72 @@ class ThesisController extends Controller
                          'publicationLocation'=>$request['lugarsus'],
                          'asesor'=>$request['asesor'],
                          'recomendacion'=>$request['recomendacion'],  //Conclusiones y recomendaciones
-
                          ]);
+
 
    //Guardamos los registros de las tesis
     $thesiss = Thesis::all();
     //Guardamos los registros de las editoriales para el pivote
     $editoriales = Editorial::all();
-    // Capturando id de la tesis ingresada
+   
+
+//Comentado este segmento de codigo, debido a que si ingresa el titulo de una tesis repetida en la base de datos, va a salir una excepcion (error consistenciado en AuthorRequest).
+   
     foreach ($thesiss as $thesis) {
-      if($thesis->title == $request['title']){
-        $id_thesis = $thesis->id ;
+      if($thesis->title == $request['title']){    //Si el titulo de la tesis encontrada en la base de datos es igua al titulo de la tesis que se esta ingresando al sistema, que el id de esa tesis de la base de datos se guarde en una variable
+        $id_thesis = $thesis->id ; 
       };
-    };
+    };     
 
 
 
     //Guardando datos de las copias de tesis
     for ($j=0; $j < $contador_copia; $j++) {
-      if($request['incomeNumber'.$j]==null){
-          continue;  
-      }
-    
-
-      $mc = ThesisCopy::create([  'incomeNumber'=>$request['incomeNumber'.$j],
-                                  'barcode'=>$request['barcode'.$j],
-                                  'ejemplar'=>$request['copy'.$j],
-                                  'availability'=>$av,
-                                  'thesis_id'=>$id_thesis
-                                ]);
-       
-    }
+            
+            if($request['barcode'.$j]==null){
+                continue;  
+            }
+            $mc = ThesisCopy::create([  'incomeNumber'=>$request['incomeNumber'.$j],
+                                        'barcode'=>$request['barcode'.$j],
+                                        'ejemplar'=>$request['copy'.$j], //Evitar que no haya ningun ejemplar que estee con datos vacios (colocar excepciones con el request). Y eliminar el contenedor que hace incrementar el numero de copia a medida que se duplica el contenedor de items (en la vista show)
+                                        'availability'=>$av,
+                                        'thesis_id'=>$id_thesis   //El id de la tesis que quiero relacionar ($id_thesis)
+                                    ]);
    
-    //RELACIONANDO LAS TABLAS PIVOTES
-    
+   }
+   
+//RELACIONANDO LAS TABLAS PIVOTES
+            
     //Pivot-> Thesis - Editorial
-      //Recorremos el arreglo con los id de las editoriales seleccionadas para asociarlas a las tesis
+           //Recorremos el arreglo con los id de las editoriales seleccionadas para asociarlas a las tesis
             $id=$request['editorial'];
             $thesis->editorials()->attach($id);
         
 
-    //Pivot-> Tesis - Editorial
-    foreach ($thesiss as $thesi) {
+//Pivot-> Thesis - Autor
+foreach ($thesiss as $thesi) {
       //Recorremos el arreglo con los id de los autores seleccionados para asociarlas a las tesis
       // Autor Principal
-
         foreach ($request['autorMain'] as $clave => $id) {
-          if($thesis->id == $id_thesis){
-                $thesi-> authors()->attach($id,['type'=>true]);
-            }
+              if($thesi->id == $id_thesis){  //El id de la tesis ingresada con la que ya esta en la base de datos(Solo voy a relacionar mediante pivots). Aqui estan los selectores.
+                    $thesi-> authors()->attach($id,['type'=>true]);
+                }
           }
-
       // Autor secundario
 
-
       foreach ($request['autorSecond'] as $clave => $id) {
-        if($thesis->id == $id_thesis){
-              $thesi-> authors() -> attach($id,['type'=>false]);
-          }
-        else{
-          continue;
+          if($thesi->id == $id_thesis){
+                $thesi-> authors()->attach($id,['type'=>false]);
+            }
+          else{
+              continue;  //  Para que servia? Creo que esta por gusto
+            }
         }
-       }
     };
     //Redireccionamos a la seccion de tesis
     return redirect('admin/thesis');
-  }
+}
+
 
 
   public function edit($id){
@@ -191,8 +190,7 @@ class ThesisController extends Controller
     $autores = Author::all();
     $thesiss = Thesis::all();
     $copias_thesiss = ThesisCopy::all();
-    
-        //Enviando arreglos -> Autores , editoriales , tesis , copias de tesis
+    //Enviando arreglos -> Autores , editoriales , tesis , copias de tesis
      return view('admin.md_thesiss.edit',['id' => $id,
                                             'thesiss'=>$thesiss,
                                             'editoriales'=>$editoriales,
@@ -201,6 +199,7 @@ class ThesisController extends Controller
                                             ]);
   }
 
+ 
   public function update(Request $request, $id){
 
         

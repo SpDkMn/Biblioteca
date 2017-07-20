@@ -131,20 +131,8 @@
                           </div>
                       </div>
                       <div class="form-group">
-                          <div class="row">
-                            <div class="col-lg-6">
-                              <label for="volumen">Volumen</label>
-                              <input type="number" value="{{$revista->volumen}}"  class="form-control" name="volumen" id="volumen" placeholder="Vol."  min="0">
-                            </div>
-                            <div class="col-lg-6">
-                              <label for="numero">Nº</label>
-                                <input type="number" value="{{$revista->numero}}" class="form-control" name="numero" id="numero" placeholder="Nº X" min="0" max="10">
-                            </div>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <label for="inputClasification">Fecha de edición</label>
-                            <input type="text" value="{{$revista->fechaEdicion}}" class="form-control" name="fechaEdicion" data-inputmask='"mask": "aaa-aaa.2099"' data-mask  id="fechaEdicion" placeholder="ABR-DIC.2017" style='text-transform:uppercase' >
+                            <label for="inputTitle">Clasificación</label>
+                            <input type="text" class="form-control" value="{{$revista->clasification}}" name="clasification" id="inputClasification" placeholder="">
                       </div>
                     </div>
                  </div>
@@ -216,7 +204,7 @@
         <?php $contContent = 0  ?>
                 <div class="box box-danger box-solid" id="{{'contentPanel'.$contContent}}">
                     <div class="box-header ">
-                        <h3 class="panel-title">Tabla de contenido</h3>
+                        <h3 class="panel-title">Contenido</h3>
                         <div class="box-tools pull-right">
                           <button type="button" id="agregarContenidoCont"  class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
                         </div>
@@ -228,12 +216,12 @@
                         @if($loop->first)
                         <div class="panel-body">
                           <div class="form-group">
-                            <label for="inputTitleContent">Tabla de contenido</label>
+                            <label for="inputTitleContent">Título</label>
                             <span>*</span>
                             <input type="text" class="form-control" name="{{'titleContent'.$contContent}}" id="{{'inputTitleContent'.$contContent}}" placeholder="" value="{{$contenido->title}}">
                           </div>
                           <div class="form-group">
-                          <label>Colaboradores</label>
+                          <label>Colaborador</label>
                             <select class="form-control select"  multiple="multiple" name ="{{'collaborator'.$contContent.'[]'}}" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
                               <!-- Cargando colaboradores seleccionados -->
                               <!-- Cargando lista de opciones para ser seleccionados  -->
@@ -267,11 +255,11 @@
                             <hr>
                                 <div class="panel-body" id="{{'boxID'.$contContent}}">
                                     <div class="form-group">
-                                      <label for="inputTitleContent">Contenido</label>
+                                      <label for="inputTitleContent">Título</label>
                                       <input type="text" class="form-control" name="{{'titleContent'.$contContent}}" id="{{'inputTitleContent'.$contContent}}" placeholder="" value="{{$contenido->title}}">
                                     </div>
                                   <div class="form-group">
-                                    <label>Colaboradores</label>
+                                    <label>Colaborador</label>
                                     <select class="form-control select"  multiple="multiple" name ="{{'collaborator'.$contContent.'[]'}}" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
                                       @foreach($autores as $autor)
                                           <?php $band = false ; ?>
@@ -414,13 +402,13 @@
                   var buttonClose = '<button id="eliminarContenido'+idContt+'" class="btn btn-xs btn-danger btn-block" type="button" name="button" ><i class="fa fa-times"></i></button>';
                   var contentHeader = '<div class="box-header with-border">'+buttonClose+'</div>'
                   var groupTitle = '<div class="form-group">'+
-                                        '<label for="inputTitleContent">Contenido</label>'+
+                                        '<label for="inputTitleContent">Título</label>'+
                                         '<span>*</span>'+
                                         '<input type="text" class="form-control" name="titleContent'+idContt+'" id="inputTitleContent'+idContt+'" placeholder="">'+
                                    '</div>';
                   var linea = '<hr>';
                   var groupCollaborator = '<div class="form-group">'+
-                                            '<label>Colaboradores</label>'+
+                                            '<label>Colaborador</label>'+
                                               '<select class="form-control select3" multiple="multiple" name ="collaborator'+idContt+'[]" data-placeholder="Seleccione los colaboradores" style="width: 100%;">'+
                                                 '@foreach($autores as $autor)'+
                                                   '@foreach($autor->categories as $category)'+
@@ -469,7 +457,6 @@
             var itemPanel = '<div class="BoxItemMagazineEdit box box-info box-solid" id="itemPanel'+idCont+'">'+itemHeader+itemBody +'</div>';
             $(container).after(itemPanel);
             idCont = idCont + 1 ;
-            $("[data-mask]").inputmask();
           })
           $('#editMagazine').on('click',function(){
             //Eliminando los valores que tienen para poder eliminarlos en la base de datos

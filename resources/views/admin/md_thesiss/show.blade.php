@@ -1,5 +1,4 @@
 
-
 <div class="box box-warning">
   <div class="box-header with-border">
     <h3 class="box-title">Informacion de Tesis y Tesinas</h3>
@@ -59,9 +58,13 @@
               <td><button type="button" data-id="{{$thesis->id}}" class="btn btn-success editar"><i class="fa fa-edit"></i></button></td>  
               <!--<td><button type="button" data-id="{{$thesis->id}}" data-name="{{$thesis->title}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted"><i class="fa fa-trash"></i></button></td>-->
            <!--   <td><a type="button" class="button-content btn btn-danger" href="{{route('thesis.destroy',$thesis->id)}}"><i class="fa fa-trash"></i></a></td>     -->
-           {!! Form::open(['route'=>['thesis.destroy',$thesis->id],'method' => 'DELETE']) !!}
+          
+          <td><button type="button" data-id="{{$thesis->id}}" data-name="eliminar" class="btn btn-danger eliminar"><i class="fa fa-trash"></i></button></td>
+
+
+      <!--     {!! Form::open(['route'=>['thesis.destroy',$thesis->id],'method' => 'DELETE']) !!}
           <td><button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
-        {!! Form::close() !!}
+        {!! Form::close() !!}   -->
               
              </tr>
                
@@ -83,11 +86,15 @@
         });
 
 </script>
-        <!--
+
+
+<script type="text/javascript">
         $(".eliminar").on('click',function(event) {
+
           $name = $(this).data('name')
 
-          $('.modal-body').html('<p>¿Esta seguro que quiere eliminar la tesis ' +$name +'?</p>');
+          $('#elim').html('<p>¿Esta seguro que quiere eliminar la tesis ' +$name +'?</p>');
+
           $('#confirmaDelete').data('id',$(this).data('id'))
         });
         $("#confirmaDelete").on('click',function(event){
@@ -100,6 +107,6 @@
               location.reload();
             }
           })
-        })   -->   
-        
+        })   
+</script>
 @endsection

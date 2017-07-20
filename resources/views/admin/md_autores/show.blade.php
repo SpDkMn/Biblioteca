@@ -7,13 +7,13 @@
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
       </button>
     </div> 
-  </div>
+  </div><br>
 
   <div class="box-body">
 
   <!---->
   <!--BUSQUEDA Y FILTROS-->
-  {!!Form::model(Request::all(),['route'=>'autor.index','method'=>'GET','class'=>'navbar-form navbar-right','role'=>'search'])!!}
+<!--  {!!Form::model(Request::all(),['route'=>'autor.index','method'=>'GET','class'=>'navbar-form navbar-right','role'=>'search'])!!}
     <div class="form-group">
         {!!Form::text('name',null,['class'=>'form-control', 'placeholder'=>'Nombre del autor'])!!}
         {!!Form::select('category[]',['Libro'=>'Libro','Revista'=>'Revista','Tesis'=>'Tesis','Compendio'=>'Compendio'],null,['id'=>'example-multiple-selected','multiple'=>'multiple'])!!}
@@ -21,17 +21,19 @@
     </div>   
     <button type="submit" class="btn btn-primary">Buscar</button><br>
       
-    {!!Form::close()!!}
+    {!!Form::close()!!}   -->
   <!--FIN BUSQUEDA Y FILTROS-->
 
    
-    <table class="table table-bordered table-hover">
-      <tr>
-        <th>Nombre</th>
-        <th>Categoria</th>
-        <th>Editar</th>
-        <th>Eliminar</th>
-      </tr>
+    <table id="example1" class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Categoria</th>
+          <th class="text-center">Editar</th>
+          <th class="text-center">Eliminar</th>
+        </tr>
+      </thead>
 
       <!--$Categories es la variable que almacena los filtros de busqueda-->
       @if($categories==null)
@@ -49,9 +51,9 @@
               @endforeach
             </td>
 
-            <td><button type="button" data-id="{{$author->id}}" class="btn btn-success editar" @if(!$editar) disabled @endif><i class="fa fa-pencil"></i></button></td>
+            <td class="text-center"><button type="button" data-id="{{$author->id}}" class="btn btn-success editar" @if(!$editar) disabled @endif><i class="fa fa-pencil"></i></button></td>
 
-            <td><button type="button" data-id="{{$author->id}}" data-name="{{$author->name}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted" @if(!$eliminar) disabled @endif><i class="fa fa-trash"></i></button></td> 
+            <td class="text-center"><button type="button" data-id="{{$author->id}}" data-name="{{$author->name}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted" @if(!$eliminar) disabled @endif><i class="fa fa-trash"></i></button></td> 
           </tr>
         @endforeach
 

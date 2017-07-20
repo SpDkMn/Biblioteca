@@ -4,7 +4,7 @@
       <div class="modal-header">
         <h4 class="modal-title" id='myModalLabel'>Eliminar Empleado</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" >
         <p>¿Esta seguro que quiere eliminar el empleado 1?</p>
       </div>
       <div class="modal-footer">

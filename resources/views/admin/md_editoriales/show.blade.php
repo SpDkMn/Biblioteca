@@ -1,4 +1,3 @@
-
 <div class="box box-warning">
   <div class="box-header with-border">
     <h3 class="box-title">Listado de Editoriales</h3>
@@ -62,7 +61,6 @@
               $array=null;
               $i=0; 
               foreach ($editorial->categories as $category) {
-
                 $array[$i] = $category->id;
                 $i=$i+1;
               }   
@@ -109,8 +107,6 @@
           $("#div-edit").load('{{ url("/admin/editorial/") }}/' + $id + '/edit');
         });
         @endif
-
-
         @if($eliminar)
         $(".eliminar").on('click',function(event) {
           $name = $(this).data('name')
@@ -122,7 +118,6 @@
           $.ajax({
             
             url: '{{ url("/admin/editorial") }}/'+$id,
-
             data: {'_token': '{{csrf_token()}}'},
             success: function(result) {
               location.reload();
@@ -133,4 +128,3 @@
       });
     </script>
 @endsection
-

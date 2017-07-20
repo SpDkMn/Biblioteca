@@ -10,7 +10,7 @@ use App\Content as Content;
 //Nota: Reducir la funciones al terminar todos los modulos
 class CompendiumController extends Controller{
   //Terminado
- 	public function index(){
+  public function index(){
     $editoriales = Editorial::all();
     $autores = Author::all();
     $contenidos = Content::all();
@@ -24,7 +24,7 @@ class CompendiumController extends Controller{
     $item = view('admin.md_compendium.items',['id'=>null,
                                               'compendios'=>$compendios]);
     //Enviando arreglos -> Autores , editoriales , compendioss , copias_compendios
- 		$new = view('admin.md_compendium.new',['autores'=>$autores,
+    $new = view('admin.md_compendium.new',['autores'=>$autores,
                                           'editoriales'=>$editoriales
                                           ]);
     $show = view('admin.md_compendium.show',['compendios'=>$compendios,
@@ -50,17 +50,17 @@ class CompendiumController extends Controller{
                                             'introduccion'=>$introduccion,
                                             'item'=>$item
                                           ]);
- 	}
+  }
   //Funcion no usada
- 	public function create(){
+  public function create(){
     //Funcion no usada
- 	}
+  }
   //Terminado
- 	public function store(Request $request){
+  public function store(Request $request){
     function cambiaCadena($str){
       return intval(preg_replace('/[^0-9]+/', '', $str), 10) ;
     }
- 		//Almacenamos lo que el usuario ingresa
+    //Almacenamos lo que el usuario ingresa
     //Declarando contadores
     $contador_contenido = 0 ;
     $contador_copia = 0 ;
@@ -73,7 +73,7 @@ class CompendiumController extends Controller{
       $contador_copia ++ ;
     };
     //Guardando los datos de la compendio
- 		$m = Compendium::create(['title'=>$request['title'],
+    $m = Compendium::create(['title'=>$request['title'],
                                 'introduccion'=>$request['introduccion'],
                                 'volumen'=>$request['volumen'],
                                 'numero'=>$request['numero'],
@@ -130,9 +130,9 @@ class CompendiumController extends Controller{
           };
       };
     }
- 		//Redireccionamos a la seccion de compendios
- 		return redirect('admin/compendium');
- 	}
+    //Redireccionamos a la seccion de compendios
+    return redirect('admin/compendium');
+  }
   //Terminado
   public function edit($id){
     $compendios = Compendium::all();

@@ -92,22 +92,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="row">
-                          <div class="col-lg-6">
-                            <label for="volumen">Volumen</label>
-                            <input type="number" class="form-control" name="volumen" id="volumen" placeholder="Vol."  min="0">
-                          </div>
-                          <div class="col-lg-6">
-                            <label for="numero">Nº</label>
-                              <input type="number" class="form-control" name="numero" id="numero" placeholder="Nº X" min="0" max="10">
-                          </div>
-                        </div>
+                        <label for="inputClasification">Clasificación</label>
+                          <span>*</span>
+                          <input type="text" class="form-control" name="clasification" id="inputClasification" placeholder="">
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputClasification">Fecha de edición</label>
-                          <input type="text" class="form-control" name="fechaEdicion" data-inputmask='"mask": "aaa-aaa.2099"' data-mask  id="fechaEdicion" placeholder="ABR-DIC.2017" style='text-transform:uppercase' >
-                    </div>
                  </div>
                </div>
   <!--***************************************************************************************************************************************
@@ -135,7 +124,7 @@
                   <div class="form-group">
                       <label for="inputCopy">Ejemplar</label>
                       <span>*</span>
-                      <input type="number" class="form-control" name="copy0" id="inputCopy" placeholder="" value=1 min="0" max="10">
+                      <input type="number" class="form-control" name="copy0" id="inputCopy" placeholder="" value=1 >
                   </div>
               </div>
             </div>
@@ -144,7 +133,7 @@
     *****************************************************************************************************************************************-->
             <div class="box box-danger box-solid" >
               <div class="box-header ">
-                  <h3 class="box-title">Tabla de contenido</h3>
+                  <h3 class="box-title">Contenido</h3>
                   <div class="box-tools pull-right">
                     <button type="button" id="agregarContenido" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
                   </div>
@@ -153,12 +142,12 @@
                   <div  id='contentPanel'>
                       <div class="panel-body">
                         <div class="form-group">
-                          <label for="inputTitleContent">Contenido</label>
+                          <label for="inputTitleContent">Título</label>
                           <span>*</span>
                           <input type="text" class="form-control" name="titleContent0" id="inputTitleContent0" placeholder="">
                         </div>
                         <div class="form-group">
-                          <label>Colaboradores</label>
+                          <label>Colaborador</label>
                             <select class="form-control selectCollaborator" multiple="multiple" name ="collaborator0[]" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
                               @foreach($autores as $autor)
                                 @foreach($autor->categories as $category)
@@ -171,6 +160,14 @@
                         </div>
                       </div>
                   </div>
+                    <!-- La paginacion será agregado al final -->
+                    <!-- <div class="box-footer clearfix">
+                      <ul class="pagination pagination-sm no-margin pull-right">
+                        <li><a href="#" >&laquo;</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                      </ul>
+                    </div> -->
                 </div>
               </div>
             </div>
@@ -187,6 +184,9 @@
 @section('scriptSelect')
   <script type="text/javascript">
     $(function () {
+      //Inicializar selectores de las editoriaes , principales y secundarias
+        //Selectores generales
+        //Select del autor
         $(".select2").select2();
         $(".selectCollaborator").select2();
         var $listaSec = $("#listEditorialSecond").select2();
@@ -203,11 +203,14 @@
         });
         //Eliminar las editoriales secundarias que esten seleccionadas
         $(".clearSelect2").on("click", function (){ $listaSec.val(null).trigger("change"); });
+      //INICIO DE  PRUEBA -> Deshabilitar una opcion
         $($listaPrim).on('change',function(e){
           //Almacenando el valor que esta en el selector de editorial principal
           e.preventDefault();
             var opc = $(this).val();
             var txt = $(this).text();
+            //Aun no se por qué no tengo que declarar la variable opcD ,
+            //cuando lo declaro var opcD aparece que no esta definido ¿?
             if(opc!=null){opcD = opc ;deshabilitar(opc);}
             else{habilitar(opcD);}
           });
@@ -230,6 +233,14 @@
                       var pos = datos.indexOf(""+opc+"");
                       //Eliminando opcion que se deshabilitara en las listas de opciones seleccionadas de editoriales secundarias
                       datos.splice(pos, 1);
+                      //Colocando nuevos datos en la lista de opciones seleccionadas de la editorial secundaria
+                      //Nota: Solo falta agregar los nuevos valores
+                      // $('#listEditorialSecond').val(["datos[0]","datos[1]","datos[2]"]);
+                      //
+                      //Mostrar datos para hacer prueba
+                      // for (var i = 0; i < datos.length; i++) {
+                      //   alert("Nuevos datos["+i+"]: "+datos[i])
+                      // }
                     }
                   }
                 }
@@ -248,10 +259,14 @@
             });
           }
           function habilitar(opcD){
+            //Eliminando y volviendo a inicializar el selector cuando se habilite las opciones , sin esto
+            //solo se muestra deshabilitado la primera vez que se inicia el selector
             reiniciarSelect('#listEditorialSecond');
+            //fin
             $("#listEditorialSecond option").each(function(){
               if(opcD==$(this).attr('value')){
                 $(this).removeAttr('disabled');
+                // alert('Habilitando opcion '+$(this).text()+' valor '+ $(this).attr('value'))
               }
             })
           }
@@ -259,6 +274,7 @@
             $(id).select2('destroy');
             $(id).select2();
           }
+      //FIN DE PRUEBAS
      //Definiendo los tooltip
         $('[data-toggle="tooltip"]').tooltip();
         //Declarando inputmask para el issn y barcode , Los patrones seran agregados al final
@@ -275,13 +291,13 @@
         // Guardar el panel donde se encuentra la seccion contenido
         var container = $(contenedor);
         var groupTitle = '<div class="form-group">'+
-                              '<label for="inputTitleContent">Contenido</label>'+
+                              '<label for="inputTitleContent">Título</label>'+
                               '<span>*</span>'+
                               '<input type="text" class="form-control" name="titleContent'+cont+'" id="inputTitleContent'+cont+'" placeholder="">'+
                          '</div>';
         var linea = '<hr>';
         var groupCollaborator = '<div class="form-group">'+
-                                  '<label>Colaboradores</label>'+
+                                  '<label>Colaborador</label>'+
                                     '<select class="form-control '+select+'" multiple="multiple" name ="collaborator'+cont+'[]" data-placeholder="Seleccione los colaboradores" style="width: 100%;">'+
                                       '@foreach($autores as $autor)'+
                                         '@foreach($autor->categories as $category)'+
@@ -324,7 +340,7 @@
                             '<div class="form-group">'+
                                 '<label for="inputBarcode">Código de barra</label>'+
                                 '<span>*</span>'+
-                              '<input type="text" class="form-control" name="barcode'+idCont+'" id="inputBarcode">'+
+                              '<input type="text" class="form-control" name="barcode'+idCont+'" id="inputBarcode" >'+
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label for="inputCopy">Ejemplar</label>'+
