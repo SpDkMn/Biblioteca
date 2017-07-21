@@ -11,7 +11,7 @@ class CreateEditorialBookTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up() 
     {
         Schema::create('editorial_book', function (Blueprint $table) {
             $table->increments('id');
@@ -19,7 +19,9 @@ class CreateEditorialBookTable extends Migration
             $table->foreign('book_id')->references('id')->on('books');
             $table->integer('editorial_id')->unsigned();
             $table->foreign('editorial_id')->references('id')->on('editorials');
+            $table->boolean('type')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

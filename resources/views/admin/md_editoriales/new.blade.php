@@ -28,11 +28,10 @@
         <option>revista</option>
         <option>tesis/tesina</option>
         <option>compendio</option>
-        <option>colaborador</option>
-        <option>asesor</option>
       </select>
-      <script> $(document).ready(function(){$('.selectCategory').select2();}) </script>
-
+      
+      <script> 
+      $(document).ready(function(){$('.select2').select2();}) </script>
       </div>
 
 

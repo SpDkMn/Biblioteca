@@ -21,10 +21,11 @@ class CreateAuthorBookTable extends Migration
             $table->foreign('author_id')->references('id')->on('authors');
             $table->boolean('type')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
-    /**
+    /** 
      * Reverse the migrations.
      *
      * @return void

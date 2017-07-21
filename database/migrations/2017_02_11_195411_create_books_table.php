@@ -17,9 +17,9 @@ class CreateBooksTable extends Migration
             $table->increments('id');
             $table->string('clasification')->unique();
             $table->string('title');
-            $table->string('secondaryTitle');
-            $table->longText('summary');
-            $table->string('isbn');
+            $table->string('secondaryTitle')->nullable();
+            $table->longText('summary')->nullable();
+            $table->string('isbn')->nullable();
             //Descripcion fisica del libro
             $table->string('extension');
             $table->string('physicalDetails')->nullable();
@@ -27,7 +27,7 @@ class CreateBooksTable extends Migration
             $table->string('accompaniment')->nullable();
             $table->unsignedSmallInteger('relationBook')->nullable();
             $table->unsignedTinyInteger('edition');
-            $table->string('libraryLocation');
+            $table->string('libraryLocation')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -21,8 +21,7 @@ class CreateCategoryEditorialTable extends Migration
             $table->foreign('editorial_id')->references('id')->on('editorials');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
-
-
+           
             $table->softDeletes();
             $table->timestamps();
 

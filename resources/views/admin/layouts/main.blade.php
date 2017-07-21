@@ -39,6 +39,7 @@
 
 
   </head>
+  
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
       @include('admin.layouts.header')

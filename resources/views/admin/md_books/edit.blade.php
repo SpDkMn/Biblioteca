@@ -1,6 +1,5 @@
 
 
-
 <div class="box box-primary">
   <div class="box-header with-border">
     <h3 class="box-title">Editar</h3>
@@ -451,18 +450,24 @@
     var contenedorPestañas = $("#contenedor-pestañas");
     var contenedorItem = $('#contenedor-item');
     var AddButton1 = $("#agregarItem");
+
     var x = $("#contenedor-pestañas li").length-2;
+
     
+
     var FieldCount = x;
     var arreglo;
+
     $(".agregarItem").click(function(){
       
       FieldCount++;
     
       arreglo = FieldCount-1;
+
       $(contenedorPestañas).append('<li><a href="#item'+FieldCount+'" id="cabezera-item'+FieldCount+'" data-toggle="tab">Item'+FieldCount+'</a></li>');
         
       $(contenedorItem).append(
+
               '<div class="tab-pane fade" id="item'+FieldCount+'">'
                  +'<div class="box-body">'
                    +'<div class="bs-example" data-example-id="simple-nav-tabs"> '
@@ -471,6 +476,7 @@
                       +'<li><a href="#segundo'+FieldCount+'" data-toggle="tab">Segundo</a></li>'
                       +'<li><a href="#tercero'+FieldCount+'" data-toggle="tab">Tercero</a></li>'
                     +'</ul>'
+
                     +'<div class="tab-content">'
                       +'<div class="tab-pane active" id="primero'+FieldCount+'">'
                        +'<div class="box-body">'
@@ -478,18 +484,22 @@
                             +'<label>Numero de Ingreso</label>'
                             +'<input type="text" name="incomeNumber['+arreglo+']" class="form-control" required>'
                           +'</div>'
+
                           +'<div class="form-group">'
                             +'<label>Codigo de Barras</label>'
                             +'<input type="text" name="barcode['+arreglo+']" class="form-control" required>'
                           +'</div>'
+
                           +'<div class="form-group">'
                             +'<label>Volumen</label>'
                             +'<input type="text" name="volume['+arreglo+']" class="form-control">'
                           +'</div>'
+
                           +'<div class="form-group">'
                             +'<label>Gestion</label>'
                             +'<input type="text" name="management['+arreglo+']" class="form-control" required>'
                           +'</div>'
+
                           +'<div class="form-group">'
                             +'<label>Disponibilidad</label>'
                             +'<select class="form-control select2" name="availability['+arreglo+']" style="width: 100%;">'
@@ -497,6 +507,7 @@
                                 +'<option>No Disponible</option>'                              
                             +'</select>'
                           +'</div>'
+
                         +'</div>'
                       +'</div>'
                       
@@ -510,20 +521,25 @@
                                 +'<option>Adquisicion</option>  '                             
                             +'</select>'
                           +'</div>'
+
                           +'<div class="form-group">'
                             +'<label>Fuente de Adquisicion</label>'
                             +'<input type="text" name="acquisitionSource['+arreglo+']" class="form-control" required>'
                           +'</div>'
+
                           +'<div class="form-group">'
                             +'<label>Precio de Adquisicion</label>'
                             +'<input type="text" name="acquisitionPrice['+arreglo+']" class="form-control">'
                           +'</div>'
+
                           +'<div class="form-group">'
                             +'<label>Fecha de Adquisicion</label>'
                             +'<input type="text" name="acquisitionDate['+arreglo+']" class="form-control" required>'
                           +'</div>'
+
                         +'</div>'
                       +'</div>'
+
                       +'<div class="tab-pane fade" id="tercero'+FieldCount+'">'
                         +'<div class="box-body">'
                           +'<div class="form-group">'
@@ -533,14 +549,17 @@
                                 +'<option>Reimpresion</option>   '                           
                             +'</select>'
                           +'</div>'
+
                           +'<div class="form-group">'
                             +'<label>Lugar de Publicacion</label>'
                             +'<input type="text" name="publicationLocation['+arreglo+']" class="form-control" required>'
                           +'</div>'
+
                           +'<div class="form-group">'
                             +'<label>Fecha de Publicacion</label>'
                             +'<input type="text" name="publicationDate['+arreglo+']" class="form-control" required>'
                           +'</div>'
+
                          
                         +'</div>'
                       +'</div>'
@@ -550,6 +569,7 @@
                   +'</div><!-- End navbar -->'
                  +'</div><!-- End box-body -->'
                +'</div><!-- End tab-pane -->');
+
       x++;
     });
   
@@ -558,9 +578,11 @@
         $("#item"+FieldCount).remove();
         $("#cabezera-item"+FieldCount).remove();
         FieldCount = FieldCount-1;
+
       }
       
     });
+
     return false;
   });
 </script>
@@ -570,13 +592,16 @@
 
 <script>
   $(document).ready(function() {
+
     var MaxInputs       = 100; //Número Maximo de Campos
     var contenedor       = $("#contenedor"); //ID del contenedor
     var AddButton       = $("#agregarCampo"); //ID del Botón Agregar
+
     //var x = número de campos existentes en el contenedor
     var x = $("#contenedor div").length + 1;
     var FieldCount = x-1; //para el seguimiento de los campos
     
+
     $(AddButton).click(function (e) {
         if(x <= MaxInputs) //max input box allowed
         {   
@@ -588,6 +613,7 @@
         }
         return false;
     });
+
     $("body").on("click",".eliminar", function(e){ //click en eliminar campo
         if( x > 1 ) {
             $(this).parent('div').remove(); //eliminar el campo

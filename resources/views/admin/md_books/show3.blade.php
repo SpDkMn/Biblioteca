@@ -7,8 +7,8 @@
     </div> 
   </div>
 
- <div class="box-body">
-   
+  <div class="box-body">
+    
     <div class="box-body with-border">
       <h1>{{$book->title}}<h1>
       <h4>{{$book->secondaryTitle}}</h4>
