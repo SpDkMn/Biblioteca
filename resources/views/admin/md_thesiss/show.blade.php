@@ -59,7 +59,7 @@
               <!--<td><button type="button" data-id="{{$thesis->id}}" data-name="{{$thesis->title}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted"><i class="fa fa-trash"></i></button></td>-->
            <!--   <td><a type="button" class="button-content btn btn-danger" href="{{route('thesis.destroy',$thesis->id)}}"><i class="fa fa-trash"></i></a></td>     -->
           
-          <td class="text-center"><button type="button" data-id="{{$thesis->id}}" data-name="eliminar" class="btn btn-danger eliminar"><i class="fa fa-trash"></i></button></td>
+          <td class="text-center"><button type="button" href="{{route('thesis.destroy',$thesis->id)}}" data-id="{{$thesis->id}}" data-name="eliminar" class="btn btn-danger eliminar"><i class="fa fa-trash"></i></button></td>
 
 
       <!--     {!! Form::open(['route'=>['thesis.destroy',$thesis->id],'method' => 'DELETE']) !!}

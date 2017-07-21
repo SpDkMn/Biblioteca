@@ -163,6 +163,8 @@ class ThesisController extends Controller
 foreach ($thesiss as $thesi) {
       //Recorremos el arreglo con los id de los autores seleccionados para asociarlas a las tesis
       // Autor Principal
+        
+
         foreach ($request['autorMain'] as $clave => $id) {
               if($thesi->id == $id_thesis){  //El id de la tesis ingresada con la que ya esta en la base de datos(Solo voy a relacionar mediante pivots). Aqui estan los selectores.
                     $thesi-> authors()->attach($id,['type'=>true]);
@@ -170,15 +172,21 @@ foreach ($thesiss as $thesi) {
           }
       // Autor secundario
 
+    if($request['autorSecond']!=null){
       foreach ($request['autorSecond'] as $clave => $id) {
           if($thesi->id == $id_thesis){
                 $thesi-> authors()->attach($id,['type'=>false]);
             }
+
           else{
               continue;  //  Para que servia? Creo que esta por gusto
             }
-        }
-    };
+    }
+  }
+  else { continue; }
+
+};
+        
     //Redireccionamos a la seccion de tesis
     return redirect('admin/thesis');
 }

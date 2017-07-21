@@ -98,6 +98,7 @@
     @yield('script')
     @yield('scriptSelectAutorPrincipal')
 
+
 <script>
           $("[data-mask]").inputmask();
 </script>
@@ -108,6 +109,8 @@
     $(".select2").select2();
     });
 </script>
+
+
 
     <!--
      <script>

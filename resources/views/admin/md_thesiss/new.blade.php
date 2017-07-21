@@ -79,7 +79,7 @@
 
                     <div class="form-group">
                         <label>Autor Secundario</label>
-                        <select class="form-control select2" id="listAutorSecond" name="autorSecond[]" multiple="multiple" style="width: 100%;" data-placeholder="Si no tiene dejelo en blanco">
+                        <select class="form-control select2" id="listAutorSecond" name="autorSecond[]" multiple="multiple" style="width: 100%;" data-placeholder="                                          Si no tiene dejelo en blanco">
                             @foreach($autores as  $autor)
                               @foreach($autor->categories as $category)
                                 @if($category->name == "tesis/tesina")
