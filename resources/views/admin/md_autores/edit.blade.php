@@ -19,7 +19,7 @@
 
       <div class="form-group">
         <label for="name">Nombre </label>
-        <input type="text" class="form-control" name="name" value="{{ $author->name }}">
+        <input type="text" class="form-control" name="name" value="{{ $author->name }}" required>
       </div>
       <?php
       
@@ -41,7 +41,7 @@
 
       <div class="form-group">
         <label>Categoria</label>
-      <select class="form-control selectCategoryEdit" multiple="multiple" data-placeholder="Seleccione la categoria" name="category[]" style="width: 100%;">
+      <select class="form-control select2" multiple="multiple" data-placeholder="Seleccione la categoria" name="category[]" style="width: 100%;" required>
       @if($id_1)<option selected>libro</option>
       @else<option>libro</option>@endif
       
@@ -63,8 +63,7 @@
       </select>
         
       </div>
-      <script> $(document).ready(function(){$('.selectCategoryEdit').select2();}) </script>
-
+      
     </div>
    
     <div class="box-footer">

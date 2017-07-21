@@ -15,7 +15,7 @@
                  <tr>
                   <th class="text-center">TIPO DE ÍTEM</th>
                   <th class="text-center">TÍTULO</th>
-                  <th class="text-center">AUTOR</th>
+                  <th class="text-center">AUTOR <h6>(Principal: Casilla Roja)</h6></th>
                   <th class="text-center">ASESOR</th>                  
                   <th class="text-center">E. A. P.</th>
                   <th>EDITAR</th>

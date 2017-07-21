@@ -13,7 +13,7 @@
 
 
     <div class="box-body with-border">
-         <h1><strong> <?php for($i=0;$i<6;$i++){echo "&nbsp";}?>TÍTULO: &nbsp {{ $thesis->title }}</strong><h1>
+         <h2><strong> TÍTULO: &nbsp {{ $thesis->title }}</strong><h2>
     </div>
 
     <!--Esta es la parte de la editorial y los autores (Principal y secundario)-->
@@ -55,7 +55,7 @@
              <div class="modal-content">
                <form>
                 <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><br>
                 <h3 class="modal-title text-center text-font-size" id="ModalCopyLabel"><strong>EJEMPLAR&nbsp<?php echo $copy->ejemplar; ?></strong></h3>
                 </div>
                 <div class="modal-body">
@@ -63,8 +63,8 @@
                   <div>
                     
                     @if($copy->incomeNumber)
-                    <p>&nbsp&nbsp&nbspNumero de Ingreso
-                   <?php    for($i=0;$i<60;$i++){echo "&nbsp";}?>:&nbsp
+                    <p>&nbsp&nbsp&nbsp<strong>Numero de Ingreso</strong>
+                   <?php    for($i=0;$i<45;$i++){echo "&nbsp";}?>:&nbsp
                     {{$copy->incomeNumber}}</p>
                     @endif
 
@@ -72,17 +72,17 @@
                   <div>
                     
                     @if($copy->barcode!="")
-                  <p>&nbsp&nbsp&nbspCódigo de Barras
-                   <?php    for($i=0;$i<65;$i++){echo "&nbsp";}?>:&nbsp
+                  <p>&nbsp&nbsp&nbsp<strong>Código de Barras</strong>
+                   <?php    for($i=0;$i<48;$i++){echo "&nbsp";}?>:&nbsp
                     {{$copy->barcode}}</p>
                     @endif
                     
-                    <p>&nbsp&nbsp&nbspEstado
-                     <?php    for($i=0;$i<85;$i++){echo "&nbsp";}?>:&nbsp
+                    <p>&nbsp&nbsp&nbsp<strong>Estado</strong>
+                     <?php    for($i=0;$i<67;$i++){echo "&nbsp";}?>:&nbsp
                       @if($copy->availability==1) Habilitado @endif
                       @if($copy->availability==0) Deshabilitado  @endif
                     </p>
-                    </div>            
+                    </div> <br><br>           
                 </div>
               
              </div>
@@ -100,7 +100,7 @@
 
 
     <div class="box-body with-border">
-         <h4><strong> Informacion del material</strong><h4>
+         <h4><strong> Información del material</strong><h4>
     </div>
 
     <div class="col-md-6">
@@ -134,29 +134,33 @@
          <div class="box-body">
            <!--    A u t o re s -->
             <strong>AUTORES SECUNDARIOS</strong>
-                    <?php for($i=0;$i<4;$i++){echo "&nbsp";}?>:&nbsp
+                    <?php for($i=0;$i<6;$i++){echo "&nbsp";}?>:&nbsp
                   <?php $cont=0; ?>
                   @foreach($thesis->authors as $author)
                     @if($author->pivot->type == false)
-                    <?php $cont=$cont+1; ?>
+                       <?php $cont=$cont+1; ?>
                     @endif
                   @endforeach 
-                  <?php $cont2=2; ?>
+
+                @if($cont>0) 
+                  <?php $cont2=1; ?>
                   @foreach($thesis->authors as $author)
                     @if($author->pivot->type == false)
-                    {{$author->name}}
-                      @if($cont2<=$cont)
-                      ,
-                      @endif
+                      {{$author->name}}
+                          @if($cont2<=$cont)
+                          ,
+                          @endif
                     @endif
                     <?php $cont2=$cont2+1; ?>
                   @endforeach  
+                @else - - - - - - - - - 
+                @endif
                 
           </div>
 
         <div class="box-body">
               <strong>EDITORIAL</strong>                
-                <?php for($i=0;$i<32;$i++){echo "&nbsp";}?>:&nbsp
+                <?php for($i=0;$i<30;$i++){echo "&nbsp";}?>:&nbsp
                 @foreach($thesis->editorials as $editorial)
                     @if($editorial->pivot->type == false)
                     {{$editorial->name}}
@@ -166,13 +170,13 @@
 
         <div class="box-body">
               <strong>ASESOR</strong>
-                <?php $cont2=2; for($i=0;$i<37;$i++){echo "&nbsp";}?>:&nbsp
+                <?php $cont2=2; for($i=0;$i<34;$i++){echo "&nbsp";}?>:&nbsp
                 {{$thesis->asesor}}
         </div>
 
         <div class="box-body">
               <strong>CLASIFICACIÓN</strong>
-              <?php   for($i=0;$i<23;$i++){echo "&nbsp";}?>:&nbsp
+              <?php   for($i=0;$i<21;$i++){echo "&nbsp";}?>:&nbsp
               {{$thesis->clasification}}
         </div><br><br>
 

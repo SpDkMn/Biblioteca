@@ -252,7 +252,7 @@
               @if($loop->first)
               <div class="box box-default box-solid" id="{{'itemPanel'.$contItem}}">
                 <div class="box-header">
-                    <h3 class="box-title ">Item {{$item->ejemplar}}</h3>
+                    <h3 class="box-title ">Item 1</h3>
                     <div class="box-tools pull-right">
                       <button type="button" name="copy0" id="agregarItemEdit" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
                     </div>
@@ -269,7 +269,7 @@
                     </div>
                     <div class="form-group">
                       <label for="inputCopy">Ejemplar</label>
-                      <input type="text" disabled value="1" class="form-control" name="copy0" id="inputCopy" placeholder="" required>
+                      <input type="text" style="background:white;width:54px;" value="1" class="form-control" name="copy0" id="inputCopy" placeholder="" required>
                   </div>
  
                 </div>
@@ -277,7 +277,7 @@
               @else
                 <div class="box box-default box-solid" id="{{'itemPanel'.$contItem}}">
                   <div class="box-header">
-                      <h3 class="panel-title">Item {{$item->ejemplar}}</h3>
+                      <h3 class="panel-title">Item {{$contItem +1}}</h3>
                       <div class="box-tools pull-right">
                         <button type="button" name="copy0" id="eliminarItem" class="btn btn-box-tool"><i class="fa fa-times"></i></button>
                       </div>
@@ -294,7 +294,7 @@
                       </div>
                       <div class="form-group">
                           <label for="inputCopy">Ejemplar</label>
-                          <input type="text" disabled value="1" class="form-control" name="copy0" id="inputCopy" placeholder="" required>
+                          <input type="text" style="background:white;width:54px;" value="{{$contItem + 1}}" class="form-control" name="copy0" id="inputCopy" placeholder="" required>
                       </div>
                       
                   </div>
@@ -334,167 +334,6 @@
 
 </div>
 
-
-
-
-
-
-
-
-<script>
-  $(document).ready(function(){
-    var contenedorPestañas = $("#contenedor-pestañas");
-    var contenedorItem = $('#contenedor-item');
-    var AddButton1 = $("#agregarItem");
-
-    var x = $("#contenedor-pestañas li").length-2;
-
-    
-
-    var FieldCount = x;
-    var arreglo;
-
-    $(".agregarItem").click(function(){
-      
-      FieldCount++;
-    
-      arreglo = FieldCount-1;
-
-      $(contenedorPestañas).append('<li><a href="#item'+FieldCount+'" id="cabezera-item'+FieldCount+'" data-toggle="tab">Item'+FieldCount+'</a></li>');
-        
-      $(contenedorItem).append(
-
-              '<div class="tab-pane fade" id="item'+FieldCount+'">'
-                 +'<div class="box-body">'
-                   +'<div class="bs-example" data-example-id="simple-nav-tabs"> '
-                    +'<ul class="nav nav-tabs">'
-                      +'<li class="active"><a href="#primero'+FieldCount+'" data-toggle="tab">Primero</a></li>'
-                      +'<li><a href="#segundo'+FieldCount+'" data-toggle="tab">Segundo</a></li>'
-                      +'<li><a href="#tercero'+FieldCount+'" data-toggle="tab">Tercero</a></li>'
-                    +'</ul>'
-
-                    +'<div class="tab-content">'
-                      +'<div class="tab-pane active" id="primero'+FieldCount+'">'
-                       +'<div class="box-body">'
-                          +'<div class="form-group">'
-                            +'<label>Numero de Ingreso</label>'
-                            +'<input type="text" name="incomeNumber['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Codigo de Barras</label>'
-                            +'<input type="text" name="barcode['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Edicion</label>'
-                            +'<input type="text" name="edition['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Gestion</label>'
-                            +'<input type="text" name="management['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Disponibilidad</label>'
-                            +'<select class="form-control select2" name="availability['+arreglo+']" style="width: 100%;">'
-                                +'<option>Disponible</option>'
-                                +'<option>No Disponible</option>'                              
-                            +'</select>'
-                          +'</div>'
-
-                        +'</div>'
-                      +'</div>'
-                      
-                      +'<div class="tab-pane fade" id="segundo'+FieldCount+'">'
-                        +'<div class="box-body">'
-                          +'<div class="form-group">'
-                            +'<label>Modalidad de Adquision</label>'
-                            +'<select class="form-control select2" name="acquisitionModality['+arreglo+']"  style="width: 100%;">'
-                                +'<option>Compra</option> '
-                                +'<option>Donacion</option>'
-                                +'<option>Adquisicion</option>  '                             
-                            +'</select>'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Fuente de Adquisicion</label>'
-                            +'<input type="text" name="acquisitionSource['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Precio de Adquisicion</label>'
-                            +'<input type="text" name="acquisitionPrice['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Fecha de Adquisicion</label>'
-                            +'<input type="text" name="acquisitionDate['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Ubicacion</label>'
-                            +'<input type="text" name="location['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                        +'</div>'
-                      +'</div>'
-
-                      +'<div class="tab-pane fade" id="tercero'+FieldCount+'">'
-                        +'<div class="box-body">'
-                          +'<div class="form-group">'
-                            +'<label>Tipo de Impresion</label>'
-                            +'<select class="form-control select2" name="printType['+arreglo+']" style="width: 100%;">'
-                                +'<option>Impresion</option>' 
-                                +'<option>Reimpresion</option>   '                           
-                            +'</select>'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Lugar de Publicacion</label>'
-                            +'<input type="text" name="publicationLocation['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Fecha de Publicacion</label>'
-                            +'<input type="text" name="publicationDate['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Telefono</label>'
-                            +'<input type="text" name="phone['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>RUC</label>'
-                            +'<input type="text" name="ruc['+arreglo+']" class="form-control">'
-                          +'</div>'
-                        +'</div>'
-                      +'</div>'
-                    
-                    +'</div><!-- End Tab Content--> '
-                                
-                  +'</div><!-- End navbar -->'
-                 +'</div><!-- End box-body -->'
-               +'</div><!-- End tab-pane -->');
-
-      x++;
-    });
-  
-    $(".eliminarItem").click(function(){
-      if (FieldCount>1) {
-        $("#item"+FieldCount).remove();
-        $("#cabezera-item"+FieldCount).remove();
-        FieldCount = FieldCount-1;
-
-      }
-      
-    });
-
-    return false;
-  });
-</script>
 
 
 
