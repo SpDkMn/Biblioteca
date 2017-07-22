@@ -360,14 +360,6 @@
                         var pos = datos.indexOf(""+opc2+"");
                         //Eliminando opcion que se deshabilitara en las listas de opciones seleccionadas de editoriales secundarias
                         datos.splice(pos, 1);
-                        //Colocando nuevos datos en la lista de opciones seleccionadas de la editorial secundaria
-                        //Nota: Solo falta agregar los nuevos valores
-                        // $('#listEditorialSecond').val(["datos[0]","datos[1]","datos[2]"]);
-                        //
-                        //Mostrar datos para hacer prueba
-                        // for (var i = 0; i < datos.length; i++) {
-                        //   alert("Nuevos datos["+i+"]: "+datos[i])
-                        // }
                       }
                     }
                   }
@@ -379,11 +371,8 @@
                 if(opc2==$(this).attr('value')){
                   //Deshabilitando la opcion
                   $(this).attr("disabled","disabled");
-                  // alert('Deshabilitando opcion '+$(this).text()+' valor '+ $(this).attr('value'));
                   //Reinicializando
                   reiniciarSelect('#listEditorialSecondEdit');
-                  // $('#listEditorialSecond').select2('destroy');
-                  // $('#listEditorialSecond').select2();
                 }
               });
             }
@@ -470,9 +459,6 @@
             var itemPanel = '<div class="BoxItemMagazineEdit box box-info box-solid" id="itemPanel'+idCont+'">'+itemHeader+itemBody +'</div>';
             $(container).after(itemPanel);
             idCont = idCont + 1 ;
-            $("[data-mask]").inputmask();
-
-
           })
           $('#editMagazine').on('click',function(){
             //Eliminando los valores que tienen para poder eliminarlos en la base de datos
