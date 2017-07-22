@@ -334,7 +334,6 @@
                         '</div>';
       var itemPanel = '<div class="BoxItemMagazine box box-info box-solid" id="itemBoxID'+idCont+'">'+itemHeader+itemBody +'</div>';
       $(container).after(itemPanel);
-      $("[data-mask]").inputmask();
       idCont = idCont + 1 ;
     });
 

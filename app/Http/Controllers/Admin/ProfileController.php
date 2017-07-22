@@ -30,7 +30,7 @@ class ProfileController extends Controller
         foreach($j2a['perfiles'] as $dato){
           foreach($dato as $key => $value){
             if($value == true){
-              switch($ke       y){
+              switch($key){
                 case 'ver': $ver = true;break;
                 case 'crear': $crear = true;break;
                 case 'editar': $editar = true; break;

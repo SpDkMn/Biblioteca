@@ -11,7 +11,7 @@ class CreateEditorialThesisTable extends Migration
      *
      * @return void
      */
-    public function up() 
+    public function up()
     {
         Schema::create('editorial_thesis', function (Blueprint $table) {
             $table->increments('id');
@@ -19,6 +19,7 @@ class CreateEditorialThesisTable extends Migration
             $table->foreign('thesis_id')->references('id')->on('thesiss');
             $table->integer('editorial_id')->unsigned();
             $table->foreign('editorial_id')->references('id')->on('editorials');
+
             $table->timestamps();
         });
     }
