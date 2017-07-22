@@ -72,6 +72,8 @@
     <script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>
     <script src="{{ URL::asset('js/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{ URL::asset('js/jquery.slimscroll.min.js')}}"></script>
+    <script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>
+
 
 
 <script>
@@ -102,7 +104,8 @@
 
 
 <script>
-          $("[data-mask]").inputmask();
+  //Inicializador de los inputmask
+  $("[data-mask]").inputmask();
 </script>
 
 

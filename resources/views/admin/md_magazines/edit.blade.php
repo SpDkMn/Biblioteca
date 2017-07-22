@@ -331,7 +331,7 @@
           });
         //Actualizado 9/04/17 04:55
         //INICIO DE  PRUEBA -> Deshabilitar una opcion PARA EDITAR
-          $("#selectEditorialMainEdi").on('change',function(e){
+          $("#selectEditorialMainEdit").on('change',function(e){
             //Almacenando el valor que esta en el selector de editorial principal
             e.preventDefault();
               var opc2 = $(this).val();
