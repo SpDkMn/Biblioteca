@@ -36,12 +36,14 @@
           $("#div-edit").load('{{ url("/admin/profiles/") }}/' + $id + '/edit');
         });
         @endif
+        
         @if($eliminar)
         $(".eliminar").on('click',function(event) {
           $name = $(this).data('name')
           $('.modal-body').html('<p>¿Esta seguro que quiere eliminar el perfil ' + $name +'?</p>');
           $('#confirmaDelete').data('id',$(this).data('id'))
         });
+
         $("#confirmaDelete").on('click',function(event){
           $id = $('#confirmaDelete').data('id')
           $.ajax({
