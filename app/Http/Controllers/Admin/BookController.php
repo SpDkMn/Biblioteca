@@ -53,31 +53,65 @@ class BookController extends Controller
 
  	public function store(Request $request){
     
-  
-    $books=Book::all();
     
-    //Como no se pueden guardar null , entonces verifiricare , y lo llenare con ""
-    if($request['title']==null)
-        $request['title']="";
-    if($request['secondaryTitle']==null)
-        $request['secondaryTitle']="";
-    if($request['summary']==null)
-        $request['summary']="";
-    if($request['isbn']==null)
-        $request['isbn']="";
-    if($request['extension']==null)
-        $request['extension']="";
-    if($request['physicalDetails']==null)
-        $request['physicalDetails']="";
-    if($request['dimensions']==null)
-        $request['dimensions']="";
-    if($request['accompaniment']==null)
-        $request['accompaniment']="Ninguno";
-    if($request['edition']==null)
-        $request['edition']="";
-    if($request['libraryLocation']==null)
-        $request['libraryLocation']="";
-    //Creando un nuevo libro , lo asigno a la variable $b
+    $books=Book::all();
+
+    foreach ($books as $b) {
+      if($request->clasification == $b->clasification){
+        dd("ERROR: Ya existe un libro con la clasificacion ingresada");
+      }
+    }
+
+    if(!$request->isbn){
+      foreach($books as $b){
+        if($b->isbn == $request->isbn){
+          dd("ERROR: Ya existe un libro con el isbn ingresado");
+        }
+      }
+    }
+
+    $bookCopies =BookCopy::all();
+    foreach($bookCopies as $bc){
+      foreach($request->barcode as $aux){
+        if($aux == $bc->barcode){
+          dd("ERROR : Ya existe un libro con el codigo de barras ingresado");
+        }
+      }
+    }
+
+    foreach($request->barcode as $aux1){
+      $cont=0;
+      foreach($request->barcode as $aux2){
+        if($aux1 == $aux2){
+          $cont++;
+        }
+      }
+      if($cont>=2){
+        dd("ERROR : Esta repitiendo el codigo de barras");
+      }
+    }
+
+    foreach($bookCopies as $bc){
+      foreach($request->incomeNumber as $aux){
+        if($aux == $bc->incomeNumber){
+          dd("ERROR : Ya existe un libro con el Numero de Ingreso ingresado");
+        }
+      }
+    }
+
+    foreach($request->incomeNumber as $aux1){
+      $cont=0;
+      foreach($request->incomeNumber as $aux2){
+        if($aux1 == $aux2){
+          $cont++;
+        }
+      }
+      if($cont>=2){
+        dd("ERROR : Esta repitiendo el numero de ingreso");
+      }
+    }
+
+
     $b = Book::create([
                       'clasification'=>$request['clasification'],
                       'title'=>$request['title'],
@@ -93,8 +127,7 @@ class BookController extends Controller
                       'libraryLocation'=>$request['libraryLocation']
                       ]);
 
-    //Como el libro ya se creo , buscare y guardare su id    
-
+   
     $book_id = $b->id;
 
     $autores = Author::all();
@@ -169,70 +202,7 @@ class BookController extends Controller
       $contador_copia ++;
     }
 
-    //Asigno lo ingresado en el formulario a las siguientes variables 
-    $incomeNumber =$request['incomeNumber'];
-    $clasification =$request['clasification'];
-    $acquisitionModality =$request['acquisitionModality'];
-    $printType =$request['printType'];
-  
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['barcode'][$i]==null)
-            $barcode[$i]= 0;
-        else
-            $barcode[$i]=$request['barcode'][$i];
-    }
-
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['volume'][$i]==null)
-            $volume[$i]=0;
-        else
-            $volume[$i] =$request['volume'][$i];
-    }
     
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['acquisitionSource'][$i]==null)
-            $acquisitionSource[$i]="";
-        else
-            $acquisitionSource[$i] =$request['acquisitionSource'][$i];
-    }
-    
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['acquisitionPrice'][$i]==null)
-            $acquisitionPrice[$i]="";
-        else
-            $acquisitionPrice[$i] =$request['acquisitionPrice'][$i];
-    }
-      
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['acquisitionDate'][$i]==null)
-            $acquisitionDate[$i]="";
-        else
-            $acquisitionDate[$i] =$request['acquisitionDate'][$i];
-    }
-    
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['management'][$i]==null)
-            $management[$i]=0;
-        else
-            $management[$i] =$request['management'][$i];
-    }
-    
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['publicationLocation'][$i]==null)
-            $publicationLocation[$i]="";
-        else
-            $publicationLocation[$i] =$request['publicationLocation'][$i];
-    }
-    
-    for($i=0;$i<$contador_copia;$i++){
-        if($request['publicationDate'][$i]==null)
-            $publicationDate[$i]="";
-        else
-            $publicationDate[$i] =$request['publicationDate'][$i];
-    }
-    
-  
-
     for($i=0;$i<$contador_copia;$i++){
       
       $bandera=false;
@@ -240,24 +210,29 @@ class BookController extends Controller
       if($request['availability'][$i] == "Disponible")
         $bandera=true;
 
-      $copy_aux=$i+1;$bc_clasification = $request->clasification."ej.".$copy_aux;
+      $copy_aux=$i+1;
+      $bc_clasification = $request->clasification."ej.".$copy_aux;
 
+      if($request->volume[$i] != null)
+        $bc_clasification = $bc_clasification." vol.".$request->volume[$i];
+    
+     
       $bc = BookCopy::create([
-        'incomeNumber' => $incomeNumber[$i],
-        'clasification'=>$copy_aux,
-        'barcode'=>$barcode[$i],
+        'incomeNumber' => $request->incomeNumber[$i],
+        'clasification'=>$bc_clasification,
+        'barcode'=>$request->barcode[$i],
         'copy'=>$i+1,
-        'volume'=>$volume[$i],
-        'acquisitionModality'=>$acquisitionModality[$i],
-        'acquisitionSource'=>$acquisitionSource[$i],
-        'acquisitionPrice'=>$acquisitionPrice[$i],
-        'acquisitionDate'=>$acquisitionDate[$i],
+        'volume'=>$request->volume[$i],
+        'acquisitionModality'=>$request->acquisitionModality[$i],
+        'acquisitionSource'=>$request->acquisitionSource[$i],
+        'acquisitionPrice'=>$request->acquisitionPrice[$i],
+        'acquisitionDate'=>$request->acquisitionDate[$i],
         
-        'management'=>$management[$i],
+        'management'=>$request->management[$i],
         'availability'=>$bandera,
-        'printType'=>$printType[$i],
-        'publicationLocation'=>$publicationLocation[$i],
-        'publicationDate'=>$publicationDate[$i],
+        'printType'=>$request->printType[$i],
+        'publicationLocation'=>$request->publicationLocation[$i],
+        'publicationDate'=>$request->publicationDate[$i],
         
         'book_id'=>$book_id
       ]);
@@ -297,29 +272,95 @@ class BookController extends Controller
     $autores = Author::all();
     $chapters = ChapterBook::all();
     $bookCopies = BookCopy::all();
+    $books=Book::all();
 
+    foreach ($books as $b) { 
+      if($request->clasification == $b->clasification && $request->clasification != $book->clasification){
+        dd("ERROR: Ya existe un libro con la clasificacion ingresada");
+      }
+    }
 
+    if(!$request->isbn){
+      foreach($books as $b){
+        if($b->isbn == $request->isbn && $request->isbn != $book->clasification){
+          dd("ERROR: Ya existe un libro con el isbn ingresado");
+        }
+      }
+    }
 
-    if($request['title']==null)
-        $request['title']="";
-    if($request['secondaryTitle']==null)
-        $request['secondaryTitle']="";
-    if($request['summary']==null)
-        $request['summary']="";
-    if($request['isbn']==null)
-        $request['isbn']="";
-    if($request['edition']==null)
-      $request['edition']="";
-    if($request['extension']==null)
-        $request['extension']="";
-    if($request['physicalDetails']==null)
-        $request['physicalDetails']="";
-    if($request['dimensions']==null)
-        $request['dimensions']="";
-    if($request['accompaniment']==null)
-        $request['accompaniment']="Ninguno";
-    if($request['libraryLocation']==null)
-        $request['libraryLocation']="";
+/**
+    $bookCopies =BookCopy::all();
+    foreach ($request->barcode as $aux1) {
+      $bool=false;
+
+      foreach ($book->bookCopies as $aux2) {
+
+        if($aux1 ==$aux2->barcode){
+          $bool=true;
+        }
+      }
+      if($bool==false){
+        $bool2 = false;
+        foreach ($bookCopies as $bc) {
+          if($aux1 == $bc->barcode){
+            dd("ERROR: Ya existe un libro con el codigo de barras ingresado1");
+          }
+        }
+      }
+    }
+**/
+    foreach($bookCopies as $bc){
+      foreach($request->barcode as $aux1){
+        if($aux1 == $bc->barcode){
+          $bool = false;
+          foreach($book->bookCopies as $aux2){
+            if($aux2->barcode == $aux1)
+              $bool=true;
+          }
+          if($bool == false)
+            dd("ERROR : Ya existe un libro con el codigo de barras ingresado");
+        }
+      }
+    }
+
+    foreach($request->barcode as $aux1){
+      $cont=0;
+      foreach($request->barcode as $aux2){
+        if($aux1 == $aux2){
+          $cont++;
+        }
+      }
+      if($cont>=2){
+        dd("ERROR : Esta repitiendo el codigo de barras");
+      }
+    }
+
+    foreach($bookCopies as $bc){
+      foreach($request->incomeNumber as $aux1){
+        if($aux1 == $bc->incomeNumber){
+          $bool = false;
+          foreach($book->bookCopies as $aux2){
+            if($aux2->incomeNumber == $aux1)
+              $bool=true;
+          }
+          if($bool == false)
+            dd("ERROR : Ya existe un libro con el Numero de Ingreso ingresado");
+        }
+      }
+    }
+
+    foreach($request->incomeNumber as $aux1){
+      $cont=0;
+      foreach($request->incomeNumber as $aux2){
+        if($aux1 == $aux2){
+          $cont++;
+        }
+      }
+      if($cont>=2){
+        dd("ERROR : Esta repitiendo el numero de ingreso");
+      }
+    }
+
 
     $book->clasification = $request['clasification'];
     $book->title = $request['title'];
@@ -334,6 +375,7 @@ class BookController extends Controller
     $book->edition = $request->edition;
     $book->libraryLocation = $request->libraryLocation;
 
+    $book->save();
     $book->authors()->detach();
     $book->editorials()->detach(); 
 
@@ -387,6 +429,7 @@ class BookController extends Controller
       }
     }
     
+
     //************EDITANDO CAPITULOS******************
     //Calculando la cantidad de capitulos antiguos
     $contador_capitulos_antiguo=0;
@@ -469,6 +512,9 @@ class BookController extends Controller
         
         $copy_aux=$i+1;$bc_clasification = $request->clasification." ej. ".$copy_aux;
 
+        if($request->volume[$i] != null)
+        $bc_clasification = $bc_clasification." vol.".$request->volume[$i];
+
         $book->bookCopies[$i]->incomeNumber = $request->incomeNumber[$i];
         $book->bookCopies[$i]->clasification = $bc_clasification;
         $book->bookCopies[$i]->barcode = $request->barcode[$i];
@@ -494,6 +540,8 @@ class BookController extends Controller
           $bandera=true;
 
         $copy_aux=$i+1;$bc_clasification = $request->clasification." ej. ".$copy_aux;
+        if($request->volume[$i] != null)
+        $bc_clasification = $bc_clasification." vol.".$request->volume[$i];
 
         $book->bookCopies[$i]->incomeNumber = $request->incomeNumber[$i];
         $book->bookCopies[$i]->clasification = $bc_clasification;
@@ -524,6 +572,8 @@ class BookController extends Controller
           $bandera=true;
 
         $copy_aux=$i+1;$bc_clasification = $request->clasification." ej. ".$copy_aux;
+        if($request->volume[$i] != null)
+        $bc_clasification = $bc_clasification." vol.".$request->volume[$i];
 
         $book->bookCopies[$i]->incomeNumber = $request->incomeNumber[$i];
         $book->bookCopies[$i]->clasification = $bc_clasification;
@@ -547,6 +597,8 @@ class BookController extends Controller
           $bandera=true;
 
         $copy_aux=$i+1;$bc_clasification = $request->clasification." ej. ".$copy_aux;
+        if($request->volume[$i] != null)
+        $bc_clasification = $bc_clasification." vol.".$request->volume[$i];
 
          BookCopy::create([
           'incomeNumber' => $request->incomeNumber[$i],

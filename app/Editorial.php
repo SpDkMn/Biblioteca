@@ -1,9 +1,13 @@
 <?php
 namespace App;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Editorial extends Model{
+	use SoftDeletes;
 	protected $table = 'editorials';
 	protected $fillable=['name'];
+	protected $dates = ['deleted_at'];	
 	//Una editorial pertenece a muchas revistas
 	public function magazines(){
 		return $this->belongsToMany('App\Magazine','editorial_magazine')->withPivot('type');

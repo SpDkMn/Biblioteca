@@ -2,6 +2,8 @@
 
 @section('content')
 <!-- Content Header (Page header) -->
+
+<div class="arial">
 <section class="content-header">
   <h1>
     Libros
@@ -34,5 +36,5 @@
     <!-- /.col -->
   <!-- /.row -->
 </section>
-
+</div>
 @endsection

@@ -22,7 +22,7 @@ class CreateBookCopiesTable extends Migration
             $table->unsignedTinyInteger('volume')->nullable();
             //adquision del libro
             $table->string('acquisitionModality');
-            $table->string('acquisitionSource'); 
+            $table->string('acquisitionSource');
             $table->string('acquisitionPrice')->nullable();
             $table->string('acquisitionDate');
             //fin adquision   

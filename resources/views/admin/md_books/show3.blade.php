@@ -75,7 +75,7 @@
         <a href="#2" data-id="{{$book->id}}"  class="btn btn-primary active pagina2">2</a>  
       </div>
       <br>
-  </div>
+    </div>
   
 </div>
 

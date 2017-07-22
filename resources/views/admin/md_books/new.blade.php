@@ -66,59 +66,35 @@
 
                           <!--4. Autor -->
                           <div class="form-group">
-                            <label>Autor</label>
-                            <!--4.1. Autor Principal -->
-                              <p>
-                                &nbsp&nbsp&nbsp&nbspPrincipal<?php   for($i=0;$i<20;$i++){echo "&nbsp";}?>:&nbsp&nbsp&nbsp&nbsp
-                                <select class="form-control select2" name="primaryAuthor[]" multiple="multiple" style="width: 66%;">
-                                  @foreach($autores as  $autor)
-                                    @foreach($autor->categories as $category)
-                                      @if($category->id == 1)
-                                        <option value="{{ $autor->id }}">{{$autor->name}}</option>
-                                      @endif
-                                    @endforeach
-                                  @endforeach
-                                </select>
-                              </p>
-                            <!--4.1. Fin Autor Principal-->
-                            <!-- 4.2. Autor Secundario -->
-                              <p>
-                                &nbsp&nbsp&nbsp&nbspSecundario<?php   for($i=0;$i<15;$i++){echo "&nbsp";}?>:&nbsp&nbsp&nbsp&nbsp
-                                <select class="form-control select2" name="secondaryAuthor[]" multiple="multiple" style="width: 66%;">
-                                  @foreach($autores as  $autor)
-                                    @foreach($autor->categories as $category)
-                                      @if($category->id == 1)
-                                        <option value="{{ $autor->id }}">{{$autor->name}}</option>
-                                      @endif
-                                    @endforeach
-                                  @endforeach
-                                </select>
-                              </p>
-                            <!--4.2. Fin Autor Secundario -->
-                          </div>
-                          <!--4. Fin Autor -->
-                          
-                          <!-- 5. Editorial -->
+                            <label>Autor Principal</label>                            
+                            <select class="form-control select2" name="primaryAuthor[]" multiple="multiple"">
+                              @foreach($autores as  $autor)
+                                @foreach($autor->categories as $category)
+                                  @if($category->id == 1)
+                                    <option value="{{ $autor->id }}">{{$autor->name}}</option>
+                                  @endif
+                                @endforeach
+                              @endforeach
+                            </select>
+                          </div>   
+     
+                          <div class="form-group">
+                            <label>Autor Secundario</label> 
+                            <select class="form-control select2" name="secondaryAuthor[]" multiple="multiple">
+                              @foreach($autores as  $autor)
+                                @foreach($autor->categories as $category)
+                                  @if($category->id == 1)
+                                    <option value="{{ $autor->id }}">{{$autor->name}}</option>
+                                  @endif
+                                @endforeach
+                              @endforeach
+                            </select>
+                          </div> 
+                                
+
                             <div class="form-group">
-                              <label>Editorial</label>
-                              <!-- 5.1. Editorial Principal -->
-                                <p>
-                                  &nbsp&nbsp&nbsp&nbspPrincipal<?php   for($i=0;$i<20;$i++){echo "&nbsp";}?>:&nbsp&nbsp&nbsp&nbsp
-                                  <select class="form-control select2" name="editorial[]" style="width: 66%;">
-                                      @foreach($editoriales as  $editorial)
-                                        @foreach($editorial->categories as $category)
-                                          @if($category->name == "libro"){
-                                            <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
-                                          }@endif
-                                        @endforeach
-                                      @endforeach
-                                  </select>
-                                </p> 
-                              <!-- 5.1. Fin Editorial Principal -->
-                              <!-- 5.2. Editorial Secundaria -->
-                                <p>
-                                  &nbsp&nbsp&nbsp&nbspAnexo<?php   for($i=0;$i<25;$i++){echo "&nbsp";}?>:&nbsp&nbsp&nbsp&nbsp
-                                  <select class="form-control select2" name="secondaryEditorial[]" multiple="multiple" style="width: 66%;">
+                              <label>Editorial</label>                                            
+                              <select class="form-control select2" name="editorial[]"">
                                   @foreach($editoriales as  $editorial)
                                     @foreach($editorial->categories as $category)
                                       @if($category->name == "libro"){
@@ -126,11 +102,21 @@
                                       }@endif
                                     @endforeach
                                   @endforeach
-                                  </select>
-                                </p>
-                              <!-- 5.2. Fin Editorial Secundario -->
+                              </select>
                             </div>
-                          <!-- 5. Fin Editorial -->
+                              
+                            <div class="form-group">
+                              <label>Anexos</label>     
+                              <select class="form-control select2" name="secondaryEditorial[]" multiple="multiple">
+                              @foreach($editoriales as  $editorial)
+                                @foreach($editorial->categories as $category)
+                                  @if($category->name == "libro"){
+                                    <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
+                                  }@endif
+                                @endforeach
+                              @endforeach
+                              </select>
+                            </div>
 
                       </div><!-- End Box-body -->
                     </div><!-- End Primer Panel -->
@@ -244,7 +230,6 @@
                           <ul class="nav nav-tabs">
                             <li class="active"><a href="#primero1" data-toggle="tab">Primero</a></li>
                             <li><a href="#segundo1" data-toggle="tab">Segundo</a></li>
-                            <li><a href="#tercero1" data-toggle="tab">Tercero</a></li>
                           </ul>
 
                           <div class="tab-content">
@@ -287,8 +272,8 @@
                                 <div class="form-group">
                                   <label>Modalidad de Adquision</label>
                                   <select class="form-control select2" name="acquisitionModality[0]" id="acquisitionModality1" style="width: 100%;">
-                                      <option>Compra</option> 
-                                      <option>Donacion</option>
+                                      <option>Donacion</option> 
+                                      <option>Compra</option>
                                       <option>Adquisicion</option>                               
                                   </select>
                                 </div>
@@ -308,12 +293,6 @@
                                   <input type="text" name="acquisitionDate[0]" class="form-control" id="acquisitionDate1" required>
                                 </div>
 
-                               
-                              </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="tercero1">
-                              <div class="box-body">
                                 <div class="form-group">
                                   <label>Tipo de Impresion</label>
                                   <select class="form-control select2" name="printType[0]" style="width: 100%;">
@@ -331,8 +310,7 @@
                                   <label>Fecha de Publicacion</label>
                                   <input type="text" name="publicationDate[0]" class="form-control" id="publicationDate1" required>
                                 </div>
-
-        
+                               
                               </div>
                             </div>
                           
@@ -394,7 +372,6 @@
                     +'<ul class="nav nav-tabs">'
                       +'<li class="active"><a href="#primero'+FieldCount+'" data-toggle="tab">Primero</a></li>'
                       +'<li><a href="#segundo'+FieldCount+'" data-toggle="tab">Segundo</a></li>'
-                      +'<li><a href="#tercero'+FieldCount+'" data-toggle="tab">Tercero</a></li>'
                     +'</ul>'
 
                     +'<div class="tab-content">'
@@ -436,9 +413,9 @@
                           +'<div class="form-group">'
                             +'<label>Modalidad de Adquision</label>'
                             +'<select class="form-control select2" name="acquisitionModality['+arreglo+']"  style="width: 100%;">'
-                                +'<option>Compra</option> '
-                                +'<option>Donacion</option>'
-                                +'<option>Adquisicion</option>  '                             
+                                +'<option>Donacion</option> '
+                                +'<option>Compra</option>'
+                                +'<option>Adquisicion</option> '                             
                             +'</select>'
                           +'</div>'
 
@@ -457,11 +434,6 @@
                             +'<input type="text" name="acquisitionDate['+arreglo+']" id="acquisitionDate'+FieldCount+'" class="form-control" required>'
                           +'</div>'
 
-                        +'</div>'
-                      +'</div>'
-
-                      +'<div class="tab-pane fade" id="tercero'+FieldCount+'">'
-                        +'<div class="box-body">'
                           +'<div class="form-group">'
                             +'<label>Tipo de Impresion</label>'
                             +'<select class="form-control select2" name="printType['+arreglo+']" style="width: 100%;">'
@@ -482,7 +454,7 @@
 
                         +'</div>'
                       +'</div>'
-                    
+
                     +'</div><!-- End Tab Content--> '
                                 
                   +'</div><!-- End navbar -->'

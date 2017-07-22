@@ -9,60 +9,14 @@
   </div>
 
   <div class="box-body table-responsive">
-    <div class="row">
-
-      <div class="col-lg-3">
-        <div class="form-group">
-          <div class="input-group">
-            
-            
-            <div class="input-group-btn">
-              <button type="button" class="btn btn-default">
-                <span>Cantidad de Libros&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-              </button>
-            
-            </div><!-- /btn-group -->
-            
-            
-              <input type="text" class="form-control" aria-label="..." size="">
-            
-
-            <div class="input-group-btn">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span> </button>
-              <ul class="dropdown-menu">
-                <li><a href="#">5</a></li>
-                <li><a href="#">10</a></li>
-                <li><a href="#">20</a></li>
-                <li><a href="#">30</a></li>
-              </ul>
-            
-            </div><!-- /btn-group -->
-          </div><!-- /input-group -->
-        </div>
-      </div>
      
-      <div class="col-lg-5">
-        
-      </div>
-
-      <div class="col-lg-4">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Nombre de Libro">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-          </span>
-        </div><!-- /input-group -->
-      </div><!-- /.col-lg-6 -->
-      
-    </div>
-    
     <table id="bookTable" class="table table-bordered table-striped">
         <tr>
           <th>Titulo</th>
           <th>Autor</th>
           <th>Editorial</th>
           <th>Nº ejemplares</th>
-          <th>ISBN</th>
+          <th>Clasificacion</th>
           <th>Editar</th>
           <th>Eliminar</th>
         </tr>    
@@ -107,7 +61,7 @@
           @endforeach
           {{$cont}}
         </td>
-        <td>{{$book->isbn}}</td>
+        <td>{{$book->clasification}}</td>
         <td><a type="button" data-id="{{$book->id}}" class="button-content btn btn-success editar"><i class="fa fa-pencil"></i></a></td>
         
         {!! Form::open(['route'=>['book.destroy',$book->id],'method' => 'DELETE']) !!}
