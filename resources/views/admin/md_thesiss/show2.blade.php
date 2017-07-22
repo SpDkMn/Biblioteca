@@ -192,11 +192,6 @@
               {{$thesis->summary}}
         </div><br>
 
-        <div class="box-body">
-              <strong>CONCLUSIONES Y RECOMENDACIONES </strong><br>
-              <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>&nbsp
-              {{$thesis->recomendacion}}
-        </div><br>
         
         <div class="box-body">
               <strong>BIBLIOGRAFÍA </strong><br>

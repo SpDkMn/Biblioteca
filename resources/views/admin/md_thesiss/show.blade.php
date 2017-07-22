@@ -59,7 +59,28 @@
               <!--<td><button type="button" data-id="{{$thesis->id}}" data-name="{{$thesis->title}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted"><i class="fa fa-trash"></i></button></td>-->
            <!--   <td><a type="button" class="button-content btn btn-danger" href="{{route('thesis.destroy',$thesis->id)}}"><i class="fa fa-trash"></i></a></td>     -->
           
-          <td class="text-center"><button type="button" href="{{route('thesis.destroy',$thesis->id)}}" data-id="{{$thesis->id}}" data-name="eliminar" class="btn btn-danger eliminar"><i class="fa fa-trash"></i></button></td>
+
+          <td><center><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCopy<?php echo $thesis->id; ?>"><i class="fa fa-trash"></i></button></center></td>
+
+          <div class="modal fade" id="ModalCopy<?php echo $thesis->id; ?>" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">
+        
+           <div class="modal-dialog" role="document">
+             <div class="modal-content">
+               <form>
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><br>
+                <h3 class="modal-title text-center text-font-size" id="ModalCopyLabel"><strong>EJEMPLAR&nbsp<?php echo $thesis->ejemplar; ?></strong></h3>
+                </div>
+                <div class="modal-body">
+                  
+                  <div>
+                  <p>Ddesea eliminar el registro</p>  
+                  <a href="{{route('thesis.destroy',$thesis->id)}}" type="button" class="btn btn-success pull-right">Eliminar</a><br><br>
+                 </div>
+              
+                </div>
+           </div>
+         </div>
 
 
       <!--     {!! Form::open(['route'=>['thesis.destroy',$thesis->id],'method' => 'DELETE']) !!}

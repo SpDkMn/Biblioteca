@@ -86,7 +86,7 @@
 
                     <div class="form-group">
                         <label>Autor Secundario</label>
-                        <select class="form-control select" id="selectAutorSecondEdit" name="autorSecond[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Secundario">
+                        <select class="form-control select" id="selectAutorSecondEdit" name="autorSecond[]" multiple="multiple" style="width: 100%;" data-placeholder="                                          Si no tiene deje en blanco">
                             @foreach($autores as  $autor)
                               @foreach($autor->categories as $category)
                                 @if($category->name == "tesis/tesina")
@@ -275,11 +275,11 @@
                 </div>
               </div>
               @else
-                <div class="box box-default box-solid" id="{{'itemPanel'.$contItem}}">
+                <div class="BoxItemThesiss box box-default box-solid" id="{{'itemPanel'.$contItem}}" >
                   <div class="box-header">
                       <h3 class="panel-title">Item {{$contItem +1}}</h3>
                       <div class="box-tools pull-right">
-                        <button type="button" name="copy0" id="eliminarItem" class="btn btn-box-tool"><i class="fa fa-times"></i></button>
+                        <button type="button" data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button>
                       </div>
                   </div>
                   <div class="box-body">
@@ -294,7 +294,7 @@
                       </div>
                       <div class="form-group">
                           <label for="inputCopy">Ejemplar</label>
-                          <input type="text" style="background:white;width:54px;" value="{{$contItem + 1}}" class="form-control" name="copy0" id="inputCopy" placeholder="" required>
+                          <input type="text" style="background:white;width:54px;" value="{{$contItem + 1}}" class="form-control" name="{{'copy'.$contItem}}" id="inputCopy" placeholder="" required>
                       </div>
                       
                   </div>
@@ -327,12 +327,15 @@
 
   
           <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Editar</button>
+        <button type="submit" class="btn btn-primary" id="ediThesis">Editar</button>
     
 
   </form>
 
 </div>
+
+
+
 
 
 
@@ -397,7 +400,7 @@
             // Guardar el panel donde se encuentra la seccion contenido
             var container = $('#itemPanel0');
             var titleItem = '<h3 class="box-title">Item '+(idCont+1)+'</h3>';
-            var buttonClose ='<div class="box-tools pull-right">  <button type="button" id="eliminarItemEdit" data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button> </div>';
+            var buttonClose ='<div class="box-tools pull-right"><button type="button"  data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button> </div>';
             var itemHeader = '<div class="box-header">'+titleItem+buttonClose+'</div>'
             var itemBody = '<div class="box-body">'+
                                   
@@ -407,21 +410,24 @@
                                   '</div>'+
                                   '<div class="form-group">'+
                                       '<label for="inputBarcode">Código de barra</label>'+
-                                    '<input type="text" class="form-control" name="barcode'+idCont+'" id="inputBarcode" placeholder="">'+
+                                      '<input type="text" value="20000000" class="form-control" name="barcode'+idCont+'" id="inputBarcode" placeholder="">'+
                                   '</div>'+
                                      '<div class="form-group">'+
-                                    '<label for="inputCopy">Ejemplar</label>'+
-                                    '<input type="number" value="'+(idCont+1)+'" class="form-control" name="copy'+idCont+'" id="inputC opy" placeholder="">'+
-                            '</div>'+
-
+                                     '<label for="inputCopy">Ejemplar</label>'+
+                                     '<input type="number" value="'+(idCont+1)+'" class="form-control" name="copy'+idCont+'" id="inputC opy" placeholder="">'+
+                                  '</div>'+
 
                             '</div>';
 
-            var itemPanel = '<div class="box box-default box-solid" id="itemPanel'+(idCont-1)+'">'+itemHeader+itemBody +'</div>';
+            var itemPanel = '<div class="BoxItemThesiss box box-default box-solid" id="itemPanel'+(idCont-1)+'">'+itemHeader+itemBody +'</div>';
             $(container).after(itemPanel);
-
             idCont = idCont + 1 ;
-          })
+          });
+
+          $('#ediThesis').click(function(){
+
+            $('.BoxItemThesiss:hidden').remove();
+          });
       
   </script>
 

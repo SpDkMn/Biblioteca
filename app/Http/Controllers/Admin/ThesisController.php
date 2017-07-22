@@ -203,6 +203,7 @@ foreach ($thesiss as $thesi) {
          $contador_copia = 0;
          $contador_copia2 = 0;
 
+
    $copiasT=$thesis->thesisCopies;      
 
   //Contando las copias de la tesis
@@ -232,18 +233,30 @@ foreach ($thesiss as $thesi) {
     $thesis->publicationLocation = $request['lugarsus'];
     $thesis->asesor = $request['asesor'];
 
-      if(is_string($request['author'])){
+      /*if(is_string($request['author'])){
           //Convirtiendo a entero el valor de $request['author'], pues es una cadena y al asignarlo guardara 0
           $request['author'] = (int)$request['author'];
-      }
-      $thesis->authors->author_id = $request['author'];
+      }*/
+    //  $thesis->authors->author_id = $request['author'];
 
+
+/*    for($i=0;$i<=8;$i++){
+          $thesis->thesisCopies[$i]->delete();
+      }
+*/
+
+
+      foreach($copias as $copia) {
+        if($copia->thesis_id == $id) {
+          $copia->delete();
+        }
+      }
 
     {{$av=1;}}
 
 //  GUARDANDO LOS DATOS DE LAS COPIAS DE TESIS
 
-    for ($j=0; $j <= 8; $j++) {
+    for ($j=0; $j <= 8; $j++) {      
             if($request['barcode'.$j]==null){
                continue;  
             }
@@ -251,12 +264,9 @@ foreach ($thesiss as $thesi) {
                                         'barcode'=>$request['barcode'.$j],
                                         'ejemplar'=>$request['copy'.$j], //Evitar que no haya ningun ejemplar que estee con datos vacios (colocar excepciones con el request). Y eliminar el contenedor que hace incrementar el numero de copia a medida que se duplica el contenedor de items (en la vista show)
                                         'availability'=>$av,
-                                        'thesis_id'=>$thesis->id   //El id de la tesis que quiero relacionar ($id_thesis)
+                                        'thesis_id'=>$id   //El id de la tesis que quiero relacionar ($id_thesis)
                                     ]);  
-   }
-
-
-
+   }    
 
 
 
