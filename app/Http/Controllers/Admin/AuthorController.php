@@ -18,7 +18,7 @@ class AuthorController extends Controller
 {  
 	public function index(Request $request){
 
-      $profile = User::with(['Employee','Employee.profile'])->where('id',Auth::user()->id)->first()->Employee->Profile;
+     /* $profile = User::with(['Employee','Employee.profile'])->where('id',Auth::user()->id)->first()->Employee->Profile;
       $j2a = json_decode($profile->JSON,true);
       // Iniciamos los permisos en false
 
@@ -36,8 +36,9 @@ class AuthorController extends Controller
             }
           }
         }
-      }
-      $show = $new = $edit = $delete = "";
+      } */
+      $show = $new = $edit = $delete = true;
+      $ver = $crear = $editar = $eliminar = true;
     
       //Verifica si se envio "category" por metodo get , FILTROS de busqueda 
       if($request->get('category')==null){
@@ -48,18 +49,23 @@ class AuthorController extends Controller
         foreach ($request->get('category') as $category) {
             switch ($category) {
               case 'libro':
-                $categories[$i]=1;
-                break;
-              case 'revista':
-                $categories[$i]=2;
-                break;
-              case 'tesis':
-                $categories[$i]=3;
-                break;
-              case 'compendio':
-                $categories[$i]=4;
-                break;
-              
+                    $id=1;
+                    break;
+                case 'revista':
+                    $id=2;
+                    break;
+                case 'tesis/tesina':
+                    $id=3;
+                    break;
+                case 'compendio':
+                    $id=4;
+                    break;
+                case 'colaborador':
+                    $id=5;
+                    break;
+                case 'asesor':
+                    $id=6;
+                    break;
              
             }
             $i=$i+1;
@@ -179,7 +185,7 @@ class AuthorController extends Controller
        
 
    public function update($id,AuthorRequest $request){
-       
+      
       $author = Author::find($id);
       //$auth = Auth::find($id);
       $author->fill($request->all());

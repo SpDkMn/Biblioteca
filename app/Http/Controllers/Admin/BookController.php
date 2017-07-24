@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BookRequest;
 // Para usar el Modelo Magazine
 use App\Author as Author;
 use App\Book as Book;
@@ -11,12 +10,9 @@ use App\BookCopy as BookCopy;
 use App\Editorial as Editorial;
 use App\Content as Content;
 use App\ChapterBook as ChapterBook;
-
 class BookController extends Controller
 {
-
- 	public function index(){
-
+  public function index(){
     $books=Book::all();
     $editoriales = Editorial::all(); 
     $autores = Author::all();
@@ -28,40 +24,29 @@ class BookController extends Controller
                                     'editoriales'=>$editoriales,
                                     'autores'=>$autores
       ]);
-
-
      return view('admin.md_books.index',[
                                             'show'=>$show,
                                             'new'=>$new
                                             ]);
- 	}
-
-
-
+  }
  public function create(){
     $books=Book::all();
     $editoriales = Editorial::all(); 
     $autores = Author::all();
-
     return view('admin.md_books.new',['books'=>$books,
                                     'editoriales'=>$editoriales,
                                     'autores'=>$autores
       ]);
-
  }
-
-
- 	public function store(Request $request){
+  public function store(BookRequest $request){
     
-    
+    /*
     $books=Book::all();
-
     foreach ($books as $b) {
       if($request->clasification == $b->clasification){
         dd("ERROR: Ya existe un libro con la clasificacion ingresada");
       }
     }
-
     if(!$request->isbn){
       foreach($books as $b){
         if($b->isbn == $request->isbn){
@@ -69,7 +54,6 @@ class BookController extends Controller
         }
       }
     }
-
     $bookCopies =BookCopy::all();
     foreach($bookCopies as $bc){
       foreach($request->barcode as $aux){
@@ -78,7 +62,6 @@ class BookController extends Controller
         }
       }
     }
-
     foreach($request->barcode as $aux1){
       $cont=0;
       foreach($request->barcode as $aux2){
@@ -90,7 +73,6 @@ class BookController extends Controller
         dd("ERROR : Esta repitiendo el codigo de barras");
       }
     }
-
     foreach($bookCopies as $bc){
       foreach($request->incomeNumber as $aux){
         if($aux == $bc->incomeNumber){
@@ -98,7 +80,6 @@ class BookController extends Controller
         }
       }
     }
-
     foreach($request->incomeNumber as $aux1){
       $cont=0;
       foreach($request->incomeNumber as $aux2){
@@ -111,7 +92,7 @@ class BookController extends Controller
       }
     }
 
-
+    */
     $b = Book::create([
                       'clasification'=>$request['clasification'],
                       'title'=>$request['title'],
@@ -126,19 +107,15 @@ class BookController extends Controller
                       'edition'=>$request['edition'],
                       'libraryLocation'=>$request['libraryLocation']
                       ]);
-
    
     $book_id = $b->id;
-
     $autores = Author::all();
     $editoriales = Editorial::all();
-
     
     //Creando relacion de autor principal con libro
     if($request['primaryAuthor']!=null){
         foreach( $request['primaryAuthor'] as $autor ){
           foreach ($autores as $aut ) {
-
               if($autor == $aut->id)
                 {
                   $b->authors()->attach($aut->id,['type'=>true]);
@@ -159,7 +136,6 @@ class BookController extends Controller
           }
         }
     }
-
     //Creando Relacion de la editorial con libro
     if($request['editorial']!=null){
       foreach($request['editorial'] as $editorial){
@@ -184,7 +160,6 @@ class BookController extends Controller
       }
     }
     
-
     //Crenado los capitulos , utilizo el id de libro
     $contador_capitulos=0;
     foreach ($request['chapter'] as $chapter) {
@@ -195,24 +170,19 @@ class BookController extends Controller
             'book_id'=>$book_id
           ]);
     }
-
     //Calculando el numero de ejemplares del libro
     $contador_copia=0;
     foreach ($request['incomeNumber'] as $a) {
       $contador_copia ++;
     }
-
     
     for($i=0;$i<$contador_copia;$i++){
       
       $bandera=false;
-
       if($request['availability'][$i] == "Disponible")
         $bandera=true;
-
       $copy_aux=$i+1;
       $bc_clasification = $request->clasification."ej.".$copy_aux;
-
       if($request->volume[$i] != null)
         $bc_clasification = $bc_clasification." vol.".$request->volume[$i];
     
@@ -236,24 +206,18 @@ class BookController extends Controller
         
         'book_id'=>$book_id
       ]);
-
     }
-
     return redirect('admin/book');
-
   }
-
   public function edit($id){
     $books = Book::all();
     $book = Book::find($id);
-
     $editoriales = Editorial::all();
     $autores = Author::all();
     $chapters = ChapterBook::all();
     $bookCopies = BookCopy::all();
     
     
-
     return view('admin.md_books.edit',[     'books'=>$books,
                                             'book'=>$book,
                                             'editoriales'=>$editoriales,
@@ -262,39 +226,33 @@ class BookController extends Controller
                                             'bookCopies'=>$bookCopies]);
      
   }
-
-
-
-
-  public function update(Request $request, $id){
+  public function update(BookRequest $request, $id){
     $book= Book::find($id);
     $editoriales = Editorial::all();
     $autores = Author::all();
     $chapters = ChapterBook::all();
     $bookCopies = BookCopy::all();
     $books=Book::all();
+    
 
+/*
     foreach ($books as $b) { 
       if($request->clasification == $b->clasification && $request->clasification != $book->clasification){
         dd("ERROR: Ya existe un libro con la clasificacion ingresada");
       }
     }
-
     if(!$request->isbn){
       foreach($books as $b){
         if($b->isbn == $request->isbn && $request->isbn != $book->clasification){
           dd("ERROR: Ya existe un libro con el isbn ingresado");
         }
       }
-    }
-
+    }   */
 /**
     $bookCopies =BookCopy::all();
     foreach ($request->barcode as $aux1) {
       $bool=false;
-
       foreach ($book->bookCopies as $aux2) {
-
         if($aux1 ==$aux2->barcode){
           $bool=true;
         }
@@ -309,7 +267,9 @@ class BookController extends Controller
       }
     }
 **/
-    foreach($bookCopies as $bc){
+
+
+/*    foreach($bookCopies as $bc){
       foreach($request->barcode as $aux1){
         if($aux1 == $bc->barcode){
           $bool = false;
@@ -322,7 +282,6 @@ class BookController extends Controller
         }
       }
     }
-
     foreach($request->barcode as $aux1){
       $cont=0;
       foreach($request->barcode as $aux2){
@@ -334,7 +293,6 @@ class BookController extends Controller
         dd("ERROR : Esta repitiendo el codigo de barras");
       }
     }
-
     foreach($bookCopies as $bc){
       foreach($request->incomeNumber as $aux1){
         if($aux1 == $bc->incomeNumber){
@@ -348,7 +306,6 @@ class BookController extends Controller
         }
       }
     }
-
     foreach($request->incomeNumber as $aux1){
       $cont=0;
       foreach($request->incomeNumber as $aux2){
@@ -362,6 +319,7 @@ class BookController extends Controller
     }
 
 
+    */
     $book->clasification = $request['clasification'];
     $book->title = $request['title'];
     $book->secondaryTitle = $request['secondaryTitle'];
@@ -374,16 +332,13 @@ class BookController extends Controller
     $book->relationBook = 1;
     $book->edition = $request->edition;
     $book->libraryLocation = $request->libraryLocation;
-
     $book->save();
     $book->authors()->detach();
     $book->editorials()->detach(); 
-
     //Creando relacion de autor principal con libro
     if($request['primaryAuthor']!=null){
         foreach( $request['primaryAuthor'] as $autor ){
           foreach ($autores as $aut ) {
-
               if($autor == $aut->id)
                 {
                   $book->authors()->attach($aut->id,['type'=>true]);
@@ -404,7 +359,6 @@ class BookController extends Controller
           }
         }
     }
-
     //Creando Relacion de la editorial con libro
     if($request['editorial']!=null){
       foreach($request['editorial'] as $editorial){
@@ -429,7 +383,6 @@ class BookController extends Controller
       }
     }
     
-
     //************EDITANDO CAPITULOS******************
     //Calculando la cantidad de capitulos antiguos
     $contador_capitulos_antiguo=0;
@@ -484,7 +437,6 @@ class BookController extends Controller
         $i++;
       }
     }
-
     //**********************EDITANDO ITEMS**********************
     //Calculando el antiguo numero de ejemplares del libro
     $numero_copias_antiguo=0;
@@ -497,24 +449,20 @@ class BookController extends Controller
     foreach ($request['incomeNumber'] as $a) {
       $numero_copias_nuevo++;
     }
-
     //Analizo los tres casos 
     //CASO I
     //Como son vectores paralelos , ejem 
     //$book->bookCopies[0]->barcode : antiguo codigo de barras de item1 
     //$request->barcode[0]          : nuevo codigo de barras de item1
     if($numero_copias_antiguo==$numero_copias_nuevo){
-
       for($i=0;$i<$numero_copias_nuevo;$i++){
         $bandera=false;
         if($request->availability[$i] == "Disponible")
           $bandera=true;
         
         $copy_aux=$i+1;$bc_clasification = $request->clasification." ej. ".$copy_aux;
-
         if($request->volume[$i] != null)
         $bc_clasification = $bc_clasification." vol.".$request->volume[$i];
-
         $book->bookCopies[$i]->incomeNumber = $request->incomeNumber[$i];
         $book->bookCopies[$i]->clasification = $bc_clasification;
         $book->bookCopies[$i]->barcode = $request->barcode[$i];
@@ -538,11 +486,9 @@ class BookController extends Controller
         $bandera=false;
         if($request->availability[$i] == "Disponible")
           $bandera=true;
-
         $copy_aux=$i+1;$bc_clasification = $request->clasification." ej. ".$copy_aux;
         if($request->volume[$i] != null)
         $bc_clasification = $bc_clasification." vol.".$request->volume[$i];
-
         $book->bookCopies[$i]->incomeNumber = $request->incomeNumber[$i];
         $book->bookCopies[$i]->clasification = $bc_clasification;
         $book->bookCopies[$i]->barcode = $request->barcode[$i];
@@ -570,11 +516,9 @@ class BookController extends Controller
         $bandera=false;
         if($request->availability[$i] == "Disponible")
           $bandera=true;
-
         $copy_aux=$i+1;$bc_clasification = $request->clasification." ej. ".$copy_aux;
         if($request->volume[$i] != null)
         $bc_clasification = $bc_clasification." vol.".$request->volume[$i];
-
         $book->bookCopies[$i]->incomeNumber = $request->incomeNumber[$i];
         $book->bookCopies[$i]->clasification = $bc_clasification;
         $book->bookCopies[$i]->barcode = $request->barcode[$i];
@@ -595,11 +539,9 @@ class BookController extends Controller
         $bandera=false;
         if($request->availability[$i] == "Disponible")
           $bandera=true;
-
         $copy_aux=$i+1;$bc_clasification = $request->clasification." ej. ".$copy_aux;
         if($request->volume[$i] != null)
         $bc_clasification = $bc_clasification." vol.".$request->volume[$i];
-
          BookCopy::create([
           'incomeNumber' => $request->incomeNumber[$i],
           'clasification'=>$bc_clasification,
@@ -623,35 +565,25 @@ class BookController extends Controller
     //*********************FIN EDITAR ITEMS**********************
     
     return redirect()->route('book.index');
-
   }
-
   /**
    * Remove the specified resource from storage.
    *
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-
-
   public function destroy($id)
   {
       $book = Book::find($id);
-
       $book->authors()->detach();
       $book->editorials()->detach();
-
       $book->bookCopies()->delete();
       $book->chapters()->delete();
-
       $book->delete();
  
        return redirect()->route('book.index');
    }
-
-
    public function show(){
-
       $book=Book::find($id);
       if($request->get('page')==1){
         return view('admin.md_books.show2')->with('book',$book);
@@ -660,8 +592,6 @@ class BookController extends Controller
         return view('admin.md_books.show3')->with('book',$book);
       }
     }
-
-
   public function show2($id){
       
       $book= Book::find($id);
@@ -685,9 +615,7 @@ class BookController extends Controller
       return view('admin.md_books.show3',[ 'book'=>$book
                                             ]);
   }
-
   public function content(){
     
   }
-
 }

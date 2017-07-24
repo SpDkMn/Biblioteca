@@ -171,7 +171,6 @@
           //
           //    }
           //  });
-
           })
           //Manejador de evento local para mostrar el modal luego de que se ha completado la peticion
           //************************************************************************************
@@ -209,7 +208,6 @@
           })
         //Editar una revista sin dirigirse a otra url
         $(".editar").on('click',function(event) {
-
           $id = $(this).data('id');
           //Mostrando recarga
           $("#divEdit").html('<div class="box box-success box-solid"><div class="box-header with-border"><h3 class="box-title">Editar</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>');

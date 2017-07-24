@@ -336,8 +336,6 @@
       $(container).after(itemPanel);
       idCont = idCont + 1 ;
     });
-
-
     $('#newMagazine').click(function(){
       //Elimina las cajas ocultadas que contiene los items
         $('.BoxItemMagazine:hidden').remove();

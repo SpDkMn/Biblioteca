@@ -64,9 +64,46 @@
         <td>{{$book->clasification}}</td>
         <td><a type="button" data-id="{{$book->id}}" class="button-content btn btn-success editar"><i class="fa fa-pencil"></i></a></td>
         
-        {!! Form::open(['route'=>['book.destroy',$book->id],'method' => 'DELETE']) !!}
-          <td><button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
-        {!! Form::close() !!}
+
+        <!--ELIMINACION DE UNA TESIS MEDIANTE MODAL-->
+
+          <td><center><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCopy<?php echo $book->id; ?>"><i class="fa fa-trash"></i></button></center></td>
+
+
+          <div class="modal modal-danger fade" id="ModalCopy<?php echo $book->id; ?>" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">
+        
+             <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                 <form>
+                   
+                  <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title text-center text-font-size" id="ModalCopyLabel"><strong>MATERIAL :</strong> {{ $book->title}}</h3>
+                   </div>
+
+
+                   <div class="modal-body">
+                       <p class="text-center"><strong>¿ Desea eliminar dicha libro ?</strong></p>
+                   </div>
+
+                   <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+                        <a href="{{route('book.destroy',$book->id)}}" type="button" class="btn btn-outline">Eliminar</a>
+                   </div>
+                 </form>
+               </div>
+            </div>
+          </div>
+      <!--FIN DE LA ELIMINACION DE UNA TESIS MEDIANTE MODAL-->
+
+
+
+
+
+
+
+
         
       </tr>
       @endforeach
@@ -98,4 +135,3 @@
       })
     })
   </script>
-  

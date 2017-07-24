@@ -64,14 +64,12 @@
 							}
 							echo "<img src='/imgNoticias/".$fijo_url."' alt='Responsive image' class='img-responsive' style='width: 280px; height: 280px;'>";
 						?>
-						<div class="caption" style="height: 220px;">
+						<div class="caption" style="height: 260px;">
 							<div style="height: 150px;">
-								<h3 style="text-align: center; font-weight:bold;"><?php echo $variable[($i-1)*4]->titulo ?></h3>
+								<h3 style="text-align: center; height: 85px;font-weight:bold;margin-top: 0px;justify-content: center;align-content: center;flex-direction: column;  overflow: hidden; display: flex;"><?php echo $variable[($i-1)*4]->titulo ?></h3>
 								
-								<div style="text-align: center; height: 100px; font-size:15px; display: flex; justify-content: center; align-content: center; flex-direction: column;  overflow: hidden;"><?php echo $variable[($i-1)*4]->contenido ?></div>
-								
-							</div>
-							<div style="padding-left: 18%;">
+								<div style="text-align: center; height: 100px; font-size:15px; display: flex; justify-content: center; align-content: center; flex-direction: column;  overflow: hidden"><?php echo $variable[($i-1)*4]->contenido ?></div>
+								<div style="padding-left: 18%; margin-top: 8px;">
 							<div class="box">
 								{!!link_to_route('noticias.edit', $title='Editar', $parameters = $variable[($i-1)*4]->id, $attributes = ['class'=>'btn btn-primary'])!!}
 							</div>
@@ -83,6 +81,8 @@
 		             				 </form>
 	             				 </div>
 							</div>
+							</div>
+							
 						</div>
 
 					</div>
@@ -99,12 +99,11 @@
 							}
 							echo "<img src='/imgNoticias/".$fijo_url."' alt='Responsive image' class='img-responsive' style='width: 280px; height: 280px;'>";
 						?>
-						<div class="caption" style="height: 220px;">
+						<div class="caption" style="height: 260px;">
 							<div style="height: 150px;">
-								<h3 style="text-align: center; font-weight:bold;"><?php echo $variable[($i-1)*4+1]->titulo ?></h3>
-								<div style="text-align: center; height: 100px; font-size:15px; display: flex; justify-content: center; align-content: center; flex-direction: column;  overflow: hidden;"><?php echo $variable[($i-1)*4+1]->contenido ?></div>
-							</div>
-							<div style="padding-left: 18%;">
+								<h3 style="text-align: center; height: 85px;font-weight:bold;margin-top: 0px;justify-content: center;align-content: center;flex-direction: column;  overflow: hidden; display: flex;"><?php echo $variable[($i-1)*4+1]->titulo ?></h3>
+								<div style="text-align: center; height: 100px; font-size:15px; display: flex; justify-content: center; align-content: center; flex-direction: column;  overflow: hidden"><?php echo $variable[($i-1)*4+1]->contenido ?></div>
+								<div style="padding-left: 18%; margin-top: 8px;">
 								<div class="box">
 									{!!link_to_route('noticias.edit', $title='Editar', $parameters = $variable[($i-1)*4+1]->id, $attributes = ['class'=>'btn btn-primary'])!!}
 								</div>
@@ -116,6 +115,8 @@
 	             				 	</form>
 	             				 </div>
 							</div>
+							</div>
+							
 						</div>
 
 					</div>
@@ -132,12 +133,11 @@
 							}
 							echo "<img src='/imgNoticias/".$fijo_url."' alt='Responsive image' class='img-responsive' style='width: 280px; height: 280px;'>";
 						?>
-						<div class="caption" style="height: 220px;">
+						<div class="caption" style="height: 260px;">
 							<div style="height: 150px;">
-								<h3 style="text-align: center; font-weight:bold;"><?php echo $variable[($i-1)*4+2]->titulo ?></h3>
-								<div style="text-align: center; height: 100px; font-size:15px; display: flex; justify-content: center; align-content: center; flex-direction: column;  overflow: hidden;"><?php echo $variable[($i-1)*4+2]->contenido ?></div>
-							</div>
-							<div style="padding-left: 18%;">
+								<h3 style="text-align: center; height: 85px;font-weight:bold;margin-top: 0px;justify-content: center;align-content: center;flex-direction: column;  overflow: hidden; display: flex;"><?php echo $variable[($i-1)*4+2]->titulo ?></h3>
+								<div style="text-align: center; height: 100px; font-size:15px; display: flex; justify-content: center; align-content: center; flex-direction: column;  overflow: hidden"><?php echo $variable[($i-1)*4+2]->contenido ?></div>
+								<div style="padding-left: 18%; margin-top: 8px;">
 								<div class="box">
 									{!!link_to_route('noticias.edit', $title='Editar', $parameters = $variable[($i-1)*4+2]->id, $attributes = ['class'=>'btn btn-primary'])!!}
 								</div>
@@ -149,6 +149,8 @@
 	             					 </form>
 	             				 </div>
 							</div>
+							</div>
+							
 						</div>
 
 					</div>
@@ -165,13 +167,12 @@
 							}
 							echo "<img src='/imgNoticias/".$fijo_url."' alt='Responsive image' class='img-responsive' style='width: 280px; height: 280px;'>";
 						?>
-						<div class="caption" style="height: 220px;">
+						<div class="caption" style="height: 260px;">
 							<div style="height: 150px;">
-								<h3 style="text-align: center; font-weight:bold;"><?php echo $variable[($i-1)*4+3]->titulo ?></h3>
+								<h3 style="text-align: center; height: 85px;font-weight:bold;margin-top: 0px;justify-content: center;align-content: center;flex-direction: column;  overflow: hidden; display: flex;"><?php echo $variable[($i-1)*4+3]->titulo ?></h3>
 								
-								<div style="text-align: center; height: 100px; font-size:15px; display: flex; justify-content: center; align-content: center; flex-direction: column;  overflow: hidden;"><?php echo $variable[($i-1)*4+3]->contenido ?></div>
-							</div>
-							<div style="padding-left: 18%;">
+								<div style="text-align: center; height: 100px; font-size:15px; display: flex; justify-content: center; align-content: center; flex-direction: column;  overflow: hidden"><?php echo $variable[($i-1)*4+3]->contenido ?></div>
+								<div style="padding-left: 18%; margin-top: 8px;">
 								<div class="box">
 									{!!link_to_route('noticias.edit', $title='Editar', $parameters = $variable[($i-1)*4+3]->id, $attributes = ['class'=>'btn btn-primary'])!!}
 								</div>
@@ -183,6 +184,8 @@
 	             				 	</form>
              				 	</div>
 							</div>
+							</div>
+							
 						</div>
 
 					</div>
@@ -210,14 +213,12 @@
 							}
 							echo "<img src='/imgNoticias/".$fijo_url."' alt='Responsive image' class='img-responsive' style='width: 280px; height: 280px;'>";
 						?>
-						<div class="caption" style="height: 220px;">
+						<div class="caption" style="height: 260px;">
 							<div style="height: 150px;">
-								<h3 style="text-align: center; font-weight:bold;"><?php echo $variable[$cantidad_elementos_multiplo4+$i-1]->titulo ?></h3>
+								<h3 style="text-align: center; height: 85px;font-weight:bold;margin-top: 0px;justify-content: center;align-content: center;flex-direction: column;  overflow: hidden; display: flex;"><?php echo $variable[$cantidad_elementos_multiplo4+$i-1]->titulo ?></h3>
 								
-								<div style="text-align: center; height: 100px; font-size:15px; display: flex; justify-content: center; align-content: center; flex-direction: column; overflow: hidden;"><?php echo $variable[$cantidad_elementos_multiplo4+$i-1]->contenido ?></div>
-								
-							</div>
-							<div style="padding-left: 18%;">
+								<div style="text-align: center; height: 100px; font-size:15px; display: flex; justify-content: center; align-content: center; flex-direction: column;  overflow: hidden"><?php echo $variable[$cantidad_elementos_multiplo4+$i-1]->contenido ?></div>
+								<div style="padding-left: 18%; margin-top: 8px;">
 							<div class="box">
 							{!!link_to_route('noticias.edit', $title='Editar', $parameters = $variable[$cantidad_elementos_multiplo4+$i-1]->id, $attributes = ['class'=>'btn btn-primary'])!!}
 							</div>
@@ -231,6 +232,8 @@
              				 </div>
 							<!--<a style="margin-left: 20px;" href="#" class="btn btn-success">Leer mas</a>-->
 							</div>
+							</div>
+							
 						</div>
 
 					</div>

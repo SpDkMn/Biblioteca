@@ -21,7 +21,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-          $profile = User::with(['Employee','Employee.profile'])->where('id',Auth::user()->id)->first()->Employee->Profile;
+     /*   $profile = User::with(['Employee','Employee.profile'])->where('id',Auth::user()->id)->first()->Employee->Profile;
         // Json TO Array (J2A)
         $j2a = json_decode($profile->JSON,true);
         // Iniciamos los permisos en false
@@ -38,8 +38,9 @@ class ProfileController extends Controller
               }
             }
           }
-        }
-        $show = $new = $edit = $delete = "";
+        }   */
+        $show = $new = $edit = $delete = true;
+        $ver = $crear = $editar = $eliminar = true;
 
         if($crear)$new = view('admin.md_perfiles.new');
         if($ver)$show = view('admin.md_perfiles.show',['new' => $new,'perfiles'=>Profile::all(),'editar' => $editar,'eliminar'=>$eliminar]);

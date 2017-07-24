@@ -121,7 +121,6 @@
             $("#modalIntroduccionBody").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>')
             $("#modalIntroduccionBody").load('{{ url("/admin/compendium") }}/' + $id+ '/introduccion');
           })
-
           // //Mostrar introduccion de una compendio
           // $('.showIntroduccion').on('click',function(event){
           //   $id = $(this).data('id');
@@ -139,7 +138,6 @@
           //      }
           //    });
           //   })
-
         //Mostrar items de una compendio
         $('.showItem').on('click',function(event){
           $id = $(this).data('id');
@@ -161,7 +159,6 @@
                $('#modalItem').modal();
                //Habilita los botones de mostrar contenido
                $(".showItem").removeAttr("disabled","disabled");
-
              }
            });
           })
@@ -186,7 +183,6 @@
           //       }
           //     });
           // }
-
           // Borrar comentario cuando el metodo para eliminar sea DELETE y se use ajax
           // $(".deleteButton").on('click',function(event) {
           //   $name = $(this).data('name');
@@ -194,7 +190,6 @@
           //   $('.modal-body').html('<p>¿Esta seguro que quiere eliminar la compendio ' + $name +'?</p>');
           //   //Agregando la el id de la compendio
           //   $('#confirmarDelete').data('id',$id);
-
           // Borrar comentario cuando el metodo para eliminar sea DELETE y se use ajax
           // $("#confirmarDelete").on('click',function(event){
           //   $id = $('#confirmarDelete').data('id');
@@ -241,12 +236,10 @@
                 "sNext" : "Siguiente" ,
                 "sPrevious" : "Anterior"
             },
-
             "oAria" : {
                 "sSortAscending" : ": Actibar para ordenar la columna de manera ascendente",
                 "sSordtDescending" : ": Activar para ordenar la columna de manera descendente"
             },
-
             "lengthMenu" : "Mostrar _MENU_ registros por pagina",
             "zeroRecords": "No se encontraron registros",
             "info" : "Página _PAGE_ de _PAGES_",

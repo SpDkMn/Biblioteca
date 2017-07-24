@@ -15,12 +15,14 @@ class CreateConfigurationsTable extends Migration
     {
          Schema::create('configurations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tiPrestamo');
-            $table->string('tcPrestamo');
-            $table->string('tReserva');
-            $table->string('diaFeriado');
-            $table->string('rangoFeriado');
-            $table->boolean('activador');
+            $table->boolean('mondaySetting');
+            $table->boolean('tuesdaySetting');
+            $table->boolean('wednesdaySetting');
+            $table->boolean('thursdaySetting');
+            $table->boolean('fridaySetting');
+            $table->boolean('saturdaySetting');
+            $table->boolean('sundaySetting');
+
             $table->softDeletes();
             $table->timestamps();
         });

@@ -22,9 +22,9 @@ class AuthorRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    {   
         return [
-            'name'=> 'required'
+            'name'=> 'required|unique:authors',
         ];
     }
 }

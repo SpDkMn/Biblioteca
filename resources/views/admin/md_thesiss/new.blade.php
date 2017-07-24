@@ -1,4 +1,4 @@
- <div class="box box-primary">
+  <div class="box box-primary">
   <div class="box-header with-border">
     <h3 class="box-title"><strong>Agregar Nuevo Material</strong></h3>
     <div class="box-tools pull-right">
@@ -55,18 +55,18 @@
                         
                         <input type="radio" class="flat" name="tipo" value="tesis" checked="" required/> Tesis 
                         <br>
-                        <input type="radio" class="flat" name="tipo" value="tesina" required /> Tesina
+                        <input type="radio" class="flat" name="tipo" value="tesina"/> Tesina
                       </p>
                   </div>
 
                     <div class="form-group">
                         <label for="inputTitle">Titulo</label>
-                        <input type="text" class="form-control" name="title" id="inputTitle" placeholder="" required>
+                        <input type="text" class="form-control" name="title" id="inputTitle" placeholder="">
                     </div>
                     
                     <div class="form-group">
                         <label>Autor Principal</label>
-                        <select class="form-control" id="selectAutorMain" name="autorMain[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Principal" required>
+                        <select class="form-control" id="selectAutorMain" name="autorMain[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Principal">
                             @foreach($autores as  $autor)
                               @foreach($autor->categories as $category)
                                 @if($category->name == "tesis/tesina")
@@ -79,7 +79,7 @@
 
                     <div class="form-group">
                         <label>Autor Secundario</label>
-                        <select class="form-control select2" id="listAutorSecond" name="autorSecond[]" multiple="multiple" style="width: 100%;" data-placeholder="                                          Si no tiene dejelo en blanco">
+                        <select class="form-control select2" id="listAutorSecond" name="autorSecond[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Secundario">
                             @foreach($autores as  $autor)
                               @foreach($autor->categories as $category)
                                 @if($category->name == "tesis/tesina")
@@ -92,7 +92,7 @@
 
                     <div class="form-group">
                         <label>Editorial</label>
-                        <select class="form-control select2" name="editorial" style="width: 100%;" required>
+                        <select class="form-control select2" name="editorial" style="width: 100%;">
                         @foreach($editoriales as  $editorial)
                           @foreach($editorial->categories as $category)
                             @if($category->name == "tesis/tesina")
@@ -105,13 +105,13 @@
 
                     <div class="form-group">
                       <label for="Clasification">Clasificación</label>
-                      <input type="text" class="form-control" name="clasification" id="inputClasification" placeholder="" required>
+                      <input type="text" class="form-control" name="clasification" id="inputClasification" placeholder="">
                     </div>
 
                     
                     <div class="form-group">
                         <label>Asesor</label>
-                        <select class="form-control select2" name="asesor" style="width: 100%;" required>
+                        <select class="form-control select2" name="asesor" style="width: 100%;">
                         @foreach($autores as  $autor)
                           @foreach($autor->categories as $category)
                             @if($category->name == "asesor")
@@ -125,7 +125,7 @@
 
                     <div class="form-group">
                       <label for="escuela">E . A . P : </label>
-                      <input type="text" class="form-control" name="escuela" id="inputEscuela" placeholder="" required>
+                      <input type="text" class="form-control" name="escuela" id="inputEscuela" placeholder="">
                     </div>
                             
               </div>
@@ -145,37 +145,37 @@
                    
                     <div class="form-group">
                         <label for="inputEdition">Edicion</label>
-                        <input type="text" class="form-control" name="edition" id="inputEdition" placeholder="" required>
+                        <input type="text" class="form-control" name="edition" id="inputEdition" placeholder="">
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Extension</label>
-                        <input type="text" class="form-control" name="extension" id="inputEXTENSION" placeholder="" required>
+                        <input type="text" class="form-control" name="extension" id="inputEXTENSION" placeholder="">
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Dimensiones</label>
-                        <input type="text" class="form-control" name="dimension" id="inputEXTENSION" placeholder="" required>
+                        <input type="text" class="form-control" name="dimension" id="inputEXTENSION" placeholder="">
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Detalles Físicos</label>
-                        <input type="text" class="form-control" name="detalles" id="inputEXTENSION" placeholder="" required>
+                        <input type="text" class="form-control" name="detalles" id="inputEXTENSION" placeholder="">
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Material Adicional</label>
-                        <input type="text" class="form-control" name="materialad" id="inputEXTENSION" placeholder="" required>
+                        <input type="text" class="form-control" name="materialad" id="inputEXTENSION" placeholder="">
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Ubicacion</label>
-                        <input type="text" class="form-control" name="ubicacion" id="inputEXTENSION" value="Stand  " required>
+                        <input type="text" class="form-control" name="ubicacion" id="inputEXTENSION" value="Estante Nº ">
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Lugar de sustentacion</label>
-                        <input type="text" class="form-control" name="lugarsus" id="inputEXTENSION" value="Facultad de Ingeniería de Sistemas - UNMSM" required>
+                        <input type="text" class="form-control" name="lugarsus" id="inputEXTENSION" value="Facultad de Ingeniería de Sistemas - UNMSM">
                     </div>
 
                         
@@ -196,22 +196,22 @@
                         <!-- 1. Resumen -->
                     <div class="form-group">
                         <label for="inputSummary">Resumen</label>
-                        <textarea class="form-control" rows="3" name="summary" id="inputSummary" placeholder="" required></textarea> 
+                        <textarea class="form-control" rows="3" name="summary" id="inputSummary" placeholder=""></textarea> 
                      </div>
 
                      <div class="form-group">
                         <label for="inputContent">Contenido</label>
-                        <textarea class="form-control" rows="3" name="contenido" id="inputContent" placeholder="" required></textarea> 
+                        <textarea class="form-control" rows="3" name="contenido" id="inputContent" placeholder=""></textarea> 
                      </div>  
                     
                     <div class="form-group">
                         <label for="inputRecomend">Conclusiones y Recomendaciones</label>
-                        <textarea class="form-control" rows="3" name="recomendacion" id="inputRecomend" placeholder="" required></textarea> 
+                        <textarea class="form-control" rows="3" name="recomendacion" id="inputRecomend" placeholder=""></textarea> 
                     </div>
 
                     <div class="form-group">
                         <label for="inputBibliografia">Bibliografía</label>
-                        <textarea class="form-control" rows="3" name="bibliografia" id="inputBibliografia" placeholder="" required></textarea> 
+                        <textarea class="form-control" rows="3" name="bibliografia" id="inputBibliografia" placeholder=""></textarea> 
                     </div>
                         
                </div><!-- End Box-Body -->
@@ -229,25 +229,23 @@
                   <h3 class="box-title">Item principal</h3>
                   <!-- Cambiar por un diseño mas atractivo cuando este funcionando -->
                   <div class="box-tools pull-right">
-                    <button type="button" id="agregarItem" class="btn btn-box-tool"><i class="fa fa-plus" required></i></button>
+                    <button type="button" id="agregarItem" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
                   </div>
               </div>
               <div class="box-body">
                   
                   <div class="form-group">
                       <label for="inputIncomeNumber">Nº Ingreso</label>
-                      <input type="text" class="form-control" name="incomeNumber0" id="inputIncomeNumber" placeholder="" required>
+                      <input type="text" class="form-control" name="incomeNumber0" id="inputIncomeNumber" placeholder="">
                   </div>
                   <div class="form-group">
                       <label for="inputBarcode">Código de barra</label>
-                      <input type="text" class="form-control" value="20000000" name="barcode0" id="inputBarcode" data-inputmask='"mask": "200000009999"' data-mask required>
+                      <input type="text" class="form-control" value="20000000" name="barcode0" id="inputBarcode" data-inputmask='"mask": "200000009999"' data-mask>
                   </div>
                   <div class="form-group">
                       <label for="inputCopy">Ejemplar</label>
-                      <input type="text" value="1" style="background:white;width:54px;" class="form-control" name="copy0" id="inputCopy" placeholder="" required>
+                      <input type="number" class="form-control" value="1" name="copy0" id="inputCopy" placeholder="">
                   </div>
-
-
               </div>
             </div>
 
@@ -577,7 +575,7 @@
     $('#agregarItem').click(function(){
       // Guardar el panel donde se encuentra la seccion contenido
       var container = $('#itemBox');
-      var titleItem = '<h3 class="panel-title">Ejemplar secundario</h3>';
+      var titleItem = '<h3 class="panel-title">Item Secundario</h3>';
       var buttonClose ='<div class="box-tools pull-right">  <button type="button" id="eliminarItem" data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button> </div>';
       var itemHeader = '<div class="box-header">'+titleItem+buttonClose+'</div>'
       var itemBody = '<div class="box-body">'+
@@ -592,7 +590,7 @@
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label for="inputCopy">Ejemplar</label>'+
-                                '<input type="text" style="background:white;width:54px;" value="'+(idCont+1)+'" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
+                                '<input type="number" value="'+(idCont+1)+'" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
                             '</div>'+
                         '</div>';
       var itemPanel = '<div class="box box-default box-solid" id="itemBoxID'+idCont+'">'+itemHeader+itemBody +'</div>';

@@ -1,7 +1,9 @@
 <?php
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+
 class CreateCompendiumCopiesTable extends Migration
 {
     /**
@@ -16,10 +18,12 @@ class CreateCompendiumCopiesTable extends Migration
              $table->BigInteger('incomeNumber')->unsigned();
              $table->smallInteger('copy')->unsigned(); //Ejemplar
              $table->integer('compendium_id')->unsigned();
+
              $table->softDeletes();
              $table->timestamps();
          });
      }
+
      /**
       * Reverse the migrations.
       *

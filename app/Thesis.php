@@ -8,7 +8,7 @@ class Thesis extends Model
 {   
     protected $table = 'thesiss';
 
-	protected $fillable = ['type','clasification','title','edition','escuela','extension','dimensions','physicalDetails','accompaniment','conten','summary','recomendacion','bibliografia','location','publicationLocation','asesor'];
+	protected $fillable = ['type','clasification','title','edition','escuela','extension','dimensions','physicalDetails','accompaniment','conten','summary','recomendacion','bibliografia','location','publicationLocation','author_id'];
 
     public function thesisCopies(){
     	return $this->hasMany('App\ThesisCopy');
@@ -33,5 +33,6 @@ class Thesis extends Model
     public function categories(){
         return $this->belongsTo('App\Category');
     }
+    
 }
  

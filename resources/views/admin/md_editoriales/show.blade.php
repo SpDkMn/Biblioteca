@@ -1,4 +1,3 @@
-
 <div class="box box-warning">
   <div class="box-header with-border">
     <h3 class="box-title">Listado de Editoriales</h3>
@@ -10,6 +9,20 @@
   </div>
 
   <div class="box-body">
+
+  <!---->
+  <!--BUSQUEDA Y FILTROS-->
+  {!!Form::model(Request::all(),['route'=>'editorial.index','method'=>'GET','class'=>'navbar-form navbar-right','role'=>'search'])!!}
+    <div class="form-group">
+        {!!Form::text('name',null,['class'=>'form-control', 'placeholder'=>'Nombre de editorial'])!!}
+        {!!Form::select('category[]',['Libro'=>'Libro','Revista'=>'Revista','Tesis'=>'Tesis','Compendio'=>'Compendio'],null,['id'=>'example-multiple-selected','multiple'=>'multiple'])!!}
+         
+    </div>   
+    <button type="submit" class="btn btn-primary">Buscar</button><br>
+      
+    {!!Form::close()!!}
+  <!--FIN BUSQUEDA Y FILTROS-->
+
    
     <table class="table table-bordered table-hover">
       <tr>
@@ -48,7 +61,6 @@
               $array=null;
               $i=0; 
               foreach ($editorial->categories as $category) {
-
                 $array[$i] = $category->id;
                 $i=$i+1;
               }   
@@ -95,8 +107,6 @@
           $("#div-edit").load('{{ url("/admin/editorial/") }}/' + $id + '/edit');
         });
         @endif
-
-
         @if($eliminar)
         $(".eliminar").on('click',function(event) {
           $name = $(this).data('name')
@@ -108,7 +118,6 @@
           $.ajax({
             
             url: '{{ url("/admin/editorial") }}/'+$id,
-
             data: {'_token': '{{csrf_token()}}'},
             success: function(result) {
               location.reload();
@@ -119,4 +128,3 @@
       });
     </script>
 @endsection
-

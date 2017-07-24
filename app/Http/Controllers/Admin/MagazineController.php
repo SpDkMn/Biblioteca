@@ -58,8 +58,7 @@ class MagazineController extends Controller{
     function cambiaCadena($str){
       return intval(preg_replace('/[^0-9]+/', '', $str), 10) ;
     }
-
- 		//Almacenamos lo que el usuario ingresa
+    //Almacenamos lo que el usuario ingresa
     //Declarando contadores
     $contador_contenido = 0 ;
     $contador_copia = 0 ;

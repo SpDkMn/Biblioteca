@@ -10,6 +10,11 @@ use App\User as User;
 use App\Profile as Profile;
 // Para usar el Modelo Employee
 use App\Employee as Employee;
+
+use App\Holiday as Holiday;
+
+use DateTime;
+
 class ConfigurationController extends Controller
 {
     /**
@@ -19,11 +24,7 @@ class ConfigurationController extends Controller
      */
     public function index()
     {
-        // Obtenemos el perfil del usuario logueado como Modelo Profile
-        $profile = User::with(['Employee','Employee.profile'])->where('id',Auth::user()->id)->first()->Employee->Profile;
-        // Json TO Array (J2A)
-        $j2a = json_decode($profile->JSON,true);                  
-        // Iniciamos los permisos en false      
+         
         $verActivar = $editarActivar = true;
         $verFeriado = $crearFeriado = $editarFeriado = $eliminarFeriado = true;
         $verReserva = $crearReserva = $editarReserva = $eliminarReserva = true;
@@ -40,7 +41,7 @@ class ConfigurationController extends Controller
           }
         }  */
         $showActivar = $editActivar ="";
-        if(true)$showActivar = view('admin.md_configuration.showActivar',["editar"=>$editarActivar]);
+        if(true)$showTipoUsuario= view('admin.md_configuration.showTipoUsuario',["editar"=>$editarActivar]);
         // Recorremos cada uno de los permisos de 'Activar'
        
         
@@ -99,7 +100,7 @@ class ConfigurationController extends Controller
         if($editarReserva)$editPrestamo = view('',["editar"=>$editarPrestamo]);
         if($eliminarReserva)$deletePrestamo = view("");*/
         return view( 'admin.md_configuration.index',[
-            'showActivar'=>$showActivar,
+            'showTipoUsuario'=>$showTipoUsuario,
             'showFeriado'=>$showFeriado,
             'showReserva'=>$showReserva,
             'showPrestamo'=>$showPrestamo
@@ -121,8 +122,16 @@ class ConfigurationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        dd('probando..');  
+    {   
+
+        Holiday::create([
+                'item'=>$request->item,
+                'start'=>$request->inicioFeriado,
+                'end'=>$request->finFeriado,
+                'id_configuration'=>1,
+            ]);
+
+        return redirect('admin/configurations');
     }
     /**
      * Display the specified resource.

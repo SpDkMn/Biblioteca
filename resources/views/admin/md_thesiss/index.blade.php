@@ -39,3 +39,4 @@
 {!! $delete !!}
 
 @endsection
+

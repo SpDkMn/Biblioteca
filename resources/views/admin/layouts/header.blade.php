@@ -1,3 +1,26 @@
+<script type="text/javascript">
+  function funcion1(){
+    
+    if(document.getElementById('op').getAttribute('class')=="dropdown user user-menu"){
+      document.getElementById('op').setAttribute("class","dropdown user user-menu open");
+    }else{
+      document.getElementById('op').setAttribute("class","dropdown user user-menu");
+    }
+  }
+
+  function funcion2(){
+    
+    if(document.getElementById('op2').getAttribute('class')=="dropdown notifications-menu"){
+      document.getElementById('op2').setAttribute("class","dropdown notifications-menu open");
+    }else{
+      document.getElementById('op2').setAttribute("class","dropdown notifications-menu");
+    }
+  }
+</script>
+
+
+
+
 <header class="main-header">
   <!-- Logo -->
   <a href="index2.html" class="logo">
@@ -16,7 +39,7 @@
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
         <!-- Notifications: style can be found in dropdown.less -->
-        <li class="dropdown notifications-menu">
+        <li class="dropdown notifications-menu" onclick="funcion2()" id="op2">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-bell-o"></i>
             <span class="label label-warning">10</span>
@@ -52,10 +75,10 @@
           </ul>
         </li>
         <!-- User Account: style can be found in dropdown.less -->
-        <li class="dropdown user user-menu">
+        <li class="dropdown user user-menu" onclick="funcion1()" id="op">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <img src="{{url('img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
-            <span class="hidden-xs">Alexander Pierce</span>
+            <span class="hidden-xs">{{ Auth::user()->name }}</span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
@@ -63,8 +86,8 @@
               <img src="{{url('img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
 
               <p>
-                Alexander Pierce - Web Developer
-                <small>Member since Nov. 2012</small>
+                {{ Auth::user()->name }}
+                <small>{{ Auth::user()->last_name }}</small>
               </p>
             </li>
             <!-- Menu Body -->
@@ -85,7 +108,7 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                <a href="{{url('admin/usuarios/show')}}" class="btn btn-default btn-flat">Perfil</a>
               </div>
               <div class="pull-right">
                 <a href="{{ url('/logout') }}"
@@ -106,3 +129,6 @@
 
   </nav>
 </header>
+
+
+

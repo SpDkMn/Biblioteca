@@ -34,6 +34,8 @@ Route::resource('profiles', 'ProfileController');
 //RUTA PARA LAS NOTICIAS
 Route::resource('/noticias','Noticias');
 
+//RUTA PARA LOS USUARIOS
+Route::resource('/usuarios','usuarios');
 
 //RUTA PARA LAS CONFIGURACIONES
 Route::resource('configurations', 'ConfigurationController');

@@ -12,8 +12,9 @@ class Authors extends Seeder
     public function run()
     {
       //Rellenando la tabla authors con 30 datos aleatorios
-        Author::Create(['name'=>'Hector Arturo Florez Fernandez']);
-        Author::Create(['name'=>'Humberto Leyva Naveros']);
+        Author::Create(['name'=>'Mauricio Espinoza Vargas']);
+        Author::Create(['name'=>'Santiago Moquillaza Enriquez']);
+        Author::Create(['name'=>'Luis Cayo Leon']);
         Author::Create(['name'=>'Tania Leyva Riveira']);
     }
 

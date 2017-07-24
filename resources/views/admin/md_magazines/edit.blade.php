@@ -142,7 +142,6 @@
                             </div>
                           </div>
                       </div>
-
                       <div class="form-group">
                           <label for="inputClasification">Fecha de edición</label>
                             <input type="text" value="{{$revista->fechaEdicion}}" class="form-control" name="fechaEdicion" data-inputmask='"mask": "aaa-aaa.2099"' data-mask  id="fechaEdicion" placeholder="ABR-DIC.2017" style='text-transform:uppercase' >

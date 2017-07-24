@@ -1,26 +1,41 @@
 <form method="POST" action="{{ url('/admin/configurations')}}">
+       {{ csrf_field() }}
             <div class="box-body">
-              <div>
-                <label>Razon:</label>
-                <input type="date" class="form-control pull-right" id="datepicker1">
-              </div>
-              <!-- Date -->
               <div class="form-group">
-                <label>Date:</label>
-                <div class="input-group date">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i> 
-                  </div>
-                  <input type="date" class="form-control pull-right" id="datepicker">
-                </div>
-                <!-- /.input group -->
+                <label>Asunto: </label>
+                <input type="text" name="item" class="form-control" id="asunto">
               </div>
-              <!-- /.form group -->
+
+              <div class="form-group">
+                <label>Inicio de feriado</label>
+                <div id="datetimepicker" class="input-append date fecha1">
+                  <input type="text" name="inicioFeriado" class="txtPickter"></input>
+                  <span class="add-on">
+                    <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Fin de feriado</label>
+                <div id="datetimepicker"  class="input-append date fecha1">
+                  <input type="text" name="finFeriado" class="txtPickter"></input>
+                  <span class="add-on">
+                    <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                  </span>
+                </div>
+              </div>
+          
             </div>
             <!-- /.box-body -->
           <!-- /.box -->
+
 
     <div class="box-footer">
       <button type="submit" class="btn btn-primary" id="newFeriado">Crear</button>
     </div>
   </form>
+
+
+
+

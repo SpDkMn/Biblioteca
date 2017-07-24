@@ -7,28 +7,28 @@
     </div>
   </div>
   
- @if($id!=null)
-  @foreach($thesiss as $thesis)
-    @if($thesis->id == $id)
-   <form method="POST" action="{{ url('/admin/thesis')}}/{{$id}}">
+@if($id!=null)
+ @foreach($thesiss as $thesis)
+ @if($thesis->id == $id)
+ <form method="POST" action="{{ url('/admin/thesis')}}/{{$id}}">
 
-   <input type="hidden" name="_method" value="put" />
+ <input type="hidden" name="_method" value="put" />
     {{ csrf_field() }}
   
-    <div class="box-body">
+  <div class="box-body">
     
-        <div class="box box-success box-solid">
-          <div class="box-header with-border">
+    <div class="box box-success box-solid">
+      <div class="box-header with-border">
             <h3 class="box-title">Libro</h3>
             <div class="box-tools pull-right"> 
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
             </div> 
-          </div>
+      </div>
           
-              <div class="box-body">
+      <div class="box-body">
               
-                <div class="bs-example" data-example-id="simple-nav-tabs"> 
+        <div class="bs-example" data-example-id="simple-nav-tabs"> 
                   <ul class="nav nav-tabs">
                     <li class="active"><a href="#quinto" data-toggle="tab">Primero</a></li>
                     <li><a href="#sexto" data-toggle="tab">Segundo</a></li>
@@ -36,16 +36,13 @@
                     <li><a href="#octavo" data-toggle="tab">Cuarto</a></li>
                   </ul>
 
-            <div class="tab-content">
+              <div class="tab-content">
                     <!-- Primer panel -->
-               <div class="tab-pane active" id="quinto">
-                 <div class="box-body">
+                <div class="tab-pane active" id="quinto">
+                  <div class="box-body">
                           <!--1. Titulo -->
                           
-
-
-
-                     <div class="form-group">
+                    <div class="form-group">
                          <label>TIPO DE ITEM</label>
                            <p>
                             
@@ -53,12 +50,12 @@
                             <br>
                             <input type="radio" class="flat" name="tipo" value="tesina"/> Tesina
                           </p>
-                     </div>
+                    </div>
 
-                      <div class="form-group">
+                    <div class="form-group">
                           <label for="inputTitle">Titulo</label>
                           <input type="text" class="form-control" value="{{$thesis->title}}" name="title" id="inputTitle" placeholder="">
-                      </div>
+                    </div>
                     
                     <div class="form-group">
                         <label>Autor Principal</label>
@@ -82,11 +79,11 @@
                               @endforeach
                             @endforeach
                         </select>
-                    </div>
+                     </div>
 
                     <div class="form-group">
                         <label>Autor Secundario</label>
-                        <select class="form-control select" id="selectAutorSecondEdit" name="autorSecond[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Secundario">
+                        <select class="form-control select" id="selectAutorSecondEdit" name="autorSecond[]" multiple="multiple" style="width: 100%;" data-placeholder="                                          Si no tiene deje en blanco">
                             @foreach($autores as  $autor)
                               @foreach($autor->categories as $category)
                                 @if($category->name == "tesis/tesina")
@@ -101,7 +98,8 @@
 
                                       ?>
 
-                                  >{{$autor->name}}</option>
+                                  >{{$autor->name}}
+                                  </option>
                                 @endif
                               @endforeach
                             @endforeach
@@ -146,73 +144,57 @@
                       <input type="text" class="form-control" name="escuela" value="{{$thesis->escuela}}" id="inputEscuela" placeholder="">
                     </div>
 
-
-
-
-
-                  </div><!-- End Box-body -->
-                </div><!-- End Primer Panel -->
-
-
-
+                  </div>
+                </div>
 
 
 
                     <!-- Segundo Panel -->
              <div class="tab-pane fade" id="sexto">
-                 <div class="box-body">
-                        
-                     
-
-                    <div class="form-group">
+                 <div class="box-body">                                         
+                     <div class="form-group">
                         <label for="inputEdition">Edicion</label>
-                        <input type="text" class="form-control" value="{{$thesis->edition}}" name="edition" id="inputEdition" placeholder="">
-                    </div>
+                        <input type="text" class="form-control solo-numeros" value="{{$thesis->edition}}" name="edition" id="inputEdition" placeholder="">
+                     </div>
 
-                    <div class="form-group">
+                     <div class="form-group">
                         <label for="inputEXTENSION">Extension</label>
-                        <input type="text" class="form-control" value="{{$thesis->extension}}" name="extension" id="inputEXTENSION" placeholder="">
-                    </div>
+                        <input type="text" class="form-control solo-numeros" value="{{$thesis->extension}}" name="extension" id="inputEXTENSION" placeholder="">
+                     </div>
 
-                    <div class="form-group">
+                     <div class="form-group">
                         <label for="inputEXTENSION">Dimensiones</label>
                         <input type="text" class="form-control" value="{{$thesis->dimensions}}" name="dimension" id="inputEXTENSION" placeholder="">
-                    </div>
+                     </div>
 
-                    <div class="form-group">
+                     <div class="form-group">
                         <label for="inputEXTENSION">Detalles Físicos</label>
                         <input type="text" class="form-control" value="{{$thesis->physicalDetails}}" name="detalles" id="inputEXTENSION" placeholder="">
-                    </div>
+                     </div>
 
-                    <div class="form-group">
+                     <div class="form-group">
                         <label for="inputEXTENSION">Material Adicional</label>
                         <input type="text" class="form-control" value="{{$thesis->accompaniment}}" name="materialad" id="inputEXTENSION" placeholder="">
-                    </div>
+                     </div>
 
-                    <div class="form-group">
+                     <div class="form-group">
                         <label for="inputEXTENSION">Ubicacion</label>
                         <input type="text" class="form-control" value="{{$thesis->location}}" name="ubicacion" id="inputEXTENSION" value="Stand ">
-                    </div>
+                     </div>
 
-                    <div class="form-group">
+                     <div class="form-group">
                         <label for="inputEXTENSION">Lugar de sustentacion</label>
                         <input type="text" class="form-control" value="{{$thesis->publicationLocation}}" name="lugarsus" id="inputEXTENSION" value="Facultad de Ingeniería de Sistemas">
-                    </div>   
-
-
-                </div><!-- End nav-bar -->       
-              </div><!-- End Box-body -->
+                     </div>   
+                </div>     
+            </div>
           
 
 
-
-
-          <div class="tab-pane fade" id="setimo">
+            <div class="tab-pane fade" id="setimo">
                  <div class="box-body">
-                        
-                     
-
-                   <div class="form-group">
+                                           
+                     <div class="form-group">
                         <label for="inputSummary">Resumen</label>
                         <textarea class="form-control" name="summary" id="inputSummary" placeholder="">{{$thesis->summary}}</textarea> 
                      </div>
@@ -232,269 +214,90 @@
                          <textarea class="form-control" name="bibliografia" id="inputBibliografia" cols="65">{{$thesis->bibliografia}}</textarea>
                      </div>
 
-
-                </div><!-- End nav-bar -->       
-              </div><!-- End Box-body -->
-
+                </div>       
+            </div>
 
 
 
-
-              <div class="tab-pane fade" id="octavo">
-                 <div class="box-body">
+        <div class="tab-pane fade" id="octavo">
+           <div class="box-body">
                         
                      
 
                    <!-- Declarando el contador de items -->
-            <!-- Declarando el contador de items -->
-          <?php $contItem = 0  ?>
-            @foreach($thesis->thesisCopies as $item)
+                   <!-- Declarando el contador de items -->
+             <?php $contItem = 0  ?>
+             @foreach($thesis->thesisCopies as $item)
               @if($loop->first)
-              <div class="box box-default box-solid" id="{{'itemPanel'.$contItem}}">
-                <div class="box-header">
-                    <h3 class="box-title ">Item {{$item->ejemplar}}</h3>
-                    <div class="box-tools pull-right">
-                      <button type="button" name="copy0" id="agregarItemEdit" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
-                    </div>
-                </div>
-                <div class="box-body">
+                  <div class="box box-default box-solid" id="{{'itemPanel'.$contItem}}">
+                       <div class="box-header">
+                         <h3 class="box-title ">Item 1</h3>
+                          <div class="box-tools pull-right">
+                            <button type="button" name="copy0" id="agregarItemEdit" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
+                          </div>
+                        </div>
+                        <div class="box-body">
                     
-                    <div class="form-group">
-                        <label for="inputIncomeNumber">Nº Ingreso</label>
-                        <input type="text" class="form-control" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputBarcode">Código de barra</label>
-                        <input type="text" class="form-control" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
-                    </div>
-                    <div class="form-group">
-                      <label for="inputCopy">Ejemplar</label>
-                      <input type="text" disabled value="1" class="form-control" name="copy0" id="inputCopy" placeholder="" required>
-                  </div>
+                            <div class="form-group">
+                                <label for="inputIncomeNumber">Nº Ingreso</label>
+                                <input type="text" class="form-control solo-numeros" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputBarcode">Código de barra</label>
+                                <input type="text" class="form-control solo-numeros" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
+                            </div>
+                            <div class="form-group">
+                              <label for="inputCopy">Ejemplar</label>
+                              <input type="text" style="background:white;width:54px;" value="1" class="form-control solo-numeros" name="copy0" id="inputCopy" placeholder="" required>
+                            </div>
  
-                </div>
-              </div>
+                         </div>
+
+                  </div>
               @else
-                <div class="box box-default box-solid" id="{{'itemPanel'.$contItem}}">
-                  <div class="box-header">
-                      <h3 class="panel-title">Item {{$item->ejemplar}}</h3>
-                      <div class="box-tools pull-right">
-                        <button type="button" name="copy0" id="eliminarItem" class="btn btn-box-tool"><i class="fa fa-times"></i></button>
+                 <div class="BoxItemThesiss box box-default box-solid" id="{{'itemPanel'.$contItem}}" >
+                      <div class="box-header">
+                          <h3 class="panel-title">Item {{$contItem +1}}</h3>
+                          <div class="box-tools pull-right">
+                            <button type="button" data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button>
+                          </div>
                       </div>
-                  </div>
-                  <div class="box-body">
-                      
-                      <div class="form-group">
-                          <label for="inputIncomeNumber">Nº Ingreso</label>
-                          <input type="text" class="form-control" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="">
+                      <div class="box-body">
+                          
+                          <div class="form-group">
+                              <label for="inputIncomeNumber">Nº Ingreso</label>
+                              <input type="text" class="form-control solo-numeros" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="">
+                          </div>
+                          <div class="form-group">
+                              <label for="inputBarcode">Código de barra</label>
+                              <input type="text" class="form-control solo-numeros" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
+                          </div>
+                          <div class="form-group">
+                              <label for="inputCopy">Ejemplar</label>
+                              <input type="text" style="background:white;width:54px;" value="{{$contItem + 1}}" class="form-control solo-numeros" name="{{'copy'.$contItem}}" id="inputCopy" placeholder="" required>
+                          </div>                          
                       </div>
-                      <div class="form-group">
-                          <label for="inputBarcode">Código de barra</label>
-                          <input type="text" class="form-control" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
-                      </div>
-                      <div class="form-group">
-                          <label for="inputCopy">Ejemplar</label>
-                          <input type="text" disabled value="1" class="form-control" name="copy0" id="inputCopy" placeholder="" required>
-                      </div>
-                      
-                  </div>
-                </div>
-                @endif
+
+                   </div>
+              @endif
               <?php $contItem = $contItem  +1  ?>
-            @endforeach
+             @endforeach
 
 
-                </div><!-- End nav-bar -->       
-              </div><!-- End Box-body -->
+           </div>      
+        </div>
 
+      </div>
+   </div>
 
-
-
-        </div><!-- End Box-solid -->
-      </div><!-- End col-md-6 -->
-
-
-
-  
-
-
-
-
-
-
-
-                  <!---Aqui iba un div--> 
-
-  
-          <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Editar</button>
-    
+    <!---Aqui iba un div--> 
+    <div class="box-footer">
+         <button type="submit" class="btn btn-primary" id="ediThesis">Editar</button>
 
   </form>
-
 </div>
 
 
-
-
-
-
-
-
-<script>
-  $(document).ready(function(){
-    var contenedorPestañas = $("#contenedor-pestañas");
-    var contenedorItem = $('#contenedor-item');
-    var AddButton1 = $("#agregarItem");
-
-    var x = $("#contenedor-pestañas li").length-2;
-
-    
-
-    var FieldCount = x;
-    var arreglo;
-
-    $(".agregarItem").click(function(){
-      
-      FieldCount++;
-    
-      arreglo = FieldCount-1;
-
-      $(contenedorPestañas).append('<li><a href="#item'+FieldCount+'" id="cabezera-item'+FieldCount+'" data-toggle="tab">Item'+FieldCount+'</a></li>');
-        
-      $(contenedorItem).append(
-
-              '<div class="tab-pane fade" id="item'+FieldCount+'">'
-                 +'<div class="box-body">'
-                   +'<div class="bs-example" data-example-id="simple-nav-tabs"> '
-                    +'<ul class="nav nav-tabs">'
-                      +'<li class="active"><a href="#primero'+FieldCount+'" data-toggle="tab">Primero</a></li>'
-                      +'<li><a href="#segundo'+FieldCount+'" data-toggle="tab">Segundo</a></li>'
-                      +'<li><a href="#tercero'+FieldCount+'" data-toggle="tab">Tercero</a></li>'
-                    +'</ul>'
-
-                    +'<div class="tab-content">'
-                      +'<div class="tab-pane active" id="primero'+FieldCount+'">'
-                       +'<div class="box-body">'
-                          +'<div class="form-group">'
-                            +'<label>Numero de Ingreso</label>'
-                            +'<input type="text" name="incomeNumber['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Codigo de Barras</label>'
-                            +'<input type="text" name="barcode['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Edicion</label>'
-                            +'<input type="text" name="edition['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Gestion</label>'
-                            +'<input type="text" name="management['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Disponibilidad</label>'
-                            +'<select class="form-control select2" name="availability['+arreglo+']" style="width: 100%;">'
-                                +'<option>Disponible</option>'
-                                +'<option>No Disponible</option>'                              
-                            +'</select>'
-                          +'</div>'
-
-                        +'</div>'
-                      +'</div>'
-                      
-                      +'<div class="tab-pane fade" id="segundo'+FieldCount+'">'
-                        +'<div class="box-body">'
-                          +'<div class="form-group">'
-                            +'<label>Modalidad de Adquision</label>'
-                            +'<select class="form-control select2" name="acquisitionModality['+arreglo+']"  style="width: 100%;">'
-                                +'<option>Compra</option> '
-                                +'<option>Donacion</option>'
-                                +'<option>Adquisicion</option>  '                             
-                            +'</select>'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Fuente de Adquisicion</label>'
-                            +'<input type="text" name="acquisitionSource['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Precio de Adquisicion</label>'
-                            +'<input type="text" name="acquisitionPrice['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Fecha de Adquisicion</label>'
-                            +'<input type="text" name="acquisitionDate['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Ubicacion</label>'
-                            +'<input type="text" name="location['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                        +'</div>'
-                      +'</div>'
-
-                      +'<div class="tab-pane fade" id="tercero'+FieldCount+'">'
-                        +'<div class="box-body">'
-                          +'<div class="form-group">'
-                            +'<label>Tipo de Impresion</label>'
-                            +'<select class="form-control select2" name="printType['+arreglo+']" style="width: 100%;">'
-                                +'<option>Impresion</option>' 
-                                +'<option>Reimpresion</option>   '                           
-                            +'</select>'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Lugar de Publicacion</label>'
-                            +'<input type="text" name="publicationLocation['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Fecha de Publicacion</label>'
-                            +'<input type="text" name="publicationDate['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>Telefono</label>'
-                            +'<input type="text" name="phone['+arreglo+']" class="form-control">'
-                          +'</div>'
-
-                          +'<div class="form-group">'
-                            +'<label>RUC</label>'
-                            +'<input type="text" name="ruc['+arreglo+']" class="form-control">'
-                          +'</div>'
-                        +'</div>'
-                      +'</div>'
-                    
-                    +'</div><!-- End Tab Content--> '
-                                
-                  +'</div><!-- End navbar -->'
-                 +'</div><!-- End box-body -->'
-               +'</div><!-- End tab-pane -->');
-
-      x++;
-    });
-  
-    $(".eliminarItem").click(function(){
-      if (FieldCount>1) {
-        $("#item"+FieldCount).remove();
-        $("#cabezera-item"+FieldCount).remove();
-        FieldCount = FieldCount-1;
-
-      }
-      
-    });
-
-    return false;
-  });
-</script>
 
 
 
@@ -510,7 +313,6 @@
     var x = $("#contenedor div").length + 1;
     var FieldCount = x-1; //para el seguimiento de los campos
     
-
     $(AddButton).click(function (e) {
         if(x <= MaxInputs) //max input box allowed
         {   
@@ -538,18 +340,10 @@
         //Initialize Select2 Elements
         $(".select2").select2();
       });
-    </script>
+</script>
 
 
-
-
-
-
-
-
-
-<script type="text/javascript">
-      
+<script type="text/javascript">    
           //Convirtiendo a entero contItem -> guarda el numero de item que se muestra inicialmente en editar ,
           //estos seran los que se agregaron , apartir de ahi se podra agregar mas items con id continuo
 
@@ -558,31 +352,34 @@
             // Guardar el panel donde se encuentra la seccion contenido
             var container = $('#itemPanel0');
             var titleItem = '<h3 class="box-title">Item '+(idCont+1)+'</h3>';
-            var buttonClose ='<div class="box-tools pull-right">  <button type="button" id="eliminarItemEdit" data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button> </div>';
+            var buttonClose ='<div class="box-tools pull-right"><button type="button"  data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button> </div>';
             var itemHeader = '<div class="box-header">'+titleItem+buttonClose+'</div>'
             var itemBody = '<div class="box-body">'+
                                   
                                   '<div class="form-group">'+
                                       '<label for="inputIncomeNumber">Nº Ingreso</label>'+
-                                      '<input type="text" class="form-control" name="incomeNumber'+idCont+'" id="inputIncomeNumber" placeholder="">'+
+                                      '<input type="text" class="form-control solo-numeros" name="incomeNumber'+idCont+'" id="inputIncomeNumber" placeholder="_ _ _ _ _ _">'+
                                   '</div>'+
                                   '<div class="form-group">'+
                                       '<label for="inputBarcode">Código de barra</label>'+
-                                    '<input type="text" class="form-control" name="barcode'+idCont+'" id="inputBarcode" placeholder="">'+
+                                      '<input type="text" value="20000000" class="form-control solo-numeros" name="barcode'+idCont+'" id="inputBarcode" placeholder="">'+
                                   '</div>'+
                                      '<div class="form-group">'+
-                                    '<label for="inputCopy">Ejemplar</label>'+
-                                    '<input type="number" value="'+(idCont+1)+'" class="form-control" name="copy'+idCont+'" id="inputC opy" placeholder="">'+
-                            '</div>'+
-
+                                     '<label for="inputCopy">Ejemplar</label>'+
+                                     '<input type="number" value="'+(idCont+1)+'" class="form-control solo-numeros" name="copy'+idCont+'" id="inputC opy" placeholder="">'+
+                                  '</div>'+
 
                             '</div>';
 
-            var itemPanel = '<div class="box box-default box-solid" id="itemPanel'+(idCont-1)+'">'+itemHeader+itemBody +'</div>';
+            var itemPanel = '<div class="BoxItemThesiss box box-default box-solid" id="itemPanel'+(idCont-1)+'">'+itemHeader+itemBody +'</div>';
             $(container).after(itemPanel);
-
             idCont = idCont + 1 ;
-          })
+          });
+
+          $('#ediThesis').click(function(){
+
+            $('.BoxItemThesiss:hidden').remove();
+          });
       
   </script>
 
@@ -670,7 +467,19 @@
         //FIN DE PRUEBAS PARA EDITAR
       </script>
 
-      
+         <!--SCRIPT QUE PERMITE SOLO INGREASR NUMEROS-->
+
+  <script>
+        $(document).ready(function (){
+          $('.solo-numeros').keyup(function (){
+            this.value = (this.value + '').replace(/[^0-9]/g, '');
+          });
+        });
+  </script>
+
+    
       @endif
+
     @endforeach
+
   @endif

@@ -264,11 +264,9 @@
                   reiniciarSelect('#listEditorialSecondEdit');
                   // $('#listEditorialSecond').select2('destroy');
                   // $('#listEditorialSecond').select2();
-
                 }
               });
             }
-
             function habilitar(opcD){
               //Eliminando y volviendo a inicializar el selector cuando se habilite las opciones , sin esto
               //solo se muestra deshabilitado la primera vez que se inicia el selector
@@ -301,15 +299,12 @@
                                         '<input type="text" class="form-control" name="titleContent'+idContt+'" id="inputTitleContent'+idContt+'" placeholder="">'+
                                    '</div>';
                   var linea = '<hr>';
-
                   var contentBody = '<div class="panel-body" id="boxID'+idContt+'">'+groupTitle+'</div>';
                   // var boxContent = '<div class="box box-default" id="boxID'+idContt+'">'+contentBody +'</div>';
-
                   $(container).append(contentBody);
                   idContt = idContt + 1 ;
                   //Inicializa los selectores que se cargan luego de agregar un contenido más , debe ser diferente al de los demás
                   $(".select3").select2();
-
                   //Inicializar el select2 para mostrar los colaboradores de los nuevos contenidos
                 });
               })
@@ -337,11 +332,8 @@
                                   '</div>'+
                               '</div>';
             var itemPanel = '<div class="BoxItemMagazineEdit box box-info box-solid" id="itemPanel'+idCont+'">'+itemHeader+itemBody +'</div>';
-
             $(container).after(itemPanel);
             idCont = idCont + 1 ;
-
-
           })
           $('#editMagazine').on('click',function(){
             //Eliminando los valores que tienen para poder eliminarlos en la base de datos

@@ -1,4 +1,3 @@
-
 <div class="box box-warning">
   <div class="box-header with-border">
     <h3 class="box-title">Informacion de Tesis y Tesinas</h3>
@@ -15,7 +14,7 @@
                  <tr>
                   <th class="text-center">TIPO DE ÍTEM</th>
                   <th class="text-center">TÍTULO</th>
-                  <th class="text-center">AUTOR</th>
+                  <th class="text-center">AUTOR <h6>(Principal: Casilla Roja)</h6></th>
                   <th class="text-center">ASESOR</th>                  
                   <th class="text-center">E. A. P.</th>
                   <th>EDITAR</th>
@@ -54,29 +53,53 @@
                   <td class="text-center">
                      {{$thesis->escuela}}
                   </td>
-                  <!--<td><button type="button"  href="{{route('thesis.edit',$thesis->id)}}" data-id="{{$thesis->id}}" class="btn btn-success editar" ><i class="fa fa-pencil"></i></a></td> -->
+
+       <!--SECCION PARA EDITAR UNA TESIS-->           
             <td class="text-center"><button type="button" data-id="{{$thesis->id}}" class="btn btn-success editar"><i class="fa fa-edit"></i></button></td>  
-              <!--<td><button type="button" data-id="{{$thesis->id}}" data-name="{{$thesis->title}}" class="btn btn-danger eliminar" data-toggle="modal" data-target="#delted"><i class="fa fa-trash"></i></button></td>-->
-           <!--   <td><a type="button" class="button-content btn btn-danger" href="{{route('thesis.destroy',$thesis->id)}}"><i class="fa fa-trash"></i></a></td>     -->
-          
-          <td class="text-center"><button type="button" href="{{route('thesis.destroy',$thesis->id)}}" data-id="{{$thesis->id}}" data-name="eliminar" class="btn btn-danger eliminar"><i class="fa fa-trash"></i></button></td>
+        <!--FIN DE LA SECCION PARA EDITAR UNA TESIS-->      
+
+      <!--ELIMINACION DE UNA TESIS MEDIANTE MODAL-->
+
+          <td><center><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCopy<?php echo $thesis->id; ?>"><i class="fa fa-trash"></i></button></center></td>
 
 
-      <!--     {!! Form::open(['route'=>['thesis.destroy',$thesis->id],'method' => 'DELETE']) !!}
-          <td><button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
-        {!! Form::close() !!}   -->
-              
-             </tr>
-               
-            @endforeach
-           </tbody>
-                
-       </table>
-    </div>
+          <div class="modal modal-danger fade" id="ModalCopy<?php echo $thesis->id; ?>" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">
+        
+             <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                 <form>
+                   
+                  <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title text-center text-font-size" id="ModalCopyLabel"><strong>MATERIAL :</strong> {{ $thesis->title}}</h3>
+                   </div>
+
+
+                   <div class="modal-body">
+                       <p class="text-center"><strong>¿ Desea eliminar dicha {{$thesis->type}} ?</strong></p>
+                   </div>
+
+                   <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+                        <a href="{{route('thesis.destroy',$thesis->id)}}" type="button" class="btn btn-outline">Eliminar</a>
+                   </div>
+                 </form>
+               </div>
+            </div>
+          </div>
+      <!--FIN DE LA ELIMINACION DE UNA TESIS MEDIANTE MODAL-->
+
+
+          </tr>             
+        @endforeach
+      </tbody>               
+    </table>
+  </div>
 </div>
 
 
-
+<!--SCRIPT PARA EDITAR UNA TESIS-->
 @section('script')
    <script type="text/javascript">
         $(".editar").on('click',function(event) {
@@ -84,29 +107,5 @@
           $("#divEdit").html('<div class="box box-success box-solid"><div class="box-header with-border"><h3 class="box-title">Editar</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>');
           $("#divEdit").load('{{ url("/admin/thesis/") }}/' + $id + '/edit');
         });
-
-</script>
-
-
-<script type="text/javascript">
-        $(".eliminar").on('click',function(event) {
-
-          $name = $(this).data('name')
-
-          $('#elim').html('<p>¿Esta seguro que quiere eliminar la tesis ' +$name +'?</p>');
-
-          $('#confirmaDelete').data('id',$(this).data('id'))
-        });
-        $("#confirmaDelete").on('click',function(event){
-          $id = $('#confirmaDelete').data('id')
-          $.ajax({
-            url: '{{ url("/admin/thesis") }}/'+$id,
-            type: 'DELETE',
-            data: {'_token': '{{csrf_token()}}'},
-            success: function(result) {
-              location.reload();
-            }
-          })
-        })   
-</script>
+    </script>
 @endsection

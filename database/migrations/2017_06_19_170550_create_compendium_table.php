@@ -1,7 +1,9 @@
 <?php
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+
 class CreateCompendiumTable extends Migration
 {
     /**
@@ -19,8 +21,10 @@ class CreateCompendiumTable extends Migration
           $table->integer('author_id')->unsigned();
           $table->integer('editorial_id')->unsigned();
           $table->longText('introduccion');
+
           $table->softDeletes();
           $table->timestamps();
+
         });
     }
     /**

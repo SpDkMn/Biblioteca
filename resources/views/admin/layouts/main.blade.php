@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
+     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-datetimepicker.min.css') }}">
+
+     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-combined.min.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('css/estiloLibros.css')}}">
 
     <link rel="stylesheet" href="{{ URL::asset('css/AdminLTE.min.css') }}">
@@ -74,7 +77,35 @@
     <script src="{{ URL::asset('js/jquery.slimscroll.min.js')}}"></script>
     <script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>
 
+    <script src="{{ URL::asset('js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script src="{{ URL::asset('js/bootstrap-datetimepicker.pt-PE.js')}}"></script>
 
+    <script type="text/javascript">
+      $('.fecha1').datetimepicker({
+        format: 'yyyy-MM-dd hh:mm:ss',
+        language: 'pt-PE'
+      });
+      //Hora
+      $('.fecha2').datetimepicker({
+        language: 'pt-PE',
+        pick12HourFormat: true
+      });
+
+      //Solo hora formato 24 horas
+      $('.fecha3').datetimepicker({
+        pickDate: false
+      });
+      //solo hora formato 12 horas
+      $('.fecha4').datetimepicker({
+        pickDate: false,
+        pick12HourFormat: true
+      });
+      //Solo fecha
+      $('.fecha5').datetimepicker({
+        language: 'pt-PE',
+        pickTime: false
+      });
+    </script>      
 
 <script>
   $(function () {
@@ -109,7 +140,12 @@
 </script>
 
 
-
+<script>
+    $(function() {
+      //Initialize Select2 Elements
+    $(".select2").select2();
+    });
+</script>
 
     <!--
      <script>

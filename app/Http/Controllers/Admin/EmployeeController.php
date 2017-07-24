@@ -24,16 +24,15 @@ class EmployeeController extends Controller
     public function index()
     {
         
-        // Obtenemos el perfil del usuario logueado como Modelo Profile
-        $profile = User::with(['Employee','Employee.profile'])->where('id',Auth::user()->id)->first()->Employee->Profile;
+        /*   $profile = User::with(['Employee','Employee.profile'])->where('id',Auth::user()->id)->first()->Employee->Profile;
         // Json TO Array (J2A)
         $j2a = json_decode($profile->JSON,true);
         // Iniciamos los permisos en false
-        $ver = $crear = $editar = $eliminar = false;
+        $ver = $crear = $editar = $eliminar = true;
         // Recorremos cada uno de los permisos de 'perfiles'
-        foreach($j2a['empleados'] as $dato){
+        foreach($j2a['perfiles'] as $dato){
           foreach($dato as $key => $value){
-            if($value == true){ 
+            if($value == true){
               switch($key){
                 case 'ver': $ver = true;break;
                 case 'crear': $crear = true;break;
@@ -42,9 +41,10 @@ class EmployeeController extends Controller
               }
             }
           }
-        }
+        }   */
         
-        $show = $new = $edit = $delete = "";
+        $show = $new = $edit = $delete = true;
+        $ver = $crear = $editar = $eliminar = true;
         
         if($crear)
             $new = view('admin.md_empleados.new',['perfiles'=>Profile::all()]);

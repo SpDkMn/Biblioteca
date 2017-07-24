@@ -27,6 +27,6 @@ class Profile extends Model
 
     //
     public function employees(){
-        return $this->hasMany('App\Employe');
+        return $this->hasMany('App\Employee');
     }
 }
