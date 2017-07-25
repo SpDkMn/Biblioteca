@@ -10,6 +10,31 @@ class Configuration1 extends Seeder
      */
     public function run()
     {
-        Configuration::create(['name' => 'Activar','JSON'=>'{"activar":1}']);
+        Configuration::create([
+
+        	'mondaySetting'=>false,
+            'tuesdaySetting'=>false,
+            'wednesdaySetting'=>false,
+            'thursdaySetting'=>false,
+            'fridaySetting'=>false,
+            'saturdaySetting'=>false,
+            'sundaySetting'=>false,
+            'startMonday'=>null,
+            'startTuesday'=>null,
+            'startWednesday'=>null,
+            'startThursday'=>null,
+            'startFriday'=>null,
+            'startSaturday'=>null,
+            'startSunday'=>null,
+            'endSunday'=>null,
+            'endMonday'=>null,
+            'endTuesday'=>null,
+            'endWednesday'=>null,
+            'endThursday'=>null,
+            'endFriday'=>null,
+            'endSaturday'=>null,
+            'endSunday'=>null
+
+        	]);
     }
 }

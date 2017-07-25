@@ -12,7 +12,7 @@ use App\Profile as Profile;
 use App\Employee as Employee;
 
 use App\Holiday as Holiday;
-
+use App\UserType as UserType;
 use DateTime;
 
 class ConfigurationController extends Controller
@@ -25,6 +25,7 @@ class ConfigurationController extends Controller
     public function index()
     {
          
+        $userTypes = UserType::all();
         $verActivar = $editarActivar = true;
         $verFeriado = $crearFeriado = $editarFeriado = $eliminarFeriado = true;
         $verReserva = $crearReserva = $editarReserva = $eliminarReserva = true;
@@ -41,7 +42,7 @@ class ConfigurationController extends Controller
           }
         }  */
         $showActivar = $editActivar ="";
-        if(true)$showTipoUsuario= view('admin.md_configuration.showTipoUsuario',["editar"=>$editarActivar]);
+        if(true)$showTipoUsuario= view('admin.md_configuration.showTipoUsuario',["editar"=>$editarActivar,"userTypes"=>$userTypes]);
         // Recorremos cada uno de los permisos de 'Activar'
        
         
@@ -124,15 +125,47 @@ class ConfigurationController extends Controller
     public function store(Request $request)
     {   
 
-        Holiday::create([
-                'item'=>$request->item,
-                'start'=>$request->inicioFeriado,
-                'end'=>$request->finFeriado,
-                'id_configuration'=>1,
+        
+        
+        Configuration::create([
+            'mondaySetting'=>$request->mondaySetting,
+            'tuesdaySetting'=>$request->tuesdaySetting,
+            'wednesdaySetting'=>$request->wednesdaySetting,
+            'thursdaySetting'=>$request->thursdaySetting,
+            'fridaySetting'=>$request->fridaySetting,
+            'saturdaySetting'=>$request->saturdaySetting,
+            'sundaySetting'=>$request->sundaySetting,
+            'startMonday'=>$request->startMonday,
+            'startTuesday'=>$request->startTuesday,
+            'startWednesday'=>$request->startWednesday,
+            'startThursday'=>$request->startThursday,
+            'startFriday'=>$request->startFriday,
+            'startSaturday'=>$request->startSaturday,
+            'startSunday'=>$request->startSunday,
+            'endSunday'=>$request->endSunday,
+            'endMonday'=>$request->endMonday,
+            'endTuesday'=>$request->endTuesday,
+            'endWednesday'=>$request->endWednesday,
+            'endThursday'=>$request->endThursday,
+            'endFriday'=>$request->endFriday,
+            'endSaturday'=>$request->endSaturday,
+            'endSunday'=>$request->endSunday
             ]);
 
-        return redirect('admin/configurations');
+
+
+        // Holiday::create([
+        //         'item'=>$request->item,
+        //         'start'=>$request->inicioFeriado,
+        //         'end'=>$request->finFeriado,
+        //         'id_configuration'=>1,
+        //     ]);
+
+        // return redirect('admin/configurations');
     }
+
+
+
     /**
      * Display the specified resource.
      *

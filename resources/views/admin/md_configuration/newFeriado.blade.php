@@ -1,4 +1,4 @@
-<form method="POST" action="{{ url('/admin/configurations')}}">
+<form method="POST" action="{{ url('/admin/configurations')}}">z
        {{ csrf_field() }}
             <div class="box-body">
               <div class="form-group">
@@ -18,7 +18,7 @@
 
               <div class="form-group">
                 <label>Fin de feriado</label>
-                <div id="datetimepicker"  class="input-append date fecha1">
+                <div class="input-append date fecha3">
                   <input type="text" name="finFeriado" class="txtPickter"></input>
                   <span class="add-on">
                     <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>

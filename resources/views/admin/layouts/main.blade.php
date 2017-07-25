@@ -81,19 +81,22 @@
     <script src="{{ URL::asset('js/bootstrap-datetimepicker.pt-PE.js')}}"></script>
 
     <script type="text/javascript">
+    //fecha + hora formato 24 horas
       $('.fecha1').datetimepicker({
         format: 'yyyy-MM-dd hh:mm:ss',
         language: 'pt-PE'
       });
-      //Hora
+      //fecha+hora formato 12 horas
       $('.fecha2').datetimepicker({
         language: 'pt-PE',
         pick12HourFormat: true
       });
 
-      //Solo hora formato 24 horas
+      //Solo hora formato 12 horas
       $('.fecha3').datetimepicker({
-        pickDate: false
+        format: 'hh:mm:ss',
+        pickDate: false,
+        pick12HourFormat: true
       });
       //solo hora formato 12 horas
       $('.fecha4').datetimepicker({

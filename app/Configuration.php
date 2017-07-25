@@ -8,11 +8,10 @@ namespace App;
   {
      //
      use SoftDeletes;
-    protected $fillable = [
-        'tiPrestamo','tcPrestamo','tReserva','diaFeriado','rangoFeriado','activador'
-    ];
-     /**
-      * The attributes that should be mutated to dates.
+
+    protected $fillable = ['mondaySetting','tuesdaySetting','wednesdaySetting','thursdaySetting','fridaySetting','saturdaySetting','undaySetting','startMonday','startTuesday','startWednesday','startThursday','startFriday','startSaturday','endSunday','endMonday','ndTuesday','endWednesday','endThursday','endFriday','endSaturday','endSunday'];  
+       /**
+          * The attributes that should be mutated to dates.
       *
       * @var array
       */
@@ -23,6 +22,4 @@ namespace App;
       *
       * @var array
       */
-     protected $fillable = [
-         'name', 'JSON' ];
   }

@@ -13,7 +13,7 @@ class CreateConfigurationsTable extends Migration
      */
     public function up()
     {
-         Schema::create('configurations', function (Blueprint $table) {
+        Schema::create('configurations', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('mondaySetting');
             $table->boolean('tuesdaySetting');
@@ -22,7 +22,21 @@ class CreateConfigurationsTable extends Migration
             $table->boolean('fridaySetting');
             $table->boolean('saturdaySetting');
             $table->boolean('sundaySetting');
-
+            $table->time('startMonday')->nullable();
+            $table->time('startTuesday')->nullable();
+            $table->time('startWednesday')->nullable();
+            $table->time('startThursday')->nullable();
+            $table->time('startFriday')->nullable();
+            $table->time('startSaturday')->nullable();
+            $table->time('startSunday')->nullable();
+            $table->time('endMonday')->nullable();
+            $table->time('endTuesday')->nullable();
+            $table->time('endWednesday')->nullable();
+            $table->time('endThursday')->nullable();
+            $table->time('endFriday')->nullable();
+            $table->time('endSaturday')->nullable();
+            $table->time('endSunday')->nullable();
+            
             $table->softDeletes();
             $table->timestamps();
         });

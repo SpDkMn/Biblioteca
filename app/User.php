@@ -173,5 +173,8 @@ class User extends Authenticatable
     public function employee(){
         return  $this->hasMany('App\Employee');
     }
+     public function user_type(){
+        return $this->belongsto('App\UserType');
+    }
 
 }

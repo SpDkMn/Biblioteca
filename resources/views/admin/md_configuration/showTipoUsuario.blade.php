@@ -13,9 +13,9 @@
     <table id="tipoUsuarioTable" class="table table-bordered table-striped">
         <thead>
           <tr>
-          <th></th>
+          <th>-</th>
           <th>Prestamo Sala</th>
-          <th>PPrestamo Domicilio</th>
+          <th>Prestamo Domicilio</th>
           <th>Castigo</th>
           <th>Tiempo Prestamo</th>
           <th>Cantidad Sala</th>
@@ -24,28 +24,26 @@
         </tr>    
         </thead>
         <tbody>
-          <tr>
-            <th>Docentes</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>m
-            <th></th>oLNtuae GO HAjoR jose ontaa
-            <th></th>
-          </tr>ok ok , aca solo tengo lo de configuraciones . Jose ta  arreglando los errores . 
-         <tr>
-            <th>Administrativos</th>ateo , boy a seguir avanzando >:v 
-          </tr>
-          <tr>
-            <th>Pregrado</th>
-          </tr>
-          <tr>
-            <th>Postgrado</th>
-          </tr>
-          <tr>
-            <th>Externos</th>
-          </tr>
+          @foreach($userTypes as $type)
+            @if($type->name != 'Admin')
+              <tr>
+                <th>{{$type->name}}</th>
+                <td style="text-align: center">
+                    <input type="checkbox" class="custom-control-input" @if($type->prestamoSala) checked @endif >
+                </td>
+                <td style="text-align: center">
+                    <input type="checkbox" class="custom-control-input" @if($type->prestamoSala) checked @endif >     
+                </td>
+                <td style="text-align: center">
+                    <input type="checkbox" class="custom-control-input" @if($type->prestamoSala) checked @endif >            
+                </td>
+                <td>{{$type->tiempoDomicilio}}</td>
+                <td>{{$type->cantidadSala}}</td>
+                <td>{{$type->cantidadDomicilio}}</td>
+                <td><a type="button" class="button-content btn btn-success"><i class="fa fa-pencil"></i></a></td>
+              </tr>
+            @endif
+          @endforeach
         </tbody>
         
 
@@ -53,6 +51,8 @@
     </table>      
   </div>
 </div>
+
+
 
 
   
