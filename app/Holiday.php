@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,14 +6,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Holiday extends Model
 {
-    use SoftDeletes;
-	protected $table = 'holidays';
+   use SoftDeletes;
 
-    protected $fillable = ['item','start','end','id_configuration'];
-    	
-    protected $dates = ['deleted_at'];
+   protected $table = 'holidays';
 
-    public function configuration(){
-    	return $this->belongsto('App\Configuration');
-    }
+   protected $fillable = [
+      'item',
+      'start',
+      'end',
+      'id_configuration'
+   ];
+
+   protected $dates = [
+      'deleted_at'
+   ];
+
+   public function configuration()
+   {
+      return $this->belongsto('App\Configuration');
+   }
 }

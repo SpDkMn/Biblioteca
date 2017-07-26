@@ -1,29 +1,29 @@
-.box-footer{
+.box-footer {
 	display: flex;
 	justify-content: center;
 }
 
-.box-footer>button{
-	margin  : 0 10px;
+.box-footer>button {
+	margin: 0 10px;
 }
 
-.contenido{
-	border : 1px solid black ;
+.contenido {
+	border: 1px solid black;
 }
 
 .example-modal .modal {
-      position: relative;
-      top: auto;
-      bottom: auto;
-      right: auto;
-      left: auto;
-      display: block;
-      z-index: 1;
-    }
+	position: relative;
+	top: auto;
+	bottom: auto;
+	right: auto;
+	left: auto;
+	display: block;
+	z-index: 1;
+}
 
-    .example-modal .modal {
-      background: transparent !important;
-    }
+.example-modal .modal {
+	background: transparent !important;
+}
 
 /*td.details-control {
     background: url('../resources/details_open.png') no-repeat center center;

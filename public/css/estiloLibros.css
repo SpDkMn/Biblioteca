@@ -1,53 +1,56 @@
-.arial
-{
+.arial {
 	font-family: Arial, Helvetica, sans-serif;
 }
-.title
-{	
+
+.title {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9f490+2,eaefb5+91 */
-	
-	color:#990000;
+	color: #990000;
 	font-size: 40px;
 	font-weight: 700;
 }
-.secondaryTitle
-{	
-	
-	color:#006699;
+
+.secondaryTitle {
+	color: #006699;
 	font-size: 23px;
 	font-weight: 400;
 	font-style: italic;
 }
-.subtitle
-{	
-	color:#AEAB09;
+
+.subtitle {
+	color: #AEAB09;
 	font-size: 22px;
 	font-weight: 400;
 }
-.itemTable
-{
-	color:#077A46;
+
+.itemTable {
+	color: #077A46;
 }
-.modalBody1
-{
+
+.modalBody1 {
 	background: #feffe8; /* Old browsers */
-	background: -moz-linear-gradient(left, #feffe8 0%, #ebf2a7 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(left, #feffe8 0%,#ebf2a7 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to right, #feffe8 0%,#ebf2a7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffe8', endColorstr='#ebf2a7',GradientType=1 ); /* IE6-9 */
+	background: -moz-linear-gradient(left, #feffe8 0%, #ebf2a7 100%);
+	/* FF3.6-15 */
+	background: -webkit-linear-gradient(left, #feffe8 0%, #ebf2a7 100%);
+	/* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, #feffe8 0%, #ebf2a7 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffe8',
+		endColorstr='#ebf2a7', GradientType=1); /* IE6-9 */
 }
-.modalHead1
-{
+
+.modalHead1 {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#eaefb5+0,f9f490+100 */
 	background: #eaefb5; /* Old browsers */
-	background: -moz-linear-gradient(left, #eaefb5 0%, #f9f490 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(left, #eaefb5 0%,#f9f490 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to right, #eaefb5 0%,#f9f490 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaefb5', endColorstr='#f9f490',GradientType=1 ); /* IE6-9 */
+	background: -moz-linear-gradient(left, #eaefb5 0%, #f9f490 100%);
+	/* FF3.6-15 */
+	background: -webkit-linear-gradient(left, #eaefb5 0%, #f9f490 100%);
+	/* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, #eaefb5 0%, #f9f490 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaefb5',
+		endColorstr='#f9f490', GradientType=1); /* IE6-9 */
 }
-.titleModal1
-{	
 
-	color:#990000;
-	
+.titleModal1 {
+	color: #990000;
 }

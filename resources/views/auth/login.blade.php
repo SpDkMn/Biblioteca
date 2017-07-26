@@ -1,123 +1,125 @@
-@extends('layouts.app')
-
-@section('content')
+@extends('layouts.app') @section('content')
 <style type="text/css">
-    *{
-        margin:0px;
-        padding:0px;
-    }
-   body{
-        background-image: url("{{ URL::asset('img/fondo_login_1.jpeg')}}");
-        background-size: 100% 100%;
-    }
-    #icono_login{
-        width: 35px;
-        height: 35px;
-        
-       // background-color: red;
-       background-image: url("{{ URL::asset('img/icono_login_1.png')}}");
-       background-size: 100% 100%;
-        float:left;
-        margin-top:16px;
-        margin-left: 63px;
-        
-    }
-    .boxlogin{
-        background-color: #E6E6E6;
-        border-radius: 4px;
-        box-shadow:0px 2px 10px #d6d6d6;
-        margin:130px auto;
-        width:320px;
-        -webki-border-radius: 4px;
-        -moz-border-radius:4px;
-        padding-bottom:13px;
-    }
-    input[type="submit"]{
-        margin-top:14px;
-    }
-    #titulo{
-        margin-left: 103px;
-        width: 200px;
-       // background-color:blue;
-        font-size: 45px;
-        font-weight: bold;
-    }
-    #botones_login{
-        margin-top:15px;
-        margin-left:35px;
-    }
-    #contrasenia{
-        margin-top:14px;
+* {
+	margin: 0px;
+	padding: 0px;
+}
 
-    }
-    #dni_cuadro{
-        margin-top:-5px;
-    }
-    #letra_contra,#letra_dni{
-        font-size: 20px;
-        margin-left: 5px;
-    }
+body {
+	background-image: url("{{ URL::asset('img/fondo_login_1.jpeg')}}");
+	background-size: 100% 100%;
+}
+
+#icono_login {
+	width: 35px;
+	height: 35px; //
+	background-color: red;
+	background-image: url("{{ URL::asset('img/icono_login_1.png')}}");
+	background-size: 100% 100%;
+	float: left;
+	margin-top: 16px;
+	margin-left: 63px;
+}
+
+.boxlogin {
+	background-color: #E6E6E6;
+	border-radius: 4px;
+	box-shadow: 0px 2px 10px #d6d6d6;
+	margin: 130px auto;
+	width: 320px;
+	-webki-border-radius: 4px;
+	-moz-border-radius: 4px;
+	padding-bottom: 13px;
+}
+
+input[type="submit"] {
+	margin-top: 14px;
+}
+
+#titulo {
+	margin-left: 103px;
+	width: 200px; //
+	background-color: blue;
+	font-size: 45px;
+	font-weight: bold;
+}
+
+#botones_login {
+	margin-top: 15px;
+	margin-left: 35px;
+}
+
+#contrasenia {
+	margin-top: 14px;
+}
+
+#dni_cuadro {
+	margin-top: -5px;
+}
+
+#letra_contra, #letra_dni {
+	font-size: 20px;
+	margin-left: 5px;
+}
 </style>
-<?php /*
-use Illuminate\Foundation\Auth\User;
-\App\User::create([
-                'name'=>"Giordano Barbieri",
-                'last_name'=>"Barbieri Lizama",
-                'code'=>"16200251",
-                'dni'=>"71324372",
-                'password'=>bcrypt("fisi.barbieri"),
-                'home_phone'=>"5373623",
-                'phone'=>"12345678",
-                'school'=>"Ingenieria de Software",
-                'id_user_type' =>"1",
-                'email' =>"giordano200699@hotmail.com",
-                'address'=>"Av.Tupac Amaru",
-                'username' =>"16200251",
-                'faculty'=>"Ingenieria de Sistemas e Informatica",
-                'university'=>"Universidad Nacional Mayor de San Marcos",
-                'state'=>true,
-            ]);
-            */
+<?php 
+/*
+       * use Illuminate\Foundation\Auth\User;
+       * \App\User::create([
+       * 'name'=>"Giordano Barbieri",
+       * 'last_name'=>"Barbieri Lizama",
+       * 'code'=>"16200251",
+       * 'dni'=>"71324372",
+       * 'password'=>bcrypt("fisi.barbieri"),
+       * 'home_phone'=>"5373623",
+       * 'phone'=>"12345678",
+       * 'school'=>"Ingenieria de Software",
+       * 'id_user_type' =>"1",
+       * 'email' =>"giordano200699@hotmail.com",
+       * 'address'=>"Av.Tupac Amaru",
+       * 'username' =>"16200251",
+       * 'faculty'=>"Ingenieria de Sistemas e Informatica",
+       * 'university'=>"Universidad Nacional Mayor de San Marcos",
+       * 'state'=>true,
+       * ]);
+       */
 ?>
 <div class="container boxlogin">
-    <form class="form-horizontal" role="form" name="flogin" id="flogin" method="POST" action="{{ route('login') }}">
+	<form class="form-horizontal" role="form" name="flogin" id="flogin"
+		method="POST" action="{{ route('login') }}">
 
-        {{ csrf_field() }}
+		{{ csrf_field() }}
 
-            <div id="icono_login"></div><div id="titulo">Login</div>
-            <div id="dni_cuadro">
-                <label for="dni" id="letra_dni" >Usuario:</label>
-                <div >
-                    <input type="text" class="form-control" id="username" placeholder="Username" name="username">
-                </div>
-            </div>
+		<div id="icono_login"></div>
+		<div id="titulo">Login</div>
+		<div id="dni_cuadro">
+			<label for="dni" id="letra_dni">Usuario:</label>
+			<div>
+				<input type="text" class="form-control" id="username"
+					placeholder="Username" name="username">
+			</div>
+		</div>
 
-            <div id="contrasenia">
-                <label for="password" id="letra_contra" >Password:</label>
+		<div id="contrasenia">
+			<label for="password" id="letra_contra">Password:</label>
 
-                <div >
-                    <input id="password" type="password" class="form-control" name="password" required>
+			<div>
+				<input id="password" type="password" class="form-control"
+					name="password" required> @if ($errors->has('password')) <span
+					class="help-block"> <strong>{{ $errors->first('password') }}</strong>
+				</span> @endif
+			</div>
+		</div>
 
-                    @if ($errors->has('password'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-        
 
-       
-            <div id="botones_login">
-                <button type="submit" class="btn btn-success">
-                    Login
-                </button>
 
-                <a class="btn btn-link" href="{{ route('password.request') }}">
-                    Forgot Your Password?
-                </a>
-            </div>
-        
-    </form>
+		<div id="botones_login">
+			<button type="submit" class="btn btn-success">Login</button>
+
+			<a class="btn btn-link" href="{{ route('password.request') }}">
+				Forgot Your Password? </a>
+		</div>
+
+	</form>
 </div>
 @endsection

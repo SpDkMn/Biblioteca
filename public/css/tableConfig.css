@@ -1,16 +1,16 @@
-.tableConfig{
-    width:40%;
-    border:1px solid #aaa;
-    border-radius:4px;
-    margin:0 0;
-    outline:none;
-    padding:4px;
-    box-sizing:border-box;
-    transition:.3s;
-    text-align: center;
-  }
-  
-.tableConfig:focus{
-    border-color:#428bca;
-    box-shadow:0 0 2px 0 #428bca;
-  }
+.tableConfig {
+	width: 40%;
+	border: 1px solid #aaa;
+	border-radius: 4px;
+	margin: 0 0;
+	outline: none;
+	padding: 4px;
+	box-sizing: border-box;
+	transition: .3s;
+	text-align: center;
+}
+
+.tableConfig:focus {
+	border-color: #428bca;
+	box-shadow: 0 0 2px 0 #428bca;
+}

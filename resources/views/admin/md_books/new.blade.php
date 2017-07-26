@@ -1,343 +1,383 @@
 <div class="box box-primary">
-  <div class="box-header with-border">
-    <h3 class="box-title">Nuevo</h3>
-    <div class="box-tools pull-right">
-      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-      </button>
-    </div>
-  </div>
-  
-
-  <form method="POST" id="formulario" action="{{ url('/admin/book') }}">
-    {{ csrf_field() }}
-   
-    <div class="box-body">
-    
-      <div class="col-md-6">
-        <div class="box box-success box-solid">
-          <div class="box-header with-border">
-            <h3 class="box-title">Libro</h3>
-            <div class="box-tools pull-right"> 
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-              </button>
-            </div> 
-          </div>
-          
-              <div class="box-body">
-              
-                <div class="bs-example" data-example-id="simple-nav-tabs"> 
-                  <ul class="nav nav-tabs">
-                    <li class="active"><a href="#primero" data-toggle="tab">Primero</a></li>
-                    <li><a href="#segundo" data-toggle="tab">Segundo</a></li>
-                  </ul>
-
-                  <div class="tab-content">
-                    <!-- Primer panel -->
-                    <div class="tab-pane active" id="primero">
-                      <div class="box-body">
-                          <!--1. Titulo -->
-                          <div class="form-group">
-                            <label>Titulo</label>
-                            <input type="text" name="title" class="form-control" id="title" required>
-                          </div>
-                          <!--1. Fin de Titulo -->
-
-                          <!--2. Resto de Titulo -->
-                          <div class="form-group">
-                            <label>Resto de Titulo</label>
-                            <input type="text" name="secondaryTitle" class="form-control" id="secondaryTitle" value="">
-                          </div>                    
-                          <!--2. Fin Resto de Titulo -->
-
-                          <!--3. Clasificacion -->
-                          <div class="form-group">
-                            <label>Clasificacion</label>
-                            <input type="text" name="clasification" class="form-control" id="clasification" required>
-                          </div>
-                          <!--3. Fin clasificacion -->
-                          
-                          <div class="form-group">
-                            <label>Edicion</label>
-                            <input type="text" name="edition" class="form-control" id="edition" required>
-                          </div>
-
-                          <!--4. Autor -->
-                          <div class="form-group">
-                            <label>Autor Principal</label>                            
-                            <select class="form-control select2" name="primaryAuthor[]" multiple="multiple"">
-                              @foreach($autores as  $autor)
-                                @foreach($autor->categories as $category)
-                                  @if($category->id == 1)
-                                    <option value="{{ $autor->id }}">{{$autor->name}}</option>
-                                  @endif
-                                @endforeach
-                              @endforeach
-                            </select>
-                          </div>   
-     
-                          <div class="form-group">
-                            <label>Autor Secundario</label> 
-                            <select class="form-control select2" name="secondaryAuthor[]" multiple="multiple">
-                              @foreach($autores as  $autor)
-                                @foreach($autor->categories as $category)
-                                  @if($category->id == 1)
-                                    <option value="{{ $autor->id }}">{{$autor->name}}</option>
-                                  @endif
-                                @endforeach
-                              @endforeach
-                            </select>
-                          </div> 
-                                
-                            <div class="form-group">
-                              <label>Editorial</label>                                            
-                              <select class="form-control select2" name="editorial[]"">
-                                  @foreach($editoriales as  $editorial)
-                                    @foreach($editorial->categories as $category)
-                                      @if($category->name == "libro"){
-                                        <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
-                                      }@endif
-                                    @endforeach
-                                  @endforeach
-                              </select>
-                            </div>
-                              
-                            <div class="form-group">
-                              <label>Anexos</label>     
-                              <select class="form-control select2" name="secondaryEditorial[]" multiple="multiple">
-                              @foreach($editoriales as  $editorial)
-                                @foreach($editorial->categories as $category)
-                                  @if($category->name == "libro"){
-                                    <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
-                                  }@endif
-                                @endforeach
-                              @endforeach
-                              </select>
-                            </div>
-
-                      </div><!-- End Box-body -->
-                    </div><!-- End Primer Panel -->
-
-                    <!-- Segundo Panel -->
-                    <div class="tab-pane fade" id="segundo">
-                      <div class="box-body">
-                        
-                        <!-- 1. Resumen -->
-                        <div class="form-group">
-                          <label>Resumen</label>
-                          <textarea class="form-control" rows="3" name="summary" id="Summary" placeholder=""></textarea> 
-                        </div>
-                        <!-- 1. Fin Resumen -->
-
-                        <!-- 2. Capitulos -->
-                        <div class="form-group">
-                          <label>Capitulos</label>
-                          <div id="contenedor">
-                            <div class="input-group">
-                              <span class="input-group-addon">1</span>
-                              <input type="text" id="campo_1" name="chapter[0]" class="form-control" required>
-                              <span id="agregarCampo"  class="input-group-addon"><i class="fa fa-plus"></i></span>
-                            </div>
-
-                          </div>
-                        </div>
-                        <!-- 2. Fin <center></center>apitulos -->
-
-                        <div class="form-group">
-                          <label>Isbn</label>
-                          <input type="text" name="isbn" id="isbn" class="form-control" value="">
-                        </div>
-
-                        <div class="form-group">
-                          <label>Libros relacionados</label>
-                          <select class="form-control select2" name="relationBook[]" multiple="multiple" style="width: 100%;">
-                            @foreach($books as  $book)
-                                  <option value="{{ $book->id }}">{{$book->name}}</option>
-                            @endforeach
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                          <label>Ubicacion en Biblioteca</label>
-                          <input type="text" name="libraryLocation" class="form-control" id="libraryLocation" value="">
-                        </div>
-
-                        <div class="form-group">
-                        <label>Descripcion Fisica</label>
-                          <div class="form-horizontal">
-                           <div for="ejemplo_password_3" class="col-xs-6 control-label">Extension</div>
-                          <div class="col-xs-6">
-                            <input type="text" name="extension" id="extension" class="form-control" required>
-                          </div>
-
-                          <div for="ejemplo_password_3" class="col-xs-6 control-label">Otros detalles fisicos</div>
-                          <div class="col-xs-6">
-                            <input type="text" name="physicalDetails" id="physicalDetails" class="form-control">
-                          </div>
-
-                          <div for="ejemplo_password_3" class="col-xs-6 control-label">Dimensiones</div>
-                          <div class="col-xs-6">
-                            <input type="text" name="dimensions" id="dimensions" class="form-control" required>
-
-                          </div>
-                          <div for="ejemplo_password_3" class="col-xs-6 control-label">Material de Acompañamiento</div>
-                            <div class="col-xs-6">
-                              <input type="text" name="accompaniment" id="accompaniment" class="form-control">
-                            </div>
-                          </div>   
-
-                        </div>
-                        
-                      </div><!-- End Box-Body -->
-                    </div><!-- End Segundo Panel -->
-                  </div>   
-
-                </div><!-- End nav-bar -->       
-              </div><!-- End Box-body -->
-          
-        </div><!-- End Box-solid -->
-      </div><!-- End col-md-6 -->
-      <!-- /*/*/*/*/*/*/*/*/*/*/*/*/*/*/ACA ESTA ****************************************/*//////**/*/*/*/ -->
-      
-      <div class="col-md-6">
-        <div class="box box-success box-solid">
-          <div class="box-header with-border">
-            <h3 class="box-title">Item</h3>
-            <div class="box-tools pull-right"> 
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-              </button>
-            </div> 
-          </div>
-          <div class="box-body">
-            <div class="bs-example" data-expample-id="simple-nav-tabs">
-               <ul class="nav nav-tabs" id="contenedor-pestañas">
-                <li><a type="button" href="#" class="agregarItem"><i class="fa fa-plus"></i></a></li>
-                <li><a type="button" href="#" class="eliminarItem"><i class="fa fa-remove"></i></a></li>
-                <li class="active"><a href="#item1" id="cabezera-item1" data-toggle="tab">Item1&nbsp</a></li>
-                
-                
-               </ul>
-               
-              <!--************************** CONTENIDO DE ITEM 1 ***********************************-->
-               <div class="tab-content"  id="contenedor-item">
-
-                 <div class="tab-pane active" id="item1">
-                    <div class="box-body">
-                      <div class="bs-example" data-example-id="simple-nav-tabs"> 
-                          <ul class="nav nav-tabs">
-                            <li class="active"><a href="#primero1" data-toggle="tab">Primero</a></li>
-                            <li><a href="#segundo1" data-toggle="tab">Segundo</a></li>
-                          </ul>
-
-                          <div class="tab-content">
-                            <div class="tab-pane active" id="primero1">
-                              <div class="box-body">
-                                <div class="form-group">
-                                  <label>Numero de Ingreso</label>
-                                  <input type="text" name="incomeNumber[0]" id="incomeNumber1" class="form-control" required>
-                                </div>
-
-                                <div class="form-group">
-                                  <label>Codigo de Barras</label>
-                                  <input type="text" name="barcode[0]" id="barcode1" class="form-control" required>
-                                </div>
-
-                                <div class="form-group">
-                                  <label>Volumen</label>
-                                  <input type="text" name="volume[0]" id="volume1" class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                  <label>Gestion</label>
-                                  <input type="text" name="management[0]" id="management1" class="form-control" required>
-                                </div>
-
-                               <div class="form-group">
-                                  <label>Disponibilidad</label>
-                                  <select class="form-control select2" name="availability[0]" style="width: 100%;">
-                                      <option>Disponible</option> 
-                                      <option>No Disponible</option>                              
-                                  </select>
-                                </div>
+	<div class="box-header with-border">
+		<h3 class="box-title">Nuevo</h3>
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" data-widget="collapse">
+				<i class="fa fa-minus"></i>
+			</button>
+		</div>
+	</div>
 
 
-                              </div>
-                            </div>
-                            
-                            <div class="tab-pane fade" id="segundo1">
-                              <div class="box-body">
-                                <div class="form-group">
-                                  <label>Modalidad de Adquision</label>
-                                  <select class="form-control select2" name="acquisitionModality[0]" id="acquisitionModality1" style="width: 100%;">
-                                      <option>Donacion</option> 
-                                      <option>Compra</option>
-                                      <option>Adquisicion</option>                               
-                                  </select>
-                                </div>
+	<form method="POST" id="formulario" action="{{ url('/admin/book') }}">
+		{{ csrf_field() }}
 
-                                <div class="form-group">
-                                  <label>Fuente de Adquisicion</label>
-                                  <input type="text" class="form-control" name="acquisitionSource[0]" id="acquisitionSource1" required>
-                                </div>
+		<div class="box-body">
 
-                                <div class="form-group">
-                                  <label>Precio de Adquisicion</label>
-                                  <input type="text" name="acquisitionPrice[0]" class="form-control" id="acquisitionPrice1">
-                                </div>
+			<div class="col-md-6">
+				<div class="box box-success box-solid">
+					<div class="box-header with-border">
+						<h3 class="box-title">Libro</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool"
+								data-widget="collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+						</div>
+					</div>
 
-                                <div class="form-group">
-                                  <label>Fecha de Adquisicion</label>
-                                  <input type="text" name="acquisitionDate[0]" class="form-control" id="acquisitionDate1" required>
-                                </div>
+					<div class="box-body">
 
-                                <div class="form-group">
-                                  <label>Tipo de Impresion</label>
-                                  <select class="form-control select2" name="printType[0]" style="width: 100%;">
-                                      <option>Impresion</option> 
-                                      <option>Reimpresion</option>                              
-                                  </select>
-                                </div>
+						<div class="bs-example" data-example-id="simple-nav-tabs">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#primero" data-toggle="tab">Primero</a></li>
+								<li><a href="#segundo" data-toggle="tab">Segundo</a></li>
+							</ul>
 
-                                <div class="form-group">
-                                  <label>Lugar de Publicacion</label>
-                                  <input type="text" name="publicationLocation[0]" class="form-control" id="publicationLocation1" required>
-                                </div>
+							<div class="tab-content">
+								<!-- Primer panel -->
+								<div class="tab-pane active" id="primero">
+									<div class="box-body">
+										<!--1. Titulo -->
+										<div class="form-group">
+											<label>Titulo</label> <input type="text" name="title"
+												class="form-control" id="title" required>
+										</div>
+										<!--1. Fin de Titulo -->
 
-                                <div class="form-group">
-                                  <label>Fecha de Publicacion</label>
-                                  <input type="text" name="publicationDate[0]" class="form-control" id="publicationDate1" required>
-                                </div>
-                               
-                              </div>
-                            </div>
-                          
-                          </div><!-- End Tab Content--> 
-                                    
-                      </div><!-- End navbar -->
-                    </div><!-- End box-body -->
-                 </div><!-- End tab-pane -->
+										<!--2. Resto de Titulo -->
+										<div class="form-group">
+											<label>Resto de Titulo</label> <input type="text"
+												name="secondaryTitle" class="form-control"
+												id="secondaryTitle" value="">
+										</div>
+										<!--2. Fin Resto de Titulo -->
 
-                 
+										<!--3. Clasificacion -->
+										<div class="form-group">
+											<label>Clasificacion</label> <input type="text"
+												name="clasification" class="form-control" id="clasification"
+												required>
+										</div>
+										<!--3. Fin clasificacion -->
+
+										<div class="form-group">
+											<label>Edicion</label> <input type="text" name="edition"
+												class="form-control" id="edition" required>
+										</div>
+
+										<!--4. Autor -->
+										<div class="form-group">
+											<label>Autor Principal</label> <select
+												class="form-control select2" name="primaryAuthor[]"
+												multiple="multiple""> @foreach($autores as $autor)
+												@foreach($autor->categories as $category) @if($category->id
+												== 1)
+												<option value="{{ $autor->id }}">{{$autor->name}}</option>
+												@endif @endforeach @endforeach
+											</select>
+										</div>
+
+										<div class="form-group">
+											<label>Autor Secundario</label> <select
+												class="form-control select2" name="secondaryAuthor[]"
+												multiple="multiple"> @foreach($autores as $autor)
+												@foreach($autor->categories as $category) @if($category->id
+												== 1)
+												<option value="{{ $autor->id }}">{{$autor->name}}</option>
+												@endif @endforeach @endforeach
+											</select>
+										</div>
+
+										<div class="form-group">
+											<label>Editorial</label> <select class="form-control select2"
+												name="editorial[]""> @foreach($editoriales as $editorial)
+												@foreach($editorial->categories as $category)
+												@if($category->name == "libro"){
+												<option value="{{ $editorial->id }}">{{$editorial->name}}</option>
+												}@endif @endforeach @endforeach
+											</select>
+										</div>
+
+										<div class="form-group">
+											<label>Anexos</label> <select class="form-control select2"
+												name="secondaryEditorial[]" multiple="multiple">
+												@foreach($editoriales as $editorial)
+												@foreach($editorial->categories as $category)
+												@if($category->name == "libro"){
+												<option value="{{ $editorial->id }}">{{$editorial->name}}</option>
+												}@endif @endforeach @endforeach
+											</select>
+										</div>
+
+									</div>
+									<!-- End Box-body -->
+								</div>
+								<!-- End Primer Panel -->
+
+								<!-- Segundo Panel -->
+								<div class="tab-pane fade" id="segundo">
+									<div class="box-body">
+
+										<!-- 1. Resumen -->
+										<div class="form-group">
+											<label>Resumen</label>
+											<textarea class="form-control" rows="3" name="summary"
+												id="Summary" placeholder=""></textarea>
+										</div>
+										<!-- 1. Fin Resumen -->
+
+										<!-- 2. Capitulos -->
+										<div class="form-group">
+											<label>Capitulos</label>
+											<div id="contenedor">
+												<div class="input-group">
+													<span class="input-group-addon">1</span> <input type="text"
+														id="campo_1" name="chapter[0]" class="form-control"
+														required> <span id="agregarCampo"
+														class="input-group-addon"><i class="fa fa-plus"></i></span>
+												</div>
+
+											</div>
+										</div>
+										<!-- 2. Fin <center></center>apitulos -->
+
+										<div class="form-group">
+											<label>Isbn</label> <input type="text" name="isbn" id="isbn"
+												class="form-control" value="">
+										</div>
+
+										<div class="form-group">
+											<label>Libros relacionados</label> <select
+												class="form-control select2" name="relationBook[]"
+												multiple="multiple" style="width: 100%;"> @foreach($books as
+												$book)
+												<option value="{{ $book->id }}">{{$book->name}}</option>
+												@endforeach
+											</select>
+										</div>
+
+										<div class="form-group">
+											<label>Ubicacion en Biblioteca</label> <input type="text"
+												name="libraryLocation" class="form-control"
+												id="libraryLocation" value="">
+										</div>
+
+										<div class="form-group">
+											<label>Descripcion Fisica</label>
+											<div class="form-horizontal">
+												<div for="ejemplo_password_3" class="col-xs-6 control-label">Extension</div>
+												<div class="col-xs-6">
+													<input type="text" name="extension" id="extension"
+														class="form-control" required>
+												</div>
+
+												<div for="ejemplo_password_3" class="col-xs-6 control-label">Otros
+													detalles fisicos</div>
+												<div class="col-xs-6">
+													<input type="text" name="physicalDetails"
+														id="physicalDetails" class="form-control">
+												</div>
+
+												<div for="ejemplo_password_3" class="col-xs-6 control-label">Dimensiones</div>
+												<div class="col-xs-6">
+													<input type="text" name="dimensions" id="dimensions"
+														class="form-control" required>
+
+												</div>
+												<div for="ejemplo_password_3" class="col-xs-6 control-label">Material
+													de Acompañamiento</div>
+												<div class="col-xs-6">
+													<input type="text" name="accompaniment" id="accompaniment"
+														class="form-control">
+												</div>
+											</div>
+
+										</div>
+
+									</div>
+									<!-- End Box-Body -->
+								</div>
+								<!-- End Segundo Panel -->
+							</div>
+
+						</div>
+						<!-- End nav-bar -->
+					</div>
+					<!-- End Box-body -->
+
+				</div>
+				<!-- End Box-solid -->
+			</div>
+			<!-- End col-md-6 -->
+			<!-- /*/*/*/*/*/*/*/*/*/*/*/*/*/*/ACA ESTA ****************************************/*//////**/*/*/*/ -->
+
+			<div class="col-md-6">
+				<div class="box box-success box-solid">
+					<div class="box-header with-border">
+						<h3 class="box-title">Item</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool"
+								data-widget="collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+						</div>
+					</div>
+					<div class="box-body">
+						<div class="bs-example" data-expample-id="simple-nav-tabs">
+							<ul class="nav nav-tabs" id="contenedor-pestañas">
+								<li><a type="button" href="#" class="agregarItem"><i
+										class="fa fa-plus"></i></a></li>
+								<li><a type="button" href="#" class="eliminarItem"><i
+										class="fa fa-remove"></i></a></li>
+								<li class="active"><a href="#item1" id="cabezera-item1"
+									data-toggle="tab">Item1&nbsp</a></li>
 
 
-               </div><!-- End tab-content -->
-               <!--*************************** FIN CONTENIDO ITEM1 ***********************************-->
+							</ul>
 
-         
-            </div><!-- End nav.bar -->
+							<!--************************** CONTENIDO DE ITEM 1 ***********************************-->
+							<div class="tab-content" id="contenedor-item">
 
-          </div><!-- End box-body -->
-        </div><!-- End box-solid -->
+								<div class="tab-pane active" id="item1">
+									<div class="box-body">
+										<div class="bs-example" data-example-id="simple-nav-tabs">
+											<ul class="nav nav-tabs">
+												<li class="active"><a href="#primero1" data-toggle="tab">Primero</a></li>
+												<li><a href="#segundo1" data-toggle="tab">Segundo</a></li>
+											</ul>
 
-      </div><!-- End coll-md-6 -->
+											<div class="tab-content">
+												<div class="tab-pane active" id="primero1">
+													<div class="box-body">
+														<div class="form-group">
+															<label>Numero de Ingreso</label> <input type="text"
+																name="incomeNumber[0]" id="incomeNumber1"
+																class="form-control" required>
+														</div>
 
-      <!-- ***/*/*/*/*/*/*/*/*/*/*ACA ESTA ****************************************/*//////**/*/*/*/ -->
-    </div>  
+														<div class="form-group">
+															<label>Codigo de Barras</label> <input type="text"
+																name="barcode[0]" id="barcode1" class="form-control"
+																required>
+														</div>
 
-    <div class="box-footer">
-        <button type="submit" id="btn" class="btn btn-primary">Crear</button>
-    </div>
+														<div class="form-group">
+															<label>Volumen</label> <input type="text"
+																name="volume[0]" id="volume1" class="form-control">
+														</div>
 
-  </form>
+														<div class="form-group">
+															<label>Gestion</label> <input type="text"
+																name="management[0]" id="management1"
+																class="form-control" required>
+														</div>
+
+														<div class="form-group">
+															<label>Disponibilidad</label> <select
+																class="form-control select2" name="availability[0]"
+																style="width: 100%;">
+																<option>Disponible</option>
+																<option>No Disponible</option>
+															</select>
+														</div>
+
+
+													</div>
+												</div>
+
+												<div class="tab-pane fade" id="segundo1">
+													<div class="box-body">
+														<div class="form-group">
+															<label>Modalidad de Adquision</label> <select
+																class="form-control select2"
+																name="acquisitionModality[0]" id="acquisitionModality1"
+																style="width: 100%;">
+																<option>Donacion</option>
+																<option>Compra</option>
+																<option>Adquisicion</option>
+															</select>
+														</div>
+
+														<div class="form-group">
+															<label>Fuente de Adquisicion</label> <input type="text"
+																class="form-control" name="acquisitionSource[0]"
+																id="acquisitionSource1" required>
+														</div>
+
+														<div class="form-group">
+															<label>Precio de Adquisicion</label> <input type="text"
+																name="acquisitionPrice[0]" class="form-control"
+																id="acquisitionPrice1">
+														</div>
+
+														<div class="form-group">
+															<label>Fecha de Adquisicion</label> <input type="text"
+																name="acquisitionDate[0]" class="form-control"
+																id="acquisitionDate1" required>
+														</div>
+
+														<div class="form-group">
+															<label>Tipo de Impresion</label> <select
+																class="form-control select2" name="printType[0]"
+																style="width: 100%;">
+																<option>Impresion</option>
+																<option>Reimpresion</option>
+															</select>
+														</div>
+
+														<div class="form-group">
+															<label>Lugar de Publicacion</label> <input type="text"
+																name="publicationLocation[0]" class="form-control"
+																id="publicationLocation1" required>
+														</div>
+
+														<div class="form-group">
+															<label>Fecha de Publicacion</label> <input type="text"
+																name="publicationDate[0]" class="form-control"
+																id="publicationDate1" required>
+														</div>
+
+													</div>
+												</div>
+
+											</div>
+											<!-- End Tab Content-->
+
+										</div>
+										<!-- End navbar -->
+									</div>
+									<!-- End box-body -->
+								</div>
+								<!-- End tab-pane -->
+
+
+
+
+							</div>
+							<!-- End tab-content -->
+							<!--*************************** FIN CONTENIDO ITEM1 ***********************************-->
+
+
+						</div>
+						<!-- End nav.bar -->
+
+					</div>
+					<!-- End box-body -->
+				</div>
+				<!-- End box-solid -->
+
+			</div>
+			<!-- End coll-md-6 -->
+
+			<!-- ***/*/*/*/*/*/*/*/*/*/*ACA ESTA ****************************************/*//////**/*/*/*/ -->
+		</div>
+
+		<div class="box-footer">
+			<button type="submit" id="btn" class="btn btn-primary">Crear</button>
+		</div>
+
+	</form>
 
 </div>
 

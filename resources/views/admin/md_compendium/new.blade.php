@@ -1,129 +1,133 @@
 <div class="box box-primary">
-  <div class="box-header with-border">
-    <i class="fa fa-book"></i>
-    <h3 class="box-title">Nuevo</h3>
-    <div class="box-tools pull-right">
-      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-      </button>
-    </div>
-  </div>
-  <form method="POST" action="{{ url('/admin/compendium') }}">
-    {{ csrf_field() }}
-        <div class="box-body">
-    <!--***************************************************************************************************************************************
+	<div class="box-header with-border">
+		<i class="fa fa-book"></i>
+		<h3 class="box-title">Nuevo</h3>
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" data-widget="collapse">
+				<i class="fa fa-minus"></i>
+			</button>
+		</div>
+	</div>
+	<form method="POST" action="{{ url('/admin/compendium') }}">
+		{{ csrf_field() }}
+		<div class="box-body">
+			<!--***************************************************************************************************************************************
                                               PANEL DE INFORMACION
     *******************************************************************************************************************************************-->
-            <div class="box box-success box-solid ">
-                <div class="box-header">
-                    <h3 class="panel-title">Informacion</h3>
-                </div>
-                <div class="box-body">
-                    <div class="form-group">
-                        <label for="inputTitle">Título</label>
-                        <span>*</span>
-                        <input type="text" class="form-control" name="title" id="inputTitle" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputTitle">introduccion</label>
-                        <span>*</span>
-                        <textarea rows="3" class="form-control" name="introduccion" id="inputintroduccion" placeholder=""></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Entidad académica</label>
-                        <span>*</span>
-                        <select class="form-control select2" name="author">
-                          @foreach($autores as $autor)
-                            @foreach($autor->categories as $category)
-                              @if($category->name == "compendio")
-                                <option value="{{ $autor->id }}">{{ $autor->name}}</option>
-                              @endif
-                            @endforeach
-                          @endforeach
-                        </select>
-                    </div>
+			<div class="box box-success box-solid ">
+				<div class="box-header">
+					<h3 class="panel-title">Informacion</h3>
+				</div>
+				<div class="box-body">
+					<div class="form-group">
+						<label for="inputTitle">Título</label> <span>*</span> <input
+							type="text" class="form-control" name="title" id="inputTitle"
+							placeholder="">
+					</div>
+					<div class="form-group">
+						<label for="inputTitle">introduccion</label> <span>*</span>
+						<textarea rows="3" class="form-control" name="introduccion"
+							id="inputintroduccion" placeholder=""></textarea>
+					</div>
+					<div class="form-group">
+						<label>Entidad académica</label> <span>*</span> <select
+							class="form-control select2" name="author"> @foreach($autores as
+							$autor) @foreach($autor->categories as $category)
+							@if($category->name == "compendio")
+							<option value="{{ $autor->id }}">{{ $autor->name}}</option>
+							@endif @endforeach @endforeach
+						</select>
+					</div>
 
-                    <div class="form-group">
-                            <label>Editorial</label>
-                            <span>*</span>
-                            <select class="form-control select2" name="editorial" data-placeholder="Editorial" style="width: 100%;">
-                            @foreach($editoriales as  $editorial)
-                              @foreach($editorial->categories as $category)
-                                @if($category->name == "compendio")
-                                  <option  value="{{ $editorial->id }}">{{$editorial->name}}</option>
-                                @endif
-                              @endforeach
-                            @endforeach
-                            </select>
-                    </div>
+					<div class="form-group">
+						<label>Editorial</label> <span>*</span> <select
+							class="form-control select2" name="editorial"
+							data-placeholder="Editorial" style="width: 100%;">
+							@foreach($editoriales as $editorial)
+							@foreach($editorial->categories as $category) @if($category->name
+							== "compendio")
+							<option value="{{ $editorial->id }}">{{$editorial->name}}</option>
+							@endif @endforeach @endforeach
+						</select>
+					</div>
 
-                    <div class="form-group">
-                        <div class="row">
-                          <!-- <div class="col-lg-4">
+					<div class="form-group">
+						<div class="row">
+							<!-- <div class="col-lg-4">
                             <label for="volumen">Volumen</label>
                             <input type="number" class="form-control" name="volumen" id="volumen" placeholder="Vol."  min="0">
                           </div> -->
-                          <div class="col-lg-6">
-                            <label for="numero">Nº</label>
-                              <input type="number" class="form-control" name="numero" id="numero" placeholder="Nº X" min="0">
-                          </div>
-                          <div class="col-lg-6">
-                              <label for="inputClasification">Fecha de edición</label>
-                                <input type="text" class="form-control" name="fechaEdicion" data-inputmask='"mask": "2099"' data-mask  id="fechaEdicion" placeholder="XXXX"  >
-                          </div>
-                        </div>
-                    </div>
-                  </div>
-               </div>
-  <!--***************************************************************************************************************************************
+							<div class="col-lg-6">
+								<label for="numero">Nº</label> <input type="number"
+									class="form-control" name="numero" id="numero"
+									placeholder="Nº X" min="0">
+							</div>
+							<div class="col-lg-6">
+								<label for="inputClasification">Fecha de edición</label> <input
+									type="text" class="form-control" name="fechaEdicion"
+									data-inputmask='"mask": "2099"' data-mask id="fechaEdicion"
+									placeholder="XXXX">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--***************************************************************************************************************************************
                                                       PANEL DE ITEM
   *******************************************************************************************************************************************-->
-  <!--Los name terminan en 0 para poder tener un control de los inputs a la hora de enviar los datos al store-->
-          <div class="box box-info box-solid" id="itemBox">
-              <div class="box-header">
-                  <h3 class="box-title">Item principal</h3>
-                  <div class="box-tools pull-right">
-                    <button type="button" id="agregarItem" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
-                  </div>
-              </div>
-              <div class="box-body">
-                  <div class="form-group">
-                      <label for="inputIncomeNumber">Nº Ingreso</label>
-                      <span>*</span>
-                      <input type="text" class="form-control" name="incomeNumber0" id="inputIncomeNumber" placeholder="">
-                  </div>
-                  <div class="form-group">
-                      <label for="inputCopy">Ejemplar</label>
-                      <span>*</span>
-                      <input type="number" class="form-control" name="copy0" id="inputCopy" placeholder="" value=1 >
-                  </div>
-              </div>
-            </div>
-    <!--***************************************************************************************************************************************
+			<!--Los name terminan en 0 para poder tener un control de los inputs a la hora de enviar los datos al store-->
+			<div class="box box-info box-solid" id="itemBox">
+				<div class="box-header">
+					<h3 class="box-title">Item principal</h3>
+					<div class="box-tools pull-right">
+						<button type="button" id="agregarItem" class="btn btn-box-tool">
+							<i class="fa fa-plus"></i>
+						</button>
+					</div>
+				</div>
+				<div class="box-body">
+					<div class="form-group">
+						<label for="inputIncomeNumber">Nº Ingreso</label> <span>*</span> <input
+							type="text" class="form-control" name="incomeNumber0"
+							id="inputIncomeNumber" placeholder="">
+					</div>
+					<div class="form-group">
+						<label for="inputCopy">Ejemplar</label> <span>*</span> <input
+							type="number" class="form-control" name="copy0" id="inputCopy"
+							placeholder="" value=1>
+					</div>
+				</div>
+			</div>
+			<!--***************************************************************************************************************************************
                                                 PANEL DE CONTENIDO
     *****************************************************************************************************************************************-->
-            <div class="box box-danger box-solid" >
-              <div class="box-header ">
-                  <h3 class="box-title">Tabla de contenido</h3>
-                  <div class="box-tools pull-right">
-                    <button type="button" id="agregarContenido" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
-                  </div>
-              </div>
-              <div class="box-body">
-                  <div  id='contentPanel'>
-                      <div class="panel-body">
-                        <div class="form-group">
-                          <label for="inputTitleContent">Contenido</label>
-                          <input type="text" class="form-control" name="titleContent0" id="inputTitleContent0" placeholder="">
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-    <div class="box-footer">
-      <button type="submit" class="btn btn-primary" id="newCompendium">Crear</button>
-    </div>
-  </form>
+			<div class="box box-danger box-solid">
+				<div class="box-header ">
+					<h3 class="box-title">Tabla de contenido</h3>
+					<div class="box-tools pull-right">
+						<button type="button" id="agregarContenido"
+							class="btn btn-box-tool">
+							<i class="fa fa-plus"></i>
+						</button>
+					</div>
+				</div>
+				<div class="box-body">
+					<div id='contentPanel'>
+						<div class="panel-body">
+							<div class="form-group">
+								<label for="inputTitleContent">Contenido</label> <input
+									type="text" class="form-control" name="titleContent0"
+									id="inputTitleContent0" placeholder="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="box-footer">
+			<button type="submit" class="btn btn-primary" id="newCompendium">Crear</button>
+		</div>
+	</form>
 </div>
 <!-- /.box -->
 <!--***************************************************************************************************************************************
@@ -131,7 +135,7 @@
 *******************************************************************************************************************************************
  -->
 @section('scriptSelect')
-  <script type="text/javascript">
+<script type="text/javascript">
     $(function () {
         $(".select2").select2();
         $(".selectCollaborator").select2();
@@ -211,9 +215,8 @@
         $("[data-mask]").inputmask();
     });
   </script>
-@endsection
-@section('scriptContent')
-  <script type="text/javascript">
+@endsection @section('scriptContent')
+<script type="text/javascript">
   $(document).ready(function(){
     var idCont = 1 ;
     function agregarContenido(id,contenedor,cont,select){
@@ -248,9 +251,8 @@
     agregarContenido('#agregarContenido','#contentPanel',idCont,'selectCollaborator');
   });
   </script>
-@endsection
-@section('scriptItem')
-  <script type="text/javascript">
+@endsection @section('scriptItem')
+<script type="text/javascript">
   $(document).ready(function(){
     var idCont = 1 ;
     // Cuando haga click en agregarContenido

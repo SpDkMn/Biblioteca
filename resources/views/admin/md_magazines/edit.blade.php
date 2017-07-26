@@ -1,67 +1,64 @@
 <div class="box box-primary">
-  <div class="box-header with-border">
-    <i class="fa fa-edit"></i>
-    <h3 class="box-title">Editar</h3>
-    <div class="box-tools pull-right">
-      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-      </button>
-    </div>
-  </div>
-  <!-- /.box-header -->
-  @if($id!=null)
-    @foreach($revistas as $revista)
-      @if($revista->id == $id)
-      <form method="POST" action="{{ url('/admin/magazines')}}/{{$id}}">
-        <!-- Envia los datos a la funcion update del controlador luego de presionar edit -->
-        <input type="hidden" name="_method" value="put" />
-        {{ csrf_field() }}
-          <div class="box-body">
-<!--***************************************************************************************************************************************
+	<div class="box-header with-border">
+		<i class="fa fa-edit"></i>
+		<h3 class="box-title">Editar</h3>
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" data-widget="collapse">
+				<i class="fa fa-minus"></i>
+			</button>
+		</div>
+	</div>
+	<!-- /.box-header -->
+	@if($id!=null) @foreach($revistas as $revista) @if($revista->id == $id)
+	<form method="POST" action="{{ url('/admin/magazines')}}/{{$id}}">
+		<!-- Envia los datos a la funcion update del controlador luego de presionar edit -->
+		<input type="hidden" name="_method" value="put" /> {{ csrf_field() }}
+		<div class="box-body">
+			<!--***************************************************************************************************************************************
                                           PANEL DE INFORMACION
 *******************************************************************************************************************************************
 -->
-              <div class="box box-success box-solid">
-                  <div class="box-header">
-                      <h3 class="box-title">Informacion</h3>
-                  </div>
-                  <div class="box-body">
-                    <div class="form-group">
-                          <label for="inputTitle">Titulo</label>
-                          <input type="text" class="form-control" value="{{$revista->title}}" name="title" id="inputTitle" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputSubTitle">Resto de título</label>
-                        <input type="text" class="form-control" value="{{$revista->subtitle}}" name="subtitle" id="inputSubTitle" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label>Entidad académica</label>
-                        <select class="form-control select" name="author" >
-                        <!-- Cargando opciones de autores -->
-                        @foreach($autores as $autor)
-                          @foreach($autor->categories as $category)
-                            @if($category->name == "revista"){
-                              <!-- Si el id del autor del bucle es igual al autor de la revista seleccionada  -->
-                              @if($autor->id == $revista->author->id)
-                              <!-- Entonces muestro al autor como seleccionado -->
-                              <option value="{{ $autor->id }}" selected>{{ $autor->name}}</option>
-                                @else
-                              <!-- sino solo muestro al autor como una opcion -->
-                              <option value="{{ $autor->id }}">{{ $autor->name}}</option>
-                              @endif
-                              <!-- finsi -->
-                            }
-                            @endif
-                          @endforeach
-                        @endforeach
-                        </select>
-                    </div>
+			<div class="box box-success box-solid">
+				<div class="box-header">
+					<h3 class="box-title">Informacion</h3>
+				</div>
+				<div class="box-body">
+					<div class="form-group">
+						<label for="inputTitle">Titulo</label> <input type="text"
+							class="form-control" value="{{$revista->title}}" name="title"
+							id="inputTitle" placeholder="">
+					</div>
+					<div class="form-group">
+						<label for="inputSubTitle">Resto de título</label> <input
+							type="text" class="form-control" value="{{$revista->subtitle}}"
+							name="subtitle" id="inputSubTitle" placeholder="">
+					</div>
+					<div class="form-group">
+						<label>Entidad académica</label> <select
+							class="form-control select" name="author">
+							<!-- Cargando opciones de autores --> @foreach($autores as
+							$autor) @foreach($autor->categories as $category)
+							@if($category->name == "revista"){
+							<!-- Si el id del autor del bucle es igual al autor de la revista seleccionada  -->
+							@if($autor->id == $revista->author->id)
+							<!-- Entonces muestro al autor como seleccionado -->
+							<option value="{{ $autor->id }}" selected>{{ $autor->name}}</option>
+							@else
+							<!-- sino solo muestro al autor como una opcion -->
+							<option value="{{ $autor->id }}">{{ $autor->name}}</option>
+							@endif
+							<!-- finsi --> } @endif @endforeach @endforeach
+						</select>
+					</div>
 
-                    <div class="form-group">
-                        <div class="row">
-                          <div class="col-xs-4">
-                            <!-- Main editorial -->
-                            <label>Editorial</label>
-                              <select id="selectEditorialMainEdit" class="form-control" name="mEditorialMain[]" multiple="multiple" data-placeholder="Editorial Principal" style="width: 100%;">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-xs-4">
+								<!-- Main editorial -->
+								<label>Editorial</label> <select id="selectEditorialMainEdit"
+									class="form-control" name="mEditorialMain[]"
+									multiple="multiple" data-placeholder="Editorial Principal"
+									style="width: 100%;">
                               @foreach($editoriales as $editorial)
                                 <?php $band = false ; ?>
                                 @foreach($revista->editorials as $editorialM)
@@ -73,24 +70,23 @@
                                   Comprobar si el id de $editorial es igual a
                                   $revista->editorials as $editorial
                                     $editorial->id
-                                -->
-                                @if($band)
-                                    <option value="{{$editorial->id }}" selected>{{$editorial->name}}</option>
+                                --> @if($band)
+									<option value="{{$editorial->id }}" selected>{{$editorial->name}}</option>
                                     <?php $band = false; ?>
                                   @else
                                     @foreach($editorial->categories as $category)
                                       @if($category->name == "revista")
-                                        <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
-                                      @endif
-                                    @endforeach
-                                @endif
-                              @endforeach
-                              </select>
-                          </div>
-                          <div class="col-xs-8">
-                              <label>Anexos</label>
-                              <div class="input-group ">
-                                <select class="form-control" id="selectEditorialSecondEdit" name="mEditorialSecond[]" multiple="multiple" data-placeholder="Editorial Secundaria" style="width: 97%;">
+                                        <option
+										value="{{ $editorial->id }}">{{$editorial->name}}</option>
+									@endif @endforeach @endif @endforeach
+								</select>
+							</div>
+							<div class="col-xs-8">
+								<label>Anexos</label>
+								<div class="input-group ">
+									<select class="form-control" id="selectEditorialSecondEdit"
+										name="mEditorialSecond[]" multiple="multiple"
+										data-placeholder="Editorial Secundaria" style="width: 97%;">
                                   @foreach($editoriales as $editorial)
                                     <?php $band = false ; ?>
                                     @foreach($revista->editorials as $editorialM)
@@ -100,112 +96,132 @@
                                     @endforeach
                                     @if($band)
                                         <?php $band = false ; ?>
-                                        <option value="{{$editorial->id }}" selected>{{$editorial->name}}</option>
-                                      @else
-                                        @foreach($editorial->categories as $category)
-                                          @if($category->name == "revista")
-                                            <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
-                                          @endif
-                                        @endforeach
-                                    @endif
-                                  @endforeach
-                                </select>
-                                <div class="input-group-btn ">
-                                  <button type="button" class="btn btn-danger btn-flat clearSelect2" data-toggle="tooltip" data-placement="top" title="Elimina todas las opciones seleccionadas"><i class="fa fa-times"></i></button>
-                                </div>
-                              </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                          <div class="row">
-                            <div class="col-lg-6">
-                              <label for="inputISSNi">ISSN Impreso</label>
-                              <span>*</span>
-                              <input type="text" class="form-control" name="issn" id="inputISSNi" data-inputmask='"mask": "9999-9999"' placeholder="Version Impresa" value="{{$revista->issn}}">
-                            </div>
-                            <div class="col-lg-6">
-                              <label for="inputISSNd">ISSN Digital</label>
-                              <input type="text" class="form-control" name="issnD" id="inputISSNd" data-inputmask='"mask": "9999-9999"' placeholder="Version Digital" value="@if($revista->issnD!=0){{$revista->issnD}}@endif">
-                            </div>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <div class="row">
-                            <div class="col-lg-6">
-                              <label for="volumen">Volumen</label>
-                              <input type="number" value="{{$revista->volumen}}"  class="form-control" name="volumen" id="volumen" placeholder="Vol."  min="0">
-                            </div>
-                            <div class="col-lg-6">
-                              <label for="numero">Nº</label>
-                                <input type="number" value="{{$revista->numero}}" class="form-control" name="numero" id="numero" placeholder="Nº X" min="0" max="10">
-                            </div>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <label for="inputClasification">Fecha de edición</label>
-                            <input type="text" value="{{$revista->fechaEdicion}}" class="form-control" name="fechaEdicion" data-inputmask='"mask": "aaa-aaa.2099"' data-mask  id="fechaEdicion" placeholder="ABR-DIC.2017" style='text-transform:uppercase' >
-                      </div>
-                    </div>
-                 </div>
-<!--***************************************************************************************************************************************
+                                        <option
+											value="{{$editorial->id }}" selected>{{$editorial->name}}</option>
+										@else @foreach($editorial->categories as $category)
+										@if($category->name == "revista")
+										<option value="{{ $editorial->id }}">{{$editorial->name}}</option>
+										@endif @endforeach @endif @endforeach
+									</select>
+									<div class="input-group-btn ">
+										<button type="button"
+											class="btn btn-danger btn-flat clearSelect2"
+											data-toggle="tooltip" data-placement="top"
+											title="Elimina todas las opciones seleccionadas">
+											<i class="fa fa-times"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-lg-6">
+								<label for="inputISSNi">ISSN Impreso</label> <span>*</span> <input
+									type="text" class="form-control" name="issn" id="inputISSNi"
+									data-inputmask='"mask": "9999-9999"'
+									placeholder="Version Impresa" value="{{$revista->issn}}">
+							</div>
+							<div class="col-lg-6">
+								<label for="inputISSNd">ISSN Digital</label> <input type="text"
+									class="form-control" name="issnD" id="inputISSNd"
+									data-inputmask='"mask": "9999-9999"'
+									placeholder="Version Digital"
+									value="@if($revista->issnD!=0){{$revista->issnD}}@endif">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-lg-6">
+								<label for="volumen">Volumen</label> <input type="number"
+									value="{{$revista->volumen}}" class="form-control"
+									name="volumen" id="volumen" placeholder="Vol." min="0">
+							</div>
+							<div class="col-lg-6">
+								<label for="numero">Nº</label> <input type="number"
+									value="{{$revista->numero}}" class="form-control" name="numero"
+									id="numero" placeholder="Nº X" min="0" max="10">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputClasification">Fecha de edición</label> <input
+							type="text" value="{{$revista->fechaEdicion}}"
+							class="form-control" name="fechaEdicion"
+							data-inputmask='"mask": "aaa-aaa.2099"' data-mask
+							id="fechaEdicion" placeholder="ABR-DIC.2017"
+							style='text-transform: uppercase'>
+					</div>
+				</div>
+			</div>
+			<!--***************************************************************************************************************************************
                                          PANEL DE ITEM
 *******************************************************************************************************************************************
 -->
         <?php $contItem = 0  ?>
             @foreach($revista->magazines_copies as $item)
               @if($loop->first)
-              <div class="box box-info box-solid" id="{{'itemPanel'.$contItem}}">
-                <div class="box-header">
-                    <h3 class="box-title">Item Principal</h3>
-                    <div class="box-tools pull-right">
-                      <button type="button" id="agregarItemEdit" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
-                    </div>
-                </div>
-                <div class="box-body">
-                    <div class="form-group">
-                        <label for="inputIncomeNumber">Nº Ingreso</label>
-                        <span>*</span>
-                        <input type="text" class="form-control" value="{{$item->incomeNumber}}" name="{{'incomeNumber[]'}}" id="inputIncomeNumber" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputBarcode">Código de barra</label>
-                        <span>*</span>
-                        <input type="text" class="form-control" value="{{$item->barcode}}" name="{{'barcode[]'}}" id="inputBarcode" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputCopy">Ejemplar</label>
-                        <span>*</span>
-                        <input type="number" class="form-control" value="{{$item->copy}}" name="{{'copy[]'}}" id="inputCopy" placeholder="">
-                    </div>
-                </div>
-              </div>
-              @else
-                <div class="BoxItemMagazineEdit box box-info box-solid" id="{{'itemPanel'.$contItem}}">
-                  <div class="box-header">
-                      <h3 class="panel-title">Item Secundario</h3>
-                      <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" class="eliminarItem" data-widget="remove"><i class="fa fa-times"></i></button>
-                      </div>
-                  </div>
-                  <div class="box-body">
-                      <div class="form-group">
-                          <label for="inputIncomeNumber">Nº Ingreso</label>
-                          <span>*</span>
-                          <input type="text" class="form-control" value="{{$item->incomeNumber}}" name="{{'incomeNumber[]'}}" id="inputIncomeNumber" placeholder="">
-                      </div>
-                      <div class="form-group">
-                          <label for="inputBarcode">Código de barra</label>
-                          <span>*</span>
-                          <input type="text" class="form-control" value="{{$item->barcode}}" name="{{'barcode[]'}}" id="inputBarcode" placeholder="">
-                      </div>
-                      <div class="form-group">
-                          <label for="inputCopy">Ejemplar</label>
-                          <span>*</span>
-                          <input type="number" class="form-control" value="{{$item->copy}}" name="{{'copy[]'}}" id="inputCopy" placeholder="">
-                      </div>
-                  </div>
-                </div>
+              <div class="box box-info box-solid"
+				id="{{'itemPanel'.$contItem}}">
+				<div class="box-header">
+					<h3 class="box-title">Item Principal</h3>
+					<div class="box-tools pull-right">
+						<button type="button" id="agregarItemEdit"
+							class="btn btn-box-tool">
+							<i class="fa fa-plus"></i>
+						</button>
+					</div>
+				</div>
+				<div class="box-body">
+					<div class="form-group">
+						<label for="inputIncomeNumber">Nº Ingreso</label> <span>*</span> <input
+							type="text" class="form-control" value="{{$item->incomeNumber}}"
+							name="{{'incomeNumber[]'}}" id="inputIncomeNumber" placeholder="">
+					</div>
+					<div class="form-group">
+						<label for="inputBarcode">Código de barra</label> <span>*</span> <input
+							type="text" class="form-control" value="{{$item->barcode}}"
+							name="{{'barcode[]'}}" id="inputBarcode" placeholder="">
+					</div>
+					<div class="form-group">
+						<label for="inputCopy">Ejemplar</label> <span>*</span> <input
+							type="number" class="form-control" value="{{$item->copy}}"
+							name="{{'copy[]'}}" id="inputCopy" placeholder="">
+					</div>
+				</div>
+			</div>
+			@else
+			<div class="BoxItemMagazineEdit box box-info box-solid"
+				id="{{'itemPanel'.$contItem}}">
+				<div class="box-header">
+					<h3 class="panel-title">Item Secundario</h3>
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool"
+							class="eliminarItem" data-widget="remove">
+							<i class="fa fa-times"></i>
+						</button>
+					</div>
+				</div>
+				<div class="box-body">
+					<div class="form-group">
+						<label for="inputIncomeNumber">Nº Ingreso</label> <span>*</span> <input
+							type="text" class="form-control" value="{{$item->incomeNumber}}"
+							name="{{'incomeNumber[]'}}" id="inputIncomeNumber" placeholder="">
+					</div>
+					<div class="form-group">
+						<label for="inputBarcode">Código de barra</label> <span>*</span> <input
+							type="text" class="form-control" value="{{$item->barcode}}"
+							name="{{'barcode[]'}}" id="inputBarcode" placeholder="">
+					</div>
+					<div class="form-group">
+						<label for="inputCopy">Ejemplar</label> <span>*</span> <input
+							type="number" class="form-control" value="{{$item->copy}}"
+							name="{{'copy[]'}}" id="inputCopy" placeholder="">
+					</div>
+				</div>
+			</div>
                 @endif
                 <?php $contItem = $contItem  +1  ?>
               @endforeach
@@ -214,30 +230,37 @@
 *******************************************************************************************************************************************
 -->
         <?php $contContent = 0  ?>
-                <div class="box box-danger box-solid" id="{{'contentPanel'.$contContent}}">
-                    <div class="box-header ">
-                        <h3 class="panel-title">Tabla de contenido</h3>
-                        <div class="box-tools pull-right">
-                          <button type="button" id="agregarContenidoCont"  class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
-                        </div>
-                    </div>
-                    <!-- PRUEBA  -->
-                    <div class="box-body">
-                      <div  id="contentPanelEdit">
-                      @foreach($revista->contents as $contenido)
-                        @if($loop->first)
-                        <div class="panel-body">
-                          <div class="form-group">
-                            <label for="inputTitleContent">Tabla de contenido</label>
-                            <span>*</span>
-                            <input type="text" class="form-control" name="{{'titleContent'.$contContent}}" id="{{'inputTitleContent'.$contContent}}" placeholder="" value="{{$contenido->title}}">
-                          </div>
-                          <div class="form-group">
-                          <label>Colaboradores</label>
-                            <select class="form-control select"  multiple="multiple" name ="{{'collaborator'.$contContent.'[]'}}" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
-                              <!-- Cargando colaboradores seleccionados -->
-                              <!-- Cargando lista de opciones para ser seleccionados  -->
-                              <!-- Nota : Corregir error al mostrar lista de opciones  -->
+                <div class="box box-danger box-solid"
+				id="{{'contentPanel'.$contContent}}">
+				<div class="box-header ">
+					<h3 class="panel-title">Tabla de contenido</h3>
+					<div class="box-tools pull-right">
+						<button type="button" id="agregarContenidoCont"
+							class="btn btn-box-tool">
+							<i class="fa fa-plus"></i>
+						</button>
+					</div>
+				</div>
+				<!-- PRUEBA  -->
+				<div class="box-body">
+					<div id="contentPanelEdit">
+						@foreach($revista->contents as $contenido) @if($loop->first)
+						<div class="panel-body">
+							<div class="form-group">
+								<label for="inputTitleContent">Tabla de contenido</label> <span>*</span>
+								<input type="text" class="form-control"
+									name="{{'titleContent'.$contContent}}"
+									id="{{'inputTitleContent'.$contContent}}" placeholder=""
+									value="{{$contenido->title}}">
+							</div>
+							<div class="form-group">
+								<label>Colaboradores</label> <select class="form-control select"
+									multiple="multiple" name="{{'collaborator'.$contContent.'[]'}}"
+									data-placeholder="Seleccione los colaboradores"
+									style="width: 100%;">
+									<!-- Cargando colaboradores seleccionados -->
+									<!-- Cargando lista de opciones para ser seleccionados  -->
+									<!-- Nota : Corregir error al mostrar lista de opciones  -->
                               @foreach($autores as $autor)
                                   <?php $band = false ; ?>
                                   @foreach($contenido->authors as $author)
@@ -250,29 +273,33 @@
                                     @endif
                                   @endforeach
                                   @if($band)
-                                      <option value="{{ $autor->id }}" selected>{{ $autor->name}}</option>
+                                      <option value="{{ $autor->id }}"
+										selected>{{ $autor->name}}</option>
                                       <?php $band = false; ?>
                                     @else
                                     @foreach($autor->categories as $category)
                                       @if($category->name == "colaborador")
-                                            <option value="{{ $autor->id }}" >{{ $autor->name}}</option>
-                                      @endif
-                                    @endforeach
-                                  @endif
-                              @endforeach
-                              </select>
-                            </div>
-                          </div>
-                          @else
-                            <hr>
-                                <div class="panel-body" id="{{'boxID'.$contContent}}">
-                                    <div class="form-group">
-                                      <label for="inputTitleContent">Contenido</label>
-                                      <input type="text" class="form-control" name="{{'titleContent'.$contContent}}" id="{{'inputTitleContent'.$contContent}}" placeholder="" value="{{$contenido->title}}">
-                                    </div>
-                                  <div class="form-group">
-                                    <label>Colaboradores</label>
-                                    <select class="form-control select"  multiple="multiple" name ="{{'collaborator'.$contContent.'[]'}}" data-placeholder="Seleccione los colaboradores" style="width: 100%;">
+                                            <option
+										value="{{ $autor->id }}">{{ $autor->name}}</option> @endif
+									@endforeach @endif @endforeach
+								</select>
+							</div>
+						</div>
+						@else
+						<hr>
+						<div class="panel-body" id="{{'boxID'.$contContent}}">
+							<div class="form-group">
+								<label for="inputTitleContent">Contenido</label> <input
+									type="text" class="form-control"
+									name="{{'titleContent'.$contContent}}"
+									id="{{'inputTitleContent'.$contContent}}" placeholder=""
+									value="{{$contenido->title}}">
+							</div>
+							<div class="form-group">
+								<label>Colaboradores</label> <select class="form-control select"
+									multiple="multiple" name="{{'collaborator'.$contContent.'[]'}}"
+									data-placeholder="Seleccione los colaboradores"
+									style="width: 100%;">
                                       @foreach($autores as $autor)
                                           <?php $band = false ; ?>
                                           @foreach($contenido->authors as $author)
@@ -285,36 +312,36 @@
                                             @endif
                                           @endforeach
                                           @if($band)
-                                              <option value="{{ $autor->id }}" selected>{{ $autor->name}}</option>
+                                              <option
+										value="{{ $autor->id }}" selected>{{ $autor->name}}</option>
                                               <?php $band = false; ?>
                                             @else
                                             @foreach($autor->categories as $category)
                                               @if($category->name == "colaborador")
-                                                    <option value="{{ $autor->id }}" >{{ $autor->name}}</option>
-                                              @endif
-                                            @endforeach
-                                          @endif
-                                      @endforeach
-                                    </select>
-                                  </div>
-                                </div>
+                                                    <option
+										value="{{ $autor->id }}">{{ $autor->name}}</option> @endif
+									@endforeach @endif @endforeach
+								</select>
+							</div>
+						</div>
                         @endif
                         <?php $contContent = $contContent +1 ?>
                         @endforeach
                       </div>
-                    </div>
-<!--***************************************************************************************************************************************
+				</div>
+				<!--***************************************************************************************************************************************
                                           BOTON DE EDITAR
 *******************************************************************************************************************************************
 -->
-          </div>
-          <div class="box-footer">
-            <button type="submit" class="btn btn-primary" id="editMagazine">Editar</button>
-          </div>
-      </form>
+			</div>
+			<div class="box-footer">
+				<button type="submit" class="btn btn-primary" id="editMagazine">Editar</button>
+			</div>
+	
+	</form>
 </div>
-      <!-- Script para mostrar los selectores luego de mostrar el editar -->
-      <script type="text/javascript">
+<!-- Script para mostrar los selectores luego de mostrar el editar -->
+<script type="text/javascript">
         $(".select").select2();
         $listaSecEdit = $("#selectEditorialSecondEdit").select2();
         $listaPrimEdit =  $("#selectEditorialMainEdit").select2({
@@ -393,7 +420,7 @@
             }
         //FIN DE PRUEBAS PARA EDITAR
       </script>
-      <script type="text/javascript">
+<script type="text/javascript">
               $(document).ready(function(){
                 var idContt = {{$contContent}}; //global
                 //Agregando un contenido màs
@@ -430,7 +457,7 @@
                 });
               })
             </script>
-      <script type="text/javascript">
+<script type="text/javascript">
         $(document).ready(function(){
           //Convirtiendo a entero contItem -> guarda el numero de item que se muestra inicialmente en editar ,
           //estos seran los que se agregaron , apartir de ahi se podra agregar mas items con id continuo
@@ -470,6 +497,4 @@
             });
         });
       </script>
-    @endif
-  @endforeach
-@endif
+@endif @endforeach @endif

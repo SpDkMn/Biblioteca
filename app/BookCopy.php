@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,14 +6,34 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BookCopy extends Model
 {
-	use SoftDeletes;
-	protected $table = 'book_copies';
+   use SoftDeletes;
 
-    protected $fillable = ['incomeNumber','clasification','barcode','copy','volume','acquisitionModality','acquisitionSource','acquisitionPrice','acquisitionDate','management','availability','printType','publicationLocation','publicationDate','book_id'];
-    	
-    protected $dates = ['deleted_at'];
+   protected $table = 'book_copies';
 
-    public function book(){
-    	return $this->belongsto('App\Book');
-    }
+   protected $fillable = [
+      'incomeNumber',
+      'clasification',
+      'barcode',
+      'copy',
+      'volume',
+      'acquisitionModality',
+      'acquisitionSource',
+      'acquisitionPrice',
+      'acquisitionDate',
+      'management',
+      'availability',
+      'printType',
+      'publicationLocation',
+      'publicationDate',
+      'book_id'
+   ];
+
+   protected $dates = [
+      'deleted_at'
+   ];
+
+   public function book()
+   {
+      return $this->belongsto('App\Book');
+   }
 }
