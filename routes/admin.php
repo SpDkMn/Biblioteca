@@ -40,7 +40,7 @@ Route::resource('/usuarios','usuarios');
 //RUTA PARA LAS CONFIGURACIONES
 Route::resource('configurations', 'ConfigurationController');
 
-
+Route::resource('userTypes', 'userTypeController');
 //RUTA PARA LOS LIBROS
 Route::resource('book', 'BookController');
 //Route::get('book/content', 'BookController@content');

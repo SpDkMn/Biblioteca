@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{URL::asset('css/dataTables.bootstrap.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('plugins/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/app.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('css/tableConfig.css')}}">
 
     <script src="{{ URL::asset('js/jquery-2.2.3.min.js')}}"></script>
     <script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>

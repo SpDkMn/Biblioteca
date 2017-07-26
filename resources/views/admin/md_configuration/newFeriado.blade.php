@@ -1,4 +1,4 @@
-<form method="POST" action="{{ url('/admin/configurations')}}">z
+<form method="POST" action="{{ url('/admin/configurations')}}">
        {{ csrf_field() }}
             <div class="box-body">
               <div class="form-group">

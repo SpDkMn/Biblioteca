@@ -39,60 +39,7 @@ class BookController extends Controller
       ]);
  }
   public function store(BookRequest $request){
-    
-    /*
-    $books=Book::all();
-    foreach ($books as $b) {
-      if($request->clasification == $b->clasification){
-        dd("ERROR: Ya existe un libro con la clasificacion ingresada");
-      }
-    }
-    if(!$request->isbn){
-      foreach($books as $b){
-        if($b->isbn == $request->isbn){
-          dd("ERROR: Ya existe un libro con el isbn ingresado");
-        }
-      }
-    }
-    $bookCopies =BookCopy::all();
-    foreach($bookCopies as $bc){
-      foreach($request->barcode as $aux){
-        if($aux == $bc->barcode){
-          dd("ERROR : Ya existe un libro con el codigo de barras ingresado");
-        }
-      }
-    }
-    foreach($request->barcode as $aux1){
-      $cont=0;
-      foreach($request->barcode as $aux2){
-        if($aux1 == $aux2){
-          $cont++;
-        }
-      }
-      if($cont>=2){
-        dd("ERROR : Esta repitiendo el codigo de barras");
-      }
-    }
-    foreach($bookCopies as $bc){
-      foreach($request->incomeNumber as $aux){
-        if($aux == $bc->incomeNumber){
-          dd("ERROR : Ya existe un libro con el Numero de Ingreso ingresado");
-        }
-      }
-    }
-    foreach($request->incomeNumber as $aux1){
-      $cont=0;
-      foreach($request->incomeNumber as $aux2){
-        if($aux1 == $aux2){
-          $cont++;
-        }
-      }
-      if($cont>=2){
-        dd("ERROR : Esta repitiendo el numero de ingreso");
-      }
-    }
 
-    */
     $b = Book::create([
                       'clasification'=>$request['clasification'],
                       'title'=>$request['title'],
