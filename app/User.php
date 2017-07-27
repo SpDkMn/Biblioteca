@@ -95,7 +95,6 @@ class User extends Authenticatable
                } else {
                   // Caso 9
                   return $query->where("academic_type", '=', "$nombres_2", 'AND', "union", 'LIKE', "%$arreglo_1[1]%");
-                  dd("caso 9");
                }
             }
          }
@@ -119,22 +118,12 @@ class User extends Authenticatable
                }
             }
          } else {
-            if ($arreglo_1[0] == null || $arreglo_1[0] == "todos") {
-               if ($arreglo_1[1] == null || $arreglo_1[1] = "") {
-                  // Caso 4
-                  return $query->where('school', '=', "$nombres", 'AND', "academic_type", '=', "$nombres_2");
-               } else {
-                  // Caso 3
-                  return $query->where('school', '=', "$nombres", 'AND', "academic_type", '=', "$nombres_2", 'AND', "union", 'LIKE', "%$arreglo_1[1]%");
-               }
+            if ($arreglo_1[1] == null || $arreglo_1[1] = "") {
+               // Caso 4 | 2
+               return $query->where('school', '=', "$nombres", 'AND', "academic_type", '=', "$nombres_2");
             } else {
-               if ($arreglo_1[1] == null || $arreglo_1[1] = "") {
-                  // Caso 2
-                  return $query->where('school', '=', "$nombres", 'AND', "academic_type", '=', "$nombres_2");
-               } else {
-                  // Caso 1
-                  return $query->where('school', '=', "$nombres", 'AND', "academic_type", '=', "$nombres_2", 'AND', "union", 'LIKE', "%$arreglo_1[1]%");
-               }
+               // Caso 3 | 1
+               return $query->where('school', '=', "$nombres", 'AND', "academic_type", '=', "$nombres_2", 'AND', "union", 'LIKE', "%$arreglo_1[1]%");
             }
          }
       }

@@ -32,20 +32,21 @@ class ConfigurationController extends Controller
       $verPrestamo = $crearPrestamo = $editarPrestamo = $eliminarPrestamo = true;
       // Recorremos cada uno de los permisos de 'Activar'
       $showActivar = $editActivar = "";
-      if (true)
+      if (true){
          $showTipoUsuario = view('admin.md_configuration.showTipoUsuario', [
             "editar" => $editarActivar,
             "userTypes" => $userTypes
          ]);
+      }
       // Recorremos cada uno de los permisos de 'Activar'
       $showFeriado = $newFeriado = $editFeriado = $deleteFeriado = "";
-      if (true)
+      if (true){
          $showFeriado = view('admin.md_configuration.showFeriado', [
             "editar" => $editarActivar,
             "crear" => $newFeriado,
             "eliminar" => $eliminarFeriado
          ]);
-      
+      }
       // Recorremos cada uno de los permisos de 'Activar'
       $showReserva = $newReserva = $editReserva = $deleteReserva = "";
       if (true){

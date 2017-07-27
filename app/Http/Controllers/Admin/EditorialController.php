@@ -28,7 +28,7 @@ class EditorialController extends Controller
          // Rellena la variable $categories con el tipo de categoria que desean filtrar
          // Ejm: Desea filtrar por Revista y Tesis
          // El id de Revista en la tabla categories es 2 , y Tesis es 3
-         // Entonces $categories[0]=2 ; $categories[1]=3;
+         // Entonces categories 0 = 2 y categories 1 = 3
          $i = 0;
          foreach ($request->get('category') as $category) {
             switch ($category) {
@@ -48,14 +48,16 @@ class EditorialController extends Controller
             $i = $i + 1;
          }
       }
-      if ($editar)
+      if ($editar){
          // $editorial recibira la primera editorial, tambien pudo usarse el metodo first
          $edit = view('admin.md_editoriales.edit', [
             'editorial' => Editorial::get()[0]
          ]);
-      if ($crear)
+      }
+      if ($crear){
          $new = view('admin.md_editoriales.new');
-      if ($ver)
+      }
+      if ($ver){
          if (($request->get('name')) != null) {
             // $editorials cargara todas las editoriales con con nombre "name"
             $editorials = Editorial::name($request->get('name'))->paginate();
@@ -81,10 +83,12 @@ class EditorialController extends Controller
                'search' => false
             ]);
          }
-      if ($eliminar)
+      }
+      if ($eliminar){
          $delete = view('admin.md_editoriales.delete', [
             'editorial' => Editorial::get()[0]
          ]);
+      }
       return view('admin.md_editoriales.index', [
          'show' => $show,
          'new' => $new,

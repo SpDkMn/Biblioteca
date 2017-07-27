@@ -12,6 +12,18 @@ use App\Editorial as Editorial;
 use App\Content as Content;
 use App\ChapterBook as ChapterBook;
 
+define('BOOKS','books');
+define('EDITORIALES','editoriales');
+define('AUTORES','autores');
+define('CLASIFICATION','clasification');
+define('TITLE','title');
+define('SECUNDARY_TITLE','secondaryTitle');
+define('SUMMARY','summary');
+define('EXTENSION','extension');
+define('PHYSICAL_DETAILS','physicalDetails');
+define('DIMENSIONS','dimensions');
+define('ISBN','isbn');
+
 class BookController extends Controller
 {
 
@@ -22,13 +34,13 @@ class BookController extends Controller
       $autores = Author::all();
       
       $show = view('admin.md_books.show', [
-         'books' => $books
+         BOOKS => $books
       ]);
       
       $new = view('admin.md_books.new', [
-         'books' => $books,
-         'editoriales' => $editoriales,
-         'autores' => $autores
+         BOOKS => $books,
+         EDITORIALES => $editoriales,
+         AUTORES => $autores
       ]);
       return view('admin.md_books.index', [
          'show' => $show,
@@ -42,23 +54,23 @@ class BookController extends Controller
       $editoriales = Editorial::all();
       $autores = Author::all();
       return view('admin.md_books.new', [
-         'books' => $books,
-         'editoriales' => $editoriales,
-         'autores' => $autores
+         BOOKS => $books,
+         EDITORIALES => $editoriales,
+         AUTORES => $autores
       ]);
    }
 
    public function store(BookRequest $request)
    {
       $b = Book::create([
-         'clasification' => $request['clasification'],
-         'title' => $request['title'],
-         'secondaryTitle' => $request['secondaryTitle'],
-         'summary' => $request['summary'],
-         'isbn' => $request['isbn'],
-         'extension' => $request['extension'],
-         'physicalDetails' => $request['physicalDetails'],
-         'dimensions' => $request['dimensions'],
+         CLASIFICATION => $request[CLASIFICATION],
+         TITLE => $request[TITLE],
+         SECUNDARY_TITLE => $request[SECUNDARY_TITLE],
+         SUMMARY => $request[SUMMARY],
+         ISBN => $request[ISBN],
+         EXTENSION => $request[EXTENSION],
+         PHYSICAL_DETAILS => $request[PHYSICAL_DETAILS],
+         DIMENSIONS => $request[DIMENSIONS],
          'accompaniment' => $request['accompaniment'],
          'relationBook' => 1,
          'edition' => $request['edition'],
@@ -128,7 +140,7 @@ class BookController extends Controller
       $contador_capitulos = 0;
       foreach ($request['chapter'] as $chapter) {
          $contador_capitulos ++;
-         $cb = ChapterBook::create([
+         ChapterBook::create([
             'name' => $chapter,
             'number' => $contador_capitulos,
             'book_id' => $book_id
@@ -151,7 +163,7 @@ class BookController extends Controller
          if ($request->volume[$i] != null){
             $bc_clasification = $bc_clasification . " vol." . $request->volume[$i];
          }
-         $bc = BookCopy::create([
+         BookCopy::create([
             'incomeNumber' => $request->incomeNumber[$i],
             'clasification' => $bc_clasification,
             'barcode' => $request->barcode[$i],
@@ -184,10 +196,10 @@ class BookController extends Controller
       $bookCopies = BookCopy::all();
       
       return view('admin.md_books.edit', [
-         'books' => $books,
+         BOOKS => $books,
          'book' => $book,
-         'editoriales' => $editoriales,
-         'autores' => $autores,
+         EDITORIALES => $editoriales,
+         AUTORES => $autores,
          'chapters' => $chapters,
          'bookCopies' => $bookCopies
       ]);
@@ -198,18 +210,15 @@ class BookController extends Controller
       $book = Book::find($id);
       $editoriales = Editorial::all();
       $autores = Author::all();
-      $chapters = ChapterBook::all();
-      $bookCopies = BookCopy::all();
-      $books = Book::all();
       
-      $book->clasification = $request['clasification'];
-      $book->title = $request['title'];
-      $book->secondaryTitle = $request['secondaryTitle'];
-      $book->summary = $request['summary'];
+      $book->clasification = $request[CLASIFICATION];
+      $book->title = $request[TITLE];
+      $book->secondaryTitle = $request[SECUNDARY_TITLE];
+      $book->summary = $request[SUMMARY];
       $book->isbn = $request['isbn'];
-      $book->extension = $request['extension'];
-      $book->physicalDetails = $request['physicalDetails'];
-      $book->dimensions = $request['dimensions'];
+      $book->extension = $request[EXTENSION];
+      $book->physicalDetails = $request[PHYSICAL_DETAILS];
+      $book->dimensions = $request[DIMENSIONS];
       $book->accompaniment = $request['accompaniment'];
       $book->relationBook = 1;
       $book->edition = $request->edition;
@@ -444,7 +453,7 @@ class BookController extends Controller
             }
             BookCopy::create([
                'incomeNumber' => $request->incomeNumber[$i],
-               'clasification' => $bc_clasification,
+               CLASIFICATION => $bc_clasification,
                'barcode' => $request->barcode[$i],
                'copy' => $i + 1,
                'volume' => $request->volume[$i],
@@ -505,8 +514,8 @@ class BookController extends Controller
       $bookCopies = BookCopy::all();
       return view('admin.md_books.show2', [
          'book' => $book,
-         'autores' => $autores,
-         'editoriales' => $editoriales,
+         AUTORES => $autores,
+         EDITORIALES => $editoriales,
          'chapters' => $chapters,
          'bookCopies' => $bookCopies
       ]);
@@ -515,10 +524,6 @@ class BookController extends Controller
    public function show3($id)
    {
       $book = Book::find($id);
-      $editoriales = Editorial::all();
-      $autores = Author::all();
-      $chapters = ChapterBook::all();
-      $bookCopies = BookCopy::all();
       return view('admin.md_books.show3', [
          'book' => $book
       ]);

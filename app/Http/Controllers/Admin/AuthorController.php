@@ -13,6 +13,16 @@ use App\Author as Author;
 use Session;
 use Redirect;
 
+define('CATEGORY','category');
+define('TESIS','tesis/tesina');
+define('LIBRO','libro');
+define('REVISTA','revista');
+define('COMPENDIO','compendio');
+define('COLABORADOR','colaborador');
+define('ASESOR','asesor');
+define('AUTHOR','author');
+define('AUTOR_ROUTE','autor.index');
+
 class AuthorController extends Controller
 {
 
@@ -23,28 +33,28 @@ class AuthorController extends Controller
       $ver = $crear = $editar = $eliminar = true;
       
       // Verifica si se envio "category" por metodo get , FILTROS de busqueda
-      if ($request->get('category') == null) {
+      if ($request->get(CATEGORY) == null) {
          $categories = null;
       } else {
          $i = 0;
-         foreach ($request->get('category') as $category) {
+         foreach ($request->get(CATEGORY) as $category) {
             switch ($category) {
-               case 'libro':
+               case LIBRO:
                   $id = 1;
                   break;
-               case 'revista':
+               case REVISTA:
                   $id = 2;
                   break;
-               case 'tesis/tesina':
+               case TESIS:
                   $id = 3;
                   break;
-               case 'compendio':
+               case COMPENDIO:
                   $id = 4;
                   break;
-               case 'colaborador':
+               case COLABORADOR:
                   $id = 5;
                   break;
-               case 'asesor':
+               case ASESOR:
                   $id = 6;
                   break;
             }
@@ -55,7 +65,7 @@ class AuthorController extends Controller
       if ($editar){
          // $author recibira el primer autor, tambien pudo usarse el metodo first
          $edit = view('admin.md_autores.edit', [
-            'author' => Author::get()[0]
+            AUTHOR => Author::get()[0]
          ]);
       }
       if ($crear){
@@ -91,7 +101,7 @@ class AuthorController extends Controller
       }
       if ($eliminar){
          $delete = view('admin.md_autores.delete', [
-            'author' => Author::get()[0]
+            AUTHOR => Author::get()[0]
          ]);
       }
       return view('admin.md_autores.index', [
@@ -111,24 +121,24 @@ class AuthorController extends Controller
          'name' => $request['name']
       ]);
       
-      foreach ($request['category'] as $category) {
+      foreach ($request[CATEGORY] as $category) {
          switch ($category) {
-            case 'libro':
+            case LIBRO:
                $id = 1;
                break;
-            case 'revista':
+            case REVISTA:
                $id = 2;
                break;
-            case 'tesis/tesina':
+            case TESIS:
                $id = 3;
                break;
-            case 'compendio':
+            case COMPENDIO:
                $id = 4;
                break;
-            case 'colaborador':
+            case COLABORADOR:
                $id = 5;
                break;
-            case 'asesor':
+            case ASESOR:
                $id = 6;
                break;
          }
@@ -153,39 +163,39 @@ class AuthorController extends Controller
       
       $author->categories()->detach(); // No tiene nada que ver con el error
       
-      foreach ($request['category'] as $category) {
+      foreach ($request[CATEGORY] as $category) {
          
          switch ($category) {
-            case 'libro':
+            case LIBRO:
                $id = 1;
                break;
-            case 'revista':
+            case REVISTA:
                $id = 2;
                break;
-            case 'tesis/tesina':
+            case TESIS:
                $id = 3;
                break;
-            case 'compendio':
+            case COMPENDIO:
                $id = 4;
                break;
-            case 'colaborador':
+            case COLABORADOR:
                $id = 5;
                break;
-            case 'asesor':
+            case ASESOR:
                $id = 6;
                break;
          }
          $author->categories()->attach($id);
       }
       
-      return redirect()->route('autor.index');
+      return redirect()->route(AUTOR_ROUTE);
    }
 
    public function destroy($id)
    {
       $author = Author::find($id);
       $author->delete();
-      return redirect('autor.index');
+      return redirect(AUTOR_ROUTE);
    }
 
    public function show($id)
@@ -194,6 +204,6 @@ class AuthorController extends Controller
       $author->categories()->detach();
       $author->delete();
       
-      return redirect()->route('autor.index');
+      return redirect()->route(AUTOR_ROUTE);
    }
 }

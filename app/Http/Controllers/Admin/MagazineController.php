@@ -91,7 +91,7 @@ class MagazineController extends Controller
       }
       
       // Guardando los datos de la revista
-      $m = Magazine::create([
+      Magazine::create([
          'title' => $request['title'],
          'subtitle' => $request['subtitle'],
          'issn' => cambiaCadena($request['issn']),
@@ -114,7 +114,7 @@ class MagazineController extends Controller
       
       // Guardando datos de las copias de revistas
       for ($j = 0; $j < $contador_copia; $j ++) {
-         $mc = MagazineCopy::create([
+         MagazineCopy::create([
             'incomeNumber' => $request['incomeNumber' . $j],
             'barcode' => cambiaCadena($request['barcode' . $j]),
             'copy' => $request['copy' . $j],
@@ -124,7 +124,7 @@ class MagazineController extends Controller
       // Guardando los titulos de los contenidos de una revista
       // Este bucle tiene que ir antes del bucle que asocia los contenidos y los autores
       for ($i = 0; $i < $contador_contenido; $i ++) {
-         $c = Content::create([
+         Content::create([
             'title' => $request["titleContent" . $i],
             'magazine_id' => $id_magazine
          ]);
@@ -137,13 +137,11 @@ class MagazineController extends Controller
             $cont = 0;
             foreach ($magazine->contents as $content) {
                // Si el contenido esta relacionado con la revista
-               if ($content->magazine_id == $id_magazine) {
-                  // recorremos el arreglo con los id de los colaboradores para asociarlos al contenido
-                  // Si el arreglo colaborador no esta vacio
-                  if ($request["collaborator" . $cont] != null) {
-                     foreach ($request["collaborator" . $cont] as $clave => $id) {
-                        $content->authors()->attach($id);
-                     }
+               // recorremos el arreglo con los id de los colaboradores para asociarlos al contenido
+               // Si el arreglo colaborador no esta vacio
+               if ($content->magazine_id == $id_magazine && $request["collaborator" . $cont] != null) {
+                  foreach ($request["collaborator" . $cont] as $clave => $id) {
+                     $content->authors()->attach($id);
                   }
                }
                $cont = $cont + 1;
@@ -201,10 +199,6 @@ class MagazineController extends Controller
       // Obteniendo datos
       $revistaP = Magazine::find($id);
       $revista = Magazine::find($id);
-      $copias = MagazineCopy::all();
-      $magazines = Magazine::all();
-      $contents = Content::all();
-      $editoriales = Editorial::all();
       // Inicializando contadores
       $contador_contenido = 0;
       $contador_contenido2 = 0;
@@ -247,7 +241,7 @@ class MagazineController extends Controller
          $copiaEliminada->delete();
       }
       for ($j = 0; $j < $countA; $j ++) {
-         $mc = MagazineCopy::create([
+         MagazineCopy::create([
             'incomeNumber' => $request['incomeNumber'][$j],
             'barcode' => $request['barcode'][$j],
             'copy' => $request['copy'][$j],
@@ -256,7 +250,7 @@ class MagazineController extends Controller
       }
       // Agregando Los nuevos Contenidos que se han agregado en editar
       for ($i = $contador_contenido2; $i < $contador_contenido; $i ++) {
-         $cc = Content::create([
+         Content::create([
             'title' => $request["titleContent" . $i],
             'magazine_id' => $id
          ]);
@@ -281,28 +275,6 @@ class MagazineController extends Controller
             $cont ++;
          }
       }
-      //
-      // $activador = false ;
-      // foreach ($revista->editorials as $editorial) {
-      // if($editorial->pivot->type == true){
-      // foreach ($request['mEditorialMain'] as $key => $ip) {
-      // dd($ip);
-      //
-      // if($ip == $editorial->id){
-      // $activador = true;
-      // }
-      // }
-      // }else{
-      // foreach ($request['mEditorialSecond'] as $key => $ip) {
-      // if($ip == $editorial->id){
-      // $activador = true;
-      // }
-      // }
-      // }
-      // }
-      //
-      //
-      // dd($revista->editorials,$activador);
       // Borramos las relaciones entre revistas y editoriales solo cuando se hace una modificacion
       // si no se modifica esto no es necesario eliminar las relaciones para luego relacionarlos denuevo
       $revista->editorials()->detach();

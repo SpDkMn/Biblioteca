@@ -96,7 +96,7 @@ class CompendiumController extends Controller
       }
       
       // Guardando los datos de la compendio
-      $m = Compendium::create([
+      Compendium::create([
          'title' => $request['title'],
          'introduccion' => $request['introduccion'],
          'volumen' => $request['volumen'],
@@ -107,7 +107,6 @@ class CompendiumController extends Controller
       ]);
       // Guardamos los registros de las compendios
       $compendios = Compendium::all();
-      $copias_compendios = CompendiumCopy::all();
       // Guardamos los registros de las editoriales para el pivote
       $editoriales = Editorial::all();
       // Capturando id de la compendio ingresada
@@ -121,7 +120,7 @@ class CompendiumController extends Controller
       
       // Guardando datos de las copias de compendios
       for ($j = 0; $j < $contador_copia; $j ++) {
-         $mc = CompendiumCopy::create([
+         CompendiumCopy::create([
             'incomeNumber' => $request['incomeNumber' . $j],
             'copy' => $request['copy' . $j],
             'compendium_id' => $id_compendium
@@ -130,7 +129,7 @@ class CompendiumController extends Controller
       // Guardando los titulos de los contenidos de una compendio
       // Este bucle tiene que ir antes del bucle que asocia los contenidos y los autores
       for ($i = 0; $i < $contador_contenido; $i ++) {
-         $c = Content::create([
+         Content::create([
             'title' => $request["titleContent" . $i],
             'compendium_id' => $id_compendium,
             'magazine_id' => null
@@ -144,13 +143,11 @@ class CompendiumController extends Controller
             $cont = 0;
             foreach ($compendio->contents as $content) {
                // Si el contenido esta relacionado con la compendio
-               if ($content->compendium_id == $id_compendium) {
-                  // recorremos el arreglo con los id de los colaboradores para asociarlos al contenido
-                  // Si el arreglo colaborador no esta vacio
-                  if ($request["collaborator" . $cont] != null) {
-                     foreach ($request["collaborator" . $cont] as $clave => $id) {
-                        $content->authors()->attach($id);
-                     }
+               // recorremos el arreglo con los id de los colaboradores para asociarlos al contenido
+               // Si el arreglo colaborador no esta vacio
+               if ($content->compendium_id == $id_compendium && $request["collaborator" . $cont] != null) {
+                  foreach ($request["collaborator" . $cont] as $clave => $id) {
+                     $content->authors()->attach($id);
                   }
                }
                $cont = $cont + 1;
@@ -184,12 +181,7 @@ class CompendiumController extends Controller
    public function update(Request $request, $id)
    {
       // Obteniendo datos
-      $compendioP = Compendium::find($id);
       $compendio = Compendium::find($id);
-      $copias = CompendiumCopy::all();
-      $compendios = Compendium::all();
-      $contents = Content::all();
-      $editoriales = Editorial::all();
       // Inicializando contadores
       $contador_contenido = 0;
       $contador_contenido2 = 0;
@@ -233,7 +225,7 @@ class CompendiumController extends Controller
          $copiaEliminada->delete();
       }
       for ($j = 0; $j < $countA; $j ++) {
-         $mc = CompendiumCopy::create([
+         CompendiumCopy::create([
             'incomeNumber' => $request['incomeNumber'][$j],
             'copy' => $request['copy'][$j],
             'compendium_id' => (int) $id
@@ -241,7 +233,7 @@ class CompendiumController extends Controller
       }
       // Agregando Los nuevos Contenidos que se han agregado en editar
       for ($i = $contador_contenido2; $i < $contador_contenido; $i ++) {
-         $cc = Content::create([
+         Content::create([
             'title' => $request["titleContent" . $i],
             'compendium_id' => $id
          ]);
@@ -251,8 +243,6 @@ class CompendiumController extends Controller
          $compendio->contents[$i]->title = $request["titleContent" . $i];
          $contentsR[$i]->save();
       }
-      // Inicializando contador
-      $cont = 0;
       $compendio->save();
       return redirect('admin/compendium');
    }

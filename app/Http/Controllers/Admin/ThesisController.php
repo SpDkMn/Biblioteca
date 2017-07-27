@@ -73,7 +73,7 @@ class ThesisController extends Controller
          }
       }
       // Guardando los datos de la tesis
-      $m = Thesis::create([
+      Thesis::create([
          'type' => $request['tipo'],
          'clasification' => $request['clasification'],
          'title' => $request['title'],
@@ -109,7 +109,7 @@ class ThesisController extends Controller
          if ($request['barcode' . $j] == null) {
             continue;
          }
-         $mc = ThesisCopy::create([
+         ThesisCopy::create([
             'incomeNumber' => $request['incomeNumber' . $j],
             'barcode' => $request['barcode' . $j],
             'ejemplar' => $request['copy' . $j], // Evitar que no haya ningun ejemplar que estee con datos vacios (colocar excepciones con el request). Y eliminar el contenedor que hace incrementar el numero de copia a medida que se duplica el contenedor de items (en la vista show)
@@ -176,7 +176,6 @@ class ThesisController extends Controller
       $thesis = Thesis::find($id);
       $copias = ThesisCopy::all();
       $thesiss = Thesis::all();
-      $editoriales = Editorial::all();
       $contador_copia = 0;
       $contador_copia2 = 0;
       
@@ -227,7 +226,7 @@ class ThesisController extends Controller
          if ($request['barcode' . $j] == null) {
             continue;
          }
-         $mc = ThesisCopy::create([
+         ThesisCopy::create([
             'incomeNumber' => $request['incomeNumber' . $j],
             'barcode' => $request['barcode' . $j],
             'ejemplar' => $request['copy' . $j], // Evitar que no haya ningun ejemplar que estee con datos vacios (colocar excepciones con el request). Y eliminar el contenedor que hace incrementar el numero de copia a medida que se duplica el contenedor de items (en la vista show)
