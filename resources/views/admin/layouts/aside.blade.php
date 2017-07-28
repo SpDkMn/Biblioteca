@@ -14,7 +14,7 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
       <li class="header">MAIN NAVIGATION</li>
-      <li @if(URL::full() == url('/admin/configurations'))class="active"@endif><a href="{{ url('/admin/configurations') }}"><i class="fa fa-dashboard"></i><span>Panel de control</span></a></li>
+      <li @if(URL::full() == url('admin/configurations'))class="active"@endif><a href="{{ url('admin/configurations') }}"><i class="fa fa-dashboard"></i><span>Panel de control</span></a></li>
       <li @if(URL::full() == url('/admin/solicitudes'))class="active"@endif><a href="{{ url('/admin/solicitudes') }}"><i class="fa fa-bell"></i> <span>Solicitudes</span><span class="pull-right-container"><small class="label pull-right bg-blue">4</small></span></a></li>
       <li @if(URL::full() == url('/admin/prestamos'))class="active"@endif><a href="{{ url('/admin/prestamos') }}"><i class="fa fa-asl-interpreting"></i> <span>Prestamos</span></a></li>
       {{-- ADMINISTRATION --}}

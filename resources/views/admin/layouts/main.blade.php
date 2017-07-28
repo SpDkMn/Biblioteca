@@ -42,8 +42,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-<script src="{{ URL::asset('js/jquery-2.2.3.min.js')}}"></script>
-<script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
 
 
 </head>
@@ -80,7 +78,6 @@
 	<script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>
 	<script src="{{ URL::asset('js/dataTables.bootstrap.min.js')}}"></script>
 	<script src="{{ URL::asset('js/jquery.slimscroll.min.js')}}"></script>
-	<script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>
 
 	<script src="{{ URL::asset('js/bootstrap-datetimepicker.min.js')}}"></script>
 	<script src="{{ URL::asset('js/bootstrap-datetimepicker.pt-PE.js')}}"></script>
@@ -135,6 +132,7 @@
 	@yield('scriptSelect') @yield('scriptModal')
 	@yield('scriptModalContent') @yield('script')
 	@yield('scriptSelectAutorPrincipal')
+
 
 
 	<script>

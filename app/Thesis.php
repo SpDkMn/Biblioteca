@@ -24,7 +24,7 @@ class Thesis extends Model
       'bibliografia',
       'location',
       'publicationLocation',
-      'author_id'
+      'asesor'
    ];
 
    public function thesisCopies()
