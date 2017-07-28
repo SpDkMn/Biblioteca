@@ -684,64 +684,205 @@ a:active, a:focus, a:hover {
 		padding-bottom: 5px;
 		border-bottom-right-radius: 4px
 	}
-	.sidebar-mini.sidebar-collapse .sidebar-menu>li:hover>.treeview-menu,
-		.sidebar-mini.sidebar-collapse .sidebar-menu>li:hover>a>span:not (.pull-right
-		){
-		display: block !important;
-		position: absolute;
-		width: 180px;
-		left: 50px
-	}
-	.sidebar-mini.sidebar-collapse .sidebar-menu>li:hover>a>span {
-		top: 0;
-		margin-left: -3px;
-		padding: 12px 5px 12px 20px;
-		background-color: inherit
-	}
-	.sidebar-mini.sidebar-collapse .sidebar-menu>li:hover>a>.pull-right-container
-		{
-		float: right;
-		width: auto !important;
-		left: 200px !important;
-		top: 10px !important
-	}
-	.sidebar-mini.sidebar-collapse .sidebar-menu>li:hover>a>.pull-right-container>.label:not
-		(:first-of-type ){
-		display: none
-	}
-	.sidebar-mini.sidebar-collapse .sidebar-menu>li:hover>.treeview-menu {
-		top: 44px;
-		margin-left: 0
-	}
-	.sidebar-mini.sidebar-collapse .main-sidebar .user-panel>.info,
-		.sidebar-mini.sidebar-collapse .sidebar-form, .sidebar-mini.sidebar-collapse .sidebar-menu li.header,
-		.sidebar-mini.sidebar-collapse .sidebar-menu>li>.treeview-menu,
-		.sidebar-mini.sidebar-collapse .sidebar-menu>li>a>.pull-right,
-		.sidebar-mini.sidebar-collapse .sidebar-menu>li>a>span {
-		display: none !important;
-		-webkit-transform: translateZ(0)
-	}
-	.sidebar-mini.sidebar-collapse .main-header .logo {
-		width: 50px
-	}
-	.sidebar-mini.sidebar-collapse .main-header .logo>.logo-mini {
-		display: block;
-		margin-left: -15px;
-		margin-right: -15px;
-		font-size: 18px
-	}
-	.sidebar-mini.sidebar-collapse .main-header .logo>.logo-lg {
-		display: none
-	}
-	.sidebar-mini.sidebar-collapse .main-header .navbar {
-		margin-left: 50px
-	}
-	.control-sidebar-open .content-wrapper, .control-sidebar-open .main-footer,
-		.control-sidebar-open .right-side {
-		margin-right: 230px
-	}
+	.sidebar-mini
+	
+	
+	.sidebar-collapse
+	
+	 
+	
+	.sidebar-menu
+	>
+	li
+	
+	
+	:hover
+	>
+	.treeview-menu
+	,
+	.sidebar-mini
+	
+	
+	.sidebar-collapse
+	
+	 
+	
+	.sidebar-menu
+	>
+	li
+	
+	
+	:hover
+	>
+	a
+	>
+	span
+	
+	
+	:not
+	
+	 
+	
+	(
+	.pull-right
+	
+	
+		
+	
+	){
+	display
+	
+	
+	:
+	
+	 
+	
+	block
+	
+	 
+	
+	!
+	important
+	
+	
+	;
+	position
+	
+	
+	:
+	
+	 
+	
+	absolute
+	
+	
+	;
+	width
+	
+	
+	:
+	
+	 
+	
+	180
+	px
+	
+	
+	;
+	left
+	
+	
+	:
+	
+	 
+	
+	50
+	px
+	
+	
+	
+
 }
 
+.sidebar-mini.sidebar-collapse .sidebar-menu>li:hover>a>span {
+	top: 0;
+	margin-left: -3px;
+	padding: 12px 5px 12px 20px;
+	background-color: inherit
+}
+
+.sidebar-mini.sidebar-collapse .sidebar-menu>li:hover>a>.pull-right-container
+	{
+	float: right;
+	width: auto !important;
+	left: 200px !important;
+	top: 10px !important
+}
+
+.sidebar-mini
+
+
+.sidebar-collapse
+
+ 
+
+.sidebar-menu
+>
+li
+
+
+:hover
+>
+a
+>
+.pull-right-container
+>
+.label
+
+
+:not
+
+
+		
+
+(
+:first-of-type
+
+ 
+
+){
+display
+
+
+:
+
+ 
+
+none
+
+
+	
+
+}
+.sidebar-mini.sidebar-collapse .sidebar-menu>li:hover>.treeview-menu {
+	top: 44px;
+	margin-left: 0
+}
+
+.sidebar-mini.sidebar-collapse .main-sidebar .user-panel>.info,
+	.sidebar-mini.sidebar-collapse .sidebar-form, .sidebar-mini.sidebar-collapse .sidebar-menu li.header,
+	.sidebar-mini.sidebar-collapse .sidebar-menu>li>.treeview-menu,
+	.sidebar-mini.sidebar-collapse .sidebar-menu>li>a>.pull-right,
+	.sidebar-mini.sidebar-collapse .sidebar-menu>li>a>span {
+	display: none !important;
+	-webkit-transform: translateZ(0)
+}
+
+.sidebar-mini.sidebar-collapse .main-header .logo {
+	width: 50px
+}
+
+.sidebar-mini.sidebar-collapse .main-header .logo>.logo-mini {
+	display: block;
+	margin-left: -15px;
+	margin-right: -15px;
+	font-size: 18px
+}
+
+.sidebar-mini.sidebar-collapse .main-header .logo>.logo-lg {
+	display: none
+}
+
+.sidebar-mini.sidebar-collapse .main-header .navbar {
+	margin-left: 50px
+}
+
+.control-sidebar-open .content-wrapper, .control-sidebar-open .main-footer,
+	.control-sidebar-open .right-side {
+	margin-right: 230px
+}
+
+}
 .main-sidebar .user-panel, .sidebar-menu, .sidebar-menu>li.header {
 	white-space: nowrap;
 	overflow: hidden
@@ -1278,43 +1419,117 @@ keyframes flipInX { 0%{
 
 40%{
 transform
+
+
+
+
 :perspective(400px)
+
+
  
+
+
 rotate3d
+
+
+
+
 (1
 ,
 0,0,-20
 deg
-);transition-timing-function
+
+
+
+
+);
+transition-timing-function
+
+
+
+
 :ease-in
+
+
+
+
 }
 60%{
 transform
+
+
+
+
 :perspective(400px)
+
+
  
+
+
 rotate3d
+
+
+
+
 (1
 ,
 0,0,10
 deg
-);opacity
+
+
+
+
+);
+opacity
+
+
+
+
 :
+
+
+
+
 1
 }
 80%{
 transform
+
+
+
+
 :perspective(400px)
+
+
  
+
+
 rotate3d
+
+
+
+
 (1
 ,
 0,0,-5
 deg
+
+
+
+
 )
 }
 100%{
 transform
+
+
+
+
 :perspective(400px)
+
+
+
+
 }
 }
 @
@@ -1326,43 +1541,117 @@ transform
 
 40%{
 -webkit-transform
+
+
+
+
 :perspective(400px)
+
+
  
+
+
 rotate3d
+
+
+
+
 (1
 ,
 0,0,-20
 deg
-);-webkit-transition-timing-function
+
+
+
+
+);
+-webkit-transition-timing-function
+
+
+
+
 :ease-in
+
+
+
+
 }
 60%{
 -webkit-transform
+
+
+
+
 :perspective(400px)
+
+
  
+
+
 rotate3d
+
+
+
+
 (1
 ,
 0,0,10
 deg
-);opacity
+
+
+
+
+);
+opacity
+
+
+
+
 :
+
+
+
+
 1
 }
 80%{
 -webkit-transform
+
+
+
+
 :perspective(400px)
+
+
  
+
+
 rotate3d
+
+
+
+
 (1
 ,
 0,0,-5
 deg
+
+
+
+
 )
 }
 100%{
 -webkit-transform
+
+
+
+
 :perspective(400px)
+
+
+
+
 }
 }
 .navbar-custom-menu>.navbar-nav>li {
@@ -2739,7 +3028,7 @@ deg
 }
 
 .nav-tabs-custom>.nav-tabs>li:not (.active )>a:active, .nav-tabs-custom>.nav-tabs>li:not
-	(.active )>a:focus, .nav-tabs-custom>.nav-tabs>li:not (.active )>a:hover
+	 (.active )>a:focus, .nav-tabs-custom>.nav-tabs>li:not (.active )>a:hover
 	{
 	border-color: transparent
 }

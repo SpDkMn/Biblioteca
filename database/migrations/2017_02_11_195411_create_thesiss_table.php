@@ -35,7 +35,6 @@ class CreateThesissTable extends Migration
          $table->string('asesor');
          // fin descripcion fisica
          $table->timestamps();
-         // $table->foreign('category_id')->references('id')->on('categories');
       });
    }
 

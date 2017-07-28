@@ -62,28 +62,6 @@ input[type="submit"] {
 	margin-left: 5px;
 }
 </style>
-<?php 
-/*
-       * use Illuminate\Foundation\Auth\User;
-       * \App\User::create([
-       * 'name'=>"Giordano Barbieri",
-       * 'last_name'=>"Barbieri Lizama",
-       * 'code'=>"16200251",
-       * 'dni'=>"71324372",
-       * 'password'=>bcrypt("fisi.barbieri"),
-       * 'home_phone'=>"5373623",
-       * 'phone'=>"12345678",
-       * 'school'=>"Ingenieria de Software",
-       * 'id_user_type' =>"1",
-       * 'email' =>"giordano200699@hotmail.com",
-       * 'address'=>"Av.Tupac Amaru",
-       * 'username' =>"16200251",
-       * 'faculty'=>"Ingenieria de Sistemas e Informatica",
-       * 'university'=>"Universidad Nacional Mayor de San Marcos",
-       * 'state'=>true,
-       * ]);
-       */
-?>
 <div class="container boxlogin">
 	<form class="form-horizontal" role="form" name="flogin" id="flogin"
 		method="POST" action="{{ route('login') }}">

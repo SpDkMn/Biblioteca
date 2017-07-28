@@ -24,10 +24,10 @@ class ProfileController extends Controller
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
       
-      if ($crear){
+      if ($crear) {
          $new = view('admin.md_perfiles.new');
       }
-      if ($ver){
+      if ($ver) {
          $show = view('admin.md_perfiles.show', [
             'new' => $new,
             'perfiles' => Profile::all(),
@@ -35,12 +35,12 @@ class ProfileController extends Controller
             'eliminar' => $eliminar
          ]);
       }
-      if ($editar){
+      if ($editar) {
          $edit = view('admin.md_perfiles.edit', [
             'perfil' => Profile::first()
          ]);
       }
-      if ($eliminar){
+      if ($eliminar) {
          $delete = view('admin.md_perfiles.delete');
       }
       return view('admin.md_perfiles.index', [
@@ -113,9 +113,9 @@ class ProfileController extends Controller
       foreach ($profiles as $key => $value) {
          $enviado = $request->$key;
          if (! is_null($enviado)) {
-            foreach ($enviado as $clav => $valo) {
+            foreach ($enviado as $valo) {
                foreach ($profiles[$key] as $cla => $val) {
-                  foreach ($val as $k => $v){
+                  foreach ($val as $k => $v) {
                      if ($k == $valo) {
                         $profiles[$key][$cla][$k] = true;
                      }

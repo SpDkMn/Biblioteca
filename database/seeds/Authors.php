@@ -15,14 +15,11 @@ class Authors extends Seeder
       // Rellenando la tabla authors con 30 datos aleatorios
       Author::Create([
          'name' => 'Mauricio Espinoza Vargas'
-      ]);
-      Author::Create([
+      ], [
          'name' => 'Santiago Moquillaza Enriquez'
-      ]);
-      Author::Create([
+      ], [
          'name' => 'Luis Cayo Leon'
-      ]);
-      Author::Create([
+      ], [
          'name' => 'Tania Leyva Riveira'
       ]);
    }

@@ -12,17 +12,24 @@ use App\Editorial as Editorial;
 use App\Content as Content;
 use App\ChapterBook as ChapterBook;
 
-define('BOOKS','books');
-define('EDITORIALES','editoriales');
-define('AUTORES','autores');
-define('CLASIFICATION','clasification');
-define('TITLE','title');
-define('SECUNDARY_TITLE','secondaryTitle');
-define('SUMMARY','summary');
-define('EXTENSION','extension');
-define('PHYSICAL_DETAILS','physicalDetails');
-define('DIMENSIONS','dimensions');
-define('ISBN','isbn');
+define('BOOKS', 'books');
+define('EDITORIALES', 'editoriales');
+define('AUTORES', 'autores');
+define('CLASIFICATION', 'clasification');
+define('TITLE', 'title');
+define('SECUNDARY_TITLE', 'secondaryTitle');
+define('SUMMARY', 'summary');
+define('EXTENSION', 'extension');
+define('PHYSICAL_DETAILS', 'physicalDetails');
+define('DIMENSIONS', 'dimensions');
+define('ISBN', 'isbn');
+define('ADMIN','admin');
+define('MOD_BOOKS', ADMIN . '.md_books');
+define('MBOOKS_EDIT', MOD_BOOKS . '.edit');
+define('MBOOKS_NEW', MOD_BOOKS . '.new');
+define('MBOOKS_SHOW', MOD_BOOKS . '.show');
+define('MBOOKS_DELETE', MOD_BOOKS . '.delete');
+define('MBOOKS_INDEX', MOD_BOOKS . '.index');
 
 class BookController extends Controller
 {
@@ -33,16 +40,16 @@ class BookController extends Controller
       $editoriales = Editorial::all();
       $autores = Author::all();
       
-      $show = view('admin.md_books.show', [
+      $show = view(MBOOKS_SHOW, [
          BOOKS => $books
       ]);
       
-      $new = view('admin.md_books.new', [
+      $new = view(MBOOKS_NEW, [
          BOOKS => $books,
          EDITORIALES => $editoriales,
          AUTORES => $autores
       ]);
-      return view('admin.md_books.index', [
+      return view(MBOOKS_INDEX, [
          'show' => $show,
          'new' => $new
       ]);
@@ -53,7 +60,7 @@ class BookController extends Controller
       $books = Book::all();
       $editoriales = Editorial::all();
       $autores = Author::all();
-      return view('admin.md_books.new', [
+      return view(MBOOKS_NEW, [
          BOOKS => $books,
          EDITORIALES => $editoriales,
          AUTORES => $autores
@@ -155,12 +162,12 @@ class BookController extends Controller
       for ($i = 0; $i < $contador_copia; $i ++) {
          
          $bandera = false;
-         if ($request['availability'][$i] == "Disponible"){
+         if ($request['availability'][$i] == "Disponible") {
             $bandera = true;
          }
          $copy_aux = $i + 1;
          $bc_clasification = $request->clasification . "ej." . $copy_aux;
-         if ($request->volume[$i] != null){
+         if ($request->volume[$i] != null) {
             $bc_clasification = $bc_clasification . " vol." . $request->volume[$i];
          }
          BookCopy::create([
@@ -195,7 +202,7 @@ class BookController extends Controller
       $chapters = ChapterBook::all();
       $bookCopies = BookCopy::all();
       
-      return view('admin.md_books.edit', [
+      return view(MBOOKS_EDIT, [
          BOOKS => $books,
          'book' => $book,
          EDITORIALES => $editoriales,
@@ -355,12 +362,12 @@ class BookController extends Controller
       if ($numero_copias_antiguo == $numero_copias_nuevo) {
          for ($i = 0; $i < $numero_copias_nuevo; $i ++) {
             $bandera = false;
-            if ($request->availability[$i] == "Disponible"){
+            if ($request->availability[$i] == "Disponible") {
                $bandera = true;
             }
             $copy_aux = $i + 1;
             $bc_clasification = $request->clasification . " ej. " . $copy_aux;
-            if ($request->volume[$i] != null){
+            if ($request->volume[$i] != null) {
                $bc_clasification = $bc_clasification . " vol." . $request->volume[$i];
             }
             $book->bookCopies[$i]->incomeNumber = $request->incomeNumber[$i];
@@ -384,12 +391,12 @@ class BookController extends Controller
       if ($numero_copias_nuevo < $numero_copias_antiguo) {
          for ($i = 0; $i < $numero_copias_nuevo; $i ++) {
             $bandera = false;
-            if ($request->availability[$i] == "Disponible"){
+            if ($request->availability[$i] == "Disponible") {
                $bandera = true;
             }
             $copy_aux = $i + 1;
             $bc_clasification = $request->clasification . " ej. " . $copy_aux;
-            if ($request->volume[$i] != null){
+            if ($request->volume[$i] != null) {
                $bc_clasification = $bc_clasification . " vol." . $request->volume[$i];
             }
             $book->bookCopies[$i]->incomeNumber = $request->incomeNumber[$i];
@@ -417,12 +424,12 @@ class BookController extends Controller
       if ($numero_copias_nuevo > $numero_copias_antiguo) {
          for ($i = 0; $i < $numero_copias_antiguo; $i ++) {
             $bandera = false;
-            if ($request->availability[$i] == "Disponible"){
+            if ($request->availability[$i] == "Disponible") {
                $bandera = true;
             }
             $copy_aux = $i + 1;
             $bc_clasification = $request->clasification . " ej. " . $copy_aux;
-            if ($request->volume[$i] != null){
+            if ($request->volume[$i] != null) {
                $bc_clasification = $bc_clasification . " vol." . $request->volume[$i];
             }
             $book->bookCopies[$i]->incomeNumber = $request->incomeNumber[$i];
@@ -443,12 +450,12 @@ class BookController extends Controller
          }
          while ($i < $numero_copias_nuevo) {
             $bandera = false;
-            if ($request->availability[$i] == "Disponible"){
+            if ($request->availability[$i] == "Disponible") {
                $bandera = true;
             }
             $copy_aux = $i + 1;
             $bc_clasification = $request->clasification . " ej. " . $copy_aux;
-            if ($request->volume[$i] != null){
+            if ($request->volume[$i] != null) {
                $bc_clasification = $bc_clasification . " vol." . $request->volume[$i];
             }
             BookCopy::create([

@@ -30,8 +30,7 @@ class Employees extends Seeder
          'university' => "Universidad nacional mayor de san marcos",
          'id_user_type' => 1,
          'state' => true
-      ]);
-      User::create([
+      ], [
          'username' => 'superadmin',
          'password' => bcrypt('jefa'),
          'name' => 'Maribel',
@@ -52,8 +51,7 @@ class Employees extends Seeder
       Employee::create([
          'user_id' => 1,
          'profile_id' => 1
-      ]);
-      Employee::create([
+      ], [
          'user_id' => 2,
          'profile_id' => 2
       ]);

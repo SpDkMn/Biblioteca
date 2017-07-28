@@ -41,6 +41,15 @@
 			<p>&nbsp&nbsp&nbsp&nbsp-Material de Acompañamiento<?php  for($i=0;$i<28;$i++){echo "&nbsp";}?>:&nbsp {{$book->accompaniment}}
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<p>
 		
 		</div>

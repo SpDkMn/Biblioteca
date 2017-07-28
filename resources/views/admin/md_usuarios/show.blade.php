@@ -67,8 +67,7 @@ thead {
 					</tr>
 				</thead>
 				<tbody>
-						<?php //dd($universities[0]->name);?>
-							@foreach($users as $user)
+						@foreach($users as $user)
 							<tr>
 						<td id="celda_izquierda">{{ $user->id }}</td>
 
@@ -164,7 +163,7 @@ thead {
 															<strong style="float: left"><i
 																class="fa fa-book margin-r-5"></i> Estado</strong>
         <?php
-      if ($user->state == true) {
+      if ($user->state) {
          echo ("<div style='margin-left: 145px;'>Disponible</div>");
       } else {
          echo ("<div style='margin-left: 145px;'>Bloqueado</div>");
@@ -331,7 +330,7 @@ thead {
 			<div class="modal-body">
 				<p><?php
    
-if ($user != null) {
+   if ($user != null) {
       echo ($user->name);
    }
    ?></p>

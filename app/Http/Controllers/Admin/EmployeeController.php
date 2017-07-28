@@ -23,16 +23,15 @@ class EmployeeController extends Controller
     */
    public function index()
    {
-      
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
       
-      if ($crear){
+      if ($crear) {
          $new = view('admin.md_empleados.new', [
             'perfiles' => Profile::all()
          ]);
       }
-      if ($ver){
+      if ($ver) {
          $show = view('admin.md_empleados.show', [
             'empleados' => Employee::with([
                'user'
@@ -41,7 +40,7 @@ class EmployeeController extends Controller
             'eliminar' => $eliminar
          ]);
       }
-      if ($editar){
+      if ($editar) {
          $edit = view('admin.md_empleados.edit', [
             'empleado' => Employee::with([
                'user'
@@ -49,7 +48,7 @@ class EmployeeController extends Controller
             'perfiles' => Profile::all()
          ]);
       }
-      if ($eliminar){
+      if ($eliminar) {
          $delete = view('admin.md_empleados.delete');
       }
       return view('admin.md_empleados.index', [

@@ -81,14 +81,12 @@
 													<option value="{{ $autor->id }}"
 														<?php
             foreach ($book->authors as $a) {
-               if ($a->id == $autor->id && $a->pivot->type == true) {
+               if ($a->id == $autor->id && $a->pivot->type) {
                   echo " selected ";
                   break;
                }
             }
-            ?>>{{$autor->name}}</option>
-
-													@endif @endforeach @endforeach
+            ?>>{{$autor->name}}</option> @endif @endforeach @endforeach
 												</select>
 											</p>
 											<!--4.1. Fin Autor Principal-->
@@ -105,13 +103,12 @@
 													<option value="{{ $autor->id }}"
 														<?php
             foreach ($book->authors as $a) {
-               if ($a->id == $autor->id && $a->pivot->type == false) {
+               if ($a->id == $autor->id && !$a->pivot->type) {
                   echo " selected ";
                   break;
                }
             }
-            ?>>{{$autor->name}}</option>
-													@endif @endforeach @endforeach
+            ?>>{{$autor->name}}</option> @endif @endforeach @endforeach
 												</select>
 											</p>
 											<!--4.2. Fin Autor Secundario -->
@@ -131,13 +128,13 @@
 													<option value="{{ $editorial->id }}"
 														<?php
             foreach ($book->editorials as $e) {
-               if ($e->id == $editorial->id && $e->pivot->type == true) {
+               if ($e->id == $editorial->id && $e->pivot->type) {
                   echo " selected ";
                   break;
                }
             }
-            ?>>{{$editorial->name}}</option>
-													}@endif @endforeach @endforeach
+            ?>>{{$editorial->name}}</option> }@endif @endforeach
+													@endforeach
 												</select>
 											</p>
 											<!-- 5.1. Fin Editorial Principal -->
@@ -152,13 +149,13 @@
 													<option value="{{ $editorial->id }}"
 														<?php
             foreach ($book->editorials as $e) {
-               if ($e->id == $editorial->id && $e->pivot->type == false) {
+               if ($e->id == $editorial->id && !$e->pivot->type) {
                   echo " selected ";
                   break;
                }
             }
-            ?>>{{$editorial->name}}</option>
-													}@endif @endforeach @endforeach
+            ?>>{{$editorial->name}}</option> }@endif @endforeach
+													@endforeach
 												</select>
 											</p>
 											<!-- 5.2. Fin Editorial Secundario -->

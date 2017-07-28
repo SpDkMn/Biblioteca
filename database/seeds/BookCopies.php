@@ -3,6 +3,25 @@ use Illuminate\Database\Seeder;
 
 use App\BookCopy as BookCopy;
 
+define('INCOMENUMBER', 'incomeNumber');
+define('CLASIFICATION', 'clasification');
+define('EDITION', 'edition');
+define('BARCODE', 'barcode');
+define('COPY', 'copy');
+define('ACQUISITIONMODALITY', 'acquisitionModality');
+define('ACQUISITIONSOURCE', 'acquisitionSource');
+define('ACQUISITIONPRICE', 'acquisitionPrice');
+define('ACQUISITIONDATE', 'acquisitionDate');
+define('LOCATION', 'location');
+define('MANAGEMENT', 'management');
+define('AVAILABILITY', 'availability');
+define('PRINTTYPE', 'printType');
+define('PUBLICATIONLOCATION', 'publicationLocation');
+define('PUBLICATIONDATE', 'publicationDate');
+define('PHONE', 'phone');
+define('RUC', 'ruc');
+define('BOOK_ID', 'book_id');
+
 class BookCopies extends Seeder
 {
 
@@ -14,104 +33,100 @@ class BookCopies extends Seeder
    public function run()
    {
       BookCopy::create([
-         'incomeNumber' => 20057861,
-         'clasification' => 'addkgd',
-         'edition' => 1,
-         'barcode' => 48200001,
-         'copy' => 1,
-         'acquisitionModality' => 'compra',
-         'acquisitionSource' => 'Facultad de Sistemas e informatica',
-         'acquisitionPrice' => '48.50',
-         'acquisitionDate' => '15 de Marzo',
-         'location' => 'Facultad de Sistemas e informatica',
-         'management' => 2017,
-         'availability' => true,
-         'printType' => 'impresion',
-         'publicationLocation' => 'San Borja',
-         'publicationDate' => '12 de marzo de 2080',
-         'phone' => '973849441',
-         'ruc' => '148430',
-         'book_id' => 1
-      ]);
-      BookCopy::create([
-         'incomeNumber' => 10065421,
-         'clasification' => 'saaaaf',
-         'edition' => 1,
-         'barcode' => 44500001,
-         'copy' => 2,
-         'acquisitionModality' => 'compra',
-         'acquisitionSource' => 'Facultad de Sistemas e informatica',
-         'acquisitionPrice' => '48.50',
-         'acquisitionDate' => '15 de Marzo',
-         'location' => 'Facultad de Sistemas e informatica',
-         'management' => 2017,
-         'availability' => true,
-         'printType' => 'impresion',
-         'publicationLocation' => 'San Borja',
-         'publicationDate' => '12 de marzo de 2080',
-         'phone' => '973849441',
-         'ruc' => '148430',
-         'book_id' => 1
-      ]);
-      BookCopy::create([
-         'incomeNumber' => 10043331,
-         'clasification' => 'dgddss',
-         'edition' => 2,
-         'barcode' => 65423401,
-         'copy' => 1,
-         'acquisitionModality' => 'compra',
-         'acquisitionSource' => 'Facultad de Sistemas e informatica',
-         'acquisitionPrice' => '48.50',
-         'acquisitionDate' => '15 de Marzo',
-         'location' => 'Facultad de Sistemas e informatica',
-         'management' => 2017,
-         'availability' => true,
-         'printType' => 'impresion',
-         'publicationLocation' => 'San Borja',
-         'publicationDate' => '12 de marzo de 2080',
-         'phone' => '973849441',
-         'ruc' => '148430',
-         'book_id' => 3
-      ]);
-      BookCopy::create([
-         'incomeNumber' => 10051231,
-         'clasification' => 'fkfdss',
-         'edition' => 1,
-         'barcode' => 43405001,
-         'copy' => 1,
-         'acquisitionModality' => 'compra',
-         'acquisitionSource' => 'Facultad de Sistemas e informatica',
-         'acquisitionPrice' => '48.50',
-         'acquisitionDate' => '15 de Marzo',
-         'location' => 'Facultad de Sistemas e informatica',
-         'management' => 2017,
-         'availability' => true,
-         'printType' => 'impresion',
-         'publicationLocation' => 'San Borja',
-         'publicationDate' => '12 de marzo de 2080',
-         'phone' => '973849441',
-         'ruc' => '148430',
-         'book_id' => 2
-      ]);
-      BookCopy::create([
-         'incomeNumber' => 10057651,
-         'clasification' => 'gkggdf',
-         'edition' => 4,
-         'barcode' => 48200001,
-         'copy' => 1,
-         'acquisitionModality' => 'compra',
-         'acquisitionSource' => 'Facultad de Sistemas e informatica',
-         'acquisitionPrice' => '48.50',
-         'acquisitionDate' => '15 de Marzo',
-         'location' => 'Facultad de Sistemas e informatica',
-         'management' => 2017,
-         'availability' => true,
-         'printType' => 'impresion',
-         'publicationLocation' => 'San Borja',
-         'publicationDate' => '12 de marzo de 2080',
-         'phone' => '973849441',
-         'ruc' => '148430',
-         'book_id' => 2
+         INCOMENUMBER => 20057861,
+         CLASIFICATION => 'addkgd',
+         EDITION => 1,
+         BARCODE => 48200001,
+         COPY => 1,
+         ACQUISITIONMODALITY => 'compra',
+         ACQUISITIONSOURCE => 'Facultad de Sistemas e informatica',
+         ACQUISITIONPRICE => '48.50',
+         ACQUISITIONDATE => '15 de Marzo',
+         LOCATION => 'Facultad de Sistemas e informatica',
+         MANAGEMENT => 2017,
+         AVAILABILITY => true,
+         PRINTTYPE => 'impresion',
+         PUBLICATIONLOCATION => 'San Borja',
+         PUBLICATIONDATE => '12 de marzo de 2080',
+         PHONE => '973849441',
+         RUC => '148430',
+         BOOK_ID => 1
+      ], [
+         INCOMENUMBER => 10065421,
+         CLASIFICATION => 'saaaaf',
+         EDITION => 1,
+         BARCODE => 44500001,
+         COPY => 2,
+         ACQUISITIONMODALITY => 'compra',
+         ACQUISITIONSOURCE => 'Facultad de Sistemas e informatica',
+         ACQUISITIONPRICE => '48.50',
+         ACQUISITIONDATE => '15 de Marzo',
+         LOCATION => 'Facultad de Sistemas e informatica',
+         MANAGEMENT => 2017,
+         AVAILABILITY => true,
+         PRINTTYPE => 'impresion',
+         PUBLICATIONLOCATION => 'San Borja',
+         PUBLICATIONDATE => '12 de marzo de 2080',
+         PHONE => '973849441',
+         RUC => '148430',
+         BOOK_ID => 1
+      ], [
+         INCOMENUMBER => 10043331,
+         CLASIFICATION => 'dgddss',
+         EDITION => 2,
+         BARCODE => 65423401,
+         COPY => 1,
+         ACQUISITIONMODALITY => 'compra',
+         ACQUISITIONSOURCE => 'Facultad de Sistemas e informatica',
+         ACQUISITIONPRICE => '48.50',
+         ACQUISITIONDATE => '15 de Marzo',
+         LOCATION => 'Facultad de Sistemas e informatica',
+         MANAGEMENT => 2017,
+         AVAILABILITY => true,
+         PRINTTYPE => 'impresion',
+         PUBLICATIONLOCATION => 'San Borja',
+         PUBLICATIONDATE => '12 de marzo de 2080',
+         PHONE => '973849441',
+         RUC => '148430',
+         BOOK_ID => 3
+      ], [
+         INCOMENUMBER => 10051231,
+         CLASIFICATION => 'fkfdss',
+         EDITION => 1,
+         BARCODE => 43405001,
+         COPY => 1,
+         ACQUISITIONMODALITY => 'compra',
+         ACQUISITIONSOURCE => 'Facultad de Sistemas e informatica',
+         ACQUISITIONPRICE => '48.50',
+         ACQUISITIONDATE => '15 de Marzo',
+         LOCATION => 'Facultad de Sistemas e informatica',
+         MANAGEMENT => 2017,
+         AVAILABILITY => true,
+         PRINTTYPE => 'impresion',
+         PUBLICATIONLOCATION => 'San Borja',
+         PUBLICATIONDATE => '12 de marzo de 2080',
+         PHONE => '973849441',
+         RUC => '148430',
+         BOOK_ID => 2
+      ], [
+         INCOMENUMBER => 10057651,
+         CLASIFICATION => 'gkggdf',
+         EDITION => 4,
+         BARCODE => 48200001,
+         COPY => 1,
+         ACQUISITIONMODALITY => 'compra',
+         ACQUISITIONSOURCE => 'Facultad de Sistemas e informatica',
+         ACQUISITIONPRICE => '48.50',
+         ACQUISITIONDATE => '15 de Marzo',
+         LOCATION => 'Facultad de Sistemas e informatica',
+         MANAGEMENT => 2017,
+         AVAILABILITY => true,
+         PRINTTYPE => 'impresion',
+         PUBLICATIONLOCATION => 'San Borja',
+         PUBLICATIONDATE => '12 de marzo de 2080',
+         PHONE => '973849441',
+         RUC => '148430',
+         BOOK_ID => 2
       ]);
    }
 }

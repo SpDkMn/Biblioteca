@@ -1,8 +1,10 @@
 <?php
 use Illuminate\Database\Seeder;
 use App\Configuration as Configuration;
+
 class Configuration1 extends Seeder
 {
+
    /**
     * Run the database seeds.
     *

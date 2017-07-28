@@ -12,25 +12,32 @@
 <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css')}}">
 @yield('css')
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-<link rel="stylesheet" href="{{ URL::asset('css/bootstrap-datetimepicker.min.css') }}">
+<link rel="stylesheet"
+	href="{{ URL::asset('css/bootstrap-datetimepicker.min.css') }}">
 
-<link rel="stylesheet" href="{{ URL::asset('css/bootstrap-combined.min.css')}}">
+<link rel="stylesheet"
+	href="{{ URL::asset('css/bootstrap-combined.min.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('css/estiloLibros.css')}}">
 
 <link rel="stylesheet" href="{{ URL::asset('css/AdminLTE.min.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/magazinesStyle.css')}}">
-<link rel="stylesheet" href="{{URL::asset('css/dataTables.bootstrap.css')}}">
-<link rel="stylesheet" href="{{ URL::asset('plugins/select2/select2.min.css') }}">
+<link rel="stylesheet"
+	href="{{URL::asset('css/dataTables.bootstrap.css')}}">
+<link rel="stylesheet"
+	href="{{ URL::asset('plugins/select2/select2.min.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/app.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('css/tableConfig.css')}}">
 
 <script src="{{ URL::asset('js/jquery-2.2.3.min.js')}}"></script>
 <script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
 
-<link rel="stylesheet" href="{{URL::asset('css/bootstrap-multiselect.css')}}">
+<link rel="stylesheet"
+	href="{{URL::asset('css/bootstrap-multiselect.css')}}">
 
 
 <script src="{{URL::asset('js/bootstrap-multiselect.js')}}"></script>
@@ -71,7 +78,8 @@
 	<!-- ./wrapper -->
 	@yield('plugins')
 
-	<script	src="{{ URL::asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+	<script
+		src="{{ URL::asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 
 	<script src="{{ URL::asset('js/fastclick.js')}}"></script>
 	<script src="{{ URL::asset('js/app.min.js')}}"></script>

@@ -22,7 +22,7 @@ class Noticia extends Model
 
    public function setUrlImgAttribute($urlImg)
    {
-      if ($urlImg == true && is_string($urlImg) == false) {
+      if ($urlImg && !is_string($urlImg)) {
          $this->attributes['urlImg'] = time() . $urlImg->getClientOriginalName();
          $name = time() . $urlImg->getClientOriginalName();
          \Storage::disk('local')->put($name, \File::get($urlImg));

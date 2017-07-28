@@ -104,7 +104,7 @@ class MagazineController extends Controller
       // Guardamos los registros de las revistas
       $magazines = Magazine::all();
       // Guardamos los registros de las editoriales para el pivote
-      $editoriales = Editorial::all();
+      Editorial::all();
       // Capturando id de la revista ingresada
       foreach ($magazines as $magazine) {
          if ($magazine->issn == cambiaCadena($request['issn'])) {
@@ -216,7 +216,7 @@ class MagazineController extends Controller
       while ($request['titleContent' . $contador_contenido] != null) {
          $contador_contenido ++;
       }
-
+      
       // COPIAS DE REVISTA
       // Items antes de editar
       $countB = count($copiasR);

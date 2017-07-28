@@ -71,7 +71,7 @@
 				<strong style="float: left"><i class="fa fa-book margin-r-5"></i>
 					Estado</strong>
         <?php
-      if (Auth::user()->state == true) {
+      if (Auth::user()->state) {
          echo ("<div style='margin-left: 145px;'>Disponible</div>");
       } else {
          echo ("<div style='margin-left: 145px;'>Bloqueado</div>");

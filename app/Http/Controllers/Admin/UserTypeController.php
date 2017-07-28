@@ -20,20 +20,19 @@ class UserTypeController extends Controller
       foreach ($userTypes as $userType) {
          if ($userType->name != 'Admin') {
             
-            if (isset($request->pSala[$cont])){
+            if (isset($request->pSala[$cont])) {
                $userType->prestamoSala = true;
-            }else{
+            } else {
                $userType->prestamoSala = false;
             }
-            if (isset($request->pDomicilio[$cont])){
+            if (isset($request->pDomicilio[$cont])) {
                $userType->prestamoDomicilio = true;
-            }else{
+            } else {
                $userType->prestamoDomicilio = false;
             }
-            if (isset($request->castigado[$cont])){
+            if (isset($request->castigado[$cont])) {
                $userType->castigado = true;
-            }
-            else{
+            } else {
                $userType->castigado = false;
             }
             $userType->cantidadSala = $request->cSala[$cont];

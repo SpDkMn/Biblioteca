@@ -102,8 +102,7 @@ alert("entro");
 
 		<div class="form-group">
 			<label for="contenido" class="control-label col-md-2">Contenido:</label>
-			<br />
-			<br />
+			<br /> <br />
 			<div class="box-body pad col-md-10 col-md-offset-1">
 
 				<textarea id="editor1" name="contenido" rows="10" cols="80">Escribe aquí el contenido de la Noticia

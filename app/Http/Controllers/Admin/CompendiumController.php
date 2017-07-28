@@ -108,7 +108,7 @@ class CompendiumController extends Controller
       // Guardamos los registros de las compendios
       $compendios = Compendium::all();
       // Guardamos los registros de las editoriales para el pivote
-      $editoriales = Editorial::all();
+      Editorial::all();
       // Capturando id de la compendio ingresada
       foreach ($compendios as $compendio) {
          $i = 0;
@@ -146,7 +146,7 @@ class CompendiumController extends Controller
                // recorremos el arreglo con los id de los colaboradores para asociarlos al contenido
                // Si el arreglo colaborador no esta vacio
                if ($content->compendium_id == $id_compendium && $request["collaborator" . $cont] != null) {
-                  foreach ($request["collaborator" . $cont] as $clave => $id) {
+                  foreach ($request["collaborator" . $cont] as $id) {
                      $content->authors()->attach($id);
                   }
                }

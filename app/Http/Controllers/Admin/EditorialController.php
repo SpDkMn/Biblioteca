@@ -31,33 +31,20 @@ class EditorialController extends Controller
          // Entonces categories 0 = 2 y categories 1 = 3
          $i = 0;
          foreach ($request->get('category') as $category) {
-            switch ($category) {
-               case 'libro':
-                  $categories[$i] = 1;
-                  break;
-               case 'revista':
-                  $categories[$i] = 2;
-                  break;
-               case 'tesis':
-                  $categories[$i] = 3;
-                  break;
-               case 'compendio':
-                  $categories[$i] = 4;
-                  break;
-            }
+            $categories[$i] = switchCategory($category);
             $i = $i + 1;
          }
       }
-      if ($editar){
+      if ($editar) {
          // $editorial recibira la primera editorial, tambien pudo usarse el metodo first
          $edit = view('admin.md_editoriales.edit', [
             'editorial' => Editorial::get()[0]
          ]);
       }
-      if ($crear){
+      if ($crear) {
          $new = view('admin.md_editoriales.new');
       }
-      if ($ver){
+      if ($ver) {
          if (($request->get('name')) != null) {
             // $editorials cargara todas las editoriales con con nombre "name"
             $editorials = Editorial::name($request->get('name'))->paginate();
@@ -84,7 +71,7 @@ class EditorialController extends Controller
             ]);
          }
       }
-      if ($eliminar){
+      if ($eliminar) {
          $delete = view('admin.md_editoriales.delete', [
             'editorial' => Editorial::get()[0]
          ]);
@@ -106,20 +93,7 @@ class EditorialController extends Controller
          'name' => $request['name']
       ]);
       foreach ($request['category'] as $category) {
-         switch ($category) {
-            case 'libro':
-               $id = 1;
-               break;
-            case 'revista':
-               $id = 2;
-               break;
-            case 'tesis':
-               $id = 3;
-               break;
-            case 'compendio':
-               $id = 4;
-               break;
-         }
+         $id = switchCategory($category);
          $edit->categories()->attach($id);
       }
       return redirect('admin/editorial');
@@ -138,20 +112,7 @@ class EditorialController extends Controller
       $editorial->save();
       $editorial->categories()->detach();
       foreach ($request['category'] as $category) {
-         switch ($category) {
-            case 'libro':
-               $id = 1;
-               break;
-            case 'revista':
-               $id = 2;
-               break;
-            case 'tesis':
-               $id = 3;
-               break;
-            case 'compendio':
-               $id = 4;
-               break;
-         }
+         $id = switchCategory($category);
          $editorial->categories()->attach($id);
       }
       return redirect()->route('editorial.index');
@@ -170,5 +131,25 @@ class EditorialController extends Controller
       $editorial->categories()->detach();
       $editorial->delete();
       return redirect()->route('editorial.index');
+   }
+   
+   public function switchCategory($category){
+      switch ($category) {
+         case 'libro':
+            $id = 1;
+            break;
+         case 'revista':
+            $id = 2;
+            break;
+         case 'tesis':
+            $id = 3;
+            break;
+         case 'compendio':
+            $id = 4;
+            break;
+         default:
+            $id = null;
+      }
+      return $id;
    }
 }

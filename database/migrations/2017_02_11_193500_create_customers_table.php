@@ -14,14 +14,6 @@ class CreateCustomersTable extends Migration
    public function up()
    {
       // Para crear si fueran necesarios
-      /*
-       * Schema::create('type_customer',function(Blueprint $table){
-       *
-       * });
-       * Schema::create('eap',function(Blueprint $table){
-       *
-       * });
-       */
       Schema::create('customers', function (Blueprint $table) {
          $table->increments('id');
          
@@ -44,9 +36,5 @@ class CreateCustomersTable extends Migration
    public function down()
    {
       Schema::dropIfExists('customers');
-      /*
-       * Schema::dropIfExists('eap');
-       * Schema::dropIfExists('type_customer');
-       */
    }
 }

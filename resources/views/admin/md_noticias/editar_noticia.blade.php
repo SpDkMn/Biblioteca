@@ -128,8 +128,7 @@
 
 	<div class="form-group">
 		{!!Form::label('contenido','Contenido:',['class'=>'control-label
-		col-md-2'])!!} <br />
-		<br />
+		col-md-2'])!!} <br /> <br />
 		<div class="box-body pad col-md-10 col-md-offset-1">
 
 			{!!Form::textarea('contenido',null,['class'=>'form-control','placeholder'=>'This
@@ -153,29 +152,8 @@
 			<img src="" class='img-responsive' alt='Responsive image'
 				style='max-width: 250px; margin-left: 230px;' id="muestra_imagen">
 		</div>
-	</div>
-
-	<script type="text/javascript">
-       			 	/*var valor_imagen=document.getElementById("titulo").achivo;
-       			 	if(archivo==null)
-       			 	{
-       			 		alert("nulo");
-       			 	}
-       			 	else{
-       			 		alert(valor_imagen);
-       			 	}*/
-       			  </script>
-       			      			 
-       			 
-				<?php
-   // $valor_2 = "<script> document.write(valor_imagen) </script>";
-   // echo "valor";
-   // $valor_3=($valor_2->getClientOriginalName());
-   // echo "variablePHP = ".$valor_3;
-   ?>
-
-
-       			 <div class="form-group">
+	</div>   			 
+   <div class="form-group">
 		{!!Form::label('localizacion','Localización:',['class'=>'control-label
 		col-md-2'])!!}
 		<div class="col-md-9">{!!Form::select('localizacion',
