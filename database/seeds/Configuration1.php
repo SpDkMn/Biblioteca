@@ -1,10 +1,8 @@
 <?php
 use Illuminate\Database\Seeder;
 use App\Configuration as Configuration;
-
 class Configuration1 extends Seeder
 {
-
    /**
     * Run the database seeds.
     *
@@ -13,14 +11,6 @@ class Configuration1 extends Seeder
    public function run()
    {
       Configuration::create([
-         
-         'mondaySetting' => false,
-         'tuesdaySetting' => false,
-         'wednesdaySetting' => false,
-         'thursdaySetting' => false,
-         'fridaySetting' => false,
-         'saturdaySetting' => false,
-         'sundaySetting' => false,
          'startMonday' => null,
          'startTuesday' => null,
          'startWednesday' => null,
@@ -28,7 +18,6 @@ class Configuration1 extends Seeder
          'startFriday' => null,
          'startSaturday' => null,
          'startSunday' => null,
-         'endSunday' => null,
          'endMonday' => null,
          'endTuesday' => null,
          'endWednesday' => null,

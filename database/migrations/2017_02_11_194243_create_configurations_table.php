@@ -2,10 +2,8 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
 class CreateConfigurationsTable extends Migration
 {
-
    /**
     * Run the migrations.
     *
@@ -15,13 +13,6 @@ class CreateConfigurationsTable extends Migration
    {
       Schema::create('configurations', function (Blueprint $table) {
          $table->increments('id');
-         $table->boolean('mondaySetting');
-         $table->boolean('tuesdaySetting');
-         $table->boolean('wednesdaySetting');
-         $table->boolean('thursdaySetting');
-         $table->boolean('fridaySetting');
-         $table->boolean('saturdaySetting');
-         $table->boolean('sundaySetting');
          $table->time('startMonday')->nullable();
          $table->time('startTuesday')->nullable();
          $table->time('startWednesday')->nullable();
@@ -41,7 +32,6 @@ class CreateConfigurationsTable extends Migration
          $table->timestamps();
       });
    }
-
    /**
     * Reverse the migrations.
     *
