@@ -35,7 +35,7 @@ class AuthorController extends Controller
    {
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
-      
+
       // Verifica si se envio "category" por metodo get , FILTROS de busqueda
       if ($request->get(CATEGORY) == null) {
          $categories = null;
@@ -46,12 +46,14 @@ class AuthorController extends Controller
             $i = $i + 1;
          }
       }
-      
+
       if ($editar) {
          // $author recibira el primer autor, tambien pudo usarse el metodo first
-         $edit = view(MAUTORES_EDIT, [
-            AUTHOR => Author::get()[0]
-         ]);
+         if (Author::all()->isNotEmpty()) {
+           $edit = view(MAUTORES_EDIT, [
+              AUTHOR => Author::get()[0]
+           ]);
+         }
       }
       if ($crear) {
          $new = view(MAUTORES_NEW);
@@ -84,9 +86,11 @@ class AuthorController extends Controller
          }
       }
       if ($eliminar) {
+        if (Author::all()->isNotEmpty()) {
          $delete = view(MAUTORES_DELETE, [
             AUTHOR => Author::get()[0]
          ]);
+       }
       }
       return view('admin.md_autores.index', [
          'show' => $show,
@@ -104,12 +108,12 @@ class AuthorController extends Controller
       $edit = Author::create([
          'name' => $request['name']
       ]);
-      
+
       foreach ($request[CATEGORY] as $category) {
          $id = switchCategory($category);
          $edit->categories()->attach($id);
       }
-      
+
       return redirect('admin/autor');
    }
 
@@ -124,14 +128,14 @@ class AuthorController extends Controller
       $author = Author::find($id);
       $author->fill($request->all());
       $author->save();
-      
+
       $author->categories()->detach(); // No tiene nada que ver con el error
-      
+
       foreach ($request[CATEGORY] as $category) {
          $id = switchCategory($category);
          $author->categories()->attach($id);
       }
-      
+
       return redirect()->route(AUTOR_ROUTE);
    }
 
@@ -147,7 +151,7 @@ class AuthorController extends Controller
       $author = Author::find($id);
       $author->categories()->detach();
       $author->delete();
-      
+
       return redirect()->route(AUTOR_ROUTE);
    }
 
