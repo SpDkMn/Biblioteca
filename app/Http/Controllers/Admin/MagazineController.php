@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Validator; 
+use Validator;
 use App\Author as Author;
 use App\Magazine as Magazine;
 use App\MagazineCopy as MagazineCopy;
@@ -111,10 +111,8 @@ class MagazineController extends Controller
          'author_id' => $request['author'],
          'fechaEdicion' => $request['fechaEdicion']
       ]);
-      // Guardamos los registros de las revistas
+      // Guardamos los registros de las revistas para capturar el id de la revista
       $magazines = Magazine::all();
-      // Guardamos los registros de las editoriales para el pivote
-      Editorial::all();
       // Capturando id de la revista ingresada
       foreach ($magazines as $magazine) {
          if ($magazine->issn == cambiaCadena($request['issn'])) {
@@ -160,7 +158,6 @@ class MagazineController extends Controller
       }
       // Pivot-> Magazine - Editorial
       foreach ($magazines as $magazine) {
-         // Recorremos el arreglo con los id de las editoriales seleccionadas para asociarlas a las revistas
          // Editoriales anexadas
          if ($request['mEditorialSecond'] != null) {
             foreach ($request['mEditorialSecond'] as $clave => $id) {
