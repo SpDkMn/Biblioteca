@@ -54,8 +54,7 @@
 					<!-- <li @if(URL::full() == url('/admin/profiles'))class="active"@endif><a href="{{ url('/admin/profiles') }}"><i class="fa fa-user-secret"></i> <span>Perfiles</span></a></li> -->
 				</ul>
 			</li> {{-- END SEARCH --}} {{-- COMPENDIUM MANAGEMENT--}} {{--
-			<li
-				class="treeview @if(URL::full() == url('/admin/magazines')) active @endif  ">
+			<li	class="treeview @if(URL::full() == url('/admin/magazines')) active @endif ">
 				<a href="#"> <i class="fa fa-table"></i><span>Revistas y Compendios</span>
 					<span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
@@ -80,10 +79,11 @@
 							<span> Tesis - Tesina</span></a></li>
 
 					<li @if(URL::full() == url('/admin/magazines'))class="active"
-						@endif><a href="{{ url('/admin/magazines') }}"><i class="fa fa-"></i>
+						@endif><a href="{{ url('/admin/magazines') }}"><i class="fa fa-book"></i>
 							<span>Revistas</span></a></li>
+
 					<li @if(URL::full() == url('/admin/compendium'))class="active"
-						@endif><a href="{{ url('/admin/compendium') }}"><i class="fa fa-"></i>
+						@endif><a href="{{ url('/admin/compendium') }}"><i class="fa fa-book"></i>
 							<span>Compendios</span></a></li> {{--
 					<li @if(URL::full() ==
 						url('/admin/magazines/delete'))class="active" @endif><a
@@ -150,6 +150,10 @@
 			</li>
 			<li @if(URL::full() == url('/admin/noticias'))class="active" @endif><a
 				href="{{ url('/admin/noticias') }}"><i class="fa fa-book"></i> <span>Noticias</span></a></li>
+
+			<li @if(URL::full() == url('/admin/configurations'))class="active" @endif><a
+				href="{{ url('/admin/configurations') }}"><i class="fa fa-"></i> <span>Configuraciones</span></a></li>
+
 
 			<li @if(URL::full() == url('/admin/usuarios'))class="active" @endif><a
 				href="{{ url('/admin/usuarios') }}"><i class="fa fa-users"></i> <span>Usuarios</span></a></li>

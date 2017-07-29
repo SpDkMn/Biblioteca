@@ -31,7 +31,7 @@
 					</div>
 					<div class="form-group">
 						<label>Entidad académica</label> <span>*</span> <select
-							class="form-control select2" name="author">
+							class="form-control selectEntidadAcademica" name="author">
 							<!--  Seleccionando la lista de autores que pertenecen a la categoria revista -->
 							@foreach($autores as $autor) @foreach($autor->categories as
 							$category) @if($category->name == "revista")
@@ -136,18 +136,18 @@
 				<div class="box-body">
 					<div class="form-group">
 						<label for="inputIncomeNumber">Nº Ingreso</label> <span>*</span> <input
-							type="text" class="form-control" name="incomeNumber0"
+							type="text" class="form-control" name="incomeNumber[]"
 							id="inputIncomeNumber" placeholder="">
 					</div>
 					<div class="form-group">
 						<label for="inputBarcode">Código de barra</label> <span>*</span> <input
-							type="text" class="form-control" name="barcode0"
+							type="text" class="form-control" name="barcode[]"
 							id="inputBarcode" data-inputmask='"mask": "200000009999"'
 							data-mask>
 					</div>
 					<div class="form-group">
 						<label for="inputCopy">Ejemplar</label> <span>*</span> <input
-							type="number" class="form-control" name="copy0" id="inputCopy"
+							type="number" class="form-control" name="copy[]" id="inputCopy"
 							placeholder="" value=1 min="0" max="10">
 					</div>
 				</div>
@@ -170,7 +170,7 @@
 						<div class="panel-body">
 							<div class="form-group">
 								<label for="inputTitleContent">Contenido</label> <span>*</span>
-								<input type="text" class="form-control" name="titleContent0"
+								<input type="text" class="form-control" name="titleContent[]"
 									id="inputTitleContent0" placeholder="">
 							</div>
 							<div class="form-group">
@@ -203,7 +203,7 @@
 @section('scriptSelect')
 <script type="text/javascript">
     $(function () {
-        $(".select2").select2();
+        $(".selectEntidadAcademica").select2();
         $(".selectCollaborator").select2();
         var $listaSec = $("#listEditorialSecond").select2();
         var $listaPrim = $("#listEditorialMain").select2({
@@ -292,7 +292,7 @@
         var groupTitle = '<div class="form-group">'+
                               '<label for="inputTitleContent">Contenido</label>'+
                               '<span>*</span>'+
-                              '<input type="text" class="form-control" name="titleContent'+cont+'" id="inputTitleContent'+cont+'" placeholder="">'+
+                              '<input type="text" class="form-control" name="titleContent[]" id="inputTitleContent'+cont+'" placeholder="">'+
                          '</div>';
         var linea = '<hr>';
         var groupCollaborator = '<div class="form-group">'+
@@ -333,17 +333,17 @@
                             '<div class="form-group">'+
                                 '<label for="inputIncomeNumber">Nº Ingreso</label>'+
                                 '<span>*</span>'+
-                                '<input type="text" class="form-control" name="incomeNumber'+idCont+'" id="inputIncomeNumber">'+
+                                '<input type="text" class="form-control" name="incomeNumber[]" id="inputIncomeNumber">'+
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label for="inputBarcode">Código de barra</label>'+
                                 '<span>*</span>'+
-                              '<input type="text" class="form-control" name="barcode'+idCont+'" id="inputBarcode">'+
+                              '<input type="text" class="form-control" name="barcode[]" id="inputBarcode">'+
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label for="inputCopy">Ejemplar</label>'+
                                 '<span>*</span>'+
-                                '<input type="number" class="form-control" name="copy'+idCont+'" id="inputCopy" value='+(idCont+1)+'>'+
+                                '<input type="number" class="form-control" name="copy[]" id="inputCopy" value='+(idCont+1)+'>'+
                             '</div>'+
                         '</div>';
       var itemPanel = '<div class="BoxItemMagazine box box-info box-solid" id="itemBoxID'+idCont+'">'+itemHeader+itemBody +'</div>';

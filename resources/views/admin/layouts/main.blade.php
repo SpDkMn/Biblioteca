@@ -20,8 +20,7 @@
 <link rel="stylesheet"
 	href="{{ URL::asset('css/bootstrap-datetimepicker.min.css') }}">
 
-<link rel="stylesheet"
-	href="{{ URL::asset('css/bootstrap-combined.min.css')}}">
+<link rel="stylesheet"href="{{ URL::asset('css/bootstrap-combined.min.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('css/estiloLibros.css')}}">
 
 <link rel="stylesheet" href="{{ URL::asset('css/AdminLTE.min.css') }}">
@@ -36,10 +35,7 @@
 <script src="{{ URL::asset('js/jquery-2.2.3.min.js')}}"></script>
 <script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
 
-<link rel="stylesheet"
-	href="{{URL::asset('css/bootstrap-multiselect.css')}}">
-
-
+<link rel="stylesheet"href="{{URL::asset('css/bootstrap-multiselect.css')}}">
 <script src="{{URL::asset('js/bootstrap-multiselect.js')}}"></script>
 
 
@@ -80,7 +76,6 @@
 
 	<script
 		src="{{ URL::asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
-
 	<script src="{{ URL::asset('js/fastclick.js')}}"></script>
 	<script src="{{ URL::asset('js/app.min.js')}}"></script>
 	<script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>
@@ -89,6 +84,7 @@
 
 	<script src="{{ URL::asset('js/bootstrap-datetimepicker.min.js')}}"></script>
 	<script src="{{ URL::asset('js/bootstrap-datetimepicker.pt-PE.js')}}"></script>
+	<script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>
 
 	<script type="text/javascript">
     //fecha + hora formato 24 horas
@@ -149,24 +145,8 @@
 </script>
 
 
-	<script>
-    $(function() {
-      //Initialize Select2 Elements
-    $(".select2").select2();
-    });
-</script>
+	<script>$(function() {$(".select2").select2();});</script>
 
-	<!--
-     <script>
-        $(function() {
-            $('#ms').change(function() {
-                console.log($(this).val());
-            }).multipleSelect({
-                width: '100%'
-            });
-        });
-    </script>
-    -->
 
 </body>
 </html>

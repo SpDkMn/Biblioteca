@@ -35,7 +35,7 @@
 					</div>
 					<div class="form-group">
 						<label>Entidad académica</label> <select
-							class="form-control select" name="author">
+							class="form-control selectEntidadAcademicaEdit" name="author">
 							<!-- Cargando opciones de autores --> @foreach($autores as
 							$autor) @foreach($autor->categories as $category)
 							@if($category->name == "revista"){
@@ -249,7 +249,7 @@
 							<div class="form-group">
 								<label for="inputTitleContent">Tabla de contenido</label> <span>*</span>
 								<input type="text" class="form-control"
-									name="{{'titleContent'.$contContent}}"
+									name="{{'titleContent[]'}}"
 									id="{{'inputTitleContent'.$contContent}}" placeholder=""
 									value="{{$contenido->title}}">
 							</div>
@@ -292,7 +292,7 @@
 								<label for="inputTitleContent">Contenido</label> <input
 									type="text" class="form-control"
 									name="{{'titleContent'.$contContent}}"
-									id="{{'inputTitleContent'.$contContent}}" placeholder=""
+									id="{{'inputTitleContent[]'}}" placeholder=""
 									value="{{$contenido->title}}">
 							</div>
 							<div class="form-group">
@@ -337,12 +337,12 @@
 			<div class="box-footer">
 				<button type="submit" class="btn btn-primary" id="editMagazine">Editar</button>
 			</div>
-	
+
 	</form>
 </div>
 <!-- Script para mostrar los selectores luego de mostrar el editar -->
 <script type="text/javascript">
-        $(".select").select2();
+        $(".selectEntidadAcademicaEdit").select2();
         $listaSecEdit = $("#selectEditorialSecondEdit").select2();
         $listaPrimEdit =  $("#selectEditorialMainEdit").select2({
             maximumSelectionLength: 1,
@@ -432,7 +432,7 @@
                   var groupTitle = '<div class="form-group">'+
                                         '<label for="inputTitleContent">Contenido</label>'+
                                         '<span>*</span>'+
-                                        '<input type="text" class="form-control" name="titleContent'+idContt+'" id="inputTitleContent'+idContt+'" placeholder="">'+
+                                        '<input type="text" class="form-control" name="titleContent[]" id="inputTitleContent'+idContt+'" placeholder="">'+
                                    '</div>';
                   var linea = '<hr>';
                   var groupCollaborator = '<div class="form-group">'+

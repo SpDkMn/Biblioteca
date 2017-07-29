@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Validator; 
 use App\Author as Author;
 use App\Magazine as Magazine;
 use App\MagazineCopy as MagazineCopy;
@@ -81,15 +82,24 @@ class MagazineController extends Controller
       $contador_contenido = 0;
       $contador_copia = 0;
       // Contando los contenidos de la revista
-      while ($request['titleContent' . $contador_contenido] != null) {
-         $contador_contenido ++;
-      }
-      
+      $contador_contenido = sizeof($request['titleContent']);;
       // Contando las copias de la revista
-      while ($request['incomeNumber' . $contador_copia] != null) {
-         $contador_copia ++;
-      }
-      
+      $contador_copia = sizeof($request['incomeNumber']);
+      //VALIDANDO DATOS DE ENTRADA
+      $validator = Validator::make($request->all(), [
+          'title' => 'required|unique:magazines|max:255',
+          'issn' => 'required|unique:magazines',
+          'issnD' => 'unique:magazines',
+          'volumen' => 'required',
+          'numero' => 'required||min:0||max:100',
+          'fechaEdicion' => 'required',
+          'incomeNumber'   =>  'required|unique:magazine_copies',
+          'barcode'        =>  'required',
+          'titleContent'  => 'required'
+
+          ])->validate();
+
+
       // Guardando los datos de la revista
       Magazine::create([
          'title' => $request['title'],
@@ -111,13 +121,13 @@ class MagazineController extends Controller
             $id_magazine = $magazine->id;
          }
       }
-      
+
       // Guardando datos de las copias de revistas
       for ($j = 0; $j < $contador_copia; $j ++) {
          MagazineCopy::create([
-            'incomeNumber' => $request['incomeNumber' . $j],
-            'barcode' => cambiaCadena($request['barcode' . $j]),
-            'copy' => $request['copy' . $j],
+            'incomeNumber' => $request['incomeNumber'][$j],
+            'barcode' => cambiaCadena($request['barcode'][$j]),
+            'copy' => $request['copy'][$j],
             'magazine_id' => $id_magazine
          ]);
       }
@@ -125,7 +135,7 @@ class MagazineController extends Controller
       // Este bucle tiene que ir antes del bucle que asocia los contenidos y los autores
       for ($i = 0; $i < $contador_contenido; $i ++) {
          Content::create([
-            'title' => $request["titleContent" . $i],
+            'title' => $request["titleContent"][$i],
             'magazine_id' => $id_magazine
          ]);
       }
@@ -209,20 +219,14 @@ class MagazineController extends Controller
       // Contenidos de la revista a editar
       $contentsR = $revista->contents;
       // Contando las contenidos de la revista antes de editar ($contador_contenido2)
-      foreach ($contentsR as $contentR) {
-         $contador_contenido2 ++;
-      }
+      $contador_contenido2 = count($contentsR);
       // Contando los contenidos luego de editar ($contador_contenido)
-      while ($request['titleContent' . $contador_contenido] != null) {
-         $contador_contenido ++;
-      }
-      
+      $contador_contenido = sizeof($request['titleContent']);
       // COPIAS DE REVISTA
       // Items antes de editar
       $countB = count($copiasR);
       // Items luego de editar
       $countA = sizeof($request['incomeNumber']);
-      // ********************************************************************************************************
       // Actualizando datos de revista
       $revista->title = $request['title'];
       $revista->subtitle = $request['subtitle'];
@@ -257,7 +261,7 @@ class MagazineController extends Controller
       }
       // Actualizando contenido
       for ($i = 0; $i < $contador_contenido2; $i ++) {
-         $revista->contents[$i]->title = $request["titleContent" . $i];
+         $revista->contents[$i]->title = $request["titleContent"][$i];
          $contentsR[$i]->save();
       }
       // Borramos las relaciones entre contenidos y colaboradores

@@ -24,9 +24,9 @@
 			</div>
       <?php
       $id_1 = $id_2 = $id_3 = $id_4 = $id_5 = $id_6 = false;
-      
+
       foreach ($author->categories as $category) {
-         
+
          switch ($category->name) {
             case 'libro':
                $id_1 = true;
@@ -48,11 +48,11 @@
                break;
          }
       }
-      
-      ?>   
+
+      ?>
 
       <div class="form-group">
-				<label>Categoria</label> <select class="form-control select2"
+				<label>Categoria</label> <select class="form-control selectCategoriaEdit"
 					multiple="multiple" data-placeholder="Seleccione la categoria"
 					name="category[]" style="width: 100%;" required> @if($id_1)
 					<option selected>libro</option> @else
@@ -80,3 +80,5 @@
 	</form>
 
 </div>
+<!-- Para que se pueda inicializar el selector en editar autores -->
+<script>$(function() {$(".selectCategoriaEdit").select2();});</script>

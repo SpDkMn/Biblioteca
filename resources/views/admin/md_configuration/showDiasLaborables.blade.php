@@ -1,11 +1,26 @@
 <?php
-$i = 0;
 $configuraciones = App\Configuration::all();
-foreach ($configuraciones as $configura) {
-   $i ++;
+//Inicializando bandera
+$band = false ;
+if ($configuraciones->isNotEmpty()) {
+  $configuracion = $configuraciones->last();
+  $band = true;
+}else {
+  $configuracion = collect([]);
 }
-$configuracion = App\Configuration::find($i);
+
+//ESTO DE ABAJO DEBE SER BORRADO -> LO DE ARRIBA ES LO MISMO PERO OPTMIZADO ,
+// LO DE ABAJO NO FUNCIONA CUANDO NO HAY CONFIGURACION AGREGADA
+
+// $i = 0;
+// $configuraciones = App\Configuration::all();
+// foreach ($configuraciones as $configura) {
+//    $i ++;
+// }
+// $configuracion = App\Configuration::find($i);
 ?>
+
+<!-- Condiciones agregadas para poder mostrar los datos de configuracion solo si no están vacíos -->
 
 <div class="box box-success">
 	<div class="box-header">
@@ -44,7 +59,8 @@ $configuracion = App\Configuration::find($i);
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton3" id="boton3"
-								value="{{$configuracion->startMonday}}" style="width: 80px;"
+
+								value="@if($band){{$configuracion->startMonday}}@endif" style="width: 80px;"
 								value="" class="txtPickter" type="text" disabled /> <span
 								class="add-on" style="width: 25px; height: 34px; padding: 7px;">
 								<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
@@ -54,7 +70,7 @@ $configuracion = App\Configuration::find($i);
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton4" id="boton4"
-								value="{{$configuracion->endMonday}}" style="width: 80px;"
+								value="@if($band){{$configuracion->endMonday}}@endif" style="width: 80px;"
 								class="txtPickter" type="text" disabled /> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
@@ -76,7 +92,7 @@ $configuracion = App\Configuration::find($i);
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton7" id="boton7"
-								value="{{$configuracion->startTuesday}}" style="width: 80px;"
+								value="@if($band){{$configuracion->startTuesday}}@endif" style="width: 80px;"
 								class="txtPickter" type="text" disabled /> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
@@ -86,7 +102,7 @@ $configuracion = App\Configuration::find($i);
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton8" id="boton8"
-								value="{{$configuracion->endTuesday}}" style="width: 80px;"
+								value="@if($band){{$configuracion->endTuesday}}@endif" style="width: 80px;"
 								class="txtPickter" type="text" disabled /> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
@@ -107,7 +123,7 @@ $configuracion = App\Configuration::find($i);
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton11" id="boton11"
-								value="{{$configuracion->startWednesday}}" style="width: 80px;"
+								value="@if($band){{$configuracion->startWednesday}}@endif" style="width: 80px;"
 								class="txtPickter" type="text" disabled /> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
@@ -117,7 +133,7 @@ $configuracion = App\Configuration::find($i);
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton12" id="boton12"
-								value="{{$configuracion->endWednesday}}" style="width: 80px;"
+								value="@if($band){{$configuracion->endWednesday}}@endif" style="width: 80px;"
 								class="txtPickter" type="text" disabled /> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
@@ -138,7 +154,7 @@ $configuracion = App\Configuration::find($i);
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton15" id="boton15"
-								value="{{$configuracion->startThursday}}" style="width: 80px;"
+								value="@if($band){{$configuracion->startThursday}}@endif" style="width: 80px;"
 								class="txtPickter" type="text" disabled /> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
@@ -148,7 +164,7 @@ $configuracion = App\Configuration::find($i);
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton16" id="boton16"
-								value="{{$configuracion->endThursday}}" style="width: 80px;"
+								value="@if($band){{$configuracion->endThursday}}@endif" style="width: 80px;"
 								class="txtPickter" type="text" disabled /> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
@@ -169,7 +185,7 @@ $configuracion = App\Configuration::find($i);
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton19" id="boton19"
-								value="{{$configuracion->startFriday}}" style="width: 80px;"
+								value="@if($band){{$configuracion->startFriday}}@endif" style="width: 80px;"
 								class="txtPickter" type="text" disabled /> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
@@ -179,7 +195,7 @@ $configuracion = App\Configuration::find($i);
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton20" id="boton20"
-								value="{{$configuracion->endFriday}}" style="width: 80px;"
+								value="@if($band){{$configuracion->endFriday}}@endif" style="width: 80px;"
 								class="txtPickter" type="text" disabled /> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
@@ -200,7 +216,7 @@ $configuracion = App\Configuration::find($i);
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton23" id="boton23"
-								value="{{$configuracion->startSaturday}}" style="width: 80px;"
+								value="@if($band){{$configuracion->startSaturday}}@endif" style="width: 80px;"
 								class="txtPickter" type="text" disabled /> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
@@ -210,7 +226,7 @@ $configuracion = App\Configuration::find($i);
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton24" id="boton24"
-								value="{{$configuracion->endSaturday}}" style="width: 80px;"
+								value="@if($band){{$configuracion->endSaturday}}@endif" style="width: 80px;"
 								class="txtPickter" type="text" disabled /> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
@@ -231,7 +247,7 @@ $configuracion = App\Configuration::find($i);
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton27" id="boton27"
-								value="{{$configuracion->startSunday}}" style="width: 80px;"
+								value="@if($band){{$configuracion->startSunday}}@endif" style="width: 80px;"
 								class="txtPickter" type="text" disabled /> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
@@ -241,7 +257,7 @@ $configuracion = App\Configuration::find($i);
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton28" id="boton28"
-								value="{{$configuracion->endSunday}}" style="width: 80px;"
+								value="@if($band){{$configuracion->endSunday}}@endif" style="width: 80px;"
 								class="txtPickter" type="text" disabled /> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
@@ -282,15 +298,14 @@ function activar(name,nombreBotones){
   var partesBotones = nombreBotones.split(",");
   for(i=0;i<partesBotones.length;i++){
     var bot = document.getElementById(partesBotones[i]);
-    var botones = document.getElementById(bot.name); 
+    var botones = document.getElementById(bot.name);
     botones.disabled = false;  //Cambiamos el estado del boton
 
 
     if(document.getElementById(name).getAttribute("value","Deshabilitar")){
-      document.getElementById(botones.name).setAttribute("value","");  
+      document.getElementById(botones.name).setAttribute("value","");
       document.getElementById(botones.name).setAttribute("class","txtPickter bg-white");
      }
   }
 }
 </script>
-

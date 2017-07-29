@@ -142,6 +142,16 @@ return [
       'date' => 'fecha',
       'time' => 'hora',
       'subject' => 'asunto',
-      'message' => 'mensaje'
+      'message' => 'mensaje',
+      'issn'                  => 'ISSN Impreso',
+      'issnD'                 => 'ISSN Digital',
+      'fechaEdicion'          => 'Fecha de Edición',
+      'incomeNumber'          => 'Número de ingreso',
+      'barcode'               => 'Código de barra',
+      'copy'                  => 'Número de copia',
+      'numero'                => 'Número',
+      'introduccion'          => 'Introducción',
+      'titleContent'          => 'Contenido',
+
    ]
 ];

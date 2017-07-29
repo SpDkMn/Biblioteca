@@ -391,12 +391,12 @@
     var FieldCount = x;
     var arreglo;
     $(".agregarItem").click(function(){
-      
+
       FieldCount++;
-    
+
       arreglo = FieldCount-1;
       $(contenedorPestañas).append('<li><a href="#item'+FieldCount+'" id="cabezera-item'+FieldCount+'" data-toggle="tab">Item'+FieldCount+'</a></li>');
-        
+
       $(contenedorItem).append(
               '<div class="tab-pane fade" id="item'+FieldCount+'">'
                  +'<div class="box-body">'
@@ -428,12 +428,12 @@
                             +'<label>Disponibilidad</label>'
                             +'<select class="form-control select2" name="availability['+arreglo+']" style="width: 100%;">'
                                 +'<option>Disponible</option>'
-                                +'<option>No Disponible</option>'                              
+                                +'<option>No Disponible</option>'
                             +'</select>'
                           +'</div>'
                         +'</div>'
                       +'</div>'
-                      
+
                       +'<div class="tab-pane fade" id="segundo'+FieldCount+'">'
                         +'<div class="box-body">'
                           +'<div class="form-group">'
@@ -441,7 +441,7 @@
                             +'<select class="form-control select2" name="acquisitionModality['+arreglo+']"  style="width: 100%;">'
                                 +'<option>Donacion</option> '
                                 +'<option>Compra</option>'
-                                +'<option>Adquisicion</option> '                             
+                                +'<option>Adquisicion</option> '
                             +'</select>'
                           +'</div>'
                           +'<div class="form-group">'
@@ -459,8 +459,8 @@
                           +'<div class="form-group">'
                             +'<label>Tipo de Impresion</label>'
                             +'<select class="form-control select2" name="printType['+arreglo+']" style="width: 100%;">'
-                                +'<option>Impresion</option>' 
-                                +'<option>Reimpresion</option>   '                           
+                                +'<option>Impresion</option>'
+                                +'<option>Reimpresion</option>   '
                             +'</select>'
                           +'</div>'
                           +'<div class="form-group">'
@@ -474,20 +474,20 @@
                         +'</div>'
                       +'</div>'
                     +'</div><!-- End Tab Content--> '
-                                
+
                   +'</div><!-- End navbar -->'
                  +'</div><!-- End box-body -->'
                +'</div><!-- End tab-pane -->');
       x++;
     });
-    
+
     $(".eliminarItem").click(function(){
       if (FieldCount>1) {
         $("#item"+FieldCount).remove();
         $("#cabezera-item"+FieldCount).remove();
         FieldCount = FieldCount-1;
       }
-      
+
     });
     return false;
   });
@@ -501,7 +501,7 @@
     //var x = número de campos existentes en el contenedor
     var x = $("#contenedor div").length + 1;
     var FieldCount = x-1; //para el seguimiento de los campos
-    
+
     $(AddButton).click(function (e) {
         if(x <= MaxInputs) //max input box allowed
         {
@@ -554,4 +554,3 @@
       formulario.addEventListener("submit",validar);
     } ())
 </script>
-
