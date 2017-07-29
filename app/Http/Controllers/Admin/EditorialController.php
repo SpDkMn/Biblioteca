@@ -20,7 +20,9 @@ class EditorialController extends Controller
    {
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
-      
+
+
+
       // Verifica si se envio "category" por metodo get , FILTROS de busqueda
       if ($request->get('category') == null) {
          $categories = null;
@@ -35,11 +37,17 @@ class EditorialController extends Controller
             $i = $i + 1;
          }
       }
+
+
+
       if ($editar) {
-         // $editorial recibira la primera editorial, tambien pudo usarse el metodo first
-         $edit = view('admin.md_editoriales.edit', [
-            'editorial' => Editorial::get()[0]
-         ]);
+        //Con esto ya no saldra offset: 0 , solo mostraremos el primero a editar si existe
+        if (Editorial::all()->isNotEmpty()) {
+          // $editorial recibira la primera editorial, tambien pudo usarse el metodo first
+          $edit = view('admin.md_editoriales.edit', [
+             'editorial' => Editorial::get()[0]
+          ]);
+        }
       }
       if ($crear) {
          $new = view('admin.md_editoriales.new');
@@ -71,10 +79,13 @@ class EditorialController extends Controller
             ]);
          }
       }
+
       if ($eliminar) {
+        if (Editorial::all()->isNotEmpty()) {
          $delete = view('admin.md_editoriales.delete', [
             'editorial' => Editorial::get()[0]
          ]);
+       }
       }
       return view('admin.md_editoriales.index', [
          'show' => $show,
@@ -87,7 +98,7 @@ class EditorialController extends Controller
    public function create()
    {}
 
-  
+
    public function store(EditorialRequest $request)
    {
       $edit = Editorial::create([
