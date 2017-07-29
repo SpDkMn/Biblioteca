@@ -17,16 +17,13 @@
 	<section class="content">
 
 		<div class="row">
-			<div class="col-md-12 " id="div-content"></div>
+			<div class="col-md-12 " id="div-content">{!!$showTipoUsuario!!}</div>
 		</div>
 		<div class="row">
 			<div class="col-md-6" id="div-new">{!!$showDiasLaborables!!}</div>
 			<div class="col-md-6" id="div-new">{!!$showFeriado!!}</div>
 
 		</div>
-
-
-
 
 		<!-- /.col -->
 		<!-- /.row -->
