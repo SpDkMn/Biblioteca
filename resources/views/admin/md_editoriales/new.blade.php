@@ -30,8 +30,6 @@
 					<option>revista</option>
 					<option>tesis/tesina</option>
 					<option>compendio</option>
-					<option>colaborador</option>
-					<option>asesor</option>
 				</select>
 				<script> $(document).ready(function(){$('.selectCategory').select2();}) </script>
 

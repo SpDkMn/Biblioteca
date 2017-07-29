@@ -32,7 +32,7 @@
             case 'revista':
                $id_2 = true;
                break;
-            case 'tesis':
+            case 'tesis/tesina':
                $id_3 = true;
                break;
             case 'compendio':
@@ -44,21 +44,21 @@
 
       <div class="form-group">
 				<label>Categoria</label> <select
-					class="form-control selectCategoryEdit" multiple="multiple"
+					class="form-control select2" multiple="multiple"
 					data-placeholder="Seleccione la categoria" name="category[]"
 					style="width: 100%;"> @if($id_1)
 					<option selected>libro</option> @else
 					<option>libro</option>@endif @if($id_2)
 					<option selected>revista</option> @else
 					<option>revista</option>@endif @if($id_3)
-					<option selected>tesis</option> @else
-					<option>tesis</option>@endif @if($id_4)
+					<option selected>tesis/tesina</option> @else
+					<option>tesis/tesina</option>@endif @if($id_4)
 					<option selected>compendio</option> @else
 					<option>compendio</option>@endif
 				</select>
 
 			</div>
-			<script> $(document).ready(function(){$('.selectCategoryEdit').select2();}) </script>
+			<script> $(document).ready(function(){$('.select2').select2();}) </script>
 
 
 		</div>

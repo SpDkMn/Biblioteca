@@ -87,13 +87,14 @@ class EditorialController extends Controller
    public function create()
    {}
 
+  
    public function store(EditorialRequest $request)
    {
       $edit = Editorial::create([
          'name' => $request['name']
       ]);
       foreach ($request['category'] as $category) {
-         $id = switchCategory($category);
+         $id = $this->switchCategory($category);
          $edit->categories()->attach($id);
       }
       return redirect('admin/editorial');
@@ -111,8 +112,9 @@ class EditorialController extends Controller
       $editorial->fill($request->all());
       $editorial->save();
       $editorial->categories()->detach();
+
       foreach ($request['category'] as $category) {
-         $id = switchCategory($category);
+         $id = $this->switchCategory($category);
          $editorial->categories()->attach($id);
       }
       return redirect()->route('editorial.index');
@@ -132,8 +134,8 @@ class EditorialController extends Controller
       $editorial->delete();
       return redirect()->route('editorial.index');
    }
-   
-   public function switchCategory($category){
+
+     public function switchCategory($category){
       switch ($category) {
          case 'libro':
             $id = 1;
@@ -141,7 +143,7 @@ class EditorialController extends Controller
          case 'revista':
             $id = 2;
             break;
-         case 'tesis':
+         case 'tesis/tesina':
             $id = 3;
             break;
          case 'compendio':
@@ -152,4 +154,5 @@ class EditorialController extends Controller
       }
       return $id;
    }
+
 }
