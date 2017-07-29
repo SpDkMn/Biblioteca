@@ -3,8 +3,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use App\Editorial as Editorial;
 
-define('NAME', 'name');
-
 class Editorials extends Seeder
 {
 
@@ -17,15 +15,19 @@ class Editorials extends Seeder
    {
       // Rellenando la tabla authors para la prueba de revistas
       Editorial::Create([
-         NAME => 'Universidad Nacional Mayor de San Marcos'
-      ], [
-         NAME => 'Anaya Multimendia'
-      ], [
-         NAME => 'Ecoe Ediciones'
-      ], [
-         NAME => 'Solver-Maquin'
-      ], [
-         NAME => 'Bruño'
+         'name' => 'Universidad Nacional Mayor de San Marcos'
+      ]);
+      Editorial::Create([
+         'name' => 'Anaya Multimendia'
+      ]);
+      Editorial::Create([
+         'name' => 'Ecoe Ediciones'
+      ]);
+      Editorial::Create([
+         'name' => 'Solver-Maquin'
+      ]);
+      Editorial::Create([
+         'name' => 'Bruño'
       ]);
    }
 }

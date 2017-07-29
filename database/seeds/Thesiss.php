@@ -30,7 +30,9 @@ class Thesiss extends Seeder
          'recomendacion' => 'Las visualizaciones inteligentes en combinación con los datos Qlik patentados de su motor de indexación descubren todas las relaciones entre las dimensiones de datos, revelando conocimientos que habrían permanecido ocultos en los modelos tradicionales de datos basados en consultas y jerárquicos',
          'bibliografia' => 'Laberge, Robert (2011) The Data Warehouse mentor. Practical Data Warehouse Business Intelligence Insights .Mc Graw Hill Christopher Adamson (2006) Mastering Data Warehouse Aggregates: Solutions for Star Schema Performance. Wiley. ISBN-13: 978-0471777090. Anahory S. & Murray D. (1997), Data Warehousing in the real world: A practical Guide for Building Decision Support Systems. Addison-Wesley Ed. Jill Dyché & Evan Levy (2006) Customer Data Integration: Reaching a Single Version of the Truth (SAS Institute Inc.). Wiley. ISBN-13: 978-0471916970 Franco J. M. (1997) El Data Warehouse. Ed Gestión. Han J. & Kamber M. (2001) Data Mining: Concepts and Techniques. Morgan Kaufmann.',
          'asesor' => 'Pedro Diaz'
-      ], [
+      ]);
+      
+      Thesis::create([
          'type' => 'tesina',
          'clasification' => '35432r',
          'title' => 'Guia referencial para el plan de contingencia en un centro de computo para una entidad educativa',

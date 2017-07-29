@@ -12,27 +12,23 @@ use App\Profile as Profile;
 use App\Author as Author;
 use Session;
 use Redirect;
-define('CATEGORY', 'category');
-define('TESIS', 'tesis/tesina');
-define('LIBRO', 'libro');
-define('REVISTA', 'revista');
-define('COMPENDIO', 'compendio');
-define('COLABORADOR', 'colaborador');
-define('ASESOR', 'asesor');
-define('AUTHOR', 'author');
-define('AUTOR_ROUTE', 'autor.index');
-define('ADMIN', 'admin');
-define('MOD_AUTORES', ADMIN . '.md_autores');
-define('MAUTORES_EDIT', MOD_AUTORES . '.edit');
-define('MAUTORES_NEW', MOD_AUTORES . '.new');
-define('MAUTORES_SHOW', MOD_AUTORES . '.show');
-define('MAUTORES_DELETE', MOD_AUTORES . '.delete');
+
+define('CATEGORY','category');
+define('TESIS','tesis/tesina');
+define('LIBRO','libro');
+define('REVISTA','revista');
+define('COMPENDIO','compendio');
+define('COLABORADOR','colaborador');
+define('ASESOR','asesor');
+define('AUTHOR','author');
+define('AUTOR_ROUTE','autor.index');
 
 class AuthorController extends Controller
 {
 
    public function index(Request $request)
    {
+      
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
       
@@ -41,40 +37,42 @@ class AuthorController extends Controller
          $categories = null;
       } else {
          $i = 0;
-         foreach ($request->get(CATEGORY) as $category) {
-            switchCategory($category);
+          
+          foreach ($request->get('category') as $category) {
+            $categories[$i] = switchCategory($category);
             $i = $i + 1;
          }
       }
       
-      if ($editar) {
+      if ($editar){
          // $author recibira el primer autor, tambien pudo usarse el metodo first
-         $edit = view(MAUTORES_EDIT, [
+         $edit = view('admin.md_autores.edit', [
             AUTHOR => Author::get()[0]
          ]);
       }
-      if ($crear) {
-         $new = view(MAUTORES_NEW);
+      if ($crear){
+         $new = view('admin.md_autores.new');
       }
-      if ($ver) {
+      if ($ver){
          if (($request->get('name')) != null) {
             // $authors cargara todos los autores con con nombre "name"
             $authors = Author::name($request->get('name'))->paginate();
             // envia los permisos de editar y eliminar
             // ademas enviara un boleano "search" el cual servira para saber si se realizo una busqueda en la vista
-            $show = view(MAUTORES_SHOW, [
+            $show = view('admin.md_autores.show', [
                'authors' => $authors,
                'eliminar' => $eliminar,
                'editar' => $editar,
                'categories' => $categories,
                'search' => true
             ]);
-         } else {
+         } 
+         else {
             // $authors cargara todos los autores
             $authors = Author::all();
             // envia los permisos de editar y eliminar
             // ademas enviara un boleano "search" el cual servira para saber si se realizo una busqueda en la vista
-            $show = view(MAUTORES_SHOW, [
+            $show = view('admin.md_autores.show', [
                'authors' => $authors,
                'eliminar' => $eliminar,
                'editar' => $editar,
@@ -83,8 +81,8 @@ class AuthorController extends Controller
             ]);
          }
       }
-      if ($eliminar) {
-         $delete = view(MAUTORES_DELETE, [
+      if ($eliminar){
+         $delete = view('admin.md_autores.delete', [
             AUTHOR => Author::get()[0]
          ]);
       }
@@ -105,10 +103,11 @@ class AuthorController extends Controller
          'name' => $request['name']
       ]);
       
-      foreach ($request[CATEGORY] as $category) {
-         $id = switchCategory($category);
+      foreach ($request['category'] as $category) {
+         $id = $this->switchCategory($category);
          $edit->categories()->attach($id);
       }
+
       
       return redirect('admin/autor');
    }
@@ -116,7 +115,7 @@ class AuthorController extends Controller
    public function edit($id)
    {
       $author = Author::find($id);
-      return view(MAUTORES_EDIT)->with('author', $author);
+      return view('admin.md_autores.edit')->with('author', $author);
    }
 
    public function update($id, AuthorRequest $request)
@@ -127,8 +126,8 @@ class AuthorController extends Controller
       
       $author->categories()->detach(); // No tiene nada que ver con el error
       
-      foreach ($request[CATEGORY] as $category) {
-         $id = switchCategory($category);
+       foreach ($request['category'] as $category) {
+         $id = $this->switchCategory($category);
          $author->categories()->attach($id);
       }
       
@@ -151,30 +150,25 @@ class AuthorController extends Controller
       return redirect()->route(AUTOR_ROUTE);
    }
 
-   public function switchCategory($category)
-   {
+   public function switchCategory($category){
       switch ($category) {
-         case LIBRO:
+         case 'libro':
             $id = 1;
             break;
-         case REVISTA:
+         case 'revista':
             $id = 2;
             break;
-         case TESIS:
+         case 'tesis/tesina':
             $id = 3;
             break;
-         case COMPENDIO:
+         case 'compendio':
             $id = 4;
-            break;
-         case COLABORADOR:
-            $id = 5;
-            break;
-         case ASESOR:
-            $id = 6;
             break;
          default:
             $id = null;
       }
       return $id;
    }
+
+   
 }

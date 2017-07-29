@@ -17,15 +17,20 @@ class Categories extends Seeder
       // Rellenando la tabla categorias para hacer la prueba
       Category::create([
          'name' => 'libro'
-      ], [
+      ]);
+      Category::create([
          'name' => 'revista'
-      ], [
+      ]);
+      Category::create([
          'name' => 'tesis/tesina'
-      ], [
+      ]);
+      Category::create([
          'name' => 'compendio'
-      ], [
+      ]);
+      Category::create([
          'name' => 'colaborador'
-      ], [
+      ]);
+      Category::create([
          'name' => 'asesor'
       ]);
    }

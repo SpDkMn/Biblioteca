@@ -18,13 +18,17 @@ class ThesisCopies extends Seeder
          'ejemplar' => 1,
          'availability' => '1',
          'thesis_id' => '1'
-      ], [
+      ]);
+      
+      ThesisCopy::create([
          'incomeNumber' => 24547861,
          'barcode' => 200000001345,
          'ejemplar' => 2,
          'availability' => '0',
          'thesis_id' => '1'
-      ], [
+      ]);
+      
+      ThesisCopy::create([
          'incomeNumber' => 22343561,
          'barcode' => 200000002354,
          'ejemplar' => 1,

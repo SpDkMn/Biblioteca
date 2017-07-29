@@ -1,307 +1,281 @@
-
-<div class="box box-primary">
-	<div class="box-header with-border">
-		<h3 class="box-title">
-			<strong>Agregar Nuevo Material</strong>
-		</h3>
-		<div class="box-tools pull-right">
-			<button type="button" class="btn btn-box-tool" data-widget="collapse">
-				<i class="fa fa-minus"></i>
-			</button>
-		</div>
-	</div>
-	<!-- /.box-header -->
-
-	<form method="POST" action="{{ url('/admin/thesis') }}">
-		{{ csrf_field() }}
-
-
-		<div class="box-body">
-			<!---->
-			<!--***************************** PANEL DE NUEVA TESIS *************************************-->
-
-
-
-
-
-
-			<div class="box box-success box-solid">
-
-				<div class="box-header with-border">
-					<h3 class="box-title">Tesis y Tesina</h3>
-					<div class="box-tools pull-right">
-						<button type="button" class="btn btn-box-tool"
-							data-widget="collapse">
-							<i class="fa fa-minus"></i>
-						</button>
-					</div>
-				</div>
-
-
-
-				<div class="box-body">
-
-					<div class="bs-example" data-example-id="simple-nav-tabs">
-						<ul class="nav nav-tabs">
-							<li class="active"><a href="#primero" data-toggle="tab">Primero</a></li>
-							<li><a href="#segundo" data-toggle="tab">Segundo</a></li>
-							<li><a href="#tercero" data-toggle="tab">Tercero</a></li>
-							<li><a href="#cuarto" data-toggle="tab">Cuarto</a></li>
-						</ul>
-
-						<div class="tab-content">
-							<!-- Primer panel -->
-							<div class="tab-pane active" id="primero">
-
-
-								<div class="box-body">
-									<div class="form-group">
-										<label>TIPO DE ITEM</label>
-										<p>
-
-											<input type="radio" class="flat" name="tipo" value="tesis"
-												checked="" required /> Tesis <br> <input type="radio"
-												class="flat" name="tipo" value="tesina" /> Tesina
-										</p>
-									</div>
-
-									<div class="form-group">
-										<label for="inputTitle">Titulo</label> <input type="text"
-											class="form-control" name="title" id="inputTitle"
-											placeholder="">
-									</div>
-
-									<div class="form-group">
-										<label>Autor Principal</label> <select class="form-control"
-											id="selectAutorMain" name="autorMain[]" multiple="multiple"
-											style="width: 100%;" data-placeholder="Autor Principal">
-											@foreach($autores as $autor) @foreach($autor->categories as
-											$category) @if($category->name == "tesis/tesina")
-											<option value="{{ $autor->id }}">{{$autor->name}}</option>
-											@endif @endforeach @endforeach
-										</select>
-									</div>
-
-									<div class="form-group">
-										<label>Autor Secundario</label> <select
-											class="form-control select2" id="listAutorSecond"
-											name="autorSecond[]" multiple="multiple" style="width: 100%;"
-											data-placeholder="Autor Secundario"> @foreach($autores as
-											$autor) @foreach($autor->categories as $category)
-											@if($category->name == "tesis/tesina")
-											<option value="{{ $autor->id }}">{{$autor->name}}</option>
-											@endif @endforeach @endforeach
-										</select>
-									</div>
-
-									<div class="form-group">
-										<label>Editorial</label> <select class="form-control select2"
-											name="editorial" style="width: 100%;"> @foreach($editoriales
-											as $editorial) @foreach($editorial->categories as $category)
-											@if($category->name == "tesis/tesina")
-											<option value="{{ $editorial->id }}">{{$editorial->name}}</option>
-											@endif @endforeach @endforeach
-										</select>
-									</div>
-
-									<div class="form-group">
-										<label for="Clasification">Clasificación</label> <input
-											type="text" class="form-control" name="clasification"
-											id="inputClasification" placeholder="">
-									</div>
-
-
-									<div class="form-group">
-										<label>Asesor</label> <select class="form-control select2"
-											name="asesor" style="width: 100%;"> @foreach($autores as
-											$autor) @foreach($autor->categories as $category)
-											@if($category->name == "asesor")
-											<option value="{{ $autor->name }}">{{$autor->name}}</option>
-											@endif @endforeach @endforeach
-
-										</select>
-									</div>
-
-									<div class="form-group">
-										<label for="escuela">E . A . P : </label> <input type="text"
-											class="form-control" name="escuela" id="inputEscuela"
-											placeholder="">
-									</div>
-
-								</div>
-							</div>
-							<!--Fin de la primera division-->
-
-
-
-
-
-
-							<!-- Segundo Panel -->
-							<div class="tab-pane fade" id="segundo">
-								<div class="box-body">
-
-									<!-- 1. Resumen -->
-
-									<div class="form-group">
-										<label for="inputEdition">Edicion</label> <input type="text"
-											class="form-control" name="edition" id="inputEdition"
-											placeholder="">
-									</div>
-
-									<div class="form-group">
-										<label for="inputEXTENSION">Extension</label> <input
-											type="text" class="form-control" name="extension"
-											id="inputEXTENSION" placeholder="">
-									</div>
-
-									<div class="form-group">
-										<label for="inputEXTENSION">Dimensiones</label> <input
-											type="text" class="form-control" name="dimension"
-											id="inputEXTENSION" placeholder="">
-									</div>
-
-									<div class="form-group">
-										<label for="inputEXTENSION">Detalles Físicos</label> <input
-											type="text" class="form-control" name="detalles"
-											id="inputEXTENSION" placeholder="">
-									</div>
-
-									<div class="form-group">
-										<label for="inputEXTENSION">Material Adicional</label> <input
-											type="text" class="form-control" name="materialad"
-											id="inputEXTENSION" placeholder="">
-									</div>
-
-									<div class="form-group">
-										<label for="inputEXTENSION">Ubicacion</label> <input
-											type="text" class="form-control" name="ubicacion"
-											id="inputEXTENSION" value="Estante Nº ">
-									</div>
-
-									<div class="form-group">
-										<label for="inputEXTENSION">Lugar de sustentacion</label> <input
-											type="text" class="form-control" name="lugarsus"
-											id="inputEXTENSION"
-											value="Facultad de Ingeniería de Sistemas - UNMSM">
-									</div>
-
-
-								</div>
-								<!-- End Box-Body -->
-							</div>
-							<!-- End Segundo Panel -->
-
-
-
-
-
-
-
-
-							<!-- Tercer Panel -->
-							<div class="tab-pane fade" id="tercero">
-								<div class="box-body">
-
-									<!-- 1. Resumen -->
-									<div class="form-group">
-										<label for="inputSummary">Resumen</label>
-										<textarea class="form-control" rows="3" name="summary"
-											id="inputSummary" placeholder=""></textarea>
-									</div>
-
-									<div class="form-group">
-										<label for="inputContent">Contenido</label>
-										<textarea class="form-control" rows="3" name="contenido"
-											id="inputContent" placeholder=""></textarea>
-									</div>
-
-									<div class="form-group">
-										<label for="inputRecomend">Conclusiones y Recomendaciones</label>
-										<textarea class="form-control" rows="3" name="recomendacion"
-											id="inputRecomend" placeholder=""></textarea>
-									</div>
-
-									<div class="form-group">
-										<label for="inputBibliografia">Bibliografía</label>
-										<textarea class="form-control" rows="3" name="bibliografia"
-											id="inputBibliografia" placeholder=""></textarea>
-									</div>
-
-								</div>
-								<!-- End Box-Body -->
-							</div>
-							<!-- End Tercer  Panel -->
-
-
-
-
-
-							<!-- Cuarto Panel -->
-							<div class="tab-pane fade" id="cuarto">
-
-								<div class="box box-default box-solid" id="itemBox">
-									<div class="box-header">
-										<h3 class="box-title">Item principal</h3>
-										<!-- Cambiar por un diseño mas atractivo cuando este funcionando -->
-										<div class="box-tools pull-right">
-											<button type="button" id="agregarItem"
-												class="btn btn-box-tool">
-												<i class="fa fa-plus"></i>
-											</button>
-										</div>
-									</div>
-									<div class="box-body">
-
-										<div class="form-group">
-											<label for="inputIncomeNumber">Nº Ingreso</label> <input
-												type="text" class="form-control" name="incomeNumber0"
-												id="inputIncomeNumber" placeholder="">
-										</div>
-										<div class="form-group">
-											<label for="inputBarcode">Código de barra</label> <input
-												type="text" class="form-control" value="20000000"
-												name="barcode0" id="inputBarcode"
-												data-inputmask='"mask": "200000009999"' data-mask>
-										</div>
-										<div class="form-group">
-											<label for="inputCopy">Ejemplar</label> <input type="number"
-												class="form-control" value="1" name="copy0" id="inputCopy"
-												placeholder="">
-										</div>
-									</div>
-								</div>
-
-
-
-
-							</div>
-							<!-- End Cuarto Panel -->
-
-						</div>
-					</div>
-				</div>
-
-
-			</div>
-			<!-- End Box-solid -->
-		</div>
-		<!-- End col-md-6 -->
-
-
-
-		<div class="box-footer">
-			<button type="submit" class="btn btn-primary">Crear</button>
-		</div>
-
-	</form>
+  <div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title"><strong>Agregar Nuevo Material</strong></h3>
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+      </button>
+    </div>
+  </div>
+  <!-- /.box-header -->
+
+  <form method="POST" action="{{ url('/admin/thesis') }}">
+    {{ csrf_field() }}
+
+
+     <div class="box-body">
+        <!---->
+        <!--***************************** PANEL DE NUEVA TESIS *************************************-->
+ 
+
+
+
+
+
+        <div class="box box-success box-solid">
+            
+            <div class="box-header with-border">
+              <h3 class="box-title">Tesis y Tesina</h3>
+              <div class="box-tools pull-right"> 
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div> 
+            </div>
+            
+             
+
+     <div class="box-body">
+              
+        <div class="bs-example" data-example-id="simple-nav-tabs"> 
+             <ul class="nav nav-tabs">
+                <li class="active"><a href="#primero" data-toggle="tab">Primero</a></li>
+                <li><a href="#segundo" data-toggle="tab">Segundo</a></li>
+                <li><a href="#tercero" data-toggle="tab">Tercero</a></li>
+                <li><a href="#cuarto" data-toggle="tab">Cuarto</a></li>
+             </ul>
+
+          <div class="tab-content">
+                    <!-- Primer panel -->
+            <div class="tab-pane active" id="primero">
+
+                
+              <div class="box-body">
+                  <div class="form-group">
+                    <label>TIPO DE ITEM</label>
+                      <p>
+                        
+                        <input type="radio" class="flat" name="tipo" value="tesis" checked="" required/> Tesis 
+                        <br>
+                        <input type="radio" class="flat" name="tipo" value="tesina"/> Tesina
+                      </p>
+                  </div>
+
+                    <div class="form-group">
+                        <label for="inputTitle">Titulo</label>
+                        <input type="text" class="form-control" name="title" id="inputTitle" placeholder="">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Autor Principal</label>
+                        <select class="form-control" id="selectAutorMain" name="autorMain[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Principal">
+                            @foreach($autores as  $autor)
+                              @foreach($autor->categories as $category)
+                                @if($category->name == "tesis/tesina")
+                                  <option value="{{ $autor->id }}">{{$autor->name}}</option>
+                                @endif
+                              @endforeach
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Autor Secundario</label>
+                        <select class="form-control select2" id="listAutorSecond" name="autorSecond[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Secundario">
+                            @foreach($autores as  $autor)
+                              @foreach($autor->categories as $category)
+                                @if($category->name == "tesis/tesina")
+                                  <option value="{{ $autor->id }}">{{$autor->name}}</option>
+                                @endif
+                              @endforeach
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Editorial</label>
+                        <select class="form-control select2" name="editorial" style="width: 100%;">
+                        @foreach($editoriales as  $editorial)
+                          @foreach($editorial->categories as $category)
+                            @if($category->name == "tesis/tesina")
+                              <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
+                            @endif
+                          @endforeach
+                        @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="Clasification">Clasificación</label>
+                      <input type="text" class="form-control" name="clasification" id="inputClasification" placeholder="">
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label>Asesor</label>
+                        <select class="form-control select2" name="asesor" style="width: 100%;">
+                        @foreach($autores as  $autor)
+                          @foreach($autor->categories as $category)
+                            @if($category->name == "asesor")
+                              <option value="{{ $autor->name }}">{{$autor->name}}</option>
+                            @endif
+                          @endforeach
+                        @endforeach
+                       
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="escuela">E . A . P : </label>
+                      <input type="text" class="form-control" name="escuela" id="inputEscuela" placeholder="">
+                    </div>
+                            
+              </div>
+            </div>
+        <!--Fin de la primera division-->
+
+
+
+
+
+
+              <!-- Segundo Panel -->
+          <div class="tab-pane fade" id="segundo">
+              <div class="box-body">
+                       
+                        <!-- 1. Resumen -->
+                   
+                    <div class="form-group">
+                        <label for="inputEdition">Edicion</label>
+                        <input type="text" class="form-control" name="edition" id="inputEdition" placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputEXTENSION">Extension</label>
+                        <input type="text" class="form-control" name="extension" id="inputEXTENSION" placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputEXTENSION">Dimensiones</label>
+                        <input type="text" class="form-control" name="dimension" id="inputEXTENSION" placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputEXTENSION">Detalles Físicos</label>
+                        <input type="text" class="form-control" name="detalles" id="inputEXTENSION" placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputEXTENSION">Material Adicional</label>
+                        <input type="text" class="form-control" name="materialad" id="inputEXTENSION" placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputEXTENSION">Ubicacion</label>
+                        <input type="text" class="form-control" name="ubicacion" id="inputEXTENSION" value="Estante Nº ">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputEXTENSION">Lugar de sustentacion</label>
+                        <input type="text" class="form-control" name="lugarsus" id="inputEXTENSION" value="Facultad de Ingeniería de Sistemas - UNMSM">
+                    </div>
+
+                        
+              </div><!-- End Box-Body -->
+           </div><!-- End Segundo Panel -->
+                 
+      
+                  
+
+
+
+
+
+                  <!-- Tercer Panel -->
+          <div class="tab-pane fade" id="tercero">
+              <div class="box-body">
+                        
+                        <!-- 1. Resumen -->
+                    <div class="form-group">
+                        <label for="inputSummary">Resumen</label>
+                        <textarea class="form-control" rows="3" name="summary" id="inputSummary" placeholder=""></textarea> 
+                     </div>
+
+                     <div class="form-group">
+                        <label for="inputContent">Contenido</label>
+                        <textarea class="form-control" rows="3" name="contenido" id="inputContent" placeholder=""></textarea> 
+                     </div>  
+                    
+                    <div class="form-group">
+                        <label for="inputRecomend">Conclusiones y Recomendaciones</label>
+                        <textarea class="form-control" rows="3" name="recomendacion" id="inputRecomend" placeholder=""></textarea> 
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputBibliografia">Bibliografía</label>
+                        <textarea class="form-control" rows="3" name="bibliografia" id="inputBibliografia" placeholder=""></textarea> 
+                    </div>
+                        
+               </div><!-- End Box-Body -->
+          </div><!-- End Tercer  Panel -->
+
+
+
+
+
+              <!-- Cuarto Panel -->
+            <div class="tab-pane fade" id="cuarto">
+               
+                <div class="box box-default box-solid" id="itemBox">
+              <div class="box-header">
+                  <h3 class="box-title">Item principal</h3>
+                  <!-- Cambiar por un diseño mas atractivo cuando este funcionando -->
+                  <div class="box-tools pull-right">
+                    <button type="button" id="agregarItem" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
+                  </div>
+              </div>
+              <div class="box-body">
+                  
+                  <div class="form-group">
+                      <label for="inputIncomeNumber">Nº Ingreso</label>
+                      <input type="text" class="form-control" name="incomeNumber0" id="inputIncomeNumber" placeholder="">
+                  </div>
+                  <div class="form-group">
+                      <label for="inputBarcode">Código de barra</label>
+                      <input type="text" class="form-control" value="20000000" name="barcode0" id="inputBarcode" data-inputmask='"mask": "200000009999"' data-mask>
+                  </div>
+                  <div class="form-group">
+                      <label for="inputCopy">Ejemplar</label>
+                      <input type="number" class="form-control" value="1" name="copy0" id="inputCopy" placeholder="">
+                  </div>
+              </div>
+            </div>
+
+
+
+
+             </div><!-- End Cuarto Panel -->
+
+          </div>
+        </div>
+      </div>
+
+                
+        </div><!-- End Box-solid -->
+      </div><!-- End col-md-6 -->
+
+
+
+    <div class="box-footer">
+       <button type="submit" class="btn btn-primary">Crear</button>
+    </div>
+
+  </form>
 
 </div>
 
 
 
 @section('scriptSelectAutorPrincipal')
-<script type="text/javascript">
+  <script type="text/javascript">
     $(function () {
       //Inicializar selectores de las editoriaes , principales y secundarias
         //Selectores generales
@@ -389,8 +363,12 @@
         $("[data-mask]").inputmask();
     });
   </script>
-@endsection @section('scriptItem')
-<script type="text/javascript">
+@endsection
+
+
+
+@section('scriptItem')
+  <script type="text/javascript">
   $(document).ready(function(){
     var idCont = 1 ;
     // Cuando haga click en agregarContenido

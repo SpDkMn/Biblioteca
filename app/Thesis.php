@@ -57,5 +57,10 @@ class Thesis extends Model
    {
       return $this->belongsTo('App\Category');
    }
+   public function pedidos()
+   {
+      return $this->belongsToMany('App\PedidoThesis', 'pedido_thesis');
+   }
+
 }
  

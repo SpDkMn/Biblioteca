@@ -24,7 +24,7 @@ class ThesisRequest extends FormRequest
    public function rules()
    {
       return [
-         'title' => 'min:4|max:200|required|unique:thesiss'
+         'title' => 'min:4|max:200|required'
       ];
    }
 }

@@ -2,10 +2,6 @@
 use App\ChapterBook as ChapterBook;
 use Illuminate\Database\Seeder;
 
-define('NAME', 'name');
-define('NUMBER', 'number');
-define('BOOK_ID', 'book_id');
-
 class ChaptersBook extends Seeder
 {
 
@@ -17,53 +13,65 @@ class ChaptersBook extends Seeder
    public function run()
    {
       ChapterBook::create([
-         NAME => 'numeros romanos',
-         NUMBER => 1,
-         BOOK_ID => 1
-      ], [
-         NAME => 'numeros reales',
-         NUMBER => 2,
-         BOOK_ID => 1
-      ], [
-         NAME => 'numeros complejos',
-         NUMBER => 3,
-         BOOK_ID => 1
-      ], [
-         NAME => 'limites',
-         NUMBER => 4,
-         BOOK_ID => 1
-      ], [
-         NAME => 'metodos numericos',
-         NUMBER => 5,
-         BOOK_ID => 1
-      ], [
-         NAME => 'derivadas',
-         NUMBER => 6,
-         BOOK_ID => 1
-      ], [
-         NAME => 'Nacimiento, Hijo de satan',
-         NUMBER => 1,
-         BOOK_ID => 2
-      ], [
-         NAME => 'Muerte de Shiro',
-         NUMBER => 2,
-         BOOK_ID => 2
-      ], [
-         NAME => 'El nuevo exorcista',
-         NUMBER => 3,
-         BOOK_ID => 2
-      ], [
-         NAME => 'El gato de Rin',
-         NUMBER => 4,
-         BOOK_ID => 2
-      ], [
-         NAME => 'Enfrentamiento Yukio',
-         NUMBER => 5,
-         BOOK_ID => 2
-      ], [
-         NAME => 'Tragado por su padre, satan',
-         NUMBER => 6,
-         BOOK_ID => 2
+         'name' => 'numeros romanos',
+         'number' => 1,
+         'book_id' => 1
+      ]);
+      ChapterBook::create([
+         'name' => 'numeros reales',
+         'number' => 2,
+         'book_id' => 1
+      ]);
+      ChapterBook::create([
+         'name' => 'numeros complejos',
+         'number' => 3,
+         'book_id' => 1
+      ]);
+      ChapterBook::create([
+         'name' => 'limites',
+         'number' => 4,
+         'book_id' => 1
+      ]);
+      ChapterBook::create([
+         'name' => 'metodos numericos',
+         'number' => 5,
+         'book_id' => 1
+      ]);
+      ChapterBook::create([
+         'name' => 'derivadas',
+         'number' => 6,
+         'book_id' => 1
+      ]);
+      
+      ChapterBook::create([
+         'name' => 'Nacimiento, Hijo de satan',
+         'number' => 1,
+         'book_id' => 2
+      ]);
+      ChapterBook::create([
+         'name' => 'Muerte de Shiro',
+         'number' => 2,
+         'book_id' => 2
+      ]);
+      ChapterBook::create([
+         'name' => 'El nuevo exorcista',
+         'number' => 3,
+         'book_id' => 2
+      ]);
+      ChapterBook::create([
+         'name' => 'El gato de Rin',
+         'number' => 4,
+         'book_id' => 2
+      ]);
+      ChapterBook::create([
+         'name' => 'Enfrentamiento Yukio',
+         'number' => 5,
+         'book_id' => 2
+      ]);
+      ChapterBook::create([
+         'name' => 'Tragado por su padre, satan',
+         'number' => 6,
+         'book_id' => 2
       ]);
    }
 }

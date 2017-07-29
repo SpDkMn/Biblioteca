@@ -20,15 +20,15 @@
   <div class="row">
      
         <div class="col-md-12 " id="div-content">
-          {!! $show !!}
+          {!! $showPrestamo !!}
         </div> 
   </div>
   <div class="row">
         <div class="col-md-6" id="div-content">
-          {!! $new !!}
+
         </div>  
         <div id="divEdit" class="col-md-6">
-          {!! $edit !!}
+          
         </div>      
 
       
@@ -36,7 +36,6 @@
   
 </section>
 
-{!! $delete !!}
 
 @endsection
 

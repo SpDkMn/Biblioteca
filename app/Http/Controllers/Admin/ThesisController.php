@@ -20,6 +20,7 @@ class ThesisController extends Controller
 
    public function index(Request $request)
    {
+      
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
       
@@ -68,6 +69,7 @@ class ThesisController extends Controller
    {
       
       $av = 1;
+      
       // Guardando los datos de la tesis
       Thesis::create([
          'type' => $request['tipo'],
@@ -92,7 +94,7 @@ class ThesisController extends Controller
       // Guardamos los registros de las tesis
       $thesiss = Thesis::all();
       // Guardamos los registros de las editoriales para el pivote
-      Editorial::all();
+      $editoriales = Editorial::all();
       
       foreach ($thesiss as $thesis) {
          if ($thesis->title == $request['title']) { // Si el titulo de la tesis encontrada en la base de datos es igua al titulo de la tesis que se esta ingresando al sistema, que el id de esa tesis de la base de datos se guarde en una variable
@@ -142,7 +144,7 @@ class ThesisController extends Controller
                   ]);
                }
             }
-         } else {
+         } else{
             continue;
          }
       }
@@ -209,8 +211,10 @@ class ThesisController extends Controller
             $copia->delete();
          }
       }
+           
+            $av = 1;
       
-      $av = 1;
+      
       // GUARDANDO LOS DATOS DE LAS COPIAS DE TESIS
       
       for ($j = 0; $j <= 8; $j ++) {
@@ -253,7 +257,7 @@ class ThesisController extends Controller
                   ]);
                }
             }
-         } else {
+         } else{
             continue;
          }
       }
