@@ -1,6 +1,6 @@
 <script type="text/javascript">
   function funcion1(){
-    
+
     if(document.getElementById('op').getAttribute('class')=="dropdown user user-menu"){
       document.getElementById('op').setAttribute("class","dropdown user user-menu open");
     }else{
@@ -9,7 +9,7 @@
   }
 
   function funcion2(){
-    
+
     if(document.getElementById('op2').getAttribute('class')=="dropdown notifications-menu"){
       document.getElementById('op2').setAttribute("class","dropdown notifications-menu open");
     }else{
@@ -113,6 +113,3 @@
 
 	</nav>
 </header>
-
-
-
