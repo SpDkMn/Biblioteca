@@ -12,7 +12,6 @@ class Authors extends Seeder
     */
    public function run()
    {
-<<<<<<< HEAD
       // Rellenando la tabla authors con 30 datos aleatorios
       Author::Create([
          'name' => 'Mauricio Espinoza Vargas'
@@ -26,14 +25,5 @@ class Authors extends Seeder
       Author::Create([
          'name' => 'Tania Leyva Riveira'
       ]);
-=======
-      Author::Create(['name' => 'Luis Cayo Leon']);
-      Author::Create(['name' => 'Santiago Moquillaza Enriquez']);
-      Author::Create(['name' => 'Mauricio Espinoza Vargas']);
-      Author::Create(['name' => 'Jose Mateo Carrasco']);
-      Author::Create(['name' => 'Jose Gonzales Villalobos']);
-      Author::Create(['name' => 'Facultad de Ingeniería de Sistemas e Información']);
-      Author::Create(['name' => 'Facultad de Ingeniería de Minas']);
->>>>>>> e4f94eab83036b90581060e078051096c072bd75
    }
 }
