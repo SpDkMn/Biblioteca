@@ -1,9 +1,7 @@
 <?php
 use Illuminate\Database\Seeder;
 
-define('AUTHOR_ID', 'author_id');
-define('THESIS_ID', 'thesis_id');
-define('TYPE', 'type');
+
 
 class AuthorThesis extends Seeder
 {

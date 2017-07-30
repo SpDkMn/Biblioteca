@@ -204,6 +204,7 @@ class MagazineController extends Controller
    public function update(Request $request, $id)
    {
       // Obteniendo datos
+
       $revistaP = Magazine::find($id);
       $revista = Magazine::find($id);
       // Inicializando contadores
@@ -252,11 +253,12 @@ class MagazineController extends Controller
       // Agregando Los nuevos Contenidos que se han agregado en editar
       for ($i = $contador_contenido2; $i < $contador_contenido; $i ++) {
          Content::create([
-            'title' => $request["titleContent" . $i],
+            'title' => $request["titleContent"][$i],
             'magazine_id' => $id
          ]);
       }
       // Actualizando contenido
+
       for ($i = 0; $i < $contador_contenido2; $i ++) {
          $revista->contents[$i]->title = $request["titleContent"][$i];
          $contentsR[$i]->save();
@@ -289,11 +291,14 @@ class MagazineController extends Controller
          }
       }
       // Editorial Primaria -> Dato obligatorio
-      foreach ($request['mEditorialMain'] as $clave => $valor2) {
-         $revista->editorials()->attach($valor2, [
-            'type' => true
-         ]);
+      if ($request['mEditorialMain'] != null) {
+        foreach ($request['mEditorialMain'] as $clave => $valor2) {
+           $revista->editorials()->attach($valor2, [
+              'type' => true
+           ]);
+        }
       }
+
       $revista->save();
       return redirect('admin/magazines');
    }

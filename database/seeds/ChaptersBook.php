@@ -2,9 +2,7 @@
 use App\ChapterBook as ChapterBook;
 use Illuminate\Database\Seeder;
 
-define('NAME', 'name');
-define('NUMBER', 'number');
-define('BOOK_ID', 'book_id');
+
 
 class ChaptersBook extends Seeder
 {

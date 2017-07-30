@@ -2,13 +2,7 @@
 use Illuminate\Database\Seeder;
 use App\UserType as UserType;
 
-define('NAME', 'name');
-define('PRESTAMOSALA', 'prestamoSala');
-define('PRESTAMODOMICILIO', 'prestamoDomicilio');
-define('CASTIGADO', 'castigado');
-define('TIEMPODOMICILIO', 'tiempoDomicilio');
-define('CANTIDADSALA', 'cantidadSala');
-define('CANTIDADDOMICILIO', 'cantidadDomicilio');
+
 
 class UserTypes extends Seeder
 {

@@ -3,24 +3,7 @@ use Illuminate\Database\Seeder;
 
 use App\BookCopy as BookCopy;
 
-define('INCOMENUMBER', 'incomeNumber');
-define('CLASIFICATION', 'clasification');
-define('EDITION', 'edition');
-define('BARCODE', 'barcode');
-define('COPY', 'copy');
-define('ACQUISITIONMODALITY', 'acquisitionModality');
-define('ACQUISITIONSOURCE', 'acquisitionSource');
-define('ACQUISITIONPRICE', 'acquisitionPrice');
-define('ACQUISITIONDATE', 'acquisitionDate');
-define('LOCATION', 'location');
-define('MANAGEMENT', 'management');
-define('AVAILABILITY', 'availability');
-define('PRINTTYPE', 'printType');
-define('PUBLICATIONLOCATION', 'publicationLocation');
-define('PUBLICATIONDATE', 'publicationDate');
-define('PHONE', 'phone');
-define('RUC', 'ruc');
-define('BOOK_ID', 'book_id');
+
 
 class BookCopies extends Seeder
 {

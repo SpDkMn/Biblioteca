@@ -12,6 +12,7 @@ use App\Profile as Profile;
 use App\Author as Author;
 use Session;
 use Redirect;
+
 define('CATEGORY', 'category');
 define('TESIS', 'tesis/tesina');
 define('LIBRO', 'libro');
@@ -108,11 +109,11 @@ class AuthorController extends Controller
       $edit = Author::create([
          'name' => $request['name']
       ]);
-
       foreach ($request[CATEGORY] as $category) {
          $id = switchCategory($category);
          $edit->categories()->attach($id);
       }
+
 
       return redirect('admin/autor');
    }
@@ -155,7 +156,7 @@ class AuthorController extends Controller
       return redirect()->route(AUTOR_ROUTE);
    }
 
-   public function switchCategory($category)
+    private function switchCategory($category)
    {
       switch ($category) {
          case LIBRO:
