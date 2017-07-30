@@ -342,7 +342,7 @@
 </div>
 <!-- Script para mostrar los selectores luego de mostrar el editar -->
 <script type="text/javascript">
-				$('select').select2();
+				$('.select').select2(); //Colaboradores
         $(".selectEntidadAcademicaEdit").select2();
         $listaSecEdit = $("#selectEditorialSecondEdit").select2();
         $listaPrimEdit =  $("#selectEditorialMainEdit").select2({

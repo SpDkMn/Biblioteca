@@ -25,7 +25,7 @@
 			</div>
 
 			<div class="form-group">
-				<label>Categoria</label> <select class="form-control select2"
+				<label>Categoria</label> <select class="form-control selectCategoria"
 					multiple="multiple" data-placeholder="Seleccione la categoria"
 					name="category[]" style="width: 100%;" required>
 					<option>libro</option>
@@ -47,4 +47,8 @@
 	</form>
 
 </div>
-<!-- /.box -->
+<script type="text/javascript">
+$(function () {
+		$(".selectCategoria").select2();
+	});
+</script>
