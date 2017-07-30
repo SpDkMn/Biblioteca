@@ -291,7 +291,7 @@
 							<div class="form-group">
 								<label for="inputTitleContent">Contenido</label> <input
 									type="text" class="form-control"
-									name="{{'titleContent'.$contContent}}"
+									name="{{'titleContent[]'}}"
 									id="{{'inputTitleContent[]'}}" placeholder=""
 									value="{{$contenido->title}}">
 							</div>
@@ -342,6 +342,7 @@
 </div>
 <!-- Script para mostrar los selectores luego de mostrar el editar -->
 <script type="text/javascript">
+				$('.select').select2(); //Colaboradores
         $(".selectEntidadAcademicaEdit").select2();
         $listaSecEdit = $("#selectEditorialSecondEdit").select2();
         $listaPrimEdit =  $("#selectEditorialMainEdit").select2({

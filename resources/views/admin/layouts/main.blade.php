@@ -25,15 +25,17 @@
 
 <link rel="stylesheet" href="{{ URL::asset('css/AdminLTE.min.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('css/magazinesStyle.css')}}">
-<link rel="stylesheet"
-	href="{{URL::asset('css/dataTables.bootstrap.css')}}">
-<link rel="stylesheet"
-	href="{{ URL::asset('plugins/select2/select2.min.css') }}">
+<link rel="stylesheet" href="{{URL::asset('css/dataTables.bootstrap.css')}}">
+<link rel="stylesheet" href="{{ URL::asset('plugins/select2/select2.min.css') }}">
+
+<link rel="stylesheet" href="{{ URL::asset('plugins/fullcalendar/fullcalendar.css') }}">
+
 <link rel="stylesheet" href="{{ URL::asset('css/app.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('css/tableConfig.css')}}">
-
+	
 <script src="{{ URL::asset('js/jquery-2.2.3.min.js')}}"></script>
 <script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
+	
 
 <link rel="stylesheet"href="{{URL::asset('css/bootstrap-multiselect.css')}}">
 <script src="{{URL::asset('js/bootstrap-multiselect.js')}}"></script>
@@ -79,6 +81,11 @@
 	<script src="{{ URL::asset('js/fastclick.js')}}"></script>
 	<script src="{{ URL::asset('js/app.min.js')}}"></script>
 	<script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>
+	
+	<script src="{{URL::asset('plugins/fullcalendar/jquery-ui.min.js')}}"></script>
+	<script src="{{URL::asset('plugins/fullcalendar/moment.min.js')}}"></script>
+	<script src="{{URL::asset('plugins/fullcalendar/fullcalendar.min.js')}}"></script>
+
 	<script src="{{ URL::asset('js/dataTables.bootstrap.min.js')}}"></script>
 	<script src="{{ URL::asset('js/jquery.slimscroll.min.js')}}"></script>
 
@@ -136,16 +143,13 @@
 	@yield('scriptSelect') @yield('scriptModal')
 	@yield('scriptModalContent') @yield('script')
 	@yield('scriptSelectAutorPrincipal')
-
+	@yield('scripts')
 
 
 	<script>
   //Inicializador de los inputmask
   $("[data-mask]").inputmask();
 </script>
-
-
-	<script>$(function() {$(".select2").select2();});</script>
 
 
 </body>

@@ -12,16 +12,12 @@ class Authors extends Seeder
     */
    public function run()
    {
-      // Rellenando la tabla authors con 30 datos aleatorios
-      Author::Create([
-         'name' => 'Mauricio Espinoza Vargas'
-      ], [
-         'name' => 'Santiago Moquillaza Enriquez'
-      ], [
-         'name' => 'Luis Cayo Leon'
-      ], [
-         'name' => 'Tania Leyva Riveira'
-      ]);
+      Author::Create(['name' => 'Luis Cayo Leon']);
+      Author::Create(['name' => 'Santiago Moquillaza Enriquez']);
+      Author::Create(['name' => 'Mauricio Espinoza Vargas']);
+      Author::Create(['name' => 'Jose Mateo Carrasco']);
+      Author::Create(['name' => 'Jose Gonzales Villalobos']);
+      Author::Create(['name' => 'Facultad de Ingeniería de Sistemas e Información']);
+      Author::Create(['name' => 'Facultad de Ingeniería de Minas']);
    }
 }
-// Eliminar esta semilla cuando se tenga gestion author

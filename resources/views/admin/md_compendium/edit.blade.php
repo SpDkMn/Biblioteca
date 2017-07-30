@@ -205,7 +205,7 @@
 			<div class="box-footer">
 				<button type="submit" class="btn btn-primary" id="editMagazine">Editar</button>
 			</div>
-	
+
 	</form>
 </div>
 
@@ -278,8 +278,7 @@
                   // alert('Deshabilitando opcion '+$(this).text()+' valor '+ $(this).attr('value'));
                   //Reinicializando
                   reiniciarSelect('#listEditorialSecondEdit');
-                  // $('#listEditorialSecond').select2('destroy');
-                  // $('#listEditorialSecond').select2();
+              
                 }
               });
             }

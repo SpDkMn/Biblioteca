@@ -1,9 +1,6 @@
 <?php
 use Illuminate\Database\Seeder;
 
-define('EDITORIAL_ID', 'editorial_id');
-define('THESIS_ID', 'thesis_id');
-
 class EditorialThesis extends Seeder
 {
 

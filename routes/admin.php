@@ -41,3 +41,9 @@ Route::resource('book', 'BookController');
 Route::get('book/show', 'BookController@show')->name('book.show');
 Route::get('book/{book}/show2', 'BookController@show2')->name('book.show2');
 Route::get('book/{book}/show3', 'BookController@show3')->name('book.show3');
+
+Route::get('cargaEventos{id?}','CalendarController@index');
+Route::post('guardaEventos', array('as' => 'guardaEventos','uses' => 'CalendarController@create'));
+Route::post('actualizaEventos','CalendarController@update');
+Route::post('eliminaEvento','CalendarController@delete');
+
