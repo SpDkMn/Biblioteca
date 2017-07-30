@@ -25,63 +25,32 @@ class ConfigurationController extends Controller
     * @return \Illuminate\Http\Response
     */
    public function index()
-   {
+   {  
+     // return view('admin.md_configuration.showFeriados');
       $userTypes = UserType::all();
-      $verActivar = $editarActivar = true;
-      $verFeriado = $crearFeriado = $editarFeriado = $eliminarFeriado = true;
-      $verReserva = $crearReserva = $editarReserva = $eliminarReserva = true;
-      $verPrestamo = $crearPrestamo = $editarPrestamo = $eliminarPrestamo = true;
+
       $verDiasLaborables = $editarDiasLaborables = true;
       
       $showDiasLaborables = $editDiasLaborables = true;
+
+      $showFeriados = $editFeriados = true;
+
       if (true){
          $showDiasLaborables = view('admin.md_configuration.showDiasLaborables');
       }
-      // Recorremos cada uno de los permisos de 'Activar'
-      $showActivar = $editActivar = "";
+  
       if (true) {
          $showTipoUsuario = view('admin.md_configuration.showTipoUsuario', [
-            "editar" => $editarActivar,
             "userTypes" => $userTypes
          ]);
       }
       
-      // Recorremos cada uno de los permisos de 'Activar'
-      $showFeriado = $newFeriado = $editFeriado = $deleteFeriado = "";
-      if (true) {
-         $showFeriado = view('admin.md_configuration.showFeriado', [
-            "editar" => $editarActivar,
-            "crear" => $newFeriado,
-            "eliminar" => $eliminarFeriado
-         ]);
-      }
-      
-      // Recorremos cada uno de los permisos de 'Activar'
-      $showReserva = $newReserva = $editReserva = $deleteReserva = "";
-      if (true) {
-         $showReserva = view('admin.md_configuration.showReserva', [
-            "editar" => $editarReserva,
-            "crear" => $crearReserva,
-            "eliminar" => $eliminarReserva
-         ]);
-      }
-      
-      // Recorremos cada uno de los permisos de 'Activar'
-      $showPrestamo = $newPrestamo = $editPrestamo = $deletePrestamo = "";
-      if (true) {
-         $showPrestamo = view('admin.md_configuration.showPrestamo', [
-            "editar" => $editarPrestamo,
-            "crear" => $crearPrestamo,
-            "eliminar" => $eliminarPrestamo
-         ]);
-      }
+      $showFeriados = view('admin.md_configuration.showFeriados');
       
       return view('admin.md_configuration.index', [
          'showTipoUsuario' => $showTipoUsuario,
-         'showFeriado' => $showFeriado,
-         'showReserva' => $showReserva,
-         'showPrestamo' => $showPrestamo,
-         'showDiasLaborables' => $showDiasLaborables
+         'showDiasLaborables' => $showDiasLaborables,
+         'showFeriados' => $showFeriados
       ]);
    }
 
@@ -142,41 +111,10 @@ class ConfigurationController extends Controller
          ]);
       }
       
-      // Recorremos cada uno de los permisos de 'Activar'
-      $showFeriado = $newFeriado = $editFeriado = $deleteFeriado = "";
-      if (true) {
-         $showFeriado = view('admin.md_configuration.showFeriado', [
-            "editar" => $editarActivar,
-            "crear" => $newFeriado,
-            "eliminar" => $eliminarFeriado
-         ]);
-      }
-      
-      // Recorremos cada uno de los permisos de 'Activar'
-      $showReserva = $newReserva = $editReserva = $deleteReserva = "";
-      if (true) {
-         $showReserva = view('admin.md_configuration.showReserva', [
-            "editar" => $editarReserva,
-            "crear" => $crearReserva,
-            "eliminar" => $eliminarReserva
-         ]);
-      }
-      
-      // Recorremos cada uno de los permisos de 'Activar'
-      $showPrestamo = $newPrestamo = $editPrestamo = $deletePrestamo = "";
-      if (true) {
-         $showPrestamo = view('admin.md_configuration.showPrestamo', [
-            "editar" => $editarPrestamo,
-            "crear" => $crearPrestamo,
-            "eliminar" => $eliminarPrestamo
-         ]);
-      }
+    
       
       return view('admin.md_configuration.index', [
          'showTipoUsuario' => $showTipoUsuario,
-         'showFeriado' => $showFeriado,
-         'showReserva' => $showReserva,
-         'showPrestamo' => $showPrestamo,
          'showDiasLaborables' => $showDiasLaborables
       ]);
    }

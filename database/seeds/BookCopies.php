@@ -3,6 +3,11 @@ use Illuminate\Database\Seeder;
 
 use App\BookCopy as BookCopy;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> e4f94eab83036b90581060e078051096c072bd75
 class BookCopies extends Seeder
 {
 

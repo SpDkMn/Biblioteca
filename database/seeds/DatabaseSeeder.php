@@ -11,14 +11,18 @@ class DatabaseSeeder extends Seeder
     */
    public function run()
    {
+      $this->call(Constantes::class);
       $this->call(Profiles::class);
       $this->call(Employees::class);
       $this->call(Thesiss::class);
       $this->call(ThesisCopies::class);
       $this->call(ChaptersThesis::class);
       $this->call(Authors::class);
+      $this->call(AuthorThesis::class);
+
       $this->call(Editorials::class);
       $this->call(Categories::class);
+<<<<<<< HEAD
       $this->call(Author_category::class);
       $this->call(Author_thesis::class);
       $this->call(Editorial_thesis::class);
@@ -34,6 +38,18 @@ class DatabaseSeeder extends Seeder
       // $this->call(ThesisCopies::class);
       // $this->call(ChaptersThesis::class);
       // llenando tablas pivotes
+=======
+      $this->call(AuthorCategory::class);
+      $this->call(EditorialThesis::class);
+      $this->call(EditorialCategory::class);
+      //$this->call(Noticias::class);
+      $this->call(Configuration1::class);
+      $this->call(UserTypes::class);
+      $this->call(Magazines::class);
+      $this->call(MagazineCopy::class);
+      $this->call(Contenidos::class);
+
+
+>>>>>>> e4f94eab83036b90581060e078051096c072bd75
    }
 }
-

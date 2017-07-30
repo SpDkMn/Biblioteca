@@ -20,8 +20,11 @@
 			<div class="col-md-12 " id="div-content">{!!$showTipoUsuario!!}</div>
 		</div>
 		<div class="row">
+			<div class="col-md-12 " id="div-content">{!!$showFeriados!!}</div>
+		</div>
+		<div class="row">
 			<div class="col-md-6" id="div-new">{!!$showDiasLaborables!!}</div>
-			<div class="col-md-6" id="div-new">{!!$showFeriado!!}</div>
+			<div class="col-md-6" id="div-new"></div>
 
 		</div>
 

@@ -14,6 +14,7 @@ class Editorials extends Seeder
    public function run()
    {
       // Rellenando la tabla authors para la prueba de revistas
+<<<<<<< HEAD
       Editorial::Create([
          'name' => 'Universidad Nacional Mayor de San Marcos'
       ]);
@@ -29,6 +30,15 @@ class Editorials extends Seeder
       Editorial::Create([
          'name' => 'Bruño'
       ]);
+=======
+      Editorial::Create([NAME => 'Universidad Nacional Mayor de San Marcos']);
+      Editorial::Create([NAME => 'Universidad Nacional Federico Villareal']);
+      Editorial::Create([NAME => 'Universidad Nacional de Ingeniería']);
+      Editorial::Create([NAME => 'Anaya Multimendia']);
+      Editorial::Create([NAME => 'Ecoe Ediciones']);
+      Editorial::Create([NAME => 'Solver-Maquin']);
+      Editorial::Create([NAME => 'Bruño']);
+>>>>>>> e4f94eab83036b90581060e078051096c072bd75
    }
 }
 // Eliminar esta semilla cuando se tenga gestion editorial

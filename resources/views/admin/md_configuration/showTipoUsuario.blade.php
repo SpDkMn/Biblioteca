@@ -82,8 +82,8 @@
 
       for(i=0;i<pDomicilio.length;i++){
         if(pDomicilio[i].checked){
-          tPrestamo.disabled = false;
-          cDomicilio.disabled = false;
+          tPrestamo[i].disabled = false;
+          cDomicilio[i].disabled = false;
         }else{
           tPrestamo[i].value = " ";
           tPrestamo[i].disabled =true;

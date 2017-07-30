@@ -89,12 +89,12 @@ class CompendiumController extends Controller
       while ($request['titleContent' . $contador_contenido] != null) {
          $contador_contenido ++;
       }
-      
+
       // Contando las copias de la compendio
       while ($request['incomeNumber' . $contador_copia] != null) {
          $contador_copia ++;
       }
-      
+
       // Guardando los datos de la compendio
       Compendium::create([
          'title' => $request['title'],
@@ -107,8 +107,6 @@ class CompendiumController extends Controller
       ]);
       // Guardamos los registros de las compendios
       $compendios = Compendium::all();
-      // Guardamos los registros de las editoriales para el pivote
-      Editorial::all();
       // Capturando id de la compendio ingresada
       foreach ($compendios as $compendio) {
          $i = 0;
@@ -117,7 +115,7 @@ class CompendiumController extends Controller
          }
          $i ++;
       }
-      
+
       // Guardando datos de las copias de compendios
       for ($j = 0; $j < $contador_copia; $j ++) {
          CompendiumCopy::create([
@@ -143,8 +141,6 @@ class CompendiumController extends Controller
             $cont = 0;
             foreach ($compendio->contents as $content) {
                // Si el contenido esta relacionado con la compendio
-               // recorremos el arreglo con los id de los colaboradores para asociarlos al contenido
-               // Si el arreglo colaborador no esta vacio
                if ($content->compendium_id == $id_compendium && $request["collaborator" . $cont] != null) {
                   foreach ($request["collaborator" . $cont] as $id) {
                      $content->authors()->attach($id);
@@ -199,13 +195,12 @@ class CompendiumController extends Controller
       while ($request['titleContent' . $contador_contenido] != null) {
          $contador_contenido ++;
       }
-      
+
       // COPIAS DE compendio
       // Items antes de editar
       $countB = count($copiasR);
       // Items luego de editar
       $countA = sizeof($request['incomeNumber']);
-      // ********************************************************************************************************
       // Actualizando datos de compendio
       $compendio->title = $request['title'];
       $compendio->introduccion = $request['introduccion'];
