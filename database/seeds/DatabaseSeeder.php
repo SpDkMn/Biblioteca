@@ -25,10 +25,9 @@ class DatabaseSeeder extends Seeder
       $this->call(Author_category::class);
       $this->call(Author_thesis::class);
       $this->call(Editorial_thesis::class);
-      $this->call(Editorial_category::class);
+
       $this->call(Noticias::class);
       $this->call(Configuration1::class);
-      $this->call(User_types::class);
       
       // $this->call(Books::class);
       // $this->call(BookCopies::class);;
@@ -37,7 +36,7 @@ class DatabaseSeeder extends Seeder
       // $this->call(ThesisCopies::class);
       // $this->call(ChaptersThesis::class);
       // llenando tablas pivotes
-      $this->call(EditorialThesis::class);
+
       $this->call(EditorialCategory::class);
       $this->call(UserTypes::class);
       $this->call(Magazines::class);

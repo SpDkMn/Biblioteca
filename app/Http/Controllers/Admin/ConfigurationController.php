@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// Para usar el objeto Auth
+// Para usar el objeto Auth 
 use Illuminate\Support\Facades\Auth;
 // Para usar el Modelo User
 use App\Configuration as Configuration;
@@ -27,6 +27,9 @@ class ConfigurationController extends Controller
    public function index()
    {  
      // return view('admin.md_configuration.showFeriados');
+
+
+
       $userTypes = UserType::all();
 
       $verDiasLaborables = $editarDiasLaborables = true;

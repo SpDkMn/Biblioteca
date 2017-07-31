@@ -18,9 +18,9 @@ class EditorialController extends Controller
 
    public function index(Request $request)
    {
+
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
-
 
 
       // Verifica si se envio "category" por metodo get , FILTROS de busqueda
@@ -33,7 +33,7 @@ class EditorialController extends Controller
          // Entonces categories 0 = 2 y categories 1 = 3
          $i = 0;
          foreach ($request->get('category') as $category) {
-            $categories[$i] = switchCategory($category);
+            $categories[$i] = $this->switchCategory($category);
             $i = $i + 1;
          }
       }
