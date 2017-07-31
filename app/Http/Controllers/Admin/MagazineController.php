@@ -82,7 +82,7 @@ class MagazineController extends Controller
       $contador_contenido = 0;
       $contador_copia = 0;
       // Contando los contenidos de la revista
-      $contador_contenido = sizeof($request['titleContent']);;
+      $contador_contenido = sizeof($request['titleContent']);
       // Contando las copias de la revista
       $contador_copia = sizeof($request['incomeNumber']);
       //VALIDANDO DATOS DE ENTRADA

@@ -45,7 +45,8 @@
                break;
             case 'asesor':
                $id_6 = true;
-               break;   
+               break;
+            default:
          }
       }
       

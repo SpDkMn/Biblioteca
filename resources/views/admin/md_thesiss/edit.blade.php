@@ -67,7 +67,7 @@
                                     
                                     <?php 
                                         foreach($thesis->authors as $aut){
-                                          if($aut->id == $autor->id && $aut->pivot->type == true){
+                                          if($aut->id == $autor->id && $aut->pivot->type){
                                             echo "selected";
                                             break;
                                           }
@@ -90,7 +90,7 @@
                                   <option value="{{ $autor->id }}"
                                       <?php 
                                         foreach($thesis->authors as $aut){
-                                          if($aut->id == $autor->id && $aut->pivot->type == false){
+                                          if($aut->id == $autor->id && !$aut->pivot->type){
                                             echo "selected";
                                             break;
                                           }

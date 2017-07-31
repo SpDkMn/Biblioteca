@@ -38,6 +38,7 @@
             case 'compendio':
                $id_4 = true;
                break;
+            default:
          }
       }
       ?>

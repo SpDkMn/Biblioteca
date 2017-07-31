@@ -1,0 +1,24 @@
+SonarQube plugins:
+  - C# 5.10.1.1411 (csharp)
+  - Python 1.7.0.1195 (python)
+  - SonarJava 4.9.0.9858 (java)
+  - Spanish Pack 1.13 (l10nes)
+  - Flex 2.3 (flex)
+  - Git 1.2 (scmgit)
+  - SonarXML 1.4.2.885 (xml)
+  - SonarPHP 2.10.0.2087 (php)
+  - SVN 1.4.0.522 (scmsvn)
+  - SonarJS 3.0.0.4962 (javascript)
+Global properties:
+  - sonar.core.id=AV1HCoEUo6KaoXer3RIf
+  - sonar.core.startTime=2017-07-30T19:02:53-0500
+  - sonar.cpd.cross_project=true
+Settings for module: org.spdkmn:Biblioteca
+  - sonar.host.url=http://localhost:4950
+  - sonar.projectBaseDir=C:\Users\SpDkMn\Desktop\Laravel\Code\Biblioteca
+  - sonar.projectKey=org.spdkmn:Biblioteca
+  - sonar.projectName=Application Biblioteca
+  - sonar.projectVersion=0.5
+  - sonar.sourceEncoding=UTF-8
+  - sonar.sources=app,resources,routes,database
+  - sonar.working.directory=C:\Users\SpDkMn\Desktop\Laravel\Code\Biblioteca\.scannerwork

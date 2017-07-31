@@ -1,6 +1,0 @@
-projectKey=org.spdkmn:Biblioteca
-serverUrl=http://localhost:4950
-serverVersion=6.4.0.25310
-dashboardUrl=http://localhost:4950/dashboard/index/org.spdkmn:Biblioteca
-ceTaskId=AV2Knit6KfwqJNvBbAvo
-ceTaskUrl=http://localhost:4950/api/ce/task?id=AV2Knit6KfwqJNvBbAvo
