@@ -11,6 +11,7 @@
 <!--Estilos de la ventana  modal-->
 <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css')}}">
 @yield('css')
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans">
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -24,7 +25,6 @@
 <link rel="stylesheet" href="{{ URL::asset('css/estiloLibros.css')}}">
 
 <link rel="stylesheet" href="{{ URL::asset('css/AdminLTE.min.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('css/magazinesStyle.css')}}">
 <link rel="stylesheet" href="{{URL::asset('css/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('plugins/select2/select2.min.css') }}">
 
@@ -32,13 +32,15 @@
 
 <link rel="stylesheet" href="{{ URL::asset('css/app.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('css/tableConfig.css')}}">
-	
+
 <script src="{{ URL::asset('js/jquery-2.2.3.min.js')}}"></script>
 <script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
-	
+
 
 <link rel="stylesheet"href="{{URL::asset('css/bootstrap-multiselect.css')}}">
 <script src="{{URL::asset('js/bootstrap-multiselect.js')}}"></script>
+<link rel="stylesheet" href="{{ URL::asset('css/SearchStyle.css')}}">
+
 
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -81,7 +83,7 @@
 	<script src="{{ URL::asset('js/fastclick.js')}}"></script>
 	<script src="{{ URL::asset('js/app.min.js')}}"></script>
 	<script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>
-	
+
 	<script src="{{URL::asset('plugins/fullcalendar/jquery-ui.min.js')}}"></script>
 	<script src="{{URL::asset('plugins/fullcalendar/moment.min.js')}}"></script>
 	<script src="{{URL::asset('plugins/fullcalendar/fullcalendar.min.js')}}"></script>
@@ -91,7 +93,8 @@
 
 	<script src="{{ URL::asset('js/bootstrap-datetimepicker.min.js')}}"></script>
 	<script src="{{ URL::asset('js/bootstrap-datetimepicker.pt-PE.js')}}"></script>
-	<!--<script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>-->
+	<!-- No desactiven el input mask -->
+	<script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>
 
 	<script type="text/javascript">
     //fecha + hora formato 24 horas
@@ -150,12 +153,17 @@
   //Inicializador de los inputmask
   $("[data-mask]").inputmask();
 </script>
+<script type="text/javascript">
 
+( function() {
+$('#btn-search').on('click', function(e) {
 
-<<<<<<< HEAD
-=======
+  e.preventDefault();
+  $('#search').animate({width: 'toggle'}).focus();
 
+});
 
->>>>>>> 0a091d4291fc9cd233e64aafe56e8f2b81b4c324
+} () );
+</script>
 </body>
 </html>
