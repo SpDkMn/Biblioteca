@@ -67,100 +67,80 @@
 												required>
 										</div>
 
-										<!--4. Autor -->
+
+										
 										<div class="form-group">
-											<label>Autor</label>
-											<!--4.1. Autor Principal -->
-											<p>
-                                &nbsp&nbsp&nbsp&nbspPrincipal<?php   for($i=0;$i<20;$i++){echo "&nbsp";}?>:&nbsp&nbsp&nbsp&nbsp
-                                <select class="form-control select2"
-													name="primaryAuthor[]" multiple="multiple"
-													style="width: 66%;"> @foreach($autores as $autor)
+											<label>Autor Principal</label> <select
+												class="form-control select2" name="primaryAuthor[]"
+												multiple="multiple""> @foreach($autores as $autor)
 													@foreach($autor->categories as $category) @if($category->id
 													== 1)
 													<option value="{{ $autor->id }}"
 														<?php
-            foreach ($book->authors as $a) {
-               if ($a->id == $autor->id && $a->pivot->type) {
-                  echo " selected ";
-                  break;
-               }
-            }
-            ?>>{{$autor->name}}</option> @endif @endforeach @endforeach
-												</select>
-											</p>
-											<!--4.1. Fin Autor Principal-->
+											            foreach ($book->authors as $a) {
+											               if ($a->id == $autor->id && $a->pivot->type) {
+											                  echo " selected ";
+											                  break;
+											               }
+											            }
+											            ?>
+           										 	>{{$autor->name}}</option> @endif @endforeach @endforeach
+											</select>
+										</div>
 
-
-											<!-- 4.2. Autor Secundario -->
-											<p>
-                                &nbsp&nbsp&nbsp&nbspSecundario<?php   for($i=0;$i<15;$i++){echo "&nbsp";}?>:&nbsp&nbsp&nbsp&nbsp
-                                <select class="form-control select2"
-													name="secondaryAuthor[]" multiple="multiple"
-													style="width: 66%;"> @foreach($autores as $autor)
+										<div class="form-group">
+											<label>Autor Secundario</label> <select
+												class="form-control select2" name="secondaryAuthor[]"
+												multiple="multiple">@foreach($autores as $autor)
 													@foreach($autor->categories as $category) @if($category->id
 													== 1)
 													<option value="{{ $autor->id }}"
 														<?php
-            foreach ($book->authors as $a) {
-               if ($a->id == $autor->id && !$a->pivot->type) {
-                  echo " selected ";
-                  break;
-               }
-            }
-            ?>>{{$autor->name}}</option> @endif @endforeach @endforeach
-												</select>
-											</p>
-											<!--4.2. Fin Autor Secundario -->
+											            foreach ($book->authors as $a) {
+											               if ($a->id == $autor->id && !$a->pivot->type) {
+											                  echo " selected ";
+											                  break;
+											               }
+											            }?>
+											        >{{$autor->name}}</option> @endif @endforeach @endforeach
+											</select>
 										</div>
-										<!--4. Fin Autor -->
-										<!-- 5. Editorial -->
+
 										<div class="form-group">
-											<label>Editorial</label>
-											<!-- 5.1. Editorial Principal -->
-											<p>
-                                  &nbsp&nbsp&nbsp&nbspPrincipal<?php   for($i=0;$i<20;$i++){echo "&nbsp";}?>:&nbsp&nbsp&nbsp&nbsp
-                                  <select class="form-control select2"
-													name="editorial[]" style="width: 66%;">
-													@foreach($editoriales as $editorial)
+											<label>Editorial</label> <select class="form-control select2"
+												name="editorial[]"">@foreach($editoriales as $editorial)
 													@foreach($editorial->categories as $category)
 													@if($category->name == "libro"){
 													<option value="{{ $editorial->id }}"
 														<?php
-            foreach ($book->editorials as $e) {
-               if ($e->id == $editorial->id && $e->pivot->type) {
-                  echo " selected ";
-                  break;
-               }
-            }
-            ?>>{{$editorial->name}}</option> }@endif @endforeach
-													@endforeach
-												</select>
-											</p>
-											<!-- 5.1. Fin Editorial Principal -->
-											<!-- 5.2. Editorial Secundaria -->
-											<p>
-                                  &nbsp&nbsp&nbsp&nbspAnexo<?php   for($i=0;$i<25;$i++){echo "&nbsp";}?>:&nbsp&nbsp&nbsp&nbsp
-                                  <select class="form-control select2"
-													name="secondaryEditorial[]" multiple="multiple"
-													style="width: 66%;"> @foreach($editoriales as $editorial)
-													@foreach($editorial->categories as $category)
-													@if($category->name == "libro"){
-													<option value="{{ $editorial->id }}"
-														<?php
-            foreach ($book->editorials as $e) {
-               if ($e->id == $editorial->id && !$e->pivot->type) {
-                  echo " selected ";
-                  break;
-               }
-            }
-            ?>>{{$editorial->name}}</option> }@endif @endforeach
-													@endforeach
-												</select>
-											</p>
-											<!-- 5.2. Fin Editorial Secundario -->
+											            foreach ($book->editorials as $e) {
+											               if ($e->id == $editorial->id && $e->pivot->type) {
+											                  echo " selected ";
+											                  break;
+											               }
+											            }?>
+											        >{{$editorial->name}}</option> }@endif @endforeach @endforeach
+											</select>
 										</div>
-										<!-- 5. Fin Editorial -->
+
+										<div class="form-group">
+											<label>Anexos</label> <select class="form-control select2"
+												name="secondaryEditorial[]" multiple="multiple">@foreach($editoriales as $editorial)
+												@foreach($editorial->categories as $category)
+													@if($category->name == "libro"){
+													<option value="{{ $editorial->id }}"
+														<?php
+											            foreach ($book->editorials as $e) {
+											               if ($e->id == $editorial->id && !$e->pivot->type) {
+											                  echo " selected ";
+											                  break;
+											               }
+											            }?>
+											        >{{$editorial->name}}</option> }@endif @endforeach @endforeach
+											</select>
+										</div>
+
+										
 
 									</div>
 									<!-- End Box-body -->
@@ -184,9 +164,9 @@
 										<div class="form-group">
 											<label>Capitulos</label>
 											<div id="contenedor">
-                            @foreach($book->chapters as $c)
-                            <?php $cont=$c->number-1; ?>
-                              <div class="input-group">
+					                            @foreach($book->chapters as $c)
+					                            <?php $cont=$c->number-1; ?>
+					                              <div class="input-group">
 													<span class="input-group-addon">{{$c->number}}</span> <input
 														type="text" id="campo_{{$cont}}" name="chapter[{{$cont}}]"
 														class="form-control" value="{{$c->name}}" required>
@@ -327,7 +307,7 @@
 													<li class="active"><a href="#primero{{$cont2}}"
 														data-toggle="tab">Primero</a></li>
 													<li><a href="#segundo{{$cont2}}" data-toggle="tab">Segundo</a></li>
-													<li><a href="#tercero{{$cont2}}" data-toggle="tab">Tercero</a></li>
+													
 												</ul>
 
 												<div class="tab-content">
@@ -335,7 +315,7 @@
 														<div class="box-body">
 															<div class="form-group">
 																<label>clasificacion</label> <input type="text"
-																	class="form-control" value="{{$bc->clasification}}">
+																	class="form-control" value="{{$bc->clasification}}" disabled="true">
 															</div>
 															<div class="form-group">
 																<label>Numero de Ingreso</label> <input type="text"
@@ -413,11 +393,6 @@
 																	value="{{$bc->acquisitionDate}}" required>
 															</div>
 
-														</div>
-													</div>
-
-													<div class="tab-pane fade" id="tercero{{$cont2}}">
-														<div class="box-body">
 															<div class="form-group">
 																<label>Tipo de Impresion</label> <select
 																	class="form-control select2"
@@ -479,6 +454,9 @@
 
 			<div class="box-footer">
 				<button type="submit" class="btn btn-primary">Editar</button>
+				<a href="#0" type="button"
+								class="button-content btn btn-warning" id="crearLibro"><i
+								class="fa fa-book"></i>Crear Libros</a> 
 			</div>
 	
 	</form>
@@ -609,6 +587,13 @@
 
 <script>
   $(document).ready(function() {
+
+  	$("#crearLibro").on('click',function(event){ 
+        $id = $(this).data('id');
+        $("#div-new").html('<div class="box box-warning box-solid"><div class="box-header with-border"><h3 class="box-title">Cargando</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>')
+        $("#div-new").load('{{ url("/admin/book/create") }}');
+     })
+
     var MaxInputs       = 100; //Número Maximo de Campos
     var contenedor       = $("#contenedor"); //ID del contenedor
     var AddButton       = $("#agregarCampo"); //ID del Botón Agregar
@@ -642,5 +627,5 @@
         //Initialize Select2 Elements
         $(".select2").select2();
       });
-    </script>
+</script>
 

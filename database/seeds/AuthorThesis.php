@@ -13,22 +13,25 @@ class AuthorThesis extends Seeder
     */
    public function run()
    {
+       DB::table('author_thesis')->insert([
+         'author_id' => 1,
+         'thesis_id' => 1,
+         'type' => 1
+      ]);
       DB::table('author_thesis')->insert([
-         AUTHOR_ID => 1,
-         THESIS_ID => 1,
-         TYPE => 1
-      ], [
-         AUTHOR_ID => 2,
-         THESIS_ID => 1,
-         TYPE => 0
-      ], [
-         AUTHOR_ID => 3,
-         THESIS_ID => 1,
-         TYPE => 0
-      ], [
-         AUTHOR_ID => 2,
-         THESIS_ID => 2,
-         TYPE => 1
+         'author_id' => 2,
+         'thesis_id' => 1,
+         'type' => 0
+      ]);
+      DB::table('author_thesis')->insert([
+         'author_id' => 3,
+         'thesis_id' => 1,
+         'type' => 0
+      ]);
+      DB::table('author_thesis')->insert([
+         'author_id' => 2,
+         'thesis_id' => 2,
+         'type' => 1
       ]);
    }
 }

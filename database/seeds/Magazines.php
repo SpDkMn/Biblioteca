@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Magazine as Magazine ;
+use App\Magazine as Magazine;
+
 class Magazines extends Seeder
 {
     /**
@@ -11,7 +12,7 @@ class Magazines extends Seeder
      */
     public function run()
     {
-        Magazine::Create([
+         Magazine::Create([
           'title' => 'Algorithmic',
           'volumen' => '3',
           'numero' => '4',

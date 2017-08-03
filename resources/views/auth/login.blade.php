@@ -58,13 +58,13 @@ input[type="submit"] {
 }
 
 #letra_contra, #letra_dni {
-	font-size: 20px;
+	font-size: 20px; 
 	margin-left: 5px;
 }
 </style>
 <div class="container boxlogin">
 	<form class="form-horizontal" role="form" name="flogin" id="flogin"
-		method="POST" action="{{ route('login') }}">
+		method="POST" action="{{ route('login') }}" value="{{ csrf_token() }}">
 
 		{{ csrf_field() }}
 
@@ -74,7 +74,7 @@ input[type="submit"] {
 			<label for="dni" id="letra_dni">Usuario:</label>
 			<div>
 				<input type="text" class="form-control" id="username"
-					placeholder="Username" name="username">
+					placeholder="Username" name="username" onkeyup="Boton()"/>
 			</div>
 		</div>
 
@@ -83,7 +83,7 @@ input[type="submit"] {
 
 			<div>
 				<input id="password" type="password" class="form-control"
-					name="password" required> @if ($errors->has('password')) <span
+					name="password" required  onkeyup="Boton()"/> @if ($errors->has('password')) <span
 					class="help-block"> <strong>{{ $errors->first('password') }}</strong>
 				</span> @endif
 			</div>
@@ -92,12 +92,50 @@ input[type="submit"] {
 
 
 		<div id="botones_login">
-			<button type="submit" class="btn btn-success">Login</button>
+			<button type="submit" id="boton" class="btn btn-success" disabled>Login</button>
 
-			<a class="btn btn-link" href="{{ route('password.request') }}">
-				Forgot Your Password? </a>
+			<a class="btn btn-link" >
+				Forgot Your Password? </a> 
 		</div>
 
 	</form>
 </div>
+<?php
+use Illuminate\Support\Facades\Crypt;
+use App\User as User;
+use App\Employee as Employee;
+	$usuarios = User::all();
+	$empleados = Employee::all();
+	
+	$cont=0;
+	foreach ($empleados as $empleado) {
+		foreach ($usuarios as $usuario) {
+			if($empleado->user_id == $usuario->id){
+				$usuario['password2']= Crypt::decrypt($empleado->password);
+				$users[$cont]=$usuario;
+				$cont++;
+			}
+		}
+	}
+	$objJson = json_encode($users);
+?>
+<script type="text/javascript">
+	function Boton(){
+
+		var usuarios = eval(<?php echo $objJson; ?>);
+		var password = document.getElementById("password");
+		var username = document.getElementById("username");
+		var boton = document.getElementById("boton");
+		for(i=0;i<usuarios.length;i++){
+			
+			if(usuarios[i].email == username.value && usuarios[i].password2 == password.value){
+				boton.disabled=false;
+				break;
+			}
+			else{
+				boton.disabled=true;
+			}
+		}	
+	}
+</script>
 @endsection

@@ -19,7 +19,7 @@
     
     <div class="box box-success box-solid">
       <div class="box-header with-border">
-            <h3 class="box-title">Libro</h3>
+            <h3 class="box-title">Edición de Tesis y Tesina</h3>
             <div class="box-tools pull-right"> 
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -140,9 +140,12 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="escuela">E . A . P : </label>
-                      <input type="text" class="form-control" name="escuela" value="{{$thesis->escuela}}" id="inputEscuela" placeholder="">
-                    </div>
+                      <label>E . A . P : </label>
+                      <select class="form-control select2" name="escuela" value="{{$thesis->escuela}}" style="width: 100%;">
+                        <option name="escuela">Ingeniería de Sistemas</option>
+                        <option name="escuela">Ingeniería de Software</option>
+                      </select>
+                  </div>
 
                   </div>
                 </div>
@@ -154,17 +157,17 @@
                  <div class="box-body">                                         
                      <div class="form-group">
                         <label for="inputEdition">Edicion</label>
-                        <input type="text" class="form-control solo-numeros" value="{{$thesis->edition}}" name="edition" id="inputEdition" placeholder="">
+                        <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" value="{{$thesis->edition}}" name="edition" id="inputEdition" placeholder="">
                      </div>
 
                      <div class="form-group">
                         <label for="inputEXTENSION">Extension</label>
-                        <input type="text" class="form-control solo-numeros" value="{{$thesis->extension}}" name="extension" id="inputEXTENSION" placeholder="">
+                        <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" value="{{$thesis->extension}}" name="extension" id="inputEXTENSION" placeholder="_ _ _">
                      </div>
 
                      <div class="form-group">
                         <label for="inputEXTENSION">Dimensiones</label>
-                        <input type="text" class="form-control" value="{{$thesis->dimensions}}" name="dimension" id="inputEXTENSION" placeholder="">
+                        <input type="text" class="form-control" value="{{$thesis->dimensions}}" name="dimension" id="inputEXTENSION" placeholder="_ _ x _ _">
                      </div>
 
                      <div class="form-group">
@@ -177,13 +180,39 @@
                         <input type="text" class="form-control" value="{{$thesis->accompaniment}}" name="materialad" id="inputEXTENSION" placeholder="">
                      </div>
 
-                     <div class="form-group">
-                        <label for="inputEXTENSION">Ubicacion</label>
-                        <input type="text" class="form-control" value="{{$thesis->location}}" name="ubicacion" id="inputEXTENSION" value="Stand ">
-                     </div>
+                   <div class="form-group">
+                      <label>Ubicación </label>
+                      <select class="form-control select2" value="{{$thesis->location}}" name="ubicacion" style="width: 100%;">
+                        <option name="ubicacion">Stand A1</option>
+                        <option name="ubicacion">Stand A2</option>
+                        <option name="ubicacion">Stand A3</option>
+                        <option name="ubicacion">Stand A4</option>
+                        <option name="ubicacion">Stand A5</option>
+                        <option name="ubicacion">Stand B1</option>
+                        <option name="ubicacion">Stand B2</option>
+                        <option name="ubicacion">Stand B3</option>
+                        <option name="ubicacion">Stand B4</option>
+                        <option name="ubicacion">Stand B5</option>
+                        <option name="ubicacion">Stand C1</option>
+                        <option name="ubicacion">Stand C2</option>
+                        <option name="ubicacion">Stand C3</option>
+                        <option name="ubicacion">Stand C4</option>
+                        <option name="ubicacion">Stand C5</option>
+                        <option name="ubicacion">Stand D1</option>
+                        <option name="ubicacion">Stand D2</option>
+                        <option name="ubicacion">Stand D3</option>
+                        <option name="ubicacion">Stand D4</option>
+                        <option name="ubicacion">Stand D5</option>
+                        <option name="ubicacion">Stand E1</option>
+                        <option name="ubicacion">Stand E2</option>
+                        <option name="ubicacion">Stand E3</option>
+                        <option name="ubicacion">Stand E4</option>
+                        <option name="ubicacion">Stand E5</option>
+                      </select>
+                  </div>
 
                      <div class="form-group">
-                        <label for="inputEXTENSION">Lugar de sustentacion</label>
+                        <label for="inputEXTENSION">Lugar de publicacion</label>
                         <input type="text" class="form-control" value="{{$thesis->publicationLocation}}" name="lugarsus" id="inputEXTENSION" value="Facultad de Ingeniería de Sistemas">
                      </div>   
                 </div>     
@@ -231,7 +260,7 @@
               @if($loop->first)
                   <div class="box box-default box-solid" id="{{'itemPanel'.$contItem}}">
                        <div class="box-header">
-                         <h3 class="box-title ">Item 1</h3>
+                         <h3 class="box-title ">Item Principal</h3>
                           <div class="box-tools pull-right">
                             <button type="button" name="copy0" id="agregarItemEdit" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
                           </div>
@@ -240,15 +269,15 @@
                     
                             <div class="form-group">
                                 <label for="inputIncomeNumber">Nº Ingreso</label>
-                                <input type="text" class="form-control solo-numeros" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="">
+                                <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="_ _ _ _ _ _ _ _">
                             </div>
                             <div class="form-group">
                                 <label for="inputBarcode">Código de barra</label>
-                                <input type="text" class="form-control solo-numeros" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
+                                <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
                             </div>
                             <div class="form-group">
                               <label for="inputCopy">Ejemplar</label>
-                              <input type="text" style="background:white;width:54px;" value="1" class="form-control solo-numeros" name="copy0" id="inputCopy" placeholder="" required>
+                              <input type="text" onkeypress="return isNumberKey(event)" value="1" class="form-control" name="copy0" id="inputCopy" placeholder="" required>
                             </div>
  
                          </div>
@@ -257,7 +286,7 @@
               @else
                  <div class="BoxItemThesiss box box-default box-solid" id="{{'itemPanel'.$contItem}}" >
                       <div class="box-header">
-                          <h3 class="panel-title">Item {{$contItem +1}}</h3>
+                          <h3 class="panel-title">Item Secundario</h3>
                           <div class="box-tools pull-right">
                             <button type="button" data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button>
                           </div>
@@ -266,15 +295,15 @@
                           
                           <div class="form-group">
                               <label for="inputIncomeNumber">Nº Ingreso</label>
-                              <input type="text" class="form-control solo-numeros" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="">
+                              <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="_ _ _ _ _ _ _ _">
                           </div>
                           <div class="form-group">
                               <label for="inputBarcode">Código de barra</label>
-                              <input type="text" class="form-control solo-numeros" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
+                              <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" value="{{$item->barcode}}" name="{{'barcode'.$contItem}}" id="inputBarcode" placeholder="">
                           </div>
                           <div class="form-group">
                               <label for="inputCopy">Ejemplar</label>
-                              <input type="text" style="background:white;width:54px;" value="{{$contItem + 1}}" class="form-control solo-numeros" name="{{'copy'.$contItem}}" id="inputCopy" placeholder="" required>
+                              <input type="text" onkeypress="return isNumberKey(event)" value="{{$contItem + 1}}" class="form-control solo-numeros" name="{{'copy'.$contItem}}" id="inputCopy" placeholder="" required>
                           </div>                          
                       </div>
 
@@ -351,22 +380,22 @@
           $('#agregarItemEdit').click(function(){
             // Guardar el panel donde se encuentra la seccion contenido
             var container = $('#itemPanel0');
-            var titleItem = '<h3 class="box-title">Item '+(idCont+1)+'</h3>';
+            var titleItem = '<h3 class="box-title">Item Secundario</h3>';
             var buttonClose ='<div class="box-tools pull-right"><button type="button"  data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button> </div>';
             var itemHeader = '<div class="box-header">'+titleItem+buttonClose+'</div>'
             var itemBody = '<div class="box-body">'+
                                   
                                   '<div class="form-group">'+
                                       '<label for="inputIncomeNumber">Nº Ingreso</label>'+
-                                      '<input type="text" class="form-control solo-numeros" name="incomeNumber'+idCont+'" id="inputIncomeNumber" placeholder="_ _ _ _ _ _">'+
+                                      '<input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" name="incomeNumber'+idCont+'" id="inputIncomeNumber" placeholder="_ _ _ _ _ _ _ _">'+
                                   '</div>'+
                                   '<div class="form-group">'+
                                       '<label for="inputBarcode">Código de barra</label>'+
-                                      '<input type="text" value="20000000" class="form-control solo-numeros" name="barcode'+idCont+'" id="inputBarcode" placeholder="">'+
+                                      '<input type="text" onkeypress="return isNumberKey(event)" value="20000000" class="form-control solo-numeros" name="barcode'+idCont+'" id="inputBarcode" placeholder="">'+
                                   '</div>'+
                                      '<div class="form-group">'+
                                      '<label for="inputCopy">Ejemplar</label>'+
-                                     '<input type="number" value="'+(idCont+1)+'" class="form-control solo-numeros" name="copy'+idCont+'" id="inputC opy" placeholder="">'+
+                                     '<input type="text" onkeypress="return isNumberKey(event)" value="'+(idCont+1)+'" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
                                   '</div>'+
 
                             '</div>';
@@ -467,16 +496,8 @@
         //FIN DE PRUEBAS PARA EDITAR
       </script>
 
-         <!--SCRIPT QUE PERMITE SOLO INGREASR NUMEROS-->
 
-  <script>
-        $(document).ready(function (){
-          $('.solo-numeros').keyup(function (){
-            this.value = (this.value + '').replace(/[^0-9]/g, '');
-          });
-        });
-  </script>
-
+  
     
       @endif
 

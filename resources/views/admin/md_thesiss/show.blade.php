@@ -11,12 +11,12 @@
   <div class="box-body">
               <table id="example1" class="table table-bordered table-striped table-responsive table-hover">
                 <thead>
-                 <tr class="text-center box-success" style="background:#86aecc;">
+                 <tr class="text-center box-success" style="background:#C3CECE;">
                   <th class="text-center">TIPO DE ÍTEM</th>
                   <th class="text-center">TÍTULO</th>
                   <th class="text-center">AUTOR <h6>(Principal: Casilla Roja)</h6></th>
                   <th class="text-center">ASESOR</th>                  
-                  <th class="text-center">E. A. P.</th>
+                  <th class="text-center">UBICACIÓN</th>
                   <th>EDITAR</th>
                   <th>ELIMINAR</th>
                  </tr>
@@ -51,7 +51,7 @@
                  
                   
                   <td class="text-center">
-                     {{$thesis->escuela}}
+                     {{$thesis->location}}
                   </td>
 
        <!--SECCION PARA EDITAR UNA TESIS-->           
@@ -95,7 +95,7 @@
         @endforeach
       </tbody>  
       <thead>
-                 <tr class="text-center box-success" style="background:#86aecc;">
+                 <tr class="text-center box-success" style="background:#C3CECE;">
                   <th class="text-center">TIPO</th>
                   <th class="text-center">TÍTULO</th>
                   <th class="text-center">AUTOR </th>

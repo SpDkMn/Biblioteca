@@ -134,9 +134,14 @@ class User extends Authenticatable
       return $this->hasMany('App\Employee');
    }
 
+   //lo uso para el login
+   public function emmployee(){
+      return $this->hasOne('App\Employee','id');
+   }
+
    public function user_type()
    {
-      return $this->belongsto('App\UserType');
+      return $this->belongsTo('App\UserType');
    }
 
    public function thesis_order()

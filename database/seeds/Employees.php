@@ -3,6 +3,7 @@ use Illuminate\Database\Seeder;
 
 use App\User as User;
 use App\Employee as Employee;
+use Illuminate\Support\Facades\Crypt;
 
 class Employees extends Seeder
 {
@@ -50,10 +51,14 @@ class Employees extends Seeder
       ]);
       
       Employee::create([
+         'code' => 'empleado_1a45',
+         'password' => Crypt::encrypt('admin'),
          'user_id' => 1,
          'profile_id' => 1
       ]);
       Employee::create([
+         'code' => 'empleado_21a5',
+         'password' => Crypt::encrypt('admin2'),
          'user_id' => 2,
          'profile_id' => 2
       ]);

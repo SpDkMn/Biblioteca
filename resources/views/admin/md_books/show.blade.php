@@ -1,4 +1,4 @@
-<div class="box box-warning collapsed-box">
+<div class="box box-warning">
 	<div class="box-header with-border">
 		<h3 class="box-title">Informacion de Libros</h3>
 
@@ -23,10 +23,7 @@
 			</tr>
 			@foreach($books as $book)
 			<tr>
-				<td><a href="#" data-id="{{$book->id}}" class="contenido">{{$book->title}}</a>
-
-
-				</td>
+				<td><a href="#" data-id="{{$book->id}}" class="contenido">{{$book->title}}</a></td>
 				<td>
             <?php $cont=0; ?>
             @foreach($book->authors as $author)
@@ -66,15 +63,15 @@
 
 				<td><center>
 						<button type="button" class="btn btn-danger" data-toggle="modal"
-							data-target="#ModalCopy<?php echo $book->id; ?>">
+							data-target="#ModalBook<?php echo $book->id; ?>">
 							<i class="fa fa-trash"></i>
 						</button>
 					</center></td>
 
 
 				<div class="modal modal-danger fade"
-					id="ModalCopy<?php echo $book->id; ?>" tabindex="-1" role="dialog"
-					aria-labelledby="ModalCopyLabel">
+					id="ModalBook<?php echo $book->id; ?>" tabindex="-1" role="dialog"
+					aria-labelledby="ModalBookLabel">
 
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
@@ -86,7 +83,7 @@
 										<span aria-hidden="true">&times;</span>
 									</button>
 									<h3 class="modal-title text-center text-font-size"
-										id="ModalCopyLabel">
+										id="ModalBookLabel">
 										<strong>MATERIAL :</strong> {{ $book->title}}
 									</h3>
 								</div>
@@ -110,14 +107,6 @@
 				</div>
 				<!--FIN DE LA ELIMINACION DE UNA TESIS MEDIANTE MODAL-->
 
-
-
-
-
-
-
-
-
 			</tr>
 			@endforeach
 
@@ -133,10 +122,7 @@
          $("#div-new").load('{{ url("/admin/book/") }}/' + $id + '/edit'); 
       });
     });
-  </script>
-
-
-
+</script>
 
 <script>
     $(document).ready(function(){
@@ -147,4 +133,4 @@
        $("#div-new").load('{{ url("/admin/book/") }}/' + $id+'/show2');
       })
     })
-  </script>
+ </script>

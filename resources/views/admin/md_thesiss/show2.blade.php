@@ -111,7 +111,7 @@
          <div class="box-body"><br>
             <!--    A u t o re s -->
               <strong>AUTOR PRINCIPAL</strong>
-                  <?php for($i=0;$i<18;$i++){echo "&nbsp";}?>:&nbsp
+                  <?php for($i=0;$i<20;$i++){echo "&nbsp";}?>:&nbsp
                 <?php $cont=0; ?>
                 @foreach($thesis->authors as $author)
                   @if($author->pivot->type == true)
@@ -160,7 +160,7 @@
 
         <div class="box-body">
               <strong>EDITORIAL</strong>                
-                <?php for($i=0;$i<30;$i++){echo "&nbsp";}?>:&nbsp
+                <?php for($i=0;$i<34;$i++){echo "&nbsp";}?>:&nbsp
                 @foreach($thesis->editorials as $editorial)
                     @if($editorial->pivot->type == false)
                     {{$editorial->name}}
@@ -170,14 +170,20 @@
 
         <div class="box-body">
               <strong>ASESOR</strong>
-                <?php $cont2=2; for($i=0;$i<34;$i++){echo "&nbsp";}?>:&nbsp
+                <?php $cont2=2; for($i=0;$i<39;$i++){echo "&nbsp";}?>:&nbsp
                 {{$thesis->asesor}}
         </div>
 
         <div class="box-body">
               <strong>CLASIFICACIÓN</strong>
-              <?php   for($i=0;$i<21;$i++){echo "&nbsp";}?>:&nbsp
+              <?php   for($i=0;$i<25;$i++){echo "&nbsp";}?>:&nbsp
               {{$thesis->clasification}}
+        </div>
+
+        <div class="box-body">
+              <strong>ESCUELA DE PERTEN.</strong>
+              <?php   for($i=0;$i<12;$i++){echo "&nbsp";}?>:&nbsp
+              {{$thesis->escuela}}
         </div><br><br>
 
 

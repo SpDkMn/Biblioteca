@@ -54,3 +54,13 @@
 .titleModal1 {
 	color: #990000;
 }
+.dl-horizontalLibro dt {
+	float: left;
+	width: 240px;
+	overflow: hidden;
+	clear: left;
+	text-align: right;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-right: 20px;
+}

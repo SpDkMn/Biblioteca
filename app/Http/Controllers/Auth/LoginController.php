@@ -1,11 +1,15 @@
 <?php
 namespace App\Http\Controllers\Auth;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Redirect;
+use Illuminate\Support\Facades\Crypt;
+use App\employee as Employee;
+use App\User as User;
 
 class LoginController extends Controller
 {
@@ -35,15 +39,18 @@ class LoginController extends Controller
     * @return void
     */
    public function login(Request $request)
-   {
-      if (Auth::attempt([
-         'username' => $request['username'],
-         'password' => $request['password']
-      ])) {
-         // Authentication passed...
-         return redirect()->intended('admin/noticias');
+   {  
+
+
+      $users = User::all();
+
+      foreach ($users as $u) {
+        if($u->email == $request->username && $request->password == Crypt::decrypt($u->emmployee->password)){
+          Auth::loginUsingId($u->id);
+          return redirect()->intended('admin/noticias');
+        }
       }
-      return redirect::to('/login');
+      dd("ERROR : 484515x121 :v");
    }
 
    public function __construct()

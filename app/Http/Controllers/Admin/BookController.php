@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\BookRequest;
+//use App\Http\Requests\BookRequest;
 // Para usar el Modelo Magazine
 use App\Author as Author;
 use App\Book as Book;
@@ -67,7 +67,7 @@ class BookController extends Controller
       ]);
    }
 
-   public function store(BookRequest $request)
+   public function store(Request $request)
    {
       $b = Book::create([
          CLASIFICATION => $request[CLASIFICATION],
@@ -212,7 +212,7 @@ class BookController extends Controller
       ]);
    }
 
-   public function update(BookRequest $request, $id)
+   public function update(Request $request, $id)
    {
       $book = Book::find($id);
       $editoriales = Editorial::all();

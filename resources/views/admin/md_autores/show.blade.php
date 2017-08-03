@@ -12,20 +12,6 @@
 
 	<div class="box-body">
 
-		<!---->
-		<!--BUSQUEDA Y FILTROS-->
-		<!--  {!!Form::model(Request::all(),['route'=>'autor.index','method'=>'GET','class'=>'navbar-form navbar-right','role'=>'search'])!!}
-    <div class="form-group">
-        {!!Form::text('name',null,['class'=>'form-control', 'placeholder'=>'Nombre del autor'])!!}
-        {!!Form::select('category[]',['Libro'=>'Libro','Revista'=>'Revista','Tesis'=>'Tesis','Compendio'=>'Compendio'],null,['id'=>'example-multiple-selected','multiple'=>'multiple'])!!}
-         
-    </div>   
-    <button type="submit" class="btn btn-primary">Buscar</button><br>
-      
-    {!!Form::close()!!}   -->
-		<!--FIN BUSQUEDA Y FILTROS-->
-
-
 		<table id="example1" class="table table-bordered table-hover">
 			<thead>
 				<tr>
@@ -106,8 +92,6 @@
 	</div>
 
 
-	@section('script')
-	<script src="{{ URL::asset('js/jquery.multi-select.js')}}"></script>
 	<script type="text/javascript">
     <!-- Note the missing multiple attribute! -->
       $(document).ready(function() {
@@ -144,4 +128,3 @@
         @endif
       });
     </script>
-	@endsection

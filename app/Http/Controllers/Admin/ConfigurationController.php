@@ -26,18 +26,10 @@ class ConfigurationController extends Controller
     */
    public function index()
    {  
-     // return view('admin.md_configuration.showFeriados');
-
-
 
       $userTypes = UserType::all();
 
-      $verDiasLaborables = $editarDiasLaborables = true;
       
-      $showDiasLaborables = $editDiasLaborables = true;
-
-      $showFeriados = $editFeriados = true;
-
       if (true){
          $showDiasLaborables = view('admin.md_configuration.showDiasLaborables');
       }
@@ -48,7 +40,9 @@ class ConfigurationController extends Controller
          ]);
       }
       
-      $showFeriados = view('admin.md_configuration.showFeriados');
+      if(true){
+        $showFeriados = view('admin.md_configuration.showFeriados');    
+      }
       
       return view('admin.md_configuration.index', [
          'showTipoUsuario' => $showTipoUsuario,
@@ -93,33 +87,28 @@ class ConfigurationController extends Controller
       ]);
       
       $userTypes = UserType::all();
-      $verActivar = $editarActivar = true;
-      $verFeriado = $crearFeriado = $editarFeriado = $eliminarFeriado = true;
-      $verReserva = $crearReserva = $editarReserva = $eliminarReserva = true;
-      $verPrestamo = $crearPrestamo = $editarPrestamo = $eliminarPrestamo = true;
-      $verDiasLaborables = $editarDiasLaborables = true;
+
       
-      // Redireccionamos a la seccion general de Configuraciones
-      
-      $showDiasLaborables = $editDiasLaborables = true;
       if (true){
          $showDiasLaborables = view('admin.md_configuration.showDiasLaborables');
       }
-      // Recorremos cada uno de los permisos de 'Activar'
-      $showActivar = $editActivar = "";
+  
       if (true) {
          $showTipoUsuario = view('admin.md_configuration.showTipoUsuario', [
-            "editar" => $editarActivar,
             "userTypes" => $userTypes
          ]);
       }
       
-    
+      if(true){
+        $showFeriados = view('admin.md_configuration.showFeriados');
+      }
       
       return view('admin.md_configuration.index', [
          'showTipoUsuario' => $showTipoUsuario,
-         'showDiasLaborables' => $showDiasLaborables
+         'showDiasLaborables' => $showDiasLaborables,
+         'showFeriados' => $showFeriados
       ]);
+      
    }
 
    public function show($id)

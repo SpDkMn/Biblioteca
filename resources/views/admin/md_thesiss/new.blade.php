@@ -7,7 +7,15 @@
     </div>
   </div>
   <!-- /.box-header -->
-
+     @if(count($errors)>0)
+      <div class="alert alert-danger" role="alert">
+        <ul>
+          @foreach($errors->all() as $error)
+            <li>{{ $error }}</li> 
+          @endforeach
+        </ul>
+      </div>
+     @endif
   <form method="POST" action="{{ url('/admin/thesis') }}">
     {{ csrf_field() }}
 
@@ -15,14 +23,7 @@
      <div class="box-body">
         <!---->
         <!--***************************** PANEL DE NUEVA TESIS *************************************-->
- 
-
-
-
-
-
-        <div class="box box-success box-solid">
-            
+         <div class="box box-success box-solid"> 
             <div class="box-header with-border">
               <h3 class="box-title">Tesis y Tesina</h3>
               <div class="box-tools pull-right"> 
@@ -44,29 +45,28 @@
              </ul>
 
           <div class="tab-content">
+          
                     <!-- Primer panel -->
             <div class="tab-pane active" id="primero">
-
-                
+      
               <div class="box-body">
                   <div class="form-group">
                     <label>TIPO DE ITEM</label>
                       <p>
-                        
                         <input type="radio" class="flat" name="tipo" value="tesis" checked="" required/> Tesis 
                         <br>
                         <input type="radio" class="flat" name="tipo" value="tesina"/> Tesina
                       </p>
                   </div>
 
-                    <div class="form-group">
+                  <div class="form-group">
                         <label for="inputTitle">Titulo</label>
                         <input type="text" class="form-control" name="title" id="inputTitle" placeholder="">
-                    </div>
+                  </div>
                     
-                    <div class="form-group">
+                  <div class="form-group">
                         <label>Autor Principal</label>
-                        <select class="form-control" id="selectAutorMain" name="autorMain[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Principal">
+                        <select class="form-control" id="selectAutorMain" name="autorMain[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Principal" required>
                             @foreach($autores as  $autor)
                               @foreach($autor->categories as $category)
                                 @if($category->name == "tesis/tesina")
@@ -75,9 +75,9 @@
                               @endforeach
                             @endforeach
                         </select>
-                    </div>
+                  </div>
 
-                    <div class="form-group">
+                  <div class="form-group">
                         <label>Autor Secundario</label>
                         <select class="form-control select2" id="listAutorSecond" name="autorSecond[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Secundario">
                             @foreach($autores as  $autor)
@@ -88,56 +88,53 @@
                               @endforeach
                             @endforeach
                         </select>
-                    </div>
+                  </div>
 
-                    <div class="form-group">
+                  <div class="form-group">
                         <label>Editorial</label>
-                        <select class="form-control select2" name="editorial" style="width: 100%;">
-                        @foreach($editoriales as  $editorial)
-                          @foreach($editorial->categories as $category)
-                            @if($category->name == "tesis/tesina")
-                              <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
-                            @endif
-                          @endforeach
-                        @endforeach
+                        <select class="form-control select2" name="editorial" style="width: 100%;" required>
+                            @foreach($editoriales as  $editorial)
+                              @foreach($editorial->categories as $category)
+                                @if($category->name == "tesis/tesina")
+                                  <option value="{{ $editorial->id }}">{{$editorial->name}}</option>
+                                @endif
+                              @endforeach
+                            @endforeach
                         </select>
-                    </div>
+                  </div>
 
-                    <div class="form-group">
+                  <div class="form-group">
                       <label for="Clasification">Clasificación</label>
                       <input type="text" class="form-control" name="clasification" id="inputClasification" placeholder="">
-                    </div>
+                  </div>
 
                     
-                    <div class="form-group">
+                  <div class="form-group">
                         <label>Asesor</label>
-                        <select class="form-control select2" name="asesor" style="width: 100%;">
-                        @foreach($autores as  $autor)
-                          @foreach($autor->categories as $category)
-                            @if($category->name == "asesor")
-                              <option value="{{ $autor->name }}">{{$autor->name}}</option>
-                            @endif
-                          @endforeach
-                        @endforeach
-                       
+                        <select class="form-control select2" name="asesor" style="width: 100%;" required>
+                            @foreach($autores as  $autor)
+                              @foreach($autor->categories as $category)
+                                @if($category->name == "asesor")
+                                  <option value="{{ $autor->name }}">{{$autor->name}}</option>
+                                @endif
+                              @endforeach
+                            @endforeach                      
                         </select>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="escuela">E . A . P : </label>
-                      <input type="text" class="form-control" name="escuela" id="inputEscuela" placeholder="">
-                    </div>
-                            
+                  </div>
+                  <div class="form-group">
+                      <label>E . A . P : </label>
+                      <select class="form-control select2" name="escuela" style="width: 100%;">
+                        <option name="escuela">Ingeniería de Sistemas</option>
+                        <option name="escuela">Ingeniería de Software</option>
+                      </select>
+                  </div>                     
               </div>
-            </div>
+          </div>
         <!--Fin de la primera division-->
 
 
 
-
-
-
-              <!-- Segundo Panel -->
+        <!-- Segundo Panel -->
           <div class="tab-pane fade" id="segundo">
               <div class="box-body">
                        
@@ -145,17 +142,17 @@
                    
                     <div class="form-group">
                         <label for="inputEdition">Edicion</label>
-                        <input type="text" class="form-control" name="edition" id="inputEdition" placeholder="">
+                        <input type="text" onkeypress="return isNumberKey(event)" class="form-control" name="edition" id="inputEdition" placeholder="_ _ _ _">
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Extension</label>
-                        <input type="text" class="form-control" name="extension" id="inputEXTENSION" placeholder="">
+                        <input type="text" onkeypress="return isNumberKey(event)" class="form-control" name="extension" id="inputEXTENSION" placeholder="_ _ _">
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Dimensiones</label>
-                        <input type="text" class="form-control" name="dimension" id="inputEXTENSION" placeholder="">
+                        <input type="text" class="form-control" name="dimension" id="inputEXTENSION" placeholder="_ _ x _ _">
                     </div>
 
                     <div class="form-group">
@@ -169,9 +166,35 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputEXTENSION">Ubicacion</label>
-                        <input type="text" class="form-control" name="ubicacion" id="inputEXTENSION" value="Estante Nº ">
-                    </div>
+                      <label>Ubicación </label>
+                      <select class="form-control select2" name="ubicacion" style="width: 100%;">
+                        <option name="ubicacion">Stand A1</option>
+                        <option name="ubicacion">Stand A2</option>
+                        <option name="ubicacion">Stand A3</option>
+                        <option name="ubicacion">Stand A4</option>
+                        <option name="ubicacion">Stand A5</option>
+                        <option name="ubicacion">Stand B1</option>
+                        <option name="ubicacion">Stand B2</option>
+                        <option name="ubicacion">Stand B3</option>
+                        <option name="ubicacion">Stand B4</option>
+                        <option name="ubicacion">Stand B5</option>
+                        <option name="ubicacion">Stand C1</option>
+                        <option name="ubicacion">Stand C2</option>
+                        <option name="ubicacion">Stand C3</option>
+                        <option name="ubicacion">Stand C4</option>
+                        <option name="ubicacion">Stand C5</option>
+                        <option name="ubicacion">Stand D1</option>
+                        <option name="ubicacion">Stand D2</option>
+                        <option name="ubicacion">Stand D3</option>
+                        <option name="ubicacion">Stand D4</option>
+                        <option name="ubicacion">Stand D5</option>
+                        <option name="ubicacion">Stand E1</option>
+                        <option name="ubicacion">Stand E2</option>
+                        <option name="ubicacion">Stand E3</option>
+                        <option name="ubicacion">Stand E4</option>
+                        <option name="ubicacion">Stand E5</option>
+                      </select>
+                  </div>  
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Lugar de sustentacion</label>
@@ -184,10 +207,6 @@
                  
       
                   
-
-
-
-
 
                   <!-- Tercer Panel -->
           <div class="tab-pane fade" id="tercero">
@@ -236,15 +255,15 @@
                   
                   <div class="form-group">
                       <label for="inputIncomeNumber">Nº Ingreso</label>
-                      <input type="text" class="form-control" name="incomeNumber0" id="inputIncomeNumber" placeholder="">
+                      <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" name="incomeNumber0" id="inputIncomeNumber"  placeholder="_ _ _ _ _ _ _ _">
                   </div>
                   <div class="form-group">
                       <label for="inputBarcode">Código de barra</label>
-                      <input type="text" class="form-control" value="20000000" name="barcode0" id="inputBarcode" data-inputmask='"mask": "200000009999"' data-mask>
+                      <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" value="20000000" name="barcode0" id="inputBarcode" data-inputmask='"mask": "200000009999"' data-mask>
                   </div>
                   <div class="form-group">
                       <label for="inputCopy">Ejemplar</label>
-                      <input type="number" class="form-control" value="1" name="copy0" id="inputCopy" placeholder="">
+                      <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" value="1" name="copy0" id="inputCopy" placeholder="" required>
                   </div>
               </div>
             </div>
@@ -265,7 +284,7 @@
 
 
     <div class="box-footer">
-       <button type="submit" class="btn btn-primary">Crear</button>
+       <button type="submit" class="btn btn-primary" id="eliminarItem">Crear</button>
     </div>
 
   </form>
@@ -376,28 +395,30 @@
       // Guardar el panel donde se encuentra la seccion contenido
       var container = $('#itemBox');
       var titleItem = '<h3 class="panel-title">Item Secundario</h3>';
-      var buttonClose ='<div class="box-tools pull-right">  <button type="button" id="eliminarItem" data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button> </div>';
+      var buttonClose ='<div class="box-tools pull-right">  <button type="button" data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button> </div>';
       var itemHeader = '<div class="box-header">'+titleItem+buttonClose+'</div>'
       var itemBody = '<div class="box-body">'+
                             
                             '<div class="form-group">'+
                                 '<label for="inputIncomeNumber">Nº Ingreso</label>'+
-                                '<input type="text" class="form-control" name="incomeNumber'+idCont+'" id="inputIncomeNumber" placeholder="">'+
+                                '<input type="text" onkeypress="return isNumberKey(event)" class="form-control" name="incomeNumber'+idCont+'" id="inputIncomeNumber" placeholder="_ _ _ _ _ _ _ _">'+
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label for="inputBarcode">Código de barra</label>'+
-                              '<input type="text" class="form-control" value="20000000" name="barcode'+idCont+'" id="inputBarcode" placeholder="">'+
+                              '<input type="text" onkeypress="return isNumberKey(event)" class="form-control" value="20000000" name="barcode'+idCont+'" id="inputBarcode" placeholder="">'+
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label for="inputCopy">Ejemplar</label>'+
-                                '<input type="number" value="'+(idCont+1)+'" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
+                                '<input type="text" onkeypress="return isNumberKey(event)" value="'+(idCont+1)+'" class="form-control" name="copy'+idCont+'" id="inputCopy" placeholder="">'+
                             '</div>'+
                         '</div>';
-      var itemPanel = '<div class="box box-default box-solid" id="itemBoxID'+idCont+'">'+itemHeader+itemBody +'</div>';
+      var itemPanel = '<div class="BoxItemThesi box box-default box-solid" id="itemBoxID'+idCont+'">'+itemHeader+itemBody +'</div>';
       $(container).after(itemPanel);
       idCont = idCont + 1 ;
     });
-    $('#eliminarItem').click(function(){})
+    $('#eliminarItem').click(function(){
+        $('.BoxItemThesi:hidden').remove();
+    })
   });
   </script>
 @endsection
