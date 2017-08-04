@@ -135,7 +135,7 @@ class User extends Authenticatable
    }
 
    //lo uso para el login
-   public function emmployee(){
+   public function employee2(){
       return $this->hasOne('App\Employee','id');
    }
 

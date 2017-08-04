@@ -45,7 +45,7 @@ class LoginController extends Controller
       $users = User::all();
 
       foreach ($users as $u) {
-        if($u->email == $request->username && $request->password == Crypt::decrypt($u->emmployee->password)){
+        if($u->email == $request->username && $request->password == Crypt::decrypt($u->employee2->password)){
           Auth::loginUsingId($u->id);
           return redirect()->intended('admin/noticias');
         }
