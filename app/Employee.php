@@ -32,6 +32,10 @@ class Employee extends Model
       return $this->belongsTo('App\Profile');
    }
 
+   public function profile2(){
+      return $this->hasOne('App\Profile','id');
+   }
+
    /**
     * The attributes that should be mutated to dates.
     *
