@@ -14,7 +14,13 @@ if ($configuraciones->isNotEmpty()) {
 <!-- Condiciones agregadas para poder mostrar los datos de configuracion solo si no están vacíos -->
 
 <div class="box box-success">
+
 	<div class="box-header">
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" data-widget="collapse">
+				<i class="fa fa-minus"></i>
+			</button>
+		</div>
 		<center>
 			<h1 class="box-title">Dias Laborables</h1>
 		</center>
@@ -39,12 +45,12 @@ if ($configuraciones->isNotEmpty()) {
 				<tr>
 
 					<td class="text-center" style="font-weight: bold;">Lunes</td>
-					<td class="text-center"><input name="boton1" id="check" type="checkbox" onchange="habilitar1(this.checked);" checked/></td>
+					<td class="text-center"><input name="boton1" id="check" type="checkbox" onchange="habilitar1(this.checked);" @if($configuracion->startMonday!=null) checked @endif/></td>
 					
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton3" id="boton3" value="@if($band){{$configuracion->startMonday}}@endif" style="width: 80px;"
-								value="" class="txtPickter" type="text" /> <span
+								value="" class="txtPickter" type="text" @if($configuracion->startMonday==null) disabled @endif /> <span
 								class="add-on" style="width: 25px; height: 34px; padding: 7px;">
 								<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 							</span>
@@ -53,7 +59,7 @@ if ($configuraciones->isNotEmpty()) {
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton4" id="boton4" value="@if($band){{$configuracion->endMonday}}@endif" style="width: 80px;"
-								class="txtPickter" type="text"/> <span class="add-on"	style="width: 25px; height: 34px; padding: 7px;"> <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+								class="txtPickter" type="text" @if($configuracion->endMonday==null)disabled @endif/> <span class="add-on"	style="width: 25px; height: 34px; padding: 7px;"> <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 							</span>
 						</div>
 					</td>
@@ -62,18 +68,18 @@ if ($configuraciones->isNotEmpty()) {
 
 				<tr>
 					<td class="text-center" style="font-weight: bold;">Martes</td>
-					<td class="text-center"><input name="boton5" id="check" type="checkbox" onchange="habilitar2(this.checked);" checked /></td>
+					<td class="text-center"><input name="boton5" id="check" type="checkbox" onchange="habilitar2(this.checked);" @if($configuracion->startTuesday!=null) checked @endif/></td>
 					
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton7" id="boton7" value="@if($band){{$configuracion->startTuesday}}@endif" style="width: 80px;"
-								class="txtPickter" type="text"/> <span class="add-on"	style="width: 25px; height: 34px; padding: 7px;"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+								class="txtPickter" type="text" @if($configuracion->startTuesday==null) disabled @endif/> <span class="add-on"	style="width: 25px; height: 34px; padding: 7px;"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 							</span>
 						</div>
 					</td>
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
-							<input name="boton8" id="boton8" value="@if($band){{$configuracion->endTuesday}}@endif" style="width: 80px;" class="txtPickter" type="text"/> <span class="add-on" style="width: 25px; height: 34px; padding: 7px;"> <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+							<input name="boton8" id="boton8" value="@if($band){{$configuracion->endTuesday}}@endif" style="width: 80px;" class="txtPickter" type="text" @if($configuracion->endTuesday==null) disabled @endif/> <span class="add-on" style="width: 25px; height: 34px; padding: 7px;"> <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 							</span>
 						</div>
 					</td>
@@ -81,19 +87,19 @@ if ($configuraciones->isNotEmpty()) {
 
 				<tr>
 					<td class="text-center" style="font-weight: bold;">Miercoles</td>
-					<td class="text-center"><input name="boton9" id="check" type="checkbox" onchange="habilitar3(this.checked);" checked/></td>
+					<td class="text-center"><input name="boton9" id="check" type="checkbox" onchange="habilitar3(this.checked);" @if($configuracion->startWednesday!=null) checked @endif/></td>
 					
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton11" id="boton11" value="@if($band){{$configuracion->startWednesday}}@endif" style="width: 80px;"
-								class="txtPickter" type="text"/> <span class="add-on"	style="width: 25px; height: 34px; padding: 7px;"> <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+								class="txtPickter" type="text" @if($configuracion->startWednesday==null) disabled @endif/> <span class="add-on"	style="width: 25px; height: 34px; padding: 7px;"> <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 							</span>
 						</div>
 					</td>
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton12" id="boton12" value="@if($band){{$configuracion->endWednesday}}@endif" style="width: 80px;"
-								class="txtPickter" type="text"/> <span class="add-on" style="width: 25px; height: 34px; padding: 7px;"> <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+								class="txtPickter" type="text" @if($configuracion->endWednesday==null) disabled @endif/> <span class="add-on" style="width: 25px; height: 34px; padding: 7px;"> <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 							</span>
 						</div>
 					</td>
@@ -101,13 +107,13 @@ if ($configuraciones->isNotEmpty()) {
 
 				<tr>
 					<td class="text-center" style="font-weight: bold;">Jueves</td>
-					<td class="text-center"><input name="boton13" id="check" type="checkbox" onchange="habilitar4(this.checked);" checked /></td>
+					<td class="text-center"><input name="boton13" id="check" type="checkbox" onchange="habilitar4(this.checked);" @if($configuracion->startThursday!=null) checked @endif/></td>
 					
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton15" id="boton15"
 								value="@if($band){{$configuracion->startThursday}}@endif" style="width: 80px;"
-								class="txtPickter" type="text"/> <span class="add-on"
+								class="txtPickter" type="text" @if($configuracion->startThursday==null) disabled @endif/> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 							</span>
@@ -117,7 +123,7 @@ if ($configuraciones->isNotEmpty()) {
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton16" id="boton16"
 								value="@if($band){{$configuracion->endThursday}}@endif" style="width: 80px;"
-								class="txtPickter" type="text"/> <span class="add-on"
+								class="txtPickter" type="text" @if($configuracion->endThursday==null) disabled @endif/> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 							</span>
@@ -127,13 +133,13 @@ if ($configuraciones->isNotEmpty()) {
 
 				<tr>
 					<td class="text-center" style="font-weight: bold;">Viernes</td>
-					<td class="text-center"><input name="boton17" id="check" type="checkbox" onchange="habilitar5(this.checked);" checked /></td>
+					<td class="text-center"><input name="boton17" id="check" type="checkbox" onchange="habilitar5(this.checked);" @if($configuracion->startFriday!=null) checked @endif /></td>
 					
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton19" id="boton19"
 								value="@if($band){{$configuracion->startFriday}}@endif" style="width: 80px;"
-								class="txtPickter" type="text"/> <span class="add-on"
+								class="txtPickter" type="text" @if($configuracion->startFriday==null) disabled @endif/> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 							</span>
@@ -143,7 +149,7 @@ if ($configuraciones->isNotEmpty()) {
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton20" id="boton20"
 								value="@if($band){{$configuracion->endFriday}}@endif" style="width: 80px;"
-								class="txtPickter" type="text"/> <span class="add-on"
+								class="txtPickter" type="text" @if($configuracion->endFriday==null) disabled @endif/> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 							</span>
@@ -153,13 +159,13 @@ if ($configuraciones->isNotEmpty()) {
 
 				<tr>
 					<td class="text-center" style="font-weight: bold;">Sabado</td>
-					<td class="text-center"><input name="boton21" id="check" type="checkbox" onchange="habilitar6(this.checked);" checked /></td>
+					<td class="text-center"><input name="boton21" id="check" type="checkbox" onchange="habilitar6(this.checked);" @if($configuracion->startSaturday!=null) checked @endif/></td>
 					
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton23" id="boton23"
 								value="@if($band){{$configuracion->startSaturday}}@endif" style="width: 80px;"
-								class="txtPickter" type="text"/> <span class="add-on"
+								class="txtPickter" type="text" @if($configuracion->startSaturday==null) disabled @endif/> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 							</span>
@@ -169,7 +175,7 @@ if ($configuraciones->isNotEmpty()) {
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton24" id="boton24"
 								value="@if($band){{$configuracion->endSaturday}}@endif" style="width: 80px;"
-								class="txtPickter" type="text"/> <span class="add-on"
+								class="txtPickter" type="text" @if($configuracion->endSaturday==null) disabled @endif/> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 							</span>
@@ -179,13 +185,13 @@ if ($configuraciones->isNotEmpty()) {
 
 				<tr>
 					<td class="text-center" style="font-weight: bold;">Domingo</td>
-					<td class="text-center"><input name="boton25" id="check" type="checkbox" onchange="habilitar7(this.checked);" checked /></td>
+					<td class="text-center"><input name="boton25" id="check" type="checkbox" onchange="habilitar7(this.checked);" @if($configuracion->startSunday!=null) checked @endif/></td>
 					
 					<td class="text-center">
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton27" id="boton27"
 								value="@if($band){{$configuracion->startSunday}}@endif" style="width: 80px;"
-								class="txtPickter" type="text"/> <span class="add-on"
+								class="txtPickter" type="text" @if($configuracion->startSunday==null) disabled @endif/> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 							</span>
@@ -195,7 +201,7 @@ if ($configuraciones->isNotEmpty()) {
 						<div id="datetimepicker" class="input-append date fecha3">
 							<input name="boton28" id="boton28"
 								value="@if($band){{$configuracion->endSunday}}@endif" style="width: 80px;"
-								class="txtPickter" type="text"/> <span class="add-on"
+								class="txtPickter" type="text" @if($configuracion->endSunday==null) disabled @endif/> <span class="add-on"
 								style="width: 25px; height: 34px; padding: 7px;"> <i
 								data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
 							</span>

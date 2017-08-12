@@ -1,3 +1,6 @@
+  
+
+
   <div class="box box-primary">
   <div class="box-header with-border">
     <h3 class="box-title"><strong>Agregar Nuevo Material</strong></h3>
@@ -16,7 +19,7 @@
         </ul>
       </div>
      @endif
-  <form method="POST" action="{{ url('/admin/thesis') }}">
+  <form method="POST" action="{{ url('/admin/thesis') }}"  onsubmit="return validarFormulario ()">
     {{ csrf_field() }}
 
 
@@ -60,13 +63,13 @@
                   </div>
 
                   <div class="form-group">
-                        <label for="inputTitle">Titulo</label>
+                        <label for="inputTitle">Titulo *</label>
                         <input type="text" class="form-control" name="title" id="inputTitle" placeholder="">
                   </div>
                     
                   <div class="form-group">
-                        <label>Autor Principal</label>
-                        <select class="form-control" id="selectAutorMain" name="autorMain[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Principal" required>
+                        <label>Autor Principal *</label>
+                        <select class="form-control" id="selectAutorMain" name="autorMain[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Principal" onsubmit="return validacion()" required>
                             @foreach($autores as  $autor)
                               @foreach($autor->categories as $category)
                                 @if($category->name == "tesis/tesina")
@@ -91,7 +94,7 @@
                   </div>
 
                   <div class="form-group">
-                        <label>Editorial</label>
+                        <label>Editorial *</label>
                         <select class="form-control select2" name="editorial" style="width: 100%;" required>
                             @foreach($editoriales as  $editorial)
                               @foreach($editorial->categories as $category)
@@ -104,13 +107,13 @@
                   </div>
 
                   <div class="form-group">
-                      <label for="Clasification">Clasificación</label>
+                      <label for="Clasification">Clasificación *</label>
                       <input type="text" class="form-control" name="clasification" id="inputClasification" placeholder="">
                   </div>
 
                     
                   <div class="form-group">
-                        <label>Asesor</label>
+                        <label>Asesor *</label>
                         <select class="form-control select2" name="asesor" style="width: 100%;" required>
                             @foreach($autores as  $autor)
                               @foreach($autor->categories as $category)
@@ -146,27 +149,27 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputEXTENSION">Extension</label>
+                        <label for="inputEXTENSION">Extension *</label>
                         <input type="text" onkeypress="return isNumberKey(event)" class="form-control" name="extension" id="inputEXTENSION" placeholder="_ _ _">
                     </div>
 
                     <div class="form-group">
-                        <label for="inputEXTENSION">Dimensiones</label>
-                        <input type="text" class="form-control" name="dimension" id="inputEXTENSION" placeholder="_ _ x _ _">
+                        <label for="inputEXTENSION">Dimensiones *</label>
+                        <input type="text" class="form-control" name="dimension" id="inputDimension" placeholder="_ _ x _ _" onclick="agregaDimension()">
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Detalles Físicos</label>
-                        <input type="text" class="form-control" name="detalles" id="inputEXTENSION" placeholder="">
+                        <input type="text" class="form-control" name="detalles" id="inputDetalles" placeholder="" onclick="agregaDetalles()">
                     </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Material Adicional</label>
-                        <input type="text" class="form-control" name="materialad" id="inputEXTENSION" placeholder="">
+                        <input type="text" class="form-control" name="materialad" id="inputMaterial" placeholder="" onclick="agregaMaterial()">
                     </div>
 
                     <div class="form-group">
-                      <label>Ubicación </label>
+                      <label>Ubicación *</label>
                       <select class="form-control select2" name="ubicacion" style="width: 100%;">
                         <option name="ubicacion">Stand A1</option>
                         <option name="ubicacion">Stand A2</option>
@@ -215,22 +218,27 @@
                         <!-- 1. Resumen -->
                     <div class="form-group">
                         <label for="inputSummary">Resumen</label>
-                        <textarea class="form-control" rows="3" name="summary" id="inputSummary" placeholder=""></textarea> 
+                        <textarea class="form-control" rows="3" name="summary" id="inputSummary" placeholder="">No presenta resumen</textarea> 
                      </div>
 
                      <div class="form-group">
                         <label for="inputContent">Contenido</label>
-                        <textarea class="form-control" rows="3" name="contenido" id="inputContent" placeholder=""></textarea> 
+                        <textarea class="form-control" rows="3" name="contenido" id="inputContent" placeholder="">No presenta contenido</textarea> 
                      </div>  
                     
                     <div class="form-group">
-                        <label for="inputRecomend">Conclusiones y Recomendaciones</label>
-                        <textarea class="form-control" rows="3" name="recomendacion" id="inputRecomend" placeholder=""></textarea> 
+                        <label for="inputConclusion">Conclusiones</label>
+                        <textarea class="form-control" rows="3" name="conclusions" id="inputConclusion"  placeholder="">No presenta conclusiones</textarea> 
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputRecomend">Recomendaciones</label>
+                        <textarea class="form-control" rows="3" name="recomendacion" id="inputRecomend"  placeholder="">No presenta conclusiones</textarea> 
                     </div>
 
                     <div class="form-group">
                         <label for="inputBibliografia">Bibliografía</label>
-                        <textarea class="form-control" rows="3" name="bibliografia" id="inputBibliografia" placeholder=""></textarea> 
+                        <textarea class="form-control" rows="3" name="bibliografia" id="inputBibliografia"  placeholder="">No presenta bibliografia</textarea> 
                     </div>
                         
                </div><!-- End Box-Body -->
@@ -254,15 +262,15 @@
               <div class="box-body">
                   
                   <div class="form-group">
-                      <label for="inputIncomeNumber">Nº Ingreso</label>
-                      <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" name="incomeNumber0" id="inputIncomeNumber"  placeholder="_ _ _ _ _ _ _ _">
+                      <label for="inputIncomeNumber">Nº Ingreso *</label>
+                      <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" name="incomeNumber0" id="inputIncomeNumber"  placeholder="_ _ _ _ _ _">
                   </div>
                   <div class="form-group">
-                      <label for="inputBarcode">Código de barra</label>
+                      <label for="inputBarcode">Código de barra *</label>
                       <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" value="20000000" name="barcode0" id="inputBarcode" data-inputmask='"mask": "200000009999"' data-mask>
                   </div>
                   <div class="form-group">
-                      <label for="inputCopy">Ejemplar</label>
+                      <label for="inputCopy">Ejemplar *</label>
                       <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" value="1" name="copy0" id="inputCopy" placeholder="" required>
                   </div>
               </div>
@@ -292,6 +300,19 @@
 </div>
 
 
+
+
+<script type="text/javascript">
+  function agregaDimension(){
+    document.getElementById("inputDimension").value = "30 cm";
+  }
+  function agregaDetalles(){
+    document.getElementById("inputDetalles").value = "Contiene cuadros, imagenes, esquemas, mapas";
+  }
+  function agregaMaterial(){
+    document.getElementById("inputMaterial").value = "Viene incorporado con 1 cd";
+  }
+</script>
 
 @section('scriptSelectAutorPrincipal')
   <script type="text/javascript">
@@ -401,7 +422,7 @@
                             
                             '<div class="form-group">'+
                                 '<label for="inputIncomeNumber">Nº Ingreso</label>'+
-                                '<input type="text" onkeypress="return isNumberKey(event)" class="form-control" name="incomeNumber'+idCont+'" id="inputIncomeNumber" placeholder="_ _ _ _ _ _ _ _">'+
+                                '<input type="text" onkeypress="return isNumberKey(event)" class="form-control" name="incomeNumber'+idCont+'" id="inputIncomeNumber" placeholder="_ _ _ _ _ _">'+
                             '</div>'+
                             '<div class="form-group">'+
                                 '<label for="inputBarcode">Código de barra</label>'+
@@ -422,3 +443,5 @@
   });
   </script>
 @endsection
+
+

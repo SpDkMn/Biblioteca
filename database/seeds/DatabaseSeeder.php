@@ -36,6 +36,9 @@ class DatabaseSeeder extends Seeder
       $this->call(Magazines::class);
       $this->call(MagazineCopy::class);
       $this->call(Contenidos::class);
+      //Compendios
+      $this->call(Compendiums::class);
+      $this->call(CompendiumCopies::class);
       //Tipos de usuarios:
       $this->call(UserTypes::class);
       //Pivots:
@@ -45,5 +48,10 @@ class DatabaseSeeder extends Seeder
       $this->call(EditorialCategory::class);
       $this->call(EditorialBook::class);
       $this->call(AuthorCategory::class);
+      $this->call(EditorialMagazine::class);
+
+
+
+
    }
 }

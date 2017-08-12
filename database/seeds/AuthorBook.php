@@ -11,7 +11,7 @@ class AuthorBook extends Seeder
      */
     public function run()
     {
-         DB::table('author_book')->insert([
+       DB::table('author_book')->insert([
          'author_id' => 1,
          'book_id' => 1,
          'type' => 1

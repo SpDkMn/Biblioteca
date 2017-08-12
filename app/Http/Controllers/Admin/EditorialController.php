@@ -15,32 +15,13 @@ use Redirect;
 
 class EditorialController extends Controller
 {
- 
+
    public function index(Request $request)
    {
-        
-      $profile = Auth::User()->employee2->profile2;
 
-      $j2a = json_decode($profile->JSON,true);
-      // Iniciamos los permisos en false
+      $show = $new = $edit = $delete = true;
+      $ver = $crear = $editar = $eliminar = true;
 
-      $ver = $crear = $editar = $eliminar =false;
-    
-      // Recorremos cada uno de los permisos de 'perfiles'
-      foreach($j2a['empleados'] as $dato){
-        foreach($dato as $key => $value){
-          if($value == true){
-            switch($key){
-              case 'ver': $ver = true;break;
-              case 'crear': $crear = true;break;
-              case 'editar': $editar = true; break;
-              case 'eliminar': $eliminar = true; break;
-            }
-          }
-        }
-      }
-      $show = $new = $edit = $delete = "";
-    
       if ($editar) {
         //Con esto ya no saldra offset: 0 , solo mostraremos el primero a editar si existe
         if (Editorial::all()->isNotEmpty()) {
@@ -54,6 +35,7 @@ class EditorialController extends Controller
          $new = view('admin.md_editoriales.new');
       }
       if ($ver) {
+        
             // $editorials cargara todas las editoriales
             $editorials = Editorial::all();
             // envia los permisos de editar y eliminar
@@ -63,6 +45,7 @@ class EditorialController extends Controller
                'eliminar' => $eliminar,
                'editar' => $editar,
             ]);
+         
       }
 
       if ($eliminar) {
@@ -125,7 +108,9 @@ class EditorialController extends Controller
 
    public function show($id)
    {
-   
+      $editorial = Editorial::find($id);
+      $editorial->delete();
+      return redirect('editorial.index');   
    }
 
      public function switchCategory($category){
@@ -141,6 +126,12 @@ class EditorialController extends Controller
             break;
          case 'compendio':
             $id = 4;
+            break;
+          case 'colaborador':
+            $id = 5;
+            break;
+          case 'asesor':
+            $id = 6;
             break;
          default:
             $id = null;

@@ -38,10 +38,7 @@ Route::resource('configurations', 'ConfigurationController');
 
 // RUTA PARA LOS PRESTAMOS DE TESIS
 Route::resource('prestamos', 'PrestamoController');
-Route::get('prestamos/{id}', 'PrestamoController@store');
-
-// RUTA PARA LOS PRESTAMOS
- Route::resource('search', 'BusquedaController');
+Route::get('prestamos/{id}', 'PrestamosController@store');
 
 
 Route::resource('userTypes', 'userTypeController');

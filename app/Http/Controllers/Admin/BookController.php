@@ -172,7 +172,7 @@ class BookController extends Controller
          }
          BookCopy::create([
             'incomeNumber' => $request->incomeNumber[$i],
-            'clasification' => $bc_clasification,
+            'clasification' => $request->clasification,
             'barcode' => $request->barcode[$i],
             'copy' => $i + 1,
             'volume' => $request->volume[$i],
@@ -501,15 +501,24 @@ class BookController extends Controller
       return redirect()->route('book.index');
    }
 
-   public function show()
+   public function show($id)
    {
       $book = Book::find($id);
+      $book->authors()->detach();
+      $book->editorials()->detach();
+      $book->bookCopies()->delete();
+      $book->chapters()->delete();
+      $book->delete();
+      
+      return redirect()->route('book.index');
+      
+     /* $book = Book::find($id);
       if ($request->get('page') == 1) {
          return view('admin.md_books.show2')->with('book', $book);
       }
       if ($request->get('page') == 2) {
          return view('admin.md_books.show3')->with('book', $book);
-      }
+      }  */
    }
 
    public function show2($id)
@@ -521,8 +530,8 @@ class BookController extends Controller
       $bookCopies = BookCopy::all();
       return view('admin.md_books.show2', [
          'book' => $book,
-         AUTORES => $autores,
-         EDITORIALES => $editoriales,
+         'autores' => $autores,
+         'editoriales' => $editoriales,
          'chapters' => $chapters,
          'bookCopies' => $bookCopies
       ]);

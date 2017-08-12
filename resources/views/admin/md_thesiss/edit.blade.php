@@ -1,6 +1,6 @@
 <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title">Editar</h3>
+    <h3 class="box-title"><strong>Editar Material</strong></h3>
     <div class="box-tools pull-right">
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
       </button>
@@ -232,9 +232,14 @@
                         <label for="inputContent">Contenido</label>
                         <textarea class="form-control" name="contenido" id="inputContent" placeholder="">{{$thesis->conten}}</textarea> 
                      </div>  
+      
+                     <div class="form-group">
+                       <label for="inputConclusion">Conclusiones</label>
+                         <textarea class="form-control" name="conclusions" id="inputConclusion" cols="65">{{$thesis->conclusions}}</textarea>
+                     </div> 
 
                      <div class="form-group">
-                       <label for="inputRecomend">Conclusiones y Recomendaciones</label>
+                       <label for="inputRecomend">Recomendaciones</label>
                          <textarea class="form-control" name="recomendacion" id="inputRecomend" cols="65">{{$thesis->recomendacion}}</textarea>
                      </div>
 
@@ -269,7 +274,7 @@
                     
                             <div class="form-group">
                                 <label for="inputIncomeNumber">Nº Ingreso</label>
-                                <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="_ _ _ _ _ _ _ _">
+                                <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="_ _ _ _ _ _">
                             </div>
                             <div class="form-group">
                                 <label for="inputBarcode">Código de barra</label>
@@ -387,7 +392,7 @@
                                   
                                   '<div class="form-group">'+
                                       '<label for="inputIncomeNumber">Nº Ingreso</label>'+
-                                      '<input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" name="incomeNumber'+idCont+'" id="inputIncomeNumber" placeholder="_ _ _ _ _ _ _ _">'+
+                                      '<input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" name="incomeNumber'+idCont+'" id="inputIncomeNumber" placeholder="_ _ _ _ _ _">'+
                                   '</div>'+
                                   '<div class="form-group">'+
                                       '<label for="inputBarcode">Código de barra</label>'+

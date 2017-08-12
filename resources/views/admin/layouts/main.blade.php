@@ -10,8 +10,6 @@
 <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css')}}">
 @yield('css')
 
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
@@ -21,7 +19,7 @@
 <link rel="stylesheet" href="{{ URL::asset('css/estiloLibro.css')}}">
 
 <link rel="stylesheet" href="{{ URL::asset('css/AdminLTE.min.css') }}">
-
+<link rel="stylesheet" href="{{ URL::asset('css/magazinesStyle.css')}}">
 <link rel="stylesheet" href="{{URL::asset('css/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('plugins/select2/select2.min.css') }}">
 
@@ -37,7 +35,6 @@
 <link rel="stylesheet" href="{{URL::asset('css/bootstrap-multiselect.css')}}">
 <script src="{{URL::asset('js/bootstrap-multiselect.js')}}"></script>
 
-<link rel="stylesheet" href="{{ URL::asset('css/SearchStyle.css')}}">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -89,8 +86,6 @@
 	<script src="{{ URL::asset('js/bootstrap-datetimepicker.min.js')}}"></script>
 	<script src="{{ URL::asset('js/bootstrap-datetimepicker.pt-PE.js')}}"></script>
 	<!--<script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>-->
-
-  <script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>
 
 	<script type="text/javascript">
     //fecha + hora formato 24 horas
@@ -148,7 +143,14 @@
 	@yield('script')
 	@yield('scriptSelectAutorPrincipal')
 	@yield('scripts')
-  
+
+
+<script>
+  //Inicializador de los inputmask
+  $("[data-mask]").inputmask();
+</script>
+
+<!--Que me permita ingresar solo numeros-->
 <script language=Javascript>
       
       function isNumberKey(evt)
@@ -163,24 +165,71 @@
 </script>
 
 <script>
-  //Inicializador de los inputmask
-  $("[data-mask]").inputmask();
-</script>
-<script type="text/javascript">
-
-( function() {
-$('#btn-search').on('click', function(e) {
-
-  e.preventDefault();
-  $('#search').animate({width: 'toggle'}).focus();
-
-});
-
-} () );
-</script>
-
-<!--Que me permita ingresar solo numeros-->
-
+    
+  function validarFormulario(){
+ 
+    var txtNombre = document.getElementById('tipo').value;
+    var txtEdad = document.getElementById('title').value;
+    var txtCorreo = document.getElementById('clasification').value;
+    var txtFecha = document.getElementById('asesor').value;
+    var cmbSelector = document.getElementById('escuela').selectedIndex;
+    var chkEstado = document.getElementById('edition');
+    var rbtEstado = document.getElementsByName('extension');
+ 
+    var banderaRBTN = false;
+ 
+    //Test campo obligatorio
+    if(txtNombre == null || txtNombre.length == 0 || /^\s+$/.test(txtNombre)){
+      alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco');
+      return false;
+    }
+ 
+    //Test edad
+    if(txtEdad == null || txtEdad.length == 0 || isNaN(txtEdad)){
+      alert('ERROR: Debe ingresar una edad');
+      return false;
+    }
+ 
+    //Test correo
+    if(!(/\S+@\S+\.\S+/.test(txtCorreo))){
+      alert('ERROR: Debe escribir un correo válido');
+      return false;
+    }
+ 
+    //Test fecha
+    if(!isNaN(txtFecha)){
+      alert('ERROR: Debe elegir una fecha');
+      return false;
+    }
+ 
+    //Test comboBox
+    if(cmbSelector == null || cmbSelector == 0){
+      alert('ERROR: Debe seleccionar una opcion del combo box');
+      return false;
+    }
+ 
+    //Test checkBox
+    if(!chkEstado.checked){
+      alert('ERROR: Debe seleccionar el checkbox');
+      return false;
+    }
+ 
+    //Test RadioButtons
+    for(var i = 0; i < rbtEstado.length; i++){
+      if(rbtEstado[i].checked){
+        banderaRBTN = true;
+        break;
+      }
+    }
+    if(!banderaRBTN){
+      alert('ERROR: Debe elegir una opción de radio button');
+      return false;
+    }
+ 
+    return true;
+  }
+ 
+  </script>
 
  </body>
 </html>

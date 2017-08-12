@@ -22,5 +22,15 @@ class Magazines extends Seeder
           'issnD' => '999666',
           'author_id' => '6'
         ]);
+         Magazine::Create([
+          'title' => 'Algorithmic 2',
+          'volumen' => '2',
+          'numero' => '4',
+          'fechaEdicion' => 'ABR-ENE.2015',
+          'subtitle' => 'Revista de Investigación',
+          'issn' => '662999',
+          'issnD' => '999556',
+          'author_id' => '5'
+        ]);
     }
 }

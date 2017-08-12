@@ -15,7 +15,7 @@
 		<div class="box-body">
 			<div class="form-group">
 				<label for="inputCode">Codigo de empleado</label> 
-				<input type="text" class="form-control" name="code2" id="inputCode" value="{{$empleado->code}}">
+				<input type="text" class="form-control" name="code" id="inputCode" value="{{$empleado->code}}">
 			</div>
 			<div class="form-group">
 				<label>Usuario</label> <select class="form-control select2"
@@ -33,7 +33,7 @@
 			</div>
 			<div class="form-group">
 				<label for="inputPassword">Contraseña nueva</label> <input type="password"
-					class="form-control" name="password2" id="inputPassword" placeholder="">
+					class="form-control" name="password" id="inputPassword" placeholder="">
 			</div>
 		</div> 
 		<!-- /.box-body -->

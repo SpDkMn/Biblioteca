@@ -1,4 +1,4 @@
-<div class="box box-primary">
+isbn<div class="box box-primary">
 	<div class="box-header with-border">
 		<h3 class="box-title">Editar</h3>
 		<div class="box-tools pull-right">
@@ -39,7 +39,7 @@
 									<div class="box-body">
 										<!--1. Titulo -->
 										<div class="form-group">
-											<label>Titulo</label> <input type="text" name="title"
+											<label>Titulo *</label> <input type="text" name="title"
 												class="form-control" id="title" value="{{$book->title}}"
 												required>
 										</div>
@@ -55,7 +55,7 @@
 
 										<!--3. Clasificacion -->
 										<div class="form-group">
-											<label>Clasificacion</label> <input type="text"
+											<label>Clasificacion *</label> <input type="text"
 												name="clasification" class="form-control" id="clasification"
 												value="{{$book->clasification}}" required>
 										</div>
@@ -63,14 +63,13 @@
 
 										<div class="form-group">
 											<label>Edicion</label> <input type="text" name="edition"
-												class="form-control" id="edition" value="{{$book->edition}}"
-												required>
+												class="form-control" id="edition" value="{{$book->edition}}" onkeypress="return isNumberKey(event)">
 										</div>
 
 
 										
 										<div class="form-group">
-											<label>Autor Principal</label> <select
+											<label>Autor Principal *</label> <select
 												class="form-control select2" name="primaryAuthor[]"
 												multiple="multiple""> @foreach($autores as $autor)
 													@foreach($autor->categories as $category) @if($category->id
@@ -107,7 +106,7 @@
 										</div>
 
 										<div class="form-group">
-											<label>Editorial</label> <select class="form-control select2"
+											<label>Editorial *</label> <select class="form-control select2"
 												name="editorial[]"">@foreach($editoriales as $editorial)
 													@foreach($editorial->categories as $category)
 													@if($category->name == "libro"){
@@ -153,16 +152,16 @@
 
 										<!-- 1. Resumen -->
 										<div class="form-group">
-											<label>Resumen</label>
+											<label>Resumen *</label>
 											<textarea class="form-control" rows="3" name="summary"
-												id="inputSummary">{{$book->summary}}</textarea>
+												id="inputSummary" required>{{$book->summary}}</textarea>
 										</div>
 										<!-- 1. Fin Resumen -->
 
 										<!-- 2. Capitulos -->
 
 										<div class="form-group">
-											<label>Capitulos</label>
+											<label>Capitulos *</label>
 											<div id="contenedor">
 					                            @foreach($book->chapters as $c)
 					                            <?php $cont=$c->number-1; ?>
@@ -198,12 +197,146 @@
 
 
 
-
 										<div class="form-group">
-											<label>Ubicacion en Biblioteca</label> <input type="text"
-												name="libraryLocation" class="form-control"
-												value="{{$book->libraryLocation}}">
-										</div>
+						                      <label>Ubicación </label>
+						                      <select class="form-control select2" name="libraryLocation" id="libraryLocation" value="{{$book->libraryLocation}}" style="width: 100%;">
+						                        <option name="ubicacion">Stand A1</option>
+							                        <option name="ubicacion">Stand A2</option>
+							                        <option name="ubicacion">Stand A3</option>
+							                        <option name="ubicacion">Stand A4</option>
+							                        <option name="ubicacion">Stand A5</option>
+							                        <option name="ubicacion">Stand B1</option>
+							                        <option name="ubicacion">Stand B2</option>
+							                        <option name="ubicacion">Stand B3</option>
+							                        <option name="ubicacion">Stand B4</option>
+							                        <option name="ubicacion">Stand B5</option>
+							                        <option name="ubicacion">Stand C1</option>
+							                        <option name="ubicacion">Stand C2</option>
+							                        <option name="ubicacion">Stand C3</option>
+							                        <option name="ubicacion">Stand C4</option>
+							                        <option name="ubicacion">Stand C5</option>
+							                        <option name="ubicacion">Stand D1</option>
+							                        <option name="ubicacion">Stand D2</option>
+							                        <option name="ubicacion">Stand D3</option>
+							                        <option name="ubicacion">Stand D4</option>
+							                        <option name="ubicacion">Stand D5</option>
+							                        <option name="ubicacion">Stand E1</option>
+							                        <option name="ubicacion">Stand E2</option>
+							                        <option name="ubicacion">Stand E3</option>
+							                        <option name="ubicacion">Stand E4</option>
+							                        <option name="ubicacion">Stand E5</option>
+							                        <option name="ubicacion">Stand F1</option>
+							                        <option name="ubicacion">Stand F2</option>
+							                        <option name="ubicacion">Stand F3</option>
+							                        <option name="ubicacion">Stand F4</option>
+							                        <option name="ubicacion">Stand F5</option>
+							                        <option name="ubicacion">Stand G1</option>
+							                        <option name="ubicacion">Stand G2</option>
+							                        <option name="ubicacion">Stand G3</option>
+							                        <option name="ubicacion">Stand G4</option>
+							                        <option name="ubicacion">Stand G5</option>
+							                        <option name="ubicacion">Stand H1</option>
+							                        <option name="ubicacion">Stand H2</option>
+							                        <option name="ubicacion">Stand H3</option>
+							                        <option name="ubicacion">Stand H4</option>
+							                        <option name="ubicacion">Stand H5</option>
+							                        <option name="ubicacion">Stand I1</option>
+							                        <option name="ubicacion">Stand I2</option>
+							                        <option name="ubicacion">Stand I3</option>
+							                        <option name="ubicacion">Stand I4</option>
+							                        <option name="ubicacion">Stand I5</option>
+							                        <option name="ubicacion">Stand J1</option>
+							                        <option name="ubicacion">Stand J2</option>
+							                        <option name="ubicacion">Stand J3</option>
+							                        <option name="ubicacion">Stand J4</option>
+							                        <option name="ubicacion">Stand J5</option>
+							                        <option name="ubicacion">Stand K1</option>
+							                        <option name="ubicacion">Stand K2</option>
+							                        <option name="ubicacion">Stand K3</option>
+							                        <option name="ubicacion">Stand K4</option>
+							                        <option name="ubicacion">Stand K5</option>
+							                        <option name="ubicacion">Stand L1</option>
+							                        <option name="ubicacion">Stand L2</option>
+							                        <option name="ubicacion">Stand L3</option>
+							                        <option name="ubicacion">Stand L4</option>
+							                        <option name="ubicacion">Stand L5</option>
+							                        <option name="ubicacion">Stand M1</option>
+							                        <option name="ubicacion">Stand M2</option>
+							                        <option name="ubicacion">Stand M3</option>
+							                        <option name="ubicacion">Stand M4</option>
+							                        <option name="ubicacion">Stand M5</option>
+							                        <option name="ubicacion">Stand N1</option>
+							                        <option name="ubicacion">Stand N2</option>
+							                        <option name="ubicacion">Stand N3</option>
+							                        <option name="ubicacion">Stand N4</option>
+							                        <option name="ubicacion">Stand N5</option>
+							                        <option name="ubicacion">Stand Ñ1</option>
+							                        <option name="ubicacion">Stand Ñ2</option>
+							                        <option name="ubicacion">Stand Ñ3</option>
+							                        <option name="ubicacion">Stand Ñ4</option>
+							                        <option name="ubicacion">Stand Ñ5</option>
+							                        <option name="ubicacion">Stand O1</option>
+							                        <option name="ubicacion">Stand O2</option>
+							                        <option name="ubicacion">Stand O3</option>
+							                        <option name="ubicacion">Stand O4</option>
+							                        <option name="ubicacion">Stand O5</option>
+							                        <option name="ubicacion">Stand P1</option>
+							                        <option name="ubicacion">Stand P2</option>
+							                        <option name="ubicacion">Stand P3</option>
+							                        <option name="ubicacion">Stand P4</option>
+							                        <option name="ubicacion">Stand P5</option>
+							                        <option name="ubicacion">Stand Q1</option>
+							                        <option name="ubicacion">Stand Q2</option>
+							                        <option name="ubicacion">Stand Q3</option>
+							                        <option name="ubicacion">Stand Q4</option>
+							                        <option name="ubicacion">Stand Q5</option>
+							                        <option name="ubicacion">Stand R1</option>
+							                        <option name="ubicacion">Stand R2</option>
+							                        <option name="ubicacion">Stand R3</option>
+							                        <option name="ubicacion">Stand R4</option>
+							                        <option name="ubicacion">Stand R5</option>
+							                        <option name="ubicacion">Stand S1</option>
+							                        <option name="ubicacion">Stand S2</option>
+							                        <option name="ubicacion">Stand S3</option>
+							                        <option name="ubicacion">Stand S4</option>
+							                        <option name="ubicacion">Stand S5</option>
+							                        <option name="ubicacion">Stand T1</option>
+							                        <option name="ubicacion">Stand T2</option>
+							                        <option name="ubicacion">Stand T3</option>
+							                        <option name="ubicacion">Stand T4</option>
+							                        <option name="ubicacion">Stand T5</option>
+							                        <option name="ubicacion">Stand U1</option>
+							                        <option name="ubicacion">Stand U2</option>
+							                        <option name="ubicacion">Stand U3</option>
+							                        <option name="ubicacion">Stand U4</option>
+							                        <option name="ubicacion">Stand U5</option>
+							                        <option name="ubicacion">Stand V1</option>
+							                        <option name="ubicacion">Stand V2</option>
+							                        <option name="ubicacion">Stand V3</option>
+							                        <option name="ubicacion">Stand V4</option>
+							                        <option name="ubicacion">Stand V5</option>
+							                        <option name="ubicacion">Stand W1</option>
+							                        <option name="ubicacion">Stand W2</option>
+							                        <option name="ubicacion">Stand W3</option>
+							                        <option name="ubicacion">Stand W4</option>
+							                        <option name="ubicacion">Stand W5</option>
+							                        <option name="ubicacion">Stand X1</option>
+							                        <option name="ubicacion">Stand X2</option>
+							                        <option name="ubicacion">Stand X3</option>
+							                        <option name="ubicacion">Stand X4</option>
+							                        <option name="ubicacion">Stand X5</option>
+							                        <option name="ubicacion">Stand Y1</option>
+							                        <option name="ubicacion">Stand Y2</option>
+							                        <option name="ubicacion">Stand Y3</option>
+							                        <option name="ubicacion">Stand Y4</option>
+							                        <option name="ubicacion">Stand Y5</option>
+							                        <option name="ubicacion">Stand Z1</option>
+							                        <option name="ubicacion">Stand Z2</option>
+							                        <option name="ubicacion">Stand Z3</option>
+							                        <option name="ubicacion">Stand Z4</option>
+							                        <option name="ubicacion">Stand Z5</option>
+						                      </select>
+						                 </div>  
 
 										<div class="form-group">
 											<label>Descripcion Fisica</label>
@@ -221,14 +354,14 @@
 														class="form-control" value="{{$book->physicalDetails}}">
 												</div>
 
-												<div for="ejemplo_password_3" class="col-xs-6 control-label">Dimensiones</div>
+												<div for="ejemplo_password_3" class="col-xs-6 control-label">Dimensiones *</div>
 												<div class="col-xs-6">
 													<input type="text" name="dimensions" class="form-control"
 														value="{{$book->dimensions}}" required>
 
 												</div>
 												<div for="ejemplo_password_3" class="col-xs-6 control-label">Material
-													de Acompañamiento</div>
+													de Acompañamiento </div>
 												<div class="col-xs-6">
 													<input type="text" name="accompaniment"
 														class="form-control" value="{{$book->accompaniment}}">
@@ -314,17 +447,17 @@
 													<div class="tab-pane active" id="primero{{$cont2}}">
 														<div class="box-body">
 															<div class="form-group">
-																<label>clasificacion</label> <input type="text"
+																<label>clasificacion *</label> <input type="text"
 																	class="form-control" value="{{$bc->clasification}}" disabled="true">
 															</div>
 															<div class="form-group">
-																<label>Numero de Ingreso</label> <input type="text"
+																<label>Numero de Ingreso *</label> <input type="text"
 																	name="incomeNumber[{{$cont}}]" class="form-control"
 																	value="{{$bc->incomeNumber}}" required>
 															</div>
 
 															<div class="form-group">
-																<label>Codigo de Barras</label> <input type="text"
+																<label>Codigo de Barras *</label> <input type="text"
 																	name="barcode[{{$cont}}]" class="form-control"
 																	value="{{$bc->barcode}}" required>
 															</div>
@@ -336,7 +469,7 @@
 															</div>
 
 															<div class="form-group">
-																<label>Gestion</label> <input type="text"
+																<label>Gestion *</label> <input type="text"
 																	name="management[{{$cont}}]" class="form-control"
 																	value="{{$bc->management}}" required>
 															</div>
@@ -358,7 +491,7 @@
 													<div class="tab-pane fade" id="segundo{{$cont2}}">
 														<div class="box-body">
 															<div class="form-group">
-																<label>Modalidad de Adquision</label> <select
+																<label>Modalidad de Adquision *</label> <select
 																	class="form-control select2"
 																	name="acquisitionModality[{{$cont}}]"
 																	style="width: 100%;">
@@ -378,7 +511,7 @@
 																<label>Fuente de Adquisicion</label> <input type="text"
 																	class="form-control"
 																	name="acquisitionSource[{{$cont}}]"
-																	value="{{$bc->acquisitionSource}}" required>
+																	value="{{$bc->acquisitionSource}}">
 															</div>
 
 															<div class="form-group">
@@ -390,7 +523,7 @@
 															<div class="form-group">
 																<label>Fecha de Adquisicion</label> <input type="text"
 																	name="acquisitionDate[{{$cont}}]" class="form-control"
-																	value="{{$bc->acquisitionDate}}" required>
+																	value="{{$bc->acquisitionDate}}">
 															</div>
 
 															<div class="form-group">
@@ -408,13 +541,13 @@
 																<label>Lugar de Publicacion</label> <input type="text"
 																	name="publicationLocation[{{$cont}}]"
 																	class="form-control"
-																	value="{{$bc->publicationLocation}}" required>
+																	value="{{$bc->publicationLocation}}">
 															</div>
 
 															<div class="form-group">
 																<label>Fecha de Publicacion</label> <input type="text"
 																	name="publicationDate[{{$cont}}]" class="form-control"
-																	value="{{$bc->publicationDate}}" required>
+																	value="{{$bc->publicationDate}}">
 															</div>
 
 														</div>
@@ -497,7 +630,7 @@
                           +'</div>'
                           +'<div class="form-group">'
                             +'<label>Codigo de Barras</label>'
-                            +'<input type="text" name="barcode['+arreglo+']" class="form-control" required>'
+                            +'<input type="text" name="barcode['+arreglo+']" class="form-control" value="20000000" required>'
                           +'</div>'
                           +'<div class="form-group">'
                             +'<label>Volumen</label>'

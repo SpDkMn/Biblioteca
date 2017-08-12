@@ -11,20 +11,22 @@
 
 	<div class="box-body table-responsive">
 
-		<table id="bookTable" class="table table-bordered table-striped">
-			<tr>
-				<th>Titulo</th>
-				<th>Autor</th>
-				<th>Editorial</th>
-				<th>Nº ejemplares</th>
-				<th>Clasificacion</th>
-				<th>Editar</th>
-				<th>Eliminar</th>
+		<table id="example1" class="table table-bordered table-striped table-hover" >
+		   <thead>
+			<tr style="background:#E7FAE2;">
+				<th class="text-center">Título</th>
+				<th class="text-center">Autor</th>
+				<th class="text-center">Editorial</th>
+				<th class="text-center">Nº ejemplares</th>
+				<th class="text-center">Clasificación</th>
+				<th class="text-center">Editar</th>
+				<th class="text-center">Eliminar</th>
 			</tr>
+			</thead>
 			@foreach($books as $book)
 			<tr>
-				<td><a href="#" data-id="{{$book->id}}" class="contenido">{{$book->title}}</a></td>
-				<td>
+				<td class="text-center"><a href="#" data-id="{{$book->id}}" class="contenid">{{$book->title}} - Edición {{$book->edition}}</a></td>
+				<td class="text-center">
             <?php $cont=0; ?>
             @foreach($book->authors as $author)
               @if($author->pivot->type == true)
@@ -42,24 +44,24 @@
               <?php $cont2=$cont2+1; ?>
             @endforeach   
           </td>
-				<td>@foreach($book->editorials as $editorial)
+				<td class="text-center">@foreach($book->editorials as $editorial)
 					@if($editorial->pivot->type == true) {{$editorial->name}} @endif
 					@endforeach</td>
 
-				<td>
+				<td class="text-center">
           <?php $cont=0 ?>
           @foreach($book->bookCopies as $copy)
             <?php $cont=$cont+1; ?>
           @endforeach
           {{$cont}}
         </td>
-				<td>{{$book->clasification}}</td>
-				<td><a type="button" data-id="{{$book->id}}"
+				<td class="text-center">{{$book->clasification}}</td>
+				<td class="text-center"><a type="button" data-id="{{$book->id}}"
 					class="button-content btn btn-success editar"><i
 						class="fa fa-pencil"></i></a></td>
 
 
-				<!--ELIMINACION DE UNA TESIS MEDIANTE MODAL-->
+				<!--ELIMINACION DE UN libro MEDIANTE MODAL-->
 
 				<td><center>
 						<button type="button" class="btn btn-danger" data-toggle="modal"
@@ -91,7 +93,7 @@
 
 								<div class="modal-body">
 									<p class="text-center">
-										<strong>¿ Desea eliminar dicha libro ?</strong>
+										<strong>¿ Desea eliminar dicho libro ?</strong>
 									</p>
 								</div>
 
@@ -126,7 +128,7 @@
 
 <script>
     $(document).ready(function(){
-      $(".contenido").on('click',function(event){
+      $(".contenid").on('click',function(event){
         
         $id = $(this).data('id');
         $("#div-new").html('<div class="box box-warning box-solid"><div class="box-header with-border"><h3 class="box-title">Cargando</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>')

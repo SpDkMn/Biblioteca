@@ -11,8 +11,8 @@
 	<div class="box-body">
 
 		<div class="box-body with-border">
-			<div class="title">{{$book->title}}</div>
-			<div class="secondaryTitle">{{$book->secondaryTitle}}</div>
+			<div class="title"> <i	class="fa fa-book"></i> {{$book->title}}</div>
+			<div class="secondaryTitle">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{$book->secondaryTitle}} <?php if($book->secondaryTitle!="") echo "-"; ?> Edición {{$book->edition}}</div>
 		</div>
 
 
@@ -21,8 +21,8 @@
 			<div class="col-md-6">
 				<div class="box box-success box-solid">
 					<div class="box-body table-responsive table-hover">
-						<div class="subtitle">Items</div>
-						<table class="table">
+					  <div class="subtitle">Items</div>
+						<table class="table table-hover table-striped table-bordered" >
 							<tr>
 								<th class="itemTable">Numero de ingreso</th>
 								<th class="itemTable">Codigo de barras</th>
@@ -37,17 +37,17 @@
 
 							<tr @if($copy->
 								availability) class="success" @else class="danger" @endif>
-								<td>{{$copy->incomeNumber}}</td>
-								<td>{{$copy->barcode}}</td>
-								<td>{{$copy->copy}} @if($copy->availability) <span
+								<td class="text-center">{{$copy->incomeNumber}}</td>
+								<td class="text-center">{{$copy->barcode}}</td>
+								<td class="text-center">{{$copy->copy}} @if($copy->availability) <span
 									class="sr-only">Disponible</span> @else <span class="sr-only">No
 										disponible</span> @endif
 								</td>
 
-								<td>{{$copy->volume}}</td>
-								<td>{{$copy->clasification}}</td>
+								<td class="text-center"><?php if($copy->volume != "") echo ( $copy->volume); else echo "_";  ?></td>
+								<td class="text-center">{{$copy->clasification}}</td>
 
-								<td><button type="button" class="btn btn-success"
+								<td class="text-center"><button type="button" class="btn btn-success"
 										data-toggle="modal"
 										data-target="#ModalCopy<?php echo $copy->id; ?>">
 										<i class="fa fa-tag"></i>
@@ -73,23 +73,19 @@
 										<div class="modal-body modalBody1">
 										<dl class="dl-horizontalLibro">
 											@if($copy->acquisitionModality!="")
-												<dt>Modalidad de Adquisicion :</dt>
+												<dt>Modalidad de Adquisicion : </dt>
                   								<dd>{{$copy->acquisitionModality}}</dd>
                          					@endif
-                         					@if($copy->acquisitionPrice!="")
-												<dt>Precio de Adquisicion :</dt>
-                 								<dd>{{$copy->acquisitionPrice}}</dd>
-                          					@endif
                           					@if($copy->acquisitionSource!="")
-												<dt>Fuente de Adquisicion :</dt>
+												<dt>Fuente de Adquisicion : </dt>
 												<dd>{{$copy->acquisitionSource}}</dd>
                   							@endif
                   							@if($copy->acquisitionPrice!="")
-												<dt>Precio de Adquisicion :</dt>
-												<dd>{{$copy->acquisitionPrice}}</dd>
+												<dt>Precio de Adquisicion : </dt>
+												<dd>{{$copy->acquisitionPrice}}.00 soles</dd>
                 							@endif
 											@if($copy->acquisitionDate)
-												<dt>Fecha de Adquisicion :</dt>
+												<dt>Fecha de Adquisicion : </dt>
                   								<dd>{{$copy->acquisitionDate}}</dd>
                           					@endif
                           					@if($copy->printType!="")
@@ -97,15 +93,15 @@
                  								<dd>{{$copy->printType}}</dd>
                           					@endif
                           					@if($copy->publicationLocation!="")
-												<dt class="contenidoModalLibro">Lugar de publicacion</dt>
+												<dt class="contenidoModalLibro">Lugar de publicacion :</dt>
                  								<dd>{{$copy->publicationLocation}}</dd>
                           					@endif
                           					@if($copy->publicationDate!="")
-												<dt class="contenidoModalLibro">Fecha de publicacion</dt>
+												<dt class="contenidoModalLibro">Fecha de publicacion :</dt>
                   								<dd>{{$copy->publicationDate}}</dd>
                           					@endif
                           					@if($copy->publicationDate!="")
-												<dt class="contenidoModalLibro">Gestion</dt>
+												<dt class="contenidoModalLibro">Gestion :</dt>
                           						<dd>{{$copy->management}}</dd>	
                           					@endif
 										
@@ -212,13 +208,13 @@
 							<li>Otros detalles fisicos: <?php  for($i=0;$i<45;$i++){echo "&nbsp";}?>{{$book->physicalDetails}}</li>
 							<li>Dimensiones:<?php for($i=0;$i<60;$i++){echo "&nbsp";}?> {{$book->dimensions}}</li>
 							<li>Material de Acompañamiento: <?php  for($i=0;$i<28;$i++){echo "&nbsp";}?>{{$book->accompaniment}}</li>
-						</ul>
+						</ul><br><br>
 
 
 						<div box-body>
 							<a href="#0" type="button"
 								class="button-content btn btn-warning" id="crearLibro"><i
-								class="fa fa-book"></i>Crear Libros</a> 
+								class="fa fa-book"></i> Crear Libros</a> 
 						</div>
 
 					</div>

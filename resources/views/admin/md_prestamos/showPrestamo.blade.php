@@ -18,7 +18,7 @@ $thesiss = App\Thesis::all();
   <div class="box-body">
               <table id="example1" class="table table-bordered table-striped table-responsive table-hover">
                 <thead>
-                 <tr class="text-center box-success" style="background:#C3CECE;">
+                 <tr class="text-center box-success" style="background:#E7FAE2;">
                   <th class="text-center">PEDIR<h6></h6></th>
                   <th class="text-center">TIPO DE ÍTEM</th>
                   <th class="text-center">TÍTULO<h6></h6></th>
@@ -56,22 +56,27 @@ $thesiss = App\Thesis::all();
                                  <input type="hidden" name="_method" value="put" />
                                       {{ csrf_field() }}
                                
-                              <div class="modal-header" style="background:#DBEFF0">
+                              <div class="modal-header modalHead1">
                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span></button>
                                     <h3 class="modal-title text-center text-font-size" id="ModalCopyLabel"><strong>MATERIAL PEDIDO</strong></h3><h4 class="text-center"> {{ $thesis->title}}</h4>
                                </div>
 
+                               <div class="modal-body modalBody1 text-center">
+                                   <br>
+                                  <p>Correo institucional &nbsp&nbsp&nbsp&nbsp
+                                  <input type="text" placeholder="" name=""> </p>
 
-                               <div class="modal-body">
-                                   
+                               
                                   <p>Codigo del alumno &nbsp&nbsp&nbsp&nbsp
                                   <input type="text" placeholder="" name="codigo" required> </p>
+                                  <br>
 
                                </div>
 
-                               <div class="modal-footer" style="background:#DBEFF0">
-                                    <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Cancelar</button>
+
+                               <div class="modal-footer modalHead1">
+                                    <button type="button" class="btn pull-left" style="background:#D0D0CD" data-dismiss="modal">Cancelar</button>
                                     <input type="submit" class="btn btn-primary" value="Pedir">
 
                                </div>
@@ -120,7 +125,7 @@ $thesiss = App\Thesis::all();
       </tbody>               
     
       <thead>
-                 <tr class="text-center box-success" style="background:#C3CECE;">
+                 <tr class="text-center box-success" style="background:#E7FAE2;">
                   <th class="text-center">PEDIR</th>
                   <th class="text-center">TIPO DE ÍTEM</th>
                   <th class="text-center">TÍTULO</th>

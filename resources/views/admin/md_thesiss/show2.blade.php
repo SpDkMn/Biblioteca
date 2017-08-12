@@ -1,24 +1,22 @@
 @extends('admin.layouts.main')
 @section('content')
 
+
 <div class="box box-warning">
   <div class="box-header with-border">
-    <h3 class="box-title">Información de Tesis y Tesinas</h3>
+    <div class="form-group">
+        <button type="button" class="btn btn-warning"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i><strong>Informacion de la {{ $thesis->type }}</strong></button>
+        <a href="{{url('admin/thesis')}}" class="btn btn-primary"><strong><br>Volver</strong></a>
+    </div>
     <div class="box-tools pull-right"> 
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
       </button>
     </div> 
   
-
-
-
-    <div class="box-body with-border">
+    <div class="box-body with-border box-warning">
          <h2><strong> TÍTULO: &nbsp {{ $thesis->title }}</strong><h2>
     </div>
-
-    <!--Esta es la parte de la editorial y los autores (Principal y secundario)-->
     
-
 
 
   <div class="box-body table-bordered table-responsive table-hover col-md-12">
@@ -54,17 +52,17 @@
            <div class="modal-dialog" role="document">
              <div class="modal-content">
                <form>
-                <div class="modal-header">
+                <div class="modal-header modalHead1">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><br>
-                <h3 class="modal-title text-center text-font-size" id="ModalCopyLabel"><strong>EJEMPLAR&nbsp<?php echo $copy->ejemplar; ?></strong></h3>
+                <h3 class="modal-title text-center text-font-size" id="ModalCopyLabel"><strong><i class="fa fa-graduation-cap"></i> EJEMPLAR&nbsp<?php echo $copy->ejemplar; ?></strong></h3>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body modalBody1">
                   
                   <div>
                     
                     @if($copy->incomeNumber)
                     <p>&nbsp&nbsp&nbsp<strong>Numero de Ingreso</strong>
-                   <?php    for($i=0;$i<45;$i++){echo "&nbsp";}?>:&nbsp
+                   <?php    for($i=0;$i<46;$i++){echo "&nbsp";}?>:&nbsp
                     {{$copy->incomeNumber}}</p>
                     @endif
 
@@ -73,18 +71,28 @@
                     
                     @if($copy->barcode!="")
                     <p>&nbsp&nbsp&nbsp<strong>Código de Barras</strong>
-                   <?php    for($i=0;$i<48;$i++){echo "&nbsp";}?>:&nbsp
+                   <?php    for($i=0;$i<50;$i++){echo "&nbsp";}?>:&nbsp
                     {{$copy->barcode}}</p>
                     @endif
                     
                     <p>&nbsp&nbsp&nbsp<strong>Estado</strong>
-                     <?php    for($i=0;$i<67;$i++){echo "&nbsp";}?>:&nbsp
+                     <?php    for($i=0;$i<72;$i++){echo "&nbsp";}?>:&nbsp
                       @if($copy->availability==1) Habilitado @endif
                       @if($copy->availability==0) Deshabilitado  @endif
                     </p>
-                    </div> <br><br>           
+                    
+                    <p>&nbsp&nbsp&nbsp<strong>Clasificación</strong>
+                   <?php    for($i=0;$i<59;$i++){echo "&nbsp";}?>:&nbsp
+                    {{$thesis->clasification}}</p>
+
+                    <p>&nbsp&nbsp&nbsp<strong>Ubicación</strong>
+                   <?php    for($i=0;$i<65;$i++){echo "&nbsp";}?>:&nbsp
+                    {{$thesis->location}}</p>
+
+
+                    </div> <br>       
                 </div>
-              
+              <div class="modal-footer modalHead1"></div>
              </div>
            </div>
          </div>
@@ -105,7 +113,7 @@
 
     <div class="col-md-6">
          
-      <div class="box box-info box-solid" style="background: rgba(21, 212, 180, 0.05);">
+      <div class="box box-info box-solid" style="background: rgba(21, 188, 137, 0.05);">
 
 
          <div class="box-body"><br>
@@ -177,7 +185,7 @@
         <div class="box-body">
               <strong>CLASIFICACIÓN</strong>
               <?php   for($i=0;$i<25;$i++){echo "&nbsp";}?>:&nbsp
-              {{$thesis->clasification}}
+              <?php if($thesis->clasification!=""){ echo($thesis->clasification); } else echo ("- - - - - - - - -");?>
         </div>
 
         <div class="box-body">
@@ -223,7 +231,7 @@
 
         <div class="box-body">
               <strong>DETALLES FÍSICOS </strong><br>
-              <?php   for($i=0;$i<6;$i++){echo "&nbsp";}?>&nbsp
+              <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>&nbsp
               {{$thesis->physicalDetails}}
         </div><br>
         <div class="box-body">
@@ -233,7 +241,13 @@
         </div><br>
 
         <div class="box-body">
-              <strong>CONCLUSIONES Y RECOMENDACIONES </strong><br>
+              <strong>CONCLUSIONES</strong><br>
+              <?php for($i=0;$i<2;$i++){echo "&nbsp";}?>&nbsp
+              {{$thesis->conclusions }}
+        </div><br>
+
+        <div class="box-body">
+              <strong>RECOMENDACIONES </strong><br>
               <?php   for($i=0;$i<2;$i++){echo "&nbsp";}?>&nbsp
               {{$thesis->recomendacion}}
         </div><br>
@@ -241,17 +255,19 @@
         <div class="box-body">
               <strong>EXTENSIÓN</strong>
                 <?php $cont2=2; for($i=0;$i<37;$i++){echo "&nbsp";}?>:&nbsp
-                {{$thesis->extension}}
+                {{$thesis->extension}} páginas
         </div>
 
         <div class="box-body">
               <strong>DIMENSIONES</strong>
-              <?php   for($i=0;$i<23;$i++){echo "&nbsp";}?>:&nbsp
-              {{$thesis->dimensions}}
-        </div><br><br><br><br>
+              <?php   for($i=0;$i<31;$i++){echo "&nbsp";}?>:&nbsp
+              {{$thesis->dimensions}} cm
+        </div><br><br>
         
-
-         <center><img src="{{URL::asset('img/tesis.jpg') }}" style="width:200px;"></center><br><br><br>
+        <div class="box-body" style="width:300px;">
+            <center><i class="fa fa-graduation-cap fa-5x"></i></center>
+        </div>
+         <br><br><br>
         <br>
 
       </div>

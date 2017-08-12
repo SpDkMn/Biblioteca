@@ -11,6 +11,15 @@ class EditorialMagazine extends Seeder
      */
     public function run()
     {
-      DB::table('category_editorial')->insert([EDITORIAL_ID => '1',MAGAZINE_ID => '1',TYPE => 'true']);
+      DB::table('editorial_magazine')->insert([
+         'editorial_id' => 4,
+         'magazine_id' 		=> 1,
+         'type' 		=> 1
+      ]);
+      DB::table('editorial_magazine')->insert([
+         'editorial_id' => 3,
+         'magazine_id' 		=> 2,
+         'type' 		=>1
+      ]);
     }
 }

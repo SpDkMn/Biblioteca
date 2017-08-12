@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Author as Author;
@@ -8,11 +7,9 @@ use App\Compendium as Compendium;
 use App\CompendiumCopy as CompendiumCopy;
 use App\Editorial as Editorial;
 use App\Content as Content;
-
 // Nota: Reducir la funciones al terminar todos los modulos
 class CompendiumController extends Controller
 {
-
    // Terminado
    public function index()
    {
@@ -66,17 +63,14 @@ class CompendiumController extends Controller
          'item' => $item
       ]);
    }
-
    // Funcion no usada
    public function create()
    {
       // Funcion no usada
    }
-
    // Terminado
    public function store(Request $request)
    {
-
       function cambiaCadena($str)
       {
          return intval(preg_replace('/[^0-9]+/', '', $str), 10);
@@ -89,12 +83,10 @@ class CompendiumController extends Controller
       while ($request['titleContent' . $contador_contenido] != null) {
          $contador_contenido ++;
       }
-
       // Contando las copias de la compendio
       while ($request['incomeNumber' . $contador_copia] != null) {
          $contador_copia ++;
       }
-
       // Guardando los datos de la compendio
       Compendium::create([
          'title' => $request['title'],
@@ -115,7 +107,6 @@ class CompendiumController extends Controller
          }
          $i ++;
       }
-
       // Guardando datos de las copias de compendios
       for ($j = 0; $j < $contador_copia; $j ++) {
          CompendiumCopy::create([
@@ -153,7 +144,6 @@ class CompendiumController extends Controller
       // Redireccionamos a la seccion de compendios
       return redirect('admin/compendium');
    }
-
    // Terminado
    public function edit($id)
    {
@@ -172,7 +162,6 @@ class CompendiumController extends Controller
          'autores' => $autores
       ]);
    }
-
    // Terminado - Falta optimizar
    public function update(Request $request, $id)
    {
@@ -195,7 +184,6 @@ class CompendiumController extends Controller
       while ($request['titleContent' . $contador_contenido] != null) {
          $contador_contenido ++;
       }
-
       // COPIAS DE compendio
       // Items antes de editar
       $countB = count($copiasR);
@@ -241,7 +229,6 @@ class CompendiumController extends Controller
       $compendio->save();
       return redirect('admin/compendium');
    }
-
    // Terminado
    public function destroy($id)
    {
@@ -264,7 +251,6 @@ class CompendiumController extends Controller
       $compendio->delete();
       return redirect('admin/compendium');
    }
-
    // Terminado
    public function content($id)
    {
@@ -274,17 +260,15 @@ class CompendiumController extends Controller
          'compendios' => $compendios
       ]);
    }
-
    // Terminado
    public function introduccion($id)
    {
       $compendios = Compendium::all();
       return view('admin.md_compendium.introduccion', [
          'id' => $id,
-         'compendios' => $compendios
+         'compendios' => $compendios,
       ]);
    }
-
    // Terminado
    public function itemDetail($id)
    {

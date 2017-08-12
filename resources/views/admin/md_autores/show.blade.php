@@ -12,9 +12,9 @@
 
 	<div class="box-body">
 
-		<table id="example1" class="table table-bordered table-hover">
+		<table id="example1" class="table table-bordered table-striped table-responsive table-hover">
 			<thead>
-				<tr>
+				<tr class="text-center box-success" style="background:#E7FAE2;">
 					<th class="text-center">Nombre</th>
 					<th class="text-center">Categoria</th>
 					<th class="text-center">Editar</th>
@@ -27,7 +27,7 @@
 			<tr>
 				<td>{{$author->name}}</td>
               <?php $aux=0; ?>
-            <td>
+            <td class="text-center">
               @foreach($author->categories as $category)
               
                 @if($aux>0),@endif
@@ -117,7 +117,7 @@
           $id = $('#confirmaDelete').data('id')
           $.ajax({
             
-            url: '{{ url("/admin/editorial") }}/'+$id,
+            url: '{{ url("/admin/autor") }}/'+$id,
 
             data: {'_token': '{{csrf_token()}}'},
             success: function(result) {
