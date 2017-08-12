@@ -1,6 +1,6 @@
 <div class="box box-warning">
   <div class="box-header with-border">
-    <h3 class="box-title">Informacion de Tesis y Tesinas</h3>
+    <h3 class="box-title"><strong>Informacion de Tesis y Tesinas</strong></h3>
 
     <div class="box-tools pull-right"> 
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -11,12 +11,12 @@
   <div class="box-body">
               <table id="example1" class="table table-bordered table-striped table-responsive table-hover">
                 <thead>
-                 <tr class="text-center box-success" style="background:#86aecc;">
-                  <th class="text-center">TIPO DE ÍTEM</th>
+                 <tr class="text-center box-success" style="background:#E7FAE2;">
+                  <th class="text-center">CLASIFICACIÓN</th>
                   <th class="text-center">TÍTULO</th>
                   <th class="text-center">AUTOR <h6>(Principal: Casilla Roja)</h6></th>
                   <th class="text-center">ASESOR</th>                  
-                  <th class="text-center">E. A. P.</th>
+                  <th class="text-center">UBICACIÓN</th>
                   <th>EDITAR</th>
                   <th>ELIMINAR</th>
                  </tr>
@@ -27,7 +27,7 @@
                 <tr>
                   
                   <td class="text-center">
-                    {{$thesis->type}}
+                    {{$thesis->clasification }}
                   </td>
                   
                   <td>
@@ -51,7 +51,7 @@
                  
                   
                   <td class="text-center">
-                     {{$thesis->escuela}}
+                     {{$thesis->location}}
                   </td>
 
        <!--SECCION PARA EDITAR UNA TESIS-->           
@@ -95,12 +95,12 @@
         @endforeach
       </tbody>  
       <thead>
-                 <tr class="text-center box-success" style="background:#86aecc;">
-                  <th class="text-center">TIPO</th>
+                 <tr class="text-center box-success" style="background:#E7FAE2;">
+                  <th class="text-center">CLASIFICACIÓN</th>
                   <th class="text-center">TÍTULO</th>
                   <th class="text-center">AUTOR </th>
                   <th class="text-center">ASESOR</th>                  
-                  <th class="text-center">E. A. P.</th>
+                  <th class="text-center">UBICACIÓN</th>
                   <th>EDITAR</th>
                   <th>ELIMINAR</th>
                  </tr>

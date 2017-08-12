@@ -22,14 +22,13 @@
 				<label for="tipo_academico" class="control-label col-md-2">Tipo
 					Academico:</label>
 				<div class="col-md-9">
-					<select name="tipo_academico" id="tipo_academico"
-						class="form-control" " required>
+					<select name="tipo_academico" id="tipoUsuario"
+						class="form-control"   required>
 						<option value="Pregrado" selected>Pregrado</option>
 						<option value="Postgrado">Postgrado</option>
-						<option value="Profesor">Profesor</option>
+						<option value="Docente">Docente</option>
 						<option value="Externo">Externo</option>
 						<option value="Administrativo">Administrativo</option>
-						<option value="Admin">Admin</option>
 					</select>
 				</div>
 			</div>
@@ -155,3 +154,44 @@
 
 	</div>
 </div>
+
+<script type="text/javascript">
+	$("#tipoUsuario").bind("change keyup", function(event){
+		var codigo = document.getElementById("code");
+		var escuela = document.getElementById("school");
+   		var usuario = document.getElementById("tipoUsuario");
+   		switch(usuario.value){
+   			case 'Pregrado' :
+   				codigo.placeholder ="Codigo";
+   				escuela.value = "Sistemas";
+   				codigo.disabled = false;
+   				escuela.disabled = false;
+   				break;
+   			case 'Postgrado' :
+   				codigo.placeholder ="Codigo";
+   				escuela.value = "Sistemas";
+   				codigo.disabled = false;
+   				escuela.disabled = false;
+   				break;
+   			case 'Docente': 
+   				codigo.placeholder ="Codigo";
+   				escuela.value="";
+   				codigo.disabled = false;
+   				escuela.disabled=true;
+   				break;
+   			case 'Externo' :
+   				codigo.placeholder ="Codigo";
+   				escuela.value = "Sistemas";
+   				codigo.disabled = false;
+   				escuela.disabled = false;
+   				break;
+   			case 'Administrativo' :
+   				codigo.placeholder ="";
+   				codigo.value = "";
+   				codigo.disabled = true;
+   				escuela.value="";
+   				escuela.disabled = true;
+   				break;
+   		}
+	});
+</script>

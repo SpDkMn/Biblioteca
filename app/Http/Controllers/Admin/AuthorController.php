@@ -118,7 +118,7 @@ class AuthorController extends Controller
       return view('admin.md_autores.edit')->with('author', $author);
    }
 
-   public function update($id, AuthorRequest $request)
+   public function update($id, $request)
    {
       $author = Author::find($id);
       $author->fill($request->all());
@@ -163,6 +163,12 @@ class AuthorController extends Controller
             break;
          case 'compendio':
             $id = 4;
+            break;
+         case 'colaborador':
+            $id = 5;
+            break;
+         case 'asesor':
+            $id = 6;
             break;
          default:
             $id = null;

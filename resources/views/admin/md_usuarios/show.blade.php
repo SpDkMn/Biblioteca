@@ -342,24 +342,6 @@ thead {
 	</div>
 </div>
 
-
-
-
-
-@section('script')
-<script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-  });
-</script>
 <script type="text/javascript">
       $(document).ready(function() {
         $(".editar").on('click',function(event) {
@@ -370,6 +352,6 @@ thead {
       });
     </script>
 
-@stop
+
 
 

@@ -3,11 +3,6 @@ use Illuminate\Database\Seeder;
 
 use App\BookCopy as BookCopy;
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> e4f94eab83036b90581060e078051096c072bd75
 class BookCopies extends Seeder
 {
 
@@ -21,101 +16,81 @@ class BookCopies extends Seeder
       BookCopy::create([
          'incomeNumber' => 20057861,
          'clasification' => 'addkgd',
-         'edition' => 1,
-         'barcode' => 48200001,
+         'barcode' => 482034001,
          'copy' => 1,
          'acquisitionModality' => 'compra',
          'acquisitionSource' => 'Facultad de Sistemas e informatica',
          'acquisitionPrice' => '48.50',
          'acquisitionDate' => '15 de Marzo',
-         'location' => 'Facultad de Sistemas e informatica',
          'management' => 2017,
          'availability' => true,
          'printType' => 'impresion',
          'publicationLocation' => 'San Borja',
          'publicationDate' => '12 de marzo de 2080',
-         'phone' => '973849441',
-         'ruc' => '148430',
          'book_id' => 1
       ]);
       BookCopy::create([
          'incomeNumber' => 10065421,
          'clasification' => 'saaaaf',
-         'edition' => 1,
          'barcode' => 44500001,
          'copy' => 2,
          'acquisitionModality' => 'compra',
          'acquisitionSource' => 'Facultad de Sistemas e informatica',
          'acquisitionPrice' => '48.50',
          'acquisitionDate' => '15 de Marzo',
-         'location' => 'Facultad de Sistemas e informatica',
          'management' => 2017,
          'availability' => true,
          'printType' => 'impresion',
          'publicationLocation' => 'San Borja',
          'publicationDate' => '12 de marzo de 2080',
-         'phone' => '973849441',
-         'ruc' => '148430',
          'book_id' => 1
       ]);
       BookCopy::create([
          'incomeNumber' => 10043331,
          'clasification' => 'dgddss',
-         'edition' => 2,
          'barcode' => 65423401,
          'copy' => 1,
          'acquisitionModality' => 'compra',
          'acquisitionSource' => 'Facultad de Sistemas e informatica',
          'acquisitionPrice' => '48.50',
          'acquisitionDate' => '15 de Marzo',
-         'location' => 'Facultad de Sistemas e informatica',
          'management' => 2017,
          'availability' => true,
          'printType' => 'impresion',
          'publicationLocation' => 'San Borja',
          'publicationDate' => '12 de marzo de 2080',
-         'phone' => '973849441',
-         'ruc' => '148430',
          'book_id' => 3
       ]);
       BookCopy::create([
          'incomeNumber' => 10051231,
          'clasification' => 'fkfdss',
-         'edition' => 1,
          'barcode' => 43405001,
          'copy' => 1,
          'acquisitionModality' => 'compra',
          'acquisitionSource' => 'Facultad de Sistemas e informatica',
          'acquisitionPrice' => '48.50',
          'acquisitionDate' => '15 de Marzo',
-         'location' => 'Facultad de Sistemas e informatica',
          'management' => 2017,
          'availability' => true,
          'printType' => 'impresion',
          'publicationLocation' => 'San Borja',
          'publicationDate' => '12 de marzo de 2080',
-         'phone' => '973849441',
-         'ruc' => '148430',
          'book_id' => 2
       ]);
       BookCopy::create([
          'incomeNumber' => 10057651,
          'clasification' => 'gkggdf',
-         'edition' => 4,
-         'barcode' => 48200001,
-         'copy' => 1,
+         'barcode' => 482002601,
+         'copy' => 2,
          'acquisitionModality' => 'compra',
          'acquisitionSource' => 'Facultad de Sistemas e informatica',
          'acquisitionPrice' => '48.50',
          'acquisitionDate' => '15 de Marzo',
-         'location' => 'Facultad de Sistemas e informatica',
          'management' => 2017,
          'availability' => true,
          'printType' => 'impresion',
          'publicationLocation' => 'San Borja',
          'publicationDate' => '12 de marzo de 2080',
-         'phone' => '973849441',
-         'ruc' => '148430',
          'book_id' => 2
       ]);
    }

@@ -1,104 +1,137 @@
 @if (count($errors) > 0)
 <div class="alert alert-danger">
-	<ul>
-		@foreach ($errors->all() as $error)
-		<li>{{ $error }}</li> @endforeach
-	</ul>
+  <ul>
+    @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li> @endforeach
+  </ul>
 </div>
 @endif
 <div class="box box-primary">
-	<div class="box-header with-border">
-		<i class="fa fa-info"></i>
-		<h3 class="box-title">Información de compendios</h3>
-		<div class="box-tools pull-right">
-			<button type="button" class="btn btn-box-tool" data-widget="collapse">
-				<i class="fa fa-minus"></i>
-			</button>
-		</div>
-	</div>
-	<!-- /.box-header -->
-	<div class="box-body">
-		<table id="magazineTable" class="table table-bordered table-striped">
-			<thead>
-				<tr>
-					<th>Compendio</th>
-					<th>Introducción</th>
-					<!-- <th>Subtitulo</th> -->
-					<th>clasificación</th>
-					<th>Entidad académica</th>
-					<th>Ejemplar</th>
-					<th>Editorial</th>
-					<th>Contenido</th>
-					<th></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach($compendios as $compendio)
-				<tr>
-					<!-- <td class="details-control"></td> -->
-					<td>{{$compendio->title}}</td>
-					<td>
-						<button type="button" data-id="{{$compendio->id}}"
-							class="btn btn-info showIntroduccion" data-toggle="modal"
-							data-target="#modalIntroduccion">
-							<i class="fa fa-book"></i>
-						</button>
-					</td>
-					<td><span>Nº{{$compendio->numero}}</span> <span>{{$compendio->fechaEdicion}}</span>
-					</td>
-					<td>{{$compendio->author->name}}</td>
+  <div class="box-header with-border">
+    <i class="fa fa-info"></i>
+    <h3 class="box-title">Información de compendios</h3>
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse">
+        <i class="fa fa-minus"></i>
+      </button>
+    </div>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <table id="magazineTable" class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Compendio</th>
+          <th>Introducción</th>
+          <!-- <th>Subtitulo</th> -->
+          <th>clasificación</th>
+          <th>Entidad académica</th>
+          <th>Ejemplar</th>
+          <th>Editorial</th>
+          <th>Contenido</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($compendios as $compendio)
+        <tr>
+          <!-- <td class="details-control"></td> -->
+          <td>{{$compendio->title}}</td>
+          <td>
+            <button type="button" data-id="{{$compendio->id}}"
+              class="btn btn-info showIntroduccion" data-toggle="modal"
+              data-target="#modalIntroduccion">
+              <i class="fa fa-book"></i>
+            </button>
+          </td>
+          <td><span>Nº{{$compendio->numero}}</span> <span>{{$compendio->fechaEdicion}}</span>
+          </td>
+          <td>{{$compendio->author->name}}</td>
 
-					<td>
-						<button type="button" data-id="{{$compendio->id}}"
-							class="btn btn-success showItem">
-							<i class="fa fa-book"></i>
-						</button>
-					</td>
-					<td>@foreach($editoriales as $editorial) @if($editorial->id ==
-						$compendio->editorial_id) <span>{{$editorial->name}}</span> @endif
-						@endforeach
-					</td>
+          <td>
+            <button type="button" data-id="{{$compendio->id}}"
+              class="btn btn-success showItem">
+              <i class="fa fa-book"></i>
+            </button>
+          </td>
+          <td>@foreach($editoriales as $editorial) @if($editorial->id ==
+            $compendio->editorial_id) <span>{{$editorial->name}}</span> @endif
+            @endforeach
+          </td>
 
-					<td>
-						<!-- <a class="button-content"  href="{{route('magazines.show',$compendio->id)}}" >click aqui</a>
+          <td>
+            <!-- <a class="button-content"  href="{{route('magazines.show',$compendio->id)}}" >click aqui</a>
                       href="{{route('magazines.edit',$compendio->id)}}-->
-						<!-- href="{{route('magazines.show',$compendio->id)}}" --> <!-- data-toggle="modal" data-target="#modalContent" no seran agregados  , puesto que con esto inicializa el modal pero cuando su valor es null
+            <!-- href="{{route('magazines.show',$compendio->id)}}" --> <!-- data-toggle="modal" data-target="#modalContent" no seran agregados  , puesto que con esto inicializa el modal pero cuando su valor es null
                       luego tiene el id cargado y al presionar cualquiera , muestra el contenido anterior-->
-						<button type="button" data-id="{{$compendio->id}}"
-							class="btn btn-success showContent">
-							<i class="fa fa-bookmark"></i>
-						</button>
-					</td>
-					<td>
-						<button type="button" data-id="{{$compendio->id}}"
-							class="btn btn-success editar">
-							<i class="fa fa-edit"></i>
-						</button>
-					</td>
-					<td><a type="button" class="button-content btn btn-danger"
-						href="{{route('compendium.destroy',$compendio->id)}}"><i
-							class="fa fa-trash"></i></a> <!--  Borrar comentario cuando el metodo para eliminar sea DELETE y se use ajax -->
-						<!-- <button type="button" data-id="{{$compendio->id}}"  data-name="{{$compendio->title}}" class="deleteButton btn btn-danger"  data-toggle="modal" data-target="#modalDelete"><i class="fa fa-trash"></i></button></td> -->
-					</td>
-				</tr>
-				@endforeach
-			</tbody>
-			<tfoot>
-				<tr>
-					<th>compendio</th>
-					<th>Introduccion</th>
-					<!-- <th>Subtitulo</th> -->
-					<th>Entidad académica</th>
-					<th>Ejemplar</th>
-					<th>Editorial</th>
-					<th>Contenido</th>
-					<th></th>
-					<th></th>
-				</tr>
-			</tfoot>
-		</table>
-	</div>
+            <button type="button" data-id="{{$compendio->id}}"
+              class="btn btn-success showContent">
+              <i class="fa fa-bookmark"></i>
+            </button>
+          </td>
+          <td>
+            <button type="button" data-id="{{$compendio->id}}"
+              class="btn btn-success editar">
+              <i class="fa fa-edit"></i>
+            </button>
+          </td>
+
+
+
+          <!--ELIMINACION DE UNA TESIS MEDIANTE MODAL-->
+
+          <td><center><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCopy<?php echo $compendio->id; ?>"><i class="fa fa-trash"></i></button></center></td>
+
+
+          <div class="modal modal-danger fade" id="ModalCopy<?php echo $compendio->id; ?>" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">
+        
+             <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                 <form>
+                   
+                  <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title text-center text-font-size" id="ModalCopyLabel"><strong>MATERIAL :</strong> {{ $compendio->title}}</h3>
+                   </div>
+
+
+                   <div class="modal-body">
+                       <p class="text-center"><strong>¿ Desea eliminar dicho compendio ?</strong></p>
+                   </div>
+
+                   <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+                        <a href="{{route('compendium.destroy',$compendio->id)}}" type="button" class="btn btn-outline">Eliminar</a>
+                   </div>
+                 </form>
+               </div>
+            </div>
+          </div>
+      <!--FIN DE LA ELIMINACION DE UNA TESIS MEDIANTE MODAL-->
+
+
+
+
+        </tr>
+        @endforeach
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>compendio</th>
+          <th>Introduccion</th>
+          <!-- <th>Subtitulo</th> -->
+          <th>Entidad académica</th>
+          <th>Ejemplar</th>
+          <th>Editorial</th>
+          <th>Contenido</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 </div>
 
 

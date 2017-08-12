@@ -21,12 +21,18 @@ class BusquedaController extends Controller
 
   public function store(Request $request,$id)
   {
-        //
+        dd('PROBANDO...');
   }
 
   public function edit($id)
   {
         //
+  }
+
+  public function show(Request $request){
+
+    dd($request->all());
+
   }
 
   public function update(Request $request, $id)

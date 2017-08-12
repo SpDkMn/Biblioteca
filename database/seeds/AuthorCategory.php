@@ -12,57 +12,74 @@ class AuthorCategory extends Seeder
     */
    public function run()
    {
-      DB::table('author_category')->insert([AUTHOR_ID => 1,CATEGORY_ID => 1]);
       DB::table('author_category')->insert([
-         AUTHOR_ID => 1,
-         CATEGORY_ID => 3
-      ]); DB::table('author_category')->insert([
-         AUTHOR_ID => 1,
-         CATEGORY_ID => 4
-      ]); DB::table('author_category')->insert([
-         AUTHOR_ID => 1,
-         CATEGORY_ID => 5
-      ]); DB::table('author_category')->insert([
-         AUTHOR_ID => 1,
-         CATEGORY_ID => 6
-      ]); DB::table('author_category')->insert([
-         AUTHOR_ID => 2,
-         CATEGORY_ID => 3
-      ]); DB::table('author_category')->insert([
-         AUTHOR_ID => 2,
-         CATEGORY_ID => 6
-      ]); DB::table('author_category')->insert([
-         AUTHOR_ID => 3,
-         CATEGORY_ID => 2
-      ]); DB::table('author_category')->insert([
-         AUTHOR_ID => 3,
-         CATEGORY_ID => 3
-      ]); DB::table('author_category')->insert([
-         AUTHOR_ID => 3,
-         CATEGORY_ID => 4
-      ]); DB::table('author_category')->insert([
-         AUTHOR_ID => 3,
-         CATEGORY_ID => 6
-      ]); DB::table('author_category')->insert([
-         AUTHOR_ID => 4,
-         CATEGORY_ID => 1
-      ]); DB::table('author_category')->insert([
-         AUTHOR_ID => 4,
-         CATEGORY_ID => 3
-      ]); DB::table('author_category')->insert([
-         AUTHOR_ID => 4,
-         CATEGORY_ID => 6
-      ]);DB::table('author_category')->insert([
-         AUTHOR_ID => 5,
-         CATEGORY_ID => 5
-      ]);DB::table('author_category')->insert([
-         AUTHOR_ID => 6,
-         CATEGORY_ID => 2
-      ]);DB::table('author_category')->insert([
-         AUTHOR_ID => 7,
-         CATEGORY_ID => 2
+         'author_id' => 1,
+         'category_id' => 1
       ]);
-
+      DB::table('author_category')->insert([
+         'author_id' => 1,
+         'category_id' => 3
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 1,
+         'category_id' => 4
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 1,
+         'category_id' => 5
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 1,
+         'category_id' => 6
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 2,
+         'category_id' => 3
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 2,
+         'category_id' => 6
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 3,
+         'category_id' => 2
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 3,
+         'category_id' => 3
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 3,
+         'category_id' => 4
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 3,
+         'category_id' => 6
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 4,
+         'category_id' => 1
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 4,
+         'category_id' => 3
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 4,
+         'category_id' => 6
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 5,
+         'category_id' => 5
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 6,
+         'category_id' => 2
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 7,
+         'category_id' => 5
+      ]);
 
    }
 }

@@ -12,23 +12,9 @@
 
 	<div class="box-body">
 
-		<!---->
-		<!--BUSQUEDA Y FILTROS-->
-		<!--  {!!Form::model(Request::all(),['route'=>'autor.index','method'=>'GET','class'=>'navbar-form navbar-right','role'=>'search'])!!}
-    <div class="form-group">
-        {!!Form::text('name',null,['class'=>'form-control', 'placeholder'=>'Nombre del autor'])!!}
-        {!!Form::select('category[]',['Libro'=>'Libro','Revista'=>'Revista','Tesis'=>'Tesis','Compendio'=>'Compendio'],null,['id'=>'example-multiple-selected','multiple'=>'multiple'])!!}
-         
-    </div>   
-    <button type="submit" class="btn btn-primary">Buscar</button><br>
-      
-    {!!Form::close()!!}   -->
-		<!--FIN BUSQUEDA Y FILTROS-->
-
-
-		<table id="example1" class="table table-bordered table-hover">
+		<table id="example1" class="table table-bordered table-striped table-responsive table-hover">
 			<thead>
-				<tr>
+				<tr class="text-center box-success" style="background:#E7FAE2;">
 					<th class="text-center">Nombre</th>
 					<th class="text-center">Categoria</th>
 					<th class="text-center">Editar</th>
@@ -41,7 +27,7 @@
 			<tr>
 				<td>{{$author->name}}</td>
               <?php $aux=0; ?>
-            <td>
+            <td class="text-center">
               @foreach($author->categories as $category)
               
                 @if($aux>0),@endif
@@ -106,8 +92,6 @@
 	</div>
 
 
-	@section('script')
-	<script src="{{ URL::asset('js/jquery.multi-select.js')}}"></script>
 	<script type="text/javascript">
     <!-- Note the missing multiple attribute! -->
       $(document).ready(function() {
@@ -133,7 +117,7 @@
           $id = $('#confirmaDelete').data('id')
           $.ajax({
             
-            url: '{{ url("/admin/editorial") }}/'+$id,
+            url: '{{ url("/admin/autor") }}/'+$id,
 
             data: {'_token': '{{csrf_token()}}'},
             success: function(result) {
@@ -144,4 +128,3 @@
         @endif
       });
     </script>
-	@endsection

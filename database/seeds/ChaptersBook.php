@@ -2,11 +2,6 @@
 use App\ChapterBook as ChapterBook;
 use Illuminate\Database\Seeder;
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> e4f94eab83036b90581060e078051096c072bd75
 class ChaptersBook extends Seeder
 {
 

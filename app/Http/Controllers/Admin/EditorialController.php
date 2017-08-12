@@ -22,24 +22,6 @@ class EditorialController extends Controller
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
 
-
-      // Verifica si se envio "category" por metodo get , FILTROS de busqueda
-      if ($request->get('category') == null) {
-         $categories = null;
-      } else {
-         // Rellena la variable $categories con el tipo de categoria que desean filtrar
-         // Ejm: Desea filtrar por Revista y Tesis
-         // El id de Revista en la tabla categories es 2 , y Tesis es 3
-         // Entonces categories 0 = 2 y categories 1 = 3
-         $i = 0;
-         foreach ($request->get('category') as $category) {
-            $categories[$i] = $this->switchCategory($category);
-            $i = $i + 1;
-         }
-      }
-
-
-
       if ($editar) {
         //Con esto ya no saldra offset: 0 , solo mostraremos el primero a editar si existe
         if (Editorial::all()->isNotEmpty()) {
@@ -53,19 +35,7 @@ class EditorialController extends Controller
          $new = view('admin.md_editoriales.new');
       }
       if ($ver) {
-         if (($request->get('name')) != null) {
-            // $editorials cargara todas las editoriales con con nombre "name"
-            $editorials = Editorial::name($request->get('name'))->paginate();
-            // envia los permisos de editar y eliminar
-            // ademas enviara un boleano "search" el cual servira para saber si se realizo una busqueda en la vista
-            $show = view('admin.md_editoriales.show', [
-               'editorials' => $editorials,
-               'eliminar' => $eliminar,
-               'editar' => $editar,
-               'categories' => $categories,
-               'search' => true
-            ]);
-         } else {
+        
             // $editorials cargara todas las editoriales
             $editorials = Editorial::all();
             // envia los permisos de editar y eliminar
@@ -74,10 +44,8 @@ class EditorialController extends Controller
                'editorials' => $editorials,
                'eliminar' => $eliminar,
                'editar' => $editar,
-               'categories' => $categories,
-               'search' => false
             ]);
-         }
+         
       }
 
       if ($eliminar) {
@@ -141,9 +109,8 @@ class EditorialController extends Controller
    public function show($id)
    {
       $editorial = Editorial::find($id);
-      $editorial->categories()->detach();
       $editorial->delete();
-      return redirect()->route('editorial.index');
+      return redirect('editorial.index');   
    }
 
      public function switchCategory($category){
@@ -159,6 +126,12 @@ class EditorialController extends Controller
             break;
          case 'compendio':
             $id = 4;
+            break;
+          case 'colaborador':
+            $id = 5;
+            break;
+          case 'asesor':
+            $id = 6;
             break;
          default:
             $id = null;

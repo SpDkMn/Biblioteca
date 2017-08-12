@@ -11,7 +11,7 @@
 <div class="box-body">
   <div class="container-search">
     <div class="container">
-      <form action="javascript:void(0);" method="get">
+      <form action="{{ url('/admin/search') }}" method="POST">
         <fieldset>
           <ul class="toolbar clearfix">
             <li><a href="#" class="fontawesome-eye-open"></a></li>
@@ -45,12 +45,18 @@
       </tr>
     </tbody>
   </table>
-
-
-
-
-
-
-
 </div>
 </div>
+<script type="text/javascript">
+function buscar() {
+  var textoBusqueda = $("input #search").val();
+  if (textoBusqueda != "") {
+          $.post('{{ url("/admin/search/")}}', {valorBusqueda: textoBusqueda}, function(mensaje) {
+              $("#resultadoBusqueda").html(mensaje);
+          });
+      } else {
+          ("#resultadoBusqueda").html('');
+  	};
+
+};
+</script>

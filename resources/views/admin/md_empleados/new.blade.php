@@ -13,24 +13,29 @@
 		{{ csrf_field() }}
 		<div class="box-body">
 			<div class="form-group">
-				<label for="inputNombre">Nombres</label> <input type="text"
-					class="form-control" name="name" id="inputNombre" placeholder="">
+				<label for="inputNombre">Codigo de empleado</label> <input type="text"
+					class="form-control" name="code" id="inputCode" placeholder="">
 			</div>
 			<div class="form-group">
-				<label for="inputApellido">Apellidos</label> <input type="text"
-					class="form-control" name="last_name" id="inputApellido"
-					placeholder="">
+				<label>Usuario</label> <select class="form-control select2"
+					name="user" id="inputUser"> 
+					@foreach($usuarios as $usuario)
+					@if($usuario-> id_user_type == 5)
+					<option value="{{ $usuario->id }}">{{$usuario->name}}</option>
+					@endif
+					@endforeach
+				</select>
 			</div>
 			<div class="form-group">
-				<label for="inputMail">Correo</label> <input type="email"
-					class="form-control" name="email" id="inputMail" placeholder="">
-			</div>
-			<div class="form-group">
-				<label>Perfil</label> <select class="form-control" name="profile">
+				<label>Perfil</label> <select class="form-control select2" name="profile">
 					@foreach($perfiles as $perfil)
 					<option value="{{ $perfil->id }}">{{ $perfil->name}}</option>
 					@endforeach
 				</select>
+			</div>
+			<div class="form-group">
+				<label for="inputPassword">Contraseña</label> <input type="password"
+					class="form-control" name="password" id="inputPassword" placeholder="">
 			</div>
 		</div>
 		<!-- /.box-body -->
@@ -39,4 +44,11 @@
 		</div>
 	</form>
 </div>
+
+<script>
+    $(function() {
+      //Initialize Select2 Elements
+    $(".select2").select2();
+    });
+</script>
 <!-- /.box -->

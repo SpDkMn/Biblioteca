@@ -13,6 +13,8 @@ use App\Profile as Profile;
 // Para usar el Modelo Employee
 use App\Employee as Employee;
 
+use App\UserType as UserType;
+
 class EmployeeController extends Controller
 {
 
@@ -22,13 +24,19 @@ class EmployeeController extends Controller
     * @return \Illuminate\Http\Response
     */
    public function index()
-   {
+   { 
+
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
       
+      $usuarios = User::all();
+      $perfiles = Profile::all();
+      $employees = Employee::all();
+
       if ($crear) {
          $new = view('admin.md_empleados.new', [
-            'perfiles' => Profile::all()
+            'perfiles' => $perfiles,
+            'usuarios' => $usuarios
          ]);
       }
       if ($ver) {
@@ -41,11 +49,12 @@ class EmployeeController extends Controller
          ]);
       }
       if ($editar) {
+
          $edit = view('admin.md_empleados.edit', [
-            'empleado' => Employee::with([
-               'user'
-            ])->get()[0],
-            'perfiles' => Profile::all()
+            'empleado' => User::first()->employee[0],
+            'usuario' => User::first(),
+            'perfiles' => $perfiles,
+            'usuarios' => $usuarios
          ]);
       }
       if ($eliminar) {
@@ -66,16 +75,14 @@ class EmployeeController extends Controller
 
    public function store(Request $request)
    {
-      $u = User::create([
-         'name' => $request->name,
-         'last_name' => $request->last_name,
-         'email' => $request->email,
-         'password' => bcrypt($request->username)
-      ]);
+
       Employee::create([
-         'user_id' => $u->id,
+         'code'=> $request->code,
+         'password' => bcrypt($request->password),
+         'user_id' => $request->user,
          'profile_id' => $request->profile
       ]);
+
       return redirect('admin/employees');
    }
 
@@ -85,24 +92,25 @@ class EmployeeController extends Controller
    }
 
    public function edit($id)
-   {
-      $e = Employee::with([
-         'user',
-         'profile'
-      ])->where('id', $id)->first();
-      
+   {  
+
+      $usuarios = User::all();
+      $empleado = Employee::find($id);
+
       return view('admin.md_empleados.edit', [
-         'empleado' => $e,
+         'empleado' => $empleado,
+         'usuarios' => User::all(),
+         'usuario' => $empleado->user,
          'perfiles' => Profile::all()
       ]);
    }
 
    public function update(Request $request, $id)
-   {
+   {  
       $e = Employee::find($id);
-      $e->user->name = $request->name;
-      $e->user->last_name = $request->last_name;
-      $e->user->email = $request->email;
+      $e->code = $request->code;
+      $e->password = bcrypt($request->password);
+      $e->user_id = $request->user;
       $e->profile_id = $request->profile;
       $e->user->save();
       $e->save();

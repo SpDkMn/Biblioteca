@@ -4,25 +4,22 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Sistema de Biblioteca</title>
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <link rel="stylesheet" href="{{ URL::asset('css/modalStyles.css')}}">
 <!--Estilos de la ventana  modal-->
 <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css')}}">
 @yield('css')
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans">
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans">
 
-<link rel="stylesheet"
-	href="{{ URL::asset('css/bootstrap-datetimepicker.min.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-<link rel="stylesheet"href="{{ URL::asset('css/bootstrap-combined.min.css')}}">
-<link rel="stylesheet" href="{{ URL::asset('css/estiloLibros.css')}}">
+<link rel="stylesheet" href="{{ URL::asset('css/bootstrap-datetimepicker.min.css') }}">
+
+<link rel="stylesheet" href="{{ URL::asset('css/bootstrap-combined.min.css')}}">
+<link rel="stylesheet" href="{{ URL::asset('css/estiloLibro.css')}}">
 
 <link rel="stylesheet" href="{{ URL::asset('css/AdminLTE.min.css') }}">
 <link rel="stylesheet" href="{{URL::asset('css/dataTables.bootstrap.css')}}">
@@ -37,11 +34,12 @@
 <script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
 
 
-<link rel="stylesheet"href="{{URL::asset('css/bootstrap-multiselect.css')}}">
+<link rel="stylesheet" href="{{URL::asset('css/bootstrap-multiselect.css')}}">
 <script src="{{URL::asset('js/bootstrap-multiselect.js')}}"></script>
 <link rel="stylesheet" href="{{ URL::asset('css/SearchStyle.css')}}">
 
 
+<link rel="stylesheet" href="{{ URL::asset('css/SearchStyle.css')}}">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -78,8 +76,7 @@
 	<!-- ./wrapper -->
 	@yield('plugins')
 
-	<script
-		src="{{ URL::asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+	<script	src="{{ URL::asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 	<script src="{{ URL::asset('js/fastclick.js')}}"></script>
 	<script src="{{ URL::asset('js/app.min.js')}}"></script>
 	<script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>
@@ -95,6 +92,8 @@
 	<script src="{{ URL::asset('js/bootstrap-datetimepicker.pt-PE.js')}}"></script>
 	<!-- No desactiven el input mask -->
 	<script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>
+
+  <script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>
 
 	<script type="text/javascript">
     //fecha + hora formato 24 horas
@@ -141,15 +140,32 @@
 
 
 </script>
-	@yield('scriptContent') @yield('scriptItem') @yield('scriptDelete')
-	@yield('scriptTable') @yield('scriptTableExtend')
-	@yield('scriptSelect') @yield('scriptModal')
-	@yield('scriptModalContent') @yield('script')
+	@yield('scriptContent')
+	@yield('scriptItem')
+	@yield('scriptDelete')
+	@yield('scriptTable')
+	@yield('scriptTableExtend')
+	@yield('scriptSelect')
+	@yield('scriptModal')
+	@yield('scriptModalContent')
+	@yield('script')
 	@yield('scriptSelectAutorPrincipal')
 	@yield('scripts')
 
+<script language=Javascript>
 
-	<script>
+      function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+
+</script>
+
+<script>
   //Inicializador de los inputmask
   $("[data-mask]").inputmask();
 </script>

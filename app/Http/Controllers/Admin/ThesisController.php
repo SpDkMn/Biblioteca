@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ThesisRequest;
 // Para usar el Modelo Tesis
 use App\Author as Author;
 use App\Thesis as Thesis;
@@ -65,12 +66,22 @@ class ThesisController extends Controller
    public function create()
    {}
 
-   public function store(Request $request)
+   public function store(ThesisRequest $request)
    {
       
+
+      $contador_copia = 0;
+           
+      while ($request['barcode' . $contador_copia] != null) {
+         $contador_copia ++;
+      }
+
+
       $av = 1;
       
       // Guardando los datos de la tesis
+     
+
       Thesis::create([
          'type' => $request['tipo'],
          'clasification' => $request['clasification'],
@@ -83,8 +94,8 @@ class ThesisController extends Controller
          'accompaniment' => $request['materialad'],
          'conten' => $request['contenido'],
          'summary' => $request['summary'],
+         'conclusions' => $request['conclusions'],
          'bibliografia' => $request['bibliografia'],
-         'recomendacion' => $request['recomendacion'],
          'location' => $request['ubicacion'],
          'publicationLocation' => $request['lugarsus'],
          'asesor' => $request['asesor'],
@@ -108,9 +119,9 @@ class ThesisController extends Controller
             continue;
          }
          ThesisCopy::create([
-            'incomeNumber' => $request['incomeNumber' . $j],
-            'barcode' => $request['barcode' . $j],
-            'ejemplar' => $request['copy' . $j], // Evitar que no haya ningun ejemplar que estee con datos vacios (colocar excepciones con el request). Y eliminar el contenedor que hace incrementar el numero de copia a medida que se duplica el contenedor de items (en la vista show)
+            'incomeNumber' => $request['incomeNumber'.$j],
+            'barcode' => $request['barcode'.$j],
+            'ejemplar' => $request['copy'.$j], // Evitar que no haya ningun ejemplar que estee con datos vacios (colocar excepciones con el request). Y eliminar el contenedor que hace incrementar el numero de copia a medida que se duplica el contenedor de items (en la vista show)
             'availability' => $av,
             'thesis_id' => $id_thesis // El id de la tesis que quiero relacionar ($id_thesis)
          ]);
@@ -200,6 +211,7 @@ class ThesisController extends Controller
       $thesis->accompaniment = $request['materialad'];
       $thesis->conten = $request['contenido'];
       $thesis->summary = $request['summary'];
+      $thesis->conclusions = $request['conclusions'];
       $thesis->bibliografia = $request['bibliografia'];
       $thesis->recomendacion = $request['recomendacion'];
       $thesis->location = $request['ubicacion'];

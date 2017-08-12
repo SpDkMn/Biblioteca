@@ -11,37 +11,46 @@ class DatabaseSeeder extends Seeder
     */
    public function run()
    {
-      //$this->call(Constantes::class);
       $this->call(Profiles::class);
       $this->call(Employees::class);
+
+     
+      $this->call(Categories::class);
+      //Autores:
+      $this->call(Authors::class);
+      //Editoriales:
+      $this->call(Editorials::class);
+      //Noticias:
+      $this->call(Noticias::class);
+      //Configuraciones:
+      $this->call(Configuration1::class);
+      //Tesis:
       $this->call(Thesiss::class);
       $this->call(ThesisCopies::class);
       $this->call(ChaptersThesis::class);
-      $this->call(Authors::class);
-     // $this->call(AuthorThesis::class);
-
-      $this->call(Editorials::class);
-      $this->call(Categories::class);
-      $this->call(Author_category::class);
-      $this->call(Author_thesis::class);
-      $this->call(Editorial_thesis::class);
-
-      $this->call(Noticias::class);
-      $this->call(Configuration1::class);
-      
-      // $this->call(Books::class);
-      // $this->call(BookCopies::class);;
-      // $this->call(ChaptersBook::class);
-      // $this->call(Thesiss::class);
-      // $this->call(ThesisCopies::class);
-      // $this->call(ChaptersThesis::class);
-      // llenando tablas pivotes
-
-      $this->call(EditorialCategory::class);
-      $this->call(UserTypes::class);
+      //Libros:
+      $this->call(Books::class);
+      $this->call(BookCopies::class);;
+      $this->call(ChaptersBook::class);
+      //Revistas:
       $this->call(Magazines::class);
       $this->call(MagazineCopy::class);
       $this->call(Contenidos::class);
+      //Compendios
+      $this->call(Compendiums::class);
+      $this->call(CompendiumCopies::class);
+      //Tipos de usuarios:
+      $this->call(UserTypes::class);
+      //Pivots:
+      $this->call(AuthorThesis::class);
+      $this->call(AuthorBook::class);
+      $this->call(EditorialThesis::class);
+      $this->call(EditorialCategory::class);
+      $this->call(EditorialBook::class);
+      $this->call(AuthorCategory::class);
+      $this->call(EditorialMagazine::class);
+
+
 
 
    }

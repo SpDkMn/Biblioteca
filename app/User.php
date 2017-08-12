@@ -136,7 +136,7 @@ class User extends Authenticatable
 
    public function user_type()
    {
-      return $this->belongsto('App\UserType');
+      return $this->belongsTo('App\UserType');
    }
 
    public function thesis_order()

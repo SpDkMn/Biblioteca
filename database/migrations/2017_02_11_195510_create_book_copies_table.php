@@ -16,22 +16,22 @@ class CreateBookCopiesTable extends Migration
       Schema::create('book_copies', function (Blueprint $table) {
          $table->increments('id');
          $table->unsignedBigInteger('incomeNumber')->unique();
-         $table->string('clasification')->unique();
+         $table->string('clasification')->nullable();
          $table->unsignedBiginteger('barcode')->unique();
          $table->unsignedTinyInteger('copy');
          $table->unsignedTinyInteger('volume')->nullable();
          // adquision del libro
          $table->string('acquisitionModality');
-         $table->string('acquisitionSource');
+         $table->string('acquisitionSource')->nullable();
          $table->string('acquisitionPrice')->nullable();
-         $table->string('acquisitionDate');
+         $table->string('acquisitionDate')->nullable();
          // fin adquision
-         $table->string('management');
+         $table->string('management')->nullable();
          $table->boolean('availability');
          
          $table->string('printType');
-         $table->string('publicationLocation');
-         $table->string('publicationDate');
+         $table->string('publicationLocation')->nullable();
+         $table->string('publicationDate')->nullable();
          
          $table->unsignedSmallInteger('book_id');
          $table->timestamps();

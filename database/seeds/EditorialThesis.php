@@ -12,11 +12,12 @@ class EditorialThesis extends Seeder
    public function run()
    {
       DB::table('editorial_thesis')->insert([
-         EDITORIAL_ID => 1,
-         THESIS_ID => 1
-      ], [
-         EDITORIAL_ID => 1,
-         THESIS_ID => 2
+         'editorial_id' => 1,
+         'thesis_id' => 1
+      ]);
+      DB::table('editorial_thesis')->insert([
+         'editorial_id' => 1,
+         'thesis_id' => 2
       ]);
    }
 }

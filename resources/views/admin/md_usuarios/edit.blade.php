@@ -23,7 +23,7 @@
 				<label for="tipo_academico" class="control-label col-md-2">Tipo
 					Academico:</label>
 				<div class="col-md-9">
-					<select name="tipo_academico" id="tipo_academico"
+					<select name="tipo_academico" id="tipoUsuario2"
 						class="form-control">
                                 <?php
                               if ($user->id_user_type == 1) {
@@ -32,28 +32,24 @@
                                  echo ("<option value='Profesor'>Profesor</option>");
                                  echo ("<option value='Externo'>Externo</option>");
                                  echo ("<option value='Administrativo'>Administrativo</option>");
-                                 echo ("<option value='Admin'>Admin</option>");
                               } else if ($user->id_user_type == 2) {
                                  echo ("<option value='Pregrado'>Pregrado</option>");
                                  echo ("<option value='Postgrado' selected>Postgrado</option>");
                                  echo ("<option value='Profesor'>Profesor</option>");
                                  echo ("<option value='Externo'>Externo</option>");
                                  echo ("<option value='Administrativo'>Administrativo</option>");
-                                 echo ("<option value='Admin'>Admin</option>");
                               } else if ($user->id_user_type == 3) {
                                  echo ("<option value='Pregrado'>Pregrado</option>");
                                  echo ("<option value='Postgrado'>Postgrado</option>");
                                  echo ("<option value='Profesor' selected>Profesor</option>");
                                  echo ("<option value='Externo'>Externo</option>");
                                  echo ("<option value='Administrativo'>Administrativo</option>");
-                                 echo ("<option value='Admin'>Admin</option>");
                               } else if ($user->id_user_type == 4) {
                                  echo ("<option value='Pregrado'>Pregrado</option>");
                                  echo ("<option value='Postgrado'>Postgrado</option>");
                                  echo ("<option value='Profesor'>Profesor</option>");
                                  echo ("<option value='Externo'selected>Externo</option>");
                                  echo ("<option value='Administrativo'>Administrativo</option>");
-                                 echo ("<option value='Admin'>Admin</option>");
                               } else if ($user->id_user_type == 5) {
                                  echo ("<option value='Pregrado'>Pregrado</option>");
                                  echo ("<option value='Postgrado'>Postgrado</option>");
@@ -61,14 +57,7 @@
                                  echo ("<option value='Externo'>Externo</option>");
                                  echo ("<option value='Administrativo' selected>Administrativo</option>");
                                  echo ("<option value='Admin'>Admin</option>");
-                              } else {
-                                 echo ("<option value='Pregrado'>Pregrado</option>");
-                                 echo ("<option value='Postgrado'>Postgrado</option>");
-                                 echo ("<option value='Profesor'>Profesor</option>");
-                                 echo ("<option value='Externo'>Externo</option>");
-                                 echo ("<option value='Administrativo'>Administrativo</option>");
-                                 echo ("<option value='Admin' selected>Admin</option>");
-                              }
+                              } 
                               ?>
                               </select>
 				</div>
@@ -92,9 +81,9 @@
 			</div>
 
 			<div class="form-group">
-				<label for="code" class="control-label col-md-2">Codigo:</label>
+				<label for="code2" class="control-label col-md-2">Codigo:</label>
 				<div class="col-md-9">
-					<input type="text" class="form-control" id="code"
+					<input type="text" class="form-control" id="code2"
 						placeholder="Codigo" name="code" value="{{ $user->code }}">
 				</div>
 			</div>
@@ -146,7 +135,7 @@
 			<div class="form-group" id="cuadro_escuela">
 				<label for="school" class="control-label col-md-2">Escuela:</label>
 				<div class="col-md-9">
-					<select name="school" id="school" class="form-control">
+					<select name="school" id="school2" class="form-control">
 						<option value="Sistemas"
 							<?php  if($user->school=="Sistemas"){echo("selected");} ?>>Sistemas</option>
 						<option value="Software"
@@ -212,3 +201,44 @@
 
 	</div>
 </div>
+<script type="text/javascript">
+	$("#tipoUsuario2").bind("change keyup", function(event){
+		alert("entro en el edit");
+		var codigo = document.getElementById("code2");
+		var escuela = document.getElementById("school2");
+   		var usuario = document.getElementById("tipoUsuario2");
+   		switch(usuario.value){
+   			case 'Pregrado' :
+   				codigo.placeholder ="Codigo";
+   				escuela.value = "Sistemas";
+   				codigo.disabled = false;
+   				escuela.disabled = false;
+   				break;
+   			case 'Postgrado' :
+   				codigo.placeholder ="Codigo";
+   				escuela.value = "Sistemas";
+   				codigo.disabled = false;
+   				escuela.disabled = false;
+   				break;
+   			case 'Docente': 
+   				codigo.placeholder ="Codigo";
+   				escuela.value="";
+   				codigo.disabled = false;
+   				escuela.disabled=true;
+   				break;
+   			case 'Externo' :
+   				codigo.placeholder ="Codigo";
+   				escuela.value = "Sistemas";
+   				codigo.disabled = false;
+   				escuela.disabled = false;
+   				break;
+   			case 'Administrativo' :
+   				codigo.placeholder ="";
+   				codigo.value = "";
+   				codigo.disabled = true;
+   				escuela.value="";
+   				escuela.disabled = true;
+   				break;
+   		}
+	});
+</script>

@@ -29,6 +29,12 @@ class MagazineCopy extends Seeder
         'copy' => '3',
         'magazine_id' => '1'
       ]);
+      mc::Create([
+        'incomeNumber' => '22222222444',
+        'barcode' => '555342453',
+        'copy' => '1',
+        'magazine_id' => '2'
+      ]);
 
 
     }

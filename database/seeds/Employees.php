@@ -50,10 +50,14 @@ class Employees extends Seeder
       ]);
       
       Employee::create([
+         'code' => 'empleado_1a45',
+         'password' => bcrypt('admin'),
          'user_id' => 1,
          'profile_id' => 1
       ]);
       Employee::create([
+         'code' => 'empleado_21a5',
+         'password' => bcrypt('admin2'),
          'user_id' => 2,
          'profile_id' => 2
       ]);

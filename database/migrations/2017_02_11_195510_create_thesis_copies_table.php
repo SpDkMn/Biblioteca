@@ -15,8 +15,8 @@ class CreateThesisCopiesTable extends Migration
    {
       Schema::create('thesis_copies', function (Blueprint $table) {
          $table->increments('id');
-         $table->biginteger('incomeNumber');
-         $table->biginteger('barcode');
+         $table->string('incomeNumber');
+         $table->string('barcode');
          $table->integer('ejemplar');
          $table->boolean('availability');
          

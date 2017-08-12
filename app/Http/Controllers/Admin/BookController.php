@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\BookRequest;
+//use App\Http\Requests\BookRequest;
 // Para usar el Modelo Magazine
 use App\Author as Author;
 use App\Book as Book;
@@ -67,7 +67,7 @@ class BookController extends Controller
       ]);
    }
 
-   public function store(BookRequest $request)
+   public function store(Request $request)
    {
       $b = Book::create([
          CLASIFICATION => $request[CLASIFICATION],
@@ -172,7 +172,7 @@ class BookController extends Controller
          }
          BookCopy::create([
             'incomeNumber' => $request->incomeNumber[$i],
-            'clasification' => $bc_clasification,
+            'clasification' => $request->clasification,
             'barcode' => $request->barcode[$i],
             'copy' => $i + 1,
             'volume' => $request->volume[$i],
@@ -212,7 +212,7 @@ class BookController extends Controller
       ]);
    }
 
-   public function update(BookRequest $request, $id)
+   public function update(Request $request, $id)
    {
       $book = Book::find($id);
       $editoriales = Editorial::all();
@@ -501,15 +501,24 @@ class BookController extends Controller
       return redirect()->route('book.index');
    }
 
-   public function show()
+   public function show($id)
    {
       $book = Book::find($id);
+      $book->authors()->detach();
+      $book->editorials()->detach();
+      $book->bookCopies()->delete();
+      $book->chapters()->delete();
+      $book->delete();
+      
+      return redirect()->route('book.index');
+      
+     /* $book = Book::find($id);
       if ($request->get('page') == 1) {
          return view('admin.md_books.show2')->with('book', $book);
       }
       if ($request->get('page') == 2) {
          return view('admin.md_books.show3')->with('book', $book);
-      }
+      }  */
    }
 
    public function show2($id)
@@ -521,8 +530,8 @@ class BookController extends Controller
       $bookCopies = BookCopy::all();
       return view('admin.md_books.show2', [
          'book' => $book,
-         AUTORES => $autores,
-         EDITORIALES => $editoriales,
+         'autores' => $autores,
+         'editoriales' => $editoriales,
          'chapters' => $chapters,
          'bookCopies' => $bookCopies
       ]);
