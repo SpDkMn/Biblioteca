@@ -107,10 +107,13 @@ use App\Employee as Employee;
 	$usuarios = User::all();
 	$empleados = Employee::all();
 	
+
 	$cont=0;
 	foreach ($empleados as $empleado) {
+
 		foreach ($usuarios as $usuario) {
 			if($empleado->user_id == $usuario->id){
+
 				$usuario['password2']= Crypt::decrypt($empleado->password);
 				$users[$cont]=$usuario;
 				$cont++;
