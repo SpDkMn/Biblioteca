@@ -56,5 +56,18 @@ class Books extends Seeder
          'edition'          => 3,
          'libraryLocation'  => 'Stand  A5'
       ]);
+
+      DB::table('search_items')->insert([
+         'item_id' => 1,
+         'type' =>1,
+         'content' => 'Analisis Matematico Secundario y sus propiedades Libro de matematicas numeros romanos numeros reales numeros complejos limites metodos numericos derivadas Mauricio Espinoza Vargas Santiago Moquillaza Enriquez Luis Cayo Leon Solver-Maquin',
+         'state' => 1
+      ]);
+      DB::table('search_items')->insert([
+         'item_id' => 2,
+         'type' =>1,
+         'content' => 'Inteligencia Artificial Cambiando el mundo El libro presenta una breve razon para que los humanos cambien de forma a robots Nacimiento Hijo de satan Muerte de Shiro El nuevo exorcista El gato de Rin Enfrentamiento Yukio Tragado por su padre, satan Santiago Moquillaza Enriquez Luis Cayo Leon Ecoe Ediciones',
+         'state' => 1
+      ]);
    }
 }

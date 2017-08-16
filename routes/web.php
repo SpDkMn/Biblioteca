@@ -10,9 +10,17 @@
  * | contains the "web" middleware group. Now create something great!
  * |
  */
-Route::get('/', function () {
-   return view('auth/login');
+
+Route::get('/busqueda', function () {
+
+   $books = DB::Select("Select id From search_items Where Match(content) AGAINST('analisis')");
+	dd($books);
+
 });
+Route::get('/', function () {
+	return view('auth/login');
+});
+
 
 Auth::routes();
 Route::get('/admin', 'HomeController@index');
