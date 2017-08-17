@@ -16,7 +16,14 @@ class OrderController extends Controller
      */
     public function index()
     {
-        dd("dfsjsdk");
+
+      $search = view('user.md_orders.search', [
+
+      ]);
+
+      return view('user.md_orders.index', [
+        'search' => $search
+      ]);
     }
 
     /**

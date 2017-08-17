@@ -52,12 +52,6 @@
 		<!-- Left side column. contains the logo and sidebar -->
 		@include('admin.layouts.aside')
 		<div class="content-wrapper">@yield('content')</div>
-		<div>
-			<select class="multiple">Accion de las empresas
-			</select>
-		</div>
-
-
 		<!-- /.content-wrapper -->
 		<footer class="main-footer">
 			<div class="pull-right hidden-xs">
@@ -85,7 +79,7 @@
 
 	<script src="{{ URL::asset('js/bootstrap-datetimepicker.min.js')}}"></script>
 	<script src="{{ URL::asset('js/bootstrap-datetimepicker.pt-PE.js')}}"></script>
-	<!--<script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>-->
+	<script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>
 
 	<script type="text/javascript">
     //fecha + hora formato 24 horas
