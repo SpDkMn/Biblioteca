@@ -67,10 +67,61 @@ class MagazineController extends Controller
    // Terminado
    public function store(Request $request)
    {
-      function cambiaCadena($str)
-      {
-         return intval(preg_replace('/[^0-9]+/', '', $str), 10);
-      }
+     function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
+     function buscaEAcademica($id){
+       if (is_string($id)) {
+         $id = cambiaCadena($id);
+       }
+       return Author::find($id);
+     }
+     function buscaColaborador($id){
+       $string_colaborador = "";
+       if (is_string($id)) {
+         $id = cambiaCadena($id);
+       }
+       $autor = Author::find($id);
+       foreach ($autor as $key => $value) {
+        $string_colaborador = $string_colaborador.''.$value->name ;
+       }
+       return $string_colaborador;
+     }
+     function buscaEditorial($id){
+       $string_edit_second = "";
+       if (is_string($id)) {
+         $id = cambiaCadena($id);
+       }
+       $editorial = Editorial::find($id);
+       foreach ($editorial as $key => $value) {
+        $string_edit_second = $string_edit_second.''.$value->name ;
+       }
+       return $string_edit_second;
+     }
+     //Parametro = $arreglo
+     function buscaContenido($contenidos){
+       $string_contenido = "";
+       foreach ($contenidos as $key => $value) {
+        $string_contenido = $string_contenido.' '.$value;
+       }
+       return $string_contenido;
+     }
+
+
+
+    // CONCATENANDO
+      dd($request->all(),
+      $request['title'].' '.
+      $request['subtitle'].' '.
+      buscaEAcademica($request['author'])->name.' '.
+      buscaEditorial($request['mEditorialMain']).' '.
+      buscaEditorial($request['mEditorialSecond']).' '.
+      buscaContenido($request['titleContent']).' '.
+      buscaColaborador($request['collaborator0'])
+
+    );
+
+
+
+
       // Almacenamos lo que el usuario ingresa
       // Declarando contadores
       $contador_contenido = 0;
@@ -134,9 +185,6 @@ class MagazineController extends Controller
             // Recorre los contenidos de cada revista
             $cont = 0;
             foreach ($magazine->contents as $content) {
-               // Si el contenido esta relacionado con la revista
-               // recorremos el arreglo con los id de los colaboradores para asociarlos al contenido
-               // Si el arreglo colaborador no esta vacio
                if ($content->magazine_id == $id_magazine && $request["collaborator" . $cont] != null) {
                   foreach ($request["collaborator" . $cont] as $clave => $id) {
                      $content->authors()->attach($id);

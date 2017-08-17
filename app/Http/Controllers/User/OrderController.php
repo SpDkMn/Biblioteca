@@ -20,7 +20,6 @@ class OrderController extends Controller
       $search = view('user.md_orders.search', [
 
       ]);
-
       return view('user.md_orders.index', [
         'search' => $search
       ]);
