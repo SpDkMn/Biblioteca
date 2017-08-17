@@ -25,5 +25,11 @@ class Authors extends Seeder
       Author::Create([
          'name' => 'Tania Leyva Riveira'
       ]);
+      Author::Create([
+         'name' => 'Facultad de Ingenieria de Sistemas'
+      ]);
+      Author::Create([
+         'name' => 'Facultad de Ingenieria de Software'
+      ]);
    }
 }
