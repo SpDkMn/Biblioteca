@@ -35,10 +35,8 @@ Route::resource('/usuarios', 'usuarios');
 // RUTA PARA LAS CONFIGURACIONES
 Route::resource('configurations', 'ConfigurationController');
 
+// RUTA PARA LOS PEDIDOS
 
-// RUTA PARA LOS PRESTAMOS DE TESIS
-Route::resource('prestamos', 'PrestamoController');
-Route::get('prestamos/{id}', 'PrestamosController@store');
 
 
 Route::resource('userTypes', 'userTypeController');
@@ -52,4 +50,3 @@ Route::get('cargaEventos{id?}','CalendarController@index');
 Route::post('guardaEventos', array('as' => 'guardaEventos','uses' => 'CalendarController@create'));
 Route::post('actualizaEventos','CalendarController@update');
 Route::post('eliminaEvento','CalendarController@delete');
-

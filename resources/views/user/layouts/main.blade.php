@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Sistema de Biblioteca</title>
+<title>Sistema de Biblioteca para usuarios </title>
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <link rel="stylesheet" href="{{ URL::asset('css/modalStyles.css')}}">
 <!--Estilos de la ventana  modal-->

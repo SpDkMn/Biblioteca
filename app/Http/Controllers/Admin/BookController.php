@@ -39,11 +39,11 @@ class BookController extends Controller
       $books = Book::all();
       $editoriales = Editorial::all();
       $autores = Author::all();
-      
+
       $show = view(MBOOKS_SHOW, [
          BOOKS => $books
       ]);
-      
+
       $new = view(MBOOKS_NEW, [
          BOOKS => $books,
          EDITORIALES => $editoriales,
@@ -83,11 +83,11 @@ class BookController extends Controller
          'edition' => $request['edition'],
          'libraryLocation' => $request['libraryLocation']
       ]);
-      
+
       $book_id = $b->id;
       $autores = Author::all();
       $editoriales = Editorial::all();
-      
+
       // Creando relacion de autor principal con libro
       if ($request['primaryAuthor'] != null) {
          foreach ($request['primaryAuthor'] as $autor) {
@@ -101,7 +101,7 @@ class BookController extends Controller
             }
          }
       }
-      
+
       // Creando relacion de autor secundario con libro
       if ($request['secondaryAuthor'] != null) {
          foreach ($request['secondaryAuthor'] as $autor) {
@@ -128,7 +128,7 @@ class BookController extends Controller
             }
          }
       }
-      
+
       // Creando relacion de anexo con libro
       if ($request['secondaryEditorial'] != null) {
          foreach ($request['secondaryEditorial'] as $editorial) {
@@ -142,7 +142,7 @@ class BookController extends Controller
             }
          }
       }
-      
+
       // Crenado los capitulos , utilizo el id de libro
       $contador_capitulos = 0;
       foreach ($request['chapter'] as $chapter) {
@@ -158,9 +158,9 @@ class BookController extends Controller
       foreach ($request['incomeNumber'] as $a) {
          $contador_copia ++;
       }
-      
+
       for ($i = 0; $i < $contador_copia; $i ++) {
-         
+
          $bandera = false;
          if ($request['availability'][$i] == "Disponible") {
             $bandera = true;
@@ -180,13 +180,13 @@ class BookController extends Controller
             'acquisitionSource' => $request->acquisitionSource[$i],
             'acquisitionPrice' => $request->acquisitionPrice[$i],
             'acquisitionDate' => $request->acquisitionDate[$i],
-            
+
             'management' => $request->management[$i],
             'availability' => $bandera,
             'printType' => $request->printType[$i],
             'publicationLocation' => $request->publicationLocation[$i],
             'publicationDate' => $request->publicationDate[$i],
-            
+
             'book_id' => $book_id
          ]);
       }
@@ -201,7 +201,7 @@ class BookController extends Controller
       $autores = Author::all();
       $chapters = ChapterBook::all();
       $bookCopies = BookCopy::all();
-      
+
       return view(MBOOKS_EDIT, [
          BOOKS => $books,
          'book' => $book,
@@ -217,7 +217,7 @@ class BookController extends Controller
       $book = Book::find($id);
       $editoriales = Editorial::all();
       $autores = Author::all();
-      
+
       $book->clasification = $request[CLASIFICATION];
       $book->title = $request[TITLE];
       $book->secondaryTitle = $request[SECUNDARY_TITLE];
@@ -246,7 +246,7 @@ class BookController extends Controller
             }
          }
       }
-      
+
       // Creando relacion de autor secundario con libro
       if ($request['secondaryAuthor'] != null) {
          foreach ($request['secondaryAuthor'] as $autor) {
@@ -273,7 +273,7 @@ class BookController extends Controller
             }
          }
       }
-      
+
       // Creando relacion de anexo con libro
       if ($request['secondaryEditorial'] != null) {
          foreach ($request['secondaryEditorial'] as $editorial) {
@@ -287,7 +287,7 @@ class BookController extends Controller
             }
          }
       }
-      
+
       // ************EDITANDO CAPITULOS******************
       // Calculando la cantidad de capitulos antiguos
       $contador_capitulos_antiguo = 0;
@@ -348,7 +348,7 @@ class BookController extends Controller
       foreach ($book->bookCopies as $copia_aux) {
          $numero_copias_antiguo ++;
       }
-      
+
       // Calculando el nuevo numero de ejemplares del libro
       $numero_copias_nuevo = 0;
       foreach ($request['incomeNumber'] as $a) {
@@ -479,7 +479,7 @@ class BookController extends Controller
          }
       }
       // *********************FIN EDITAR ITEMS**********************
-      
+
       return redirect()->route('book.index');
    }
 
@@ -497,7 +497,7 @@ class BookController extends Controller
       $book->bookCopies()->delete();
       $book->chapters()->delete();
       $book->delete();
-      
+
       return redirect()->route('book.index');
    }
 
@@ -509,9 +509,9 @@ class BookController extends Controller
       $book->bookCopies()->delete();
       $book->chapters()->delete();
       $book->delete();
-      
+
       return redirect()->route('book.index');
-      
+
      /* $book = Book::find($id);
       if ($request->get('page') == 1) {
          return view('admin.md_books.show2')->with('book', $book);
