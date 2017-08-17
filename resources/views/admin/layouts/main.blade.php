@@ -20,10 +20,7 @@
 <link rel="stylesheet" href="{{ URL::asset('css/estiloLibro.css')}}">
 
 <link rel="stylesheet" href="{{ URL::asset('css/AdminLTE.min.css') }}">
-<<<<<<< HEAD
-=======
 <link rel="stylesheet" href="{{ URL::asset('css/magazinesStyle.css')}}">
->>>>>>> 77090564ee393913c7b85990d68d0896910300e7
 <link rel="stylesheet" href="{{URL::asset('css/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('plugins/select2/select2.min.css') }}">
 
@@ -151,16 +148,12 @@
 	@yield('scriptSelectAutorPrincipal')
 	@yield('scripts')
 
-<<<<<<< HEAD
-=======
-
 <script>
   //Inicializador de los inputmask
   $("[data-mask]").inputmask();
 </script>
 
 <!--Que me permita ingresar solo numeros-->
->>>>>>> 77090564ee393913c7b85990d68d0896910300e7
 <script language=Javascript>
 
       function isNumberKey(evt)
@@ -175,7 +168,6 @@
 </script>
 
 <script>
-<<<<<<< HEAD
   //Inicializador de los inputmask
   $("[data-mask]").inputmask();
 </script>
@@ -192,10 +184,10 @@ $('#btn-search').on('click', function(e) {
 } () );
 </script>
 </body>
-=======
-    
-  function validarFormulario(){
- 
+<script>
+
+  <!-- function validarFormulario(){
+
     var txtNombre = document.getElementById('tipo').value;
     var txtEdad = document.getElementById('title').value;
     var txtCorreo = document.getElementById('clasification').value;
@@ -203,45 +195,45 @@ $('#btn-search').on('click', function(e) {
     var cmbSelector = document.getElementById('escuela').selectedIndex;
     var chkEstado = document.getElementById('edition');
     var rbtEstado = document.getElementsByName('extension');
- 
+
     var banderaRBTN = false;
- 
+
     //Test campo obligatorio
     if(txtNombre == null || txtNombre.length == 0 || /^\s+$/.test(txtNombre)){
       alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco');
       return false;
     }
- 
+
     //Test edad
     if(txtEdad == null || txtEdad.length == 0 || isNaN(txtEdad)){
       alert('ERROR: Debe ingresar una edad');
       return false;
     }
- 
+
     //Test correo
     if(!(/\S+@\S+\.\S+/.test(txtCorreo))){
       alert('ERROR: Debe escribir un correo válido');
       return false;
     }
- 
+
     //Test fecha
     if(!isNaN(txtFecha)){
       alert('ERROR: Debe elegir una fecha');
       return false;
     }
- 
+
     //Test comboBox
     if(cmbSelector == null || cmbSelector == 0){
       alert('ERROR: Debe seleccionar una opcion del combo box');
       return false;
     }
- 
+
     //Test checkBox
     if(!chkEstado.checked){
       alert('ERROR: Debe seleccionar el checkbox');
       return false;
     }
- 
+
     //Test RadioButtons
     for(var i = 0; i < rbtEstado.length; i++){
       if(rbtEstado[i].checked){
@@ -253,12 +245,11 @@ $('#btn-search').on('click', function(e) {
       alert('ERROR: Debe elegir una opción de radio button');
       return false;
     }
- 
+
     return true;
-  }
- 
+  } -->
+
   </script>
 
  </body>
->>>>>>> 77090564ee393913c7b85990d68d0896910300e7
 </html>
