@@ -9,6 +9,7 @@
 <!--Estilos de la ventana  modal-->
 <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css')}}">
 @yield('css')
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
@@ -27,13 +28,15 @@
 
 <link rel="stylesheet" href="{{ URL::asset('css/app.css')}}">
 <link rel="stylesheet" href="{{ URL::asset('css/tableConfig.css')}}">
-	
+
 <script src="{{ URL::asset('js/jquery-2.2.3.min.js')}}"></script>
 <script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
-	
+
 
 <link rel="stylesheet" href="{{URL::asset('css/bootstrap-multiselect.css')}}">
 <script src="{{URL::asset('js/bootstrap-multiselect.js')}}"></script>
+<link rel="stylesheet" href="{{ URL::asset('css/SearchStyle.css')}}">
+
 
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -75,7 +78,7 @@
 	<script src="{{ URL::asset('js/fastclick.js')}}"></script>
 	<script src="{{ URL::asset('js/app.min.js')}}"></script>
 	<script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>
-	
+
 	<script src="{{URL::asset('plugins/fullcalendar/jquery-ui.min.js')}}"></script>
 	<script src="{{URL::asset('plugins/fullcalendar/moment.min.js')}}"></script>
 	<script src="{{URL::asset('plugins/fullcalendar/fullcalendar.min.js')}}"></script>
@@ -85,7 +88,8 @@
 
 	<script src="{{ URL::asset('js/bootstrap-datetimepicker.min.js')}}"></script>
 	<script src="{{ URL::asset('js/bootstrap-datetimepicker.pt-PE.js')}}"></script>
-	<!--<script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>-->
+	<!-- No desactiven el input mask -->
+	<script src="{{ URL::asset('js/jquery.inputmask.js')}}"></script>
 
 	<script type="text/javascript">
     //fecha + hora formato 24 horas
@@ -132,18 +136,17 @@
 
 
 </script>
-	@yield('scriptContent') 
-	@yield('scriptItem') 
+	@yield('scriptContent')
+	@yield('scriptItem')
 	@yield('scriptDelete')
-	@yield('scriptTable') 
+	@yield('scriptTable')
 	@yield('scriptTableExtend')
-	@yield('scriptSelect') 
+	@yield('scriptSelect')
 	@yield('scriptModal')
-	@yield('scriptModalContent') 
+	@yield('scriptModalContent')
 	@yield('script')
 	@yield('scriptSelectAutorPrincipal')
 	@yield('scripts')
-
 
 <script>
   //Inicializador de los inputmask
@@ -152,22 +155,39 @@
 
 <!--Que me permita ingresar solo numeros-->
 <script language=Javascript>
-      
+
       function isNumberKey(evt)
       {
          var charCode = (evt.which) ? evt.which : event.keyCode
          if (charCode > 31 && (charCode < 48 || charCode > 57))
             return false;
- 
+
          return true;
       }
-      
+
 </script>
 
 <script>
-    
-  function validarFormulario(){
- 
+  //Inicializador de los inputmask
+  $("[data-mask]").inputmask();
+</script>
+<script type="text/javascript">
+
+( function() {
+$('#btn-search').on('click', function(e) {
+
+  e.preventDefault();
+  $('#search').animate({width: 'toggle'}).focus();
+
+});
+
+} () );
+</script>
+</body>
+<script>
+
+  <!-- function validarFormulario(){
+
     var txtNombre = document.getElementById('tipo').value;
     var txtEdad = document.getElementById('title').value;
     var txtCorreo = document.getElementById('clasification').value;
@@ -175,45 +195,45 @@
     var cmbSelector = document.getElementById('escuela').selectedIndex;
     var chkEstado = document.getElementById('edition');
     var rbtEstado = document.getElementsByName('extension');
- 
+
     var banderaRBTN = false;
- 
+
     //Test campo obligatorio
     if(txtNombre == null || txtNombre.length == 0 || /^\s+$/.test(txtNombre)){
       alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco');
       return false;
     }
- 
+
     //Test edad
     if(txtEdad == null || txtEdad.length == 0 || isNaN(txtEdad)){
       alert('ERROR: Debe ingresar una edad');
       return false;
     }
- 
+
     //Test correo
     if(!(/\S+@\S+\.\S+/.test(txtCorreo))){
       alert('ERROR: Debe escribir un correo válido');
       return false;
     }
- 
+
     //Test fecha
     if(!isNaN(txtFecha)){
       alert('ERROR: Debe elegir una fecha');
       return false;
     }
- 
+
     //Test comboBox
     if(cmbSelector == null || cmbSelector == 0){
       alert('ERROR: Debe seleccionar una opcion del combo box');
       return false;
     }
- 
+
     //Test checkBox
     if(!chkEstado.checked){
       alert('ERROR: Debe seleccionar el checkbox');
       return false;
     }
- 
+
     //Test RadioButtons
     for(var i = 0; i < rbtEstado.length; i++){
       if(rbtEstado[i].checked){
@@ -225,12 +245,11 @@
       alert('ERROR: Debe elegir una opción de radio button');
       return false;
     }
- 
+
     return true;
-  }
- 
+  } -->
+
   </script>
 
  </body>
 </html>
-

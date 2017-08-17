@@ -68,7 +68,18 @@ class AuthorCategory extends Seeder
          'author_id' => 4,
          'category_id' => 6
       ]);
-
+      DB::table('author_category')->insert([
+         'author_id' => 5,
+         'category_id' => 5
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 6,
+         'category_id' => 2
+      ]);
+      DB::table('author_category')->insert([
+         'author_id' => 7,
+         'category_id' => 5
+      ]);
 
    }
 }

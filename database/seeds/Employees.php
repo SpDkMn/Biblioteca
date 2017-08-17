@@ -49,7 +49,7 @@ class Employees extends Seeder
          'id_user_type' => 5,
          'state' => true
       ]);
-      
+
       Employee::create([
          'code' => 'empleado_1a45',
          'password' => Crypt::encrypt('admin'),

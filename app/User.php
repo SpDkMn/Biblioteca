@@ -134,11 +134,6 @@ class User extends Authenticatable
       return $this->hasMany('App\Employee');
    }
 
-   //lo uso para el login
-   public function employee2(){
-      return $this->hasOne('App\Employee','id');
-   }
-
    public function user_type()
    {
       return $this->belongsTo('App\UserType');

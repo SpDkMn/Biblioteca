@@ -15,8 +15,6 @@ use App\Employee as Employee;
 
 use App\UserType as UserType;
 
-use Illuminate\Support\Facades\Crypt;
-
 class EmployeeController extends Controller
 {
 
@@ -80,7 +78,7 @@ class EmployeeController extends Controller
 
       Employee::create([
          'code'=> $request->code,
-         'password' =>  Crypt::encrypt($request->password),
+         'password' => bcrypt($request->password),
          'user_id' => $request->user,
          'profile_id' => $request->profile
       ]);
@@ -110,10 +108,11 @@ class EmployeeController extends Controller
    public function update(Request $request, $id)
    {  
       $e = Employee::find($id);
-      $e->code = $request->code2;
-      $e->password = Crypt::encrypt($request->password2);
+      $e->code = $request->code;
+      $e->password = bcrypt($request->password);
       $e->user_id = $request->user;
       $e->profile_id = $request->profile;
+      $e->user->save();
       $e->save();
       return redirect('admin/employees');
    }
