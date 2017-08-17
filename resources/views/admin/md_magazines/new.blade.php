@@ -22,7 +22,7 @@
 					<div class="form-group">
 						<label for="inputTitle">Título</label> <span>*</span> <input
 							type="text" class="form-control" name="title" id="inputTitle"
-							placeholder="">
+							placeholder="" required>
 					</div>
 					<div class="form-group">
 						<label for="inputSubTitle">Resto de título</label> <input
@@ -31,7 +31,7 @@
 					</div>
 					<div class="form-group">
 						<label>Entidad académica</label> <span>*</span> <select
-							class="form-control selectEntidadAcademica" name="author">
+							class="form-control selectEntidadAcademica" name="author" required>
 							<!--  Seleccionando la lista de autores que pertenecen a la categoria revista -->
 							@foreach($autores as $autor) @foreach($autor->categories as
 							$category) @if($category->name == "revista")
@@ -46,7 +46,7 @@
 								<label>Editorial</label> <span>*</span> <select
 									id="listEditorialMain" class="form-control"
 									name="mEditorialMain[]" multiple="multiple"
-									data-placeholder="Editorial Principal" style="width: 100%;">
+									data-placeholder="Editorial Principal" style="width: 100%;" required>
 									@foreach($editoriales as $editorial)
 									@foreach($editorial->categories as $category)
 									@if($category->name == "revista")
@@ -86,7 +86,7 @@
 								<label for="inputISSNi">ISSN Impreso</label> <span>*</span> <input
 									type="text" class="form-control" name="issn" id="inputISSNi"
 									data-inputmask='"mask": "9999-9999"' data-mask
-									placeholder="Version Impresa">
+									placeholder="Version Impresa" required>
 							</div>
 							<div class="col-lg-6">
 								<label for="inputISSNd">ISSN Digital</label> <input type="text"
@@ -137,18 +137,18 @@
 					<div class="form-group">
 						<label for="inputIncomeNumber">Nº Ingreso</label> <span>*</span> <input
 							type="text" class="form-control" name="incomeNumber[]"
-							id="inputIncomeNumber" placeholder="">
+							id="inputIncomeNumber" placeholder="" required>
 					</div>
 					<div class="form-group">
 						<label for="inputBarcode">Código de barra</label> <span>*</span> <input
 							type="text" class="form-control" name="barcode[]"
 							id="inputBarcode" data-inputmask='"mask": "200000009999"'
-							data-mask>
+							data-mask required>
 					</div>
 					<div class="form-group">
 						<label for="inputCopy">Ejemplar</label> <span>*</span> <input
 							type="number" class="form-control" name="copy[]" id="inputCopy"
-							placeholder="" value=1 min="0" max="10">
+							placeholder="" value=1 min="0" max="10" required>
 					</div>
 				</div>
 			</div>
@@ -171,7 +171,7 @@
 							<div class="form-group">
 								<label for="inputTitleContent">Contenido</label> <span>*</span>
 								<input type="text" class="form-control" name="titleContent[]"
-									id="inputTitleContent0" placeholder="">
+									id="inputTitleContent0" placeholder="" required>
 							</div>
 							<div class="form-group">
 								<label>Colaboradores</label> <select

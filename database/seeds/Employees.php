@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Crypt;
 
 use App\User as User;
 use App\Employee as Employee;
@@ -28,7 +29,7 @@ class Employees extends Seeder
          'school' => 'Ingenieria de Software',
          'faculty' => "ingenieria de sistemas e informatica",
          'university' => "Universidad nacional mayor de san marcos",
-         'id_user_type' => 1,
+         'id_user_type' => 5,
          'state' => true
       ]);
       User::create([
@@ -45,7 +46,7 @@ class Employees extends Seeder
          'school' => 'Ingenieria de Sistemas',
          'faculty' => "ingenieria de sistemas e informatica",
          'university' => "Universidad nacional mayor de san marcos",
-         'id_user_type' => 3,
+         'id_user_type' => 5,
          'state' => true
       ]);
       
@@ -61,5 +62,6 @@ class Employees extends Seeder
          'user_id' => 2,
          'profile_id' => 2
       ]);
+
    }
 }

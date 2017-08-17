@@ -4,7 +4,7 @@
     if(document.getElementById('op').getAttribute('class')=="dropdown user user-menu"){
       document.getElementById('op').setAttribute("class","dropdown user user-menu open");
     }else{
-      document.getElementById('op').setAttribute("class","dropdown user user-menu open");
+      document.getElementById('op').setAttribute("class","dropdown user user-menu");
     }
   }
 

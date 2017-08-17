@@ -103,7 +103,7 @@ class EditorialController extends Controller
    {
       $editorial = Editorial::find($id);
       $editorial->delete();
-      return redirect('editorial.index');
+ 
    }
 
    public function show($id)

@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
@@ -9,11 +8,9 @@ use App\Magazine as Magazine;
 use App\MagazineCopy as MagazineCopy;
 use App\Editorial as Editorial;
 use App\Content as Content;
-
 // Nota: Reducir la funciones al terminar todos los modulos
 class MagazineController extends Controller
 {
-
    // Terminado
    public function index()
    {
@@ -62,17 +59,14 @@ class MagazineController extends Controller
          'item' => $item
       ]);
    }
-
    // Funcion no usada
    public function create()
    {
       // Funcion no usada
    }
-
    // Terminado
    public function store(Request $request)
    {
-
       function cambiaCadena($str)
       {
          return intval(preg_replace('/[^0-9]+/', '', $str), 10);
@@ -96,10 +90,7 @@ class MagazineController extends Controller
           'incomeNumber'   =>  'required|unique:magazine_copies',
           'barcode'        =>  'required',
           'titleContent'  => 'required'
-
           ])->validate();
-
-
       // Guardando los datos de la revista
       Magazine::create([
          'title' => $request['title'],
@@ -119,7 +110,6 @@ class MagazineController extends Controller
             $id_magazine = $magazine->id;
          }
       }
-
       // Guardando datos de las copias de revistas
       for ($j = 0; $j < $contador_copia; $j ++) {
          MagazineCopy::create([
@@ -180,7 +170,6 @@ class MagazineController extends Controller
       // Redireccionamos a la seccion de revistas
       return redirect('admin/magazines');
    }
-
    // Terminado
    public function edit($id)
    {
@@ -199,12 +188,10 @@ class MagazineController extends Controller
          'autores' => $autores
       ]);
    }
-
    // Terminado - Falta optimizar
    public function update(Request $request, $id)
    {
       // Obteniendo datos
-
       $revistaP = Magazine::find($id);
       $revista = Magazine::find($id);
       // Inicializando contadores
@@ -258,7 +245,6 @@ class MagazineController extends Controller
          ]);
       }
       // Actualizando contenido
-
       for ($i = 0; $i < $contador_contenido2; $i ++) {
          $revista->contents[$i]->title = $request["titleContent"][$i];
          $contentsR[$i]->save();
@@ -298,11 +284,9 @@ class MagazineController extends Controller
            ]);
         }
       }
-
       $revista->save();
       return redirect('admin/magazines');
    }
-
    // Terminado
    public function destroy($id)
    {
@@ -325,7 +309,6 @@ class MagazineController extends Controller
       $magazine->delete();
       return redirect('admin/magazines');
    }
-
    // Terminado
    public function content($id)
    {
@@ -335,7 +318,6 @@ class MagazineController extends Controller
          'revistas' => $revistas
       ]);
    }
-
    // Terminado
    public function itemDetail($id)
    {

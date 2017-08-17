@@ -100,4 +100,49 @@ input[type="submit"] {
 
 	</form>
 </div>
+<<<<<<< HEAD
 @endsection
+=======
+<?php
+use Illuminate\Support\Facades\Crypt;
+use App\User as User;
+use App\Employee as Employee;
+	$usuarios = User::all();
+	$empleados = Employee::all();
+	
+
+	$cont=0;
+	foreach ($empleados as $empleado) {
+
+		foreach ($usuarios as $usuario) {
+			if($empleado->user_id == $usuario->id){
+
+				$usuario['password2']= Crypt::decrypt($empleado->password);
+				$users[$cont]=$usuario;
+				$cont++;
+			}
+		}
+	}
+	$objJson = json_encode($users);
+?>
+<script type="text/javascript">
+	function Boton(){
+
+		var usuarios = eval(<?php echo $objJson; ?>);
+		var password = document.getElementById("password");
+		var username = document.getElementById("username");
+		var boton = document.getElementById("boton");
+		for(i=0;i<usuarios.length;i++){
+			
+			if(usuarios[i].email == username.value && usuarios[i].password2 == password.value){
+				boton.disabled=false;
+				break;
+			}
+			else{
+				boton.disabled=true;
+			}
+		}	
+	}
+</script>
+@endsection
+>>>>>>> 77090564ee393913c7b85990d68d0896910300e7

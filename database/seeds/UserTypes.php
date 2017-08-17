@@ -32,7 +32,7 @@ class UserTypes extends Seeder
          'cantidadDomicilio' => 2
       ]);
       UserType::create([
-         'name' => 'Profesor',
+         'name' => 'Docente',
          'prestamoSala' => true,
          'prestamoDomicilio' => true,
          'castigado' => true,
