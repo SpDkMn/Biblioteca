@@ -1,6 +1,6 @@
 @extends('user.layouts.main')
  @section('content')
-<section class="content-header">
+ <section class="content-header">
 	<h1>
 		Busqueda <small> -- </small>
 	</h1>
@@ -23,5 +23,4 @@
 		</div>
 	</div>
 </section>
-
 @endsection

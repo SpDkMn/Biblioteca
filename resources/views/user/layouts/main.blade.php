@@ -23,6 +23,12 @@
 	<link rel="stylesheet" href="{{ URL::asset('css/tableConfig.css')}}">
 	<link rel="stylesheet" href="{{URL::asset('css/bootstrap-multiselect.css')}}">
 	<link rel="stylesheet" href="{{ URL::asset('css/SearchStyle.css')}}">
+
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+
+
 <!-- CIERRE DE LAS HOJAS DE ESTILO  -->
 <!-- ARCHIVOS JS -->
 <script src="{{ URL::asset('js/jquery-2.2.3.min.js')}}"></script>
@@ -37,7 +43,7 @@
 		<!-- Left side column. contains the logo and sidebar -->
 		@include('user.layouts.aside')
 		<div class="content-wrapper">@yield('content')</div>
-		
+
 
 
 	<!-- /.content-wrapper -->
@@ -52,6 +58,11 @@
 
 	<!-- ./wrapper -->
 	@yield('plugins')
+
+
+
+	<script type="text/javascript" src="{{URL::asset('js/ajax.js')}}"></script>
+
 
 	<script	src="{{ URL::asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 	<script src="{{ URL::asset('js/fastclick.js')}}"></script>

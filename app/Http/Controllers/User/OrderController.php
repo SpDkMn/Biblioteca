@@ -32,7 +32,14 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+      $consulta = "Select id From search_items Where Match(content) AGAINST('".$_GET['search']."')";
+   	  dd(DB::Select($consulta));
+
+      $items = DB::Select("Select id From search_items Where Match(content) AGAINST(".$_GET['search'].")");
+   	  foreach ($items as $item) {
+   	    echo $item;
+   	  }
+      dd("listo");
     }
 
     /**
@@ -43,7 +50,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
