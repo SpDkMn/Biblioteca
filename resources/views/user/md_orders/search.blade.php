@@ -1,3 +1,4 @@
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <div class=" box box-primary">
   <div class="box-header with-border">
     <i class="fa fa-info"></i>
@@ -13,11 +14,13 @@
   <div class="container-search">
       <div class="container">
         <form action="" method="post" name="search_form" id="search_form">
+        <meta name="_token" content="{!! csrf_token() !!}"/>
+         
           <fieldset>
             <ul class="toolbar clearfix">
               <li><a href="#" class="fontawesome-eye-open"></a></li>
               <li><a href="#" class="fontawesome-comment"></a></li>
-              <li><input type="search" autofocus id="search" placeholder="¿Qúe artículo estás buscando?" ></li>
+              <li><input type="search" name="input" autofocus id="search" placeholder="¿Qúe artículo estás buscando?" ></li>
               <li><button type="submit" id="btn-search"><span class="fontawesome-search"></span></button></li>
             </ul>
           </fieldset>
@@ -38,6 +41,11 @@
 $(document).ready(function() {
   $('.example-multiple-selected').multiselect();
 });
+ $(document).ready(function() {
+    $.ajaxSetup({
+            headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+        });
+  });
 </script>
 
 
