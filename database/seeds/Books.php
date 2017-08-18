@@ -61,59 +61,60 @@ class Books extends Seeder
          'item_id' => 1,
          'type' =>1,
          'content' => 'Analisis Matematico Secundario y sus propiedades Libro de matematicas numeros romanos numeros reales numeros complejos limites metodos numericos derivadas Mauricio Espinoza Vargas Santiago Moquillaza Enriquez Luis Cayo Leon Solver-Maquin',
-         'state' => 1
+         'state' => true
       ]);
       DB::table('search_items')->insert([
          'item_id' => 2,
          'type' =>1,
          'content' => 'Inteligencia Artificial Cambiando el mundo El libro presenta una breve razon para que los humanos cambien de forma a robots Nacimiento Hijo de satan Muerte de Shiro El nuevo exorcista El gato de Rin Enfrentamiento Yukio Tragado por su padre, satan Santiago Moquillaza Enriquez Luis Cayo Leon Ecoe Ediciones',
-         'state' => 1
+         'state' => true
       ]);
       DB::table('search_items')->insert([
          'item_id' => 3,
          'type' =>2,
          'content' => 'computadora',
-         'state' => 1
+         'state' => true
       ]);
       DB::table('search_items')->insert([
          'item_id' => 3,
          'type' =>2,
          'content' => 'computadora El libro ',
-         'state' => 1
+         'state' => true
       ]);
       DB::table('search_items')->insert([
          'item_id' => 3,
          'type' =>2,
          'content' => 'Cambiando el mundo El libro presenta',
-         'state' => 1
+         'state' => true
       ]);DB::table('search_items')->insert([
          'item_id' => 3,
          'type' =>2,
          'content' => 'numeros romanos numeros reales numeros',
-         'state' => 1
+         'state' => true
       ]);
       DB::table('search_items')->insert([
          'item_id' => 3,
          'type' =>2,
          'content' => 'Artificial Cambiando el mundo El libro',
-         'state' => 1
+         'state' => true
       ]);
       DB::table('search_items')->insert([
          'item_id' => 3,
          'type' =>2,
          'content' => 'Matematico Secundario',
-         'state' => 1
+         'state' => true
       ]);
       DB::table('search_items')->insert([
          'item_id' => 3,
          'type' =>2,
          'content' => 'Secundario y sus propiedades Libro',
-         'state' => 1
+         'state' => true
       ]);
       DB::table('search_items')->insert([
          'item_id' => 3,
          'type' =>2,
          'content' => 'robots Nacimiento Hijo',
-         'state' => 1
+         'state' => true
+      ]);
    }
 }

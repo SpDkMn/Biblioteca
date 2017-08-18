@@ -8,6 +8,7 @@ use App\Magazine as Magazine;
 use App\MagazineCopy as MagazineCopy;
 use App\Editorial as Editorial;
 use App\Content as Content;
+use App\SearchItem as SearchItem;
 // Nota: Reducir la funciones al terminar todos los modulos
 class MagazineController extends Controller
 {
@@ -67,62 +68,8 @@ class MagazineController extends Controller
    // Terminado
    public function store(Request $request)
    {
-     function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
-     function buscaEAcademica($id){
-       if (is_string($id)) {
-         $id = cambiaCadena($id);
-       }
-       return Author::find($id);
-     }
-     function buscaColaborador($id){
-       $string_colaborador = "";
-       if (is_string($id)) {
-         $id = cambiaCadena($id);
-       }
-       $autor = Author::find($id);
-       foreach ($autor as $key => $value) {
-        $string_colaborador = $string_colaborador.''.$value->name ;
-       }
-       return $string_colaborador;
-     }
-     function buscaEditorial($id){
-       $string_edit_second = "";
-       if (is_string($id)) {
-         $id = cambiaCadena($id);
-       }
-       $editorial = Editorial::find($id);
-       foreach ($editorial as $key => $value) {
-        $string_edit_second = $string_edit_second.''.$value->name ;
-       }
-       return $string_edit_second;
-     }
-     //Parametro = $arreglo
-     function buscaContenido($contenidos){
-       $string_contenido = "";
-       foreach ($contenidos as $key => $value) {
-        $string_contenido = $string_contenido.' '.$value;
-       }
-       return $string_contenido;
-     }
 
-
-
-    // CONCATENANDO
-      dd($request->all(),
-      $request['title'].' '.
-      $request['subtitle'].' '.
-      buscaEAcademica($request['author'])->name.' '.
-      buscaEditorial($request['mEditorialMain']).' '.
-      buscaEditorial($request['mEditorialSecond']).' '.
-      buscaContenido($request['titleContent']).' '.
-      buscaColaborador($request['collaborator0'])
-
-    );
-
-
-
-
-      // Almacenamos lo que el usuario ingresa
+     $magazines = Magazine::all();
       // Declarando contadores
       $contador_contenido = 0;
       $contador_copia = 0;
@@ -130,6 +77,51 @@ class MagazineController extends Controller
       $contador_contenido = sizeof($request['titleContent']);
       // Contando las copias de la revista
       $contador_copia = sizeof($request['incomeNumber']);
+      function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
+      function buscaEAcademica($id){
+        if (is_string($id)) {
+          $id = cambiaCadena($id);
+        }
+        return Author::find($id);
+      }
+      function buscaColaborador($id){
+        $string_colaborador = "";
+        if (is_string($id)) {
+          $id = cambiaCadena($id);
+        }
+        $autor = Author::find($id);
+        foreach ($autor as $key => $value) {
+         $string_colaborador = $string_colaborador.''.$value->name ;
+        }
+        return $string_colaborador;
+      }
+      function buscaEditorial($id){
+        $string_edit_second = "";
+        if (is_string($id)) {
+          $id = cambiaCadena($id);
+        }
+        $editorial = Editorial::find($id);
+        if ($editorial!=null) {
+          foreach ($editorial as $key => $value) {
+           $string_edit_second = $string_edit_second.''.$value->name ;
+          }
+        }
+        return $string_edit_second;
+      }
+      //Parametro = $arreglo
+      function buscaContenido($contenidos){
+        $string_contenido = "";
+        foreach ($contenidos as $key => $value) {
+         $string_contenido = $string_contenido.' '.$value;
+        }
+        return $string_contenido;
+      }
+      //Concatenando a los colaboradores
+      $string_colaboradores = "";
+      for ($i=0; $i < $contador_contenido ; $i++) {
+        $string_colaboradores = $string_colaboradores.' '.buscaColaborador($request['collaborator'.$i]);
+      }
+      //Guardamos los registros de las revistas para capturar el id de la revista
       //VALIDANDO DATOS DE ENTRADA
       $validator = Validator::make($request->all(), [
           'title' => 'required|unique:magazines|max:255',
@@ -143,6 +135,7 @@ class MagazineController extends Controller
           'titleContent'  => 'required'
           ])->validate();
       // Guardando los datos de la revista
+      $magazines = Magazine::all();
       Magazine::create([
          'title' => $request['title'],
          'subtitle' => $request['subtitle'],
@@ -153,14 +146,9 @@ class MagazineController extends Controller
          'author_id' => $request['author'],
          'fechaEdicion' => $request['fechaEdicion']
       ]);
-      // Guardamos los registros de las revistas para capturar el id de la revista
-      $magazines = Magazine::all();
-      // Capturando id de la revista ingresada
-      foreach ($magazines as $magazine) {
-         if ($magazine->issn == cambiaCadena($request['issn'])) {
-            $id_magazine = $magazine->id;
-         }
-      }
+      // Capturando id de la revista ingresada luego de crearla
+      $id_magazine = $magazines->last()->id;
+      //Creacion la tabla para la busqueda
       // Guardando datos de las copias de revistas
       for ($j = 0; $j < $contador_copia; $j ++) {
          MagazineCopy::create([
@@ -215,6 +203,21 @@ class MagazineController extends Controller
             }
          }
       }
+
+
+
+      SearchItem::create([
+        'item_id'=> $id_magazine,
+        'type'=> '3',
+        'content'=> $request['title'].' '.
+        $request['subtitle'].' '.
+        buscaEAcademica($request['author'])->name.' '.
+        buscaEditorial($request['mEditorialMain']).' '.
+        buscaEditorial($request['mEditorialSecond']).' '.
+        buscaContenido($request['titleContent']).' '.
+        $string_colaboradores ,
+        'state' => true
+      ]);
       // Redireccionamos a la seccion de revistas
       return redirect('admin/magazines');
    }
@@ -338,6 +341,9 @@ class MagazineController extends Controller
    // Terminado
    public function destroy($id)
    {
+     function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
+     $id = cambiaCadena($id);
+
       $magazine = Magazine::find($id);
       $copias = MagazineCopy::all();
       $contents = Content::all();
@@ -354,6 +360,15 @@ class MagazineController extends Controller
          }
       }
       // Las tablas pivotes se eliminaron usando ->onDelete('cascade')
+      //CAMBIANDO EL ESTADO DE LA REVISTA ELIMINADA EN LA TABLA DE DATOS A BUSCAR
+      $datos_busqueda = SearchItem::all();
+      foreach ($datos_busqueda as $busqueda) {
+        if ($busqueda->item_id == $id) {
+          $busqueda->state = false;
+        }
+      }
+      //FIN DE LA ACTUALIZACION DE LA TABLA DE BUSQUEDA
+
       $magazine->delete();
       return redirect('admin/magazines');
    }
