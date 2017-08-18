@@ -13,27 +13,44 @@
   <div class="container-search">
       <div class="container">
         <form action="" method="post" name="search_form" id="search_form">
-          <fieldset>
-            <ul class="toolbar clearfix">
-              <li><a href="#" class="fontawesome-eye-open"></a></li>
-              <li><a href="#" class="fontawesome-comment"></a></li>
-              <li><input type="search" autofocus id="search" placeholder="¿Qúe artículo estás buscando?" ></li>
-              <li><button type="submit" id="btn-search"><span class="fontawesome-search"></span></button></li>
-            </ul>
-          </fieldset>
+          <div class="row">
+            <div class="col-xs-4">
+              <label>Filtro</label> <span>*</span> <select
+                id="orderCategory" class="form-control"
+                name="orderCategory[]" multiple="multiple"
+                data-placeholder="Seleccione un producto" style="width: 100%;" required>
+                <option value="1">Libros</option>
+                <option value="2">Tesis/Tesinas</option>
+                <option value="3">Revistas</option>
+                <option value="4">Compendios</option>
+              </select>
+            </div>
+          </div>
+            <fieldset>
+              <ul class="toolbar clearfix">
+                <li><a href="#" class="fontawesome-eye-open"></a></li>
+                <li><a href="#" class="fontawesome-comment"></a></li>
+                <li><input type="search" autofocus id="search" placeholder="¿Qúe artículo estás buscando?" ></li>
+                <li><button type="submit" id="btn-search"><span class="fontawesome-search"></span></button></li>
+              </ul>
+            </fieldset>
         </form>
       </div>
     </div>
 
-<div id="resultados">
 
-</div>
+
+
+    <div id="resultados">
+
+    </div>
 
 </div>
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
   $('.example-multiple-selected').multiselect();
+  $('#orderCategory').select2();
 });
 </script>
 

@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Book as Book;
+use App\Magazine as Magazine;
+use App\Thesis as Thesis;
+
+
 class OrderController extends Controller
 {
     /**
@@ -18,11 +22,18 @@ class OrderController extends Controller
     public function index()
     {
       $books = null ;
+      $magazines = null ;
+      $thesis = null ;
+
       $tableBooks = view('user.md_orders.tableBooks',[
         'books' => $books
       ]);
-      $tableMagazines = view('user.md_orders.tableMagazines');
-      $tableThesis = view('user.md_orders.tableThesis');
+      $tableMagazines = view('user.md_orders.tableMagazines',[
+        'magazines' => $magazines
+      ]);
+      $tableThesis = view('user.md_orders.tableThesis',[
+        'thesis' => $thesis
+      ]);
 
       $search = view('user.md_orders.search', [
         'tableBooks' => $tableBooks,
@@ -42,6 +53,7 @@ class OrderController extends Controller
      */
     public function create()
     {
+
       $books = null ;
       $consulta_libros = "Select item_id From search_items Where Match(content) AGAINST('".$_GET['search']."') AND STATE = true AND type='1'";
       $consulta_thesis = "Select item_id From search_items Where Match(content) AGAINST('".$_GET['search']."') AND STATE = true AND type='2'";
