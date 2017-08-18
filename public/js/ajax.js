@@ -7,9 +7,7 @@ $(function(){
 
 	$('#search').keyup(function(){
 		var envio = $('#search').val();
-
 		$('#resultados').html('<h3><img src="img/loading.gif" width="25" alt=""/> Cargando</h3>');
-
 		$.ajax({
 			type: 'GET',
 			url: '/user/order/create',
