@@ -7,6 +7,7 @@ use Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Book as Book;
 class OrderController extends Controller
 {
     /**
@@ -31,15 +32,22 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-      $consulta = "Select id From search_items Where Match(content) AGAINST('".$_GET['search']."')";
-   	  dd(DB::Select($consulta));
+    {   
+      
+      $consulta = "Select item_id From search_items Where Match(content) AGAINST('".$_GET['search']."') AND STATE = true AND type='1'";
 
-      $items = DB::Select("Select id From search_items Where Match(content) AGAINST(".$_GET['search'].")");
-   	  foreach ($items as $item) {
-   	    echo $item;
-   	  }
-      dd("listo");
+
+   	  $items=DB::Select($consulta);
+      $i=0;
+      foreach ($items as $item) {
+          $books[$i]=Book::find($item->item_id);
+          $i++;
+      }
+     
+      return view('user.md_orders.resultados',[
+            'books' => $books
+        ]);
+      
     }
 
     /**

@@ -71,48 +71,48 @@ class Books extends Seeder
       ]);
       DB::table('search_items')->insert([
          'item_id' => 3,
-         'type' =>2,
+         'type' =>1,
          'content' => 'computadora',
          'state' => true
       ]);
       DB::table('search_items')->insert([
-         'item_id' => 3,
-         'type' =>2,
+         'item_id' => 1,
+         'type' =>1,
          'content' => 'computadora El libro ',
          'state' => true
       ]);
       DB::table('search_items')->insert([
-         'item_id' => 3,
-         'type' =>2,
+         'item_id' => 2,
+         'type' =>1,
          'content' => 'Cambiando el mundo El libro presenta',
          'state' => true
       ]);DB::table('search_items')->insert([
          'item_id' => 3,
-         'type' =>2,
+         'type' =>1,
          'content' => 'numeros romanos numeros reales numeros',
          'state' => true
       ]);
       DB::table('search_items')->insert([
          'item_id' => 3,
-         'type' =>2,
+         'type' =>1,
          'content' => 'Artificial Cambiando el mundo El libro',
          'state' => true
       ]);
       DB::table('search_items')->insert([
-         'item_id' => 3,
-         'type' =>2,
+         'item_id' => 2,
+         'type' =>1,
          'content' => 'Matematico Secundario',
          'state' => true
       ]);
       DB::table('search_items')->insert([
-         'item_id' => 3,
-         'type' =>2,
+         'item_id' => 1,
+         'type' =>1,
          'content' => 'Secundario y sus propiedades Libro',
          'state' => true
       ]);
       DB::table('search_items')->insert([
          'item_id' => 3,
-         'type' =>2,
+         'type' =>1,
          'content' => 'robots Nacimiento Hijo',
          'state' => true
       ]);
