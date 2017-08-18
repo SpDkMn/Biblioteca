@@ -107,8 +107,6 @@ class BookController extends Controller
        return $string_edit_second;
      }
 
-
-
       $b = Book::create([
          CLASIFICATION => $request[CLASIFICATION],
          TITLE => $request[TITLE],

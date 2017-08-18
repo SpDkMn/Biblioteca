@@ -15,35 +15,37 @@ use App\ChapterThesis as ChapterThesis;
 use App\User as User;
 // Para usar el Modelo Profile
 use App\Profile as Profile;
+use App\SearchItem as SearchItem;
+
 
 class ThesisController extends Controller
 {
 
    public function index(Request $request)
    {
-      
+
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
-      
+
       $thesiss = Thesis::all();
       $editoriales = Editorial::all();
       $autores = Author::all();
-      
+
       $copias_thesiss = ThesisCopy::all();
       $contenidos = Content::all();
-      
+
       $show = view('admin.md_thesiss.show', [
          'thesiss' => $thesiss,
          'eliminar' => $eliminar,
          'editar' => $editar
       ]);
-      
+
       $new = view('admin.md_thesiss.new', [
          'thesiss' => $thesiss,
          'editoriales' => $editoriales,
          'autores' => $autores
       ]);
-      
+
       $edit = view('admin.md_thesiss.edit', [
          'thesiss' => $thesiss,
          'copias_thesiss' => $copias_thesiss,
@@ -54,7 +56,7 @@ class ThesisController extends Controller
          'id' => null,
          'autores' => null
       ]);
-      
+
       return view('admin.md_thesiss.index', [
          'new' => $new,
          'show' => $show,
@@ -68,19 +70,36 @@ class ThesisController extends Controller
 
    public function store(ThesisRequest $request)
    {
-      
+     function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
+
 
       $contador_copia = 0;
-           
+
       while ($request['barcode' . $contador_copia] != null) {
          $contador_copia ++;
       }
 
 
       $av = 1;
-      
+
+
+      function buscaAutores($id){
+        $string_autores = "";
+        if (is_string($id)) {
+          $id = cambiaCadena($id);
+        }
+        $autor = Author::find($id);
+        if ($autor!=null) {
+          foreach ($autor as $key => $value) {
+           $string_autores = $string_autores.''.$value->name ;
+          }
+        }
+        return $string_autores;
+      }
+
+
       // Guardando los datos de la tesis
-     
+
 
       Thesis::create([
          'type' => $request['tipo'],
@@ -101,18 +120,15 @@ class ThesisController extends Controller
          'asesor' => $request['asesor'],
          'recomendacion' => $request['recomendacion'] // Conclusiones y recomendaciones
       ]);
-      
-      // Guardamos los registros de las tesis
-      $thesiss = Thesis::all();
+
+
       // Guardamos los registros de las editoriales para el pivote
       $editoriales = Editorial::all();
-      
-      foreach ($thesiss as $thesis) {
-         if ($thesis->title == $request['title']) { // Si el titulo de la tesis encontrada en la base de datos es igua al titulo de la tesis que se esta ingresando al sistema, que el id de esa tesis de la base de datos se guarde en una variable
-            $id_thesis = $thesis->id;
-         }
-      }
-      
+
+      // Guardamos los registros de las tesis y el id de la thesis ingresada
+      $thesiss = Thesis::all();
+      $id_thesis = $thesiss->last()->id;
+
       // GUARDANDO LOS DATOS DE LAS COPIAS DE TESIS
       for ($j = 0; $j <= 8; $j ++) {
          if ($request['barcode' . $j] == null) {
@@ -126,18 +142,18 @@ class ThesisController extends Controller
             'thesis_id' => $id_thesis // El id de la tesis que quiero relacionar ($id_thesis)
          ]);
       }
-      
+      $thesis = Thesis::find($id_thesis);
       // ***RELACIONANDO LAS TABLAS PIVOTES***
       // Pivot-> Thesis - Editorial
       // Recorremos el arreglo con los id de las editoriales seleccionadas para asociarlas a las tesis
       $id = $request['editorial'];
       $thesis->editorials()->attach($id);
-      
+
       // Pivot-> Thesis - Autor
       foreach ($thesiss as $thesi) {
          // Recorremos el arreglo con los id de los autores seleccionados para asociarlas a las tesis
          // Autor Principal
-         
+
          foreach ($request['autorMain'] as $clave => $id) {
             if ($thesi->id == $id_thesis) { // El id de la tesis ingresada con la que ya esta en la base de datos(Solo voy a relacionar mediante pivots). Aqui estan los selectores.
                $thesi->authors()->attach($id, [
@@ -146,7 +162,7 @@ class ThesisController extends Controller
             }
          }
          // Autor secundario
-         
+
          if ($request['autorSecond'] != null) {
             foreach ($request['autorSecond'] as $clave => $id) {
                if ($thesi->id == $id_thesis) {
@@ -159,7 +175,23 @@ class ThesisController extends Controller
             continue;
          }
       }
-      
+
+
+      // No se esta considerando tesis y tesina separados porque solo hay una tabla para ambos
+      SearchItem::create([
+        'item_id'=> $id_thesis,
+        'type'=> '2',
+        'content'=> $request['title'].' '.
+        // $request['contenido'].' '.
+        $request['summary'].' '.
+        $request['asesor'].' '.
+        $request['conclusions'].' '.
+        $request['escuela'].' '.
+        buscaAutores($request['autorMain']).' '.
+        buscaAutores($request['autorSecond']),
+        'state' => true
+      ]);
+
       // Redireccionamos a la seccion de tesis
       return redirect('admin/thesis');
    }
@@ -187,19 +219,19 @@ class ThesisController extends Controller
       $thesiss = Thesis::all();
       $contador_copia = 0;
       $contador_copia2 = 0;
-      
+
       $copiasT = $thesis->thesisCopies;
-      
+
       // Contando las copias de la tesis
       foreach ($copiasT as $copia) {
          // Guarda la cantidad de items que hay luego de agregar
          $contador_copia2 ++;
       }
-      
+
       while ($request['barcode' . $contador_copia] != null) {
          $contador_copia ++;
       }
-      
+
       $thesis->type = $request['tipo'];
       $thesis->clasification = $request['clasification'];
       $thesis->title = $request['title'];
@@ -217,18 +249,18 @@ class ThesisController extends Controller
       $thesis->location = $request['ubicacion'];
       $thesis->publicationLocation = $request['lugarsus'];
       $thesis->asesor = $request['asesor'];
-      
+
       foreach ($copias as $copia) {
          if ($copia->thesis_id == $id) {
             $copia->delete();
          }
       }
-           
+
             $av = 1;
-      
-      
+
+
       // GUARDANDO LOS DATOS DE LAS COPIAS DE TESIS
-      
+
       for ($j = 0; $j <= 8; $j ++) {
          if ($request['barcode' . $j] == null) {
             continue;
@@ -241,14 +273,14 @@ class ThesisController extends Controller
             'thesis_id' => $id // El id de la tesis que quiero relacionar ($id_thesis)
          ]);
       }
-      
+
       // Borramos la relacion entre tesis y editorial, tesis y asesor
       foreach ($thesiss as $thesi) {
          if ($thesi->id == $id) {
             $thesi->authors()->detach();
          }
       }
-      
+
       // Pivot-> Thesis - Autor
       foreach ($thesiss as $thesi) {
          // Recorremos el arreglo con los id de los autores seleccionados para asociarlas a las tesis
@@ -273,12 +305,12 @@ class ThesisController extends Controller
             continue;
          }
       }
-      
+
       $thesis->editorials()->detach();
-      
+
       $id = $request['editorial'];
       $thesis->editorials()->attach($id);
-      
+
       $thesis->save();
       return redirect('admin/thesis');
    }
@@ -287,7 +319,7 @@ class ThesisController extends Controller
    {
       $thesis = Thesis::find($id);
       $copias = ThesisCopy::all();
-      
+
       foreach ($copias as $copia) {
          if ($copia->thesis_id == $id) {
             $copia->delete();
@@ -295,15 +327,23 @@ class ThesisController extends Controller
       }
       $thesis->authors()->detach();
       $thesis->editorials()->detach();
+
+      $datos_busqueda = SearchItem::all();
+      foreach ($datos_busqueda as $busqueda) {
+        if ($busqueda->item_id == $id) {
+          $busqueda->state = false;
+        }
+      }
+
       $thesis->delete();
-      
+
       return redirect()->route('thesis.index');
    }
 
    public function content(Request $request, $id)
    {
       $thesis = Thesis::find($id);
-      
+
       return view('admin.md_thesiss.show2')->with('thesis', $thesis);
    }
 
@@ -311,7 +351,7 @@ class ThesisController extends Controller
    {
       $thesis = Thesis::find($id);
       $copias = ThesisCopy::all();
-      
+
       foreach ($copias as $copia) {
          if ($copia->thesis_id == $id) {
             $copia->delete();
@@ -320,7 +360,7 @@ class ThesisController extends Controller
       $thesis->authors()->detach();
       $thesis->editorials()->detach();
       $thesis->delete();
-      
+
       return redirect()->route('thesis.index');
    }
 }
