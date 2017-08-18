@@ -90,8 +90,10 @@ class MagazineController extends Controller
           $id = cambiaCadena($id);
         }
         $autor = Author::find($id);
-        foreach ($autor as $key => $value) {
-         $string_colaborador = $string_colaborador.''.$value->name ;
+        if ($autor!=null) {
+          foreach ($autor as $key => $value) {
+           $string_colaborador = $string_colaborador.''.$value->name ;
+          }
         }
         return $string_colaborador;
       }
