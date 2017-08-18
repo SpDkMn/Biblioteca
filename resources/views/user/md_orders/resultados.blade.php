@@ -1,5 +1,4 @@
 <div class="box-body table-responsive">
-
 		<table id="example1" class="table table-bordered table-striped table-hover" >
 		   <thead>
 			<tr style="background:#E7FAE2;">
@@ -7,7 +6,7 @@
 				<th class="text-center">Autor</th>
 				<th class="text-center">Editorial</th>
 				<th class="text-center">Nº ejemplares</th>
-				<th class="text-center">Clasificación</th>
+				<th class="text-center">Disponibles</th>
 			</tr>
 			</thead>
 			@foreach($books as $book)
@@ -19,7 +18,7 @@
               @if($author->pivot->type == true)
               <?php $cont=$cont+1; ?>
               @endif
-            @endforeach 
+            @endforeach
             <?php $cont2=2; ?>
             @foreach($book->authors as $author)
               @if($author->pivot->type == true)
@@ -29,7 +28,7 @@
                 @endif
               @endif
               <?php $cont2=$cont2+1; ?>
-            @endforeach   
+            @endforeach
           </td>
 				<td class="text-center">@foreach($book->editorials as $editorial)
 					@if($editorial->pivot->type == true) {{$editorial->name}} @endif
@@ -43,7 +42,6 @@
           {{$cont}}
         </td>
 				<td class="text-center">{{$book->clasification}}</td>
-				
 
 			</tr>
 			@endforeach

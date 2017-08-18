@@ -17,9 +17,13 @@ class OrderController extends Controller
      */
     public function index()
     {
-      $tableBooks = view('user.md_orders.tableBooks');
+      $books = null ;
+      $tableBooks = view('user.md_orders.tableBooks',[
+        'books' => $books
+      ]);
       $tableMagazines = view('user.md_orders.tableMagazines');
       $tableThesis = view('user.md_orders.tableThesis');
+
       $search = view('user.md_orders.search', [
         'tableBooks' => $tableBooks,
         'tableMagazines' => $tableMagazines,
@@ -37,22 +41,23 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
-      
-      $consulta = "Select item_id From search_items Where Match(content) AGAINST('".$_GET['search']."') AND STATE = true AND type='1'";
-
-
-   	  $items=DB::Select($consulta);
+    {
+      $books = null ;
+      $consulta_libros = "Select item_id From search_items Where Match(content) AGAINST('".$_GET['search']."') AND STATE = true AND type='1'";
+      $consulta_thesis = "Select item_id From search_items Where Match(content) AGAINST('".$_GET['search']."') AND STATE = true AND type='2'";
+      $consulta_revistas = "Select item_id From search_items Where Match(content) AGAINST('".$_GET['search']."') AND STATE = true AND type='3'";
+      //La consulta se hará segun
+      $items=DB::Select($consulta_libros);
       $i=0;
       foreach ($items as $item) {
           $books[$i]=Book::find($item->item_id);
           $i++;
       }
-     
-      return view('user.md_orders.resultados',[
+
+      return view('user.md_orders.tableBooks',[
             'books' => $books
         ]);
-      
+
     }
 
     /**

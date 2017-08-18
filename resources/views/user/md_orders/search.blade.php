@@ -25,18 +25,11 @@
       </div>
     </div>
 
-
 <div id="resultados">
-  
+
 </div>
 
-<section class="content">
-	<div class="row">
-		<div class="col-md-12">
-      {!!$tableBooks!!}
-		</div>
-	</div>
-</section>
+
 
 
 </div>
