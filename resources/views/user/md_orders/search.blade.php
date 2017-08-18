@@ -10,18 +10,31 @@
   </div>
 
 <div class="box-body">
-  <div class="container-search">
-    <div class="container">
-      <div class="form center">
-        <form action="" method="post" name="search_form" id="search_form">
-          <input type="text" name="search" id="search">
-        </form>
-    </div>
-    <div id="resultados">
 
-		</div>
-  </div>
+
+  <div class="container-search">
+      <div class="container">
+        <form action="" method="post" name="search_form" id="search_form">
+          <fieldset>
+            <ul class="toolbar clearfix">
+              <li><a href="#" class="fontawesome-eye-open"></a></li>
+              <li><a href="#" class="fontawesome-comment"></a></li>
+              <li><input type="search" id="search" placeholder="¿Qúe artículo estás buscando?"></li>
+              <li><button type="submit" id="btn-search"><span class="fontawesome-search"></span></button></li>
+            </ul>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+
+<div id="resultados">
+
 </div>
+
+
+
+
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
