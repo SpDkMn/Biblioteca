@@ -11,6 +11,8 @@ use App\BookCopy as BookCopy;
 use App\Editorial as Editorial;
 use App\Content as Content;
 use App\ChapterBook as ChapterBook;
+use App\SearchItem as SearchItem;
+
 
 define('BOOKS', 'books');
 define('EDITORIALES', 'editoriales');
@@ -69,6 +71,44 @@ class BookController extends Controller
 
    public function store(Request $request)
    {
+     function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
+
+     function buscarCapitulos($capitulos){
+       $string_capitulo = "";
+       foreach ($capitulos as $key => $value) {
+        $string_capitulo = $string_capitulo.' '.$value;
+       }
+       return $string_capitulo;
+     }
+     function buscaAutores($id){
+       $string_colaborador = "";
+       if (is_string($id)) {
+         $id = cambiaCadena($id);
+       }
+       $autor = Author::find($id);
+       if ($autor!=null) {
+         foreach ($autor as $key => $value) {
+          $string_colaborador = $string_colaborador.' '.$value->name ;
+         }
+       }
+       return $string_colaborador;
+     }
+     function buscaEditorial($id){
+       $string_edit_second = "";
+       if (is_string($id)) {
+         $id = cambiaCadena($id);
+       }
+       $editorial = Editorial::find($id);
+       if ($editorial!=null) {
+         foreach ($editorial as $key => $value) {
+          $string_edit_second = $string_edit_second.''.$value->name ;
+         }
+       }
+       return $string_edit_second;
+     }
+
+
+
       $b = Book::create([
          CLASIFICATION => $request[CLASIFICATION],
          TITLE => $request[TITLE],
@@ -190,6 +230,26 @@ class BookController extends Controller
             'book_id' => $book_id
          ]);
       }
+
+
+
+      SearchItem::create([
+        'item_id'=> $book_id,
+        'type'=> '1',
+        'content'=> $request[TITLE].' '.
+        $request[SECUNDARY_TITLE].' '.
+        $request[SUMMARY].''.
+        buscarCapitulos($request['chapter']).' '.
+        buscaAutores($request['primaryAuthor']).' '.
+        buscaAutores($request['secondaryAuthor']).' '.
+        buscaEditorial($request['editorial']).' '.
+        buscaEditorial($request['secondaryEditorial']),
+        'state' => true
+      ]);
+
+
+
+
       return redirect('admin/book');
    }
 
@@ -497,7 +557,12 @@ class BookController extends Controller
       $book->bookCopies()->delete();
       $book->chapters()->delete();
       $book->delete();
-
+      $datos_busqueda = SearchItem::all();
+      foreach ($datos_busqueda as $busqueda) {
+        if ($busqueda->item_id == $id) {
+          $busqueda->state = false;
+        }
+      }
       return redirect()->route('book.index');
    }
 
