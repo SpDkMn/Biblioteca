@@ -135,7 +135,6 @@ class MagazineController extends Controller
           'titleContent'  => 'required'
           ])->validate();
       // Guardando los datos de la revista
-      $magazines = Magazine::all();
       Magazine::create([
          'title' => $request['title'],
          'subtitle' => $request['subtitle'],
@@ -147,6 +146,8 @@ class MagazineController extends Controller
          'fechaEdicion' => $request['fechaEdicion']
       ]);
       // Capturando id de la revista ingresada luego de crearla
+      //ESTO TIENE QUE ESTAR ACA PARA QUE CARGUE LUEGO DE SER AGREGADA LA ULTIMA REVISTA
+      $magazines = Magazine::all();
       $id_magazine = $magazines->last()->id;
       //Creacion la tabla para la busqueda
       // Guardando datos de las copias de revistas
@@ -185,7 +186,7 @@ class MagazineController extends Controller
       // Pivot-> Magazine - Editorial
       foreach ($magazines as $magazine) {
          // Editoriales anexadas
-         if ($request['mEditorialSecond'] != null) {
+         if ($request['mEditorialSecond']!= null) {
             foreach ($request['mEditorialSecond'] as $clave => $id) {
                if ($magazine->id == $id_magazine) {
                   $magazine->editorials()->attach($id, [
@@ -203,9 +204,6 @@ class MagazineController extends Controller
             }
          }
       }
-
-
-
       SearchItem::create([
         'item_id'=> $id_magazine,
         'type'=> '3',
