@@ -41,6 +41,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
+<<<<<<< HEAD
     {
       $books = null ;
       $consulta_libros = "Select item_id From search_items Where Match(content) AGAINST('".$_GET['search']."') AND STATE = true AND type='1'";
@@ -58,6 +59,24 @@ class OrderController extends Controller
             'books' => $books
         ]);
 
+=======
+    {   
+      
+      $consulta = "Select item_id From search_items Where Match(content) AGAINST('".$_GET['search']."') AND STATE = true AND type='1'";
+
+
+   	  $items=DB::Select($consulta);
+      $i=0;
+      foreach ($items as $item) {
+          $books[$i]=Book::find($item->item_id);
+          $i++;
+      }
+     
+      return view('user.md_orders.resultados',[
+            'books' => $books
+        ]);
+      
+>>>>>>> bb4320e8496edb89f6abf660bb188b0c97739446
     }
 
     /**
