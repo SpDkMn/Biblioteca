@@ -16,10 +16,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-
+      $tableBooks = view('user.md_orders.tableBooks');
+      $tableMagazines = view('user.md_orders.tableMagazines');
+      $tableThesis = view('user.md_orders.tableThesis');
       $search = view('user.md_orders.search', [
-
+        'tableBooks' => $tableBooks,
+        'tableMagazines' => $tableMagazines,
+        'tableThesis' => $tableThesis
       ]);
+
       return view('user.md_orders.index', [
         'search' => $search
       ]);

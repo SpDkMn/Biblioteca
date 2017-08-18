@@ -10,8 +10,6 @@
   </div>
 
 <div class="box-body">
-
-
   <div class="container-search">
       <div class="container">
         <form action="" method="post" name="search_form" id="search_form">
@@ -32,23 +30,15 @@
 
 </div>
 
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+      {!!$tableBooks!!}
+		</div>
+	</div>
+</section>
 
 
-
-  <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>TEST1</th>
-        <th>TEST2</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>PRUEBA1</td>
-        <td>PRUEBA1</td>
-      </tr>
-    </tbody>
-  </table>
 </div>
 </div>
 <script type="text/javascript">
