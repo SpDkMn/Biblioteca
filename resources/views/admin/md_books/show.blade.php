@@ -32,7 +32,7 @@
               @if($author->pivot->type == true)
               <?php $cont=$cont+1; ?>
               @endif
-            @endforeach 
+            @endforeach
             <?php $cont2=2; ?>
             @foreach($book->authors as $author)
               @if($author->pivot->type == true)
@@ -42,7 +42,7 @@
                 @endif
               @endif
               <?php $cont2=$cont2+1; ?>
-            @endforeach   
+            @endforeach
           </td>
 				<td class="text-center">@foreach($book->editorials as $editorial)
 					@if($editorial->pivot->type == true) {{$editorial->name}} @endif
@@ -121,7 +121,7 @@
       $(".editar").on('click',function(event){
         $id = $(this).data('id')
          $("#div-new").html('<div class="box box-success box-solid"><div class="box-header with-border"><h3 class="box-title">Editar</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>')
-         $("#div-new").load('{{ url("/admin/book/") }}/' + $id + '/edit'); 
+         $("#div-new").load('{{ url("/admin/book/") }}/' + $id + '/edit');
       });
     });
 </script>
@@ -129,7 +129,7 @@
 <script>
     $(document).ready(function(){
       $(".contenid").on('click',function(event){
-        
+
         $id = $(this).data('id');
         $("#div-new").html('<div class="box box-warning box-solid"><div class="box-header with-border"><h3 class="box-title">Cargando</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>')
        $("#div-new").load('{{ url("/admin/book/") }}/' + $id+'/show2');

@@ -17,7 +17,7 @@
             <ul class="toolbar clearfix">
               <li><a href="#" class="fontawesome-eye-open"></a></li>
               <li><a href="#" class="fontawesome-comment"></a></li>
-              <li><input type="search" id="search" placeholder="¿Qúe artículo estás buscando?"></li>
+              <li><input type="search" autofocus id="search" placeholder="¿Qúe artículo estás buscando?" ></li>
               <li><button type="submit" id="btn-search"><span class="fontawesome-search"></span></button></li>
             </ul>
           </fieldset>
@@ -26,7 +26,7 @@
     </div>
 
 <div id="resultados">
-  
+
 </div>
 
 

@@ -31,7 +31,7 @@
 					</button></td>
 				<td><button type="button" data-id="{{$empleado->id}}"
 						data-name="{{$empleado->user->name}}" class="btn btn-danger eliminar"
-						data-toggle="modal" data-target="#delted"
+						data-toggle="modal" data-target="#deleted"
 						@if(!$eliminar) disabled @endif>
 						<i class="fa fa-trash"></i>
 					</button></td>
@@ -54,7 +54,7 @@
           $("#div-edit").load('{{ url("/admin/employees/") }}/' + $id + '/edit');
         });
         @endif
-        
+
         @if($eliminar)
         $(".eliminar").on('click',function(event) {
           $name = $(this).data('name')
@@ -77,4 +77,3 @@
       });
     </script>
 @endsection
-

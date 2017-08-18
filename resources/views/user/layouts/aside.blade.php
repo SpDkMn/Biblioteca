@@ -15,13 +15,27 @@
     <ul class="sidebar-menu">
       <li class="header">MENU DE NAVEGACIÓN</li>
 
+
       {{-- ORDER --}}
       <li @if(URL::full() == url('user/order'))class="active"@endif>
         <a href="{{ url('user/order') }}">
-          <i class="fa fa-dashboard"></i><span>Pedido</span>
+          <i class="fa fa-dashboard"></i><span>Pedidos</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
         </a>
+        <ul class="treeview-menu">
+          <li @if(URL::full() == url('/user/order'))class="active"@endif><a href="{{ url('/user/order') }}"><i class="fa fa-user-secret"></i> <span>Libros</span></a></li>
+          <li @if(URL::full() == url('/user/employees'))class="active"@endif><a href="{{ url('/user/employees') }}"><i class="fa fa-male"></i> <span>Revistas</span></a></li>
+          <li @if(URL::full() == url('/user/employees'))class="active"@endif><a href="{{ url('/user/employees') }}"><i class="fa fa-male"></i> <span>Tesis/Tesinas</span></a></li>
+        </ul>
       </li>
       {{-- END ORDER --}}
+
+
+
+
+
 
     </ul>
   </section>
