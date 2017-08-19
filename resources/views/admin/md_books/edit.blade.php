@@ -67,7 +67,7 @@ isbn<div class="box box-primary">
 										</div>
 
 
-										
+
 										<div class="form-group">
 											<label>Autor Principal *</label> <select
 												class="form-control select2" name="primaryAuthor[]"
@@ -139,7 +139,7 @@ isbn<div class="box box-primary">
 											</select>
 										</div>
 
-										
+
 
 									</div>
 									<!-- End Box-body -->
@@ -336,7 +336,7 @@ isbn<div class="box box-primary">
 							                        <option name="ubicacion">Stand Z4</option>
 							                        <option name="ubicacion">Stand Z5</option>
 						                      </select>
-						                 </div>  
+						                 </div>
 
 										<div class="form-group">
 											<label>Descripcion Fisica</label>
@@ -420,7 +420,7 @@ isbn<div class="box box-primary">
                   @endif
                   <?php $cont=$cont+1; ?>
                  @endforeach
-                  
+
                </ul>
 
 							<!--************************** CONTENIDO DE ITEM 1 ***********************************-->
@@ -440,7 +440,7 @@ isbn<div class="box box-primary">
 													<li class="active"><a href="#primero{{$cont2}}"
 														data-toggle="tab">Primero</a></li>
 													<li><a href="#segundo{{$cont2}}" data-toggle="tab">Segundo</a></li>
-													
+
 												</ul>
 
 												<div class="tab-content">
@@ -478,10 +478,14 @@ isbn<div class="box box-primary">
 																<label>Disponibilidad</label> <select
 																	class="form-control select2"
 																	name="availability[{{$cont}}]" style="width: 100%;">
-																	<option @if($bc->availability == true) selected
+																	<option @if($bc->availability == 1) selected
 																		@endif>Disponible</option>
-																	<option @if($bc->availability == false) selected
-																		@endif>No Disponible</option>
+																	<option @if($bc->availability == 0) selected
+																		@endif>Desabilitado</option>
+																	<option @if($bc->availability == 2) selected
+																		@endif>Prestado</option>
+																	<option @if($bc->availability == 3) selected
+																		@endif>En espera</option>
 																</select>
 															</div>
 
@@ -589,9 +593,9 @@ isbn<div class="box box-primary">
 				<button type="submit" class="btn btn-primary">Editar</button>
 				<a href="#0" type="button"
 								class="button-content btn btn-warning" id="crearLibro"><i
-								class="fa fa-book"></i>Crear Libros</a> 
+								class="fa fa-book"></i>Crear Libros</a>
 			</div>
-	
+
 	</form>
 
 </div>
@@ -602,16 +606,16 @@ isbn<div class="box box-primary">
     var contenedorItem = $('#contenedor-item');
     var AddButton1 = $("#agregarItem");
     var x = $("#contenedor-pestañas li").length-2;
-    
+
     var FieldCount = x;
     var arreglo;
     $(".agregarItem").click(function(){
-      
+
       FieldCount++;
-    
+
       arreglo = FieldCount-1;
       $(contenedorPestañas).append('<li><a href="#item'+FieldCount+'" id="cabezera-item'+FieldCount+'" data-toggle="tab">Item'+FieldCount+'</a></li>');
-        
+
       $(contenedorItem).append(
               '<div class="tab-pane fade" id="item'+FieldCount+'">'
                  +'<div class="box-body">'
@@ -644,12 +648,13 @@ isbn<div class="box box-primary">
                             +'<label>Disponibilidad</label>'
                             +'<select class="form-control select2" name="availability['+arreglo+']" style="width: 100%;">'
                                 +'<option>Disponible</option>'
-                                +'<option>No Disponible</option>'                              
+                                +'<option>Desabilitado</option>'
+																+'<option>Prestado</option>'
                             +'</select>'
                           +'</div>'
                         +'</div>'
                       +'</div>'
-                      
+
                       +'<div class="tab-pane fade" id="segundo'+FieldCount+'">'
                         +'<div class="box-body">'
                           +'<div class="form-group">'
@@ -657,7 +662,7 @@ isbn<div class="box box-primary">
                             +'<select class="form-control select2" name="acquisitionModality['+arreglo+']"  style="width: 100%;">'
                                 +'<option>Compra</option> '
                                 +'<option>Donacion</option>'
-                                +'<option>Adquisicion</option>  '                             
+                                +'<option>Adquisicion</option>  '
                             +'</select>'
                           +'</div>'
                           +'<div class="form-group">'
@@ -679,8 +684,8 @@ isbn<div class="box box-primary">
                           +'<div class="form-group">'
                             +'<label>Tipo de Impresion</label>'
                             +'<select class="form-control select2" name="printType['+arreglo+']" style="width: 100%;">'
-                                +'<option>Impresion</option>' 
-                                +'<option>Reimpresion</option>   '                           
+                                +'<option>Impresion</option>'
+                                +'<option>Reimpresion</option>   '
                             +'</select>'
                           +'</div>'
                           +'<div class="form-group">'
@@ -691,25 +696,25 @@ isbn<div class="box box-primary">
                             +'<label>Fecha de Publicacion</label>'
                             +'<input type="text" name="publicationDate['+arreglo+']" class="form-control" required>'
                           +'</div>'
-                         
+
                         +'</div>'
                       +'</div>'
-                    
+
                     +'</div><!-- End Tab Content--> '
-                                
+
                   +'</div><!-- End navbar -->'
                  +'</div><!-- End box-body -->'
                +'</div><!-- End tab-pane -->');
       x++;
     });
-  
+
     $(".eliminarItem").click(function(){
       if (FieldCount>1) {
         $("#item"+FieldCount).remove();
         $("#cabezera-item"+FieldCount).remove();
         FieldCount = FieldCount-1;
       }
-      
+
     });
     return false;
   });
@@ -721,7 +726,7 @@ isbn<div class="box box-primary">
 <script>
   $(document).ready(function() {
 
-  	$("#crearLibro").on('click',function(event){ 
+  	$("#crearLibro").on('click',function(event){
         $id = $(this).data('id');
         $("#div-new").html('<div class="box box-warning box-solid"><div class="box-header with-border"><h3 class="box-title">Cargando</h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div><div class="box-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>')
         $("#div-new").load('{{ url("/admin/book/create") }}');
@@ -733,10 +738,10 @@ isbn<div class="box box-primary">
     //var x = número de campos existentes en el contenedor
     var x = $("#contenedor div").length + 1;
     var FieldCount = x-1; //para el seguimiento de los campos
-    
+
     $(AddButton).click(function (e) {
         if(x <= MaxInputs) //max input box allowed
-        {   
+        {
             FieldCount++;
             //agregar campo
             var array = FieldCount-1;
@@ -761,4 +766,3 @@ isbn<div class="box box-primary">
         $(".select2").select2();
       });
 </script>
-

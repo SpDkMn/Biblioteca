@@ -27,12 +27,15 @@ class CreateBookCopiesTable extends Migration
          $table->string('acquisitionDate')->nullable();
          // fin adquision
          $table->string('management')->nullable();
-         $table->boolean('availability');
-         
+         $table->integer('availability');
+         // 0 -> desabilitadfo
+         // 1-> Disponible
+         // 2 ->  prestado
+         //3-> en espera
          $table->string('printType');
          $table->string('publicationLocation')->nullable();
          $table->string('publicationDate')->nullable();
-         
+
          $table->unsignedSmallInteger('book_id');
          $table->timestamps();
          $table->softDeletes();
