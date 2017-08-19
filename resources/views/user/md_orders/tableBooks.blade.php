@@ -106,7 +106,7 @@
                     </div>
                     <div class="box-body  no-padding">
                       <table class="table table-hover table-striped table-bordered" id="book_copies">
-                                            
+
                       </table>
                     </div>
                   </div>
@@ -119,13 +119,13 @@
                     <!-- ACOMODAR -->
                     <div class="subtitle" id="book_subtitle"></div>
                     <div class="box-body" id="book_summary"></div>
-                    
+
                       <div class="subtitle">Contenido</div>
                       <ol id="book_chapters">
-                        
+
                       </ol>
 
-                    
+
 
                   </div>
                 </div>
@@ -198,9 +198,8 @@ use App\BookCopy as BookCopy;
             break;
     			}
     		}
-        console.log("paso1");
-        console.log("paso2");
-        console.log("paso3");
+
+        
         var cont=0;
         var chapterBook = new Array();
         var bookCopy = new Array();
@@ -237,7 +236,7 @@ use App\BookCopy as BookCopy;
         for(i=0;i<chapterBook.length;i++){
           txt_chapter=txt_chapter+"<li>"+chapterBook[i].name+"</li>";
         }
-        
+
         $('#book_chapters').html(txt_chapter);
         $('#book_title').html(books[indice].title);
         $('#book_subtitle').html(books[indice].secondaryTitle);
@@ -297,6 +296,3 @@ use App\BookCopy as BookCopy;
 
     });
   </script>
-
-
-                     
