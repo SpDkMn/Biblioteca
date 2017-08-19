@@ -13,15 +13,16 @@ $(function(){
 
 
 
-//Cada vez que se selecciona un filtro , lo enviará al controlador
+	//Cada vez que se selecciona un filtro , lo enviará al controlador
 	$('#orderCategory').change(function(){
 		var envio = $('#orderCategory').val();
 
 		$.ajax({
 			type: "post",
 			url: '/user/search',
+			// url: '/user/order',
 			data: {
-            	search: envio
+            	searchType: envio
        		 },
 			success: function(resp){
 				if(resp!=""){
@@ -30,8 +31,6 @@ $(function(){
 			}
 		})
 	})
-
-
 
 	$('#search').keyup(function(){
 		var envio = $('#search').val();

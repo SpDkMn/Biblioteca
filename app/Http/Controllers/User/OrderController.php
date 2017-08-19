@@ -41,7 +41,22 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-
+      foreach ($request['searchType'] as $key => $value) {
+        switch ($value) {
+          case 1:
+              echo "Libros";
+            break;
+        case 2:
+            echo "Tesis/Tesinas";
+          break;
+        case 3:
+              echo "Revistas";
+          break;
+        default:
+            echo "Sin datos";
+          break;
+        }
+      };
     }
 
     /**
@@ -52,7 +67,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**
