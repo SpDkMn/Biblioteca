@@ -52,7 +52,6 @@ class SearchController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -63,13 +62,14 @@ class SearchController extends Controller
      */
     public function store(Request $request)
     {
-
       if($request->ajax()){
          $search=$request->input('search');
         echo "Resultados de Busqueda : ".$search;
      }
+     dd('llego hasta aqui',$request->all(),$request['searchType']);
+     //El filtro se elimina al hacer la busqueda y la busqueda se elimina al seleccionar el filtro
 
-     //Activadores:
+     //Activadores
      $Blibros=$Bthesis=$Brevistas=$Bcompendios = false;
 
        switch ($request['searchType']) {
