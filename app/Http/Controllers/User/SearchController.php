@@ -63,6 +63,7 @@ class SearchController extends Controller
      */
     public function store(Request $request)
     {
+
       if($request->ajax()){
          $search=$request->input('search');
         echo "Resultados de Busqueda : ".$search;
@@ -141,7 +142,6 @@ class SearchController extends Controller
               'books' => $books
             ]);
       }
-    }
 
     /**
      * Display the specified resource.
