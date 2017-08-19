@@ -23,7 +23,7 @@ class LoginController extends Controller
     * | to conveniently provide its functionality to your applications.
     * |
     */
-   
+
    use AuthenticatesUsers;
 
    /**
@@ -39,9 +39,7 @@ class LoginController extends Controller
     * @return void
     */
    public function login(Request $request)
-   {  
-
-
+   {
       $users = User::all();
 
       foreach ($users as $u) {

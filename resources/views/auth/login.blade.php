@@ -58,7 +58,7 @@ input[type="submit"] {
 }
 
 #letra_contra, #letra_dni {
-	font-size: 20px; 
+	font-size: 20px;
 	margin-left: 5px;
 }
 </style>
@@ -74,7 +74,7 @@ input[type="submit"] {
 			<label for="dni" id="letra_dni">Usuario:</label>
 			<div>
 				<input type="text" class="form-control" id="username"
-					placeholder="Username" name="username" onkeyup="Boton()"/>
+					placeholder="Username" name="username"/>
 			</div>
 		</div>
 
@@ -83,7 +83,7 @@ input[type="submit"] {
 
 			<div>
 				<input id="password" type="password" class="form-control"
-					name="password" required  onkeyup="Boton()"/> @if ($errors->has('password')) <span
+					name="password" required /> @if ($errors->has('password')) <span
 					class="help-block"> <strong>{{ $errors->first('password') }}</strong>
 				</span> @endif
 			</div>
@@ -92,21 +92,21 @@ input[type="submit"] {
 
 
 		<div id="botones_login">
-			<button type="submit" id="boton" class="btn btn-success" disabled>Login</button>
+			<button type="submit" id="boton" class="btn btn-success" >Login</button>
 
 			<a class="btn btn-link" >
-				Forgot Your Password? </a> 
+				Forgot Your Password? </a>
 		</div>
 
 	</form>
 </div>
 <?php
-use Illuminate\Support\Facades\Crypt;
+/**Use Illuminate\Support\Facades\Crypt;
 use App\User as User;
 use App\Employee as Employee;
 	$usuarios = User::all();
 	$empleados = Employee::all();
-	
+
 
 	$cont=0;
 	foreach ($empleados as $empleado) {
@@ -121,16 +121,17 @@ use App\Employee as Employee;
 		}
 	}
 	$objJson = json_encode($users);
+	**/
 ?>
 <script type="text/javascript">
-	function Boton(){
+	/**function Boton(){
 
-		var usuarios = eval(<?php echo $objJson; ?>);
+		var usuarios = eval(<//?php echo $objJson; ?>);
 		var password = document.getElementById("password");
 		var username = document.getElementById("username");
 		var boton = document.getElementById("boton");
 		for(i=0;i<usuarios.length;i++){
-			
+
 			if(usuarios[i].email == username.value && usuarios[i].password2 == password.value){
 				boton.disabled=false;
 				break;
@@ -138,7 +139,7 @@ use App\Employee as Employee;
 			else{
 				boton.disabled=true;
 			}
-		}	
-	}
+		}
+	}**/
 </script>
 @endsection
