@@ -19,7 +19,7 @@
             <div class="col-xs-4">
               <label>Filtro</label> <span>*</span> <select
                 id="orderCategory" class="form-control"
-                name="orderCategory[]" multiple="multiple"
+                name="orderCategory" 
                 data-placeholder="Seleccione un producto" style="width: 100%;" required>
                 <option value="1">Libros</option>
                 <option value="2">Tesis/Tesinas</option>

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Book as Book;
 use App\Magazine as Magazine;
 use App\Thesis as Thesis;
+use App\Compendium as Compendium;
 
 class SearchController extends Controller
 {
@@ -62,34 +63,83 @@ class SearchController extends Controller
      */
     public function store(Request $request)
     {
-
-      dd($request->all());
-
       if($request->ajax()){
          $search=$request->input('search');
         echo "Resultados de Busqueda : ".$search;
      }
 
-      $consulta_libros = "Select item_id From search_items Where Match(content) AGAINST('".$search."') AND STATE = true AND type='1'";
-      $consulta_thesis = "Select item_id From search_items Where Match(content) AGAINST('".$search."') AND STATE = true AND type='2'";
-      $consulta_revistas = "Select item_id From search_items Where Match(content) AGAINST('".$search."') AND STATE = true AND type='3'";
-      //La consulta se hará segun
-      $items=DB::Select($consulta_libros);
+     //Activadores:
+     $Blibros=$Bthesis=$Brevistas=$Bcompendios = false;
 
-      if(sizeof($items)==0){
-        echo "<br>";
-        echo "No se encontraron resultados";
-      }
-      else{
-        $i=0;
-        foreach ($items as $item) {
-            $books[$i]=Book::find($item->item_id);
-            $i++;
+       switch ($request['searchType']) {
+         case 1:
+        $consulta_libros = "Select item_id From search_items Where Match(content) AGAINST('".$search."') AND STATE = true AND type='1'";
+        $Blibros = true;
+           break;
+       case 2:
+        $consulta_thesis = "Select item_id From search_items Where Match(content) AGAINST('".$search."') AND STATE = true AND type='2'";
+        $Bthesis = true;
+         break;
+       case 3:
+       $consulta_revistas = "Select item_id From search_items Where Match(content) AGAINST('".$search."') AND STATE = true AND type='3'";
+       $Brevistas = true;
+         break;
+       case 4:
+       $consulta_compendios = "Select item_id From search_items Where Match(content) AGAINST('".$search."') AND STATE = true AND type='4'";
+       $Bcompendios = true;
+         break;
+       };
+
+
+       //Comprobamos si el los items obtenidos en la consulta no son nulos
+       function compruebaItem($item){
+         if(sizeof($item)==0){
+           echo "<br>";
+           echo "No se encontraron resultados";
+           return false;
+         }else {
+           return true;
+         }
+       }
+
+      //Filtrando las consultas para hacerla más rapida
+      if ($Blibros) {
+        $itemsBooks=DB::Select($consulta_libros);
+        if (compruebaItem($itemsBooks)) {
+          $i=0;
+          foreach ($itemsBooks as $itemsBook) {
+              $books[$i]=Book::find($itemsBook->item_id);
+              $i++;
+          }
         }
+      }else if ($Bthesis) {
+        $itemsThesis=DB::Select($consulta_thesis);
+        if (compruebaItem($itemsThesis)) {
+          foreach ($itemsThesis as $itemsThesi) {
+              $thesis[$i]=Thesis::find($itemsThesi->item_id);
+              $i++;
+          }        }
+      }else if ($Brevistas) {
+        $itemsMagazines=DB::Select($consulta_revistas);
+        if (compruebaItem($itemsMagazines)) {
+          foreach ($itemsMagazines as $itemsMagazine) {
+              $magazines[$i]=Magazine::find($itemsMagazine->item_id);
+              $i++;
+          }        }
+      }else if ($Bcompendios) {
+        $itemsCompendium=DB::Select($consulta_compendios);
+        if (compruebaItem($itemsCompendium)) {
+          foreach ($itemsCompendium as $itemsCompendiu) {
+              $compendiums[$i]=Compendium::find($itemsCompendiu->item_id);
+              $i++;
+          }
+        }
+      }
+      //No hay else porque por defecto siempre habrá como minimo uno activado
 
         return view('user.md_orders.tableBooks',[
               'books' => $books
-          ]);
+            ]);
       }
     }
 
