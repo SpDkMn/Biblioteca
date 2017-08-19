@@ -20,7 +20,7 @@ $(function(){
 
 		$.ajax({
 			type: "post",
-			url: '/user/order',
+			url: '/user/search',
 			data: {
             	search: envio
        		 },

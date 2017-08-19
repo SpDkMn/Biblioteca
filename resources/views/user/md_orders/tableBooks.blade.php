@@ -57,7 +57,13 @@
                         @endif
                       @endforeach
                       {{$contBookCopiesAvailability}}</td>
-                    <td class="text-center"><button type="button" data-toggle="modal" name="button" data-target="#ModalBookInfo<?php echo $book->id; ?>"><i class="fa fa-info"></i></button></td>
+
+                    <td class="text-center"><button type="button" data-id="{{$book->id}}"
+            						data-name="{{$book->name}}" class="btn_info"
+            						data-toggle="modal" data-target="#ModalBookInfo">
+
+            						<i class="fa fa-info"></i>
+            					</button></td>
                   </tr>
 
                   @endforeach
@@ -83,9 +89,7 @@
     <!-- /.row -->
   </section>
 
-  @foreach($books as $book)
-  <!-- MODAL DEL LIBRO  -->
-  <div class="modal modal fade"id="ModalBookInfo<?php echo $book->id; ?>" tabindex="-1" role="dialog"aria-labelledby="ModalBookInfoLabel">
+  <div class="modal modal fade" id="ModalBookInfo" tabindex="-1" role="dialog" aria-labelledby="ModalBookInfoLabel">
     <div class="modal-dialog modal-lg" >
       <div class="modal-content">
           <div class="modal-header">
@@ -98,35 +102,37 @@
                   <div class="box box-default">
                     <div class="box-header with-border">
                       <i class="fa fa-book"></i>
-                      <h3 class="box-title text-center">{{$book->title}}</h3>
+                      <h3 class="box-title text-center" id="book_title"></h3>
                     </div>
                     <div class="box-body  no-padding">
                       <table class="table table-hover table-striped table-bordered">
                           <tr>
-            								<th class="itemTable text-center">Numero de ingreso</th>
-            								<th class="itemTable text-center">Codigo de barras</th>
-            								<th class="itemTable text-center">Ejemplar</th>
-            								<th class="itemTable text-center">Volumen</th>
-            								<th class="itemTable text-center">Clasificacion</th>
+                            <th class="itemTable text-center">Numero de ingreso</th>
+                            <th class="itemTable text-center">Codigo de barras</th>
+                            <th class="itemTable text-center">Ejemplar</th>
+                            <th class="itemTable text-center">Volumen</th>
+                            <th class="itemTable text-center">Clasificacion</th>
                             <th class="itemTable text-center">Estado</th>
                             <th class="itemTable text-center">Pedir</th>
-            							</tr>
-                          @foreach($book->bookCopies as $copy)
-            							<tr @if($copy->
-            								availability) class="success" @else class="danger" @endif>
-            								<td class="text-center">{{$copy->incomeNumber}}</td>
-            								<td class="text-center">{{$copy->barcode}}</td>
-            								<td class="text-center">{{$copy->copy}} @if($copy->availability) <span
-            									class="sr-only">Disponible</span> @else <span class="sr-only">No
-            										disponible</span> @endif
-            								</td>
-            								<td class="text-center"><?php if($copy->volume != "") echo ( $copy->volume); else echo "_";  ?></td>
-            								<td class="text-center">{{$copy->clasification}}</td>
+                          </tr>
+                      <!--    @foreach($book->bookCopies as $copy)
+                          <tr @if($copy->
+                            availability) class="success" @else class="danger" @endif>
+                            <td class="text-center">{{$copy->incomeNumber}}</td>
+                            <td class="text-center">{{$copy->barcode}}</td>
+                            <td class="text-center">{{$copy->copy}} @if($copy->availability) <span
+                              class="sr-only">Disponible</span> @else <span class="sr-only">No
+                                disponible</span> @endif
+                            </td>
+                            <td class="text-center"><?php //if($copy->volume != "") echo ( $copy->volume); else echo "_";  ?></td>
+                            <td class="text-center">{{$copy->clasification}}</td>
                             <td class="text-center"> @if($copy->availability) <span
-            									class="label label-info">Disponible</span>@else<span class="label label-danger">No Disponible</span>@endif</td>
-                            <td class="text-center"><button type="button"  name="button"><i class="fa fa-book"></i></button></td>
-            							</tr>
-                        @endforeach
+                              class="label label-info">Disponible</span>@else<span class="label label-danger">No Disponible</span>@endif</td>
+                            <form id="order_form" method="get">
+                              <td class="text-center"><button type="submit" class="btn_pedido"  name="button"><i class="fa fa-book"></i></button></td>
+                            </form>
+                          </tr>
+                        @endforeach -->
                       </table>
                     </div>
                   </div>
@@ -137,24 +143,28 @@
                 <div class="col-md-6">
                   <div class="box box-default">
                     <!-- ACOMODAR -->
-                    <div class="subtitle">Resumen</div>
-                    <div class="box-body">{{$book->summary}}</div>
-                    <div class="subtitle">Contenido</div>
-                    <ol>
-                      @foreach($book->chapters as $chapter)
-                      <li>{{$chapter->name}}</li> @endforeach
-                    </ol>
-                    <!-- ACOMODAR -->
+                    <div class="subtitle" id="book_subtitle"></div>
+                    <div class="box-body" id="book_summary"></div>
+                    <!--
+                      <div class="subtitle">Contenido</div>
+                      <ol id="book_chapters">
+                        @foreach($book->chapters as $chapter)
+                        <li>{{$chapter->name}}</li>
+                        @endforeach
+                      </ol>
+
+                    -->
+
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="box box-default">
                     <!-- ACOMODAR -->
                     <ul>
-                      <li>Extension:{{$book->extension}}</li>
-                      <li>Otros detalles fisicos:{{$book->physicalDetails}}</li>
-                      <li>Dimensiones:{{$book->dimensions}}</li>
-                      <li>Material de Acompañamiento: {{$book->accompaniment}}</li>
+                      <li id="book_extension"></li>
+                      <li id="book_details"></li>
+                      <li id="book_dimensions"></li>
+                      <li id="book_accompaniment"></li>
                     </ul>
                     <!-- ACOMODAR -->
 
@@ -166,9 +176,6 @@
       </div>
     </div>
   </div>
-  <!-- FIN DEL MODAL DEL LIBRO  -->
-  @endforeach
-
 @endif
   <!-- /.content -->
   <script>
@@ -183,3 +190,38 @@
     })
   })
 </script>
+
+<?php
+use App\Book as Book;
+	$books = Book::all();
+	$objJson = json_encode($books);
+?>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+      $(document).ready(function() {
+        $('#example-multiple-selected').multiselect();
+      });
+
+
+      $(".btn_info").on('click',function(event) {
+        $id = $(this).data('id')
+
+        var books = eval(<?php echo $objJson; ?>);
+        for(i=0;i<books.length;i++){
+    			if(books[i].id == $id){
+            break;
+    			}
+    		}
+
+        $('#book_title').html(books[i].title);
+        $('#book_subtitle').html(books[i].secondaryTitle);
+        $('#book_summary').html(books[i].summary);
+        $('#book_extension').html("Extension:"+books[i].extension);
+        $('#book_details').html("Otros detalles fisicos:"+books[i].physicalDetails)
+        $('#book_dimensions').html("Extension:"+books[i].dimensions);
+        $('#book_accompaniment').html("Material de Acompañamiento:"+books[i].accompaniment);
+      });
+
+    });
+  </script>

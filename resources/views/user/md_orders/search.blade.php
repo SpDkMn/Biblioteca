@@ -50,16 +50,7 @@ $(document).ready(function() {
   $('.example-multiple-selected').multiselect();
   $('#orderCategory').select2();
 });
- $(document).ready(function() {
-    $.ajaxSetup({
-            headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
-        });
-  });
 </script>
-
-
-
-
 
 </div>
 </div>
