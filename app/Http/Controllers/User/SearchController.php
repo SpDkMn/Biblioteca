@@ -62,6 +62,9 @@ class SearchController extends Controller
      */
     public function store(Request $request)
     {
+
+      dd($request->all());
+
       if($request->ajax()){
          $search=$request->input('search');
         echo "Resultados de Busqueda : ".$search;

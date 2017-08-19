@@ -15,7 +15,7 @@
       <div class="container">
         <form action="" method="post" name="search_form" id="search_form">
           <meta name="_token" content="{!! csrf_token() !!}"/>
-          <!-- <div class="row">
+          <div class="row">
             <div class="col-xs-4">
               <label>Filtro</label> <span>*</span> <select
                 id="orderCategory" class="form-control"
@@ -27,7 +27,7 @@
                 <option value="4">Compendios</option>
               </select>
             </div>
-          </div> -->
+          </div>
             <fieldset>
               <ul class="toolbar clearfix">
                 <li><a href="#" class="fontawesome-eye-open"></a></li>

@@ -13,6 +13,25 @@ $(function(){
 
 
 
+//Cada vez que se selecciona un filtro , lo enviará al controlador
+	$('#orderCategory').change(function(){
+		var envio = $('#orderCategory').val();
+
+		$.ajax({
+			type: "post",
+			url: '/user/search',
+			data: {
+            	search: envio
+       		 },
+			success: function(resp){
+				if(resp!=""){
+					$('#resultados').html(resp);
+				}
+			}
+		})
+	})
+
+
 
 	$('#search').keyup(function(){
 		var envio = $('#search').val();
