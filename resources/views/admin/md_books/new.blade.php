@@ -153,7 +153,7 @@
 											</select>
 										</div>
 
-										
+
 										<div class="form-group">
 						                      <label>Ubicación </label>
 						                      <select class="form-control select2" name="libraryLocation" id="libraryLocation" style="width: 100%;">
@@ -293,7 +293,7 @@
 								                        <option name="ubicacion">Stand Z4</option>
 								                        <option name="ubicacion">Stand Z5</option>
 						                      </select>
-						                 </div>  
+						                 </div>
 
 										<div class="form-group">
 											<label>Descripcion Fisica</label>
@@ -410,7 +410,8 @@
 																class="form-control select2" name="availability[0]"
 																style="width: 100%;">
 																<option>Disponible</option>
-																<option>No Disponible</option>
+																<option>Desabilitado</option>
+																<option>Prestado</option>
 															</select>
 														</div>
 
@@ -566,7 +567,8 @@
                             +'<label>Disponibilidad</label>'
                             +'<select class="form-control select2" name="availability['+arreglo+']" style="width: 100%;">'
                                 +'<option>Disponible</option>'
-                                +'<option>No Disponible</option>'
+                                +'<option>Desabilitado</option>'
+																+'<option>Prestado</option>'
                             +'</select>'
                           +'</div>'
                         +'</div>'

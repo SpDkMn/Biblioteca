@@ -199,10 +199,6 @@ class BookController extends Controller
 
       for ($i = 0; $i < $contador_copia; $i ++) {
 
-         $bandera = false;
-         if ($request['availability'][$i] == "Disponible") {
-            $bandera = true;
-         }
          $copy_aux = $i + 1;
          $bc_clasification = $request->clasification . "ej." . $copy_aux;
          if ($request->volume[$i] != null) {
@@ -220,7 +216,7 @@ class BookController extends Controller
             'acquisitionDate' => $request->acquisitionDate[$i],
 
             'management' => $request->management[$i],
-            'availability' => $bandera,
+            'availability' => $this->disponibilidad($request->availability[$i]),
             'printType' => $request->printType[$i],
             'publicationLocation' => $request->publicationLocation[$i],
             'publicationDate' => $request->publicationDate[$i],
@@ -419,10 +415,7 @@ class BookController extends Controller
       // $request->barcode[0] : nuevo codigo de barras de item1
       if ($numero_copias_antiguo == $numero_copias_nuevo) {
          for ($i = 0; $i < $numero_copias_nuevo; $i ++) {
-            $bandera = false;
-            if ($request->availability[$i] == "Disponible") {
-               $bandera = true;
-            }
+
             $copy_aux = $i + 1;
             $bc_clasification = $request->clasification . " ej. " . $copy_aux;
             if ($request->volume[$i] != null) {
@@ -438,7 +431,7 @@ class BookController extends Controller
             $book->bookCopies[$i]->acquisitionPrice = $request->acquisitionPrice[$i];
             $book->bookCopies[$i]->acquisitionDate = $request->acquisitionDate[$i];
             $book->bookCopies[$i]->management = $request->management[$i];
-            $book->bookCopies[$i]->availability = $bandera;
+            $book->bookCopies[$i]->availability = $this->disponibilidad($request->availability[$i]);
             $book->bookCopies[$i]->printType = $request->printType[$i];
             $book->bookCopies[$i]->publicationLocation = $request->publicationLocation[$i];
             $book->bookCopies[$i]->publicationDate = $request->publicationDate[$i];
@@ -448,10 +441,6 @@ class BookController extends Controller
       // CASO II
       if ($numero_copias_nuevo < $numero_copias_antiguo) {
          for ($i = 0; $i < $numero_copias_nuevo; $i ++) {
-            $bandera = false;
-            if ($request->availability[$i] == "Disponible") {
-               $bandera = true;
-            }
             $copy_aux = $i + 1;
             $bc_clasification = $request->clasification . " ej. " . $copy_aux;
             if ($request->volume[$i] != null) {
@@ -467,7 +456,7 @@ class BookController extends Controller
             $book->bookCopies[$i]->acquisitionPrice = $request->acquisitionPrice[$i];
             $book->bookCopies[$i]->acquisitionDate = $request->acquisitionDate[$i];
             $book->bookCopies[$i]->management = $request->management[$i];
-            $book->bookCopies[$i]->availability = $bandera;
+            $book->bookCopies[$i]->availability = $this->disponibilidad($request->availability[$i]);
             $book->bookCopies[$i]->printType = $request->printType[$i];
             $book->bookCopies[$i]->publicationLocation = $request->publicationLocation[$i];
             $book->bookCopies[$i]->publicationDate = $request->publicationDate[$i];
@@ -481,10 +470,6 @@ class BookController extends Controller
       // CASO III
       if ($numero_copias_nuevo > $numero_copias_antiguo) {
          for ($i = 0; $i < $numero_copias_antiguo; $i ++) {
-            $bandera = false;
-            if ($request->availability[$i] == "Disponible") {
-               $bandera = true;
-            }
             $copy_aux = $i + 1;
             $bc_clasification = $request->clasification . " ej. " . $copy_aux;
             if ($request->volume[$i] != null) {
@@ -500,17 +485,13 @@ class BookController extends Controller
             $book->bookCopies[$i]->acquisitionPrice = $request->acquisitionPrice[$i];
             $book->bookCopies[$i]->acquisitionDate = $request->acquisitionDate[$i];
             $book->bookCopies[$i]->management = $request->management[$i];
-            $book->bookCopies[$i]->availability = $bandera;
+            $book->bookCopies[$i]->availability = $this->disponibilidad($request->availability[$i]);
             $book->bookCopies[$i]->printType = $request->printType[$i];
             $book->bookCopies[$i]->publicationLocation = $request->publicationLocation[$i];
             $book->bookCopies[$i]->publicationDate = $request->publicationDate[$i];
             $book->bookCopies[$i]->save();
          }
          while ($i < $numero_copias_nuevo) {
-            $bandera = false;
-            if ($request->availability[$i] == "Disponible") {
-               $bandera = true;
-            }
             $copy_aux = $i + 1;
             $bc_clasification = $request->clasification . " ej. " . $copy_aux;
             if ($request->volume[$i] != null) {
@@ -527,7 +508,7 @@ class BookController extends Controller
                'acquisitionPrice' => $request->acquisitionPrice[$i],
                'acquisitionDate' => $request->acquisitionDate[$i],
                'management' => $request->management[$i],
-               'availability' => $bandera,
+               'availability' => $this->disponibilidad($request->availability[$i]),
                'printType' => $request->printType[$i],
                'publicationLocation' => $request->publicationLocation[$i],
                'publicationDate' => $request->publicationDate[$i],
@@ -610,4 +591,24 @@ class BookController extends Controller
 
    public function content()
    {}
+
+   public function disponibilidad($disponibilidad){
+       $bandera="";
+       switch ($disponibilidad) {
+         case 'Desabilitado':
+           $bandera = 0;
+           break;
+         case 'Disponible':
+           $bandera=1;
+           break;
+         case 'Prestado':
+           $bandera =2;
+           break;
+         case 'En espera':
+           $bandera=3;
+           break;
+          default: dd("ERROR : error en el campo disponiblidad");
+       }
+       return $bandera;
+     }
 }
