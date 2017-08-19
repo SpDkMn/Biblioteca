@@ -62,11 +62,11 @@ class SearchController extends Controller
      */
     public function store(Request $request)
     {
+
       if($request->ajax()){
          $search=$request->input('search');
         echo "Resultados de Busqueda : ".$search;
      }
-     dd('llego hasta aqui',$request->all(),$request['searchType']);
      //El filtro se elimina al hacer la busqueda y la busqueda se elimina al seleccionar el filtro
 
      //Activadores
@@ -103,6 +103,16 @@ class SearchController extends Controller
          }
        }
 
+       //HACIENDO PRUEBAS -- MOSTRANDO LOS ACTIVADORES
+      //  echo "<br>";
+      //  echo true === (bool)$Blibros ? 'True ' : 'False ' ;
+      //  echo "<br>";
+      //  echo true === (bool)$Bthesis ? 'True ' : 'False ';
+      //  echo "<br>";
+      //  echo true === (bool)$Brevistas ? 'True ' : 'False ';
+      //  echo "<br>";
+      //  echo true === (bool)$Bcompendios ? 'True ' : 'False ';
+
       //Filtrando las consultas para hacerla más rapida
       if ($Blibros) {
         $itemsBooks=DB::Select($consulta_libros);
@@ -112,7 +122,10 @@ class SearchController extends Controller
               $books[$i]=Book::find($itemsBook->item_id);
               $i++;
           }
+
+
         }
+        // dd("estas buscando un libro");
       }else if ($Bthesis) {
         $itemsThesis=DB::Select($consulta_thesis);
         if (compruebaItem($itemsThesis)) {
@@ -120,6 +133,7 @@ class SearchController extends Controller
               $thesis[$i]=Thesis::find($itemsThesi->item_id);
               $i++;
           }        }
+          // dd("estas buscando una tesis");
       }else if ($Brevistas) {
         $itemsMagazines=DB::Select($consulta_revistas);
         if (compruebaItem($itemsMagazines)) {
@@ -127,6 +141,7 @@ class SearchController extends Controller
               $magazines[$i]=Magazine::find($itemsMagazine->item_id);
               $i++;
           }        }
+          // dd("estas buscando una revista");
       }else if ($Bcompendios) {
         $itemsCompendium=DB::Select($consulta_compendios);
         if (compruebaItem($itemsCompendium)) {
@@ -135,7 +150,10 @@ class SearchController extends Controller
               $i++;
           }
         }
+        // dd("estas buscando un compendio");
       }
+      dd('llego hasta aqui',$request->all(),$request['searchType']);
+
       //No hay else porque por defecto siempre habrá como minimo uno activado
 
         return view('user.md_orders.tableBooks',[

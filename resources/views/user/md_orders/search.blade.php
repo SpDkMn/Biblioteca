@@ -15,19 +15,17 @@
       <div class="container">
         <form action="" method="post" name="search_form" id="search_form">
           <meta name="_token" content="{!! csrf_token() !!}"/>
-          <div class="row">
-            <div class="col-xs-4">
-              <label>Filtro</label> <span>*</span> <select
-                id="orderCategory" class="form-control"
-                name="orderCategory" 
-                data-placeholder="Seleccione un producto" style="width: 100%;" required>
-                <option value="1">Libros</option>
-                <option value="2">Tesis/Tesinas</option>
-                <option value="3">Revistas</option>
-                <option value="4">Compendios</option>
-              </select>
-            </div>
-          </div>
+              <div class="">
+                <label>Filtro</label> <span>*</span> <select
+                  id="orderCategory" class="form-control"
+                  name="orderCategory" style="width: 100%;" required>
+                  <option value=”placeholderVal” disabled selected>Seleccione filtro de busqueda</option>
+                  <option value="1" >Libros</option>
+                  <option value="2">Tesis/Tesinas</option>
+                  <option value="3">Revistas</option>
+                  <option value="4">Compendios</option>
+                </select>
+              </div>
             <fieldset>
               <ul class="toolbar clearfix">
                 <li><a href="#" class="fontawesome-eye-open"></a></li>

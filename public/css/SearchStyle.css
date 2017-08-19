@@ -152,3 +152,14 @@ ul {
 tr.shown td.details-control {
     background: url('../resources/details_close.png') no-repeat center center;
 }*/
+
+/* ELIMINANDO LA PRIMERA OPCION DEL SELECTOR */
+select:required:invalid {
+color: #999;
+}
+option[value=”placeholderVal”][disabled] {
+display: none;
+}
+option {
+color: #000;
+}
