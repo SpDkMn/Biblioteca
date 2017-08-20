@@ -96,7 +96,7 @@ class Search2Controller extends Controller
     public function busquedaLibro(Request $request){
     	if($request->ajax()){
          	$search=$request->input('search');
-	        echo "Resultados de Busqueda : ".$search;
+	        echo '<section  style="padding-left: 24px;">Resultados de Busqueda : '.$search."</section>";
 	    }
 
 	    $consulta_libros = "Select item_id From search_items Where Match(content) AGAINST('".$search."') AND STATE = true AND type='1'";
@@ -125,7 +125,8 @@ class Search2Controller extends Controller
     public function compruebaItem($item){
          if(sizeof($item)==0){
            echo "<br>";
-           echo "No se encontraron resultados";
+           echo '<section style="padding-left: 24px;">No se encontraron resultados<section><br><br>';
+           echo '<div style="text-align: center;" ><img src="img/dinosaurio.gif" width="250" alt="Dino.com" title="Dino.com"></div>';
            return false;
          }else {
            return true;

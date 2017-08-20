@@ -1,12 +1,7 @@
 <!-- Main content -->
 @if($books!=null)
     <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box box-info">
-            <div class="box-header">
-              <h3 class="box-title">Libros</h3>
-            </div>
+      
             <!-- /.box-header -->
             <div class="box-body">
               <table id="BooksTableOrder" class="table table-bordered table-hover">
@@ -81,12 +76,7 @@
               </table>
             </div>
             <!-- /.box-body -->
-          </div>
-      <!-- /.box -->
-      </div>
-      <!-- /.col -->
-      </div>
-    <!-- /.row -->
+          
   	</section>
 
   <div class="modal modal fade" id="ModalBookInfo" tabindex="-1" role="dialog" aria-labelledby="ModalBookInfoLabel">

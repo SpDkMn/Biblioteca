@@ -60,7 +60,6 @@
 	@yield('plugins')
 
 
-
 	<script type="text/javascript" src="{{URL::asset('js/ajax.js')}}"></script>
 
 
