@@ -31,9 +31,13 @@
 		</div>
 		<div class="form centrado">
 			<form action="" method="post" name="search_form" id="search_form">
+				<meta name="_token" content="{!! csrf_token() !!}"/>
 				<input type="text" name="search" id="search" class="input-busqueda">
 			</form>
 		</div>
-		
+		<br>
+		<div id="resultados">
+
+    	</div>
 	</div>
 @endsection

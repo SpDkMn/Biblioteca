@@ -10,15 +10,10 @@ $(function(){
 		e.preventDefault();
 	})
 
-
-
-
 	//Cada vez que se selecciona un filtro , lo enviará al controlador
 
 	//1.- Cambio el filtro
 	//2.- Hace una busqueda
-
-
 		$('#orderCategory').change(function(){
 			$('#search').keyup(function(){
 			var envio_filtro = $('#orderCategory').val();
@@ -41,7 +36,5 @@ $(function(){
 
 				});
 			})
-
-
-
+		
 })

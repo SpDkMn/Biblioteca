@@ -58,6 +58,8 @@
 
 	</section>
 
+	<script type="text/javascript" src="{{URL::asset('js/ajax2.js')}}"></script>
+
 	@yield('plugins')
 
 </body>
