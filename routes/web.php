@@ -20,7 +20,9 @@ Route::get('/busqueda', function () {
 Route::get('/', function () {
 	return view('auth/login');
 });
-
+Route::get('/prueba', function () {
+	return view('user2.md_noticias.index');
+});
 
 Auth::routes();
 Route::get('/admin', 'HomeController@index');
