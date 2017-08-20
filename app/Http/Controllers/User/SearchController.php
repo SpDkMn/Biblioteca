@@ -158,7 +158,7 @@ class SearchController extends Controller
 
 
       $b = Book::first();
-      $modalBook =  view('user.md_orders.ModalBook',[
+      $modalBook =  view('user.md_orders.modalBook',[
           'b'=>$b
         ]);
 
@@ -188,7 +188,7 @@ class SearchController extends Controller
     public function edit($id)
     { 
         $b = Book::find($id);
-        return view('user.md_orders.ModalBook',[
+        return view('user.md_orders.modalBook',[
             'b' => $b
           ]);
     }
