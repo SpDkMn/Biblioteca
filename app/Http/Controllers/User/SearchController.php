@@ -152,12 +152,19 @@ class SearchController extends Controller
         }
         // dd("estas buscando un compendio");
       }
-      dd('llego hasta aqui',$request->all(),$request['searchType']);
+      //dd('llego hasta aqui',$request->all(),$request['searchType']);
 
       //No hay else porque por defecto siempre habrá como minimo uno activado
 
+
+      $b = Book::first();
+      $modalBook =  view('user.md_orders.ModalBook',[
+          'b'=>$b
+        ]);
+
         return view('user.md_orders.tableBooks',[
-              'books' => $books
+              'books' => $books,
+              'modalBook' => $modalBook
             ]);
       }
 
@@ -179,8 +186,11 @@ class SearchController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    { 
+        $b = Book::find($id);
+        return view('user.md_orders.ModalBook',[
+            'b' => $b
+          ]);
     }
 
     /**
