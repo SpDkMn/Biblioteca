@@ -36,4 +36,8 @@ class BookCopy extends Model
    {
       return $this->belongsto('App\Book');
    }
+   public function book2()
+   {
+      return $this->hasOne('App\Book','id');
+   }
 }

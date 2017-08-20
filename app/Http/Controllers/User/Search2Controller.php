@@ -22,7 +22,7 @@ class Search2Controller extends Controller
      */
     public function index()
     {
-        //
+        return view('user2.md_books.index');
     }
 
     /**
@@ -54,7 +54,7 @@ class Search2Controller extends Controller
      */
     public function show($id)
     {
-        //
+        dd("index1");
     }
 
     /**
@@ -126,10 +126,15 @@ class Search2Controller extends Controller
          if(sizeof($item)==0){
            echo "<br>";
            echo '<section style="padding-left: 24px;">No se encontraron resultados<section><br><br>';
-           echo '<div style="text-align: center;" ><img src="img/dinosaurio.gif" width="250" alt="Dino.com" title="Dino.com"></div>';
+           echo '<div style="text-align: center;" ><img src="http://bibliofisi.net/img/dinosaurio.gif"  width="250" alt="Dino.com" title="Dino.com"></div>';
            return false;
          }else {
            return true;
          }
+    }
+   
+    public function indexLibro()
+    {
+         return view('user2.md_books.index');
     }
 }

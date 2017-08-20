@@ -34,11 +34,7 @@
         <script src="{{ URL::asset('js/slides.min.jquery.js')}}"></script>
 
 
-		<script>
-            $(function(){
-                $("#slideshow").slides();
-            });
-        </script>
+		
         
 	</head>
 
@@ -80,7 +76,7 @@
 	</section>
 
 	
-
+	
 	<script src="{{ URL::asset('js/jquery-2.2.3.min.js')}}"></script>
 	<script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
 	<script src="{{URL::asset('js/bootstrap-multiselect.js')}}"></script>

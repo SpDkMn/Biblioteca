@@ -17,7 +17,7 @@ $(function(){
 
 			$('#logo').html('<h2>Buscador de Libros</h2><hr />')
 
-			$('#resultados').html('<h2><img src="img/loading.gif" width="20" alt="" /> Cargando<h2>');
+			$('#resultados').html('<h2><img src="http://bibliofisi.net/img/loading.gif"  width="20" alt="" /> Cargando<h2>');
 
 			$.ajax({
 				type: "post",

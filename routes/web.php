@@ -11,18 +11,14 @@
  * |
  */
 
-Route::get('/busqueda', function () {
-
-   $books = DB::Select("Select id From search_items Where Match(content) AGAINST('analisis')");
-	dd($books);
-
-});
 Route::get('/', function () {
+	return view('user2.md_noticias.index');
+});
+
+Route::get('/loginEmpleado', function () {
 	return view('auth/login');
 });
-Route::get('/prueba', function () {
-	return view('user2.md_books.index');
-});
+
 
 Auth::routes();
 Route::get('/admin', 'HomeController@index');
