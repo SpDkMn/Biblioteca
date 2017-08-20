@@ -3,6 +3,8 @@
 <!-- Mirrored from www.falconmasters.com/demos/curso_webdesign/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 20 Aug 2017 05:43:53 GMT -->
 <head>
 		<meta charset="UTF-8">
+		
+		<link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css')}}">
 		<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/user/estilos.css') }}"/>
 
 		<title>Biblioteca</title>
@@ -19,15 +21,19 @@
         
 	</head>
 
-<body>
+<body id="body">
 
 	@include('user2.layouts.header')
 
 	<section id="wrap">
 
-		<div class="content-wrap">@yield('content')</div>
+		<div class="content-wrap">
+			<div id="main">
+				@yield('content')
+			</div>
+		</div>
 
-		<footer>
+		<footer id="footer">
 			<section id="acerca-de">
 				<article>
 				</hgroup><h3>Acerca de nuestro sitio web</h3></hgroup>

@@ -21,7 +21,7 @@ Route::get('/', function () {
 	return view('auth/login');
 });
 Route::get('/prueba', function () {
-	return view('user2.md_noticias.index');
+	return view('user2.md_books.index');
 });
 
 Auth::routes();

@@ -12,7 +12,7 @@
 								<li><a href="">Compendios</a></li>
 							</ul>
 						</li>
-						<li><a href="#">Iniciar Secion</a></li>
+						<li><a href="#">Iniciar Sesion</a></li>
 						<li><a href="#">Registrar</a></li>
 					</ul>
 				</nav>

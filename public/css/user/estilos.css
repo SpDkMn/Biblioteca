@@ -2,7 +2,7 @@
 @import url('fuentes.css');
 
 /*----- Estilos Generales -----*/
-body {
+#body {
 	background:#2d2d2d;
 	font-family:Arial, Helvetica, Sans-serif;
 }
@@ -282,7 +282,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', end
 }
 
 footer section {
-	width:440px;
+	width:480px;
 	float:left;
 	padding:20px;
 }
@@ -309,7 +309,9 @@ footer #redes-s > div {
 	background:#ff8000;
 	opacity:0.7;
 }
-
+footer #redes-s {
+	width: 480px;
+}
 footer #redes-s > div a {
 	width:220px;
 	height:60px;
