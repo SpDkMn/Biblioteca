@@ -87,7 +87,7 @@
       <!-- /.col -->
       </div>
     <!-- /.row -->
-  </section>
+  	</section>
 
   <div class="modal modal fade" id="ModalBookInfo" tabindex="-1" role="dialog" aria-labelledby="ModalBookInfoLabel">
   </div>
@@ -117,7 +117,7 @@
       $(".btn_info").on('click',function(event){
         $id = $(this).data('id')
           $("#ModalBookInfo").html('<div class="modal-dialog modal-lg" ><div class="modal-content"><div class="modal-header"></div><div class="modal-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div></div>')
-          $("#ModalBookInfo").load('{{ url("/user/search/") }}/' + $id + '/edit');
+          $("#ModalBookInfo").load('{{ url("/user/search2/") }}/' + $id + '/edit');
       });
 
     });

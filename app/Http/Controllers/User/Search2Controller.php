@@ -65,7 +65,10 @@ class Search2Controller extends Controller
      */
     public function edit($id)
     {
-        //
+        $b = Book::find($id);
+        return view('user2.md_books.modal',[
+            'b' => $b
+          ]);
     }
 
     /**
@@ -91,6 +94,41 @@ class Search2Controller extends Controller
         //
     }
     public function busquedaLibro(Request $request){
-    	dd("llegaste , me enorgulleces :'v ");
+    	if($request->ajax()){
+         	$search=$request->input('search');
+	        echo "Resultados de Busqueda : ".$search;
+	    }
+
+	    $consulta_libros = "Select item_id From search_items Where Match(content) AGAINST('".$search."') AND STATE = true AND type='1'";
+    	
+    	$itemsBooks=DB::Select($consulta_libros);
+
+        if ($this->compruebaItem($itemsBooks)) {
+          $i=0;
+          foreach ($itemsBooks as $itemsBook) {
+              $books[$i]=Book::find($itemsBook->item_id);
+              $i++;
+          }
+
+           $b = Book::first();
+	       $modalBook =  view('user2.md_books.modal',[
+	          'b'=>$b
+	        ]);
+
+        	return view('user2.md_books.resultados',[
+              'books' => $books,
+              'modalBook' => $modalBook
+            ]);
+        }
+
+    }
+    public function compruebaItem($item){
+         if(sizeof($item)==0){
+           echo "<br>";
+           echo "No se encontraron resultados";
+           return false;
+         }else {
+           return true;
+         }
     }
 }
