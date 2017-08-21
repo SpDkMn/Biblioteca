@@ -158,6 +158,7 @@ class MagazineController extends Controller
             'incomeNumber' => $request['incomeNumber'][$j],
             'barcode' => cambiaCadena($request['barcode'][$j]),
             'copy' => $request['copy'][$j],
+            'availability'=>  cambiaCadena($request['availability'][$j]),
             'magazine_id' => $id_magazine
          ]);
       }
@@ -242,6 +243,8 @@ class MagazineController extends Controller
    // Terminado - Falta optimizar
    public function update(Request $request, $id)
    {
+     function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
+
       // Obteniendo datos
       $revistaP = Magazine::find($id);
       $revista = Magazine::find($id);
@@ -285,7 +288,9 @@ class MagazineController extends Controller
             'incomeNumber' => $request['incomeNumber'][$j],
             'barcode' => $request['barcode'][$j],
             'copy' => $request['copy'][$j],
-            'magazine_id' => $id
+            'magazine_id' => $id,
+            'availability'=> cambiaCadena($request['availability'][$j]) ,
+
          ]);
       }
       // Agregando Los nuevos Contenidos que se han agregado en editar

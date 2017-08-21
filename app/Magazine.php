@@ -17,7 +17,7 @@ class Magazine extends Model
       'author_id',
       'volumen',
       'numero',
-      'fechaEdicion'
+      'fechaEdicion',
    ];
 
    protected $dates = [

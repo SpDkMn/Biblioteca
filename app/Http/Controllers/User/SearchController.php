@@ -20,6 +20,14 @@ class SearchController extends Controller
      */
     public function index()
     {
+      /*
+      ESTE CONTROLADOR SERÁ USANDO CUANDO SE QUIERA USAR EL FILTRO MEDIANTE UN SELECTOR CON AJAX PARA LA BUSQUEDA
+      */
+
+
+
+
+
       $books = null ;
       $magazines = null ;
       $thesis = null ;

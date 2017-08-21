@@ -190,6 +190,15 @@
 							type="number" class="form-control" value="{{$item->copy}}"
 							name="{{'copy[]'}}" id="inputCopy" placeholder="">
 					</div>
+					<div class="form-group">
+						<label>Disponibilidad</label> <select
+							class="form-control selectDisponibilidad" name="availability[]"
+							style="width: 100%;">
+							<option "@if($item->availability == 1) selected @endif" value="1">Disponible</option>
+							<option "@if($item->availability == 0) selected @endif" value="0">Desabilitado</option>
+							<option "@if($item->availability == 2) selected @endif" value="2">Prestado</option>
+						</select>
+					</div>
 				</div>
 			</div>
 			@else
@@ -219,6 +228,15 @@
 						<label for="inputCopy">Ejemplar</label> <span>*</span> <input
 							type="number" class="form-control" value="{{$item->copy}}"
 							name="{{'copy[]'}}" id="inputCopy" placeholder="">
+					</div>
+					<div class="form-group">
+						<label>Disponibilidad</label> <select
+							class="form-control selectDisponibilidad" name="availability[]"
+							style="width: 100%;">
+							<option "@if($item->availability == 1) selected @endif" value="1">Disponible</option>
+							<option "@if($item->availability == 0) selected @endif" value="0">Desabilitado</option>
+							<option "@if($item->availability == 2) selected @endif" value="2">Prestado</option>
+						</select>
 					</div>
 				</div>
 			</div>
@@ -344,6 +362,7 @@
 <script type="text/javascript">
 				$('.select').select2(); //Colaboradores
         $(".selectEntidadAcademicaEdit").select2();
+				$(".selectDisponibilidad").select2();
         $listaSecEdit = $("#selectEditorialSecondEdit").select2();
         $listaPrimEdit =  $("#selectEditorialMainEdit").select2({
             maximumSelectionLength: 1,
@@ -482,6 +501,14 @@
                                       '<label for="inputCopy">Ejemplar</label>'+
                                       '<input type="number" class="form-control" name="{{'copy[]'}}" id="inputCopy" placeholder="" >'+
                                   '</div>'+
+																	'<div class="form-group">'+
+																		'<label>Disponibilidad</label> <select class="form-control selectDisponibilidad" name="availability[]"'+
+																			'style="width: 100%;">'+
+																			'<option value="1">Disponible</option>'+
+																			'<option value="0">Desabilitado</option>'+
+																			'<option value="2">Prestado</option>'+
+																		'</select>'+
+																	'</div>'+
                               '</div>';
             var itemPanel = '<div class="BoxItemMagazineEdit box box-info box-solid" id="itemPanel'+idCont+'">'+itemHeader+itemBody +'</div>';
             $(container).after(itemPanel);
