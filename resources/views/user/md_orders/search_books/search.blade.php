@@ -16,7 +16,7 @@
         <form action="" method="post" name="search_form" id="search_form">
           <meta name="_token" content="{!! csrf_token() !!}"/>
             <fieldset>
-              <ul class="toolbar clearfix">
+              <ul class="toolbar clearfix searchBooks">
                 <li><a href="#" class="fontawesome-eye-open"></a></li>
                 <li><a href="#" class="fontawesome-comment"></a></li>
                 <li><input type="search" autofocus id="search" placeholder="¿Qúe libro estás buscando?" ></li>
@@ -26,7 +26,7 @@
         </form>
       </div>
     </div>
-    <div id="resultados">
+    <div id="resultadosBook">
 
     </div>
 

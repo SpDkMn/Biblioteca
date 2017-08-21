@@ -13,79 +13,120 @@ use App\Compendium as Compendium;
 
 class OrderThesisController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
-    {
-        //
-    }
+  {
+    $thesis = null ;
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    $tableThesis = view('user.md_orders.search_thesis.tableThesis',[
+      'thesis' => $thesis
+    ]);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    $search = view('user.md_orders.search_thesis.search', [
+      'tableThesis' => $tableThesis
+    ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    return view('user.md_orders.search_thesis.index', [
+      'search' => $search
+    ]);
+  }
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function create()
+  {
+      //
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function store(Request $request)
+  {
+      if($request->ajax()){
+         $search=$request->input('search');
+        echo "Resultados de Busqueda : ".$search;
+     }
+        $consulta_thesis = "Select item_id From search_items Where Match(content) AGAINST('".$search."') AND STATE = true AND type='2'";
+       //Comprobamos si el los items obtenidos en la consulta no son nulos
+       function compruebaItem($item){
+         if(sizeof($item)==0){
+           echo "<br>";
+           echo "No se encontraron resultados";
+           return false;
+         }else {
+           return true;
+         }
+       }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $itemThesis=DB::Select($consulta_thesis);
+        if (compruebaItem($itemThesis)) {
+          $i=0;
+          foreach ($itemThesis as $itemThesi) {
+              $thesis[$i]=Thesis::find($itemThesi->item_id);
+              $i++;
+          }
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+      $b = Thesis::first();
+      $modalThesis =  view('user.md_orders.search_thesis.modalThesis',[
+          'b'=>$b
+        ]);
+
+        return view('user.md_orders.search_thesis.tableThesis',[
+              'thesis' => $thesis,
+              'modalThesis' => $modalThesis
+            ]);
+  }
+  /**
+   * Display the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function show($id)
+  {
+      //
+  }
+
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function edit($id)
+  {
+        $b = Book::find($id);
+        return view('user.md_orders.search_thesis.modalThesis',[
+            'b' => $b
+          ]);
+  }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request, $id)
+  {
+      //
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy($id)
+  {
+      //
+  }
 }

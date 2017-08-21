@@ -106,7 +106,6 @@ class OrderBookController extends Controller
      */
     public function edit($id)
     {
-
           $b = Book::find($id);
           return view('user.md_orders.search_books.modalBook',[
               'b' => $b

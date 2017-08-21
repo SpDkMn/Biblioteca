@@ -23,7 +23,7 @@
                         <th class="itemTable text-center">Estado</th>
                         <th class="itemTable text-center">Pedir</th>
                       </tr>
-                      @foreach($b->bookCopies as $copy)
+                      @foreach($b->thesisCopies as $copy)
                       <tr @if($copy->
                         availability) class="success" @else class="danger" @endif>
                         <td class="text-center">{{$copy->incomeNumber}}</td>
@@ -33,7 +33,7 @@
                             disponible</span> @endif
                         </td>
                         <td class="text-center"><?php if($copy->volume != "") echo ( $copy->volume); else echo "_";  ?></td>
-                        <td class="text-center">{{$copy->clasification}}</td>
+                        <td class="text-center">----</td>
                         <td class="text-center"> @if($copy->availability) <span
                           class="label label-info">Disponible</span>@else<span class="label label-danger">No Disponible</span>@endif</td>
                         <td class="text-center"><button type="button"  name="button"><i class="fa fa-book"></i></button></td>
@@ -77,7 +77,3 @@
       </div>
   </div>
 </div>
-        
-    
-
-
