@@ -18,7 +18,7 @@
 								<li><a href="{{ url('loginEmpleado') }}">Empleado</a></li>
 							</ul>
 						</li>
-						<li><a href="#">Registrar</a></li>
+						<li><a href="{{ url('user/register') }}">Registrar</a></li>
 					</ul>
 				</nav>
 			</div>
