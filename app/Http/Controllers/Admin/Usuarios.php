@@ -30,7 +30,7 @@ class Usuarios extends Controller
       $edit = view('admin.md_usuarios.edit', [
          'user' => $user
       ]);
-      
+
       return view('admin.md_usuarios.index', [
          'show' => $show,
          'new' => $new,
@@ -92,7 +92,8 @@ class Usuarios extends Controller
          'username' => $username,
          'faculty' => $request['faculty'],
          'university' => $request['university'],
-         'state' => true
+         'state' => true,
+         'register'=>false,
       ]);
       Session::flash('message', 'Usuario creado Correctamente');
       return redirect::to('/admin/usuarios');
@@ -119,17 +120,17 @@ class Usuarios extends Controller
    {
       $users = User::all();
       $user = \App\User::find($id);
-      
+
       $show = view('admin.md_usuarios.show', [
          'users' => $users
       ]);
-      
+
       $new = view('admin.md_usuarios.new');
-      
+
       $edit = view('admin.md_usuarios.edit', [
          'user' => $user
       ]);
-      
+
       return view('admin.md_usuarios.index', [
          'show' => $show,
          'new' => $new,
@@ -147,7 +148,7 @@ class Usuarios extends Controller
    public function update(Request $request, $id)
    {
       $user_copia = \App\User::find($id);
-      
+
       $user_copia->fill($request->all());
       $arreglo_1 = explode(" ", $request['last_name'], 2);
       $cadena_contra = "fisi." . strtolower($arreglo_1[0]);
@@ -178,13 +179,13 @@ class Usuarios extends Controller
       $show = view('admin.md_usuarios.show', [
          'users' => $users
       ]);
-      
+
       $new = view('admin.md_usuarios.new');
-      
+
       $edit = view('admin.md_usuarios.edit', [
          'user' => $user
       ]);
-      
+
       return view('admin.md_usuarios.index', [
          'show' => $show,
          'new' => $new,
@@ -201,9 +202,9 @@ class Usuarios extends Controller
    public function destroy($id)
    {
       $user = User::find($id);
-      
+
       $user->delete();
-      
+
       Session::flash('message', 'Usuario eliminado Correctamente');
       return redirect::to('/admin/usuarios');
    }
