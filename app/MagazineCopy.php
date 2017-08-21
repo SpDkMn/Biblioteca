@@ -11,6 +11,7 @@ class MagazineCopy extends Model
       'incomeNumber',
       'barcode',
       'copy',
+      'availability',
       'magazine_id'
    ];
 

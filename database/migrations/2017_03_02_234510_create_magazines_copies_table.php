@@ -19,7 +19,11 @@ class CreateMagazinesCopiesTable extends Migration
          $table->BigInteger('barcode')->unsigned();
          $table->smallInteger('copy')->unsigned(); // Ejemplar
          $table->integer('magazine_id')->unsigned();
-         
+         $table->integer('availability');
+         // 0 -> desabilitado
+         // 1-> Disponible
+         // 2 ->  prestado
+         //3-> en espera
          $table->softDeletes();
          $table->timestamps();
       });

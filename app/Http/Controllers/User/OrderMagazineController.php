@@ -6,22 +6,32 @@ use Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Book as Book;
 use App\Magazine as Magazine;
 use App\Thesis as Thesis;
 use App\Compendium as Compendium;
 class OrderMagazineController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+    $magazines = null ;
 
+    $tableMagazine = view('user.md_orders.search_magazines.tableMagazine',[
+      'magazines' => $magazines
+    ]);
+
+    $search = view('user.md_orders.search_magazines.search', [
+      'tableMagazine' => $tableMagazine
+    ]);
+
+    return view('user.md_orders.search_magazines.index', [
+      'search' => $search
+    ]);
+  }
     /**
      * Show the form for creating a new resource.
      *
@@ -40,9 +50,41 @@ class OrderMagazineController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        if($request->ajax()){
+           $search=$request->input('search');
+          echo "Resultados de Busqueda : ".$search;
+       }
+          $consulta_revistas = "Select item_id From search_items Where Match(content) AGAINST('".$search."') AND STATE = true AND type='3'";
+         //Comprobamos si el los items obtenidos en la consulta no son nulos
+         function compruebaItem($item){
+           if(sizeof($item)==0){
+             echo "<br>";
+             echo "No se encontraron resultados";
+             return false;
+           }else {
+             return true;
+           }
+         }
 
+          $itemsMagazines=DB::Select($consulta_revistas);
+          if (compruebaItem($itemsMagazines)) {
+            $i=0;
+            foreach ($itemsMagazines as $itemsMagazine) {
+                $magazines[$i]=Magazine::find($itemsMagazine->item_id);
+                $i++;
+            }
+          }
+
+        $b = Magazine::first();
+        $modalMagazine =  view('user.md_orders.search_magazines.modalMagazine',[
+            'b'=>$b
+          ]);
+
+          return view('user.md_orders.search_magazines.tableMagazine',[
+                'magazines' => $magazines,
+                'modalMagazine' => $modalMagazine
+              ]);
+    }
     /**
      * Display the specified resource.
      *
@@ -62,7 +104,10 @@ class OrderMagazineController extends Controller
      */
     public function edit($id)
     {
-        //
+          $b = Magazine::find($id);
+          return view('user.md_orders.search_magazines.modalMagazine',[
+              'b' => $b
+            ]);
     }
 
     /**

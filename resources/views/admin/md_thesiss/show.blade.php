@@ -2,10 +2,10 @@
   <div class="box-header with-border">
     <h3 class="box-title"><strong>Informacion de Tesis y Tesinas</strong></h3>
 
-    <div class="box-tools pull-right"> 
+    <div class="box-tools pull-right">
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
       </button>
-    </div> 
+    </div>
   </div><br>
 
   <div class="box-body">
@@ -15,7 +15,7 @@
                   <th class="text-center">CLASIFICACIÓN</th>
                   <th class="text-center">TÍTULO</th>
                   <th class="text-center">AUTOR <h6>(Principal: Casilla Roja)</h6></th>
-                  <th class="text-center">ASESOR</th>                  
+                  <th class="text-center">ASESOR</th>
                   <th class="text-center">UBICACIÓN</th>
                   <th>EDITAR</th>
                   <th>ELIMINAR</th>
@@ -25,11 +25,11 @@
                 <tbody>
                 @foreach($thesiss as $thesis)
                 <tr>
-                  
+
                   <td class="text-center">
                     {{$thesis->clasification }}
                   </td>
-                  
+
                   <td>
                     <a href="{{url('admin/thesis/content')}}/{{$thesis->id}}">{{$thesis->title}}</a>
                   </td>
@@ -37,7 +37,7 @@
                   <td>
                       @foreach($thesis->authors as $author)
                         @if($author->pivot->type ==0)
-                          <span class="label label-info">{{$author->name}}</span>     
+                          <span class="label label-info">{{$author->name}}</span>
                         @endif
                         @if($author->pivot->type ==1)
                             <span class="label label-danger">{{$author->name}}</span>
@@ -48,15 +48,15 @@
                   <td>
                         {{$thesis->asesor}}
                   </td>
-                 
-                  
+
+
                   <td class="text-center">
                      {{$thesis->location}}
                   </td>
 
-       <!--SECCION PARA EDITAR UNA TESIS-->           
-            <td class="text-center"><button type="button" data-id="{{$thesis->id}}" class="btn btn-success editar"><i class="fa fa-edit"></i></button></td>  
-        <!--FIN DE LA SECCION PARA EDITAR UNA TESIS-->      
+       <!--SECCION PARA EDITAR UNA TESIS-->
+            <td class="text-center"><button type="button" data-id="{{$thesis->id}}" class="btn btn-success editar"><i class="fa fa-edit"></i></button></td>
+        <!--FIN DE LA SECCION PARA EDITAR UNA TESIS-->
 
       <!--ELIMINACION DE UNA TESIS MEDIANTE MODAL-->
 
@@ -64,11 +64,11 @@
 
 
           <div class="modal modal-danger fade" id="ModalCopy<?php echo $thesis->id; ?>" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">
-        
+
              <div class="modal-dialog" role="document">
                <div class="modal-content">
                  <form>
-                   
+
                   <div class="modal-header">
                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
@@ -91,20 +91,20 @@
       <!--FIN DE LA ELIMINACION DE UNA TESIS MEDIANTE MODAL-->
 
 
-          </tr>             
+          </tr>
         @endforeach
-      </tbody>  
+      </tbody>
       <thead>
                  <tr class="text-center box-success" style="background:#E7FAE2;">
                   <th class="text-center">CLASIFICACIÓN</th>
                   <th class="text-center">TÍTULO</th>
                   <th class="text-center">AUTOR </th>
-                  <th class="text-center">ASESOR</th>                  
+                  <th class="text-center">ASESOR</th>
                   <th class="text-center">UBICACIÓN</th>
                   <th>EDITAR</th>
                   <th>ELIMINAR</th>
                  </tr>
-                </thead>             
+                </thead>
     </table>
   </div>
 </div>

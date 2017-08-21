@@ -150,6 +150,15 @@
 							type="number" class="form-control" name="copy[]" id="inputCopy"
 							placeholder="" value=1 min="0" max="10" required>
 					</div>
+					<div class="form-group">
+						<label>Disponibilidad</label> <select
+							class="form-control selectDisponibilidad" name="availability[]"
+							style="width: 100%;">
+							<option value="1">Disponible</option>
+							<option value="0">Desabilitado</option>
+							<option value="2">Prestado</option>
+						</select>
+					</div>
 				</div>
 			</div>
 			<!--***************************************************************************************************************************************
@@ -203,6 +212,7 @@
 @section('scriptSelect')
 <script type="text/javascript">
     $(function () {
+				$(".selectDisponibilidad").select2();
         $(".selectEntidadAcademica").select2();
         $(".selectCollaborator").select2();
         var $listaSec = $("#listEditorialSecond").select2();
@@ -345,7 +355,15 @@
                                 '<span>*</span>'+
                                 '<input type="number" class="form-control" name="copy[]" id="inputCopy" value='+(idCont+1)+'>'+
                             '</div>'+
-                        '</div>';
+														'<div class="form-group">'+
+															'<label>Disponibilidad</label> <select class="form-control selectDisponibilidad" name="availability[]"'+
+																'style="width: 100%;">'+
+																'<option value="1">Disponible</option>'+
+																'<option value="0">Desabilitado</option>'+
+																'<option value="2">Prestado</option>'+
+															'</select>'+
+														'</div>'+
+                        '</div>'
       var itemPanel = '<div class="BoxItemMagazine box box-info box-solid" id="itemBoxID'+idCont+'">'+itemHeader+itemBody +'</div>';
       $(container).after(itemPanel);
       idCont = idCont + 1 ;
