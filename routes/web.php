@@ -15,6 +15,10 @@ Route::get('/', function () {
 	return view('user2.md_noticias.index');
 });
 
+Route::get('/user/register', function () {
+	return view('user2.auth.register');
+});
+
 Route::get('/loginEmpleado', function () {
 	return view('auth/login');
 });
