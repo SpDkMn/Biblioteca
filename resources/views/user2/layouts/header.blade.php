@@ -5,7 +5,7 @@
 					<ul>
 						<li><a href="{{ url('/') }}">Inicio</a></li>
 						<li><a href="#">Pedidos</a>
-							<ul> 
+							<ul>
 								<li><a href="{{ url('user/search2/indexLibro') }}">Libros</a></li>
 								<li><a href="">Tesis</a></li>
 								<li><a href="">Revistas</a></li>

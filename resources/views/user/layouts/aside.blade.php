@@ -25,12 +25,13 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li @if(URL::full() == url('/user/search'))class="active"@endif><a href="{{ url('/user/order') }}"><i class="fa fa-user-secret"></i> <span>Libros</span></a></li>
-          <li @if(URL::full() == url('/user/'))class="active"@endif><a href="{{ url('/user/') }}"><i class="fa fa-male"></i> <span>Revistas</span></a></li>
-          <li @if(URL::full() == url('/user/'))class="active"@endif><a href="{{ url('/user/') }}"><i class="fa fa-male"></i> <span>Tesis/Tesinas</span></a></li>
+          <li @if(URL::full() == url('/user/orderBook'))class="active"@endif><a href="{{ url('/user/orderBook') }}"><i class="fa fa-user-secret"></i> <span>Libros</span></a></li>
+          <li @if(URL::full() == url('/user/orderThesis'))class="active"@endif><a href="{{ url('/user/orderThesis') }}"><i class="fa fa-male"></i> <span>Tesis/Tesinas</span></a></li>
+          <li @if(URL::full() == url('/user/orderMagazine'))class="active"@endif><a href="{{ url('/user/orderMagazine') }}"><i class="fa fa-male"></i> <span>Revistas</span></a></li>
         </ul>
       </li>
       {{-- END ORDER --}}
+      <li @if(URL::full() == url('/user/'))class="active"@endif><a href="{{ url('/user/') }}"><i class="fa fa-user-secret"></i> <span>Noticias</span></a></li>
 
 
 
