@@ -186,7 +186,7 @@ class SearchController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    { 
+    {
         $b = Book::find($id);
         return view('user.md_orders.modalBook',[
             'b' => $b
