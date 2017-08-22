@@ -7,7 +7,7 @@
 				<div class="panel-heading">Login</div>
 				<div class="panel-body">
 					<form class="form-horizontal" role="form" method="POST"
-						action="{{ route('') }}" value="{{ csrf_token() }}">
+						action="{{ route('loginUser.login') }}" value="{{ csrf_token() }}">
 						{{ csrf_field() }}
 
 

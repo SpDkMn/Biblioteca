@@ -364,29 +364,29 @@ class BookController extends Controller
       }
       // CASO II
       if ($contador_capitulos_nuevo < $contador_capitulos_antiguo) {
-         if ($contador_capitulos_nuevo == $contador_capitulos_antiguo) {
+
             for ($i = 0; $i < $contador_capitulos_nuevo; $i ++) {
                $book->chapters[$i]->name = $request->chapter[$i];
                $book->chapters[$i]->number = $i + 1;
                $book->chapters[$i]->book_id = $id;
                $book->chapters[$i]->save();
             }
-         }
-         while ($i < $contador_capitulos_antiguo) {
-            $book->chapters[$i]->delete();
-            $i ++;
-         }
+           while ($i < $contador_capitulos_antiguo) {
+              $book->chapters[$i]->delete();
+              $i ++;
+            }
       }
       // CASO III
+
       if ($contador_capitulos_nuevo > $contador_capitulos_antiguo) {
-         if ($contador_capitulos_nuevo == $contador_capitulos_antiguo) {
-            for ($i = 0; $i < $contador_capitulos_nuevo; $i ++) {
-               $book->chapters[$i]->name = $request->chapter[$i];
-               $book->chapters[$i]->number = $i + 1;
-               $book->chapters[$i]->book_id = $id;
-               $book->chapters[$i]->save();
-            }
-         }
+
+        for ($i = 0; $i < $contador_capitulos_antiguo; $i ++) {
+           $book->chapters[$i]->name = $request->chapter[$i];
+           $book->chapters[$i]->number = $i + 1;
+           $book->chapters[$i]->book_id = $id;
+           $book->chapters[$i]->save();
+        }
+        
          while ($i < $contador_capitulos_nuevo) {
             ChapterBook::create([
                'name' => $request->chapter[$i],
