@@ -24,21 +24,17 @@ class SearchController extends Controller
       ESTE CONTROLADOR SERÁ USANDO CUANDO SE QUIERA USAR EL FILTRO MEDIANTE UN SELECTOR CON AJAX PARA LA BUSQUEDA
       */
 
-
-
-
-
       $books = null ;
       $magazines = null ;
       $thesis = null ;
 
-      $tableBooks = view('user.md_orders.tableBooks',[
+      $tableBooks = view('user.md_orders.search_books.tableBooks',[
         'books' => $books
       ]);
-      $tableMagazines = view('user.md_orders.tableMagazines',[
+      $tableMagazines = view('user.md_orders.search_magazines.tableMagazines',[
         'magazines' => $magazines
       ]);
-      $tableThesis = view('user.md_orders.tableThesis',[
+      $tableThesis = view('user.md_orders.search_thesis.tableThesis',[
         'thesis' => $thesis
       ]);
 
@@ -175,6 +171,122 @@ class SearchController extends Controller
               'modalBook' => $modalBook
             ]);
       }
+
+    public function busquedaLibro(Request $request){
+      dd('buscando libro');
+          if($request->ajax()){
+             $search=$request->input('search');
+            echo "Resultados de Busqueda : ".$search;
+         }
+            $consulta_libros = "Select item_id From search_items Where Match(content) AGAINST('".$search."') AND STATE = true AND type='1'";
+           //Comprobamos si el los items obtenidos en la consulta no son nulos
+           function compruebaItem($item){
+             if(sizeof($item)==0){
+               echo "<br>";
+               echo "No se encontraron resultados";
+               return false;
+             }else {
+               return true;
+             }
+           }
+
+            $itemsBooks=DB::Select($consulta_libros);
+            if (compruebaItem($itemsBooks)) {
+              $i=0;
+              foreach ($itemsBooks as $itemsBook) {
+                  $books[$i]=Book::find($itemsBook->item_id);
+                  $i++;
+              }
+            }
+
+          $b = Book::first();
+          $modalBook =  view('user.md_orders.search_books.modalBook',[
+              'b'=>$b
+            ]);
+
+            return view('user.md_orders.search_books.tableBooks',[
+                  'books' => $books,
+                  'modalBook' => $modalBook
+                ]);
+    }
+    public function busquedaThesis(Request $request){
+      dd('buscando thesis');
+
+          if($request->ajax()){
+             $search=$request->input('search');
+            echo "Resultados de Busqueda : ".$search;
+         }
+            $consulta_thesis = "Select item_id From search_items Where Match(content) AGAINST('".$search."') AND STATE = true AND type='2'";
+           //Comprobamos si el los items obtenidos en la consulta no son nulos
+           function compruebaItem($item){
+             if(sizeof($item)==0){
+               echo "<br>";
+               echo "No se encontraron resultados";
+               return false;
+             }else {
+               return true;
+             }
+           }
+
+            $itemThesis=DB::Select($consulta_thesis);
+            if (compruebaItem($itemThesis)) {
+              $i=0;
+              foreach ($itemThesis as $itemThesi) {
+                  $thesis[$i]=Thesis::find($itemThesi->item_id);
+                  $i++;
+              }
+            }
+
+          $b = Thesis::first();
+          $modalThesis =  view('user.md_orders.search_thesis.modalThesis',[
+              'b'=>$b
+            ]);
+
+            return view('user.md_orders.search_thesis.tableThesis',[
+                  'thesis' => $thesis,
+                  'modalThesis' => $modalThesis
+                ]);
+    }
+    public function busquedaRevista(Request $request){
+      dd('buscando revista');
+
+          if($request->ajax()){
+             $search=$request->input('search');
+            echo "Resultados de Busqueda : ".$search;
+         }
+            $consulta_revistas = "Select item_id From search_items Where Match(content) AGAINST('".$search."') AND STATE = true AND type='3'";
+           //Comprobamos si el los items obtenidos en la consulta no son nulos
+           function compruebaItem($item){
+             if(sizeof($item)==0){
+               echo "<br>";
+               echo "No se encontraron resultados";
+               return false;
+             }else {
+               return true;
+             }
+           }
+
+            $itemsMagazines=DB::Select($consulta_revistas);
+            if (compruebaItem($itemsMagazines)) {
+              $i=0;
+              foreach ($itemsMagazines as $itemsMagazine) {
+                  $magazines[$i]=Magazine::find($itemsMagazine->item_id);
+                  $i++;
+              }
+            }
+
+          $b = Magazine::first();
+          $modalMagazine =  view('user.md_orders.search_magazines.modalMagazine',[
+              'b'=>$b
+            ]);
+
+            return view('user.md_orders.search_magazines.tableMagazine',[
+                  'magazines' => $magazines,
+                  'modalMagazine' => $modalMagazine
+                ]);
+    }
+
+
 
     /**
      * Display the specified resource.

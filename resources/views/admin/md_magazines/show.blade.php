@@ -91,7 +91,7 @@
               <i class="fa fa-edit"></i>
             </button>
           </td>
-       
+
 
 
           <!--ELIMINACION DE UNA TESIS MEDIANTE MODAL-->
@@ -100,11 +100,11 @@
 
 
           <div class="modal modal-danger fade" id="ModalCopy<?php echo $revista->id; ?>" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">
-        
+
              <div class="modal-dialog" role="document">
                <div class="modal-content">
                  <form>
-                   
+
                   <div class="modal-header">
                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>

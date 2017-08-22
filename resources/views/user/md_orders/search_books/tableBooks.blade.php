@@ -13,9 +13,11 @@
                 <thead>
                 <tr style="background:#E7FAE2;">
                   <th>Libro</th>
+                  <th>Resumen</th>
                   <th>Autor</th>
                   <th>Editorial</th>
                   <th>Ejemplares</th>
+
                   <th>Disponibles</th>
                   <th>Información</th>
                 </tr>
@@ -24,6 +26,7 @@
                   @foreach($books as $book)
                   <tr>
                     <td class="text-center"><span>{{$book->title}} - Edición {{$book->edition}}</span></td>
+                    <td><span>{{str_limit($book->summary, 40)}}</span></td>
                     <td class="text-center">
                         <?php $cont=0; ?>
                         @foreach($book->authors as $author)
@@ -47,12 +50,12 @@
                         @if($editorial->pivot->type == true) {{$editorial->name}} @endif
                       @endforeach</td>
                     <td class="text-center">
-                      @foreach($book->bookCopies as $copy){{$loop->count}}@endforeach
+                      {{count($book->bookCopies)}}
                     </td>
                     <td class="text-center">
                       <?php $contBookCopiesAvailability = 0 ?>
                       @foreach($book->bookCopies as $copy)
-                        @if($copy->availability == true)
+                        @if($copy->availability == 1)
                           <?php $contBookCopiesAvailability = $contBookCopiesAvailability+1 ?>
                         @endif
                       @endforeach
@@ -71,6 +74,7 @@
                 <tfoot>
                   <tr>
                     <th>Libro</th>
+                    <th>Resumen</th>
                     <th>Autor</th>
                     <th>Editorial</th>
                     <th>Ejemplares</th>

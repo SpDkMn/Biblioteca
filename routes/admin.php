@@ -22,6 +22,9 @@ Route::get('compendium/{compendium}/destroy', 'CompendiumController@destroy')->n
 Route::get('compendium/{compendium}/content', 'CompendiumController@content')->name('compendium.content');
 Route::get('compendium/{compendium}/introduccion', 'CompendiumController@introduccion')->name('compendium.introduccion');
 Route::get('compendium/{compendium}/itemDetail', 'CompendiumController@itemDetail')->name('compendium.itemDetail');
+// RUTA PARA LOS PRESTAMOS
+Route::resource('prestamos', 'LoanController');
+
 
 // RUTA PARA LOS PERFILES
 Route::resource('profiles', 'ProfileController');

@@ -1,15 +1,13 @@
 <?php
-
-
-Route::resource('order', 'OrderController');
 //Pedidos -> por separado
 Route::resource('orderBook', 'OrderBookController');
 Route::resource('orderMagazine', 'OrderMagazineController');
 Route::resource('orderThesis', 'OrderThesisController');
-
-
-
-Route::resource('search', 'SearchController');
+// Agregando los metodos para los pedidos
+// Route::post('search/busquedaLibro', 'SearchController@busquedaLibro')->name('search.busquedaLibro');
+// Route::post('search/busquedaThesis', 'SearchController@busquedaThesis')->name('search.busquedaThesis');
+// Route::post('search/busquedaRevista', 'SearchController@busquedaRevista')->name('search.busquedaRevista');
+// Route::resource('search', 'SearchController');
 
 
 //Pedidos -> version alternativa

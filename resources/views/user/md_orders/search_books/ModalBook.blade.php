@@ -1,7 +1,9 @@
 <div class="modal-dialog modal-lg" >
   <div class="modal-content">
       <div class="modal-header">
-
+              <h3 class="box-title text-center">{{$b->title}}</h3>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
         <section class="content">
@@ -19,24 +21,55 @@
                         <th class="itemTable text-center">Codigo de barras</th>
                         <th class="itemTable text-center">Ejemplar</th>
                         <th class="itemTable text-center">Volumen</th>
-                        <th class="itemTable text-center">Clasificacion</th>
                         <th class="itemTable text-center">Estado</th>
-                        <th class="itemTable text-center">Pedir</th>
+                        <th class="itemTable text-center">Pedir sala</th>
+                        <th class="itemTable text-center">Pedir domicilio</th>
                       </tr>
                       @foreach($b->bookCopies as $copy)
                       <tr @if($copy->
                         availability) class="success" @else class="danger" @endif>
                         <td class="text-center">{{$copy->incomeNumber}}</td>
                         <td class="text-center">{{$copy->barcode}}</td>
-                        <td class="text-center">{{$copy->copy}} @if($copy->availability) <span
+                        <td class="text-center">{{$copy->copy}} @if($copy->availability==1) <span
                           class="sr-only">Disponible</span> @else <span class="sr-only">No
                             disponible</span> @endif
                         </td>
                         <td class="text-center"><?php if($copy->volume != "") echo ( $copy->volume); else echo "_";  ?></td>
-                        <td class="text-center">{{$copy->clasification}}</td>
-                        <td class="text-center"> @if($copy->availability) <span
-                          class="label label-info">Disponible</span>@else<span class="label label-danger">No Disponible</span>@endif</td>
-                        <td class="text-center"><button type="button"  name="button"><i class="fa fa-book"></i></button></td>
+                        <td class="text-center"> @if($copy->availability==1) <span class="label label-info">Disponible</span>
+                          @elseif($copy->availability==2) <span class="label label-success">Prestado</span>
+                          @else<span class="label label-danger">No Disponible</span>@endif</td>
+
+                        <td class="text-center"><button <?php if ($copy->availability!=1):?>disabled<?php endif;?> data-id="{{$b->id}}" type="button" id="realizarPedidoSala" name="button"><i class="fa fa-book"></i></button></td>
+                        <td  class="text-center"><button <?php if ($copy->copy==1 || $copy->availability!=1):?>disabled<?php endif;?> data-id="{{$b->id}}" type="button" id="realizarPedidoTesis" name="button"><i class="fa fa-book"></i></button></td>
+                        <!-- SUBMODAL DEL PEDIDO -->
+                        <!--Esto será activado si no se va a poner los tipso de pedido en la tabla
+                        <div id="ModalPedido" class="modal fade" role="dialog">
+                            	<div class="modal-dialog">
+                            		<div class="modal-content">
+                            			<div class="modal-header">
+                            				<h4 class="modal-tittle text-center">Realizar pedido</h4>
+                                 </div>
+                            			<form class="form-horizontal" role="form" id="form-agregar">
+                            				<div class="modal-body">
+                            					<div class="form-group col-md-12">
+                            						<label for="realizarPedido" class="control-label col-sm-4">Nombre: </label>
+                            						<div class="col-sm-8">
+                            							<input type="text" class="form-control" id="realizarPedido" name="realizarPedido">
+                            						</div>
+                            					</div>
+                            				</div>
+                            				<div class="modal-footer">
+                            					<button type="button" id="GuardarNombre" name="GuardarNombre" class="btn btn-primary text-center">
+                            						<span class="fa fa-"></span><span class="hidden-xs">Pedir Sala</span>
+                            					</button>
+                                      <button type="button" id="GuardarNombre" name="GuardarNombre" class="btn btn-primary text-center">
+                            						<span class="fa fa-"></span><span class="hidden-xs">Pedir Domicilio</span>
+                            					</button>
+                            				</div>
+                            			</form>
+                            		</div>
+                            	</div> -->
+                              <!-- FIN DEL SUBMODAL DE PEDIDO -->
                       </tr>
                     @endforeach
                   </table>
@@ -77,7 +110,11 @@
       </div>
   </div>
 </div>
-        
-    
 
-
+<!--
+Esto será activado si no se va a poner los tipso de pedido en la tabla
+<script type="text/javascript">
+$(document).on('click', '#realizarPedido', function() {
+     $('#ModalPedido').modal('show');
+ });
+</script> -->
