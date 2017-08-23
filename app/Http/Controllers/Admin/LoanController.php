@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
@@ -10,6 +11,7 @@ use App\MagazineCopy as MagazineCopy;
 use App\Editorial as Editorial;
 use App\Content as Content;
 use App\SearchItem as SearchItem;
+use App\BookCopy as BookCopy;
 class LoanController extends Controller
 {
 
@@ -20,7 +22,14 @@ class LoanController extends Controller
       */
      public function index(Request $request)
      {
-       dd($request->all(),'estoy en pedido');
+       $copia = BookCopy::find($request['id']);
+       $date = Carbon::now('America/Lima');
+      //         $date->toDateString();                          // 1975-12-25
+      //         $date->toFormattedDateString();                 // Dec 25, 1975
+      //         $date->toTimeString();                          // 14:15:16
+      //         $date->toDateTimeString();                      // 1975-12-25 14:15:16
+       dd($request->all(),'estoy en pedido',$copia,$date->toDateTimeString());
+
      }
 
      /**
