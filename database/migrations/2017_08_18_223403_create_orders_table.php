@@ -17,10 +17,10 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->dateTime('startDate');// fecha del pedido
             $table->string('search'); // palabra de busqueda
-            $table->integer('id_item'); // llave foranea item
             $table->integer('typeItem');// tipo de item (1,2,3,4)
             $table->boolean('place');// tipo lugar (0 = sala,1 = domicilio)
             $table->integer('id_user');//llave foranea usuario
+            $table->integer('id_copy');//llave foranea copia
             $table->timestamps();
         });
     }

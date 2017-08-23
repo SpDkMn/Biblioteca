@@ -18,8 +18,9 @@ class LoanController extends Controller
       *
       * @return \Illuminate\Http\Response
       */
-     public function index()
+     public function index(Request $request)
      {
+       dd($request->all(),'estoy en pedido');
      }
 
      /**
@@ -82,4 +83,9 @@ class LoanController extends Controller
      public function destroy($id)
      {
      }
+
+
+
+
+
 }

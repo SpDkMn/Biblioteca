@@ -22,8 +22,7 @@
                         <th class="itemTable text-center">Ejemplar</th>
                         <th class="itemTable text-center">Volumen</th>
                         <th class="itemTable text-center">Estado</th>
-                        <th class="itemTable text-center">Pedir sala</th>
-                        <th class="itemTable text-center">Pedir domicilio</th>
+                        <th class="itemTable text-center">Lugar</th>
                       </tr>
                       @foreach($b->bookCopies as $copy)
                       <tr @if($copy->
@@ -38,9 +37,21 @@
                         <td class="text-center"> @if($copy->availability==1) <span class="label label-info">Disponible</span>
                           @elseif($copy->availability==2) <span class="label label-success">Prestado</span>
                           @else<span class="label label-danger">No Disponible</span>@endif</td>
+                        <td class="text-center">
+                          <form action="{{ url('/admin/prestamos') }}" method="POST" name="pedido" id="pedido">
+                            {{ csrf_field() }}
+                              <meta name="_token" content="{!! csrf_token() !!}"/>
+                              <input type="hidden" name="id" value="{{$copy->id}}">
+                                <select class="" name="lugar">
+                                  <option value="sala" <?php if ($copy->availability!=1):?>disabled<?php endif;?>>Sala</option>
+                                  <option value="domicilio" <?php if ($copy->copy==1 || $copy->availability!=1):?>disabled<?php endif;?>>Domicilio</option>
+                                </select>
+                                <button type="submit" name="button"  class="text-center btn-xs btn-social btn btn-social-icon btn-foursquare"><i class="fa fa-book"></i></button>
+                          </form>
+                        </td>
 
-                        <td class="text-center"><button <?php if ($copy->availability!=1):?>disabled<?php endif;?> data-id="{{$b->id}}" type="button" id="realizarPedidoSala" name="button"><i class="fa fa-book"></i></button></td>
-                        <td  class="text-center"><button <?php if ($copy->copy==1 || $copy->availability!=1):?>disabled<?php endif;?> data-id="{{$b->id}}" type="button" id="realizarPedidoTesis" name="button"><i class="fa fa-book"></i></button></td>
+
+
                         <!-- SUBMODAL DEL PEDIDO -->
                         <!--Esto será activado si no se va a poner los tipso de pedido en la tabla
                         <div id="ModalPedido" class="modal fade" role="dialog">

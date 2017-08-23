@@ -24,6 +24,7 @@ Route::get('compendium/{compendium}/introduccion', 'CompendiumController@introdu
 Route::get('compendium/{compendium}/itemDetail', 'CompendiumController@itemDetail')->name('compendium.itemDetail');
 // RUTA PARA LOS PRESTAMOS
 Route::resource('prestamos', 'LoanController');
+Route::post('prestamos', 'LoanController@index');
 
 
 // RUTA PARA LOS PERFILES
@@ -37,6 +38,7 @@ Route::resource('/usuarios', 'usuarios');
 
 // RUTA PARA LAS CONFIGURACIONES
 Route::resource('configurations', 'ConfigurationController');
+
 
 // RUTA PARA LOS PEDIDOS
 

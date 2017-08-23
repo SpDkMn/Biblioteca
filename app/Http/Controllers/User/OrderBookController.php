@@ -68,7 +68,12 @@ class OrderBookController extends Controller
            }
          }
 
+         //Error: Esta mostrando libros repetidos
+        
+
           $itemsBooks=DB::Select($consulta_libros);
+
+          // dd($itemsBooks,count($itemsBooks),$z);
           if (compruebaItem($itemsBooks)) {
             $i=0;
             foreach ($itemsBooks as $itemsBook) {
