@@ -12,9 +12,9 @@
 								<li><a href="">Compendios</a></li>
 							</ul>
 						</li>
-						<li><a href="#">Iniciar Sesion</a>
+						<li><a href="">Iniciar Sesion</a>
 							<ul>
-								<li><a href="">Usuario</a></li>
+								<li><a href="{{ url('user/login') }}">Usuario</a></li>
 								<li><a href="{{ url('loginEmpleado') }}">Empleado</a></li>
 							</ul>
 						</li>

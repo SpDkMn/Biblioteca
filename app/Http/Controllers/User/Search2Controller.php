@@ -127,7 +127,7 @@ class Search2Controller extends Controller
            echo "<br>";
            sleep(2);
            echo '<section style="padding-left: 24px;">No se encontraron resultados<section><br><br>';
-           echo '<div style="text-align: center;" ><img src="http://bibliofisi.net/img/dinosaurio.gif"  width="250" alt="Dino.com" title="Dino.com"></div>';
+           echo '<div style="text-align: center;" ><img src="http://biblioteca.app/img/dinosaurio.gif"  width="250" alt="Dino.com" title="Dino.com"></div>';
            return false;
          }else {
            return true;

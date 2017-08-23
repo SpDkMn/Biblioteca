@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
          $table->increments('id');
          $table->string('username');
          $table->string('password')->nullable();
-         
+
          $table->string('name');
          $table->string('last_name');
          $table->string('code')->nullable();
@@ -30,9 +30,10 @@ class CreateUsersTable extends Migration
          $table->string('faculty')->nullable();
          $table->string('university')->nullable();
          $table->integer('id_user_type');
-         
+
          $table->boolean('state');
-         
+         $table->boolean('register');
+
          $table->rememberToken();
          $table->softDeletes();
          $table->timestamps();

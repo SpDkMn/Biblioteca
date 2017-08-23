@@ -26,7 +26,7 @@
 
 		<div class="centrado" id="logo">
 			<br><br><br><br><br>
-			<img src="http://bibliofisi.net/img/logo.png"  width="400" alt="Bibliofisi.com" title="Bibliofisi.com">
+			<img src="http://biblioteca.app/img/logo.png"  width="400" alt="Bibliofisi.com" title="Bibliofisi.com">
 			<br><br><br>
 		</div>
 		<div class="form centrado">

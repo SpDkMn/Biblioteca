@@ -19,10 +19,15 @@ Route::get('/user/register', function () {
 	return view('user2.auth.register');
 });
 
+Route::get('/user/login', function () {
+	return view('user2.auth.login');
+});
+
 Route::get('/loginEmpleado', function () {
 	return view('auth/login');
 });
 
+Route::post('user/login', 'LoginController@login')->name('loginUser.login');
 
 Auth::routes();
 Route::get('/admin', 'HomeController@index');
