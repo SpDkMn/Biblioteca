@@ -6,8 +6,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Registrar</div>
 				<div class="panel-body">
-					<form class="form-horizontal" role="form" method="POST"
-						action="{{ route('register') }}">
+					<form class="form-horizontal" role="form" method="POST"	action="{{ url('/user/registerUser') }}">
 						{{ csrf_field() }}
 
 
@@ -46,7 +45,7 @@
 
 							<div class="col-md-6">
 								<input id="password-confirm" type="password"
-									class="form-control" name="password_confirmation" required>
+									class="form-control" name="password2" required>
 							</div>
 						</div>
 

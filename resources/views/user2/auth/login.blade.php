@@ -6,12 +6,9 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Login</div>
 				<div class="panel-body">
-					<form class="form-horizontal" role="form" method="POST"
-						action="{{ route('loginUser.login') }}" value="{{ csrf_token() }}">
+					<form class="form-horizontal" role="form" method="POST" action="{{ url('/user/loginUser') }}" value="{{ csrf_token() }}">
 						{{ csrf_field() }}
-
-
-
+            
 						<div
 							class="form-group">
 							<label for="email" class="col-md-4 control-label">E-Mail</label>
