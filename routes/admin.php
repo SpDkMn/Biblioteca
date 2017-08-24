@@ -23,8 +23,11 @@ Route::get('compendium/{compendium}/content', 'CompendiumController@content')->n
 Route::get('compendium/{compendium}/introduccion', 'CompendiumController@introduccion')->name('compendium.introduccion');
 Route::get('compendium/{compendium}/itemDetail', 'CompendiumController@itemDetail')->name('compendium.itemDetail');
 // RUTA PARA LOS PRESTAMOS
-Route::resource('prestamos', 'LoanController');
-Route::post('prestamos', 'LoanController@index');
+Route::resource('prestamos', 'PrestamoController');
+Route::post('prestamos', 'PrestamoController@index');
+
+Route::resource('pedido', 'LoanController');
+Route::post('pedido', 'LoanController@index');
 
 
 // RUTA PARA LOS PERFILES

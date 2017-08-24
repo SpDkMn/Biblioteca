@@ -2,11 +2,10 @@
 
 @section('content')
 <!-- Content Header (Page header) -->
+
+
 <section class="content-header">
-  <h1>
-    Tesis y Tesinas
-    <small> -- </small>
-  </h1>
+  
   <ol class="breadcrumb">
     <li><a href=""><i class="fa fa-dashboard"></i> Inicio</a></li>
     <li class="active">Tesis</li>
@@ -18,10 +17,20 @@
 <section class="content">
 
   <div class="row">
-     
+     <br>
+        
+        <div class="col-md-12 " id="div-content">
+        <div id="print"></div>
+          {!! $showPedidos !!}
+        </div>
         <div class="col-md-12 " id="div-content">
           {!! $showPrestamo !!}
         </div> 
+        <div class="col-md-12 " id="div-content">
+          {!! $showSeleccion !!}
+        </div>
+
+
   </div>
   <div class="row">
         <div class="col-md-6" id="div-content">
@@ -38,4 +47,5 @@
 
 
 @endsection
+
 

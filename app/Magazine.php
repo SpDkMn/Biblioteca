@@ -18,6 +18,7 @@ class Magazine extends Model
       'volumen',
       'numero',
       'fechaEdicion',
+      'libraryLocation'
    ];
 
    protected $dates = [

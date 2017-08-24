@@ -1,5 +1,3 @@
-  
-
 
   <div class="box box-primary">
   <div class="box-header with-border">
@@ -14,7 +12,7 @@
       <div class="alert alert-danger" role="alert">
         <ul>
           @foreach($errors->all() as $error)
-            <li>{{ $error }}</li> 
+            <li>{{ $error }}</li>
           @endforeach
         </ul>
       </div>
@@ -26,20 +24,20 @@
      <div class="box-body">
         <!---->
         <!--***************************** PANEL DE NUEVA TESIS *************************************-->
-         <div class="box box-success box-solid"> 
+         <div class="box box-success box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">Tesis y Tesina</h3>
-              <div class="box-tools pull-right"> 
+              <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
-              </div> 
+              </div>
             </div>
-            
-             
+
+
 
      <div class="box-body">
-              
-        <div class="bs-example" data-example-id="simple-nav-tabs"> 
+
+        <div class="bs-example" data-example-id="simple-nav-tabs">
              <ul class="nav nav-tabs">
                 <li class="active"><a href="#primero" data-toggle="tab">Primero</a></li>
                 <li><a href="#segundo" data-toggle="tab">Segundo</a></li>
@@ -48,15 +46,15 @@
              </ul>
 
           <div class="tab-content">
-          
+
                     <!-- Primer panel -->
             <div class="tab-pane active" id="primero">
-      
+
               <div class="box-body">
                   <div class="form-group">
                     <label>TIPO DE ITEM</label>
                       <p>
-                        <input type="radio" class="flat" name="tipo" value="tesis" checked="" required/> Tesis 
+                        <input type="radio" class="flat" name="tipo" value="tesis" checked="" required/> Tesis
                         <br>
                         <input type="radio" class="flat" name="tipo" value="tesina"/> Tesina
                       </p>
@@ -66,7 +64,7 @@
                         <label for="inputTitle">Titulo *</label>
                         <input type="text" class="form-control" name="title" id="inputTitle" placeholder="">
                   </div>
-                    
+
                   <div class="form-group">
                         <label>Autor Principal *</label>
                         <select class="form-control" id="selectAutorMain" name="autorMain[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Principal" onsubmit="return validacion()" required>
@@ -111,7 +109,7 @@
                       <input type="text" class="form-control" name="clasification" id="inputClasification" placeholder="">
                   </div>
 
-                    
+
                   <div class="form-group">
                         <label>Asesor *</label>
                         <select class="form-control select2" name="asesor" style="width: 100%;" required>
@@ -121,7 +119,7 @@
                                   <option value="{{ $autor->name }}">{{$autor->name}}</option>
                                 @endif
                               @endforeach
-                            @endforeach                      
+                            @endforeach
                         </select>
                   </div>
                   <div class="form-group">
@@ -130,7 +128,7 @@
                         <option name="escuela">Ingeniería de Sistemas</option>
                         <option name="escuela">Ingeniería de Software</option>
                       </select>
-                  </div>                     
+                  </div>
               </div>
           </div>
         <!--Fin de la primera division-->
@@ -140,9 +138,9 @@
         <!-- Segundo Panel -->
           <div class="tab-pane fade" id="segundo">
               <div class="box-body">
-                       
+
                         <!-- 1. Resumen -->
-                   
+
                     <div class="form-group">
                         <label for="inputEdition">Edicion</label>
                         <input type="text" onkeypress="return isNumberKey(event)" class="form-control" name="edition" id="inputEdition" placeholder="_ _ _ _">
@@ -197,50 +195,50 @@
                         <option name="ubicacion">Stand E4</option>
                         <option name="ubicacion">Stand E5</option>
                       </select>
-                  </div>  
+                  </div>
 
                     <div class="form-group">
                         <label for="inputEXTENSION">Lugar de sustentacion</label>
                         <input type="text" class="form-control" name="lugarsus" id="inputEXTENSION" value="Facultad de Ingeniería de Sistemas - UNMSM">
                     </div>
 
-                        
+
               </div><!-- End Box-Body -->
            </div><!-- End Segundo Panel -->
-                 
-      
-                  
+
+
+
 
                   <!-- Tercer Panel -->
           <div class="tab-pane fade" id="tercero">
               <div class="box-body">
-                        
+
                         <!-- 1. Resumen -->
                     <div class="form-group">
                         <label for="inputSummary">Resumen</label>
-                        <textarea class="form-control" rows="3" name="summary" id="inputSummary" placeholder="">No presenta resumen</textarea> 
+                        <textarea class="form-control" rows="3" name="summary" id="inputSummary" placeholder="">No presenta resumen</textarea>
                      </div>
 
                      <div class="form-group">
                         <label for="inputContent">Contenido</label>
-                        <textarea class="form-control" rows="3" name="contenido" id="inputContent" placeholder="">No presenta contenido</textarea> 
-                     </div>  
-                    
+                        <textarea class="form-control" rows="3" name="contenido" id="inputContent" placeholder="">No presenta contenido</textarea>
+                     </div>
+
                     <div class="form-group">
                         <label for="inputConclusion">Conclusiones</label>
-                        <textarea class="form-control" rows="3" name="conclusions" id="inputConclusion"  placeholder="">No presenta conclusiones</textarea> 
+                        <textarea class="form-control" rows="3" name="conclusions" id="inputConclusion"  placeholder="">No presenta conclusiones</textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="inputRecomend">Recomendaciones</label>
-                        <textarea class="form-control" rows="3" name="recomendacion" id="inputRecomend"  placeholder="">No presenta conclusiones</textarea> 
+                        <textarea class="form-control" rows="3" name="recomendacion" id="inputRecomend"  placeholder="">No presenta conclusiones</textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="inputBibliografia">Bibliografía</label>
-                        <textarea class="form-control" rows="3" name="bibliografia" id="inputBibliografia"  placeholder="">No presenta bibliografia</textarea> 
+                        <textarea class="form-control" rows="3" name="bibliografia" id="inputBibliografia"  placeholder="">No presenta bibliografia</textarea>
                     </div>
-                        
+
                </div><!-- End Box-Body -->
           </div><!-- End Tercer  Panel -->
 
@@ -250,7 +248,7 @@
 
               <!-- Cuarto Panel -->
             <div class="tab-pane fade" id="cuarto">
-               
+
                 <div class="box box-default box-solid" id="itemBox">
               <div class="box-header">
                   <h3 class="box-title">Item principal</h3>
@@ -260,7 +258,7 @@
                   </div>
               </div>
               <div class="box-body">
-                  
+
                   <div class="form-group">
                       <label for="inputIncomeNumber">Nº Ingreso *</label>
                       <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" name="incomeNumber0" id="inputIncomeNumber"  placeholder="_ _ _ _ _ _">
@@ -285,7 +283,7 @@
         </div>
       </div>
 
-                
+
         </div><!-- End Box-solid -->
       </div><!-- End col-md-6 -->
 
@@ -340,7 +338,7 @@
           e.preventDefault();
             var opc = $(this).val();
             var txt = $(this).text();
-        
+
             if(opc!=null){opcD = opc ;deshabilitar(opc);}
             else{habilitar(opcD);}
           });
@@ -419,7 +417,7 @@
       var buttonClose ='<div class="box-tools pull-right">  <button type="button" data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button> </div>';
       var itemHeader = '<div class="box-header">'+titleItem+buttonClose+'</div>'
       var itemBody = '<div class="box-body">'+
-                            
+
                             '<div class="form-group">'+
                                 '<label for="inputIncomeNumber">Nº Ingreso</label>'+
                                 '<input type="text" onkeypress="return isNumberKey(event)" class="form-control" name="incomeNumber'+idCont+'" id="inputIncomeNumber" placeholder="_ _ _ _ _ _">'+
@@ -443,5 +441,3 @@
   });
   </script>
 @endsection
-
-

@@ -34,6 +34,24 @@ class Employees extends Seeder
         //  'register'=>true
       ]);
       User::create([
+         'username' => 'admin@admin.com',
+         'password' => bcrypt('admin'),
+         'name' => 'Giordano de Jesus',
+         'last_name' => 'Admin admin',
+         'code' => "16200251",
+         'dni' => '71324372',
+         'home_phone' => '5373623',
+         'phone' => '12345678',
+         'email' => 'admin@admin.com',
+         'address' => "av.tupac amaru",
+         'school' => 'Ingenieria de Software',
+         'faculty' => "ingenieria de sistemas e informatica",
+         'university' => "Universidad nacional mayor de san marcos",
+         'id_user_type' => 5,
+         'state' => true
+        //  'register'=>true
+      ]);
+      User::create([
          'username' => 'superadmin',
          'password' => bcrypt('jefa'),
          'name' => 'Maribel',

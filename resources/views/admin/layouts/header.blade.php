@@ -38,7 +38,7 @@
 			<ul class="nav navbar-nav">
 				<!-- Notifications: style can be found in dropdown.less -->
 				<li class="dropdown notifications-menu" onclick="funcion2()"
-					id="op2"><a href="#" class="dropdown-toggle" data-toggle="dropdown-menu">
+					id="op2"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="fa fa-bell-o"></i> <span class="label label-warning">10</span>
 				</a>
 					<ul class="dropdown-menu">
@@ -64,7 +64,7 @@
 					</ul></li>
 				<!-- User Account: style can be found in dropdown.less -->
 				<li class="dropdown user user-menu" onclick="funcion1()" id="op"><a
-					href="#" class="dropdown-toggle" data-toggle="dropdown-menu"> <img
+					href="#" class="dropdown-toggle" data-toggle="dropdown"> <img
 						src="{{url('img/user2-160x160.jpg')}}" class="user-image"
 						alt="User Image"> <span class="hidden-xs">{{ Auth::user()->name }}</span>
 				</a>

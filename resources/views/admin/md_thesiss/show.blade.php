@@ -21,7 +21,7 @@
                   <th>ELIMINAR</th>
                  </tr>
                 </thead>
-                
+
                 <tbody>
                 @foreach($thesiss as $thesis)
                 <tr>
@@ -51,7 +51,7 @@
 
 
                   <td class="text-center">
-                     {{$thesis->location}}
+                     {{$thesis->libraryLocation}}
                   </td>
 
        <!--SECCION PARA EDITAR UNA TESIS-->

@@ -6,7 +6,7 @@
       </button>
     </div>
   </div>
-  
+
 @if($id!=null)
  @foreach($thesiss as $thesis)
  @if($thesis->id == $id)
@@ -14,21 +14,21 @@
 
  <input type="hidden" name="_method" value="put" />
     {{ csrf_field() }}
-  
+
   <div class="box-body">
-    
+
     <div class="box box-success box-solid">
       <div class="box-header with-border">
             <h3 class="box-title">Edición de Tesis y Tesina</h3>
-            <div class="box-tools pull-right"> 
+            <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
-            </div> 
+            </div>
       </div>
-          
+
       <div class="box-body">
-              
-        <div class="bs-example" data-example-id="simple-nav-tabs"> 
+
+        <div class="bs-example" data-example-id="simple-nav-tabs">
                   <ul class="nav nav-tabs">
                     <li class="active"><a href="#quinto" data-toggle="tab">Primero</a></li>
                     <li><a href="#sexto" data-toggle="tab">Segundo</a></li>
@@ -41,12 +41,12 @@
                 <div class="tab-pane active" id="quinto">
                   <div class="box-body">
                           <!--1. Titulo -->
-                          
+
                     <div class="form-group">
                          <label>TIPO DE ITEM</label>
                            <p>
-                            
-                            <input type="radio" class="flat" name="tipo" value="tesis" checked="" required/> Tesis 
+
+                            <input type="radio" class="flat" name="tipo" value="tesis" checked="" required/> Tesis
                             <br>
                             <input type="radio" class="flat" name="tipo" value="tesina"/> Tesina
                           </p>
@@ -56,7 +56,7 @@
                           <label for="inputTitle">Titulo</label>
                           <input type="text" class="form-control" value="{{$thesis->title}}" name="title" id="inputTitle" placeholder="">
                     </div>
-                    
+
                     <div class="form-group">
                         <label>Autor Principal</label>
                         <select class="form-control select" id="selectAutorMainEdit" name="autorMain[]" multiple="multiple" style="width: 100%;" data-placeholder="Autor Principal">
@@ -64,8 +64,8 @@
                               @foreach($autor->categories as $category)
                                 @if($category->name == "tesis/tesina")
                                   <option value="{{ $autor->id }}"
-                                    
-                                    <?php 
+
+                                    <?php
                                         foreach($thesis->authors as $aut){
                                           if($aut->id == $autor->id && $aut->pivot->type){
                                             echo "selected";
@@ -88,7 +88,7 @@
                               @foreach($autor->categories as $category)
                                 @if($category->name == "tesis/tesina")
                                   <option value="{{ $autor->id }}"
-                                      <?php 
+                                      <?php
                                         foreach($thesis->authors as $aut){
                                           if($aut->id == $autor->id && !$aut->pivot->type){
                                             echo "selected";
@@ -135,7 +135,7 @@
                             @endif
                           @endforeach
                         @endforeach
-                       
+
                         </select>
                     </div>
 
@@ -154,7 +154,7 @@
 
                     <!-- Segundo Panel -->
              <div class="tab-pane fade" id="sexto">
-                 <div class="box-body">                                         
+                 <div class="box-body">
                      <div class="form-group">
                         <label for="inputEdition">Edicion</label>
                         <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" value="{{$thesis->edition}}" name="edition" id="inputEdition" placeholder="">
@@ -182,7 +182,7 @@
 
                    <div class="form-group">
                       <label>Ubicación </label>
-                      <select class="form-control select2" value="{{$thesis->location}}" name="ubicacion" style="width: 100%;">
+                      <select class="form-control select2" value="{{$thesis->libraryLocation}}" name="ubicacion" style="width: 100%;">
                         <option name="ubicacion">Stand A1</option>
                         <option name="ubicacion">Stand A2</option>
                         <option name="ubicacion">Stand A3</option>
@@ -214,29 +214,29 @@
                      <div class="form-group">
                         <label for="inputEXTENSION">Lugar de publicacion</label>
                         <input type="text" class="form-control" value="{{$thesis->publicationLocation}}" name="lugarsus" id="inputEXTENSION" value="Facultad de Ingeniería de Sistemas">
-                     </div>   
-                </div>     
+                     </div>
+                </div>
             </div>
-          
+
 
 
             <div class="tab-pane fade" id="setimo">
                  <div class="box-body">
-                                           
+
                      <div class="form-group">
                         <label for="inputSummary">Resumen</label>
-                        <textarea class="form-control" name="summary" id="inputSummary" placeholder="">{{$thesis->summary}}</textarea> 
+                        <textarea class="form-control" name="summary" id="inputSummary" placeholder="">{{$thesis->summary}}</textarea>
                      </div>
 
                      <div class="form-group">
                         <label for="inputContent">Contenido</label>
-                        <textarea class="form-control" name="contenido" id="inputContent" placeholder="">{{$thesis->conten}}</textarea> 
-                     </div>  
-      
+                        <textarea class="form-control" name="contenido" id="inputContent" placeholder="">{{$thesis->conten}}</textarea>
+                     </div>
+
                      <div class="form-group">
                        <label for="inputConclusion">Conclusiones</label>
                          <textarea class="form-control" name="conclusions" id="inputConclusion" cols="65">{{$thesis->conclusions}}</textarea>
-                     </div> 
+                     </div>
 
                      <div class="form-group">
                        <label for="inputRecomend">Recomendaciones</label>
@@ -248,15 +248,15 @@
                          <textarea class="form-control" name="bibliografia" id="inputBibliografia" cols="65">{{$thesis->bibliografia}}</textarea>
                      </div>
 
-                </div>       
+                </div>
             </div>
 
 
 
         <div class="tab-pane fade" id="octavo">
            <div class="box-body">
-                        
-                     
+
+
 
                    <!-- Declarando el contador de items -->
                    <!-- Declarando el contador de items -->
@@ -271,7 +271,7 @@
                           </div>
                         </div>
                         <div class="box-body">
-                    
+
                             <div class="form-group">
                                 <label for="inputIncomeNumber">Nº Ingreso</label>
                                 <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="_ _ _ _ _ _">
@@ -284,7 +284,7 @@
                               <label for="inputCopy">Ejemplar</label>
                               <input type="text" onkeypress="return isNumberKey(event)" value="1" class="form-control" name="copy0" id="inputCopy" placeholder="" required>
                             </div>
- 
+
                          </div>
 
                   </div>
@@ -297,7 +297,7 @@
                           </div>
                       </div>
                       <div class="box-body">
-                          
+
                           <div class="form-group">
                               <label for="inputIncomeNumber">Nº Ingreso</label>
                               <input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" value="{{$item->incomeNumber}}" name="{{'incomeNumber'.$contItem}}" id="inputIncomeNumber" placeholder="_ _ _ _ _ _ _ _">
@@ -309,7 +309,7 @@
                           <div class="form-group">
                               <label for="inputCopy">Ejemplar</label>
                               <input type="text" onkeypress="return isNumberKey(event)" value="{{$contItem + 1}}" class="form-control solo-numeros" name="{{'copy'.$contItem}}" id="inputCopy" placeholder="" required>
-                          </div>                          
+                          </div>
                       </div>
 
                    </div>
@@ -318,13 +318,13 @@
              @endforeach
 
 
-           </div>      
+           </div>
         </div>
 
       </div>
    </div>
 
-    <!---Aqui iba un div--> 
+    <!---Aqui iba un div-->
     <div class="box-footer">
          <button type="submit" class="btn btn-primary" id="ediThesis">Editar</button>
 
@@ -346,10 +346,10 @@
     //var x = número de campos existentes en el contenedor
     var x = $("#contenedor div").length + 1;
     var FieldCount = x-1; //para el seguimiento de los campos
-    
+
     $(AddButton).click(function (e) {
         if(x <= MaxInputs) //max input box allowed
-        {   
+        {
             FieldCount++;
             //agregar campo
             var array = FieldCount-1;
@@ -377,7 +377,7 @@
 </script>
 
 
-<script type="text/javascript">    
+<script type="text/javascript">
           //Convirtiendo a entero contItem -> guarda el numero de item que se muestra inicialmente en editar ,
           //estos seran los que se agregaron , apartir de ahi se podra agregar mas items con id continuo
 
@@ -389,7 +389,7 @@
             var buttonClose ='<div class="box-tools pull-right"><button type="button"  data-widget="remove" class="btn btn-box-tool"><i class="fa fa-times"></i></button> </div>';
             var itemHeader = '<div class="box-header">'+titleItem+buttonClose+'</div>'
             var itemBody = '<div class="box-body">'+
-                                  
+
                                   '<div class="form-group">'+
                                       '<label for="inputIncomeNumber">Nº Ingreso</label>'+
                                       '<input type="text" onkeypress="return isNumberKey(event)" class="form-control solo-numeros" name="incomeNumber'+idCont+'" id="inputIncomeNumber" placeholder="_ _ _ _ _ _">'+
@@ -414,7 +414,7 @@
 
             $('.BoxItemThesiss:hidden').remove();
           });
-      
+
   </script>
 
 
@@ -502,8 +502,8 @@
       </script>
 
 
-  
-    
+
+
       @endif
 
     @endforeach

@@ -27,7 +27,8 @@ class CreateMagazinesTable extends Migration
             ->unsigned()
             ->nullable();
          $table->integer('author_id')->unsigned();
-         
+         $table->string('libraryLocation')->nullable();
+
          $table->softDeletes();
          $table->timestamps();
       });

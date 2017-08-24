@@ -22,7 +22,7 @@ class Thesis extends Model
       'summary',
       'recomendacion',
       'bibliografia',
-      'location',
+      'libraryLocation',
       'publicationLocation',
       'asesor'
    ];
@@ -63,4 +63,3 @@ class Thesis extends Model
    }
 
 }
- 

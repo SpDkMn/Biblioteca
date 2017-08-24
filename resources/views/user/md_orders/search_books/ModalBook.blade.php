@@ -39,7 +39,7 @@
                           @else<span class="label label-danger">No Disponible</span>@endif</td>
 
                         <td class="text-center">
-                          <form action="{{ url('/admin/prestamos') }}" method="POST" name="pedido" id="pedido">
+                          <form action="{{ url('/admin/pedido') }}" method="POST" name="pedido" id="pedido">
                             {{ csrf_field() }}
                               <meta name="_token" content="{!! csrf_token() !!}"/>
                               <input type="hidden" name="id" value="{{$b->id}}">

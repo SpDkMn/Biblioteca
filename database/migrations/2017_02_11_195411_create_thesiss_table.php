@@ -18,7 +18,7 @@ class CreateThesissTable extends Migration
          $table->string('type');
          $table->string('clasification')->nullable();
          $table->longText('title');
-         
+
          $table->string('edition')->nullable();
          // Descripcion fisica de la tesis
          $table->string('extension');
@@ -26,7 +26,7 @@ class CreateThesissTable extends Migration
          $table->string('physicalDetails')->nullable();
          $table->string('dimensions');
          $table->string('accompaniment')->nullable();
-         $table->string('location');
+         $table->string('libraryLocation');
          $table->string('publicationLocation');
          $table->longText('summary')->nullable();
          $table->longText('conten')->nullable();
