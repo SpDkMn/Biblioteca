@@ -14,11 +14,11 @@
 						</li>
 						<li><a href="">Iniciar Sesion</a>
 							<ul>
-								<li><a href="{{ url('user/login') }}">Usuario</a></li>
+								<li><a href="{{ url('user/loginUser') }}">Usuario</a></li>
 								<li><a href="{{ url('loginEmpleado') }}">Empleado</a></li>
 							</ul>
 						</li>
-						<li><a href="{{ url('user/register') }}">Registrar</a></li>
+						<li><a href="{{ url('user/registerUser') }}">Registrar</a></li>
 					</ul>
 				</nav>
 			</div>
