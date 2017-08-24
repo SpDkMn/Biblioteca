@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
          $table->integer('id_user_type');
 
          $table->boolean('state');
-         $table->boolean('register');
+        //  $table->boolean('register');
 
          $table->rememberToken();
          $table->softDeletes();

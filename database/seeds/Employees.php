@@ -30,8 +30,8 @@ class Employees extends Seeder
          'faculty' => "ingenieria de sistemas e informatica",
          'university' => "Universidad nacional mayor de san marcos",
          'id_user_type' => 5,
-         'state' => true,
-         'register'=>true
+         'state' => true
+        //  'register'=>true
       ]);
       User::create([
          'username' => 'superadmin',
@@ -48,8 +48,8 @@ class Employees extends Seeder
          'faculty' => "ingenieria de sistemas e informatica",
          'university' => "Universidad nacional mayor de san marcos",
          'id_user_type' => 5,
-         'state' => true,
-         'register'=>true
+         'state' => true
+        //  'register'=>true
       ]);
 
       Employee::create([
