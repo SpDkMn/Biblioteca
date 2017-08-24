@@ -12,9 +12,10 @@ use App\Editorial as Editorial;
 use App\Content as Content;
 use App\SearchItem as SearchItem;
 use App\BookCopy as BookCopy;
+use App\Book as Book;
+use App\Order as Order ;
 class LoanController extends Controller
 {
-
      /**
       * Display a listing of the resource.
       *
@@ -22,14 +23,58 @@ class LoanController extends Controller
       */
      public function index(Request $request)
      {
-       $copia = BookCopy::find($request['id']);
-       $date = Carbon::now('America/Lima');
-      //         $date->toDateString();                          // 1975-12-25
-      //         $date->toFormattedDateString();                 // Dec 25, 1975
-      //         $date->toTimeString();                          // 14:15:16
-      //         $date->toDateTimeString();                      // 1975-12-25 14:15:16
-       dd($request->all(),'estoy en pedido',$copia,$date->toDateTimeString());
+       function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
+       //Almacenamiento de la fecha de pedido
+         $startDate = Carbon::now('America/Lima');
+           //         $date->toDateString();                          // 1975-12-25
+           //         $date->toFormattedDateString();                 // Dec 25, 1975
+           //         $date->toTimeString();                          // 14:15:16
+           //         $date->toDateTimeString();                      // 1975-12-25 14:15:16
+       //fin
+         $typeItem = cambiaCadena($request['typeItem']);
+         $place = cambiaCadena($request['place']);
+         $state = 0 ;
+         $id_user = 0 ;
+         $id_item = cambiaCadena($request['id']) ;
+         $copy = cambiaCadena($request['copy']);
+         //Editados en prestamo
+         $endDate = null ;
+         //Prueba
+          //  switch ($typeItem) {
+          //    case 1:
+          //      //Almacenamiento de la copia del libro pedido
+          //        $book = Book::find($request['id']);
+          //        //Recorriendo las copias del item
+          //        foreach ($book->bookCopies as $copia) {
+          //          if ($copia->copy == cambiaCadena($request['copy'])) {
+          //            //Almacenando copia del item pedido
+          //            $copiaItem = $copia;
+          //          }
+          //        }
+          //      //Fin
+           //
+          //      break;
+           //
+          //    default:
+          //      # code...
+          //      break;
+          //  }
+           //
+           //
+           //
 
+       Order::create([
+         'startDate' => $startDate,
+         'typeItem' => $typeItem,
+         'place' => $place,
+         'id_user' => $id_user,
+         'id_item' => $id_item,
+         'copy' => $copy,
+         'state' => $state,
+         'endDate' => null ,
+       ]);
+       //Redirigir a un modal donde se muestre que el pedido fue satisfactorio
+       return redirect('user/');
      }
 
      /**

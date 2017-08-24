@@ -163,7 +163,8 @@ class SearchController extends Controller
 
       $b = Book::first();
       $modalBook =  view('user.md_orders.modalBook',[
-          'b'=>$b
+          'b'=>$b,
+          'search'=>$search
         ]);
 
         return view('user.md_orders.tableBooks',[

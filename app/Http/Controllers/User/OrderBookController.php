@@ -23,7 +23,7 @@ class OrderBookController extends Controller
     $books = null ;
 
     $tableBooks = view('user.md_orders.search_books.tableBooks',[
-      'books' => $books
+      'books' => $books,
     ]);
 
     $search = view('user.md_orders.search_books.search', [
@@ -69,7 +69,7 @@ class OrderBookController extends Controller
          }
 
          //Error: Esta mostrando libros repetidos
-        
+
 
           $itemsBooks=DB::Select($consulta_libros);
 
@@ -84,7 +84,8 @@ class OrderBookController extends Controller
 
         $b = Book::first();
         $modalBook =  view('user.md_orders.search_books.modalBook',[
-            'b'=>$b
+            'b'=>$b,
+            'searchBook'=>$search
           ]);
 
           return view('user.md_orders.search_books.tableBooks',[
@@ -113,8 +114,7 @@ class OrderBookController extends Controller
     {
           $b = Book::find($id);
           return view('user.md_orders.search_books.modalBook',[
-              'b' => $b
-            ]);
+              'b' => $b            ]);
     }
 
     /**

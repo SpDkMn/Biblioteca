@@ -17,7 +17,6 @@
                   <th>Autor</th>
                   <th>Editorial</th>
                   <th>Ejemplares</th>
-
                   <th>Disponibles</th>
                   <th>Información</th>
                 </tr>
@@ -122,6 +121,7 @@
         $id = $(this).data('id')
           $("#ModalBookInfo").html('<div class="modal-dialog modal-lg" ><div class="modal-content"><div class="modal-header"></div><div class="modal-body"></div><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div></div>')
           $("#ModalBookInfo").load('{{ url("/user/orderBook/") }}/' + $id + '/edit');
+
       });
 
     });

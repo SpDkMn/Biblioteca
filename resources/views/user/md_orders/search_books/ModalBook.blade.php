@@ -1,3 +1,4 @@
+
 <div class="modal-dialog modal-lg" >
   <div class="modal-content">
       <div class="modal-header">
@@ -25,8 +26,7 @@
                         <th class="itemTable text-center">Lugar</th>
                       </tr>
                       @foreach($b->bookCopies as $copy)
-                      <tr @if($copy->
-                        availability) class="success" @else class="danger" @endif>
+                      <tr>
                         <td class="text-center">{{$copy->incomeNumber}}</td>
                         <td class="text-center">{{$copy->barcode}}</td>
                         <td class="text-center">{{$copy->copy}} @if($copy->availability==1) <span
@@ -37,14 +37,17 @@
                         <td class="text-center"> @if($copy->availability==1) <span class="label label-info">Disponible</span>
                           @elseif($copy->availability==2) <span class="label label-success">Prestado</span>
                           @else<span class="label label-danger">No Disponible</span>@endif</td>
+
                         <td class="text-center">
                           <form action="{{ url('/admin/prestamos') }}" method="POST" name="pedido" id="pedido">
                             {{ csrf_field() }}
                               <meta name="_token" content="{!! csrf_token() !!}"/>
-                              <input type="hidden" name="id" value="{{$copy->id}}">
-                                <select class="" name="lugar">
-                                  <option value="sala" <?php if ($copy->availability!=1):?>disabled<?php endif;?>>Sala</option>
-                                  <option value="domicilio" <?php if ($copy->copy==1 || $copy->availability!=1):?>disabled<?php endif;?>>Domicilio</option>
+                              <input type="hidden" name="id" value="{{$b->id}}">
+                              <input type="hidden" name="typeItem" value="1">
+                              <input type="hidden" name="copy" value="{{$copy->copy}}">
+                                <select class="" name="place">
+                                  <option value="0" <?php if ($copy->availability!=1):?>disabled<?php endif;?>>Sala</option>
+                                  <option value="1" <?php if ($copy->copy==1 || $copy->availability!=1):?>disabled<?php endif;?>>Domicilio</option>
                                 </select>
                                 <button type="submit" name="button"  class="text-center btn-xs btn-social btn btn-social-icon btn-foursquare"><i class="fa fa-book"></i></button>
                           </form>
