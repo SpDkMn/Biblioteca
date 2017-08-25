@@ -15,7 +15,7 @@ class Employees extends Seeder
     */
    public function run()
    {
-    
+
       User::create([
          'username' => 'admin@admin.com',
          'password' => bcrypt('admin'),
@@ -31,9 +31,10 @@ class Employees extends Seeder
          'faculty' => "ingenieria de sistemas e informatica",
          'university' => "Universidad nacional mayor de san marcos",
          'id_user_type' => 5,
-         'state' => true
-        //  'register'=>true
+         'state' => true,
+         'register'=>false
       ]);
+
       User::create([
          'username' => 'superadmin',
          'password' => bcrypt('jefa'),
@@ -49,7 +50,9 @@ class Employees extends Seeder
          'faculty' => "ingenieria de sistemas e informatica",
          'university' => "Universidad nacional mayor de san marcos",
          'id_user_type' => 5,
-         'state' => true
+         'state' => true,
+         'register'=>false
+
         //  'register'=>true
       ]);
 

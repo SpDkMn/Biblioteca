@@ -24,7 +24,5 @@ class Order extends Model
       // 2 : rechazado
     'endDate',
   ];
-
-
-
+  
 }

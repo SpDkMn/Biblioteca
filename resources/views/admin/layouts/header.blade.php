@@ -92,7 +92,6 @@
                                  <input type="hidden" name="id" value="{{$pedido->id}}">
                                   <button type="submit" name="prestar" class="btn btn-info" >Prestar</button>
                                   <button type="submit" name ="cancelar" class="btn btn-info" data-widget="remove">Cancelar prestamo</button>
-
                                </div>
                        </div>
                   </div>

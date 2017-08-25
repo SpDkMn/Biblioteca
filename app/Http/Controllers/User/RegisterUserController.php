@@ -42,7 +42,8 @@ class RegisterUserController extends Controller
 
         $users = User::all();
         foreach ($users as $user) {
-          if($user->email == $request->email && $user->code == $request->codigo && $request->password == $request->password2){
+          if($user->email == $request->email && $user->code == $request->codigo && $request->password == $request->password2 && $user->register == false){
+              
               $user->register=true;
               $user->password = bcrypt($request->password);
               $user->save();
@@ -51,6 +52,7 @@ class RegisterUserController extends Controller
               return view('user2.md_noticias.index');
           }
         }
+        dd("error");
     }
 
     /**

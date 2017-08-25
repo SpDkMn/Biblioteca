@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,10 +32,11 @@ class LoanController extends Controller
            //         $date->toTimeString();                          // 14:15:16
            //         $date->toDateTimeString();                      // 1975-12-25 14:15:16
        //fin
+
          $typeItem = cambiaCadena($request['typeItem']);
          $place = cambiaCadena($request['place']);
          $state = 0 ;
-         $id_user = 0 ;
+         $id_user = Auth::User()->id;
          $id_item = cambiaCadena($request['id']) ;
          $copy = cambiaCadena($request['copy']);
          //Editados en prestamo
@@ -63,16 +65,16 @@ class LoanController extends Controller
            //
            //
 
-       Order::create([
-         'startDate' => $startDate,
-         'typeItem' => $typeItem,
-         'place' => $place,
-         'id_user' => $id_user,
-         'id_item' => $id_item,
-         'copy' => $copy,
-         'state' => $state,
-         'endDate' => null ,
-       ]);
+         Order::create([
+           'startDate' => $startDate,
+           'typeItem' => $typeItem,
+           'place' => $place,
+           'id_user' => $id_user,
+           'id_item' => $id_item,
+           'copy' => $copy,
+           'state' => $state,
+           'endDate' => null
+         ]);
        //Redirigir a un modal donde se muestre que el pedido fue satisfactorio
        return redirect('user/');
      }

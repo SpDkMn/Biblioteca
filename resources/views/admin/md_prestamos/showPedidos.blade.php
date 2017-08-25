@@ -33,11 +33,12 @@
           }?>
         </td class="text-center">
         <?php
-              $item = null ;
-              if($pedido->typeItem==2){ $item=App\Thesis::find($pedido->id_item);}
-              if($pedido->typeItem==1){ $item=App\Book::find($pedido->id_item); }
-              if($pedido->typeItem==3){ $item=App\Magazine::find($pedido->id_item); }
-              if($pedido->typeItem==3){ $item=App\Compendium::find($pedido->id_item); }
+              $tipo = null ;
+              if($pedido->typeItem==2){ $tipo=App\Thesis::find($pedido->id_item);}
+              if($pedido->typeItem==1){ $tipo=App\Book::find($pedido->id_item); }
+              if($pedido->typeItem==3){ $tipo=App\Magazine::find($pedido->id_item); }
+              if($pedido->typeItem==3){ $tipo=App\Compendium::find($pedido->id_item); }
+              $user = App\User::find($pedido->id_user);
         ?>
         <td class="text-center">{{$pedido->copy}}</td>
         <!--INICIO DEL MODAL DEL MATERIAL-->
@@ -123,7 +124,7 @@
              </div>
           </div>
         </div>
-        <td class="text-center"><span>Usuario Desconocido</span></td>
+        <td class="text-center"><span>{{$user->name}}</span></td>
         <td class="text-center">{{$pedido->startDate}}</td>
         <td class="text-center">@if($pedido->place==0){{"Sala"}}@else{{"Domicilio"}}@endif</td>
       </tr>
