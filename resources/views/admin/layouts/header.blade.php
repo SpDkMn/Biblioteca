@@ -41,20 +41,20 @@
 		</a>
 		<!-- Navbar Right Menu -->
 		<div class="navbar-custom-menu">
-      @if($pedidos!=null)
       <ul class="nav navbar-nav">
 				<!-- Notifications: style can be found in dropdown.less -->
 				<li class="dropdown notifications-menu" onclick="funcion2()"id="op2"><a href="#" class="dropdown-toggle" data-toggle="dropdown-menu">
 						<i class="fa fa-bell-o"></i>
             <span class="label label-warning">
-              {{count($pedidos)}}
+              @if($pedidos!=null){{count($pedidos)}}@endif
             </span>
 				</a>
 					<ul class="dropdown-menu">
-						<li class="header">Hay {{count($pedidos)}} solicitudes pendientes</li>
+						<li class="header text-center">@if($pedidos!=null){{"Hay".count($pedidos)}}@else {{"No hay "}} @endif solicitudes pendientes</li>
 						<li>
 							<!-- inner menu: contains the actual data -->
 							<ul class="menu">
+              @if($pedidos!=null)
                @foreach($pedidos as $pedido)
   							@if( $pedido->state==0 )
                 <form method="POST"  action="{{ url('/admin/prestamos/prestar') }}">
@@ -98,8 +98,9 @@
                 </form>
                 @endif
 							 @endforeach
+              @endif
 							</ul>
-						</li>
+            </li>
 						<li class="footer"><a href="solicitudes.html">View all</a></li>
 					</ul></li>
 				<!-- User Account: style can be found in dropdown.less -->
@@ -149,7 +150,6 @@
 						</li>
 					</ul></li>
 			</ul>
-      @endif
     </div>
 
 	</nav>

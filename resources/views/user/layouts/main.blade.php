@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head> 
+<head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Sistema de Biblioteca </title>
@@ -51,7 +51,7 @@
 		<div class="pull-right hidden-xs">
 			<b>Version</b> 2.0.0
 		</div>
-		<strong>Copyright &copy; 2016 <a href="#">SpDkMn</a>.
+		<strong>Copyright &copy; 2017 <a href="#">Bibliofisi</a>.
 		</strong> All rights reserved.
 	</footer>
 </div>

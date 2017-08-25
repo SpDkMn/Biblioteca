@@ -48,22 +48,8 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
 
-<div class="wrapper">
-   <header class="main-header">
-    <!-- Logo -->
-      <a href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
-       <span class="logo-mini"><b>S</b>B</span> <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Sistema </b>de Biblioteca</span>
-      </a>
-      <nav class="navbar navbar-static-top" >
-        <!-- Sidebar toggle button-->
-         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"> <span class="sr-only">Navegacion</span>
-         </a>  
-		    @include('admin.layouts.header')
-      </nav>
-  </header>
-
-
+  <div class="wrapper">
+		@include('admin.layouts.header')
 		<!-- Left side column. contains the logo and sidebar -->
 		@include('admin.layouts.aside')
 		<div class="content-wrapper">@yield('content')</div>
@@ -72,7 +58,7 @@
 			<div class="pull-right hidden-xs">
 				<b>Version</b> 2.0.0
 			</div>
-			<strong>Copyright &copy; 2016 <a href="#">SpDkMn</a>.
+			<strong>Copyright &copy; 2017 <a href="#">Bibliofisi</a>.
 			</strong> All rights reserved.
 		</footer>
 	</div>
