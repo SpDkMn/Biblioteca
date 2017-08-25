@@ -32,6 +32,7 @@
               if($pedido->typeItem==1){ $tipo=App\Book::find($pedido->id_item); }
               if($pedido->typeItem==3){ $tipo=App\Magazine::find($pedido->id_item); }
               if($pedido->typeItem==3){ $tipo=App\Compendium::find($pedido->id_item); }
+              $user = App\User::find($pedido->id_user);
         ?>
         <td>{{$pedido->copy}}</td>
 
@@ -124,23 +125,8 @@
           </div>
 
 
-        <td><a href="#" data-toggle="modal" data-target="#ModalCopy2"></a></td>
-          <div class="modal fade" id="ModalCopy2" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">
-             <div class="modal-dialog" role="document">
-               <div class="modal-content">
-                 <form>
-                  <div class="modal-header">
-                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                        <h3 class="modal-title text-center text-font-size" id="ModalCopyLabel"><strong>USUARIO :</strong> </h3>
-                   </div>
-                   <div class="modal-body">
+        <td>{{$user->name}}</td>
 
-                  </div>
-                 </form>
-               </div>
-            </div>
-          </div>
 
         <td>{{$pedido->startDate}}</td>
         <td><?php if($pedido->place==0) echo "Sala"; else echo "Domicilio"; ?></td>

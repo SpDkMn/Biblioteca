@@ -76,13 +76,13 @@ class Usuarios extends Controller
          $username = $request['code'];
       }
       $arreglo_1 = explode(" ", $request['last_name'], 2);
-      $cadena_contra = "fisi." . strtolower($arreglo_1[0]);
+
       \App\User::create([
          'name' => $request['name'],
          'last_name' => $request['last_name'],
          'code' => $request['code'],
          'dni' => $request['dni'],
-         'password' => bcrypt($cadena_contra),
+         'password' => null,
          'home_phone' => $request['home_phone'],
          'phone' => $request['phone'],
          'school' => $request['school'],
@@ -151,8 +151,7 @@ class Usuarios extends Controller
 
       $user_copia->fill($request->all());
       $arreglo_1 = explode(" ", $request['last_name'], 2);
-      $cadena_contra = "fisi." . strtolower($arreglo_1[0]);
-      $user_copia->password = bcrypt($cadena_contra);
+
       if ($request->tipo_academico == "Pregrado") {
          $user_copia->id_user_type = 1;
          $user_copia->username = $request->code;

@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
+use App\User as User;
 
 class LoginUserController extends Controller
 {
+    use AuthenticatesUsers;
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +40,16 @@ class LoginUserController extends Controller
      */
     public function store(Request $request)
     {
-        dd("store login");
+      $users = User::all();
+
+      foreach ($users as $user) {
+        if($user->email == $request->email && Hash::check($request->password, $user->password) && $user->register == true){
+            Auth::loginUsingId($user->id);
+
+            return redirect()->intended('/user');
+        }
+      }
+      dd("fallo al logear");
     }
 
     /**

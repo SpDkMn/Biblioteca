@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class User extends Authenticatable
 {
    use SoftDeletes;
-   
+
    use Notifiable;
 
    /**
@@ -31,7 +31,8 @@ class User extends Authenticatable
       'username',
       'faculty',
       'university',
-      'state'
+      'state', // 0 -> no castigado  // 1 -> castigado
+      'register'// 0 -> con contraseña // 1 -> sin contrasenia
    ];
 
    /**
@@ -133,6 +134,8 @@ class User extends Authenticatable
    {
       return $this->hasMany('App\Employee');
    }
+
+  
 
    //lo uso para el login
    public function employee2(){
