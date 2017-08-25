@@ -24,6 +24,7 @@ Route::get('compendium/{compendium}/introduccion', 'CompendiumController@introdu
 Route::get('compendium/{compendium}/itemDetail', 'CompendiumController@itemDetail')->name('compendium.itemDetail');
 // RUTA PARA LOS PRESTAMOS
 Route::post('prestamos/prestar', 'PrestamoController@prestar')->name('prestamos.prestar');
+Route::post('prestamos/devolver', 'PrestamoController@devolver')->name('prestamos.devolver');
 Route::resource('prestamos', 'PrestamoController');
 Route::post('prestamos', 'PrestamoController@index');
 

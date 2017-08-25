@@ -128,8 +128,15 @@
 
 	<script>
   $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
+    $("#tablePrestamo").DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true
+    });
+    $('#tablePedido').DataTable({
       "paging": true,
       "lengthChange": false,
       "searching": false,

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use App\User as User;
 // Para usar el Modelo Profile
 use App\Profile as Profile;
+use App\Order as Order;
+
 
 class ProfileController extends Controller
 {
@@ -23,7 +25,7 @@ class ProfileController extends Controller
    {
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
-      
+
       if ($crear) {
          $new = view('admin.md_perfiles.new');
       }
@@ -43,10 +45,19 @@ class ProfileController extends Controller
       if ($eliminar) {
          $delete = view('admin.md_perfiles.delete');
       }
+      $i = 0 ; $pedidos = null ;
+      foreach (Order::all() as $pedido) {
+        if ($pedido->state == 0) {
+          $pedidos[$i] = $pedido ;
+        }
+        $i = $i +1 ;
+      }
+
       return view('admin.md_perfiles.index', [
          'show' => $show,
          'edit' => $edit,
-         'delete' => $delete
+         'delete' => $delete,
+         'pedidos' => $pedidos
       ]);
    }
 

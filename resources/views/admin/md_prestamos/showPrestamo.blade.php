@@ -11,40 +11,40 @@
 
 
   <div class="box-body">
-
-<?php $cont=0; ?>
-@foreach($pedidos as $pedido)
-  @if($pedido->state == 2)
-    <table id="example3" class="table table-bordered table-hover">
+    <table id="tablePrestamo" class="table table-bordered table-hover">
       <thead>
         <tr>
-            <th>Cond</th>
-            <th>Item</th>
+            <th class="text-center">Tipo de item</th>
             <th>Titulo</th>
-            <th>Ejem</th>
+            <th>Ejemplar</th>
             <th>Usuario</th>
             <th>Personal Adm.</th>
             <th>Fecha de Prestamo</th>
-            <th>Prestamo</th>
+            <th>Lugar</th>
             <th>Tiempo restante</th>
-            <th>Devol</th>
+            <th>Devolver</th>
           </tr>
       </thead>
       <tbody>
-
+    @foreach($pedidos as $pedido)
+      @if($pedido->state == 1)
+      <!-- Obteniendo el tipo de item -->
+        <?php switch ($pedido->typeItem) {case 1 : $tipo = "Libro"; break;case 2 : $tipo = "Tesis/Tesina"; break;case 3 :$tipo = "Revista";break;}?>
+      <!-- fin-->
+      <!-- Obteniendo el usuario -->
+      <?php  $user = App\User::find($pedido->id_user); ?>
+      <?php $cont=0; ?>
       <tr>
-        <td><input type="button" class="btn btn-info" id="boton" data-original-title="Status" value="Prestado"></td>
-        <td> {{$pedido->typeItem}} </td>
-        <?php dd($pedidos) ?>
-        <?php if($pedido->typeItem==2){ $tipo=App\Thesis::find($pedido->id_item); }
+        <td class="text-center"><label class="label label-success">{{$tipo}}</label></td>
+        <?php if($pedido->typeItem==2){ $item=App\Thesis::find($pedido->id_item); }
 
-              if($pedido->typeItem==1){ $tipo=App\Book::find($pedido->id_item); }
+              if($pedido->typeItem==1){ $item=App\Book::find($pedido->id_item); }
 
-              if($pedido->typeItem==3){ $tipo=App\Magazine::find($pedido->id_item); }
+              if($pedido->typeItem==3){ $item=App\Magazine::find($pedido->id_item); }
 
-              if($pedido->typeItem==4){ $tipo=App\Compendium::find($pedido->id_item); }
+              if($pedido->typeItem==4){ $item=App\Compendium::find($pedido->id_item); }
         ?>
-        <td><a href="#" data-toggle="modal" data-target="#ModalCopy">{{$tipo->title}}</a></td>
+        <td><a href="#" data-toggle="modal" data-target="#ModalCopy">{{$item->title}}</a></td>
           <div class="modal fade" id="ModalCopy" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">
              <div class="modal-dialog" role="document">
                <div class="modal-content">
@@ -52,24 +52,24 @@
                   <div class="modal-header">
                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                        <h3 class="modal-title text-center text-font-size" id="ModalCopyLabel"><strong>MATERIAL :</strong> {{$tipo->title}}</h3>
+                        <h3 class="modal-title text-center text-font-size" id="ModalCopyLabel"><strong>MATERIAL :</strong> {{$item->title}}</h3>
                    </div>
                    <div class="modal-body">
-                       <p><?php  for($i=0;$i<36;$i++){echo "&nbsp";}?> <strong>Ubicacion</strong><?php for($i=0;$i<18;$i++){echo "&nbsp";}?>:&nbsp{{ $tipo->location }}</p>
+                       <p><?php  for($i=0;$i<36;$i++){echo "&nbsp";}?> <strong>Ubicacion</strong><?php for($i=0;$i<18;$i++){echo "&nbsp";}?>:&nbsp{{ $item->location }}</p>
 
                        <p><?php for($i=0;$i<36;$i++){echo "&nbsp";}?> <strong>Clasificación</strong>
                             <?php
                             for($i=0;$i<12;$i++){echo "&nbsp";} echo ":";
 
                               if($pedido->typeItem=="tesis")
-                                foreach($tipo->thesisCopies as $copia){
+                                foreach($item->thesisCopies as $copia){
                                   if($copia->copy == $pedido->id_copy) echo ($copia->clasification); }
                               if($pedido->typeItem=="libro"){
-                                foreach($tipo->bookCopies as $copia){
+                                foreach($item->bookCopies as $copia){
                                   if($copia->copy == $pedido->id_copy) echo ($copia->clasification); } }
 
                               if($pedido->typeItem=="revista")
-                                foreach($tipo->magazines_copies as $copia){
+                                foreach($item->magazines_copies as $copia){
                                   if($copia->copy == $pedido->id_copy) echo ($copia->numero); }
 
                             ?>
@@ -79,14 +79,14 @@
                             for($i=0;$i<4;$i++){echo "&nbsp";} echo ":";
 
                               if($pedido->typeItem=="tesis")
-                                foreach($tipo->thesisCopies as $copia){
+                                foreach($item->thesisCopies as $copia){
                                   if($copia->copy == $pedido->id_copy) echo ($copia->barcode); }
                               if($pedido->typeItem=="libro"){
-                                foreach($tipo->bookCopies as $copia){
+                                foreach($item->bookCopies as $copia){
                                   if($copia->copy == $pedido->id_copy) echo ($copia->barcode); } }
 
                               if($pedido->typeItem=="revista")
-                                foreach($tipo->magazines_copies as $copia){
+                                foreach($item->magazines_copies as $copia){
                                   if($copia->copy == $pedido->id_copy) echo ($copia->barcode); }
 
                             ?>
@@ -96,14 +96,14 @@
                             for($i=0;$i<2;$i++){echo "&nbsp";} echo ":";
 
                               if($pedido->typeItem=="tesis")
-                                foreach($tipo->thesisCopies as $copia){
+                                foreach($item->thesisCopies as $copia){
                                   if($copia->copy == $pedido->id_copy) echo ($copia->incomeNumber); }
                               if($pedido->typeItem=="libro"){
-                                foreach($tipo->bookCopies as $copia){
+                                foreach($item->bookCopies as $copia){
                                   if($copia->copy == $pedido->id_copy) echo ($copia->incomeNumber); } }
 
                               if($pedido->typeItem=="revista")
-                                foreach($tipo->magazines_copies as $copia){
+                                foreach($item->magazines_copies as $copia){
                                   if($copia->copy == $pedido->id_copy) echo ($copia->incomeNumber); }
 
                          ?>
@@ -112,13 +112,13 @@
                        <p><?php    for($i=0;$i<36;$i++){echo "&nbsp";} ?> <strong>Autores</strong>
                                 <?php for($i=0;$i<21;$i++){echo "&nbsp";}?>:&nbsp
                                 <?php $cont=0; ?>
-                                @foreach($tipo->authors as $author)
+                                @foreach($item->authors as $author)
                                   @if($author->pivot->type == true)
                                   <?php $cont=$cont+1; ?>
                                   @endif
                                 @endforeach
                                 <?php $cont2=2; ?>
-                                @foreach($tipo->authors as $author)
+                                @foreach($item->authors as $author)
                                   @if($author->pivot->type == true)
                                   {{$author->name}}
                                     @if($cont2<=$cont)
@@ -135,9 +135,8 @@
                </div>
             </div>
           </div>
-        <td>{{$pedido->id_copy}}</td>
-       <td><a href="#" data-toggle="modal" data-target="#ModalCopy2">Usuario</a></td>
-
+        <td>{{$pedido->copy}}</td>
+        <td><a href="#" data-toggle="modal" data-target="#ModalCopy2">{{$user->name}}</a></td>
           <div class="modal fade" id="ModalCopy2" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">
 
              <div class="modal-dialog" role="document">
@@ -162,117 +161,35 @@
                </div>
             </div>
           </div>
-
         <td>Mirian Pagan</td>
         <td>{{$pedido->startDate}}
-            <?php
-                $date = strtotime($pedido->startDate);
-                $fechaPedido = date("d/m/Y");
-                if(date("a", $date)=="pm"){
-                  $año = date("Y", $date);
-                  echo '<br>'.$año;
-                  $mes = date("m", $date);
-                  echo '<br>'.$mes;
-                  $dia = date("d", $date);
-                  echo '<br>dia pedido '.$dia;
-                  $hora = (12+date("h", $date));
-                  echo '<br>hora pedida '.$hora;
-                  $min = date("i", $date);
-                  echo '<br>minuto pedido '.$min;
-                  $seg = date("s", $date);
-                  echo '<br>segundo pedido '.$seg;
-                }
-                else{
-                  $año = date("Y", $date);
-                  echo '<br>'.$año;
-                  $mes = date("m", $date);
-                  echo  '<br>'.$mes;
-                  $dia = date("d", $date);
-                  echo '<br>dia pedido '.$dia;
-                  $hora = date("h", $date);
-                  echo '<br>hora pedida '.$hora;
-                  $min = date("i", $date);
-                  echo '<br>minuto pedido '.$min;
-                  $seg = date("s", $date);
-                  echo '<br>segundo pedido '.$seg;
-                }
 
-
-              $tiempo = strtotime($configuracion->endWednesday);
-                if(date("a", $tiempo)=="pm"){
-
-                  $horaFinAtencion = (12+date("h", $tiempo));
-                  echo '<br>hora de atencion '.$horaFinAtencion;
-                  $minFinAtencion = date("i", $tiempo);
-                  echo '<br>minuto de atencion'.$minFinAtencion;
-                  $segFinAtencion = date("s", $tiempo);
-                  echo '<br>segundo de atencion '.$segFinAtencion;
-
-                }
-                else{
-                  $horaFinAtencion = date("h", $tiempo);
-                  echo '<br>hora de atencion '.$horaFinAtencion;
-                  $minFinAtencion = date("i", $tiempo);
-                  echo '<br>minuto de atencion'.$minFinAtencion;
-                  $segFinAtencion = date("s", $tiempo);
-                  echo '<br>segundo de atencion '.$segFinAtencion;
-                }
-
-              echo "Hoy es dia ". date("d/m/Y") . " y la hora actual es ". date("h:i:s");
-              if(date("a")=="pm"){
-                  $fechaActual = date("d/m/Y");
-                  $tiempoActual = date("h:i:s");
-                  echo '<br>'.$tiempoActual;
-                  $diaActual = date("d");
-                  echo '<br>'.$diaActual;
-
-                  $horaActual = 7 + date("h");
-                  echo '<br>'.$horaActual;
-                  $horar = date("a");
-                  echo '<br>'.$horar;
-                  $minActual = date("i");
-                  echo '<br>'.$minActual;
-                  $segActual = date("s");
-                  echo '<br>'.$segActual;
-            }
-              else {
-                  $fechaActual = date("d/m/Y");
-                  $tiempoActual = date("h:i:s");
-                  echo '<br>'.$tiempoActual;
-                  $diaActual = date("d") - 1;
-                  echo '<br>'.$diaActual;
-                  $horar = date("a");
-                  echo '<br>'.$horar;
-                  $horaActual = 19 + date("h");
-                  echo '<br>'.$horaActual;
-                  $minActual = date("i");
-                  echo '<br>'.$minActual;
-                  $segActual = date("s");
-                  echo '<br>'.$segActual;
-              }
-            //   if($pedido->place=="Sala") $horas = ( $horaFinAtencion - $pedido->startDate );
-
-            ?>
         </td>
-        <td><?php if($pedido->place==0) echo "Sala"; else echo "Domicilio"; ?></td>
+        <td class="text-center"><label class="label label-warning"><?php if($pedido->place==0) echo "Sala"; else echo "Domicilio"; ?></label></td>
         <td>
 
           <p><span id="id">0</span></p>
         </td>
         <td class="text-center">
-          <a type="submit" class="btn btn-success" onclick="detenerse()"><i class="fa fa-external-link"></i></a>
+          <form method="POST"  action="{{ url('/admin/prestamos/devolver') }}">
+            {{ csrf_field() }}
+            <input type="hidden" name="id" value="{{$pedido->id}}">
+          <!-- <a type="submit" class="btn btn-success" onclick="detenerse()"><i class="fa fa-external-link"></i></a> -->
+          <button type="submit" name="prestar" onclick="detenerse()" class="btn btn-success">Devolver</button>
+
+          </form>
         </td>
       </tr>
+      @endif
+     @endforeach
       </tbody>
     </table>
- @endif
-@endforeach
   <div>
  </div>
 </div>
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     function countdown(id){
     var fecha=new Date('2012','1','10','21','00','00');
     var hoy=new Date();
@@ -302,4 +219,92 @@
     }
 
 }
- </script>
+ </script> -->
+<!--
+  esto va en php
+    $date = strtotime($pedido->startDate);
+    $fechaPedido = date("d/m/Y");
+    if(date("a", $date)=="pm"){
+      $año = date("Y", $date);
+      echo '<br>'.$año;
+      $mes = date("m", $date);
+      echo '<br>'.$mes;
+      $dia = date("d", $date);
+      echo '<br>dia pedido '.$dia;
+      $hora = (12+date("h", $date));
+      echo '<br>hora pedida '.$hora;
+      $min = date("i", $date);
+      echo '<br>minuto pedido '.$min;
+      $seg = date("s", $date);
+      echo '<br>segundo pedido '.$seg;
+    }
+    else{
+      $año = date("Y", $date);
+      echo '<br>'.$año;
+      $mes = date("m", $date);
+      echo  '<br>'.$mes;
+      $dia = date("d", $date);
+      echo '<br>dia pedido '.$dia;
+      $hora = date("h", $date);
+      echo '<br>hora pedida '.$hora;
+      $min = date("i", $date);
+      echo '<br>minuto pedido '.$min;
+      $seg = date("s", $date);
+      echo '<br>segundo pedido '.$seg;
+    }
+
+
+  $tiempo = strtotime($configuracion->endWednesday);
+    if(date("a", $tiempo)=="pm"){
+
+      $horaFinAtencion = (12+date("h", $tiempo));
+      echo '<br>hora de atencion '.$horaFinAtencion;
+      $minFinAtencion = date("i", $tiempo);
+      echo '<br>minuto de atencion'.$minFinAtencion;
+      $segFinAtencion = date("s", $tiempo);
+      echo '<br>segundo de atencion '.$segFinAtencion;
+
+    }
+    else{
+      $horaFinAtencion = date("h", $tiempo);
+      echo '<br>hora de atencion '.$horaFinAtencion;
+      $minFinAtencion = date("i", $tiempo);
+      echo '<br>minuto de atencion'.$minFinAtencion;
+      $segFinAtencion = date("s", $tiempo);
+      echo '<br>segundo de atencion '.$segFinAtencion;
+    }
+
+  echo "Hoy es dia ". date("d/m/Y") . " y la hora actual es ". date("h:i:s");
+  if(date("a")=="pm"){
+      $fechaActual = date("d/m/Y");
+      $tiempoActual = date("h:i:s");
+      echo '<br>'.$tiempoActual;
+      $diaActual = date("d");
+      echo '<br>'.$diaActual;
+
+      $horaActual = 7 + date("h");
+      echo '<br>'.$horaActual;
+      $horar = date("a");
+      echo '<br>'.$horar;
+      $minActual = date("i");
+      echo '<br>'.$minActual;
+      $segActual = date("s");
+      echo '<br>'.$segActual;
+}
+  else {
+      $fechaActual = date("d/m/Y");
+      $tiempoActual = date("h:i:s");
+      echo '<br>'.$tiempoActual;
+      $diaActual = date("d") - 1;
+      echo '<br>'.$diaActual;
+      $horar = date("a");
+      echo '<br>'.$horar;
+      $horaActual = 19 + date("h");
+      echo '<br>'.$horaActual;
+      $minActual = date("i");
+      echo '<br>'.$minActual;
+      $segActual = date("s");
+      echo '<br>'.$segActual;
+  }
+//   if($pedido->place=="Sala") $horas = ( $horaFinAtencion - $pedido->startDate );
+ -->

@@ -12,20 +12,22 @@ use App\Profile as Profile;
 use App\Editorial as Editorial;
 use Session;
 use Redirect;
+use App\Order as Order ;
+
 
 class EditorialController extends Controller
 {
- 
+
    public function index(Request $request)
    {
-        
+
       $profile = Auth::User()->employee2->profile2;
 
       $j2a = json_decode($profile->JSON,true);
       // Iniciamos los permisos en false
 
       $ver = $crear = $editar = $eliminar =false;
-    
+
       // Recorremos cada uno de los permisos de 'perfiles'
       foreach($j2a['empleados'] as $dato){
         foreach($dato as $key => $value){
@@ -40,7 +42,7 @@ class EditorialController extends Controller
         }
       }
       $show = $new = $edit = $delete = "";
-    
+
       if ($editar) {
         //Con esto ya no saldra offset: 0 , solo mostraremos el primero a editar si existe
         if (Editorial::all()->isNotEmpty()) {
@@ -72,11 +74,20 @@ class EditorialController extends Controller
          ]);
        }
       }
+
+      $pedidos = null ; $i = 0 ;
+      foreach (Order::all() as $pedido) {
+        if ($pedido->state == 0) {
+          $pedidos[$i] = $pedido ;
+        }
+        $i++;
+      }
       return view('admin.md_editoriales.index', [
          'show' => $show,
          'new' => $new,
          'edit' => $edit,
-         'delete' => $delete
+         'delete' => $delete,
+         'pedidos' => $pedidos
       ]);
    }
 
@@ -120,12 +131,12 @@ class EditorialController extends Controller
    {
       $editorial = Editorial::find($id);
       $editorial->delete();
- 
+
    }
 
    public function show($id)
    {
-   
+
    }
 
      public function switchCategory($category){

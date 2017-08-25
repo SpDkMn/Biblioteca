@@ -1,6 +1,7 @@
 @extends('admin.layouts.main')
+<?php $pedidos = 0 ; ?>
 
-<?php $message=Session::get('message')?> 
+<?php $message=Session::get('message')?>
 @if(Session::has('message'))
 <div class="alert alert-success alert-dismissible" role="alert"
 	id="cuadro_identificacion_envio" style="margin-bottom: 0px">
@@ -39,7 +40,7 @@ $cantidad_elementos_divisor = $cantidad_elementos_multiplo4 / 4;
 }
 </style>
 <script type="text/javascript">
-			
+
 			function cerrar_identificacion(){
 				cuadro_identificacion_envio
 				valor_identificacion=document.getElementById("cuadro_identificacion_envio");
@@ -210,7 +211,7 @@ for ($i = 1; $i <= $cantidad_elementos_divisor; $i ++) {
 ?>
 			<div class="row">
 
-			
+
 
 		<?php
 for ($i = 1; $i <= $cantidad_elementos_sobra4; $i ++) {

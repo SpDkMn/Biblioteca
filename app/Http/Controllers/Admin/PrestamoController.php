@@ -55,10 +55,20 @@ class PrestamoController extends Controller
          ]);
 
 
+         $i = 0 ;
+         foreach (Order::all() as $pedido) {
+           if ($pedido->state == 0) {
+             $pedidos[$i] = $pedido ;
+           }
+           $i = $i+1;
+         }
+
+
       return view('admin.md_prestamos.index', [
          'showSeleccion'   => $showSeleccion,
          'showPedidos'     => $showPedidos,
-         'showPrestamo'    => $showPrestamo
+         'showPrestamo'    => $showPrestamo,
+         'pedidos' => $pedidos
       ]);
    }
 
@@ -104,9 +114,38 @@ class PrestamoController extends Controller
          break;
      }
      $pedido->save();
+     return redirect(redirect()->getUrlGenerator()->previous());
 
-     return redirect('admin/');
 
+   }
+
+   public function devolver(Request $request){
+
+          function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
+          $pedido = Order::find(cambiaCadena($request['id']));
+          // $endDate = Carbon::now('America/Lima');
+          //state 3 es devuelto
+            $pedido->state = 3;
+          // $pedido->endDate = $endDate ;
+          switch ($pedido->typeItem) {
+            case 1:
+             $book = Book::find($pedido->id_item);
+             foreach ($book->bookCopies as $item) {
+                 if ($item->copy == $pedido->copy) {
+                   //Cambiando disponibilidad a disponible
+                   $item->availability = 1;
+                   //Falta cambiar el estado del usuario que ha pedido
+                   $item->save();
+                 }
+             }
+              break;
+            default:
+              # code...
+              break;
+          }
+          //Consultar: cambiar el estado del pedido a devuelto
+           $pedido->save();
+          return redirect(redirect()->getUrlGenerator()->previous());
    }
 
    public function edit($id)

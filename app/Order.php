@@ -22,7 +22,8 @@ class Order extends Model
       // 0 : en espera
       // 1 : aceptado
       // 2 : rechazado
+      // 3 : entregado
     'endDate',
   ];
-  
+
 }

@@ -24,9 +24,9 @@
     $("#recarga").load('{{ url("/admin/prestamos/create") }}');
   }
   //Esta funcion debe activarse cuando no se haga click  en notifications-menu y user-menu
-  
+
   });
-  setInterval( "actualiza()", 5000 );
+  setInterval( "actualiza()", 1000 );
 
 </script>
 		<!-- Navbar Right Menu -->
@@ -40,7 +40,7 @@
             </span>
 				</a>
 					<ul class="dropdown-menu">
-						<li class="header text-center">@if($pedidos!=null){{"Hay".count($pedidos)}}@else {{"No hay "}} @endif solicitudes pendientes</li>
+						<li class="header text-center">@if($pedidos!=null){{"Hay ".count($pedidos)}}@else {{"No hay "}} @endif solicitudes pendientes</li>
 						<li>
 							<!-- inner menu: contains the actual data -->
 							<ul class="menu">

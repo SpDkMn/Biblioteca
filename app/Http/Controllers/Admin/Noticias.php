@@ -9,6 +9,7 @@ use App\Noticia;
 use App\Notification;
 use Session;
 use Redirect;
+use App\Order as Order;
 
 class Noticias extends Controller
 {
@@ -52,9 +53,9 @@ class Noticias extends Controller
          'palabra_clave' => $request['palabra_clave'],
          'localizacion' => $request['localizacion'],
          'urlImg' => $valor
-      
+
       ]);
-      
+
       Session::flash('message', 'Noticia creada Correctamente');
       return redirect::to('/admin/noticias/show');
    }
@@ -68,7 +69,7 @@ class Noticias extends Controller
    public function show($id)
    {
       $variable = \App\Noticia::paginate(8);
-      
+
       return view('admin.md_noticias.mostrar_noticia', compact('variable'));
    }
 
@@ -99,7 +100,7 @@ class Noticias extends Controller
       $user->fill($request->all());
       $user->save();
       Session::flash('message', 'Noticia editada correctamente');
-      
+
       return Redirect::to('/admin/noticias/show');
    }
 

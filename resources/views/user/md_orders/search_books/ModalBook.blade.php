@@ -49,7 +49,7 @@
                                   <option value="0" <?php if ($copy->availability!=1):?>disabled<?php endif;?>>Sala</option>
                                   <option value="1" <?php if ($copy->copy==1 || $copy->availability!=1):?>disabled<?php endif;?>>Domicilio</option>
                                 </select>
-                                <button type="submit" name="button"  class="text-center btn-xs btn-social btn btn-social-icon btn-foursquare"><i class="fa fa-book"></i></button>
+                                <button type="submit" <?php if ($copy->availability!=1):?>disabled<?php endif;?> name="button"  class="text-center btn-xs btn-social btn btn-social-icon btn-foursquare"><i class="fa fa-book"></i></button>
                           </form>
                         </td>
 

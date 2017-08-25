@@ -9,21 +9,27 @@
   </div>
   <hr>
   <div class="box-body">
-    <table id="example1" class="table table-bordered table-hover">
+    <table id="tablePedido" class="table table-bordered table-hover">
        <thead>
         <tr>
+            <th>Estado</th>
             <th>Tipo de Item</th>
             <th>Ejemplar</th>
             <th>Titulo</th>
             <th>Usuario</th>
             <th>Fecha pedido</th>
             <th>Prestamo</th>
+            <th>Prestar</th>
         </tr>
       </thead>
      <tbody>
     @foreach($pedidos as $pedido)
-      @if($pedido->state == 1)
+      @if($pedido->state==0)
+      <!-- Obteniendo el estado -->
+        <?php switch ($pedido->state) {case 0 : $estado = "En espera"; break;case 1 : $estado = "Aceptado"; break;case 2 :$estado = "Rechazado";break;}?>
+      <!-- fin-->
       <tr>
+        <td class="text-center"><label class="label label-info">{{$estado}}</label></td>
         <td class="text-center">
           <?php
           switch ($pedido->typeItem) {
@@ -33,11 +39,11 @@
           }?>
         </td class="text-center">
         <?php
-              $tipo = null ;
-              if($pedido->typeItem==2){ $tipo=App\Thesis::find($pedido->id_item);}
-              if($pedido->typeItem==1){ $tipo=App\Book::find($pedido->id_item); }
-              if($pedido->typeItem==3){ $tipo=App\Magazine::find($pedido->id_item); }
-              if($pedido->typeItem==3){ $tipo=App\Compendium::find($pedido->id_item); }
+              $item = null ;
+              if($pedido->typeItem==2){ $item=App\Thesis::find($pedido->id_item);}
+              if($pedido->typeItem==1){ $item=App\Book::find($pedido->id_item); }
+              if($pedido->typeItem==3){ $item=App\Magazine::find($pedido->id_item); }
+              if($pedido->typeItem==3){ $item=App\Compendium::find($pedido->id_item); }
               $user = App\User::find($pedido->id_user);
         ?>
         <td class="text-center">{{$pedido->copy}}</td>
@@ -127,6 +133,13 @@
         <td class="text-center"><span>{{$user->name}}</span></td>
         <td class="text-center">{{$pedido->startDate}}</td>
         <td class="text-center">@if($pedido->place==0){{"Sala"}}@else{{"Domicilio"}}@endif</td>
+        <td>
+          <form method="POST"  action="{{ url('/admin/prestamos/prestar') }}">
+            {{ csrf_field() }}
+            <input type="hidden" name="id" value="{{$pedido->id}}">
+            <button type="submit" name="prestar" class="btn btn-info" >Prestar</button>
+          </form>
+        </td>
       </tr>
       @endif
     @endforeach

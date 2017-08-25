@@ -7,6 +7,8 @@ use App\Http\Requests\AuthorRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\User as User;
+use App\Order as Order;
+
 // Para usar el Modelo Profile
 use App\Profile as Profile;
 use App\Author as Author;
@@ -28,22 +30,22 @@ class AuthorController extends Controller
 
    public function index(Request $request)
    {
-      
+
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
-      
+
       // Verifica si se envio "category" por metodo get , FILTROS de busqueda
       if ($request->get(CATEGORY) == null) {
          $categories = null;
       } else {
          $i = 0;
-          
+
           foreach ($request->get('category') as $category) {
             $categories[$i] = switchCategory($category);
             $i = $i + 1;
          }
       }
-      
+
       if ($editar){
          // $author recibira el primer autor, tambien pudo usarse el metodo first
          $edit = view('admin.md_autores.edit', [
@@ -66,12 +68,21 @@ class AuthorController extends Controller
                'categories' => $categories,
                'search' => true
             ]);
-         } 
+         }
          else {
             // $authors cargara todos los autores
             $authors = Author::all();
             // envia los permisos de editar y eliminar
             // ademas enviara un boleano "search" el cual servira para saber si se realizo una busqueda en la vista
+
+            $pedidos = null ; $i = 0 ;
+            foreach (Order::all() as $pedido) {
+              if ($pedido->state == 0) {
+                $pedidos[$i] = $pedido ;
+              }
+              $i++;
+            }
+
             $show = view('admin.md_autores.show', [
                'authors' => $authors,
                'eliminar' => $eliminar,
@@ -90,7 +101,8 @@ class AuthorController extends Controller
          'show' => $show,
          'new' => $new,
          'edit' => $edit,
-         'delete' => $delete
+         'delete' => $delete,
+         'pedidos' => $pedidos
       ]);
    }
 
@@ -102,13 +114,13 @@ class AuthorController extends Controller
       $edit = Author::create([
          'name' => $request['name']
       ]);
-      
+
       foreach ($request['category'] as $category) {
          $id = $this->switchCategory($category);
          $edit->categories()->attach($id);
       }
 
-      
+
       return redirect('admin/autor');
    }
 
@@ -123,14 +135,14 @@ class AuthorController extends Controller
       $author = Author::find($id);
       $author->fill($request->all());
       $author->save();
-      
+
       $author->categories()->detach(); // No tiene nada que ver con el error
-      
+
        foreach ($request['category'] as $category) {
          $id = $this->switchCategory($category);
          $author->categories()->attach($id);
       }
-      
+
       return redirect()->route(AUTOR_ROUTE);
    }
 
@@ -146,7 +158,7 @@ class AuthorController extends Controller
       $author = Author::find($id);
       $author->categories()->detach();
       $author->delete();
-      
+
       return redirect()->route(AUTOR_ROUTE);
    }
 
@@ -176,5 +188,5 @@ class AuthorController extends Controller
       return $id;
    }
 
-   
+
 }

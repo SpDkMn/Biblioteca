@@ -23,17 +23,15 @@ class HomeController extends Controller
     */
    public function index()
    {
-    $pedidos = Order::all();
-    $pedidos2 = null ;
-    $i = 0 ;
-    foreach ($pedidos as $pedido) {
+    $pedidos = null ; $i = 0 ;
+    foreach (Order::all() as $pedido) {
       if ($pedido->state == 0) {
-        $pedidos2[$i] = $pedido ;
+        $pedidos[$i] = $pedido ;
       }
       $i++;
     }
     //$pedidos2 contiene a los pedidos que tienen como estado 0 osea que estan en la espera de ser aceptados o rechazados
-      return view('admin.layouts.main',['pedidos' => $pedidos2]);
+      return view('admin.layouts.main',['pedidos' => $pedidos]);
    }
    public function indexUser()
    {
