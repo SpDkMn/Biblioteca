@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 // Para usar el Modelo Tesis
+use Carbon\Carbon;
 
 use App\Order as Order;
 use App\Loan as Loan;
@@ -18,6 +19,7 @@ use App\ChapterThesis as ChapterThesis;
 use App\User as User;
 // Para usar el Modelo Profile
 use App\Profile as Profile;
+use App\Book as Book ;
 
 class PrestamoController extends Controller
 {
@@ -35,8 +37,6 @@ class PrestamoController extends Controller
       }else {
           $configuracion = collect([]);
       }
-
-
 
 
       $showSeleccion = view('admin.md_prestamos.showSeleccion',[
@@ -65,12 +65,40 @@ class PrestamoController extends Controller
 
    public function create()
    {
+          //Enviando los $pedidos
+          $pedidos = Order::all();
+          dd($pedidos);
           return view('admin.layouts.header');
    }
 
-   public function store(Request $request,$id)
+   public function prestar(Request $request)
    {
-         //
+
+     function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
+     $pedido = Order::find(cambiaCadena($request['id']));
+     $endDate = Carbon::now('America/Lima');
+     $pedido->state = 1 ;
+     $pedido->endDate = $endDate ;
+
+     switch ($pedido->typeItem) {
+       case 1:
+        $book = Book::find($pedido->id_item);
+        foreach ($book->bookCopies as $item) {
+            if ($item->copy == $pedido->copy) {
+              //Cambiando disponibilidad a prestado
+              $item->availability == 2;
+              $item->save();
+            }
+        }
+         break;
+       default:
+         # code...
+         break;
+     }
+     $pedido->save();
+
+     return redirect('admin/');
+
    }
 
    public function edit($id)

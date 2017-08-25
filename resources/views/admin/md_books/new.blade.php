@@ -8,7 +8,7 @@
 		</div>
 	</div>
 
-<form method="POST" id="formulario" action="{{ url('/admin/book') }}" onsubmit="return validarFormulario ()">
+<form method="POST" id="formulario" action="{{ url('/admin/prestamos') }}" onsubmit="return validarFormulario ()">
 	{{ csrf_field() }}
 		<div class="box-body">
 

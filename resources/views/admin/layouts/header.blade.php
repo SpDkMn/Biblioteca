@@ -18,8 +18,14 @@
   }
 </script>
 
-
-
+<!-- Este script se encarga de recargar la parte del header trayendo los ultimos pedidos -->
+<script type="text/javascript">
+  $(document).ready(function(){
+    setInterval(function(){
+      $('#show').load('{{ url("/admin/") }}')
+    }, 1000);
+  });
+</script>
 
 <header class="main-header">
 	<!-- Logo -->
@@ -35,29 +41,64 @@
 		</a>
 		<!-- Navbar Right Menu -->
 		<div class="navbar-custom-menu">
-			<ul class="nav navbar-nav">
+      @if($pedidos!=null)
+      <ul class="nav navbar-nav">
 				<!-- Notifications: style can be found in dropdown.less -->
-				<li class="dropdown notifications-menu" onclick="funcion2()"
-					id="op2"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<i class="fa fa-bell-o"></i> <span class="label label-warning">10</span>
+				<li class="dropdown notifications-menu" onclick="funcion2()"id="op2"><a href="#" class="dropdown-toggle" data-toggle="dropdown-menu">
+						<i class="fa fa-bell-o"></i>
+            <span class="label label-warning">
+              {{count($pedidos)}}
+            </span>
 				</a>
 					<ul class="dropdown-menu">
-						<li class="header">Hay 10 solicitudes pendientes</li>
+						<li class="header">Hay {{count($pedidos)}} solicitudes pendientes</li>
 						<li>
 							<!-- inner menu: contains the actual data -->
 							<ul class="menu">
-								<li><a href="solicitudes.html"> <i class="fa fa-book text-aqua"></i>
-										Programacion en C++
-								</a></li>
-								<li><a href="solicitudes.html"> <i class="fa fa-book text-aqua"></i>
-										Programacion en C#
-								</a></li>
-								<li><a href="solicitudes.html"> <i class="fa fa-book text-aqua"></i>
-										Programacion en Java
-								</a></li>
-								<li><a href="solicitudes.html"> <i class="fa fa-book text-aqua"></i>
-										Programacion en Python
-								</a></li>
+               @foreach($pedidos as $pedido)
+  							@if( $pedido->state==0 )
+                <form method="POST"  action="{{ url('/admin/prestamos/prestar') }}">
+                	{{ csrf_field() }}
+                  <div class="">
+                         <div class="box-body with-border">
+                             <?php
+                               if($pedido->typeItem==2){ $item=App\Thesis::find($pedido->id_item); }
+                           if($pedido->typeItem==1){ $item=App\Book::find($pedido->id_item); }
+                           if($pedido->typeItem==3){ $item=App\Magazine::find($pedido->id_item); }
+                           if($pedido->typeItem==4){ $item=App\Compendium::find($pedido->id_item); }
+                             ?>
+                                 <span><strong>* Alumno:</strong><?php $usuario=App\User::find($pedido->id_user); ?></span><br>
+                       <span><strong>* {{$pedido->typeItem}}:</strong> {{$item->title}}</span><br>		   <span><strong>* Autor:</strong>
+                                           <?php $cont=0; ?>
+                                           @foreach($item->authors as $author)
+                                             @if($author->pivot->type == true)
+                                             <?php $cont=$cont+1; ?>
+                                             @endif
+                                           @endforeach
+                                           <?php $cont2=2; ?>
+                                           @foreach($item->authors as $author)
+                                             @if($author->pivot->type == true)
+                                             {{$author->name}}
+                                               @if($cont2<=$cont)
+                                               ,
+                                               @endif
+                                             @endif
+                                             <?php $cont2=$cont2+1; ?>
+                                           @endforeach
+                       </span><br>
+                       <span><strong>* Ejemplar:</strong> {{$pedido->id_copy}}</span><br>
+                       <span><strong>* Ubicación:</strong> {{ $item->location }}</span><br>
+                               <div class="box-tools pull-left">
+                                 <input type="hidden" name="id" value="{{$pedido->id}}">
+                                  <button type="submit" name="prestar" class="btn btn-info" >Prestar</button>
+                                  <button type="submit" name ="cancelar" class="btn btn-info" data-widget="remove">Cancelar prestamo</button>
+
+                               </div>
+                       </div>
+                  </div>
+                </form>
+                @endif
+							 @endforeach
 							</ul>
 						</li>
 						<li class="footer"><a href="solicitudes.html">View all</a></li>
@@ -109,7 +150,8 @@
 						</li>
 					</ul></li>
 			</ul>
-		</div>
+      @endif
+    </div>
 
 	</nav>
 </header>
