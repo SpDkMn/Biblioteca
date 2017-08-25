@@ -20,27 +20,17 @@
 
 <!-- Este script se encarga de recargar la parte del header trayendo los ultimos pedidos -->
 <script type="text/javascript">
-  $(document).ready(function(){
-    setInterval(function(){
-      $('#show').load('{{ url("/admin/") }}')
-    }, 1000);
+  function actualiza(){
+    $("#recarga").load('{{ url("/admin/prestamos/create") }}');
+  }
+  //Esta funcion debe activarse cuando no se haga click  en notifications-menu y user-menu
+  
   });
-</script>
+  setInterval( "actualiza()", 5000 );
 
-<header class="main-header">
-	<!-- Logo -->
-	<a href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
-		<span class="logo-mini"><b>S</b>B</span> <!-- logo for regular state and mobile devices -->
-		<span class="logo-lg"><b>Sistema </b>de Biblioteca</span>
-	</a>
-	<!-- Header Navbar: style can be found in header.less -->
-	<nav class="navbar navbar-static-top">
-		<!-- Sidebar toggle button-->
-		<a href="#" class="sidebar-toggle" data-toggle="offcanvas"
-			role="button"> <span class="sr-only">Navegacion</span>
-		</a>
+</script>
 		<!-- Navbar Right Menu -->
-		<div class="navbar-custom-menu">
+		<div class="navbar-custom-menu" id="recarga">
       <ul class="nav navbar-nav">
 				<!-- Notifications: style can be found in dropdown.less -->
 				<li class="dropdown notifications-menu" onclick="funcion2()"id="op2"><a href="#" class="dropdown-toggle" data-toggle="dropdown-menu">
@@ -151,6 +141,3 @@
 					</ul></li>
 			</ul>
     </div>
-
-	</nav>
-</header>

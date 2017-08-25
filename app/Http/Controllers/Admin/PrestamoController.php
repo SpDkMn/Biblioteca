@@ -66,9 +66,17 @@ class PrestamoController extends Controller
    public function create()
    {
           //Enviando los $pedidos
-          $pedidos = Order::all();
-          dd($pedidos);
-          return view('admin.layouts.header');
+
+           $pedidos = Order::all();
+           $pedidos2 = null ;
+           $i = 0 ;
+           foreach ($pedidos as $pedido) {
+             if ($pedido->state == 0) {
+               $pedidos2[$i] = $pedido ;
+             }
+             $i++;
+           }
+          return view('admin.layouts.header',['pedidos'=>$pedidos2]);
    }
 
    public function prestar(Request $request)
@@ -86,7 +94,7 @@ class PrestamoController extends Controller
         foreach ($book->bookCopies as $item) {
             if ($item->copy == $pedido->copy) {
               //Cambiando disponibilidad a prestado
-              $item->availability == 2;
+              $item->availability = 2;
               $item->save();
             }
         }
