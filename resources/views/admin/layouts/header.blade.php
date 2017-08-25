@@ -1,82 +1,78 @@
-<script type="text/javascript">
-  function funcion1(){
 
-    if(document.getElementById('op').getAttribute('class')=="dropdown user user-menu"){
-      document.getElementById('op').setAttribute("class","dropdown user user-menu open");
-    }else{
-      document.getElementById('op').setAttribute("class","dropdown user user-menu");
-    }
+
+<!-- Este script se encarga de recargar la parte del header trayendo los ultimos pedidos -->
+
+
+
+<script>
+  function actualiza(){
+    $("#recarga").load('{{ url("/admin/prestamos/create") }}');
   }
+  setInterval( "actualiza()", 5000 );
 
-  function funcion2(){
+ </script>	 
 
-    if(document.getElementById('op2').getAttribute('class')=="dropdown notifications-menu"){
-      document.getElementById('op2').setAttribute("class","dropdown notifications-menu open");
-    }else{
-      document.getElementById('op2').setAttribute("class","dropdown notifications-menu");
-    }
-  }
-</script>
+	<div class="navbar-custom-menu">
+		<ul class="nav navbar-nav" id="recarga">
+			<?php 
+				$cont=0;
+				$pedidos=App\Order::all(); 
+				 foreach($pedidos as $pedido){ 
+				 	if($pedido->state==0) 
+						 $cont++;   // 0: espera , 1: aceptado, 2: rechazado
+				}
+			?>	
 
+			 <a href="#" class="dropdown-toggle " data-toggle="dropdown-menu"><li class="dropdown notifications-menu open" onclick="funcion2()" id="opcion2"><i class="fa fa-weixin"></i> <span class="label label-warning">{{$cont}}</span>
+				<ul class="dropdown-menu" >
+					<li class="header text-center" ><h4><strong>Pedidos recientes</strong></h4></li>
+					<li style=" max-height:90%;">
+					  <ul class="menu" >
+						 @foreach($pedidos as $pedido)
+							@if( $pedido->state==0 )
+							 <div class="" >
+					            <div class="box-body with-border" >
+					               	<?php
+					               		if($pedido->typeItem==2){ $tipo=App\Thesis::find($pedido->id_item); }
+								        if($pedido->typeItem==1){ $tipo=App\Book::find($pedido->id_item); }
+								        if($pedido->typeItem==3){ $tipo=App\Magazine::find($pedido->id_item); }
+								        if($pedido->typeItem==4){ $tipo=App\Compendium::find($pedido->id_item); }
+					               	?>
+					                    <span><strong>* Alumno:</strong><?php $usuario=App\User::find($pedido->id_user); ?></span><br>
+					                    
+										<span><strong>* {{$pedido->typeItem}}:</strong> {{$tipo->title}}</span><br>  <span><strong>* Autor:</strong> 
+				                             
+										</span><br>
+										<span><strong>* Ejemplar:</strong> {{$pedido->id_copy}}</span><br>
+										<span><strong>* Ubicación:</strong> {{ $tipo->location }}</span><br>
+						                <div class="box-tools pull-left">
+						                	 <a href="#" id="" name="button2" class="btn btn-primary" data-widget="remove" onclick='alert("Prestamo realizado con exito!")'>Prestar</a>
+						 
+						                    <button type="button" class="btn btn-info" data-widget="remove" onclick='alert("Desea cancelar el prestamo?")'>Cancelar prestamo
+						                    </button>
+						                </div>
+						        </div>         
+							 </div>
 
+							 @endif
+							@endforeach
+						</ul>
+					  </li>
 
-
-<header class="main-header">
-	<!-- Logo -->
-	<a href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
-		<span class="logo-mini"><b>S</b>B</span> <!-- logo for regular state and mobile devices -->
-		<span class="logo-lg"><b>Sistema </b>de Biblioteca</span>
-	</a>
-	<!-- Header Navbar: style can be found in header.less -->
-	<nav class="navbar navbar-static-top">
-		<!-- Sidebar toggle button-->
-		<a href="#" class="sidebar-toggle" data-toggle="offcanvas"
-			role="button"> <span class="sr-only">Navegacion</span>
-		</a>
-		<!-- Navbar Right Menu -->
-		<div class="navbar-custom-menu">
-			<ul class="nav navbar-nav">
-				<!-- Notifications: style can be found in dropdown.less -->
-				<li class="dropdown notifications-menu" onclick="funcion2()"
-					id="op2"><a href="#" class="dropdown-toggle" data-toggle="dropdown-menu">
-						<i class="fa fa-bell-o"></i> <span class="label label-warning">10</span>
-				</a>
-					<ul class="dropdown-menu">
-						<li class="header">Hay 10 solicitudes pendientes</li>
-						<li>
-							<!-- inner menu: contains the actual data -->
-							<ul class="menu">
-								<li><a href="solicitudes.html"> <i class="fa fa-book text-aqua"></i>
-										Programacion en C++
-								</a></li>
-								<li><a href="solicitudes.html"> <i class="fa fa-book text-aqua"></i>
-										Programacion en C#
-								</a></li>
-								<li><a href="solicitudes.html"> <i class="fa fa-book text-aqua"></i>
-										Programacion en Java
-								</a></li>
-								<li><a href="solicitudes.html"> <i class="fa fa-book text-aqua"></i>
-										Programacion en Python
-								</a></li>
-							</ul>
-						</li>
-						<li class="footer"><a href="solicitudes.html">View all</a></li>
-					</ul></li>
+					<li class="text-center">...</li>
+				    </ul>
+				</li>
 				<!-- User Account: style can be found in dropdown.less -->
-				<li class="dropdown user user-menu" onclick="funcion1()" id="op"><a
-					href="#" class="dropdown-toggle" data-toggle="dropdown-menu"> <img
-						src="{{url('img/user2-160x160.jpg')}}" class="user-image"
-						alt="User Image"> <span class="hidden-xs">{{ Auth::user()->name }}</span>
+				<li class="dropdown user user-menu" onclick="funcion1()" id="opcion3">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="{{url('img/user2-160x160.jpg')}}" class="user-image" alt="User Image"> <span class="hidden-xs">{{ Auth::user()->name }}</span>
 				</a>
 					<ul class="dropdown-menu">
-						<!-- User image -->
-						<li class="user-header"><img
-							src="{{url('img/user2-160x160.jpg')}}" class="img-circle"
+						<li class="user-header"><img src="{{url('img/user2-160x160.jpg')}}" class="img-circle"
 							alt="User Image">
-
 							<p>
 								{{ Auth::user()->name }} <small>{{ Auth::user()->last_name }}</small>
-							</p></li>
+							</p>
+						</li>
 						<!-- Menu Body -->
 						<li class="user-body">
 							<div class="row">
@@ -107,9 +103,8 @@
 									method="POST" style="display: none;">{{ csrf_field() }}</form>
 							</div>
 						</li>
-					</ul></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
-
-	</nav>
-</header>
+	

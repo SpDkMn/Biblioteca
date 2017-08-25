@@ -35,7 +35,7 @@ class LoanController extends Controller
 
          $typeItem = cambiaCadena($request['typeItem']);
          $place = cambiaCadena($request['place']);
-         $state = 1 ;
+         $state = 0 ;
          $id_user = Auth::User()->id;
          $id_item = cambiaCadena($request['id']) ;
          $copy = cambiaCadena($request['copy']);
