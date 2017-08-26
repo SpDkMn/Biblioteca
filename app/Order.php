@@ -24,5 +24,11 @@ class Order extends Model
       // 2 : rechazado
     'endDate',
   ];
-  
+  public function user()
+   {
+      return $this->belongsTo('App\User','id_user');
+           
+      
+
+   }
 }

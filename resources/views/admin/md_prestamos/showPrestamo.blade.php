@@ -1,3 +1,8 @@
+<link href='http://fonts.googleapis.com/css?family=Autour+One' rel='stylesheet' type='text/css'><style type='text/css'>#countdown_container{font-family: 'Autour One', cursive;width:300px;height:172px;background: url("http://gaf210.imvustylez.net/images/countdown-gaf210codes-chocolatecookie1.png") top center no-repeat;margin: 0px auto;}.countdown_box{overflow: hidden;position: absolute;text-align: center;}.countdown_number{width: 51px;height: 26px;font-size:20px;text-align:center;color:#000;}.countdown_number_name{width: 51px;height: 26px;font-size:13px;text-transform:uppercase;color:#000;}#countdown_days{margin-left: 15px;margin-top: 102px;}#countdown_hours{margin-left: 88px;margin-top: 85px;}#countdown_mins{margin-left: 163px;margin-top: 63px;}#countdown_secs{margin-left: 237px;margin-top: 44px;}#countdown_number_name_secs{margin-left: 236px;margin-top: 86px;}#countdown_number_name_mins{margin-left: 162px;margin-top: 106px;}#countdown_number_name_hours{margin-left: 89px;margin-top: 129px;}#countdown_number_name_days{margin-left: 14px;margin-top: 150px;}#countdown_bottompart{margin-left: 4px;margin-top: 8px;width: 188px;height: 26px;color:#ccc;font-size:15px;text-transform:uppercase;}</style><script type="text/javascript">/*courtesy of onlineclock.net*/ countdown_dateFuture=new Date(2017,8,25,00,00,00);function countdown_UpdateCount(){dateNow=new Date();timediff=Math.abs(countdown_dateFuture.getTime() - dateNow.getTime());delete dateNow;if(timediff<0){document.getElementById('countdown_container').style.display="none";}else {days=0;hours=0;mins=0;secs=0;out="";timediff=Math.floor(timediff/1000);days=Math.floor(timediff/86400);timediff=timediff % 86400;hours=Math.floor(timediff/3600);timediff=timediff % 3600;mins=Math.floor(timediff/60);timediff=timediff % 60;secs=Math.floor(timediff);if(document.getElementById('countdown_container')){document.getElementById('countdown_days').innerHTML=days;document.getElementById('countdown_hours').innerHTML=hours;document.getElementById('countdown_mins').innerHTML=mins;document.getElementById('countdown_secs').innerHTML=secs;}setTimeout("countdown_UpdateCount()", 1000);}}window.onload=function(){countdown_UpdateCount();}</script><div id="countdown_container"><div id="countdown_days" class="countdown_box countdown_number"></div><div id="countdown_hours" class="countdown_box countdown_number"></div><div id="countdown_mins" class="countdown_box countdown_number"></div><div id="countdown_secs" class="countdown_box countdown_number"></div><div id="countdown_number_name_secs" class="countdown_box countdown_number_name">Secs</div><div id="countdown_number_name_mins" class="countdown_box countdown_number_name">Mins</div><div id="countdown_number_name_hours" class="countdown_box countdown_number_name">Hours</div><div id="countdown_number_name_days" class="countdown_box countdown_number_name">Days</div><div id="countdown_bottompart" class="countdown_box">Until my Birthday!!</div></div>
+
+
+
+
 <div class="box box-warning">
   <div class="box-header with-border">
     <h2 class="all-tittles"><i class="fa fa-history"></i> Historial de Prestamos</h2>
@@ -9,12 +14,11 @@
   </div>
   <hr>
 
-
   <div class="box-body">
 
 <?php $cont=0; ?>
 @foreach($pedidos as $pedido)
-  @if($pedido->state == 2)
+  @if($pedido->state == 1)
     <table id="example3" class="table table-bordered table-hover">
       <thead>
         <tr>
@@ -35,7 +39,7 @@
       <tr>
         <td><input type="button" class="btn btn-info" id="boton" data-original-title="Status" value="Prestado"></td>
         <td> {{$pedido->typeItem}} </td>
-        <?php dd($pedidos) ?>
+       
         <?php if($pedido->typeItem==2){ $tipo=App\Thesis::find($pedido->id_item); }
 
               if($pedido->typeItem==1){ $tipo=App\Book::find($pedido->id_item); }
@@ -251,13 +255,12 @@
                   echo '<br>'.$segActual;
               }
             //   if($pedido->place=="Sala") $horas = ( $horaFinAtencion - $pedido->startDate );
-
-            ?>
+          ?>
         </td>
         <td><?php if($pedido->place==0) echo "Sala"; else echo "Domicilio"; ?></td>
         <td>
 
-          <p><span id="id">0</span></p>
+          <p><span id="identificador">0</span></p>
         </td>
         <td class="text-center">
           <a type="submit" class="btn btn-success" onclick="detenerse()"><i class="fa fa-external-link"></i></a>
@@ -273,7 +276,10 @@
 
 
 <script type="text/javascript">
-    function countdown(id){
+
+
+    function countdown(identificador){
+
     var fecha=new Date('2012','1','10','21','00','00');
     var hoy=new Date();
     var dias=0;
@@ -302,4 +308,7 @@
     }
 
 }
+
+
+
  </script>

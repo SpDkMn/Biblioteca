@@ -40,14 +40,25 @@ class LoginController extends Controller
     */
    public function login(Request $request)
    {
+
       $users = User::all();
+      $employees = Employee::all();
 
       foreach ($users as $u) {
-        if($u->email == $request->username && $request->password == Crypt::decrypt($u->employee2->password)){
+        if($u->email == $request->username){//usuario ingresa correctamente el email
+          //comprobar que sea empleado
+          foreach ($employees as $employee) {
+             // dd("");
+           }
+
+          // && $request->password == Crypt::decrypt($u->employee2->password)
+
+        //  dd("dfdsfsad");
           Auth::loginUsingId($u->id);
           return redirect()->intended('admin/noticias');
         }
       }
+
       dd("ERROR : 484515x121 :v");
    }
 
