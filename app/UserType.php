@@ -10,7 +10,7 @@ class UserType extends Model
     use SoftDeletes;
     protected $table = 'user_types';
 
-	protected $fillable = ['name','JSON',];
+	   protected $fillable = ['name','JSON',];
 
     protected $dates = ['deleted_at'];
 

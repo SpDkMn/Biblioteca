@@ -26,7 +26,7 @@ class LoanController extends Controller
      {
        function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
        //Almacenamiento de la fecha de pedido
-         $startDate = Carbon::now('America/Lima');
+         $startDate = null;
            //         $date->toDateString();                          // 1975-12-25
            //         $date->toFormattedDateString();                 // Dec 25, 1975
            //         $date->toTimeString();                          // 14:15:16

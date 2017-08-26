@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('startDate');// fecha del pedido
+            $table->dateTime('startDate')->nullable();;// fecha del pedido
             // $table->string('search'); // palabra de busqueda
             $table->integer('typeItem');// tipo de item (1,2,3,4)
             $table->boolean('place');// tipo lugar (0 = sala,1 = domicilio)

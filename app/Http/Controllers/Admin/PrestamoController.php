@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 // Para usar el Modelo Tesis
 use Carbon\Carbon;
-
+use App\UserType as UserType ;
 use App\Order as Order;
 use App\Loan as Loan;
 use App\Configuration as Configuration;
@@ -93,11 +93,16 @@ class PrestamoController extends Controller
    public function prestar(Request $request)
    {
 
+
+
+
+
+
      function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
      $pedido = Order::find(cambiaCadena($request['id']));
-     $endDate = Carbon::now('America/Lima');
+     $startDate = Carbon::now('America/Lima');
      $pedido->state = 1 ;
-     $pedido->endDate = $endDate ;
+     $pedido->startDate = $startDate ;
 
      switch ($pedido->typeItem) {
        case 1:
@@ -121,10 +126,9 @@ class PrestamoController extends Controller
    }
 
    public function devolver(Request $request){
-
           function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
           $pedido = Order::find(cambiaCadena($request['id']));
-          // $endDate = Carbon::now('America/Lima');
+          $endDate = Carbon::now('America/Lima');
           //state 3 es devuelto
             $pedido->state = 3;
           // $pedido->endDate = $endDate ;

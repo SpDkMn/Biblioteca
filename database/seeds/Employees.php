@@ -30,8 +30,8 @@ class Employees extends Seeder
          'school' => 'Ingenieria de Software',
          'faculty' => "ingenieria de sistemas e informatica",
          'university' => "Universidad nacional mayor de san marcos",
-         'id_user_type' => 5,
-         'state' => true,
+         'id_user_type' => 2,
+         'state' => false,
          'register'=>false
       ]);
 
@@ -49,8 +49,8 @@ class Employees extends Seeder
          'school' => 'Ingenieria de Sistemas',
          'faculty' => "ingenieria de sistemas e informatica",
          'university' => "Universidad nacional mayor de san marcos",
-         'id_user_type' => 5,
-         'state' => true,
+         'id_user_type' => 2,
+         'state' => false,
          'register'=>false
 
         //  'register'=>true

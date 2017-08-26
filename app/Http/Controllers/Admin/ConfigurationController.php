@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// Para usar el objeto Auth 
+// Para usar el objeto Auth
 use Illuminate\Support\Facades\Auth;
 // Para usar el Modelo User
 use App\Configuration as Configuration;
@@ -25,27 +25,28 @@ class ConfigurationController extends Controller
     * @return \Illuminate\Http\Response
     */
    public function index()
-   {  
+   {
 
       $userTypes = UserType::all();
 
-      
+
       if (true){
          $showDiasLaborables = view('admin.md_configuration.showDiasLaborables');
       }
-  
+
       if (true) {
          $showTipoUsuario = view('admin.md_configuration.showTipoUsuario', [
             "userTypes" => $userTypes
          ]);
       }
-      
+
       if(true){
-        $showFeriados = view('admin.md_configuration.showFeriados');    
+        $showFeriados = view('admin.md_configuration.showFeriados');
       }
-      
+
       return view('admin.md_configuration.index', [
          'showTipoUsuario' => $showTipoUsuario,
+         'pedidos' => null ,
          'showDiasLaborables' => $showDiasLaborables,
          'showFeriados' => $showFeriados
       ]);
@@ -85,30 +86,30 @@ class ConfigurationController extends Controller
          'startSunday' => $request['boton27'],
          'endSunday' => $request['boton28']
       ]);
-      
+
       $userTypes = UserType::all();
 
-      
+
       if (true){
          $showDiasLaborables = view('admin.md_configuration.showDiasLaborables');
       }
-  
+
       if (true) {
          $showTipoUsuario = view('admin.md_configuration.showTipoUsuario', [
             "userTypes" => $userTypes
          ]);
       }
-      
+
       if(true){
         $showFeriados = view('admin.md_configuration.showFeriados');
       }
-      
+
       return view('admin.md_configuration.index', [
          'showTipoUsuario' => $showTipoUsuario,
          'showDiasLaborables' => $showDiasLaborables,
          'showFeriados' => $showFeriados
       ]);
-      
+
    }
 
    public function show($id)
@@ -150,4 +151,3 @@ class ConfigurationController extends Controller
       //
    }
 }
-
