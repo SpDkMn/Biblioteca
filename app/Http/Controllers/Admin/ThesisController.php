@@ -13,6 +13,8 @@ use App\Editorial as Editorial;
 use App\Content as Content;
 use App\ChapterThesis as ChapterThesis;
 use App\User as User;
+use App\Order as Order;
+
 // Para usar el Modelo Profile
 use App\Profile as Profile;
 use App\SearchItem as SearchItem;
@@ -57,11 +59,21 @@ class ThesisController extends Controller
          'autores' => null
       ]);
 
+
+      $pedidos = null ; $i = 0 ;
+      foreach (Order::all() as $pedido) {
+        if ($pedido->state == 0) {
+          $pedidos[$i] = $pedido ;
+        }
+        $i++;
+      }
+
       return view('admin.md_thesiss.index', [
          'new' => $new,
          'show' => $show,
          'edit' => $edit,
-         'delete' => $delete
+         'delete' => $delete,
+         'pedidos' => $pedidos
       ]);
    }
 

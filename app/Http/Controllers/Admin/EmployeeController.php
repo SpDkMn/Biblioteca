@@ -14,6 +14,7 @@ use App\Profile as Profile;
 use App\Employee as Employee;
 
 use App\UserType as UserType;
+use App\Order as Order;
 
 use Illuminate\Support\Facades\Crypt;
 
@@ -26,11 +27,11 @@ class EmployeeController extends Controller
     * @return \Illuminate\Http\Response
     */
    public function index()
-   { 
+   {
 
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
-      
+
       $usuarios = User::all();
       $perfiles = Profile::all();
       $employees = Employee::all();
@@ -62,11 +63,20 @@ class EmployeeController extends Controller
       if ($eliminar) {
          $delete = view('admin.md_empleados.delete');
       }
+      $pedidos = null ; $i = 0 ;
+      foreach (Order::all() as $pedido) {
+        if ($pedido->state == 0) {
+          $pedidos[$i] = $pedido ;
+        }
+        $i++;
+      }
+
       return view('admin.md_empleados.index', [
          'show' => $show,
          'new' => $new,
          'edit' => $edit,
-         'delete' => $delete
+         'delete' => $delete,
+         'pedidos' => $pedidos
       ]);
    }
 
@@ -94,7 +104,7 @@ class EmployeeController extends Controller
    }
 
    public function edit($id)
-   {  
+   {
 
       $usuarios = User::all();
       $empleado = Employee::find($id);
@@ -108,7 +118,7 @@ class EmployeeController extends Controller
    }
 
    public function update(Request $request, $id)
-   {  
+   {
       $e = Employee::find($id);
       $e->code = $request->code2;
       $e->password = Crypt::encrypt($request->password2);

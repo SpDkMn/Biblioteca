@@ -9,6 +9,8 @@ use App\MagazineCopy as MagazineCopy;
 use App\Editorial as Editorial;
 use App\Content as Content;
 use App\SearchItem as SearchItem;
+use App\Order as Order;
+
 // Nota: Reducir la funciones al terminar todos los modulos
 class MagazineController extends Controller
 {
@@ -51,13 +53,24 @@ class MagazineController extends Controller
          'id' => null,
          'autores' => null
       ]);
+
+
+      $pedidos = null ; $i = 0 ;
+      foreach (Order::all() as $pedido) {
+        if ($pedido->state == 0) {
+          $pedidos[$i] = $pedido ;
+        }
+        $i++;
+      }
+
       return view('admin.md_magazines.index', [
          'new' => $new,
          'show' => $show,
          'edit' => $edit,
          'delete' => $delete,
          'content' => $content,
-         'item' => $item
+         'item' => $item,
+         'pedidos' => $pedidos
       ]);
    }
    // Funcion no usada

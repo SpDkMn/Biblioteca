@@ -15,6 +15,7 @@ class Employees extends Seeder
     */
    public function run()
    {
+
       User::create([
          'username' => 'admin@admin.com',
          'password' => bcrypt('admin'),
@@ -32,9 +33,8 @@ class Employees extends Seeder
          'id_user_type' => 5,
          'state' => true,
          'register'=>false
-        //  'register'=>true
       ]);
-      
+
       User::create([
          'username' => 'superadmin',
          'password' => bcrypt('jefa'),

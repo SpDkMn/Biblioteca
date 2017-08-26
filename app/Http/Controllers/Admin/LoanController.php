@@ -64,6 +64,18 @@ class LoanController extends Controller
            //
            //
            //
+           switch ($typeItem) {
+             case 1:
+              $book = Book::find($request['id']);
+              foreach ($book->bookCopies as $item) {
+                  if ($item->copy == cambiaCadena($request['copy'])) {
+                    //Cambiando disponibilidad a prestado
+                    $item->availability = 3;
+                    $item->save();
+                  }
+              }
+               break;
+           }
 
          Order::create([
            'startDate' => $startDate,

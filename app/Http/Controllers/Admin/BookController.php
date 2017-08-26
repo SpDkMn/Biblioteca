@@ -11,6 +11,7 @@ use App\BookCopy as BookCopy;
 use App\Editorial as Editorial;
 use App\Content as Content;
 use App\ChapterBook as ChapterBook;
+use App\Order as Order;
 use App\SearchItem as SearchItem;
 
 
@@ -51,9 +52,21 @@ class BookController extends Controller
          EDITORIALES => $editoriales,
          AUTORES => $autores
       ]);
+
+
+
+       $pedidos = null ; $i = 0 ;
+       foreach (Order::all() as $pedido) {
+         if ($pedido->state == 0) {
+           $pedidos[$i] = $pedido ;
+         }
+         $i++;
+       }
+
       return view(MBOOKS_INDEX, [
          'show' => $show,
-         'new' => $new
+         'new' => $new,
+         'pedidos' => $pedidos
       ]);
    }
 
@@ -386,7 +399,7 @@ class BookController extends Controller
            $book->chapters[$i]->book_id = $id;
            $book->chapters[$i]->save();
         }
-        
+
          while ($i < $contador_capitulos_nuevo) {
             ChapterBook::create([
                'name' => $request->chapter[$i],

@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 // Para usar el Modelo Tesis
+use Carbon\Carbon;
 
 use App\Order as Order;
 use App\Loan as Loan;
@@ -18,6 +19,7 @@ use App\ChapterThesis as ChapterThesis;
 use App\User as User;
 // Para usar el Modelo Profile
 use App\Profile as Profile;
+use App\Book as Book ;
 
 class PrestamoController extends Controller
 {
@@ -37,8 +39,6 @@ class PrestamoController extends Controller
       }
 
 
-
-
       $showSeleccion = view('admin.md_prestamos.showSeleccion',[
          'pedidos' => $pedidos,
          ]);
@@ -55,10 +55,20 @@ class PrestamoController extends Controller
          ]);
 
 
+         $i = 0 ;
+         foreach (Order::all() as $pedido) {
+           if ($pedido->state == 0) {
+             $pedidos[$i] = $pedido ;
+           }
+           $i = $i+1;
+         }
+
+
       return view('admin.md_prestamos.index', [
          'showSeleccion'   => $showSeleccion,
          'showPedidos'     => $showPedidos,
-         'showPrestamo'    => $showPrestamo
+         'showPrestamo'    => $showPrestamo,
+         'pedidos' => $pedidos
       ]);
 
    }
@@ -66,12 +76,77 @@ class PrestamoController extends Controller
 
    public function create()
    {
-          return view('admin.layouts.header');
+          //Enviando los $pedidos
+
+           $pedidos = Order::all();
+           $pedidos2 = null ;
+           $i = 0 ;
+           foreach ($pedidos as $pedido) {
+             if ($pedido->state == 0) {
+               $pedidos2[$i] = $pedido ;
+             }
+             $i++;
+           }
+          return view('admin.layouts.header',['pedidos'=>$pedidos2]);
    }
 
-   public function store(Request $request,$id)
+   public function prestar(Request $request)
    {
-         //
+
+     function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
+     $pedido = Order::find(cambiaCadena($request['id']));
+     $endDate = Carbon::now('America/Lima');
+     $pedido->state = 1 ;
+     $pedido->endDate = $endDate ;
+
+     switch ($pedido->typeItem) {
+       case 1:
+        $book = Book::find($pedido->id_item);
+        foreach ($book->bookCopies as $item) {
+            if ($item->copy == $pedido->copy) {
+              //Cambiando disponibilidad a prestado
+              $item->availability = 2;
+              $item->save();
+            }
+        }
+         break;
+       default:
+         # code...
+         break;
+     }
+     $pedido->save();
+     return redirect(redirect()->getUrlGenerator()->previous());
+
+
+   }
+
+   public function devolver(Request $request){
+
+          function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
+          $pedido = Order::find(cambiaCadena($request['id']));
+          // $endDate = Carbon::now('America/Lima');
+          //state 3 es devuelto
+            $pedido->state = 3;
+          // $pedido->endDate = $endDate ;
+          switch ($pedido->typeItem) {
+            case 1:
+             $book = Book::find($pedido->id_item);
+             foreach ($book->bookCopies as $item) {
+                 if ($item->copy == $pedido->copy) {
+                   //Cambiando disponibilidad a disponible
+                   $item->availability = 1;
+                   //Falta cambiar el estado del usuario que ha pedido
+                   $item->save();
+                 }
+             }
+              break;
+            default:
+              # code...
+              break;
+          }
+          //Consultar: cambiar el estado del pedido a devuelto
+           $pedido->save();
+          return redirect(redirect()->getUrlGenerator()->previous());
    }
 
    public function edit($id)
