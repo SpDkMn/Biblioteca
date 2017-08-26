@@ -54,14 +54,14 @@ class User extends Authenticatable
       'remember_token'
    ];
 
-  
+
 
    public function employee()
    {
       return $this->hasMany('App\Employee');
    }
 
-  
+
 
    //lo uso para el login
    public function employee2(){
@@ -73,15 +73,11 @@ class User extends Authenticatable
       return $this->belongsTo('App\UserType');
    }
 
-   public function thesis_order()
-   {
-      return $this->belongsToMany('App\Thesis','usuario_thesis');
-   }
    public function order()
     {
       return $this->hasOne('App\Order','id_user');
 
-        
+
 
     }
 

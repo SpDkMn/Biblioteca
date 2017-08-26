@@ -1,5 +1,6 @@
 <?php
 namespace App\Console;
+use DB;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -12,8 +13,9 @@ class Kernel extends ConsoleKernel
     *
     * @var array
     */
-   protected $commands = [ //
-];
+   protected $commands = [
+     'App\Console\Commands\Prueba'
+   ];
 
    /**
     * Define the application's command schedule.
@@ -23,7 +25,9 @@ class Kernel extends ConsoleKernel
     */
    protected function schedule(Schedule $schedule)
    {
-      //
+      //Comando a ejecutarse cada minuto
+       $schedule->command('test:prueba')->everyMinute();
+
    }
 
    /**

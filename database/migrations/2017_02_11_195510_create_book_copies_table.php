@@ -35,7 +35,6 @@ class CreateBookCopiesTable extends Migration
          $table->string('printType');
          $table->string('publicationLocation')->nullable();
          $table->string('publicationDate')->nullable();
-
          $table->unsignedSmallInteger('book_id');
          $table->timestamps();
          $table->softDeletes();
