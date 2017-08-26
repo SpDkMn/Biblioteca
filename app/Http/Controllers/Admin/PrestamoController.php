@@ -70,6 +70,7 @@ class PrestamoController extends Controller
          'showPrestamo'    => $showPrestamo,
          'pedidos' => $pedidos
       ]);
+
    }
 
 

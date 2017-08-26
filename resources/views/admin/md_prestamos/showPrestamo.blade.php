@@ -1,3 +1,32 @@
+<script type="text/javascript">
+//countdown_dateFuture sera el limite para los prestamos que se sacara en configuraciones
+countdown_dateFuture=new Date(2017,7,24,00,00,00);
+  function countdown_UpdateCount(countdown_dateFuture,contenedor,cDias,cHoras,cMin,cSeg)
+    {dateNow=new Date();
+    timediff=Math.abs(countdown_dateFuture.getTime() - dateNow.getTime());
+    delete dateNow;
+    if(timediff<0){
+      document.getElementById('contador_container').style.display="none";
+    }else {
+      days=hours=mins=secs=0;
+      out="";
+      timediff=Math.floor(timediff/1000);days=Math.floor(timediff/86400);
+      timediff=timediff % 86400;hours=Math.floor(timediff/3600);
+      timediff=timediff % 3600;mins=Math.floor(timediff/60);
+      timediff=timediff % 60;secs=Math.floor(timediff);
+      if(document.getElementById(contenedor)){
+        document.getElementById(cDias).innerHTML=days+" D";
+        document.getElementById(cHoras).innerHTML=hours+ " H" ;
+        document.getElementById(cMin).innerHTML=mins+ " min";
+        document.getElementById(cSeg).innerHTML=secs+ " seg" ;
+      }
+      setTimeout("countdown_UpdateCount(countdown_dateFuture,'contador_container','contador_dias','contador_horas','contador_minutos','contador_segundos')", 1000);
+    }
+  }window.onload=function(){
+    countdown_UpdateCount(countdown_dateFuture,'contador_container','contador_dias','contador_horas','contador_minutos','contador_segundos');
+  }
+</script>
+
 <div class="box box-warning">
   <div class="box-header with-border">
     <h2 class="all-tittles"><i class="fa fa-history"></i> Historial de Prestamos</h2>
@@ -8,7 +37,6 @@
     </div>
   </div>
   <hr>
-
 
   <div class="box-body">
     <table id="tablePrestamo" class="table table-bordered table-hover">
@@ -167,8 +195,12 @@
         </td>
         <td class="text-center"><label class="label label-warning"><?php if($pedido->place==0) echo "Sala"; else echo "Domicilio"; ?></label></td>
         <td>
-
-          <p><span id="id">0</span></p>
+          <div id="contador_container">
+            <span id="contador_dias" ></span>
+            <span id="contador_horas" ></span>
+            <span id="contador_minutos" ></span>
+            <span id="contador_segundos" ></span>
+          </div>
         </td>
         <td class="text-center">
           <form method="POST"  action="{{ url('/admin/prestamos/devolver') }}">
@@ -190,7 +222,7 @@
 
 
 <!-- <script type="text/javascript">
-    function countdown(id){
+    function countdown(contador){
     var fecha=new Date('2012','1','10','21','00','00');
     var hoy=new Date();
     var dias=0;

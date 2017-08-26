@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Sistema de Biblioteca </title>
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
 @yield('css')
 <!-- HOJAS DE ESTILO - USER -->
 	<link rel="stylesheet" href="{{ URL::asset('css/modalStyles.css')}}">
@@ -34,6 +35,7 @@
 <script src="{{ URL::asset('js/jquery-2.2.3.min.js')}}"></script>
 <script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
 <script src="{{URL::asset('js/bootstrap-multiselect.js')}}"></script>
+
 <!-- FIN DE ARCHIVOS JS -->
 </head>
 
@@ -75,6 +77,8 @@
 	<script src="{{ URL::asset('js/bootstrap-datetimepicker.min.js')}}"></script>
 	<script src="{{ URL::asset('js/bootstrap-datetimepicker.pt-PE.js')}}"></script>
 
+
+
 	<script type="text/javascript">
 	(function() {
 	$('#btn-search').on('click', function(e) {
@@ -83,6 +87,7 @@
 	});
 	}());
 	</script>
+
 
  </body>
 

@@ -25,5 +25,11 @@ class Order extends Model
       // 3 : entregado
     'endDate',
   ];
+  public function user()
+   {
+      return $this->belongsTo('App\User','id_user');
 
+
+
+   }
 }
