@@ -24,10 +24,13 @@ use App\Book as Book ;
 class PrestamoController extends Controller
 {
 
+   //Controlador del prestamo || ADMINISTRADOR
+
+
+
    public function index(Request $request)
    {
-      $pedidos = Order::all();
-
+     $pedidos = Order::all() ;
       $configuraciones = Configuration::all();
       //Inicializando bandera
       $band = false ;
@@ -51,19 +54,16 @@ class PrestamoController extends Controller
          'configuracion' => $configuracion,
          ]);
 
+     $showHistorial = view('admin.md_prestamos.showHistorial',[
+        'pedidos'       => $pedidos,
+        ]);
 
-         $i = 0 ;
-         foreach (Order::all() as $pedido) {
-           if ($pedido->state == 0) {
-             $pedidos[$i] = $pedido ;
-           }
-           $i = $i+1;
-         }
 
 
       return view('admin.md_prestamos.index', [
          'showPedidos'     => $showPedidos,
          'showPrestamo'    => $showPrestamo,
+         'showHistorial'   => $showHistorial,
          'pedidos' => $pedidos
       ]);
 
@@ -89,17 +89,12 @@ class PrestamoController extends Controller
    public function prestar(Request $request)
    {
 
-
-
-
-
-
      function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
      $pedido = Order::find(cambiaCadena($request['id']));
-     $startDate = Carbon::now('America/Lima');
+     //Cambiando el estado del pedido a aceptado
      $pedido->state = 1 ;
-     $pedido->startDate = $startDate ;
-
+     //Poniendo la fecha en la que fue prestado
+     $pedido->startDate = Carbon::now('America/Lima');
      switch ($pedido->typeItem) {
        case 1:
         $book = Book::find($pedido->id_item);
@@ -117,17 +112,41 @@ class PrestamoController extends Controller
      }
      $pedido->save();
      return redirect(redirect()->getUrlGenerator()->previous());
-
-
+   }
+   public function rechazar(Request $request){
+     function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
+     //Encontrando el pedido
+     $pedido = Order::find(cambiaCadena($request['id']));
+     //Poniendo la fecha en la que fue rechazado
+     $pedido->endDate = Carbon::now('America/Lima');
+     //Cambiando el estado del pedido a rechazado
+     $pedido->state = 2;
+     switch ($pedido->typeItem) {
+       case 1:
+        $book = Book::find($pedido->id_item);
+        foreach ($book->bookCopies as $item) {
+            if ($item->copy == $pedido->copy) {
+              //Cambiando disponibilidad del item a : disponible
+              $item->availability = 1;
+              //Falta cambiar el estado del usuario que ha pedido
+              $item->save();
+            }
+        }
+         break;
+       default:
+         # code...
+         break;
+     }
+     //Regresando a la ruta anterior
+     $pedido->save();
+     return redirect(redirect()->getUrlGenerator()->previous());
    }
 
    public function devolver(Request $request){
           function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
           $pedido = Order::find(cambiaCadena($request['id']));
-          $endDate = Carbon::now('America/Lima');
-          //state 3 es devuelto
-            $pedido->state = 3;
-          // $pedido->endDate = $endDate ;
+          $pedido->endDate = Carbon::now('America/Lima');
+          $pedido->state = 3;
           switch ($pedido->typeItem) {
             case 1:
              $book = Book::find($pedido->id_item);
@@ -144,70 +163,9 @@ class PrestamoController extends Controller
               # code...
               break;
           }
-          //Consultar: cambiar el estado del pedido a devuelto
            $pedido->save();
           return redirect(redirect()->getUrlGenerator()->previous());
    }
-
-   public function edit($id)
-   {
-         //
-   }
-
-   public function update(Request $request, $id)
-   {
-      $thesis = Thesis::find($id);
-      $usuarios = User::all();
-
-         $i=0;
-
-      foreach($thesis->thesisCopies as $copia){
-
-                  foreach($usuarios as $usuario){
-                        if($usuario->code == $request["codigo"]){
-                           if($usuario->state == 1){
-                              if($i<1){   //Para que pase solo una vez.Solo se hace el prestamo de un ejemplar
-                                 if($copia->availability==1){
-                                       $copia->availability=0;  //Deshabilitando una de los ejemplares
-                                       $usuario->thesis_order()->attach($id);
-                                       $copia->save();
-                                       $i++;
-                                 }
-                               }
-
-                           }
-                        }
-                     }
-
-      }
-
-    $showPrestamo = view('admin.md_prestamos.showPrestamo');
-
-      return view('admin.md_prestamos.index', [
-         'showPrestamo' => $showPrestamo
-      ]);
-
-
-}
-
-   public function destroy($id)
-   {
-      //
-   }
-
-   public function content(Request $request, $id)
-   {
-      $thesis = Thesis::find($id);
-
-      return view('admin.md_thesiss.show2')->with('thesis', $thesis);
-   }
-
-   public function show($id)
-   {
-      //
-   }
-
-   
 
 
 }

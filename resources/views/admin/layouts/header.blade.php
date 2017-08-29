@@ -25,40 +25,30 @@
   }
   //Esta funcion debe activarse cuando no se haga click  en notifications-menu y user-menu
 
-  
-  setInterval( "actualiza()", 7000 );
+
+  setInterval( "actualiza()", 10000 );
 
 </script>
 		<!-- Navbar Right Menu -->
 		<div class="navbar-custom-menu" id="recarga">
       <ul class="nav navbar-nav">
-      <?php
-      $cont=0;
-        $pedidos = App\Order::all();
-        foreach($pedidos as $pedido){
-          if($pedido->state ==0)
-            $cont++;
-        }
 
-       ?>
+      
 				<!-- Notifications: style can be found in dropdown.less -->
 				<li class="dropdown notifications-menu" onclick="funcion2()" id="op2"><a href="#" class="dropdown-toggle" data-toggle="dropdown-menu">
 						<i class="fa fa-bell-o"></i>
             <span class="label label-warning">
-                {{$cont}}
-            <!--  @if($pedidos!=null){{count($pedidos)}}@endif   -->
+             @if($pedidos2!=null){{count($pedidos2)}}@endif
             </span>
 				</a>
 					<ul class="dropdown-menu">
-						<li class="header text-center">@if($pedidos!=null){{"Hay ".count($pedidos)}}@else {{"No hay "}} @endif solicitudes pendientes</li>
+						<li class="header text-center">@if($pedidos2!=null){{"Hay ".count($pedidos2)}}@else {{"No hay "}} @endif solicitudes pendientes</li>
 						<li>
 							<!-- inner menu: contains the actual data -->
 							<ul class="menu">
-              @if($pedidos!=null)
-               @foreach($pedidos as $pedido)
-  							@if( $pedido->state== 0 )
-                <form method="POST"  action="{{ url('/admin/prestamos/prestar') }}">
-                	{{ csrf_field() }}
+              @if($pedidos2!=null)
+               @foreach($pedidos2 as $pedido)
+  							@if( $pedido->state==0 )
                   <div class="">
                          <div class="box-body with-border">
                              <?php
@@ -88,11 +78,28 @@
                        </span><br>
                        <span><strong>* Ejemplar:</strong> {{$pedido->id_copy}}</span><br>
                        <span><strong>* Ubicación:</strong> {{ $item->location }}</span><br>
+
                                <div class="box-tools pull-left">
-                                 <input type="hidden" name="id" value="{{$pedido->id}}">
-                                  <button type="submit" name="prestar" class="btn btn-info" >Prestar</button>
-                                  <button type="submit" name ="cancelar" class="btn btn-info" data-widget="remove">Cancelar prestamo</button>
+                                 <a href="{{ url('/admin/prestamos/prestar') }}"
+                                   onclick="event.preventDefault();
+                                              document.getElementById('accept-form').submit();"
+                                   class="btn btn-info"> Prestar </a>
+                                 <form id="accept-form" action="{{ url('/admin/prestamos/prestar') }}"
+                                   method="POST" style="display: none;">{{ csrf_field() }}
+                                   <input type="hidden" name="id" value="{{$pedido->id}}">
+                                 </form>
                                </div>
+                               <div class="box-tools pull-right">
+                                 <a href="{{ url('/admin/prestamos/rechazar') }}"
+                                   onclick="event.preventDefault();
+                                              document.getElementById('denied-form').submit();"
+                                   class="btn btn-info"> Rechazar </a>
+                                 <form id="denied-form" action="{{ url('/admin/prestamos/rechazar') }}"
+                                   method="POST" style="display: none;">{{ csrf_field() }}
+                                   <input type="hidden" name="id" value="{{$pedido->id}}">
+                                 </form>
+                               </div>
+
                        </div>
                   </div>
                 </form>

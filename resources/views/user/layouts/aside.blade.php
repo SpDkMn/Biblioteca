@@ -32,6 +32,7 @@
       </li>
       {{-- END ORDER --}}
       <li @if(URL::full() == url('/user/'))class="active"@endif><a href="{{ url('/user/') }}"><i class="fa fa-user-secret"></i> <span>Noticias</span></a></li>
+      <li @if(URL::full() == url('/user/'))class="active"@endif><a href="{{ url('/user/') }}"><i class="fa fa-user-secret"></i> <span>Historial de Castigos</span></a></li>
 
 
 

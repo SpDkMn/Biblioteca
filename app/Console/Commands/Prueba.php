@@ -43,7 +43,6 @@ class Prueba extends Command
     public function handle()
     {
 
-
       $tipos = UserType::all();
       $pedidos = Order::all();
       $usuarios = User::all();
@@ -78,10 +77,10 @@ class Prueba extends Command
 
 
 
-        $horaactual = Carbon::now('America/Lima')
+        $horaactual = Carbon::now('America/Lima');
         $titulo = "BIBLIOTECA.txt";
-        $nuevoarchivo = fopen($titulo, "w+");
-        fwrite($nuevoarchivo,"Fecha: ".$horaactual->toTimeString());
+        $nuevoarchivo = fopen($titulo, "a+");
+        fwrite($nuevoarchivo,"Fecha: ".$horaactual->toTimeString(). PHP_EOL);
         fclose($nuevoarchivo);
 
       $this->info('Codigo ejecutandose ... ');

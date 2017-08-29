@@ -1,6 +1,6 @@
 <div class="box box-warning">
   <div class="box-header with-border">
-    <h2 class="all-tittles"><i class="fa fa-history"></i> Historial de Prestamos</h2>
+    <h2 class="all-tittles"><i class="fa fa-history"></i> Historial</h2>
     <div class="box-tools pull-right">
       <button type="button" class="btn btn-box-tool" data-widget="collapse">
         <i class="fa fa-minus"></i>
@@ -8,40 +8,34 @@
     </div>
   </div>
   <hr>
-
   <div class="box-body">
-    <table id="tablePrestamo" class="table table-bordered table-hover">
+    <table id="tableHistorial" class="table table-bordered table-hover">
       <thead>
         <tr>
             <th>Estado</th>
             <th class="text-center">Tipo de item</th>
-
-            <th class="text-center">Titulo</th>
-            <th class="text-center">Ejemplar</th>
-            <th class="text-center">Usuario</th>
-            <th class="text-center">Personal Adm.</th>
-            <th class="text-center">Fecha de Prestamo</th>
-            <th class="text-center">Lugar</th>
-            <th class="text-center">Tiempo restante</th>
-            <th class="text-center">Devolver</th>
-
+            <th>Titulo</th>
+            <th>Ejemplar</th>
+            <th>Usuario</th>
+            <th>Personal Adm.</th>
+            <th>Fecha de Prestamo</th>
+            <th>Fecha de Devolución</th>
+            <th>Lugar</th>
           </tr>
       </thead>
       <tbody>
-  @if($pedidos!=null)
+@if($pedidos!=null)
     @foreach($pedidos as $pedido)
-      @if($pedido->state == 1)
+      @if($pedido->state == 2 || $pedido->state == 3)
       <!-- Obteniendo el tipo de item -->
         <?php switch ($pedido->typeItem) {case 1 : $tipo = "Libro"; break;case 2 : $tipo = "Tesis/Tesina"; break;case 3 :$tipo = "Revista";break;}?>
-        <!-- Obteniendo el estado de item -->
-          <?php switch ($pedido->state) {case 0 : $estado = "En espera"; break;case 1 : $estado = "Aceptado"; break;case 2 :$estado = "Rechazado";break;case 3 :$estado = "Entregado";break;}?>
-        <!-- fin-->
+      <!-- fin-->
+      <!-- Obteniendo el estado de item -->
+        <?php switch ($pedido->state) {case 0 : $estado = "En espera"; break;case 1 : $estado = "Aceptado"; break;case 2 :$estado = "Rechazado";break;case 3 :$estado = "Entregado";break;}?>
       <!-- fin-->
       <!-- Obteniendo el usuario -->
       <?php  $user = App\User::find($pedido->id_user); ?>
-      <?php $cont=0; ?>
       <tr>
-        <td class="text-center"><label class="label label-success">{{$tipo}}</label></td>
         <?php if($pedido->typeItem==2){ $item=App\Thesis::find($pedido->id_item); }
 
               if($pedido->typeItem==1){ $item=App\Book::find($pedido->id_item); }
@@ -50,7 +44,10 @@
 
               if($pedido->typeItem==4){ $item=App\Compendium::find($pedido->id_item); }
         ?>
+
+
         <td><span class="label @if($pedido->state==2) label-danger @else label-info @endif">{{$estado}}</span></td>
+        <td class="text-center"><label class="label label-success">{{$tipo}}</label></td>
         <td><a href="#" data-toggle="modal" data-target="#ModalCopy">{{$item->title}}</a></td>
           <div class="modal fade" id="ModalCopy" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">
              <div class="modal-dialog" role="document">
@@ -170,14 +167,8 @@
           </div>
         <td>Mirian Pagan</td>
         <td>{{$pedido->startDate}}</td>
+        <td>{{$pedido->endDate}}</td>
         <td class="text-center"><label class="label label-warning"><?php if($pedido->place==0) echo "Sala"; else echo "Domicilio"; ?></label></td>
-        <td class="text-center">
-          <form method="POST"  action="{{ url('/admin/prestamos/devolver') }}">
-            {{ csrf_field() }}
-            <input type="hidden" name="id" value="{{$pedido->id}}">
-            <button type="submit" name="prestar" onclick="detenerse()" class="btn btn-success">Devolver</button>
-          </form>
-        </td>
       </tr>
       @endif
      @endforeach
