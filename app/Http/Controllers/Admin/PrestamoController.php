@@ -58,6 +58,9 @@ class PrestamoController extends Controller
          'configuracion' => $configuracion,
          ]);
 
+     $showHistorial = view('admin.md_prestamos.showHistorial',[
+        'pedidos'       => $pedidos,
+        ]);
 
          $i = 0 ;
          foreach (Order::all() as $pedido) {
@@ -71,6 +74,7 @@ class PrestamoController extends Controller
          'showSeleccion'   => $showSeleccion,
          'showPedidos'     => $showPedidos,
          'showPrestamo'    => $showPrestamo,
+         'showHistorial'   => $showHistorial,
          'pedidos' => $pedidos
       ]);
 

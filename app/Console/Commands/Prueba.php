@@ -80,8 +80,8 @@ class Prueba extends Command
         $horaactual = Carbon::now('America/Lima');
         $titulo = "BIBLIOTECA.txt";
         $nuevoarchivo = fopen($titulo, "a+");
-        fwrite($nuevoarchivo,"Fecha: ".$horaactual->toTimeString());
-        fwrite($nuevoarchivo," Tiempo Domicilio: ".$tiempoDomicilio);
+        fwrite($nuevoarchivo,"Fecha: ".$horaactual->toTimeString(). PHP_EOL);
+        fwrite($nuevoarchivo,"Tiempo Domicilio: ".$tiempoDomicilio. PHP_EOL. PHP_EOL);
         fclose($nuevoarchivo);
 
       $this->info('Codigo ejecutandose ... ');

@@ -1,6 +1,6 @@
 <div class="box box-warning">
   <div class="box-header with-border">
-  <h2 class="all-tittles"><i class="fa fa-th-large"></i> Total de Prestamos del mes de </h2>
+  <h2 class="all-tittles"><i class="fa fa-th-large"></i> Total de Prestamos del mes de Septiembre </h2>
 
     <div class="box-tools pull-right">
       <button type="button" class="btn btn-box-tool" data-widget="collapse">
@@ -10,7 +10,7 @@
   </div>
     <?php $tipo_tesis=$tipo_libros=$tipo_revistas=$tipo_compendios=0; ?>
      @foreach($pedidos as $pedido)
-        @if($pedido->state == 1)
+        @if($pedido->state == 1 || $pedido->state == 3)
             <?php
               if($pedido->typeItem==2) $tipo_tesis++;
 
@@ -22,34 +22,72 @@
             ?>
         @endif
     @endforeach
-    <div class="">
-        <section class="full-reset text-center" style="padding:2px 0;">
+    <section class="content">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green">
+            <i class="fa fa-book"></i>
+          </span>
+          <div class="info-box-content">
+            <span class="info-box-text">Libro</span>
+            <span class="info-box-number">{{$tipo_libros}}</span>
+          </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green">
+            <i class="fa fa-book"></i>
+          </span>
+          <div class="info-box-content">
+            <span class="info-box-text">Tesis/Tesinas</span>
+            <span class="info-box-number">{{$tipo_tesis}}</span>
+          </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green">
+            <i class="fa fa-book"></i>
+          </span>
+          <div class="info-box-content">
+            <span class="info-box-text">Revistas</span>
+            <span class="info-box-number">{{$tipo_revistas}}</span>
+          </div>
+          </div>
+        </div>
 
-            <article class="tile">
-                <div class="tile-icon full-reset"><i class="fa fa-book"></i></div>
-                <div class="tile-name all-tittles">Libros</div>
-                <div class="tile-num full-reset">{{$tipo_libros}}</div>
-            </article>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green">
+            <i class="fa fa-book"></i>
+          </span>
+          <div class="info-box-content">
+            <span class="info-box-text">Compendios</span>
+            <span class="info-box-number">{{$tipo_compendios}}</span>
+          </div>
+          </div>
+        </div>
 
-            <article class="tile">
-                <div class="tile-icon full-reset"><i class="fa fa-graduation-cap"></i></div>
-                <div class="tile-name all-tittles">Tesis</div>
-                <div class="tile-num full-reset">{{$tipo_tesis}}</div>
-            </article>
+        <!-- <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{{$tipo_libros}}</h3>
+              <p>Libros</p>
 
-            <article class="tile">
-                <div class="tile-icon full-reset"><i class="fa fa-bookmark"></i></div>
-                <div class="tile-name all-tittles">Revistas</div>
-                <div class="tile-num full-reset">{{$tipo_revistas}}</div>
-            </article>
-            <article class="tile">
-                <div class="tile-icon full-reset"><i class="glyphicon glyphicon-book"></i></div>
-                <div class="tile-name all-tittles">Compendios</div>
-                <div class="tile-num full-reset">{{$tipo_compendios}}</div>
-            </article>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              Más información
+              <i class="fa fa-arrow-circle-right">
 
-        </section>
+              </i>
+            </a>
 
- </div>
-
-</div>
+        </div>
+      </div> -->
+    </section>
+  </div>
