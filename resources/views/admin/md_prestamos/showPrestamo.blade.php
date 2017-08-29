@@ -25,6 +25,7 @@
           </tr>
       </thead>
       <tbody>
+  @if($pedidos!=null)
     @foreach($pedidos as $pedido)
       @if($pedido->state == 1)
       <!-- Obteniendo el tipo de item -->
@@ -177,6 +178,7 @@
       </tr>
       @endif
      @endforeach
+     @endif
       </tbody>
     </table>
   <div>

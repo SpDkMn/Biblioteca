@@ -30,8 +30,7 @@ class PrestamoController extends Controller
 
    public function index(Request $request)
    {
-      $pedidos = Order::all();
-
+     $pedidos = Order::all() ;
       $configuraciones = Configuration::all();
       //Inicializando bandera
       $band = false ;
@@ -62,13 +61,7 @@ class PrestamoController extends Controller
         'pedidos'       => $pedidos,
         ]);
 
-         $i = 0 ;
-         foreach (Order::all() as $pedido) {
-           if ($pedido->state == 0) {
-             $pedidos[$i] = $pedido ;
-           }
-           $i = $i+1;
-         }
+
 
       return view('admin.md_prestamos.index', [
          'showSeleccion'   => $showSeleccion,
@@ -94,7 +87,6 @@ class PrestamoController extends Controller
              }
              $i++;
            }
-           dd($pedidos2,$pedidos);
           return view('admin.layouts.header',['pedidos'=>$pedidos2]);
    }
 

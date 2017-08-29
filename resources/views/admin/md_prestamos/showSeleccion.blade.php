@@ -9,6 +9,7 @@
     </div>
   </div>
     <?php $tipo_tesis=$tipo_libros=$tipo_revistas=$tipo_compendios=0; ?>
+    @if($pedidos!=null)
      @foreach($pedidos as $pedido)
         @if($pedido->state == 1 || $pedido->state == 3)
             <?php
@@ -21,7 +22,8 @@
               if($pedido->typeItem==4) $tipo_compendios++;
             ?>
         @endif
-    @endforeach
+      @endforeach
+    @endif
     <section class="content">
       <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">

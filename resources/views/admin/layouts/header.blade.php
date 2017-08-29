@@ -26,27 +26,17 @@
   //Esta funcion debe activarse cuando no se haga click  en notifications-menu y user-menu
 
 
-  setInterval( "actualiza()", 7000 );
+  setInterval( "actualiza()", 10000 );
 
 </script>
 		<!-- Navbar Right Menu -->
 		<div class="navbar-custom-menu" id="recarga">
       <ul class="nav navbar-nav">
-      <?php
-      $cont=0;
-        $pedidos = App\Order::all();
-        foreach($pedidos as $pedido){
-          if($pedido->state ==0)
-            $cont++;
-        }
-
-       ?>
 				<!-- Notifications: style can be found in dropdown.less -->
 				<li class="dropdown notifications-menu" onclick="funcion2()" id="op2"><a href="#" class="dropdown-toggle" data-toggle="dropdown-menu">
 						<i class="fa fa-bell-o"></i>
             <span class="label label-warning">
-                {{$cont}}
-            <!--  @if($pedidos!=null){{count($pedidos)}}@endif   -->
+             @if($pedidos!=null){{count($pedidos)}}@endif
             </span>
 				</a>
 					<ul class="dropdown-menu">
