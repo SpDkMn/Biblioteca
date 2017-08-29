@@ -13,6 +13,7 @@
     <table id="tablePrestamo" class="table table-bordered table-hover">
       <thead>
         <tr>
+            <th>Estado</th>
             <th class="text-center">Tipo de item</th>
             <th>Titulo</th>
             <th>Ejemplar</th>
@@ -28,6 +29,9 @@
       @if($pedido->state == 1)
       <!-- Obteniendo el tipo de item -->
         <?php switch ($pedido->typeItem) {case 1 : $tipo = "Libro"; break;case 2 : $tipo = "Tesis/Tesina"; break;case 3 :$tipo = "Revista";break;}?>
+        <!-- Obteniendo el estado de item -->
+          <?php switch ($pedido->state) {case 0 : $estado = "En espera"; break;case 1 : $estado = "Aceptado"; break;case 2 :$estado = "Rechazado";break;case 3 :$estado = "Entregado";break;}?>
+        <!-- fin-->
       <!-- fin-->
       <!-- Obteniendo el usuario -->
       <?php  $user = App\User::find($pedido->id_user); ?>
@@ -42,6 +46,7 @@
 
               if($pedido->typeItem==4){ $item=App\Compendium::find($pedido->id_item); }
         ?>
+        <td><span class="label @if($pedido->state==2) label-danger @else label-info @endif">{{$estado}}</span></td>
         <td><a href="#" data-toggle="modal" data-target="#ModalCopy">{{$item->title}}</a></td>
           <div class="modal fade" id="ModalCopy" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">
              <div class="modal-dialog" role="document">

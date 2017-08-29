@@ -53,7 +53,7 @@ class OrderBookController extends Controller
     public function store(Request $request)
     {
       $user = Auth::User();
-      
+
 
         if($request->ajax()){
            $search=$request->input('search');

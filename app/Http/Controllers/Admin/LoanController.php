@@ -90,7 +90,7 @@ class LoanController extends Controller
            'endDate' => null
          ]);
        //Redirigir a un modal donde se muestre que el pedido fue satisfactorio
-       return redirect('user/');
+       return redirect(redirect()->getUrlGenerator()->previous());
      }
 
      /**

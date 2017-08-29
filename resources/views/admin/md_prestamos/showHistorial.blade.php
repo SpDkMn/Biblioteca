@@ -29,12 +29,11 @@
       <!-- Obteniendo el tipo de item -->
         <?php switch ($pedido->typeItem) {case 1 : $tipo = "Libro"; break;case 2 : $tipo = "Tesis/Tesina"; break;case 3 :$tipo = "Revista";break;}?>
       <!-- fin-->
-      <!-- Obteniendo el tipo de item -->
+      <!-- Obteniendo el estado de item -->
         <?php switch ($pedido->state) {case 0 : $estado = "En espera"; break;case 1 : $estado = "Aceptado"; break;case 2 :$estado = "Rechazado";break;case 3 :$estado = "Entregado";break;}?>
       <!-- fin-->
       <!-- Obteniendo el usuario -->
       <?php  $user = App\User::find($pedido->id_user); ?>
-      <?php $cont=0; ?>
       <tr>
         <?php if($pedido->typeItem==2){ $item=App\Thesis::find($pedido->id_item); }
 
@@ -46,7 +45,7 @@
         ?>
 
 
-        <td><span class="label  label-danger">{{$estado}}</span></td>
+        <td><span class="label @if($pedido->state==2) label-danger @else label-info @endif">{{$estado}}</span></td>
         <td class="text-center"><label class="label label-success">{{$tipo}}</label></td>
         <td><a href="#" data-toggle="modal" data-target="#ModalCopy">{{$item->title}}</a></td>
           <div class="modal fade" id="ModalCopy" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">
