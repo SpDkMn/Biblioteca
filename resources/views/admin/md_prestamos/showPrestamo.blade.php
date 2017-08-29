@@ -22,7 +22,6 @@
             <th class="text-center">Personal Adm.</th>
             <th class="text-center">Fecha de Prestamo</th>
             <th class="text-center">Lugar</th>
-            <th class="text-center">Tiempo restante</th>
             <th class="text-center">Devolver</th>
 
           </tr>

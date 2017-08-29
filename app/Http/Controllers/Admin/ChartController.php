@@ -27,7 +27,7 @@ class ChartController extends Controller
     */
    public function index()
    {
-    /*  
+    /*
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
 
@@ -56,13 +56,13 @@ class ChartController extends Controller
           $pedidos[$i] = $pedido ;
         }
         $i = $i +1 ;
-      }    
+      }
       */
       $pedidos = Order::all();
       $libros  = Book::all();
       $thesis  = Thesis::all();
       $revistas= Magazine::all();
-      $compendios = Compendium::all(); 
+      $compendios = Compendium::all();
 
 
       $numBooks=0;
@@ -86,6 +86,7 @@ class ChartController extends Controller
       }
 
       return view('admin.md_statistics.index',[
+        'pedidos' => null ,
          'numBooks' => $numBooks,
          'numThesis' => $numThesis,
          'numMagazines' => $numMagazines,

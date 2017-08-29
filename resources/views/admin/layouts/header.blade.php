@@ -33,21 +33,21 @@
 		<div class="navbar-custom-menu" id="recarga">
       <ul class="nav navbar-nav">
 
-      
+
 				<!-- Notifications: style can be found in dropdown.less -->
 				<li class="dropdown notifications-menu" onclick="funcion2()" id="op2"><a href="#" class="dropdown-toggle" data-toggle="dropdown-menu">
 						<i class="fa fa-bell-o"></i>
             <span class="label label-warning">
-             @if($pedidos2!=null){{count($pedidos2)}}@endif
+             @if($pedidos!=null){{count($pedidos)}}@endif
             </span>
 				</a>
 					<ul class="dropdown-menu">
-						<li class="header text-center">@if($pedidos2!=null){{"Hay ".count($pedidos2)}}@else {{"No hay "}} @endif solicitudes pendientes</li>
+						<li class="header text-center">@if($pedidos!=null){{"Hay ".count($pedidos)}}@else {{"No hay "}} @endif solicitudes pendientes</li>
 						<li>
 							<!-- inner menu: contains the actual data -->
 							<ul class="menu">
-              @if($pedidos2!=null)
-               @foreach($pedidos2 as $pedido)
+              @if($pedidos!=null)
+               @foreach($pedidos as $pedido)
   							@if( $pedido->state==0 )
                   <div class="">
                          <div class="box-body with-border">
@@ -59,7 +59,7 @@
                              ?>
                                  <span><strong>* Alumno:</strong><?php $usuario=App\User::find($pedido->id_user); ?></span><br>
                        <span><strong>* {{$pedido->typeItem}}:</strong> {{$item->title}}</span><br>		   <span><strong>* Autor:</strong>
-                                           <?php $cont=0; ?>
+                                           <?php $cont=0; ?>@
                                            @foreach($item->authors as $author)
                                              @if($author->pivot->type == true)
                                              <?php $cont=$cont+1; ?>
