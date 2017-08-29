@@ -42,7 +42,7 @@ class Prueba extends Command
      */
     public function handle()
     {
-      
+
       $tipos = UserType::all();
       $pedidos = Order::all();
       $usuarios = User::all();
@@ -81,6 +81,7 @@ class Prueba extends Command
         $titulo = "BIBLIOTECA.txt";
         $nuevoarchivo = fopen($titulo, "w+");
         fwrite($nuevoarchivo,"Fecha: ".$horaactual->toTimeString());
+        fwrite($nuevoarchivo," Tiempo Domicilio: ".$tiempoDomicilio);
         fclose($nuevoarchivo);
 
       $this->info('Codigo ejecutandose ... ');

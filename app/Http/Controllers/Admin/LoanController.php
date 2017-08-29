@@ -17,9 +17,11 @@ use App\Book as Book;
 use App\Order as Order ;
 class LoanController extends Controller
 {
+    //Controlador del pedido || USUARIO
+
+
      /**
       * Display a listing of the resource.
-      *
       * @return \Illuminate\Http\Response
       */
      public function index(Request $request)
@@ -69,7 +71,7 @@ class LoanController extends Controller
               $book = Book::find($request['id']);
               foreach ($book->bookCopies as $item) {
                   if ($item->copy == cambiaCadena($request['copy'])) {
-                    //Cambiando disponibilidad a prestado
+                    //Cambiando disponibilidad a en espera
                     $item->availability = 3;
                     $item->save();
                   }

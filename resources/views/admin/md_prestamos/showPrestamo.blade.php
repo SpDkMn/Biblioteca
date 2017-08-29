@@ -1,32 +1,3 @@
-<script type="text/javascript">
-//countdown_dateFuture sera el limite para los prestamos que se sacara en configuraciones
-countdown_dateFuture=new Date(2017,7,24,00,00,00);
-  function countdown_UpdateCount(countdown_dateFuture,contenedor,cDias,cHoras,cMin,cSeg)
-    {dateNow=new Date();
-    timediff=Math.abs(countdown_dateFuture.getTime() - dateNow.getTime());
-    delete dateNow;
-    if(timediff<0){
-      document.getElementById('contador_container').style.display="none";
-    }else {
-      days=hours=mins=secs=0;
-      out="";
-      timediff=Math.floor(timediff/1000);days=Math.floor(timediff/86400);
-      timediff=timediff % 86400;hours=Math.floor(timediff/3600);
-      timediff=timediff % 3600;mins=Math.floor(timediff/60);
-      timediff=timediff % 60;secs=Math.floor(timediff);
-      if(document.getElementById(contenedor)){
-        document.getElementById(cDias).innerHTML=days+" D";
-        document.getElementById(cHoras).innerHTML=hours+ " H" ;
-        document.getElementById(cMin).innerHTML=mins+ " min";
-        document.getElementById(cSeg).innerHTML=secs+ " seg" ;
-      }
-      setTimeout("countdown_UpdateCount(countdown_dateFuture,'contador_container','contador_dias','contador_horas','contador_minutos','contador_segundos')", 1000);
-    }
-  }window.onload=function(){
-    countdown_UpdateCount(countdown_dateFuture,'contador_container','contador_dias','contador_horas','contador_minutos','contador_segundos');
-  }
-</script>
-
 <div class="box box-warning">
   <div class="box-header with-border">
     <h2 class="all-tittles"><i class="fa fa-history"></i> Historial de Prestamos</h2>
@@ -49,7 +20,6 @@ countdown_dateFuture=new Date(2017,7,24,00,00,00);
             <th>Personal Adm.</th>
             <th>Fecha de Prestamo</th>
             <th>Lugar</th>
-            <th>Tiempo restante</th>
             <th>Devolver</th>
           </tr>
       </thead>
@@ -190,25 +160,13 @@ countdown_dateFuture=new Date(2017,7,24,00,00,00);
             </div>
           </div>
         <td>Mirian Pagan</td>
-        <td>{{$pedido->startDate}}
-
-        </td>
+        <td>{{$pedido->startDate}}</td>
         <td class="text-center"><label class="label label-warning"><?php if($pedido->place==0) echo "Sala"; else echo "Domicilio"; ?></label></td>
-        <td>
-          <div id="contador_container">
-            <span id="contador_dias" ></span>
-            <span id="contador_horas" ></span>
-            <span id="contador_minutos" ></span>
-            <span id="contador_segundos" ></span>
-          </div>
-        </td>
         <td class="text-center">
           <form method="POST"  action="{{ url('/admin/prestamos/devolver') }}">
             {{ csrf_field() }}
             <input type="hidden" name="id" value="{{$pedido->id}}">
-          <!-- <a type="submit" class="btn btn-success" onclick="detenerse()"><i class="fa fa-external-link"></i></a> -->
-          <button type="submit" name="prestar" onclick="detenerse()" class="btn btn-success">Devolver</button>
-
+            <button type="submit" name="prestar" onclick="detenerse()" class="btn btn-success">Devolver</button>
           </form>
         </td>
       </tr>
@@ -219,124 +177,3 @@ countdown_dateFuture=new Date(2017,7,24,00,00,00);
   <div>
  </div>
 </div>
-
-
-<!-- <script type="text/javascript">
-    function countdown(contador){
-    var fecha=new Date('2012','1','10','21','00','00');
-    var hoy=new Date();
-    var dias=0;
-    var horas=0;
-    var minutos=0;
-    var segundos=0;
-
-    if (fecha>hoy){
-        var diferencia=(fecha.getTime()-hoy.getTime())/1000;
-        dias=Math.floor(diferencia/86400);
-        diferencia=diferencia-(86400*dias);
-        horas=Math.floor(diferencia/3600);
-        diferencia=diferencia-(3600*horas);
-        minutos=Math.floor(diferencia/60);
-        diferencia=diferencia-(60*minutos);
-        segundos=Math.floor(diferencia);
-
-        document.getElementById(id).innerHTML='Quedan ' + dias + ' D&iacute;as, ' + horas + ' Horas, ' + minutos + ' Minutos, ' + segundos + ' Segundos';
-
-        if (dias>0 || horas>0 || minutos>0 || segundos>0){
-            setTimeout("countdown(\"" + id + "\")",1000);
-        }
-    }
-    else{
-        document.getElementById('restante').innerHTML='Quedan ' + dias + ' D&iacute;as, ' + horas + ' Horas, ' + minutos + ' Minutos, ' + segundos + ' Segundos';
-    }
-
-}
- </script> -->
-<!--
-  esto va en php
-    $date = strtotime($pedido->startDate);
-    $fechaPedido = date("d/m/Y");
-    if(date("a", $date)=="pm"){
-      $año = date("Y", $date);
-      echo '<br>'.$año;
-      $mes = date("m", $date);
-      echo '<br>'.$mes;
-      $dia = date("d", $date);
-      echo '<br>dia pedido '.$dia;
-      $hora = (12+date("h", $date));
-      echo '<br>hora pedida '.$hora;
-      $min = date("i", $date);
-      echo '<br>minuto pedido '.$min;
-      $seg = date("s", $date);
-      echo '<br>segundo pedido '.$seg;
-    }
-    else{
-      $año = date("Y", $date);
-      echo '<br>'.$año;
-      $mes = date("m", $date);
-      echo  '<br>'.$mes;
-      $dia = date("d", $date);
-      echo '<br>dia pedido '.$dia;
-      $hora = date("h", $date);
-      echo '<br>hora pedida '.$hora;
-      $min = date("i", $date);
-      echo '<br>minuto pedido '.$min;
-      $seg = date("s", $date);
-      echo '<br>segundo pedido '.$seg;
-    }
-
-
-  $tiempo = strtotime($configuracion->endWednesday);
-    if(date("a", $tiempo)=="pm"){
-
-      $horaFinAtencion = (12+date("h", $tiempo));
-      echo '<br>hora de atencion '.$horaFinAtencion;
-      $minFinAtencion = date("i", $tiempo);
-      echo '<br>minuto de atencion'.$minFinAtencion;
-      $segFinAtencion = date("s", $tiempo);
-      echo '<br>segundo de atencion '.$segFinAtencion;
-
-    }
-    else{
-      $horaFinAtencion = date("h", $tiempo);
-      echo '<br>hora de atencion '.$horaFinAtencion;
-      $minFinAtencion = date("i", $tiempo);
-      echo '<br>minuto de atencion'.$minFinAtencion;
-      $segFinAtencion = date("s", $tiempo);
-      echo '<br>segundo de atencion '.$segFinAtencion;
-    }
-
-  echo "Hoy es dia ". date("d/m/Y") . " y la hora actual es ". date("h:i:s");
-  if(date("a")=="pm"){
-      $fechaActual = date("d/m/Y");
-      $tiempoActual = date("h:i:s");
-      echo '<br>'.$tiempoActual;
-      $diaActual = date("d");
-      echo '<br>'.$diaActual;
-
-      $horaActual = 7 + date("h");
-      echo '<br>'.$horaActual;
-      $horar = date("a");
-      echo '<br>'.$horar;
-      $minActual = date("i");
-      echo '<br>'.$minActual;
-      $segActual = date("s");
-      echo '<br>'.$segActual;
-}
-  else {
-      $fechaActual = date("d/m/Y");
-      $tiempoActual = date("h:i:s");
-      echo '<br>'.$tiempoActual;
-      $diaActual = date("d") - 1;
-      echo '<br>'.$diaActual;
-      $horar = date("a");
-      echo '<br>'.$horar;
-      $horaActual = 19 + date("h");
-      echo '<br>'.$horaActual;
-      $minActual = date("i");
-      echo '<br>'.$minActual;
-      $segActual = date("s");
-      echo '<br>'.$segActual;
-  }
-//   if($pedido->place=="Sala") $horas = ( $horaFinAtencion - $pedido->startDate );
- -->

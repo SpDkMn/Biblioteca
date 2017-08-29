@@ -26,7 +26,7 @@
   //Esta funcion debe activarse cuando no se haga click  en notifications-menu y user-menu
 
   });
-  setInterval( "actualiza()", 1000 );
+  setInterval( "actualiza()", 5000 );
 
 </script>
 		<!-- Navbar Right Menu -->
@@ -47,8 +47,6 @@
               @if($pedidos!=null)
                @foreach($pedidos as $pedido)
   							@if( $pedido->state==0 )
-                <form method="POST"  action="{{ url('/admin/prestamos/prestar') }}">
-                	{{ csrf_field() }}
                   <div class="">
                          <div class="box-body with-border">
                              <?php
@@ -78,11 +76,28 @@
                        </span><br>
                        <span><strong>* Ejemplar:</strong> {{$pedido->id_copy}}</span><br>
                        <span><strong>* Ubicación:</strong> {{ $item->location }}</span><br>
+
                                <div class="box-tools pull-left">
-                                 <input type="hidden" name="id" value="{{$pedido->id}}">
-                                  <button type="submit" name="prestar" class="btn btn-info" >Prestar</button>
-                                  <button type="submit" name ="cancelar" class="btn btn-info" data-widget="remove">Cancelar prestamo</button>
+                                 <a href="{{ url('/admin/prestamos/prestar') }}"
+                                   onclick="event.preventDefault();
+                                              document.getElementById('accept-form').submit();"
+                                   class="btn btn-info"> Prestar </a>
+                                 <form id="accept-form" action="{{ url('/admin/prestamos/prestar') }}"
+                                   method="POST" style="display: none;">{{ csrf_field() }}
+                                   <input type="hidden" name="id" value="{{$pedido->id}}">
+                                 </form>
                                </div>
+                               <div class="box-tools pull-right">
+                                 <a href="{{ url('/admin/prestamos/rechazar') }}"
+                                   onclick="event.preventDefault();
+                                              document.getElementById('denied-form').submit();"
+                                   class="btn btn-info"> Rechazar </a>
+                                 <form id="denied-form" action="{{ url('/admin/prestamos/rechazar') }}"
+                                   method="POST" style="display: none;">{{ csrf_field() }}
+                                   <input type="hidden" name="id" value="{{$pedido->id}}">
+                                 </form>
+                               </div>
+
                        </div>
                   </div>
                 </form>
