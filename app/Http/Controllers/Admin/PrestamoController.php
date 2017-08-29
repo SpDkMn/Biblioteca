@@ -39,10 +39,7 @@ class PrestamoController extends Controller
       }
 
 
-      $showSeleccion = view('admin.md_prestamos.showSeleccion',[
-         'pedidos' => $pedidos,
-         ]);
-
+     
 
       $showPedidos = view('admin.md_prestamos.showPedidos',[
          'pedidos' => $pedidos,
@@ -65,7 +62,6 @@ class PrestamoController extends Controller
 
 
       return view('admin.md_prestamos.index', [
-         'showSeleccion'   => $showSeleccion,
          'showPedidos'     => $showPedidos,
          'showPrestamo'    => $showPrestamo,
          'pedidos' => $pedidos

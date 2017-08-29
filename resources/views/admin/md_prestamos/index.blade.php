@@ -26,10 +26,7 @@
         <div class="col-md-12 " id="div-content">
           {!! $showPrestamo !!}
         </div> 
-        <div class="col-md-12 " id="div-content">
-          {!! $showSeleccion !!}
-        </div>
-
+       
 
   </div>
   <div class="row">

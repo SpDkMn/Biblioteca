@@ -45,7 +45,8 @@ Route::resource('/usuarios', 'usuarios');
 Route::resource('configurations', 'ConfigurationController');
 
 
-// RUTA PARA LOS PEDIDOS
+// RUTA PARA LAS ESTADISTICAS
+Route::resource('statistics', 'ChartController');
 
 
 
