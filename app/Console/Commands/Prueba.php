@@ -79,7 +79,7 @@ class Prueba extends Command
 
         $horaactual = Carbon::now('America/Lima');
         $titulo = "BIBLIOTECA.txt";
-        $nuevoarchivo = fopen($titulo, "w+");
+        $nuevoarchivo = fopen($titulo, "a+");
         fwrite($nuevoarchivo,"Fecha: ".$horaactual->toTimeString());
         fwrite($nuevoarchivo," Tiempo Domicilio: ".$tiempoDomicilio);
         fclose($nuevoarchivo);
