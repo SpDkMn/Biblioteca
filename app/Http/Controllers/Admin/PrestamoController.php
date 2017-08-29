@@ -63,7 +63,6 @@ class PrestamoController extends Controller
            $i = $i+1;
          }
 
-
       return view('admin.md_prestamos.index', [
          'showSeleccion'   => $showSeleccion,
          'showPedidos'     => $showPedidos,
@@ -92,11 +91,6 @@ class PrestamoController extends Controller
 
    public function prestar(Request $request)
    {
-
-
-
-
-
 
      function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
      $pedido = Order::find(cambiaCadena($request['id']));

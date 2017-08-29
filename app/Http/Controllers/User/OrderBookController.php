@@ -52,6 +52,9 @@ class OrderBookController extends Controller
      */
     public function store(Request $request)
     {
+      $user = Auth::User();
+      
+
         if($request->ajax()){
            $search=$request->input('search');
           echo "Resultados de Busqueda : ".$search;
@@ -69,8 +72,6 @@ class OrderBookController extends Controller
          }
 
          //Error: Esta mostrando libros repetidos
-
-
           $itemsBooks=DB::Select($consulta_libros);
 
           // dd($itemsBooks,count($itemsBooks),$z);
@@ -87,9 +88,11 @@ class OrderBookController extends Controller
             'b'=>$b
           ]);
 
+
           return view('user.md_orders.search_books.tableBooks',[
                 'books' => $books,
-                'modalBook' => $modalBook
+                'modalBook' => $modalBook,
+                'user' => $user
               ]);
     }
     /**

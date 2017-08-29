@@ -59,13 +59,18 @@
                         @endif
                       @endforeach
                       {{$contBookCopiesAvailability}}</td>
-
-                    <td class="text-center"><button type="button" data-id="{{$book->id}}"
+                    <td class="text-center">
+                      <button type="button" data-id="{{$book->id}}"
             						data-name="{{$book->name}}" class="btn_info"
-            						data-toggle="modal" data-target="#ModalBookInfo">
-
+            						data-toggle="modal" @if($user->state == 1) data-target="#ModalCastigoInfo"><i class="fa fa-warning"></i>
+                        @else data-target="#ModalBookInfo" >
             						<i class="fa fa-info"></i>
-            					</button></td>
+                        @endif
+            					</button>
+                      <!--
+                      Si el usuario está castigado entonces el modal que se mostrará en cada item es el motivo del castigo del usuario
+                      -->
+                    </td>
                   </tr>
 
                   @endforeach
