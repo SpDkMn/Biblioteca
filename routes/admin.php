@@ -29,6 +29,7 @@ Route::post('prestamos/devolver', 'PrestamoController@devolver')->name('prestamo
 Route::resource('prestamos', 'PrestamoController');
 Route::post('prestamos', 'PrestamoController@index');
 
+//Usuario
 Route::resource('pedido', 'LoanController');
 Route::post('pedido', 'LoanController@index');
 

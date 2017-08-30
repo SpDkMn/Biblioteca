@@ -20,21 +20,27 @@ class Usuarios extends Controller
    public function index(Request $request)
    {
       $guardado = $request->tipo_estado . " " . $request->busqueda_contenido;
-      $variable = User::search($request->tipo_escuela, $request->tipo_academico, $guardado)->orderBy('id', 'DESC')->paginate(5);
+      //Esto de abajo causa error por el ::search
+      // $variable = User::search($request->tipo_escuela, $request->tipo_academico, $guardado)->orderBy('id', 'DESC')->paginate(5);
       $users = User::all();
       $user = null;
       $show = view('admin.md_usuarios.show', [
-         'users' => $users
+         'users' => $users,
+         'pedidos' => null
+
       ]);
       $new = view('admin.md_usuarios.new');
       $edit = view('admin.md_usuarios.edit', [
-         'user' => $user
+         'user' => $user,
+         'pedidos' => null
+
       ]);
 
       return view('admin.md_usuarios.index', [
          'show' => $show,
          'new' => $new,
-         'edit' => $edit
+         'edit' => $edit,
+         'pedidos' => null
       ]);
    }
 
