@@ -57,8 +57,8 @@
         </a>
      </li> --}}
       {{-- END COMPENDIUM MANAGMENT--}}
-      
-       
+
+
 
 
         {{-- MAGAZINE MANAGEMENT--}}
@@ -70,15 +70,15 @@
           </span>
         </a>
         <ul class="treeview-menu">
-            
+
             <li @if(URL::full() == url('/admin/book'))class="active"@endif><a href="{{ url('/admin/book') }}"><i class="fa fa-book"></i> <span>Libros</span></a></li>
-       
+
             <li @if(URL::full() == url('/admin/thesis'))class="active"@endif><a href="{{ url('/admin/thesis') }}"><i class="fa fa-graduation-cap"></i> <span> Tesis - Tesina</span></a></li>
 
             <li @if(URL::full() == url('/admin/magazines'))class="active"@endif><a href="{{ url('/admin/magazines') }}"><i class="fa fa-"></i> <span>Revistas</span></a></li>
             <li @if(URL::full() == url('/admin/compendium'))class="active"@endif><a href="{{ url('/admin/compendium') }}"><i class="fa fa-"></i> <span>Compendios</span></a></li>
 
-            
+
             {{-- <li @if(URL::full() == url('/admin/magazines/delete'))class="active"@endif><a href="{{ url('/admin/magazines/delete') }}"><i class="fa fa-"></i> <span>Eliminar</span></a></li>
             <li @if(URL::full() == url('/admin/magazines/show'))class="active"@endif><a href="{{ url('/admin/magazines/show') }}"><i class="fa fa-"></i> <span>Mostrar</span></a></li>   --}}
         </ul>
@@ -89,14 +89,14 @@
 
        <li @if(URL::full() == url('/admin/autor'))class="active"@endif><a href="{{ url('/admin/autor') }}"><i class="fa fa-male"></i> <span>Autores</span></a></li>
 
-       
+
 
 
        <li @if(URL::full() == url('/admin/editorial'))class="active"@endif><a href="{{ url('/admin/editorial') }}"><i class="fa fa-newspaper-o"></i> <span>Editorial</span></a></li>
 
 
 
-      <li class="treeview @if(URL::full() == url('/admin/castigos') || URL::full() == url('/admin/castigados')) active @endif  ">
+      <li class="treeview @if(URL::full() == url('/admin/sanciones') || URL::full() == url('/admin/tiposanciones')) active @endif  ">
         <a href="#">
           <i class="fa fa-table"></i> <span>Sanciones</span>
           <span class="pull-right-container">
@@ -104,8 +104,8 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li @if(URL::full() == url('/admin/castigos'))class="active"@endif><a href="{{ url('/admin/castigos') }}"><i class="fa fa-th"></i> <span>Castigos</span></a></li>
-          <li @if(URL::full() == url('/admin/castigados'))class="active"@endif><a href="{{ url('/admin/castigados') }}"><i class="fa fa-"></i> <span>Castigados</span></a></li>
+          <li @if(URL::full() == url('/admin/sanciones'))class="active"@endif><a href="{{ url('/admin/sanciones') }}"><i class="fa fa-th"></i> <span>Castigos</span></a></li>
+          <li @if(URL::full() == url('/admin/tiposanciones'))class="active"@endif><a href="{{ url('/admin/tiposanciones') }}"><i class="fa fa-"></i> <span>Tipos de castigos</span></a></li>
         </ul>
       </li>
       <li class="treeview @if(URL::full() == url('/admin/items') || URL::full() == url('/admin/ejemplares') || URL::full() == url('/admin/lugares') || URL::full() == url('/admin/categorias') || URL::full() == url('/admin/estados'))  active @endif  ">

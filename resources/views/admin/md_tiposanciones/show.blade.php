@@ -26,8 +26,8 @@
 				<tbody>
 				@foreach($typepenalties as $typepenalty)
 						<tr>
-						
-							
+
+
 						<td id="celda_izquierda" style="text-align: center;">{{ $typepenalty->id }}</td>
 
 						<td class="celda" style="text-align: center;">{{ $typepenalty->symbol }}</td>
@@ -62,7 +62,7 @@
 							</form>
 
 						</td>
-						
+
 
 
 
@@ -77,7 +77,7 @@
 			<div class="modal  fade" id="ModalCopy" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel" >
 				<div style="width: 38%;" class="modal-dialog" role="document" >
 					<div class="modal-content" style="background-color: red; padding-left: 0px;" >
-						
+
 
 							<div class="modal-body" id="body-modal-show" style="height: auto;  margin-left: 0px; padding:0px; background-color: red;">
 
@@ -86,8 +86,8 @@
 								<!--  ACA TERMINA EL MODAL ________________________________________________________ -->
 
 							</div>
-							
-						
+
+
 					</div>
 				</div>
 			</div>
@@ -109,7 +109,7 @@
         $('#example1').on('click','#show',function(){
         	$('#body-modal-show').append(
         	'<div class="box-body" id="cuadro_ingresar_sancion" style="background-color: #17C43B; margin-left: 0px;padding: 0px; "><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>')
-        	$( "#body-modal-show" ).load( "http://bibliofisi.net/admin/tiposanciones/"+$(this).data('id')+"/modal" );
+        	$( "#body-modal-show" ).load( "{{url('/admin/tiposanciones/')}}/"+$(this).data('id')+"/modal" );
         })
       });
     </script>

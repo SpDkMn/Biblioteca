@@ -18,8 +18,8 @@ class TypePenaltyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {     
-         
+    {
+
           $typepenalties = TypePenalty::with(['penaltyOrders'])->get();
           $typepenalty = null;
           $show = view('admin.md_tiposanciones.show', [
@@ -32,7 +32,8 @@ class TypePenaltyController extends Controller
           return view('admin.md_tiposanciones.index', [
              'show' => $show,
              'new' => $new,
-             'edit' => $edit
+             'edit' => $edit,
+             'pedidos' => null 
           ]);
     }
 
@@ -83,17 +84,17 @@ class TypePenaltyController extends Controller
     {
         $typepenalties = TypePenalty::all();
       $typepenalty = \App\TypePenalty::find($id);
-      
+
       $show = view('admin.md_tiposanciones.show', [
          'typepenalties' => $typepenalties
       ]);
-      
+
       $new = view('admin.md_tiposanciones.new');
-      
+
       $edit = view('admin.md_tiposanciones.edit', [
          'typepenalty' => $typepenalty
       ]);
-      
+
       return view('admin.md_tiposanciones.index', [
          'show' => $show,
          'new' => $new,
@@ -111,7 +112,7 @@ class TypePenaltyController extends Controller
     public function update(Request $request, $id)
     {
       $typepenalty_copia = \App\TypePenalty::find($id);
-      
+
       $typepenalty_copia->fill($request->all());
 
       $typepenalty_copia->save();
@@ -121,13 +122,13 @@ class TypePenaltyController extends Controller
       $show = view('admin.md_tiposanciones.show', [
          'typepenalties' => $typepenalties
       ]);
-      
+
       $new = view('admin.md_tiposanciones.new');
-      
+
       $edit = view('admin.md_tiposanciones.edit', [
          'typepenalty' => $typepenalty
       ]);
-      
+
       return view('admin.md_tiposanciones.index', [
          'show' => $show,
          'new' => $new,
@@ -144,9 +145,9 @@ class TypePenaltyController extends Controller
     public function destroy($id)
     {
       $typepenalty = TypePenalty::find($id);
-      
+
       $typepenalty->delete();
-      
+
       Session::flash('message', 'El tipo de sancion ha sido eliminado correctamente');
       return redirect::to('/admin/tiposanciones');
     }
@@ -168,5 +169,5 @@ class TypePenaltyController extends Controller
       $arreglo[$cantidad-1]->delete();
       return redirect::to('/admin/tiposanciones');
     }
-  
+
 }
