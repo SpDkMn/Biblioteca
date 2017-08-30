@@ -38,12 +38,11 @@ function obtenerEstado($state){
         </div>
         <div class="col-md-12 ">
           {!! $showPrestamo !!}
+
         </div>
+        
         <div class="col-md-12 ">
           {!! $showHistorial !!}
-        </div>
-        <div class="col-md-12 ">
-          {!! $showSeleccion !!}
         </div>
   </div>
 </section>

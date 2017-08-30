@@ -70,15 +70,16 @@ class User extends Authenticatable
 
    public function user_type()
    {
-      return $this->belongsTo('App\UserType');
+      return $this->belongsTo('App\UserType','id_user_type');
    }
 
    public function order()
     {
       return $this->hasOne('App\Order','id_user');
-
-
-
+    }
+    public function penalties()
+    {
+      return $this->hasMany('App\Penalty','userId');
     }
 
 }
