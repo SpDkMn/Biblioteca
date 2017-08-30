@@ -12,14 +12,16 @@
     <table id="tablePedido" class="table table-bordered table-hover">
        <thead>
         <tr>
-            <th>Estado</th>
-            <th>Tipo de Item</th>
-            <th>Ejemplar</th>
-            <th>Titulo</th>
-            <th>Usuario</th>
-            <th>Prestamo</th>
-            <th>Prestar</th>
-            <th>Rechazar</th>
+
+            <th class="text-center">Estado</th>
+            <th class="text-center">Tipo de Item</th>
+            <th class="text-center">Ejemplar</th>
+            <th class="text-center">Titulo</th>
+            <th class="text-center">Usuario</th>
+            <th class="text-center">Fecha pedido</th>
+            <th class="text-center">Prestamo</th>
+            <th class="text-center">Prestar</th>
+
         </tr>
       </thead>
        <tbody>
@@ -132,36 +134,21 @@
                </div>
             </div>
           </div>
-          <td class="text-center"><span>{{$user->name}}</span></td>
-          <td class="text-center">@if($pedido->place==0){{"Sala"}}@else{{"Domicilio"}}@endif</td>
-          <!-- Aceptar pedido -->
-          <td>
-            <a href="{{ url('/admin/prestamos/prestar') }}"
-              onclick="event.preventDefault();
-                         document.getElementById('accept-form').submit();"
-              class="btn btn-info"> Prestar </a>
-            <form id="accept-form" action="{{ url('/admin/prestamos/prestar') }}"
-              method="POST" style="display: none;">{{ csrf_field() }}
-              <input type="hidden" name="id" value="{{$pedido->id}}">
-            </form>
-          </td>
-          <!-- Rechazar pedido -->
-          <td>
-            <a href="{{ url('/admin/prestamos/rechazar') }}"
-              onclick="event.preventDefault();
-                         document.getElementById('denied-form').submit();"
-              class="btn btn-info"> Rechazar </a>
-            <form id="denied-form" action="{{ url('/admin/prestamos/rechazar') }}"
-              method="POST" style="display: none;">{{ csrf_field() }}
-              <input type="hidden" name="id" value="{{$pedido->id}}">
-            </form>
-          </td>
 
-
-
-        </tr>
-        @endif
-      @endforeach
+        </div>
+        <td class="text-center"><span>{{$user->name}}</span></td>
+        <td class="text-center">{{$pedido->startDate}}</td>
+        <td class="text-center">@if($pedido->place==0){{"Sala"}}@else{{"Domicilio"}}@endif</td>
+        <td class="text-center">
+          <form method="POST"  action="{{ url('/admin/prestamos/prestar') }}">
+            {{ csrf_field() }}
+            <input type="hidden" name="id" value="{{$pedido->id}}">
+            <button type="submit" name="prestar" class="btn btn-info" >Prestar</button>
+          </form>
+        </td>
+      </tr>
+      @endif
+@endforeach
       @endif
       </tbody>
     </table>

@@ -90,7 +90,8 @@ class ChartController extends Controller
          'numBooks' => $numBooks,
          'numThesis' => $numThesis,
          'numMagazines' => $numMagazines,
-         'numCompendium' => $numCompendium
+         'numCompendium' => $numCompendium,
+         'pedidos' => null 
       ]);
 
    }

@@ -48,8 +48,6 @@ Route::resource('configurations', 'ConfigurationController');
 // RUTA PARA LAS ESTADISTICAS
 Route::resource('statistics', 'ChartController');
 
-// RUTA PARA LOS PEDIDOS
-
 
 //RUTA PARA LAS SANCIONES
 Route::resource('/sanciones','PenaltyController');

@@ -15,13 +15,15 @@
         <tr>
             <th>Estado</th>
             <th class="text-center">Tipo de item</th>
-            <th>Titulo</th>
-            <th>Ejemplar</th>
-            <th>Usuario</th>
-            <th>Personal Adm.</th>
-            <th>Fecha de Prestamo</th>
-            <th>Lugar</th>
-            <th>Devolver</th>
+
+            <th class="text-center">Titulo</th>
+            <th class="text-center">Ejemplar</th>
+            <th class="text-center">Usuario</th>
+            <th class="text-center">Personal Adm.</th>
+            <th class="text-center">Fecha de Prestamo</th>
+            <th class="text-center">Lugar</th>
+            <th class="text-center">Devolver</th>
+
           </tr>
       </thead>
       <tbody>

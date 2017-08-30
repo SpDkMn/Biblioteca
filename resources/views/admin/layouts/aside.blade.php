@@ -130,7 +130,7 @@
 
 
       <li @if(URL::full() == url('/admin/escuelas'))class="active"@endif><a href="{{ url('/admin/escuelas') }}"><i class="fa fa-users"></i> <span>Escuelas</span></a></li>
-      <li @if(URL::full() == url('/admin/devoluciones'))class="active"@endif><a href="{{ url('/admin/devoluciones') }}"><i class="fa fa-"></i> <span>Devoluciones</span></a></li>
+      <li @if(URL::full() == url('/admin/statistics'))class="active"@endif><a href="{{ url('/admin/statistics') }}"><i class="fa fa-book"></i> <span>Estadísticas</span></a></li>
 
     </ul>
   </section>
