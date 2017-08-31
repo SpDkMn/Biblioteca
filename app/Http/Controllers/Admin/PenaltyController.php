@@ -18,12 +18,10 @@ class PenaltyController extends Controller
     {
         $users = User::with(['user_type'])->get();
         return view('admin.md_sanciones.index',[
-<<<<<<< HEAD
-            "users"=>$users
-=======
+
             "users"=>$users,
             'pedidos'=>null
->>>>>>> f6b2c01f0fc262026f1e81e6217725019bb755f7
+
             ]);
     }
 

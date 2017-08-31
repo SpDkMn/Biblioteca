@@ -78,10 +78,7 @@ class User extends Authenticatable
     {
       return $this->hasOne('App\Order','id_user');
     }
-    public function penalties()
-    {
-      return $this->hasMany('App\Penalty','userId');
-    }
+
     public function penalties()
     {
       return $this->hasMany('App\Penalty','userId');

@@ -44,23 +44,9 @@ class Employee extends Model
       return $this->hasOne('App\Profile','id');
    }
 
-<<<<<<< HEAD
-   /**
-    * The attributes that should be mutated to dates.
-    *
-    * @var array
-    */
-   protected $dates = [
-      'deleted_at'
-   ];
-   public function penalties()
-    {
-      return $this->hasMany('App\Penalty','employeeId');
-    }
-=======
+
    public function penalties(){
       return $this->hasMany('App\Penalty','employeeId');
     }
 
->>>>>>> f6b2c01f0fc262026f1e81e6217725019bb755f7
 }
