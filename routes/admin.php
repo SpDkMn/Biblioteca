@@ -29,6 +29,7 @@ Route::post('prestamos/devolver', 'PrestamoController@devolver')->name('prestamo
 Route::resource('prestamos', 'PrestamoController');
 Route::post('prestamos', 'PrestamoController@index');
 
+//Usuario
 Route::resource('pedido', 'LoanController');
 Route::post('pedido', 'LoanController@index');
 
@@ -45,10 +46,37 @@ Route::resource('/usuarios', 'usuarios');
 // RUTA PARA LAS CONFIGURACIONES
 Route::resource('configurations', 'ConfigurationController');
 
-
 // RUTA PARA LAS ESTADISTICAS
 Route::resource('statistics', 'ChartController');
 
+
+//RUTA PARA LAS SANCIONES
+Route::resource('/sanciones','PenaltyController');
+Route::get('/sanciones/{idSancion}/modalVerSancion', function ($id) {
+    $Sancion=App\Penalty::with(['penaltyOrder'])->with(['user'])->find($id);
+         return view('admin.md_sanciones.modalVerSancion',[
+             'Sancion' => $Sancion
+          ]);
+    });
+
+//RUTA PARA LOS TIPOS DE SANCIONES
+Route::resource('/tiposanciones','TypePenaltyController');
+Route::get('/tiposanciones/{idorden}/modal', function ($id) {
+	$tipoSancion=App\TypePenalty::with(['penaltyOrders'])->find($id);
+         return view('admin.md_tiposanciones.modal',[
+             'tipoSancion' => $tipoSancion
+          ]);
+    });
+Route::get('/tiposanciones/{idtipo}/guardarcambio',function ($id){
+	$tipoSancion=App\TypePenalty::with(['penaltyOrders'])->find($id);
+	return view('admin.md_tiposanciones.guardarCambio',[
+             'tipoSancion' => $tipoSancion,
+             'myJson'=>$_REQUEST['myJson']
+             ]);
+});
+Route::get('/tiposanciones/{idorden}/anadirorden', 'TypePenaltyController@anadirOrden')->name('tiposanciones.anadirOrden');
+Route::get('/tiposanciones/{idorden}/quitarorden', 'TypePenaltyController@quitarOrden')->name('tiposanciones.quitarOrden');
+Route::get('/tiposanciones/{idorden}/guardarcambio', 'TypePenaltyController@guardarCambio')->name('tiposanciones.guardarCambio');
 
 
 //RUTA PARA LAS SANCIONES

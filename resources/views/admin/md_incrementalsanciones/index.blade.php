@@ -11,6 +11,14 @@
 </section>
 
 <!--Contenido Principal -->
+<<<<<<< HEAD
+=======
+<!--
+	LOS ID SON UNICOS NO PUEDEN REPETIRSE , SI ESOS DIV-CONTENT NO SE CAMBIAN SERÁN ELIMINADOS
+
+-->
+
+>>>>>>> f6b2c01f0fc262026f1e81e6217725019bb755f7
 
 <section class="content">
 
@@ -34,7 +42,11 @@
 
 
 
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> f6b2c01f0fc262026f1e81e6217725019bb755f7
 </section>
 
 @stop
