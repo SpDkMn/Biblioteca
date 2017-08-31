@@ -70,8 +70,9 @@ class User extends Authenticatable
 
    public function user_type()
    {
-      return $this->belongsTo('App\UserType');
+      return $this->belongsTo('App\UserType','id_user_type');
    }
+
 
    public function order()
     {
@@ -80,5 +81,10 @@ class User extends Authenticatable
 
 
     }
+    public function penalties()
+    {
+      return $this->hasMany('App\Penalty','userId');
+    }
+
 
 }

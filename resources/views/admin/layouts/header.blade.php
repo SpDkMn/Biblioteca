@@ -20,19 +20,35 @@
 
 <!-- Este script se encarga de recargar la parte del header trayendo los ultimos pedidos -->
 <script type="text/javascript">
-  function actualiza(){
-    $("#recarga").load('{{ url("/admin/prestamos/create") }}');
-  }
+  $(document).ready(function() {
+    function getRandValue(){
+        value = $('#value').text();
+
+        $.ajax({
+            type: "GET",
+            url: '{{ url("/admin/prestamos/create") }}' ,
+            //data: dataString,
+            success: function(data) {
+                $('#value').text(data);
+            }
+        });
+    }
   //Esta funcion debe activarse cuando no se haga click  en notifications-menu y user-menu
-
-
   setInterval( "actualiza()", 10000 );
 
 </script>
 		<!-- Navbar Right Menu -->
-		<div class="navbar-custom-menu" id="recarga">
+		<div class="navbar-custom-menu" id="value" onclick="getRandValue()">
       <ul class="nav navbar-nav">
+        <?php
+      $cont=0;
+        $pedidos = App\Order::all();
+        foreach($pedidos as $pedido){
+          if($pedido->state ==0)
+            $cont++;
+        }
 
+       ?>
 
 				<!-- Notifications: style can be found in dropdown.less -->
 				<li class="dropdown notifications-menu" onclick="funcion2()" id="op2"><a href="#" class="dropdown-toggle" data-toggle="dropdown-menu">

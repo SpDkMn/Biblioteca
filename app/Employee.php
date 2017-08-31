@@ -44,4 +44,8 @@ class Employee extends Model
    protected $dates = [
       'deleted_at'
    ];
+   public function penalties()
+    {
+      return $this->hasMany('App\Penalty','employeeId');
+    }
 }
