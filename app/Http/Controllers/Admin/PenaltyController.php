@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -14,8 +14,17 @@ class PenaltyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function autentificacion(){
+
+         if(Auth::User() != null){//esta logeado
+           if(Auth::User()->employee2() == null){//verficiaca si no  es empleado
+              Auth::logout();
+           }
+         }
+       }
     public function index()
     {
+       $this->autentificacion();
         $users = User::with(['user_type'])->get();
         return view('admin.md_sanciones.index',[
 

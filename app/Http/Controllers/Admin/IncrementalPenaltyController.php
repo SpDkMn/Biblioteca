@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\IncrementalPenalty;
 use Session;
 use Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class IncrementalPenaltyController extends Controller
 {
@@ -15,9 +16,17 @@ class IncrementalPenaltyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function autentificacion(){
+
+         if(Auth::User() != null){//esta logeado
+           if(Auth::User()->employee2() == null){//verficiaca si no  es empleado
+              Auth::logout();
+           }
+         }
+       }
     public function index()
     {
-
+        $this->autentificacion();
         $incrementalpenalties = IncrementalPenalty::all();
         $incrementalpenalty = null;
         $show = view('admin.md_incrementalsanciones.show', [
@@ -81,17 +90,17 @@ class IncrementalPenaltyController extends Controller
     {
         $incrementalpenalties = IncrementalPenalty::all();
         $incrementalpenalty = \App\IncrementalPenalty::find($id);
-          
+
         $show = view('admin.md_incrementalsanciones.show', [
             'incrementalpenalties' => $incrementalpenalties
         ]);
-          
+
         $new = view('admin.md_incrementalsanciones.new');
-          
+
         $edit = view('admin.md_incrementalsanciones.edit', [
             'incrementalpenalty' => $incrementalpenalty
         ]);
-          
+
         return view('admin.md_incrementalsanciones.index', [
             'show' => $show,
             'new' => $new,
@@ -109,7 +118,7 @@ class IncrementalPenaltyController extends Controller
     public function update(Request $request, $id)
     {
         $incrementalpenalty_copia = \App\IncrementalPenalty::find($id);
-      
+
         $incrementalpenalty_copia->fill($request->all());
 
         $incrementalpenalty_copia->save();
@@ -119,13 +128,13 @@ class IncrementalPenaltyController extends Controller
         $show = view('admin.md_incrementalsanciones.show', [
            'incrementalpenalties' => $incrementalpenalties
         ]);
-      
+
         $new = view('admin.md_incrementalsanciones.new');
-      
+
         $edit = view('admin.md_incrementalsanciones.edit', [
            'incrementalpenalty' => $incrementalpenalty
         ]);
-      
+
         return view('admin.md_incrementalsanciones.index', [
            'show' => $show,
            'new' => $new,
@@ -142,9 +151,9 @@ class IncrementalPenaltyController extends Controller
     public function destroy($id)
     {
       $incrementalpenalty = IncrementalPenalty::find($id);
-      
+
       $incrementalpenalty->delete();
-      
+
       Session::flash('message', 'La sancion incremental ha sido eliminada correctamente');
       return redirect::to('/admin/incrementalsanciones');
     }

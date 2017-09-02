@@ -13,7 +13,7 @@ use App\Content as Content;
 use App\ChapterBook as ChapterBook;
 use App\Order as Order;
 use App\SearchItem as SearchItem;
-
+use Illuminate\Support\Facades\Auth;
 
 define('BOOKS', 'books');
 define('EDITORIALES', 'editoriales');
@@ -39,6 +39,7 @@ class BookController extends Controller
 
    public function index()
    {
+      $this->autentificacion();
       $books = Book::all();
       $editoriales = Editorial::all();
       $autores = Author::all();
@@ -623,5 +624,13 @@ class BookController extends Controller
           default: dd("ERROR : error en el campo disponiblidad");
        }
        return $bandera;
+     }
+     public function autentificacion(){
+
+       if(Auth::User() != null){//esta logeado
+         if(Auth::User()->employee2() == null){//verficiaca si no  es empleado
+            Auth::logout();
+         }
+       }
      }
 }

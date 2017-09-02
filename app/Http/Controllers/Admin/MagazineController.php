@@ -15,8 +15,17 @@ use App\Order as Order;
 class MagazineController extends Controller
 {
    // Terminado
+   public function autentificacion(){
+
+       if(Auth::User() != null){//esta logeado
+         if(Auth::User()->employee2() == null){//verficiaca si no  es empleado
+            Auth::logout();
+         }
+       }
+     }
    public function index()
    {
+     $this->autentificacion();
       $editoriales = Editorial::all();
       $autores = Author::all();
       $revistas = Magazine::all();

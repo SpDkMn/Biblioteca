@@ -16,8 +16,17 @@ class RegisterUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function autentificacion(){
+
+         if(Auth::User() != null){//esta logeado
+           if(Auth::User()->employee2() != null){//verficiaca si  es empleado
+              Auth::logout();
+           }
+         }
+       }
     public function index()
     {
+      $this->autentificacion();
         return view('user2.auth.register');
     }
 
@@ -43,7 +52,7 @@ class RegisterUserController extends Controller
         $users = User::all();
         foreach ($users as $user) {
           if($user->email == $request->email && $user->code == $request->codigo && $request->password == $request->password2 && $user->register == false){
-              
+
               $user->register=true;
               $user->password = bcrypt($request->password);
               $user->save();

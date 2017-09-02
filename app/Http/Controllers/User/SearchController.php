@@ -18,8 +18,17 @@ class SearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function autentificacion(){
+
+         if(Auth::User() != null){//esta logeado
+           if(Auth::User()->employee2() != null){//verficiaca si  es empleado
+              Auth::logout();
+           }
+         }
+       }
     public function index()
     {
+      $this->autentificacion();
       /*
       ESTE CONTROLADOR SERÁ USANDO CUANDO SE QUIERA USAR EL FILTRO MEDIANTE UN SELECTOR CON AJAX PARA LA BUSQUEDA
       */

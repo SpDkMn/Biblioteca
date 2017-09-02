@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\TypePenalty;
@@ -17,9 +17,17 @@ class PenaltyOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function autentificacion(){
+
+         if(Auth::User() != null){//esta logeado
+           if(Auth::User()->employee2() == null){//verficiaca si no  es empleado
+              Auth::logout();
+           }
+         }
+       }
     public function index()
     {
-        
+      $this->autentificacion();
         //dd($user);
         /*\App\Penalty::create([
           'userId' => 2,
@@ -81,7 +89,7 @@ class PenaltyOrderController extends Controller
      */
     public function edit($id)
     {
-        dd('entro');    
+        dd('entro');
     }
 
     /**
@@ -94,7 +102,7 @@ class PenaltyOrderController extends Controller
     public function update(Request $request, $id)
     {
         //dd($request['duracion1']);
-        
+
         $tiposancion = TypePenalty::with(['penaltyOrders'])->find($id);
         $arregloOrden=$tiposancion->penaltyOrders;
         $cantidad=count($arregloOrden);

@@ -26,10 +26,21 @@ class PrestamoController extends Controller
 
    //Controlador del prestamo || ADMINISTRADOR
 
+   public function autentificacion(){
 
+       if(Auth::User() != null){//esta logeado
+         if(Auth::User()->employee2() == null){//verficiaca si no  es empleado
+            Auth::logout();
+         }
+       }
+     }
 
    public function index(Request $request)
    {
+     $this->autentificacion();
+     $tipousuario = UserType::all();
+     dd($tipousuario);
+
      $pedidos = Order::all() ;
       $configuraciones = Configuration::all();
       //Inicializando bandera
@@ -42,20 +53,20 @@ class PrestamoController extends Controller
       }
 
 
-     
+
 
       $showPedidos = view('admin.md_prestamos.showPedidos',[
-         'pedidos' => $pedidos,
+         'pedidos' => $pedidos
          ]);
 
 
       $showPrestamo = view('admin.md_prestamos.showPrestamo',[
          'pedidos'       => $pedidos,
-         'configuracion' => $configuracion,
+         'configuracion' => $configuracion
          ]);
 
      $showHistorial = view('admin.md_prestamos.showHistorial',[
-        'pedidos'       => $pedidos,
+        'pedidos'       => $pedidos
         ]);
 
 

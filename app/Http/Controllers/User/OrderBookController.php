@@ -18,8 +18,17 @@ class OrderBookController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
+   public function autentificacion(){
+
+       if(Auth::User() != null){//esta logeado
+         if(Auth::User()->employee2() != null){//verficiaca si  es empleado
+            Auth::logout();
+         }
+       }
+     }
   public function index()
   {
+    $this->autentificacion();
     $books = null ;
 
     $tableBooks = view('user.md_orders.search_books.tableBooks',[

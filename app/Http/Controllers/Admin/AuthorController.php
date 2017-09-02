@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\User as User;
 use App\Order as Order;
-
 // Para usar el Modelo Profile
 use App\Profile as Profile;
 use App\Author as Author;
@@ -30,7 +29,7 @@ class AuthorController extends Controller
 
    public function index(Request $request)
    {
-
+      $this->autentificacion();
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
 
@@ -187,6 +186,13 @@ class AuthorController extends Controller
       }
       return $id;
    }
+   public function autentificacion(){
 
+     if(Auth::User() != null){//esta logeado
+       if(Auth::User()->employee2() == null){//verficiaca si no  es empleado
+          Auth::logout();
+       }
+     }
+   }
 
 }

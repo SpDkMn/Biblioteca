@@ -8,6 +8,7 @@ use App\User;
 use Session;
 use Redirect;
 use Where;
+use Illuminate\Support\Facades\Auth;
 
 class Usuarios extends Controller
 {
@@ -17,8 +18,17 @@ class Usuarios extends Controller
     *
     * @return \Illuminate\Http\Response
     */
+    public function autentificacion(){
+
+        if(Auth::User() != null){//esta logeado
+          if(Auth::User()->employee2() == null){//verficiaca si no  es empleado
+             Auth::logout();
+          }
+        }
+      }
    public function index(Request $request)
    {
+     $this->autentificacion();
       $guardado = $request->tipo_estado . " " . $request->busqueda_contenido;
       //Esto de abajo causa error por el ::search
       // $variable = User::search($request->tipo_escuela, $request->tipo_academico, $guardado)->orderBy('id', 'DESC')->paginate(5);

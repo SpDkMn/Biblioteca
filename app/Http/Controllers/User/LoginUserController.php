@@ -17,8 +17,17 @@ class LoginUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function autentificacion(){
+
+         if(Auth::User() != null){//esta logeado
+           if(Auth::User()->employee2() != null){//verficiaca si  es empleado
+              Auth::logout();
+           }
+         }
+       }
     public function index()
     {
+      $this->autentificacion();
         return view('user2.auth.login');
     }
 
@@ -42,10 +51,11 @@ class LoginUserController extends Controller
     {
       $users = User::all();
 
+
+
       foreach ($users as $user) {
         if($user->email == $request->email && Hash::check($request->password, $user->password) && $user->register == true){
             Auth::loginUsingId($user->id);
-
             return redirect()->intended('/user');
         }
       }

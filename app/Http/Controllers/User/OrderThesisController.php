@@ -13,8 +13,17 @@ use App\Compendium as Compendium;
 
 class OrderThesisController extends Controller
 {
+  public function autentificacion(){
+
+      if(Auth::User() != null){//esta logeado
+        if(Auth::User()->employee2() != null){//verficiaca si  es empleado
+           Auth::logout();
+        }
+      }
+    }
     public function index()
   {
+    $this->autentificacion();
     $thesis = null ;
 
     $tableThesis = view('user.md_orders.search_thesis.tableThesis',[

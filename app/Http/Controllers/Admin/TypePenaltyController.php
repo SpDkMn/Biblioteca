@@ -8,7 +8,7 @@ use App\TypePenalty;
 use App\PenaltyOrder;
 use Session;
 use Redirect;
-
+use Illuminate\Support\Facades\Auth;
 
 class TypePenaltyController extends Controller
 {
@@ -17,9 +17,18 @@ class TypePenaltyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function autentificacion(){
+
+         if(Auth::User() != null){//esta logeado
+           if(Auth::User()->employee2() == null){//verficiaca si no  es empleado
+              Auth::logout();
+           }
+         }
+       }
     public function index()
 
     {
+        $this->autentificacion();
          $pedidos = null;
           $typepenalties = TypePenalty::with(['penaltyOrders'])->get();
           $typepenalty = null;

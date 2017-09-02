@@ -40,6 +40,8 @@
       <?php  $user = App\User::find($pedido->id_user); ?>
       <?php $cont=0; ?>
       <tr>
+        <td><span class="label @if($pedido->state==2) label-danger @else label-info @endif">{{$estado}}</span></td>
+
         <td class="text-center"><label class="label label-success">{{$tipo}}</label></td>
         <?php if($pedido->typeItem==2){ $item=App\Thesis::find($pedido->id_item); }
 
@@ -49,7 +51,6 @@
 
               if($pedido->typeItem==4){ $item=App\Compendium::find($pedido->id_item); }
         ?>
-        <td><span class="label @if($pedido->state==2) label-danger @else label-info @endif">{{$estado}}</span></td>
         <td><a href="#" data-toggle="modal" data-target="#ModalCopy">{{$item->title}}</a></td>
           <div class="modal fade" id="ModalCopy" tabindex="-1" role="dialog" aria-labelledby="ModalCopyLabel">
              <div class="modal-dialog" role="document">

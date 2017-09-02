@@ -1,7 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 use App\Order as Order;
+use App\Employee as Employee;
+use App\Magazine as Magazine;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use App\User as User;
 
 class HomeController extends Controller
 {
@@ -21,20 +26,19 @@ class HomeController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
+    // si es null -> es usuario
+    // si no es null -> es empleado
    public function index()
    {
-    $pedidos = null ; $i = 0 ;
-    foreach (Order::all() as $pedido) {
-      if ($pedido->state == 0) {
-        $pedidos[$i] = $pedido ;
-      }
-      $i++;
-    }
-    //$pedidos2 contiene a los pedidos que tienen como estado 0 osea que estan en la espera de ser aceptados o rechazados
-      return view('admin.layouts.main',['pedidos' => $pedidos]);
+     if(Auth::User()->employee2!=null)
+        return view('admin.layouts.main');
    }
    public function indexUser()
    {
+      if(Auth::User()->employee2!=null){
+        Auth::logout();
+        return view('user2.auth.login');
+      }
       return view('user.layouts.main');
    }
 }

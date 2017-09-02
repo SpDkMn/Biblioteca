@@ -25,8 +25,18 @@ class ChartController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
+  public function autentificacion(){
+
+      if(Auth::User() != null){//esta logeado
+        if(Auth::User()->employee2() == null){//verficiaca si no  es empleado
+           Auth::logout();
+        }
+      }
+    }
+
    public function index()
    {
+     $this->autentificacion();
     /*
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
@@ -91,7 +101,7 @@ class ChartController extends Controller
          'numThesis' => $numThesis,
          'numMagazines' => $numMagazines,
          'numCompendium' => $numCompendium,
-         'pedidos' => null 
+         'pedidos' => null
       ]);
 
    }

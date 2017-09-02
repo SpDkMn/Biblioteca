@@ -7,12 +7,22 @@ use App\Compendium as Compendium;
 use App\CompendiumCopy as CompendiumCopy;
 use App\Editorial as Editorial;
 use App\Content as Content;
+use Illuminate\Support\Facades\Auth;
 // Nota: Reducir la funciones al terminar todos los modulos
 class CompendiumController extends Controller
 {
    // Terminado
+   public function autentificacion(){
+
+       if(Auth::User() != null){//esta logeado
+         if(Auth::User()->employee2() == null){//verficiaca si no  es empleado
+            Auth::logout();
+         }
+       }
+     }
    public function index()
    {
+      $this->autentificacion();
       $editoriales = Editorial::all();
       $autores = Author::all();
       $contenidos = Content::all();

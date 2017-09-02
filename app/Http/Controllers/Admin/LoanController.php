@@ -24,8 +24,17 @@ class LoanController extends Controller
       * Display a listing of the resource.
       * @return \Illuminate\Http\Response
       */
+      public function autentificacion(){
+
+          if(Auth::User() != null){//esta logeado
+            if(Auth::User()->employee2() == null){//verficiaca si no  es empleado
+               Auth::logout();
+            }
+          }
+        }
      public function index(Request $request)
      {
+      $this->autentificacion();
        function cambiaCadena($str){return intval(preg_replace('/[^0-9]+/', '', $str), 10);}
        //Almacenamiento de la fecha de pedido
          $startDate = null;

@@ -17,10 +17,17 @@ use App\Order as Order ;
 
 class EditorialController extends Controller
 {
+   public function autentificacion(){
 
+      if(Auth::User() != null){//esta logeado
+        if(Auth::User()->employee2() == null){//verficiaca si no  es empleado
+           Auth::logout();
+        }
+      }
+    }
    public function index(Request $request)
    {
-
+     $this->autentificacion();
       $profile = Auth::User()->employee2->profile2;
 
       $j2a = json_decode($profile->JSON,true);

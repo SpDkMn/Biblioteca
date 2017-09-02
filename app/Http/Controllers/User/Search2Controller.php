@@ -20,8 +20,17 @@ class Search2Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function autentificacion(){
+
+         if(Auth::User() != null){//esta logeado
+           if(Auth::User()->employee2() != null){//verficiaca si  es empleado
+              Auth::logout();
+           }
+         }
+       }
     public function index()
     {
+      $this->autentificacion();
         return view('user2.md_books.index');
     }
 
@@ -100,7 +109,7 @@ class Search2Controller extends Controller
 	    }
 
 	    $consulta_libros = "Select item_id From search_items Where Match(content) AGAINST('".$search."') AND STATE = true AND type='1'";
-    	
+
     	$itemsBooks=DB::Select($consulta_libros);
 
         if ($this->compruebaItem($itemsBooks)) {
@@ -133,7 +142,7 @@ class Search2Controller extends Controller
            return true;
          }
     }
-   
+
     public function indexLibro()
     {
          return view('user2.md_books.index');

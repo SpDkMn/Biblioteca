@@ -22,10 +22,17 @@ use App\SearchItem as SearchItem;
 
 class ThesisController extends Controller
 {
+    public function autentificacion(){
 
+      if(Auth::User() != null){//esta logeado
+        if(Auth::User()->employee2() == null){//verficiaca si no  es empleado
+           Auth::logout();
+        }
+      }
+    }
    public function index(Request $request)
    {
-
+     $this->autentificacion();
       $show = $new = $edit = $delete = true;
       $ver = $crear = $editar = $eliminar = true;
 

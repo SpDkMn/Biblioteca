@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 class Penalty extends Model
 {
    use SoftDeletes;
-  
+
 
    /**
     * The attributes that are mass assignable.

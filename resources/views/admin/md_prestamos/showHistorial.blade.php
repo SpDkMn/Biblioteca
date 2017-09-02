@@ -24,6 +24,7 @@
           </tr>
       </thead>
       <tbody>
+        
 @if($pedidos!=null)
     @foreach($pedidos as $pedido)
       @if($pedido->state == 2 || $pedido->state == 3)
@@ -59,7 +60,8 @@
                         <h3 class="modal-title text-center text-font-size" id="ModalCopyLabel"><strong>MATERIAL :</strong> {{$item->title}}</h3>
                    </div>
                    <div class="modal-body">
-                       <p><?php  for($i=0;$i<36;$i++){echo "&nbsp";}?> <strong>Ubicacion</strong><?php for($i=0;$i<18;$i++){echo "&nbsp";}?>:&nbsp{{ $item->location }}</p>
+                       <p><?php  for($i=0;$i<36;$i++){echo "&nbsp";}?> <strong>Ubicacion</strong><?php for($i=0;$i<18;$i++){echo "&nbsp";}?>:&nbsp{
+                         { $item->location }}</p>
 
                        <p><?php for($i=0;$i<36;$i++){echo "&nbsp";}?> <strong>Clasificación</strong>
                             <?php

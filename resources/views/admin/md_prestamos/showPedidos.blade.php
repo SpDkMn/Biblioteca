@@ -18,9 +18,10 @@
             <th class="text-center">Ejemplar</th>
             <th class="text-center">Titulo</th>
             <th class="text-center">Usuario</th>
-            <th class="text-center">Fecha pedido</th>
-            <th class="text-center">Prestamo</th>
+            <th class="text-center">Lugar</th>
             <th class="text-center">Prestar</th>
+            <th class="text-center">Rechazar</th>
+
 
         </tr>
       </thead>
@@ -137,13 +138,25 @@
 
         </div>
         <td class="text-center"><span>{{$user->name}}</span></td>
-        <td class="text-center">{{$pedido->startDate}}</td>
         <td class="text-center">@if($pedido->place==0){{"Sala"}}@else{{"Domicilio"}}@endif</td>
         <td class="text-center">
-          <form method="POST"  action="{{ url('/admin/prestamos/prestar') }}">
-            {{ csrf_field() }}
+          <a href="{{ url('/admin/prestamos/prestar') }}"
+            onclick="event.preventDefault();
+                       document.getElementById('accept-form').submit();"
+            class="btn btn-info"> Prestar </a>
+          <form id="accept-form" action="{{ url('/admin/prestamos/prestar') }}"
+            method="POST" style="display: none;">{{ csrf_field() }}
             <input type="hidden" name="id" value="{{$pedido->id}}">
-            <button type="submit" name="prestar" class="btn btn-info" >Prestar</button>
+          </form>
+        </td>
+        <td class="text-center">
+          <a href="{{ url('/admin/prestamos/rechazar') }}"
+            onclick="event.preventDefault();
+                       document.getElementById('denied-form').submit();"
+            class="btn btn-danger"> Rechazar </a>
+          <form id="denied-form" action="{{ url('/admin/prestamos/rechazar') }}"
+            method="POST" style="display: none;">{{ csrf_field() }}
+            <input type="hidden" name="id" value="{{$pedido->id}}">
           </form>
         </td>
       </tr>

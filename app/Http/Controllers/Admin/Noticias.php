@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers\Admin;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\NoticiaCreateRequest;
 use App\Http\Requests\NoticiaUpdateRequest;
@@ -19,8 +19,17 @@ class Noticias extends Controller
     *
     * @return \Illuminate\Http\Response
     */
+    public function autentificacion(){
+
+        if(Auth::User() != null){//esta logeado
+          if(Auth::User()->employee2() == null)//verficiaca si no  es empleado
+            Auth::logout();
+        }
+      }
+
    public function index()
    {
+      $this->autentificacion();
       return redirect::to('/admin/noticias/show');
    }
 
