@@ -24,7 +24,25 @@ class PenaltyController extends Controller
        }
     public function index()
     {
+<<<<<<< HEAD
        $this->autentificacion();
+=======
+        /*
+        \App\Penalty::create([
+         'userId' => 1,
+         'employeeId' => 1,
+         'penaltyOrderId' => 1,
+         'categoryId' => 1,
+         'objectId' => 1,
+         'startPenalty' => null,
+         'endPenalty' => null,
+         'activity' => 1,
+         'event' => null,
+      ]);
+      */
+
+
+>>>>>>> 908a9996a750eac8f38d8d378f6ea11ab51be15d
         $users = User::with(['user_type'])->get();
         return view('admin.md_sanciones.index',[
 

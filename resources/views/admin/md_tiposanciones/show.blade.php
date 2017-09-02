@@ -26,6 +26,10 @@
 				<tbody>
 				@foreach($typepenalties as $typepenalty)
 						<tr>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 908a9996a750eac8f38d8d378f6ea11ab51be15d
 						<td id="celda_izquierda" style="text-align: center;">{{ $typepenalty->id }}</td>
 
 						<td class="celda" style="text-align: center;">{{ $typepenalty->symbol }}</td>
@@ -60,7 +64,16 @@
 							</form>
 
 						</td>
+<<<<<<< HEAD
 	</tr>
+=======
+
+
+
+
+
+					</tr>
+>>>>>>> 908a9996a750eac8f38d8d378f6ea11ab51be15d
 					@endforeach
 
 				</tbody>
@@ -101,7 +114,13 @@
         $('#example1').on('click','#show',function(){
         	$('#body-modal-show').append(
         	'<div class="box-body" id="cuadro_ingresar_sancion" style="background-color: #17C43B; margin-left: 0px;padding: 0px; "><div class="overlay"><i class="fa fa-refresh fa-spin"></i></div></div>')
+<<<<<<< HEAD
         	$( "#body-modal-show" ).load( "{{url('/admin/tiposanciones/')}}/"+$(this).data('id')+"/modal" );
+=======
+
+        	$( "#body-modal-show" ).load( "{{url('/admin/tiposanciones/')}}/"+$(this).data('id')+"/modal" );
+
+>>>>>>> 908a9996a750eac8f38d8d378f6ea11ab51be15d
         })
       });
     </script>

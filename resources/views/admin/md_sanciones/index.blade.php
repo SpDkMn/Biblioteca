@@ -48,7 +48,7 @@
 											<th style="text-align: center;">{{$user->code}}</th>
 											<th style="text-align: center;">{{$user->user_type->name}}</th>
 											<th></th>
-											<th style="text-align: center;"><a class="btn btn-primary"  href=" {{url('/admin/amiguito')}} "><i class="fa fa-eye"></i></a></th>
+											<th style="text-align: center;"><a class="btn btn-primary"  href=" {{url('/admin/sanciones/'.$user->id.'/visualizacion')}} "><i class="fa fa-eye"></i></a></th>
 										</tr>
 
 									@endforeach
