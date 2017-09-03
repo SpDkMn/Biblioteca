@@ -32,6 +32,7 @@ Route::post('prestamos', 'PrestamoController@index');
 //Usuario
 Route::resource('pedido', 'LoanController');
 Route::post('pedido', 'LoanController@index');
+Route::get('pedidito','LoanController@pedid');
 
 
 // RUTA PARA LOS PERFILES
