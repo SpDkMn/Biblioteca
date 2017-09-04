@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
          $table->string('faculty')->nullable();
          $table->string('university')->nullable();
          $table->integer('id_user_type');
+         $table->integer('ultimatePunishmentId')->nullable();
          $table->boolean('state');
          $table->boolean('register');
 

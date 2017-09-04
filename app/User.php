@@ -26,6 +26,7 @@ class User extends Authenticatable
       'phone',
       'school',
       'id_user_type',
+      'ultimatePunishmentId',
       'email',
       'address',
       'username',

@@ -32,7 +32,8 @@ class Employees extends Seeder
          'university' => "Universidad nacional mayor de san marcos",
          'id_user_type' => 2,
          'state' => false,
-         'register'=>false
+         'register'=>false,
+         'ultimatePunishmentId'=>null
       ]);
 
       User::create([
@@ -51,7 +52,8 @@ class Employees extends Seeder
          'university' => "Universidad nacional mayor de san marcos",
          'id_user_type' => 2,
          'state' => false,
-         'register'=>false
+         'register'=>false,
+         'ultimatePunishmentId'=>null
 
         //  'register'=>true
       ]);

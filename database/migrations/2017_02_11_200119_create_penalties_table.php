@@ -24,6 +24,7 @@ class CreatePenaltiesTable extends Migration
          $table->dateTime('endPenalty')->nullable();
          $table->string('activity')->nullable();
          $table->string('event')->nullable();
+         $table->boolean('belongsTime');
 
          $table->softDeletes();
          $table->timestamps();

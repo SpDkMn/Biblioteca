@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Penalty;
+use App\TypePenalty;
+use DateTime;
 
 class PenaltyController extends Controller
 {
@@ -56,7 +58,7 @@ class PenaltyController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -67,7 +69,69 @@ class PenaltyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $usuario=User::with(['penalties'])->find($request->usuarioId);
+        $tipoSancion=TypePenalty::with(['penaltyOrders'])->find($request->typePenalty);
+        if($usuario->ultimatePunishmentId!=null){
+            //dd("no esta vacio");
+        }else{
+            //dd("esta vacio");
+            //$request->typePenalty;
+            //$fecha_actual=date("d/m/Y");
+            //$fecha= time() ;
+            $fecha = new DateTime ( 'NOW' );
+            //dd($fecha->format('h/i/s'));
+            $fecha->modify( '-5 hour' );
+            $arregloCastigos=$usuario->penalties;
+            $contador=0;
+            foreach($arregloCastigos as $castigo){
+                if($castigo->belongsTime){
+                    $contador++;
+                }
+            }
+            //$contador+1;
+            $cantidadOrden=count($tipoSancion->penaltyOrders);
+            if(($contador+1)>$cantidadOrden){
+                //Esta mal
+                dd("Esta mal");
+            }else{
+                $orden=$tipoSancion->penaltyOrders[$contador];
+                if($orden->penaltyTime == "ciclo"){
+                    \App\Penalty::create([
+                         'userId' => $request->usuarioId,
+                         'employeeId' => 1,
+                         'penaltyOrderId' => $orden->id,
+                         'categoryId' => 1,
+                         'objectId' => 1,
+                         'startPenalty' => $fecha,
+                         'endPenalty' => null,
+                         'activity' => 1,
+                         'event' => $request->contexto,
+                         'belongsTime' => true,
+                      ]);
+                }
+                else{
+                    $fechaFinal=$fecha;
+                    $fechaFinal->modify('+'.$orden->penaltyTime.' day');
+                    $sanciones=Penalty::all();
+                    \App\Penalty::create([
+                         'userId' => $request->usuarioId,
+                         'employeeId' => 1,
+                         'penaltyOrderId' => $orden->id,
+                         'categoryId' => 1,
+                         'objectId' => 1,
+                         'startPenalty' => $fecha,
+                         'endPenalty' => $fechaFinal,
+                         'activity' => 1,
+                         'event' => $request->contexto,
+                         'belongsTime' => true,
+                      ]);
+                }
+                $sanciones=Penalty::all();
+
+                $usuario->ultimatePunishmentId=count($sanciones);
+                
+            }
+        }
     }
 
     /**

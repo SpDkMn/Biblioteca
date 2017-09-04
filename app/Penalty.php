@@ -27,7 +27,8 @@ class Penalty extends Model
       //0 ---> desactivado
       //1 ---> activado
       //2 ---> en cola
-      'event'
+      'event',
+      'belongsTime'
    ];
 
    /**
