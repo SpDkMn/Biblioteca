@@ -15,6 +15,8 @@ use App\SearchItem as SearchItem;
 use App\BookCopy as BookCopy;
 use App\Book as Book;
 use App\Order as Order ;
+use App\Thesis as Thesis;
+use App\User as User;
 class LoanController extends Controller
 {
     //Controlador del pedido || USUARIO
@@ -163,8 +165,68 @@ class LoanController extends Controller
      {
      }
 
+     public function pedid()
+      { 
+          ini_set('max_execution_time', 500);
+
+          while(Order::where('state',0)->count() < 1){
+             usleep(1000);
+          }        
+          if(Order::where('state',0)->count() >0){
+
+                $data = Order::where('state',0)->first();
+                $typeItem = $data->typeItem;
+                $id_item = $data->id_item;
+                if($data->typeItem==2){ $item=Thesis::find($data->id_item); } 
+                if($data->typeItem==1){ $item=Book::find($data->id_item); } 
+                if($data->typeItem==3){ $item=Magazine::find($data->id_item); } 
+                if($data->typeItem==4){ $item=Compendium::find($data->id_item); }
+
+                $titulo = $item->title;  //Titulo del material
+ 
+                foreach($item->authors as $author) 
+                  if($author->pivot->type == true) 
+                    $autor = $author->name;
+
+                $cont=0;
+                $pedidosc = Order::all();
+                foreach($pedidosc as $pedidoc)
+                  if($pedidoc->state == 0 || $pedidoc->state == 4 )   
+                    $cont++;
+
+                if($data->typeItem==1) $nomItem="Libro"; 
+                else if($data->typeItem==2) $nomItem="Tesis"; 
+                else if($data->typeItem==3) $nomItem="Revista"; 
+                else $nomItem="Compendio";
+
+                $startDate = $data->startDate;
+                $place = $data->place;
+                $copy = $data->copy;    
+                $ubicacion = $item->libraryLocation; //ubicacion del material
+
+                $usuario= User::find($data->id_user);
+                $nomUsuario = $usuario->name;   //nombre del usuario
 
 
+                $id = $data->id;
+                $edit = Order::find($id);
+                $edit->state = 4;    //Bandera. Cambio de numero para que no estea constantemente realizando peticiones a la base de datos
+                $edit->save();
+                //$data = Test::first();     
+                return response()->json([
+                      'startDate' => $startDate, 
+                      'nomItem'   => $nomItem,   //nombre del item
+                      'autor'     => $autor,
+                      'place'     => $place,    //lugar de prestamo
+                      'titulo'    => $titulo,
+                      'copy'      => $copy,    //ejemplar
+                      'ubicacion' => $ubicacion,
+                      'nomUsuario'=> $nomUsuario,
+                      'id'        => $id,
+                      'cont'      => $cont,    //Con este contador muestro la cantidad de pedidos en espera
+                      ]); 
+          }
+      }
 
 
 }
