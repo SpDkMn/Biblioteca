@@ -26,7 +26,7 @@
 						<thead>
 							<tr>
 								<th style="text-align: center;">Codigo</th>
-								<th style="text-align: center;">Fin</th>
+								<th style="text-align: center;">Estado</th>
 								<th style="text-align: center;">Item</th>
 								<th style="text-align: center;">Duración</th>
 								<th style="text-align: center;">Orden</th>
@@ -37,7 +37,15 @@
 							@foreach($Usuario->penalties as $penalty)
 								<tr>
 									<th style="text-align: center;">{{$penalty->user->code}}</th>
-									<th style="text-align: center;">{{$penalty->endPenalty}}</th>
+									<th style="text-align: center;"><?php
+										if($penalty->activity==0){
+											echo("Desactivado");
+										}else if($penalty->activity==1){
+											echo("Activado");
+										}else{
+											echo("En cola");
+										}
+									?></th>
 									<th style="text-align: center;"></th>
 									<th style="text-align: center;">{{$penalty->penaltyOrder->penaltyTime}}</th>
 									<th style="text-align: center;">{{$penalty->penaltyOrder->order}}</th>
@@ -79,7 +87,7 @@
 				</div>
 				<!-- Pie -->
 				<div id="pie" class="col-md-12" style="background-color: purple; padding: 0px; text-align: center; height: 60px;">
-					<a  class="btn btn-primary"  onClick="" style="font-size:22px; margin-right: 350px;background-color: #BFA878;border-color: #8A4C0F; color: black;">Detener Castigo Actual</a>
+					<a id="detenerSancionActual" class="btn btn-primary"  onClick="" style="font-size:22px; margin-right: 350px;background-color: #BFA878;border-color: #8A4C0F; color: black;">Detener Castigo Actual</a>
 					<a id="crearSancion" class="btn btn-primary"  style=" font-size:22px;background-color: #BFA878;border-color: #8A4C0F;color:black;" data-toggle="modal" data-id="{{$Usuario->id}}" data-target="#ModalCopy">Añadir Nuevo Castigo</a>
 				</div>
 
@@ -107,6 +115,24 @@
         	$( "#body-modal-show" ).load('{{ url("/admin/sanciones/") }}/' + $(this).data('id')+'/crearSancion');
 
       	})
+      	$('#pie').on('click','#detenerSancionActual',function(){
+      		
+      		var idUsuario="{{$Usuario->id}}"
+      		$.ajax({ 
+		          url: '{{url("/admin/sanciones")}}/'+idUsuario+'/pararSancion',
+		          type:'post',
+		          data:{_token:'{{csrf_token()}}'},
+		          success: function(data)
+		          {
+		          	
+		          	if(data=="false"){
+		          		alert("El usuario actualmente no presenta castigo.");
+		          	}
+		          }
+		         
+       		 });
+      	})
+
 
     });
 

@@ -16,8 +16,8 @@ class CreatePenaltiesTable extends Migration
       Schema::create('penalties', function (Blueprint $table) {
          $table->increments('id');
          $table->integer('userId');
-         $table->integer('employeeId');
-         $table->integer('penaltyOrderId');
+         $table->integer('employeeId')->nullable();
+         $table->integer('penaltyOrderId')->nullable();
          $table->integer('categoryId')->nullable();
          $table->integer('objectId')->nullable();
          $table->dateTime('startPenalty')->nullable();

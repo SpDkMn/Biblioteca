@@ -20,26 +20,18 @@
 
 
 <!--Este script va a servir para que parpadee cuando aparezca una notificacion (Falta optimizarlo, solo sirve cuando se recarga la pagina)-->
-<script> 
-var par=false; 
-function parpadeo() { 
-    col=par ? 'blue' : 'black'; 
-    document.getElementById('txt').style.color=col; 
-    par = !par; 
-    setTimeout("parpadeo()",500); //500 = medio segundo 
-} 
-window.onload=parpadeo; 
-</script> 
+
 
 
 <!-- Este script se encarga de recargar la parte del header con ayax, trayendo los ultimos pedidos -->
 <script>
       $(function(){
-        liveChat();
+        //liveChat();
       });
 
     function liveChat()
       { 
+        /*
         $.ajax({ 
           url: '{{url("/admin/pedidito")}}',
           type:'get',
@@ -53,6 +45,7 @@ window.onload=parpadeo;
               setTimeout(liveChat,500);       
           },
         });
+        */
       }
 </script>
 		<div class="navbar-custom-menu">

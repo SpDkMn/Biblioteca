@@ -73,6 +73,29 @@ Route::get('/sanciones/{idUser}/crearSancion', function ($id) {
              'tiposanciones' => $tiposanciones
           ]);
     });
+Route::post('/sanciones/{id}/validacion',function(){
+    
+    $usuario=App\User::with(['penalties'])->find($_POST['idUsuario']);
+    $tipoSancion=App\TypePenalty::with(['penaltyOrders'])->find($_POST['tipoSancion']);
+    $arregloCastigos=$usuario->penalties;
+        $contador=0;
+        foreach($arregloCastigos as $castigo){
+            if($castigo->belongsTime){
+                $contador++;
+            }
+        }
+        $cantidadOrden=count($tipoSancion->penaltyOrders);
+        if(($contador+1)>$cantidadOrden){
+            //No existe el orden de ese tipo castigo que se pide
+
+            echo("false");
+
+        }
+        else{
+            echo("true");
+        }
+});
+Route::post('/sanciones/{idUsuario}/pararSancion','PenaltyController@pararSancion');
 
 
 

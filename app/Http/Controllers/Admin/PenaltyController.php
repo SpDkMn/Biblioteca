@@ -28,20 +28,6 @@ class PenaltyController extends Controller
     {
        $this->autentificacion();
 
-        /*
-        \App\Penalty::create([
-         'userId' => 1,
-         'employeeId' => 1,
-         'penaltyOrderId' => 1,
-         'categoryId' => 1,
-         'objectId' => 1,
-         'startPenalty' => null,
-         'endPenalty' => null,
-         'activity' => 1,
-         'event' => null,
-      ]);
-      */
-
         $users = User::with(['user_type'])->get();
         return view('admin.md_sanciones.index',[
 
@@ -71,37 +57,47 @@ class PenaltyController extends Controller
     {
         $usuario=User::with(['penalties'])->find($request->usuarioId);
         $tipoSancion=TypePenalty::with(['penaltyOrders'])->find($request->typePenalty);
+        
+
+        $fecha = new DateTime ( 'NOW' );
+        $fecha->modify( '-5 hour' );
+        $arregloCastigos=$usuario->penalties;
+        $contador=0;
+        foreach($arregloCastigos as $castigo){
+            if($castigo->belongsTime){
+                $contador++;
+            }
+        }
+        
+        $cantidadOrden=count($tipoSancion->penaltyOrders);
+        $orden=$tipoSancion->penaltyOrders[$contador];
+
         if($usuario->ultimatePunishmentId!=null){
-            //dd("no esta vacio");
+            //Entro a Cola
+                \App\Penalty::create([
+                     'userId' => $request->usuarioId,
+                     'employeeId' => Auth::user()->employee2->id,
+                     'penaltyOrderId' => $orden->id,
+                     'startPenalty' => null,
+                     'endPenalty' => null,
+                     'activity' => 2,
+                     'event' => $request->contexto,
+                     'belongsTime' => true,
+                  ]);
+           return redirect("admin/sanciones");
+
         }else{
             //dd("esta vacio");
-            //$request->typePenalty;
+
             //$fecha_actual=date("d/m/Y");
             //$fecha= time() ;
-            $fecha = new DateTime ( 'NOW' );
             //dd($fecha->format('h/i/s'));
-            $fecha->modify( '-5 hour' );
-            $arregloCastigos=$usuario->penalties;
-            $contador=0;
-            foreach($arregloCastigos as $castigo){
-                if($castigo->belongsTime){
-                    $contador++;
-                }
-            }
-            //$contador+1;
-            $cantidadOrden=count($tipoSancion->penaltyOrders);
-            if(($contador+1)>$cantidadOrden){
-                //Esta mal
-                dd("Esta mal");
-            }else{
-                $orden=$tipoSancion->penaltyOrders[$contador];
+                
                 if($orden->penaltyTime == "ciclo"){
                     \App\Penalty::create([
                          'userId' => $request->usuarioId,
-                         'employeeId' => 1,
+                         'employeeId' => Auth::user()->employee2->id,
                          'penaltyOrderId' => $orden->id,
-                         'categoryId' => 1,
-                         'objectId' => 1,
                          'startPenalty' => $fecha,
                          'endPenalty' => null,
                          'activity' => 1,
@@ -112,13 +108,10 @@ class PenaltyController extends Controller
                 else{
                     $fechaFinal=$fecha;
                     $fechaFinal->modify('+'.$orden->penaltyTime.' day');
-                    $sanciones=Penalty::all();
                     \App\Penalty::create([
                          'userId' => $request->usuarioId,
-                         'employeeId' => 1,
+                         'employeeId' => Auth::user()->employee2->id,
                          'penaltyOrderId' => $orden->id,
-                         'categoryId' => 1,
-                         'objectId' => 1,
                          'startPenalty' => $fecha,
                          'endPenalty' => $fechaFinal,
                          'activity' => 1,
@@ -129,9 +122,13 @@ class PenaltyController extends Controller
                 $sanciones=Penalty::all();
 
                 $usuario->ultimatePunishmentId=count($sanciones);
+                $usuario->save();
                 
-            }
+                return redirect("admin/sanciones");
         }
+        
+
+        
     }
 
     /**
@@ -180,5 +177,68 @@ class PenaltyController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function pararSancion($id)
+    {
+        $usuario=User::with(['penalties'])->find($id);
+        if($usuario->ultimatePunishmentId!=null)
+        {
+            
+        
+            $sancion=Penalty::find($usuario->ultimatePunishmentId);
+
+            $fecha = new DateTime ( 'NOW' );
+            $fecha->modify( '-5 hour' );
+
+            $sancion->endPenalty=$fecha;
+            $sancion->activity=0;
+            $sancion->save();
+
+            $sancionCola=null;
+
+            $arregloSancion=$usuario->penalties;
+            for($i=0;$i<count($arregloSancion);$i++){
+                if($arregloSancion[$i]->activity==2){
+                    $sancionCola=$arregloSancion[$i];
+                    break;
+                }
+            }
+
+            if($sancionCola==null){
+                //No hubo cola
+                $usuario->ultimatePunishmentId=null;
+                $usuario->save();
+            }
+            else
+            {
+                //Si hubo cola
+
+                $ordenSancionCola=$sancionCola->penaltyOrder;
+            
+                $fechaFinal=$fecha;
+               
+                if($ordenSancionCola->penaltyTime=="ciclo"){
+                    $fechaFinal=null;
+                }
+                else{
+                    $fechaFinal->modify('+'.$ordenSancionCola->penaltyTime.' day');
+                }
+                
+                $sancionCola->startPenalty=$fecha;
+                $sancionCola->endPenalty=$fechaFinal;
+                $sancionCola->activity=1;
+                $sancionCola->save();
+
+                $usuario->ultimatePunishmentId=$sancionCola->id;
+                $usuario->save();
+            }
+            echo("true");
+        }
+        else{
+            echo("false");
+        }
+        
+        
+        
     }
 }

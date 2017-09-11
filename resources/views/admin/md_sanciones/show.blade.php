@@ -106,6 +106,7 @@
 
         $( "#body-modal-show" ).load('{{ url("/admin/sanciones/") }}/' + $(this).data('id')+'/modalVerSancion');
 
+        //$('#tablaSanciones').on('click','#')
       })
     });
 

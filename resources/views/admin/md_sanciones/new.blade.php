@@ -1,3 +1,6 @@
+<?php 
+	//$tipoSancion=TypePenalty::with(['penaltyOrders'])->find($request->typePenalty);
+?>
 <div class="box-body" id="cuadroVerSancion" style="margin-left: 0px;padding: 0px; ">
 	<div class="box box-success box-solid" style="margin-bottom: 0px; border-color: #C0872B;">
 		<form role="form" method="POST" action="{{ url('/admin/sanciones') }}" enctype="multipart/form-data" files="true" name="formularioIngresoSancion"	id="formularioIngresoSancion">
@@ -10,7 +13,7 @@
 					<div class="form-group col-md-12" style="padding: 0px;">
 						<label for="typePenalty" class="control-label col-md-3">Escoja el tipo de Castigo:</label>
 						<div class="col-md-9">
-								<select name="typePenalty" class="form-control col-md-12">
+								<select name="typePenalty" class="form-control col-md-12" id="tipoSancion">
 									@foreach($tiposanciones as $tiposancion)
 										<option value="{{$tiposancion->id}}">{{$tiposancion->symbol}}</option> 
 									@endforeach  
@@ -47,18 +50,58 @@
 
 		<div id="botones" class="box-body " style="width: 100% ;    margin: 0px;text-align: center; background-color: #B57128; ">
 			<a id="reiniciarDatos" class="btn"  onClick="" style="font-size:18px; margin-right: 150px;background-color: #BFA878;border-color: #8A4C0F; color: black;">Reiniciar Datos</a>
-			<button class="btn btn-primary" style="font-size:18px;background-color: #BFA878;border-color: #8A4C0F;color:black;">
+			<a id="crearSancion" class="btn" style="font-size:18px;background-color: #BFA878;border-color: #8A4C0F;color:black;">
 				Guardar Datos
-			</button>
+			</a>
 
 		</div>
-		</form>		
+		</form>	
+		<?php
+		/*$tipoSancion=TypePenalty::with(['penaltyOrders'])->find();
+		$contador=0;
+        foreach($arregloCastigos as $castigo){
+            if($castigo->belongsTime){
+                $contador++;
+            }
+        }
+        $cantidadOrden=count($tipoSancion->penaltyOrders);
+        if(($contador+1)>$cantidadOrden){
+        	//ERROR
+        }else{
+        	//NO ERROR
+        } */
+		?>	
 	</div>
 </div>
 <script type="text/javascript">
       $(document).ready(function() {
         $('#botones').on('click','#reiniciarDatos',function(){
         	$('#contexto').val("");
+      	})
+      	$('#botones').on('click','#crearSancion',function(){
+      		var tipoSancion=$('#tipoSancion').val();
+      		var idUsuario="{{$Usuario->id}}";
+
+      		
+      		$.ajax({ 
+		          url: '{{url("/admin/sanciones")}}/'+tipoSancion+'/validacion',
+		          type:'post',
+		          data:{_token:'{{csrf_token()}}',
+		          tipoSancion:tipoSancion,
+		          idUsuario:idUsuario},
+		          success: function(data)
+		          {
+		          	
+		          	if(data=="true"){
+		          		document.formularioIngresoSancion.submit();
+		          	}else{
+		          		alert("No existe la orden deseada.");
+		          	}
+		          }
+
+		         
+       		 });
+      		
       	})
       	
 
