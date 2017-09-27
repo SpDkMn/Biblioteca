@@ -74,7 +74,7 @@ Route::get('/sanciones/{idUser}/crearSancion', function ($id) {
           ]);
     });
 Route::post('/sanciones/{id}/validacion',function(){
-    
+
     $usuario=App\User::with(['penalties'])->find($_POST['idUsuario']);
     $tipoSancion=App\TypePenalty::with(['penaltyOrders'])->find($_POST['tipoSancion']);
     $arregloCastigos=$usuario->penalties;
@@ -96,6 +96,7 @@ Route::post('/sanciones/{id}/validacion',function(){
         }
 });
 Route::post('/sanciones/{idUsuario}/pararSancion','PenaltyController@pararSancion');
+//Route::get('/sanciones/{idUsuario}/observarCastigo','PenaltyController@observarCastigo');
 
 
 

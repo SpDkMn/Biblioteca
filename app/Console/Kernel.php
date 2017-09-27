@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
     * @var array
     */
    protected $commands = [
-     'App\Console\Commands\Prueba'
+     'App\Console\Commands\Prueba',
+     'App\Console\Commands\observarCastigo'
    ];
 
    /**
@@ -27,6 +28,7 @@ class Kernel extends ConsoleKernel
    {
       //Comando a ejecutarse cada minuto
        $schedule->command('test:prueba')->everyMinute();
+       $schedule->command('command:observarCastigo')->everyMinute();
 
    }
 

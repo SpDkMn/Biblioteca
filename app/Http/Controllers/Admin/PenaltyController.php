@@ -44,7 +44,7 @@ class PenaltyController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -57,7 +57,7 @@ class PenaltyController extends Controller
     {
         $usuario=User::with(['penalties'])->find($request->usuarioId);
         $tipoSancion=TypePenalty::with(['penaltyOrders'])->find($request->typePenalty);
-        
+
 
         $fecha = new DateTime ( 'NOW' );
         $fecha->modify( '-5 hour' );
@@ -68,7 +68,7 @@ class PenaltyController extends Controller
                 $contador++;
             }
         }
-        
+
         $cantidadOrden=count($tipoSancion->penaltyOrders);
         $orden=$tipoSancion->penaltyOrders[$contador];
 
@@ -92,7 +92,7 @@ class PenaltyController extends Controller
             //$fecha_actual=date("d/m/Y");
             //$fecha= time() ;
             //dd($fecha->format('h/i/s'));
-                
+
                 if($orden->penaltyTime == "ciclo"){
                     \App\Penalty::create([
                          'userId' => $request->usuarioId,
@@ -123,12 +123,12 @@ class PenaltyController extends Controller
 
                 $usuario->ultimatePunishmentId=count($sanciones);
                 $usuario->save();
-                
+
                 return redirect("admin/sanciones");
         }
-        
 
-        
+
+
     }
 
     /**
@@ -183,8 +183,8 @@ class PenaltyController extends Controller
         $usuario=User::with(['penalties'])->find($id);
         if($usuario->ultimatePunishmentId!=null)
         {
-            
-        
+
+
             $sancion=Penalty::find($usuario->ultimatePunishmentId);
 
             $fecha = new DateTime ( 'NOW' );
@@ -214,16 +214,16 @@ class PenaltyController extends Controller
                 //Si hubo cola
 
                 $ordenSancionCola=$sancionCola->penaltyOrder;
-            
+
                 $fechaFinal=$fecha;
-               
+
                 if($ordenSancionCola->penaltyTime=="ciclo"){
                     $fechaFinal=null;
                 }
                 else{
                     $fechaFinal->modify('+'.$ordenSancionCola->penaltyTime.' day');
                 }
-                
+
                 $sancionCola->startPenalty=$fecha;
                 $sancionCola->endPenalty=$fechaFinal;
                 $sancionCola->activity=1;
@@ -237,8 +237,69 @@ class PenaltyController extends Controller
         else{
             echo("false");
         }
-        
-        
-        
+
+
+
     }
+    /*public function observarCastigo(){
+
+      $penalties = Penalty::get()->where('activity',1);
+
+      $fecha = new DateTime ( 'NOW' );
+      $fecha->modify( '-5 hour' );
+      $tiempoRestante=$fecha;
+
+      foreach ($penalties as $penalty) {
+        //dd($penalty->endPenalty);
+
+        if($penalty->endPenalty==null){
+          //Es un ciclo
+        }
+        else{
+          $fechaFin=new DateTime($penalty->endPenalty);
+          $intervalo=date_diff( $fechaFin , $fecha );
+          $dia=(int)$intervalo -> format('%a');
+          $hora=(int)$intervalo->format('%h');
+          $min=(int)$intervalo->format('%i');
+
+          $usuario=$penalty->user;
+          if($dia==0&&$hora==0&&$min<=1){
+            //dd("entro");
+              //Es hora de detener el castigo
+              $penalty->activity=0;
+              $penalty->save();
+              $usuario->ultimatePunishmentId=null;
+              $usuario->save();
+          }
+          //dd($fecha);
+          dd("dia : ".$dia."; horas : ".$hora."; minutos : ".$min);
+          foreach($usuario->penalties as $castigo)
+          {
+            if($castigo->activity==2){
+              //El primer castigo en cola lo vuelve activo
+              $orden=$castigo->penaltyOrder;
+              if($orden->penaltyTime=="ciclo"){
+                $fechaFinal=null;
+              }else{
+                $fechaFinal=$fecha;
+                $fechaFinal->modify('+'.$orden->penaltyTime.' day');
+              }
+
+              $castigo->startPenalty=$fecha;
+              $castigo->endPenalty=$fechaFinal;
+              $castigo->activity=1;
+              $castigo->save();
+              $usuario->ultimatePunishmentId=$castigo->id;
+              $castigo->save();
+              break;
+            }
+          }
+        }
+
+      }
+
+
+
+    }
+    */
 }
